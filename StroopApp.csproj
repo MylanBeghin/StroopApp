@@ -10,6 +10,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.7.25103.5738" />
+		<PackageReference Include="ModernWpfUI" Version="0.9.6" />
 	</ItemGroup>
 
 </Project>

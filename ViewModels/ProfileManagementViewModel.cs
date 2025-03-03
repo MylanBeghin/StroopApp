@@ -80,11 +80,7 @@ namespace StroopApp.ViewModels
 
             if (Profiles.Count > 0)
             {
-                if (currentIndex >= Profiles.Count)
-                {
-                    currentIndex = Profiles.Count - 1;
-                }
-                CurrentProfile = Profiles[currentIndex];
+                CurrentProfile = Profiles[0];
             }
             else
             {

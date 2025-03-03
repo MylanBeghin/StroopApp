@@ -3,13 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         Title="Modifier Profil" 
-        SizeToContent="WidthAndHeight"
-        xmlns:converters="clr-namespace:StroopApp.Converters">
+ 
+        xmlns:converters="clr-namespace:StroopApp.Converters"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+    ui:WindowHelper.UseModernWindowStyle="True">
     <Window.Resources>
         <converters:StroopTypeToEnabledConverter x:Key="StroopTypeToEnabledConverter"/>
         <converters:BooleanToCalculationModeConverter x:Key="BooleanToCalculationModeConverter"/>
     </Window.Resources>
-    <StackPanel Margin="10">
+    <ui:SimpleStackPanel Margin="12" Spacing="24">
+
         <TabControl>
             <!-- Onglet pour la durée de la tâche -->
             <TabItem Header="Durée de la tâche">
@@ -43,42 +46,42 @@
 
                     <!-- Durée de la tâche -->
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Durée de la tâche:" Margin="5" VerticalAlignment="Center"/>
-                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="5">
-                        <xctk:IntegerUpDown Value="{Binding Profile.Hours, Mode=TwoWay}" Margin="5" Minimum="0" Width="50"/>
+                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="5" >
+                        <ui:NumberBox Value="{Binding Profile.Hours, Mode=TwoWay}" Margin="5" Minimum="0" Width="50"/>
                         <TextBlock Text="h" VerticalAlignment="Center" Margin="5"/>
-                        <xctk:IntegerUpDown Value="{Binding Profile.Minutes, Mode=TwoWay}" Margin="5" Minimum="0" Maximum="59" Width="50"/>
+                        <ui:NumberBox Value="{Binding Profile.Minutes, Mode=TwoWay}" Margin="5" Minimum="0" Maximum="59" Width="50"/>
                         <TextBlock Text="m" VerticalAlignment="Center" Margin="5"/>
-                        <xctk:IntegerUpDown Value="{Binding Profile.Seconds, Mode=TwoWay}" Margin="5" Minimum="0" Maximum="59" Width="50"/>
+                        <ui:NumberBox Value="{Binding Profile.Seconds, Mode=TwoWay}" Margin="5" Minimum="0" Maximum="59" Width="50"/>
                         <TextBlock Text="s" VerticalAlignment="Center" Margin="5"/>
                     </StackPanel>
 
                     <!-- Durée du mot -->
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Durée du mot (ms):" Margin="5" VerticalAlignment="Center"/>
-                    <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1" Value="{Binding Profile.WordDuration, Mode=TwoWay}" Margin="5" Minimum="1" MinWidth="50"/>
+                    <ui:NumberBox Grid.Row="1" Grid.Column="1" Value="{Binding Profile.WordDuration, Mode=TwoWay}" Margin="5" Minimum="1" MinWidth="50"/>
 
                     <!-- Durée de fixation -->
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Durée de fixation (ms):" Margin="5" VerticalAlignment="Center"/>
-                    <xctk:IntegerUpDown Grid.Row="2" Grid.Column="1" Value="{Binding Profile.FixationDuration, Mode=TwoWay}" Margin="5" Minimum="1" MinWidth="50"/>
+                    <ui:NumberBox Grid.Row="2" Grid.Column="1" Value="{Binding Profile.FixationDuration, Mode=TwoWay}" Margin="5" Minimum="1" MinWidth="50"/>
 
                     <!-- Ligne 6 : Durée d'amorce toujours affichée mais conditionnellement modifiable -->
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="Durée d'amorce (ms):" Margin="5" VerticalAlignment="Center"/>
-                    <xctk:IntegerUpDown Grid.Row="3" Grid.Column="1" 
-                     Value="{Binding Profile.AmorceDuration, Mode=TwoWay}" 
-                     Margin="5"
-                     Minimum="0"
-                     MinWidth="50"
-                     IsEnabled="{Binding Profile.StroopType, Converter={StaticResource StroopTypeToEnabledConverter}}"/>
+                    <ui:NumberBox Grid.Row="3" Grid.Column="1" 
+             Value="{Binding Profile.AmorceDuration, Mode=TwoWay}" 
+             Margin="5"
+             Minimum="0"
+             MinWidth="50"
+             IsEnabled="{Binding Profile.StroopType, Converter={StaticResource StroopTypeToEnabledConverter}}"/>
 
                     <!-- Type de Stroop -->
                     <TextBlock Grid.Row="4" Grid.Column="0" Text="Type de Stroop:" Margin="5" VerticalAlignment="Center"/>
                     <ComboBox Grid.Row="4" Grid.Column="1" 
-                          ItemsSource="{Binding Profile.StroopTypes}" 
-                          SelectedItem="{Binding Profile.StroopType, Mode=TwoWay}" 
-                          Margin="5" MinWidth="200"/>
+                  ItemsSource="{Binding Profile.StroopTypes}" 
+                  SelectedItem="{Binding Profile.StroopType, Mode=TwoWay}" 
+                  Margin="5" MinWidth="200"/>
 
                     <!-- Taille du groupe -->
                     <TextBlock Grid.Row="5" Grid.Column="0" Text="Taille du groupe:" Margin="5" VerticalAlignment="Center"/>
-                    <xctk:IntegerUpDown Grid.Row="5" Grid.Column="1" Value="{Binding Profile.GroupSize, Mode=TwoWay}" Margin="5" Minimum="1" MinWidth="50"/>
+                    <ui:NumberBox Grid.Row="5" Grid.Column="1" Value="{Binding Profile.GroupSize, Mode=TwoWay}" Margin="5" Minimum="1" MinWidth="50"/>
 
                     <!-- Nombre de mots calculés -->
                     <TextBlock Grid.Row="6" Grid.Column="0" Text="Nombre de mots calculés:" Margin="5" VerticalAlignment="Center"/>
@@ -91,11 +94,11 @@
                     <!-- Boutons de validation et annulation -->
                     <StackPanel Grid.Row="8" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
                         <Button Content="Enregistrer" 
-                          Command="{Binding SaveCommand}" 
-                          Margin="5"/>
+                  Command="{Binding SaveCommand}" 
+                  Margin="5"/>
                         <Button Content="Annuler" 
-                          Command="{Binding CancelCommand}" 
-                          Margin="5"/>
+                  Command="{Binding CancelCommand}" 
+                  Margin="5"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -132,35 +135,35 @@
 
                     <!-- Nombre de mots -->
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Nombre de mots:" Margin="5" VerticalAlignment="Center"/>
-                    <xctk:IntegerUpDown Grid.Row="0" Grid.Column="1" Value="{Binding Profile.WordCount, Mode=TwoWay}" Margin="5" Minimum="1" MinWidth="50"/>
+                    <ui:NumberBox Grid.Row="0" Grid.Column="1" Value="{Binding Profile.WordCount, Mode=TwoWay}" Margin="5" Minimum="1" MinWidth="50"/>
 
                     <!-- Durée du mot -->
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Durée du mot (ms):" Margin="5" VerticalAlignment="Center"/>
-                    <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1" Value="{Binding Profile.WordDuration, Mode=TwoWay}" Margin="5" Minimum="1" MinWidth="50"/>
+                    <ui:NumberBox Grid.Row="1" Grid.Column="1" Value="{Binding Profile.WordDuration, Mode=TwoWay}" Margin="5" Minimum="1" MinWidth="50"/>
 
                     <!-- Durée de fixation -->
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Durée de fixation (ms):" Margin="5" VerticalAlignment="Center"/>
-                    <xctk:IntegerUpDown Grid.Row="2" Grid.Column="1" Value="{Binding Profile.FixationDuration, Mode=TwoWay}" Margin="5" Minimum="1" MinWidth="50"/>
+                    <ui:NumberBox Grid.Row="2" Grid.Column="1" Value="{Binding Profile.FixationDuration, Mode=TwoWay}" Margin="5" Minimum="1" MinWidth="50"/>
 
                     <!-- Ligne 6 : Durée d'amorce toujours affichée mais conditionnellement modifiable -->
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="Durée d'amorce (ms):" Margin="5" VerticalAlignment="Center"/>
-                    <xctk:IntegerUpDown Grid.Row="3" Grid.Column="1" 
-                     Value="{Binding Profile.AmorceDuration, Mode=TwoWay}" 
-                     Margin="5"
-                     Minimum="0"
-                     MinWidth="50"
-                     IsEnabled="{Binding Profile.StroopType, Converter={StaticResource StroopTypeToEnabledConverter}}"/>
+                    <ui:NumberBox Grid.Row="3" Grid.Column="1" 
+             Value="{Binding Profile.AmorceDuration, Mode=TwoWay}" 
+             Margin="5"
+             Minimum="0"
+             MinWidth="50"
+             IsEnabled="{Binding Profile.StroopType, Converter={StaticResource StroopTypeToEnabledConverter}}"/>
 
                     <!-- Type de Stroop -->
                     <TextBlock Grid.Row="4" Grid.Column="0" Text="Type de Stroop:" Margin="5" VerticalAlignment="Center"/>
                     <ComboBox Grid.Row="4" Grid.Column="1" 
-                          ItemsSource="{Binding Profile.StroopTypes}" 
-                          SelectedItem="{Binding Profile.StroopType, Mode=TwoWay}" 
-                          Margin="5" MinWidth="200"/>
+                  ItemsSource="{Binding Profile.StroopTypes}" 
+                  SelectedItem="{Binding Profile.StroopType, Mode=TwoWay}" 
+                  Margin="5" MinWidth="200"/>
 
                     <!-- Taille du groupe -->
                     <TextBlock Grid.Row="5" Grid.Column="0" Text="Taille du groupe:" Margin="5" VerticalAlignment="Center"/>
-                    <xctk:IntegerUpDown Grid.Row="5" Grid.Column="1" Value="{Binding Profile.GroupSize, Mode=TwoWay}" Margin="5" Minimum="1" MinWidth="50"/>
+                    <ui:NumberBox Grid.Row="5" Grid.Column="1" Value="{Binding Profile.GroupSize, Mode=TwoWay}" Margin="5" Minimum="1" MinWidth="50"/>
 
                     <!-- Durée de la tâche calculée -->
                     <TextBlock Grid.Row="6" Grid.Column="0" Text="Durée de la tâche calculée (ms):" Margin="5" VerticalAlignment="Center"/>
@@ -173,11 +176,11 @@
                     <!-- Boutons de validation et annulation -->
                     <StackPanel Grid.Row="8" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
                         <Button Content="Enregistrer" 
-                          Command="{Binding SaveCommand}" 
-                          Margin="5"/>
+                  Command="{Binding SaveCommand}" 
+                  Margin="5"/>
                         <Button Content="Annuler" 
-                          Command="{Binding CancelCommand}" 
-                          Margin="5"/>
+                  Command="{Binding CancelCommand}" 
+                  Margin="5"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -186,5 +189,5 @@
         <!-- Nom du profil -->
         <TextBlock Text="Nom du profil:" Margin="5" VerticalAlignment="Center"/>
         <TextBox Text="{Binding Profile.ProfileName, Mode=TwoWay}" Margin="5" MinWidth="200"/>
-    </StackPanel>
+    </ui:SimpleStackPanel>
 </Window>
