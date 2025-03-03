@@ -1,0 +1,95 @@
+﻿<Window x:Class="StroopApp.Views.ProfileEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Modifier Profil" Height="500" Width="400"
+        xmlns:converters="clr-namespace:StroopApp.Converters">
+    <Window.Resources>
+        <converters:StroopTypeToEnabledConverter x:Key="StroopTypeToEnabledConverter"/>
+    </Window.Resources>
+    <Grid Margin="10">
+        <!-- Définition de deux colonnes : une pour les labels et une pour les champs -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Définition des lignes pour chaque champ -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Profil Name -->
+            <RowDefinition Height="Auto"/>
+            <!-- Hours -->
+            <RowDefinition Height="Auto"/>
+            <!-- Minutes -->
+            <RowDefinition Height="Auto"/>
+            <!-- Seconds -->
+            <RowDefinition Height="Auto"/>
+            <!-- WordDuration -->
+            <RowDefinition Height="Auto"/>
+            <!-- FixationDuration -->
+            <RowDefinition Height="Auto"/>
+            <!-- AmorceDuration -->
+            <RowDefinition Height="Auto"/>
+            <!-- IsAmorce -->
+            <RowDefinition Height="Auto"/>
+            <!-- StroopType -->
+            <RowDefinition Height="Auto"/>
+            <!-- GroupSize -->
+            <RowDefinition Height="Auto"/>
+            <!-- Boutons -->
+        </Grid.RowDefinitions>
+
+        <!-- Nom du profil -->
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Nom du profil:" Margin="5" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Profile.ProfileName, Mode=TwoWay}" Margin="5"/>
+
+        <!-- Heures -->
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Heures:" Margin="5" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Profile.Hours, Mode=TwoWay}" Margin="5"/>
+
+        <!-- Minutes -->
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Minutes:" Margin="5" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Profile.Minutes, Mode=TwoWay}" Margin="5"/>
+
+        <!-- Secondes -->
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Secondes:" Margin="5" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Profile.Seconds, Mode=TwoWay}" Margin="5"/>
+
+        <!-- Durée du mot -->
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Durée du mot (ms):" Margin="5" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Profile.WordDuration, Mode=TwoWay}" Margin="5"/>
+
+        <!-- Durée de fixation -->
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Durée de fixation (ms):" Margin="5" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Profile.FixationDuration, Mode=TwoWay}" Margin="5"/>
+
+        <!-- Ligne 6 : Durée d'amorce toujours affichée mais conditionnellement modifiable -->
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Durée d'amorce (ms):" Margin="5" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="6" Grid.Column="1" 
+         Text="{Binding Profile.AmorceDuration, Mode=TwoWay}" 
+         Margin="5"
+         IsEnabled="{Binding Profile.StroopType, Converter={StaticResource StroopTypeToEnabledConverter}}"/>
+
+        <!-- Type de Stroop -->
+        <TextBlock Grid.Row="8" Grid.Column="0" Text="Type de Stroop:" Margin="5" VerticalAlignment="Center"/>
+        <ComboBox Grid.Row="8" Grid.Column="1" 
+              ItemsSource="{Binding Profile.StroopTypes}" 
+              SelectedItem="{Binding StroopType, Mode=TwoWay}" 
+              Margin="5"/>
+
+        <!-- Taille du groupe -->
+        <TextBlock Grid.Row="9" Grid.Column="0" Text="Taille du groupe:" Margin="5" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Profile.GroupSize, Mode=TwoWay}" Margin="5"/>
+
+        <!-- Boutons de validation et annulation -->
+        <StackPanel Grid.Row="10" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Content="Enregistrer" 
+              Command="{Binding SaveCommand}" 
+              Style="{StaticResource ValidationButtonStyle}" 
+              Margin="5"/>
+            <Button Content="Annuler" 
+              Command="{Binding CancelCommand}" 
+              Style="{StaticResource CancelButtonStyle}" 
+              Margin="5"/>
+        </StackPanel>
+    </Grid>
+</Window>

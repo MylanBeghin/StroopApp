@@ -1,0 +1,81 @@
+﻿<!-- Styles.xaml -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Styles pour les boutons -->
+    <!-- Bouton classique -->
+    <Style x:Key="StandardButtonStyle" TargetType="Button">
+        <!-- Taille par défaut -->
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Height" Value="30"/>
+
+        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="Background" Value="LightGray"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="BorderBrush" Value="Gray"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Padding="{TemplateBinding Padding}"
+                CornerRadius="3">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            RecognizesAccessKey="True"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="LightBlue"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!-- Bouton de validation/confirmation -->
+    <Style x:Key="ValidationButtonStyle" TargetType="Button" BasedOn="{StaticResource StandardButtonStyle}">
+        <Setter Property="Background" Value="LightGreen" />
+        <Setter Property="Foreground" Value="Black" />
+    </Style>
+
+    <!-- Bouton de suppression -->
+    <Style x:Key="DeletionButtonStyle" TargetType="Button" BasedOn="{StaticResource StandardButtonStyle}">
+        <Setter Property="Background" Value="LightCoral" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+
+    <!-- Bouton d'annulation -->
+    <Style x:Key="CancelButtonStyle" TargetType="Button" BasedOn="{StaticResource StandardButtonStyle}">
+        <Setter Property="Background" Value="LightYellow" />
+        <Setter Property="Foreground" Value="Black" />
+    </Style>
+
+    <!-- Styles pour les TextBlocks -->
+    <!-- Style titre -->
+    <Style x:Key="TitleTextStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="DarkBlue" />
+        <Setter Property="Margin" Value="10,10,10,5"/>
+    </Style>
+
+    <!-- Style sous-titre -->
+    <Style x:Key="SubtitleTextStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="DarkSlateGray" />
+        <Setter Property="Margin" Value="10,5,10,5"/>
+    </Style>
+
+    <!-- Style texte courant -->
+    <Style x:Key="BodyTextStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Margin" Value="10,2,10,2"/>
+    </Style>
+</ResourceDictionary>
