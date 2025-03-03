@@ -2,6 +2,11 @@
 
 namespace StroopApp.Models
 {
+    public enum CalculationMode
+    {
+        TaskDuration,
+        WordCount
+    }
     public class ExperimentProfile
     {
         public ExperimentProfile()
@@ -13,8 +18,9 @@ namespace StroopApp.Models
             _wordDuration = 2000;
             _fixationDuration = 100;
             _amorceDuration = 0;
-            _stroopType = "Congruent";
+            _stroopType = StroopTypes[0];
             _groupSize = 5;
+            _calculationMode = CalculationMode.TaskDuration;
             UpdateDerivedValues();
         }
 
@@ -173,7 +179,7 @@ namespace StroopApp.Models
         public int TaskDuration
         {
             get => _taskDuration;
-            private set
+            set
             {
                 if (_taskDuration != value)
                 {
@@ -187,7 +193,7 @@ namespace StroopApp.Models
         public int WordCount
         {
             get => _wordCount;
-            private set
+            set
             {
                 if (_wordCount != value)
                 {
@@ -201,7 +207,7 @@ namespace StroopApp.Models
         public int MaxReactionTime
         {
             get => _maxReactionTime;
-            private set
+            set
             {
                 if (_maxReactionTime != value)
                 {
@@ -210,26 +216,52 @@ namespace StroopApp.Models
                 }
             }
         }
-
-        public void UpdateDerivedValues()
+        private CalculationMode _calculationMode;
+        public CalculationMode CalculationMode
         {
-            IsAmorce = StroopType == "Amorce";
-            // Calcul de la durée totale de la tâche en millisecondes
-            TaskDuration = ((Hours * 3600) + (Minutes * 60) + Seconds) * 1000;
-            if (WordDuration > 0)
+            get => _calculationMode;
+            set
             {
-                if (IsAmorce)
+                if (_calculationMode != value)
                 {
-                    WordCount = TaskDuration / WordDuration;
-                    MaxReactionTime = WordDuration - FixationDuration - AmorceDuration;
-                }
-                else
-                {
-                    WordCount = TaskDuration / WordDuration;
-                    MaxReactionTime = WordDuration - FixationDuration;
+                    _calculationMode = value;
+                    OnPropertyChanged(nameof(CalculationMode));
+                    UpdateDerivedValues();
                 }
             }
         }
+        public void UpdateDerivedValues()
+        {
+            // Validation de "Amorce"
+            IsAmorce = StroopType == "Amorce";
+            if (!IsAmorce)
+            {
+                AmorceDuration = 0;
+            }
+
+            if (CalculationMode == CalculationMode.TaskDuration)
+            {
+                // Calculer TaskDuration depuis le temps saisi
+                TaskDuration = ((Hours * 3600) + (Minutes * 60) + Seconds) * 1000;
+                // Déduire WordCount
+                if (WordDuration > 0)
+                {
+                    WordCount = TaskDuration / WordDuration;
+                }
+            }
+            else if (CalculationMode == CalculationMode.WordCount)
+            {
+                // Utiliser la valeur saisie de WordCount pour recalculer TaskDuration et le temps
+                TaskDuration = WordCount * WordDuration;
+                Hours = TaskDuration / 3600000;
+                Minutes = (TaskDuration % 3600000) / 60000;
+                Seconds = (TaskDuration % 60000) / 1000;
+            }
+
+            // Calculer le temps de réaction maximum
+            MaxReactionTime = WordDuration - FixationDuration - AmorceDuration;
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {

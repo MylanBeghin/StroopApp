@@ -1,9 +1,6 @@
-﻿using StroopApp.Services.Profile;
-using System.Windows;
-
-namespace StroopApp.Views
+﻿namespace StroopApp.Views
 {
-    public partial class ExperimentWindow : Window
+    public partial class ExperimentWindow
     {
         public ExperimentWindow()
         {

@@ -1,17 +1,15 @@
 ﻿using StroopApp.Commands;
 using StroopApp.Models;
-using StroopApp.Services.Profile;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using StroopApp.Services.Profile;
 using StroopApp.Services;
 using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace StroopApp.ViewModels
 {
-    public class ProfileEditorViewModel
+    public class ProfileEditorViewModel : INotifyPropertyChanged
     {
         public ProfileEditorViewModel(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles, IProfileService profileService)
         {
@@ -20,7 +18,24 @@ namespace StroopApp.ViewModels
             Profiles = profiles;
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
+            Profile.PropertyChanged += Profile_PropertyChanged;
         }
+
+        private void Profile_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Profile.WordCount) || e.PropertyName == nameof(Profile.WordDuration) || e.PropertyName == nameof(Profile.Hours) || e.PropertyName == nameof(Profile.Minutes) || e.PropertyName == nameof(Profile.Seconds))
+            {
+                Profile.UpdateDerivedValues();
+            }
+            else if (e.PropertyName == nameof(Profile.StroopType))
+            {
+                if (Profile.StroopType != "Amorce")
+                {
+                    Profile.AmorceDuration = 0;
+                }
+            }
+        }
+
         private ExperimentProfile _profile;
 
         public ExperimentProfile Profile
@@ -43,10 +58,48 @@ namespace StroopApp.ViewModels
         public ICommand CancelCommand { get; }
         public void Save()
         {
+            // Vérification du nom de profil
+            if (string.IsNullOrWhiteSpace(Profile.ProfileName))
+            {
+                MessageBox.Show("Le nom du profil ne peut pas être vide ou contenir uniquement des espaces.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Vérification de TaskDuration/WordDuration
+            if (Profile.WordDuration <= 0 || Profile.TaskDuration % Profile.WordDuration != 0)
+            {
+                MessageBox.Show("La durée du mot doit être positive et TaskDuration doit être divisible par WordDuration.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            int wordNumber = Profile.TaskDuration / Profile.WordDuration;
+
+            // Vérification de GroupSize
+            if (Profile.GroupSize <= 0 || wordNumber % Profile.GroupSize != 0)
+            {
+                MessageBox.Show("La taille du groupe doit être positive et diviser WordNumber.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Vérification du type de Stroop
+            if (string.IsNullOrEmpty(Profile.StroopType))
+            {
+                MessageBox.Show("Le type de Stroop ne peut pas être nul.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Vérification du temps de réaction maximum
+            if (Profile.MaxReactionTime <= 0)
+            {
+                MessageBox.Show("Le temps de réaction maximum doit être positif.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Ajout du profil
             _IprofileService.AddProfile(Profile, Profiles);
             DialogResult = true;
             CloseAction?.Invoke();
         }
+
         public void Cancel()
         {
             DialogResult = false;
@@ -56,9 +109,5 @@ namespace StroopApp.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
     }
 }
-
-
-

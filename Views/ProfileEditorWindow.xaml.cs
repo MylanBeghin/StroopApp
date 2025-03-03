@@ -1,16 +1,11 @@
 ﻿using StroopApp.Models;
 using StroopApp.ViewModels;
-using System.Windows;
-using StroopApp.Services.Profile;
 using StroopApp.Services;
 using System.Collections.ObjectModel;
 
 namespace StroopApp.Views
 {
-    /// <summary>
-    /// Logique d'interaction pour ProfileEditorWindow.xaml
-    /// </summary>
-    public partial class ProfileEditorWindow : Window
+    public partial class ProfileEditorWindow
     {
         public ProfileEditorWindow(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles, IProfileService profileService)
         {

@@ -17,7 +17,6 @@
         <!-- Zone de sélection (ComboBox et label) occupant 3 colonnes = 1/2 de la largeur -->
         <StackPanel Grid.Column="0" Grid.ColumnSpan="3">
             <TextBlock Text="Sélectionnez un profil :" 
-                 Style="{StaticResource SubtitleTextStyle}"
                  Margin="0,0,0,10"/>
             <ComboBox ItemsSource="{Binding Profiles}" 
                 SelectedItem="{Binding CurrentProfile, Mode=TwoWay}"
@@ -28,19 +27,16 @@
         <!-- Bouton "Créer" dans la 4e colonne (1/6 de la largeur) -->
         <Button Grid.Column="3" Content="Créer" 
             Command="{Binding CreateProfileCommand}" 
-            HorizontalAlignment="Center" Margin="5"
-            Style="{StaticResource StandardButtonStyle}" />
+            HorizontalAlignment="Center" Margin="5" />
 
         <!-- Bouton "Modifier" dans la 5e colonne (1/6 de la largeur) -->
         <Button Grid.Column="4" Content="Modifier" 
             Command="{Binding ModifyProfileCommand}" 
-            HorizontalAlignment="Center" Margin="5"
-            Style="{StaticResource StandardButtonStyle}" />
+            HorizontalAlignment="Center" Margin="5" />
 
         <!-- Bouton "Supprimer" dans la 6e colonne (1/6 de la largeur) -->
         <Button Grid.Column="5" Content="Supprimer" 
             Command="{Binding DeleteProfileCommand}" 
-            HorizontalAlignment="Center" Margin="5"
-            Style="{StaticResource DeletionButtonStyle}" />
+            HorizontalAlignment="Center" Margin="5" />
     </Grid>
 </UserControl>
