@@ -3,11 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:StroopApp"
              StartupUri="Views/ExperimentWindow.xaml"
-             xmlns:ui="http://schemas.modernwpf.com/2019"
-             >
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:ui="http://schemas.modernwpf.com/2019">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="LightBlue" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
                 <ui:ThemeResources RequestedTheme="Light" AccentColor="LightBlue" />
                 <ui:XamlControlsResources />
             </ResourceDictionary.MergedDictionaries>
