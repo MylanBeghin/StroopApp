@@ -4,11 +4,7 @@
              xmlns:vm="clr-namespace:StroopApp.ViewModels"
              Height="Auto" Width="Auto"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
-        Background="{DynamicResource MaterialDesign.Brush.Background}"
-        TextElement.FontWeight="Medium"
-        TextElement.FontSize="14"
-        FontFamily="{materialDesign:MaterialDesignFont}">
+             xmlns:ui="http://schemas.modernwpf.com/2019">
     <Grid Margin="10">
         <!-- Définition de 6 colonnes égales -->
         <Grid.ColumnDefinitions>
