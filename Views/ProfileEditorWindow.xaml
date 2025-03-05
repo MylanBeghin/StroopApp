@@ -5,9 +5,8 @@
         xmlns:converters="clr-namespace:StroopApp.Converters"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         Title="Modifier Profil" 
-        ui:WindowHelper.UseModernWindowStyle="True"
-        Height="500"
-        Width="500">
+        SizeToContent="WidthAndHeight"
+        Width="510">
     <Window.Resources>
         <!-- Convertisseurs existants -->
         <converters:StroopTypeToEnabledConverter x:Key="StroopTypeToEnabledConverter"/>
@@ -148,7 +147,8 @@
                 <!-- Ligne 1: Nombre de mots -->
                 <ui:NumberBox Header="Nombre de mots:" 
                               Value="{Binding Profile.WordCount, Mode=TwoWay}" 
-                              Minimum="1"/>
+                              Minimum="1"
+                              SpinButtonPlacementMode="Inline"/>
                 <!-- Ligne 2: Type de Stroop -->
                 <ComboBox ui:ControlHelper.Header="Type de Stroop" 
            ItemsSource="{Binding Profile.StroopTypes}" 
@@ -189,9 +189,15 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0"/>
                         <ColumnDefinition Width="12"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0"/>
                         <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <ui:NumberBox Header="Heures" 
@@ -201,11 +207,16 @@
                     <ui:NumberBox Header="Minutes" 
                                   Value="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToMinutesConverter}}" 
                                   IsEnabled="False"
-                                  Grid.Column="2"/>
+                                  Grid.Column="3"/>
                     <ui:NumberBox Header="Secondes" 
                                   Value="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToSecondsConverter}}" 
                                   IsEnabled="False"
-                                  Grid.Column="4"/>
+                                  Grid.Column="6"/>
+                    <ui:NumberBox Header="Temps de réaction max (ms):" 
+                                  Value="{Binding Profile.MaxReactionTime}" 
+                                  IsEnabled="False"
+                                  Grid.Column="9"
+                                  Grid.ColumnSpan="2"/>
                 </Grid>
                 <!-- Ligne 6: Boutons -->
                 <ui:SimpleStackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">

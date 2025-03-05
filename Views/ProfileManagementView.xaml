@@ -2,9 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:StroopApp.ViewModels"
-             Height="Auto" Width="Auto"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:ui="http://schemas.modernwpf.com/2019">
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             Height="Auto" Width="Auto">
     <Grid Margin="10">
         <!-- Définition de 6 colonnes égales -->
         <Grid.ColumnDefinitions>
@@ -16,15 +15,14 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Zone de sélection (ComboBox et label) occupant 3 colonnes = 1/2 de la largeur -->
-        <StackPanel Grid.Column="0" Grid.ColumnSpan="3">
-            <TextBlock Text="Sélectionnez un profil :" 
-                 Margin="0,0,0,10"/>
+        <!-- Zone de sélection : Utilisation d'un ui:SimpleStackPanel pour le label et le ComboBox -->
+        <ui:SimpleStackPanel Grid.Column="0" Grid.ColumnSpan="3" Orientation="Vertical" Spacing="5">
+            <TextBlock Text="Sélectionnez un profil" />
             <ComboBox ItemsSource="{Binding Profiles}" 
                 SelectedItem="{Binding CurrentProfile, Mode=TwoWay}"
                 DisplayMemberPath="ProfileName"
                 Margin="0,0,0,20"/>
-        </StackPanel>
+        </ui:SimpleStackPanel>
 
         <!-- Bouton "Créer" dans la 4e colonne (1/6 de la largeur) -->
         <Button Grid.Column="3" Content="Créer" 

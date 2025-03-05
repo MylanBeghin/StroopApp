@@ -11,7 +11,7 @@ namespace StroopApp.Models
     {
         public ExperimentProfile()
         {
-            _profileName = "Profil par défaut";
+            _profileName = "Nouveau Profil";
             _hours = 0;
             _minutes = 30;
             _seconds = 0;
