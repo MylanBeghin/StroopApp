@@ -2,7 +2,7 @@
 using StroopApp.Services.Profile;
 using StroopApp.ViewModels;
 
-namespace StroopApp.Views
+namespace StroopApp.Views.Profile
 {
     public partial class ProfileManagementView : UserControl
     {

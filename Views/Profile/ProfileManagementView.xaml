@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="StroopApp.Views.Profile.ProfileManagementView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:converters="clr-namespace:StroopApp.Converters"
+             Height="Auto" Width="Auto">
+    <UserControl.Resources>
+        <converters:MillisecondsToMinutesConverter x:Key="MillisecondsToMinutesConverter"/>
+    </UserControl.Resources>
+
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="12"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Sélection du profil d'expérience -->
+        <ui:SimpleStackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10" VerticalAlignment="Center">
+            <ComboBox Text="Choisissez un profil !" Width="200" ItemsSource="{Binding Profiles}" SelectedItem="{Binding CurrentProfile}"
+                          DisplayMemberPath="ProfileName"/>
+            <Button Content="Créer" 
+          Command="{Binding CreateProfileCommand}" 
+          Margin="5"
+          Style="{StaticResource AccentButtonStyle}"/>
+            <Button Content="Modifier" 
+ Command="{Binding ModifyProfileCommand}"  
+ Margin="5"
+ Style="{StaticResource DefaultButtonStyle}" />
+            <Button Content="Supprimer" 
+Command="{Binding DeleteProfileCommand}"  
+Margin="5"
+Style="{StaticResource DefaultButtonStyle}" 
+        Foreground="White"
+        Background="IndianRed"/>
+        </ui:SimpleStackPanel>
+
+        <!-- Zone d'affichage des informations du profil sélectionné -->
+        <StackPanel Grid.Row="3" Orientation="Vertical" Margin="0,10,0,0">
+            <TextBlock Text="Informations du profil sélectionné :" FontWeight="Bold" Margin="0,0,0,10"/>
+            <TextBlock Text="{Binding CurrentProfile.StroopType, StringFormat='Type de Stroop : {0}'}" Margin="0,0,0,5"/>
+            <TextBlock Text="{Binding CurrentProfile.TaskDuration, Converter={StaticResource MillisecondsToMinutesConverter}, StringFormat='Durée de la tâche (min) : {0}'}" Margin="0,0,0,5"/>
+            <TextBlock Text="{Binding CurrentProfile.MaxReactionTime, StringFormat='Temps de réaction maximum (ms) : {0}'}" Margin="0,0,0,5"/>
+            <TextBlock Text="{Binding CurrentProfile.WordDuration, StringFormat='Durée par mot (ms) : {0}'}" Margin="0,0,0,5"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
+

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
+using ModernWpf.Controls;
 using StroopApp.Commands;
 using StroopApp.Models;
 using StroopApp.Services;
@@ -53,19 +54,31 @@ namespace StroopApp.ViewModels
         private void CreateProfile()
         {
             var newProfile = new ExperimentProfile();
-            var profilesWindow = new ProfileEditorWindow(newProfile, Profiles, _IprofileService);
-            profilesWindow.ShowDialog();
-            CurrentProfile = newProfile;
+            var profileWindow = new ProfileEditorWindow(newProfile, Profiles, _IprofileService);
+            profileWindow.ShowDialog();
+            if (profileWindow.DialogResult == true)
+            {
+                Profiles.Add(newProfile);
+                _IprofileService.SaveProfiles(Profiles);
+                CurrentProfile = newProfile;
+            }
         }
         private void ModifyProfile()
         {
-            if (_currentProfile == null)
+            if (CurrentProfile == null)
             {
-                MessageBox.Show("Veuillez sélectionner un profil à modifier !", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+                ShowErrorDialog("Veuillez sélectionner un profil à modifier !");
                 return;
             }
-            var profilesWindow = new ProfileEditorWindow(_currentProfile, Profiles, _IprofileService);
-            profilesWindow.ShowDialog();
+
+            var profileEditorViewModel = new ProfileEditorViewModel(CurrentProfile, Profiles, _IprofileService);
+            var profileEditorWindow = new ProfileEditorWindow(CurrentProfile, Profiles, _IprofileService);
+            profileEditorWindow.ShowDialog();
+            if (profileEditorWindow.DialogResult == true)
+            {
+                CurrentProfile = profileEditorViewModel.Profile;
+                _IprofileService.SaveProfiles(Profiles);
+            }
         }
         private void DeleteProfile()
         {
@@ -87,8 +100,17 @@ namespace StroopApp.ViewModels
                 CurrentProfile = null;
             }
         }
+        private async void ShowErrorDialog(string message)
+        {
+            var dialog = new ContentDialog
+            {
+                Title = "Erreur",
+                Content = message,
+                CloseButtonText = "OK"
+            };
 
-
+            await dialog.ShowAsync();
+        }
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

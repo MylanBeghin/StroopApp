@@ -4,7 +4,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:converters="clr-namespace:StroopApp.Converters"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        Title="Modifier Profil" 
+        Title="" 
         SizeToContent="WidthAndHeight"
         Width="510">
     <Window.Resources>
@@ -127,9 +127,9 @@
                                   Grid.Column="2"/>
                 </Grid>
                 <!-- Ligne 6: Boutons -->
-                <ui:SimpleStackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">
-                    <Button Content="Annuler" Command="{Binding CancelCommand}"/>
-                    <Button Content="Enregistrer" Command="{Binding SaveCommand}"/>
+                <ui:SimpleStackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12">
+                    <Button Content="Annuler" Style="{StaticResource DefaultButtonStyle}" Command="{Binding CancelCommand}"/>
+                    <Button Content="Enregistrer" Style="{StaticResource AccentButtonStyle}" Command="{Binding SaveCommand}"/>                
                 </ui:SimpleStackPanel>
             </ui:SimpleStackPanel>
             <!-- Panel pour le mode "En fonction du nombre de mots" -->
@@ -219,9 +219,9 @@
                                   Grid.ColumnSpan="2"/>
                 </Grid>
                 <!-- Ligne 6: Boutons -->
-                <ui:SimpleStackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">
-                    <Button Content="Annuler" Command="{Binding CancelCommand}"/>
-                    <Button Content="Enregistrer" Command="{Binding SaveCommand}"/>
+                <ui:SimpleStackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12">
+                    <Button Content="Annuler" Style="{StaticResource DefaultButtonStyle}" Command="{Binding CancelCommand}"/>
+                    <Button Content="Enregistrer" Style="{StaticResource AccentButtonStyle}" Command="{Binding SaveCommand}"/>
                 </ui:SimpleStackPanel>
             </ui:SimpleStackPanel>
         </ui:SimpleStackPanel>

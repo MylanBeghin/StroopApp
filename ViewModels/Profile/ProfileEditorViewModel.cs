@@ -6,6 +6,7 @@ using System.Windows.Input;
 using StroopApp.Services;
 using System.Collections.ObjectModel;
 using System.Windows;
+using ModernWpf.Controls;
 
 namespace StroopApp.ViewModels
 {
@@ -61,14 +62,19 @@ namespace StroopApp.ViewModels
             // Vérification du nom de profil
             if (string.IsNullOrWhiteSpace(Profile.ProfileName))
             {
-                MessageBox.Show("Le nom du profil ne peut pas être vide ou contenir uniquement des espaces.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorDialog("Le nom du profil ne peut pas être vide ou contenir uniquement des espaces.");
+                return;
+            }
+            if (Profiles.Any(p => p != Profile && p.ProfileName.Equals(Profile.ProfileName, StringComparison.OrdinalIgnoreCase)))
+            {
+                ShowErrorDialog("Un profil avec ce nom existe déjà. Veuillez choisir un autre nom.");
                 return;
             }
 
             // Vérification de TaskDuration/WordDuration
             if (Profile.WordDuration <= 0 || Profile.TaskDuration % Profile.WordDuration != 0)
             {
-                MessageBox.Show("La durée du mot doit être positive et TaskDuration doit être divisible par WordDuration.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorDialog("La durée du mot doit être positive et TaskDuration doit être divisible par WordDuration.");
                 return;
             }
             int wordNumber = Profile.TaskDuration / Profile.WordDuration;
@@ -76,36 +82,43 @@ namespace StroopApp.ViewModels
             // Vérification de GroupSize
             if (Profile.GroupSize <= 0 || wordNumber % Profile.GroupSize != 0)
             {
-                MessageBox.Show("La taille du groupe doit être positive et diviser WordNumber.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorDialog("La taille du groupe doit être positive et diviser WordNumber.");
                 return;
             }
 
             // Vérification du type de Stroop
             if (string.IsNullOrEmpty(Profile.StroopType))
             {
-                MessageBox.Show("Le type de Stroop ne peut pas être nul.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorDialog("Le type de Stroop ne peut pas être nul.");
                 return;
             }
 
             // Vérification du temps de réaction maximum
             if (Profile.MaxReactionTime <= 0)
             {
-                MessageBox.Show("Le temps de réaction maximum doit être positif.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                ShowErrorDialog("Le temps de réaction maximum doit être positif.");
                 return;
             }
 
-            // Ajout du profil
-            _IprofileService.AddProfile(Profile, Profiles);
             DialogResult = true;
             CloseAction?.Invoke();
         }
-
         public void Cancel()
         {
             DialogResult = false;
             CloseAction?.Invoke();
         }
+        private async void ShowErrorDialog(string message)
+        {
+            var dialog = new ContentDialog
+            {
+                Title = "Erreur",
+                Content = message,
+                CloseButtonText = "OK"
+            };
 
+            await dialog.ShowAsync();
+        }
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

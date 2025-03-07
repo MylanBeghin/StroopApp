@@ -1,6 +1,8 @@
-﻿namespace StroopApp.Views
+﻿using System.Windows;
+
+namespace StroopApp.Views
 {
-    public partial class ExperimentWindow
+    public partial class ExperimentWindow : Window
     {
         public ExperimentWindow()
         {
