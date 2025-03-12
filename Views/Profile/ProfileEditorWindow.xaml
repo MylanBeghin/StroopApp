@@ -6,7 +6,8 @@
         xmlns:ui="http://schemas.modernwpf.com/2019"
         Title="" 
         SizeToContent="WidthAndHeight"
-        Width="510">
+        Width="510"
+        ui:WindowHelper.UseModernWindowStyle="True">
     <Window.Resources>
         <!-- Convertisseurs existants -->
         <converters:StroopTypeToEnabledConverter x:Key="StroopTypeToEnabledConverter"/>

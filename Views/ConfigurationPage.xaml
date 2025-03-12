@@ -2,7 +2,59 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:ui="http://schemas.modernwpf.com/2019"
-      xmlns:views="clr-namespace:StroopApp.Views.Profile"
+      xmlns:viewsProfile="clr-namespace:StroopApp.Views.Profile"
+      xmlns:viewsParticipant="clr-namespace:StroopApp.Views.Participant"
       Title="Configuration de l'expérience">
-    <views:ProfileManagementView/>
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Titre -->
+            <RowDefinition Height="Auto"/>
+            <!-- Section supérieure -->
+            <RowDefinition Height="*"/>
+            <!-- ParticipantManagementView -->
+        </Grid.RowDefinitions>
+
+        <!-- Titre en haut à gauche -->
+        <TextBlock Grid.Row="0"
+               Text="Configuration des paramètres de l'expérience"
+               Style="{DynamicResource HeaderTextBlockStyle}"
+               HorizontalAlignment="Left"
+               Margin="0,0,0,12"/>
+
+        <!-- Section supérieure : 2 colonnes -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Colonne gauche : ProfileManagementView -->
+            <viewsProfile:ProfileManagementView Grid.Column="0"/>
+
+            <!-- Colonne droite : Bloc placeholder pour 'Choix des touches' -->
+            <Border Grid.Column="1"
+              Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+              CornerRadius="8"
+              Padding="16"
+              Margin="10,0,0,0">
+                <ui:SimpleStackPanel>
+                    <TextBlock Text="Choix des touches"
+                     Style="{DynamicResource TitleTextBlockStyle}"
+                     Margin="0,0,0,10"/>
+                    <TextBlock Text="(Implémentation à venir)"
+                     Style="{DynamicResource BodyTextBlockStyle}"/>
+                </ui:SimpleStackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Section du bas : ParticipantManagementView -->
+        <Border Grid.Row="2"
+            Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+            CornerRadius="8"
+            Padding="16"
+            Margin="0,12,0,0">
+            <viewsParticipant:ParticipantManagementView/>
+        </Border>
+    </Grid>
 </Page>
