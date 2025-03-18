@@ -76,15 +76,18 @@ namespace StroopApp.ViewModels
             profileEditorWindow.ShowDialog();
             if (profileEditorWindow.DialogResult == true)
             {
+                // Même si profileEditorViewModel.Profile est le même objet, nous forçons la mise à jour.
                 CurrentProfile = profileEditorViewModel.Profile;
+                OnPropertyChanged(nameof(CurrentProfile));
                 _IprofileService.SaveProfiles(Profiles);
             }
         }
+
         private void DeleteProfile()
         {
             if (_currentProfile == null)
             {
-                MessageBox.Show("Veuillez sélectionner un profil à supprimer !", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+                ShowErrorDialog("Veuillez sélectionner un profil à supprimer !");
                 return;
             }
 
