@@ -14,6 +14,11 @@
         <ui:SimpleStackPanel Spacing="10">
             <TextBlock Text="Gestion des participants" 
                  Style="{DynamicResource TitleTextBlockStyle}"/>
+            <ui:SimpleStackPanel Orientation="Horizontal" Spacing="10">
+                <Button Content="Créer" Command="{Binding CreateParticipantCommand}" />
+                <Button Content="Modifier" Command="{Binding ModifyParticipantCommand}" />
+                <Button Content="Supprimer" Command="{Binding DeleteParticipantCommand}" />
+            </ui:SimpleStackPanel>
             <!-- Liste des participants -->
             <ListView ItemsSource="{Binding Participants}" SelectedItem="{Binding SelectedParticipant}" Height="150">
                 <ListView.ItemTemplate>
@@ -22,13 +27,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <!-- Boutons d'actions -->
-            <ui:SimpleStackPanel Orientation="Horizontal" Spacing="10">
-                <Button Content="Créer" Command="{Binding CreateParticipantCommand}" />
-                <Button Content="Modifier" Command="{Binding ModifyParticipantCommand}" />
-                <Button Content="Supprimer" Command="{Binding DeleteParticipantCommand}" />
-                <Button Content="Sélectionner" Command="{Binding SelectParticipantCommand}" />
-            </ui:SimpleStackPanel>
         </ui:SimpleStackPanel>
     </Border>
 </UserControl>
