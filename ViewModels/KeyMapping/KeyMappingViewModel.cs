@@ -7,6 +7,10 @@ using StroopApp.Services.KeyMapping;
 using ModernWpf.Controls;
 
 using KeyMappingModel = StroopApp.Models.KeyMapping;
+using System.Windows.Controls;
+using System.Windows.Media.Animation;
+using System.Windows.Media;
+using System.Windows;
 
 namespace StroopApp.ViewModels
 {
@@ -68,16 +72,52 @@ namespace StroopApp.ViewModels
         {
             StartEditing(color);
 
-            // Création d'un ContentDialog ressemblant à un ContextDialog
+            // Message original et panneau d'erreur dans un Grid
+            string originalMessage = "Appuyez sur une touche pour définir le mapping. Appuyez sur Échap pour annuler.";
+            var originalText = new TextBlock
+            {
+                Text = originalMessage,
+                TextWrapping = TextWrapping.Wrap
+            };
+
+            var errorPanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Opacity = 0,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+            // Utilisation de FontIcon de ModernWpf (ou FontIcon standard) pour l'icône d'avertissement
+            var errorIcon = new FontIcon
+            {
+                Glyph = "\uE7BA", // Code unicode pour une icône d'avertissement (à ajuster si besoin)
+                Foreground = new SolidColorBrush(Colors.Red),
+                FontSize = 24,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            var errorText = new TextBlock
+            {
+                Text = "Cette touche est déjà utilisée. Veuillez choisir une autre touche.",
+                Foreground = new SolidColorBrush(Colors.Red),
+                Margin = new Thickness(8, 0, 0, 0),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            errorPanel.Children.Add(errorIcon);
+            errorPanel.Children.Add(errorText);
+
+            // Le Grid contient l'affichage normal (originalText) et l'erreur par-dessus
+            var grid = new Grid();
+            grid.Children.Add(originalText);
+            grid.Children.Add(errorPanel);
+
             var dialog = new ContentDialog
             {
                 Title = $"Modification du mapping pour {color}",
-                Content = "Appuyez sur une touche pour définir le mapping. Appuyez sur Échap pour annuler.",
+                Content = grid,
                 PrimaryButtonText = string.Empty,
                 SecondaryButtonText = string.Empty
             };
 
-            dialog.KeyDown += (s, e) =>
+            dialog.KeyDown += async (s, e) =>
             {
                 if (e.Key == Key.Escape)
                 {
@@ -88,10 +128,49 @@ namespace StroopApp.ViewModels
                 }
                 else
                 {
-                    // Affectation de la touche et fermeture du dialog
-                    EditingMapping.Key = e.Key;
-                    dialog.Hide();
-                    e.Handled = true;
+                    bool keyAlreadyUsed =
+                        (Mappings.Red.Key == e.Key && EditingMapping != Mappings.Red) ||
+                        (Mappings.Blue.Key == e.Key && EditingMapping != Mappings.Blue) ||
+                        (Mappings.Green.Key == e.Key && EditingMapping != Mappings.Green) ||
+                        (Mappings.Yellow.Key == e.Key && EditingMapping != Mappings.Yellow);
+
+                    if (keyAlreadyUsed)
+                    {
+                        // Animation d'erreur : faire apparaître puis disparaître errorPanel
+                        var fadeIn = new DoubleAnimation
+                        {
+                            From = 0,
+                            To = 1,
+                            Duration = TimeSpan.FromMilliseconds(300)
+                        };
+                        var fadeOut = new DoubleAnimation
+                        {
+                            From = 1,
+                            To = 0,
+                            BeginTime = TimeSpan.FromMilliseconds(1500),
+                            Duration = TimeSpan.FromMilliseconds(300)
+                        };
+
+                        var sb = new Storyboard();
+                        sb.Children.Add(fadeIn);
+                        sb.Children.Add(fadeOut);
+                        Storyboard.SetTarget(fadeIn, errorPanel);
+                        Storyboard.SetTargetProperty(fadeIn, new PropertyPath("Opacity"));
+                        Storyboard.SetTarget(fadeOut, errorPanel);
+                        Storyboard.SetTargetProperty(fadeOut, new PropertyPath("Opacity"));
+                        sb.Begin();
+
+                        // Laisser le dialog ouvert pour une nouvelle saisie
+                        dialog.Focus();
+                        e.Handled = true;
+                    }
+                    else
+                    {
+                        // Touche valide, on affecte et on ferme
+                        EditingMapping.Key = e.Key;
+                        dialog.Hide();
+                        e.Handled = true;
+                    }
                 }
             };
 

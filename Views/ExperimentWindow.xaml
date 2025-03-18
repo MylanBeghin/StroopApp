@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="" Height="450" Width="800"
         ui:WindowHelper.UseModernWindowStyle="True"
-        Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}">
+        Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}"
+        WindowState="Maximized">
     <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
 </Window>
