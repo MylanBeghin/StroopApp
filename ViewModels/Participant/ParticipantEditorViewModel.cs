@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Input;
+using ModernWpf.Controls;
 using StroopApp.Commands;
 using StroopApp.Models;
 using StroopApp.Services.Participant;
@@ -25,12 +27,8 @@ namespace StroopApp.ViewModels
                 }
             }
         }
-
-        // Expose les valeurs possibles pour les énumérations
         public IEnumerable<SexAssignedAtBirth> SexAssignedValues { get; }
         public IEnumerable<Gender> GenderValues { get; }
-
-        // Commandes pour Sauvegarder et Annuler
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
 
@@ -48,18 +46,33 @@ namespace StroopApp.ViewModels
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
         }
-
-        // Méthode appelée lors de la sauvegarde
-        private void Save()
+        private async void Save()
         {
+            if (!Participant.Age.HasValue ||
+                !Participant.Weight.HasValue ||
+                !Participant.Height.HasValue ||
+                double.IsNaN(Participant.Weight.Value) ||
+                double.IsInfinity(Participant.Weight.Value) ||
+                double.IsNaN(Participant.Height.Value) ||
+                double.IsInfinity(Participant.Height.Value))
+            {
+                var dialog = new ContentDialog
+                {
+                    Title = "Erreur",
+                    Content = "Veuillez remplir correctement tous les champs obligatoires.",
+                    CloseButtonText = "OK"
+                };
+                await dialog.ShowAsync();
+                return;
+            }
             DialogResult = true;
             CloseAction?.Invoke();
         }
 
-        // Méthode appelée lors de l'annulation
         private void Cancel()
         {
-            // Implémentez ici la logique d'annulation, par exemple, en fermant la fenêtre avec DialogResult = false.
+            DialogResult = false;
+            CloseAction?.Invoke();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

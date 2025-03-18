@@ -9,7 +9,6 @@
         Height="610"
         ui:WindowHelper.UseModernWindowStyle="True">
     <Window.Resources>
-        <!-- Convertisseurs existants -->
         <converters:StroopTypeToEnabledConverter x:Key="StroopTypeToEnabledConverter"/>
         <converters:CalculationModeToBooleanConverter x:Key="CalculationModeToBooleanConverter"/>
         <converters:MillisecondsToHoursConverter x:Key="MillisecondsToHoursConverter"/>
@@ -17,12 +16,10 @@
         <converters:MillisecondsToSecondsConverter x:Key="MillisecondsToSecondsConverter"/>
     </Window.Resources>
     <ui:SimpleStackPanel Margin="12" Spacing="12">
-        <!-- Zone d'informations générales -->
         <TextBlock Text="Modification du profil" Style="{StaticResource TitleTextBlockStyle}"/>
         <ui:SimpleStackPanel Orientation="Vertical" Spacing="12">
             <TextBox ui:ControlHelper.Header="Nom du profil" 
                      Text="{Binding Profile.ProfileName, Mode=TwoWay}"/>
-            <!-- Zone de sélection du mode via RadioButton -->
             <ui:SimpleStackPanel Orientation="Vertical">
                 <TextBlock Text="Choix du mode" />
                 <ui:SimpleStackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,12,0,0" Spacing="12">
@@ -35,9 +32,7 @@
                 </ui:SimpleStackPanel>
             </ui:SimpleStackPanel>
         </ui:SimpleStackPanel>
-        <!-- Panneaux conditionnels -->
         <ui:SimpleStackPanel Spacing="12">
-            <!-- Panel pour le mode "En fonction du temps" -->
             <ui:SimpleStackPanel x:Name="TimeModePanel" Spacing="12">
                 <ui:SimpleStackPanel.Style>
                     <Style TargetType="ui:SimpleStackPanel">
@@ -49,7 +44,6 @@
                         </Style.Triggers>
                     </Style>
                 </ui:SimpleStackPanel.Style>
-                <!-- Ligne 1: Heures, Minutes, Secondes -->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -76,12 +70,10 @@
                                   SpinButtonPlacementMode="Inline" 
                                   Grid.Column="4"/>
                 </Grid>
-                <!-- Ligne 2: Type de Stroop -->
                 <ComboBox ui:ControlHelper.Header="Type de Stroop" 
                           ItemsSource="{Binding Profile.StroopTypes}" 
                           SelectedItem="{Binding Profile.StroopType, Mode=TwoWay}" 
                           Width="120"/>
-                <!-- Ligne 3: Durée du mot, fixation et amorce -->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -107,12 +99,10 @@
                                   SpinButtonPlacementMode="Inline"
                                   Grid.Column="4"/>
                 </Grid>
-                <!-- Ligne 4: Taille du groupe -->
                 <ui:NumberBox Header="Taille du groupe" 
                               Value="{Binding Profile.GroupSize, Mode=TwoWay}" 
                               Minimum="1" 
                               SpinButtonPlacementMode="Inline"/>
-                <!-- Ligne 5: Résultats en lecture seule -->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -128,13 +118,11 @@
                                   IsEnabled="False"
                                   Grid.Column="2"/>
                 </Grid>
-                <!-- Ligne 6: Boutons -->
                 <ui:SimpleStackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12">
                     <Button Content="Annuler" Style="{StaticResource DefaultButtonStyle}" Command="{Binding CancelCommand}"/>
-                    <Button Content="Enregistrer" Style="{StaticResource AccentButtonStyle}" Command="{Binding SaveCommand}"/>                
+                    <Button Content="Enregistrer" Style="{StaticResource AccentButtonStyle}" Command="{Binding SaveCommand}"/>
                 </ui:SimpleStackPanel>
             </ui:SimpleStackPanel>
-            <!-- Panel pour le mode "En fonction du nombre de mots" -->
             <ui:SimpleStackPanel x:Name="WordCountPanel" Spacing="12">
                 <ui:SimpleStackPanel.Style>
                     <Style TargetType="ui:SimpleStackPanel">
@@ -146,17 +134,14 @@
                         </Style.Triggers>
                     </Style>
                 </ui:SimpleStackPanel.Style>
-                <!-- Ligne 1: Nombre de mots -->
                 <ui:NumberBox Header="Nombre de mots" 
                               Value="{Binding Profile.WordCount, Mode=TwoWay}" 
                               Minimum="1"
                               SpinButtonPlacementMode="Inline"/>
-                <!-- Ligne 2: Type de Stroop -->
                 <ComboBox ui:ControlHelper.Header="Type de Stroop" 
            ItemsSource="{Binding Profile.StroopTypes}" 
            SelectedItem="{Binding Profile.StroopType, Mode=TwoWay}" 
            Width="120"/>
-                <!-- Ligne 3: Durée du mot, fixation et amorce -->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -182,12 +167,10 @@
                    SpinButtonPlacementMode="Inline"
                    Grid.Column="4"/>
                 </Grid>
-                <!-- Ligne 4: Taille du groupe -->
                 <ui:NumberBox Header="Taille du groupe" 
                Value="{Binding Profile.GroupSize, Mode=TwoWay}" 
                Minimum="1" 
                SpinButtonPlacementMode="Inline"/>
-                <!-- Ligne 5: Conversion de la durée de la tâche en heures, minutes et secondes -->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -220,7 +203,6 @@
                                   Grid.Column="9"
                                   Grid.ColumnSpan="2"/>
                 </Grid>
-                <!-- Ligne 6: Boutons -->
                 <ui:SimpleStackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12">
                     <Button Content="Annuler" Style="{StaticResource DefaultButtonStyle}" Command="{Binding CancelCommand}"/>
                     <Button Content="Enregistrer" Style="{StaticResource AccentButtonStyle}" Command="{Binding SaveCommand}"/>

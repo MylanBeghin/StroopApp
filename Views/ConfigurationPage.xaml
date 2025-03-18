@@ -6,12 +6,31 @@
       xmlns:viewsKeyMapping="clr-namespace:StroopApp.Views.KeyMapping"
       xmlns:viewsParticipant="clr-namespace:StroopApp.Views.Participant"
       Title="Configuration de l'expérience">
-    <ui:SimpleStackPanel Spacing="12" Margin="12">
-        <TextBlock Text="Configuration des paramètres de l'expérience"
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="12"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="12"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="12"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+               Text="Configuration des paramètres de l'expérience"
                Style="{DynamicResource HeaderTextBlockStyle}"
-               HorizontalAlignment="Left"/>
-        <viewsProfile:ProfileManagementView/>
-        <viewsKeyMapping:KeyMappingView/>
-        <viewsParticipant:ParticipantManagementView/>
-    </ui:SimpleStackPanel>
+               HorizontalAlignment="Left"
+               Margin="0,0,0,12"/>
+        <viewsProfile:ProfileManagementView Grid.Row="1"/>
+        <viewsKeyMapping:KeyMappingView Grid.Row="3"/>
+        <ScrollViewer Grid.Row="5" VerticalScrollBarVisibility="Auto">
+            <viewsParticipant:ParticipantManagementView/>
+        </ScrollViewer>
+        <StackPanel Grid.Row="7" HorizontalAlignment="Center">
+            <Button Content="Lancer l'expérience" 
+              Style="{DynamicResource AccentButtonStyle}"
+              Command="{Binding LaunchExperimentCommand}"/>
+        </StackPanel>
+    </Grid>
 </Page>
