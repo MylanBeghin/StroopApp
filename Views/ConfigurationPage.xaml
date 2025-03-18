@@ -16,11 +16,6 @@
         <!-- Section intermédiaire : KeyMappingView (les key mappings alignés horizontalement) -->
         <viewsKeyMapping:KeyMappingView/>
         <!-- Section du bas : ParticipantManagementView -->
-        <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
-            CornerRadius="8"
-            Padding="16"
-            Margin="0,12,0,0">
-            <viewsParticipant:ParticipantManagementView/>
-        </Border>
+        <viewsParticipant:ParticipantManagementView/>
     </ui:SimpleStackPanel>
 </Page>

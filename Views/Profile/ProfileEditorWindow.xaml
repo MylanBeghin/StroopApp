@@ -6,7 +6,7 @@
         xmlns:ui="http://schemas.modernwpf.com/2019"
         Title=""
         Width="510"
-        Height="560"
+        Height="610"
         ui:WindowHelper.UseModernWindowStyle="True">
     <Window.Resources>
         <!-- Convertisseurs existants -->
@@ -18,6 +18,7 @@
     </Window.Resources>
     <ui:SimpleStackPanel Margin="12" Spacing="12">
         <!-- Zone d'informations générales -->
+        <TextBlock Text="Modification du profil" Style="{StaticResource TitleTextBlockStyle}"/>
         <ui:SimpleStackPanel Orientation="Vertical" Spacing="12">
             <TextBox ui:ControlHelper.Header="Nom du profil" 
                      Text="{Binding Profile.ProfileName, Mode=TwoWay}"/>

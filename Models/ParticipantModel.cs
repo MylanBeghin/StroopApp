@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace StroopApp.Models
 {
@@ -20,7 +18,7 @@ namespace StroopApp.Models
         Other,
         PreferNotToAnswer
     }
-    public class Participant : INotifyPropertyChanged
+    public class ParticipantModel : INotifyPropertyChanged
     {
         private int _id;
         public int Id
@@ -133,7 +131,7 @@ namespace StroopApp.Models
         }
 
         // Constructor
-        public Participant()
+        public ParticipantModel()
         {
             Results = new List<Result>();
             Height = null;
