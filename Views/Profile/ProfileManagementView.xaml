@@ -6,29 +6,35 @@
              Height="Auto" Width="Auto"
              Background="Transparent">
     <UserControl.Resources>
-        <converters:MillisecondsToHoursConverter x:Key="MillisecondsToHoursConverter"/>
-        <converters:MillisecondsToMinutesConverter x:Key="MillisecondsToMinutesConverter"/>
-        <converters:MillisecondsToSecondsConverter x:Key="MillisecondsToSecondsConverter"/>
+        <converters:MillisecondsToHoursConverter x:Key="MillisecondsToHoursConverter" />
+        <converters:MillisecondsToMinutesConverter x:Key="MillisecondsToMinutesConverter" />
+        <converters:MillisecondsToSecondsConverter x:Key="MillisecondsToSecondsConverter" />
     </UserControl.Resources>
-    <ui:SimpleStackPanel>
-        <!-- Card 1 : Choix du profil -->
-        <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
-            CornerRadius="8,8,0,0"
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Card 1 : Choix du profil (colonne gauche) -->
+        <Border Grid.Column="0"
+            Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+            CornerRadius="8,0,0,8"
             Padding="16"
             BorderThickness="0.5"
-            BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+            BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+            >
             <ui:SimpleStackPanel Spacing="10">
                 <TextBlock Text="Choix du profil de l'expérience"
                    Style="{DynamicResource TitleTextBlockStyle}"/>
-                <!-- Petite phrase explicative sous le titre -->
                 <TextBlock Text="Sélectionnez le profil à utiliser pour configurer votre expérience."
                    Style="{DynamicResource CaptionTextBlockStyle}"/>
-                <!-- Mise en ligne horizontale du ComboBox et des boutons -->
                 <ui:SimpleStackPanel Orientation="Horizontal"
                              HorizontalAlignment="Left"
                              VerticalAlignment="Bottom"
                              Spacing="10">
-                    <ComboBox Width="200"
+                    <ComboBox Width="350"
                     ItemsSource="{Binding Profiles}"
                     SelectedItem="{Binding CurrentProfile}"
                     DisplayMemberPath="ProfileName"
@@ -37,7 +43,7 @@
                     <Button Content="Créer"
                   Command="{Binding CreateProfileCommand}"
                   Style="{DynamicResource AccentButtonStyle}"
-                  Margin="0"/>
+                  />
                     <Button Content="Modifier"
                   Command="{Binding ModifyProfileCommand}"
                   Style="{DynamicResource DefaultButtonStyle}"/>
@@ -47,91 +53,100 @@
                 </ui:SimpleStackPanel>
             </ui:SimpleStackPanel>
         </Border>
-        <!-- Card 2 : Détails du profil sélectionné -->
-        <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
-            CornerRadius="0,0,8,8"
-            Padding="16"
-            BorderThickness="0.5"
-            BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+
+        <!-- Card 2 : Détails du profil sélectionné (colonne droite) -->
+        <Border Grid.Column="1"
+        Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+        CornerRadius="0,8,8,0"
+        Padding="16"
+        BorderThickness="0.5"
+        BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+            <!-- Bloc contenant le titre de section et le reste en dessous -->
             <ui:SimpleStackPanel Spacing="10">
+                <!-- Titre de section -->
                 <TextBlock Text="Détails du profil sélectionné"
-                   Style="{DynamicResource TitleTextBlockStyle}"
-                   Margin="0,0,0,10"/>
-                <!-- Grid pour aligner les champs sur toute la largeur -->
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+               Style="{DynamicResource TitleTextBlockStyle}"/>
+                <!-- Grille à 4 colonnes (mêmes largeurs, spacing de 8 via les marges) -->
+                <Grid Margin="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*" />
+                        <!-- Colonne 2 sera une grille imbriquée -->
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-
-                    <!-- Champ 1 : Type de Stroop -->
-                    <TextBox Grid.Row="0" Grid.Column="0"
-                   Text="{Binding CurrentProfile.StroopType}"
-                   IsReadOnly="True"
-                   HorizontalAlignment="Stretch"
-                   ui:ControlHelper.Header="Type de Stroop"
-                   Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-                   BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                   Padding="4" Margin="4" IsHitTestVisible="False"/>
-
-                    <!-- Champ 2 : Durée de la tâche en heures, minutes et secondes -->
-                    <Grid Grid.Row="0" Grid.Column="1">
+                    <!-- Colonne 1 : Type de Stroop -->
+                    <TextBox Grid.Column="0"
+               Text="{Binding CurrentProfile.StroopType}"
+               IsReadOnly="True"
+               HorizontalAlignment="Stretch"
+               ui:ControlHelper.Header="Type de Stroop"
+               Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+               BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+               IsHitTestVisible="False"
+                             Padding="4" Margin="4"/>
+                    <!-- Colonne 2 : Durée de la tâche divisée en 3 sous-colonnes -->
+                    <Grid Grid.Column="1">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
+                        <!-- Heures -->
                         <TextBox Grid.Column="0"
-                     Text="{Binding CurrentProfile.TaskDuration, Converter={StaticResource MillisecondsToHoursConverter}}"
-                     IsReadOnly="True"
-                     HorizontalAlignment="Stretch"
-                     ui:ControlHelper.Header="Heures"
-                     Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-                     BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                     Padding="4" Margin="4" IsHitTestVisible="False"/>
+                 Text="{Binding CurrentProfile.TaskDuration, Converter={StaticResource MillisecondsToHoursConverter}}"
+                 IsReadOnly="True"
+                 HorizontalAlignment="Center"
+                 ui:ControlHelper.Header="Heures"
+                 Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                 Padding="4" Margin="4"
+                 IsHitTestVisible="False"/>
+                        <!-- Minutes -->
                         <TextBox Grid.Column="1"
-                     Text="{Binding CurrentProfile.TaskDuration, Converter={StaticResource MillisecondsToMinutesConverter}}"
-                     IsReadOnly="True"
-                     HorizontalAlignment="Stretch"
-                     ui:ControlHelper.Header="Minutes"
-                     Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-                     BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                     Padding="4" Margin="4" IsHitTestVisible="False"/>
+                 Text="{Binding CurrentProfile.TaskDuration, Converter={StaticResource MillisecondsToMinutesConverter}}"
+                 IsReadOnly="True"
+                 HorizontalAlignment="Center"
+                 
+                 ui:ControlHelper.Header="Minutes"
+                 Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                 Padding="4" Margin="4"
+                 IsHitTestVisible="False"/>
+                        <!-- Secondes -->
                         <TextBox Grid.Column="2"
-                     Text="{Binding CurrentProfile.TaskDuration, Converter={StaticResource MillisecondsToSecondsConverter}}"
-                     IsReadOnly="True"
-                     HorizontalAlignment="Stretch"
-                     ui:ControlHelper.Header="Secondes"
-                     Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-                     BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                     Padding="4" Margin="4" IsHitTestVisible="False"/>
+                 Text="{Binding CurrentProfile.TaskDuration, Converter={StaticResource MillisecondsToSecondsConverter}}"
+                 IsReadOnly="True"
+                 HorizontalAlignment="Center"
+                 
+                 ui:ControlHelper.Header="Secondes"
+                 Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                 Padding="4" Margin="4"
+                 IsHitTestVisible="False"/>
                     </Grid>
-
-                    <!-- Champ 3 : Temps de réaction max (ms) -->
-                    <TextBox Grid.Row="1" Grid.Column="0"
-                   Text="{Binding CurrentProfile.MaxReactionTime}"
-                   IsReadOnly="True"
-                   HorizontalAlignment="Stretch"
-                   ui:ControlHelper.Header="Temps de réaction max (ms)"
-                   Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-                   BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                   Padding="4" Margin="4" IsHitTestVisible="False"/>
-
-                    <!-- Champ 4 : Durée par mot (ms) -->
-                    <TextBox Grid.Row="1" Grid.Column="1"
-                   Text="{Binding CurrentProfile.WordDuration}"
-                   IsReadOnly="True"
-                   HorizontalAlignment="Stretch"
-                   ui:ControlHelper.Header="Durée par mot (ms)"
-                   Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-                   BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                   Padding="4" Margin="4" IsHitTestVisible="False"/>
+                    <!-- Colonne 3 : Temps de réaction max (ms) -->
+                    <TextBox Grid.Column="2"
+               Text="{Binding CurrentProfile.MaxReactionTime}"
+               IsReadOnly="True"
+               HorizontalAlignment="Stretch"
+               ui:ControlHelper.Header="Temps de réaction max (ms)"
+               Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+               BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+               Padding="4" Margin="4"
+               IsHitTestVisible="False"/>
+                    <!-- Colonne 4 : Durée par mot (ms) -->
+                    <TextBox Grid.Column="3"
+               Text="{Binding CurrentProfile.WordDuration}"
+               IsReadOnly="True"
+               HorizontalAlignment="Stretch"
+               ui:ControlHelper.Header="Durée par mot (ms)"
+               Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+               BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+               Padding="4" Margin="4"
+               IsHitTestVisible="False"/>
                 </Grid>
             </ui:SimpleStackPanel>
         </Border>
-    </ui:SimpleStackPanel>
+    </Grid>
 </UserControl>

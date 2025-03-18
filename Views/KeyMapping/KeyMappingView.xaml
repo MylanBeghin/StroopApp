@@ -1,0 +1,152 @@
+﻿<UserControl x:Class="StroopApp.Views.KeyMapping.KeyMappingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:conv="clr-namespace:StroopApp.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="600">
+    <UserControl.Resources>
+        <conv:KeyToStringConverter x:Key="KeyToStringConverter"/>
+    </UserControl.Resources>
+    <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+          CornerRadius="8"
+          Padding="16"
+          BorderThickness="0.5"
+          BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+        <ui:SimpleStackPanel Spacing="10" VerticalAlignment="Center">
+            <!-- Titre et description -->
+            <TextBlock Text="Choix des touches"/>
+            <TextBlock Text="Sélectionnez les touches à associer aux couleurs."/>
+            <!-- Grille à 4 colonnes pour les 4 couleurs -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Rouge -->
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <!-- Header simple -->
+                    <TextBlock Grid.Row="0" Text="Rouge:" HorizontalAlignment="Left" Margin="0,0,0,4"/>
+                    <!-- Contenu : TextBox et Bouton -->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                     Text="{Binding Mappings.Red.Key, Converter={StaticResource KeyToStringConverter}}"
+                     IsReadOnly="True"
+                     IsHitTestVisible="False"
+                     Focusable="False"
+                     Width="50"
+                     Height="16"
+                     VerticalAlignment="Center"
+                     Margin="0,0,8,0"/>
+                        <Button Grid.Column="1"
+                    Command="{Binding OpenKeyMappingEditorCommand}"
+                    CommandParameter="Rouge"
+                    VerticalAlignment="Center"
+                    Content="Modifier"/>
+                    </Grid>
+                </Grid>
+
+                <!-- Bleu -->
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Bleu:" HorizontalAlignment="Left" Margin="0,0,0,4"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                     Text="{Binding Mappings.Blue.Key, Converter={StaticResource KeyToStringConverter}}"
+                     IsReadOnly="True"
+                     IsHitTestVisible="False"
+                     Focusable="False"
+                     Width="50"
+                     Height="16"
+                     VerticalAlignment="Center"
+                     Margin="0,0,8,0"/>
+                        <Button Grid.Column="1"
+                    Command="{Binding OpenKeyMappingEditorCommand}"
+                    CommandParameter="Bleu"
+                    VerticalAlignment="Center"
+                    Content="Modifier"/>
+                    </Grid>
+                </Grid>
+
+                <!-- Vert -->
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Vert:" HorizontalAlignment="Left" Margin="0,0,0,4"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                     Text="{Binding Mappings.Green.Key, Converter={StaticResource KeyToStringConverter}}"
+                     IsReadOnly="True"
+                     IsHitTestVisible="False"
+                     Focusable="False"
+                     Width="50"
+                     Height="16"
+                     VerticalAlignment="Center"
+                     Margin="0,0,8,0"/>
+                        <Button Grid.Column="1"
+                    Command="{Binding OpenKeyMappingEditorCommand}"
+                    CommandParameter="Vert"
+                    VerticalAlignment="Center"
+                    Content="Modifier"/>
+                    </Grid>
+                </Grid>
+
+                <!-- Jaune -->
+                <Grid Grid.Column="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Jaune:" HorizontalAlignment="Left" Margin="0,0,0,4"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                     Text="{Binding Mappings.Yellow.Key, Converter={StaticResource KeyToStringConverter}}"
+                     IsReadOnly="True"
+                     IsHitTestVisible="False"
+                     Focusable="False"
+                     Width="50"
+                     Height="16"
+                     VerticalAlignment="Center"
+                     Margin="0,0,8,0"/>
+                        <Button Grid.Column="1"
+                    Command="{Binding OpenKeyMappingEditorCommand}"
+                    CommandParameter="Jaune"
+                    VerticalAlignment="Center"
+                    Content="Modifier"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </ui:SimpleStackPanel>
+    </Border>
+</UserControl>

@@ -5,26 +5,62 @@ namespace StroopApp.Commands
 {
     public class RelayCommand : ICommand
     {
-        private readonly Action _execute;
-        private readonly Func<bool>? _canExecute;
+        private readonly Action<object> _execute;
+        private readonly Predicate<object> _canExecute;
+        public event EventHandler CanExecuteChanged;
 
-        public RelayCommand(Action execute, Func<bool>? canExecute = null)
+        public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
         }
 
-        // L'événement qui notifie les modifications de la capacité d'exécuter la commande
-        public event EventHandler? CanExecuteChanged
+        // Constructeur pour commande sans paramètre
+        public RelayCommand(Action execute, Func<bool> canExecute = null)
+            : this(o => execute(), o => canExecute == null || canExecute())
         {
-            add => CommandManager.RequerySuggested += value;
-            remove => CommandManager.RequerySuggested -= value;
         }
 
-        // Vérifie si la commande peut être exécutée
-        public bool CanExecute(object? parameter) => _canExecute?.Invoke() ?? true;
+        public bool CanExecute(object parameter) => _canExecute == null || _canExecute(parameter);
+        public void Execute(object parameter) => _execute(parameter);
+        public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+    }
 
-        // Exécute la commande
-        public void Execute(object? parameter) => _execute();
+    public class RelayCommand<T> : ICommand
+    {
+        private readonly Action<T> _execute;
+        private readonly Predicate<T> _canExecute;
+        public event EventHandler CanExecuteChanged;
+
+        public RelayCommand(Action<T> execute, Predicate<T> canExecute = null)
+        {
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
+        }
+
+        // Constructeur pour commande sans paramètre (même si T n'est pas utilisé)
+        public RelayCommand(Action execute, Func<bool> canExecute = null)
+            : this(o => execute(), o => canExecute == null || canExecute())
+        {
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            if (_canExecute == null)
+                return true;
+            if (parameter == null && typeof(T).IsValueType)
+                return _canExecute(default(T));
+            return _canExecute((T)parameter);
+        }
+
+        public void Execute(object parameter)
+        {
+            if (parameter == null && typeof(T).IsValueType)
+                _execute(default(T));
+            else
+                _execute((T)parameter);
+        }
+
+        public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
     }
 }
