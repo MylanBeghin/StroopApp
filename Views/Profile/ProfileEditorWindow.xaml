@@ -4,9 +4,9 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:converters="clr-namespace:StroopApp.Converters"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        Title="" 
-        SizeToContent="WidthAndHeight"
+        Title=""
         Width="510"
+        Height="560"
         ui:WindowHelper.UseModernWindowStyle="True">
     <Window.Resources>
         <!-- Convertisseurs existants -->
@@ -89,17 +89,17 @@
                         <ColumnDefinition Width="12"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <ui:NumberBox Header="Durée du mot (ms):" 
+                    <ui:NumberBox Header="Durée du mot (ms)" 
                                   Value="{Binding Profile.WordDuration, Mode=TwoWay}" 
                                   Minimum="1" 
                                   SpinButtonPlacementMode="Inline" 
                                   Grid.Column="0"/>
-                    <ui:NumberBox Header="Durée de fixation (ms):" 
+                    <ui:NumberBox Header="Durée de fixation (ms)" 
                                   Value="{Binding Profile.FixationDuration, Mode=TwoWay}" 
                                   Minimum="1" 
                                   SpinButtonPlacementMode="Inline" 
                                   Grid.Column="2"/>
-                    <ui:NumberBox Header="Durée d'amorce (ms):" 
+                    <ui:NumberBox Header="Durée d'amorce (ms)" 
                                   Value="{Binding Profile.AmorceDuration, Mode=TwoWay}" 
                                   Minimum="0"
                                   IsEnabled="{Binding Profile.StroopType, Converter={StaticResource StroopTypeToEnabledConverter}}"
@@ -107,7 +107,7 @@
                                   Grid.Column="4"/>
                 </Grid>
                 <!-- Ligne 4: Taille du groupe -->
-                <ui:NumberBox Header="Taille du groupe:" 
+                <ui:NumberBox Header="Taille du groupe" 
                               Value="{Binding Profile.GroupSize, Mode=TwoWay}" 
                               Minimum="1" 
                               SpinButtonPlacementMode="Inline"/>
@@ -118,11 +118,11 @@
                         <ColumnDefinition Width="12"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <ui:NumberBox Header="Nombre de mots:" 
+                    <ui:NumberBox Header="Nombre de mots" 
                                   Value="{Binding Profile.WordCount}" 
                                   IsEnabled="False"
                                   Grid.Column="0"/>
-                    <ui:NumberBox Header="Temps de réaction max (ms):" 
+                    <ui:NumberBox Header="Temps de réaction max (ms)" 
                                   Value="{Binding Profile.MaxReactionTime}" 
                                   IsEnabled="False"
                                   Grid.Column="2"/>
@@ -146,7 +146,7 @@
                     </Style>
                 </ui:SimpleStackPanel.Style>
                 <!-- Ligne 1: Nombre de mots -->
-                <ui:NumberBox Header="Nombre de mots:" 
+                <ui:NumberBox Header="Nombre de mots" 
                               Value="{Binding Profile.WordCount, Mode=TwoWay}" 
                               Minimum="1"
                               SpinButtonPlacementMode="Inline"/>
@@ -164,17 +164,17 @@
                         <ColumnDefinition Width="12"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <ui:NumberBox Header="Durée du mot (ms):" 
+                    <ui:NumberBox Header="Durée du mot (ms)" 
                    Value="{Binding Profile.WordDuration, Mode=TwoWay}" 
                    Minimum="1" 
                    SpinButtonPlacementMode="Inline" 
                    Grid.Column="0"/>
-                    <ui:NumberBox Header="Durée de fixation (ms):" 
+                    <ui:NumberBox Header="Durée de fixation (ms)" 
                    Value="{Binding Profile.FixationDuration, Mode=TwoWay}" 
                    Minimum="1" 
                    SpinButtonPlacementMode="Inline" 
                    Grid.Column="2"/>
-                    <ui:NumberBox Header="Durée d'amorce (ms):" 
+                    <ui:NumberBox Header="Durée d'amorce (ms)" 
                    Value="{Binding Profile.AmorceDuration, Mode=TwoWay}" 
                    Minimum="0"
                    IsEnabled="{Binding Profile.StroopType, Converter={StaticResource StroopTypeToEnabledConverter}}"
@@ -182,7 +182,7 @@
                    Grid.Column="4"/>
                 </Grid>
                 <!-- Ligne 4: Taille du groupe -->
-                <ui:NumberBox Header="Taille du groupe:" 
+                <ui:NumberBox Header="Taille du groupe" 
                Value="{Binding Profile.GroupSize, Mode=TwoWay}" 
                Minimum="1" 
                SpinButtonPlacementMode="Inline"/>
@@ -213,7 +213,7 @@
                                   Value="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToSecondsConverter}}" 
                                   IsEnabled="False"
                                   Grid.Column="6"/>
-                    <ui:NumberBox Header="Temps de réaction max (ms):" 
+                    <ui:NumberBox Header="Temps de réaction max (ms)" 
                                   Value="{Binding Profile.MaxReactionTime}" 
                                   IsEnabled="False"
                                   Grid.Column="9"
