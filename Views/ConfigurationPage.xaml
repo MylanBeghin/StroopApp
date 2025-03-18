@@ -7,15 +7,11 @@
       xmlns:viewsParticipant="clr-namespace:StroopApp.Views.Participant"
       Title="Configuration de l'expérience">
     <ui:SimpleStackPanel Spacing="12" Margin="12">
-        <!-- Titre en haut -->
         <TextBlock Text="Configuration des paramètres de l'expérience"
                Style="{DynamicResource HeaderTextBlockStyle}"
                HorizontalAlignment="Left"/>
-        <!-- Section supérieure : ProfileManagementView (les deux cards alignées horizontalement) -->
         <viewsProfile:ProfileManagementView/>
-        <!-- Section intermédiaire : KeyMappingView (les key mappings alignés horizontalement) -->
         <viewsKeyMapping:KeyMappingView/>
-        <!-- Section du bas : ParticipantManagementView -->
         <viewsParticipant:ParticipantManagementView/>
     </ui:SimpleStackPanel>
 </Page>

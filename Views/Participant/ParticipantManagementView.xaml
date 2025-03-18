@@ -5,27 +5,91 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="400">
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             >
     <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
           CornerRadius="8"
           Padding="16"
           BorderThickness="0.5"
           BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
         <ui:SimpleStackPanel Spacing="10">
-            <TextBlock Text="Gestion des participants" 
-                 Style="{DynamicResource TitleTextBlockStyle}"/>
-            <ui:SimpleStackPanel Orientation="Horizontal" Spacing="10">
-                <Button Content="Créer" Command="{Binding CreateParticipantCommand}" />
-                <Button Content="Modifier" Command="{Binding ModifyParticipantCommand}" />
-                <Button Content="Supprimer" Command="{Binding DeleteParticipantCommand}" />
-            </ui:SimpleStackPanel>
-            <!-- Liste des participants -->
-            <ListView ItemsSource="{Binding Participants}" SelectedItem="{Binding SelectedParticipant}" Height="150">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Id}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+            <TextBlock Text="Choix du participant" Style="{StaticResource TitleTextBlockStyle}"/>
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+                   Text="Sélectionnez un participant pour lancer l'expérience."
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"/>
+                <ui:SimpleStackPanel Grid.Column="1"
+    Orientation="Horizontal"
+    Spacing="10"
+    HorizontalAlignment="Right"
+    VerticalAlignment="Center">
+                    <Border Background="{DynamicResource SystemControlBackgroundTransparentBrush}" CornerRadius="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="250"/>
+                            </Grid.ColumnDefinitions>
+                            <!-- Icône toujours affichée -->
+                            <fa5:FontAwesome Grid.Column="0" 
+                       Icon="Solid_Search" 
+                       Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}" 
+                       Width="24" 
+                       Height="24" 
+                       VerticalAlignment="Center" 
+                      Margin="0,0,-35,-12"
+                       Panel.ZIndex="1"/>
+                            <!-- Zone de saisie avec padding pour laisser l'espace de l'icône -->
+                            <Grid Grid.Column="1">
+                                <TextBox x:Name="SearchTermTextBox"
+                 VerticalAlignment="Center"
+                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                 Padding="34,6,0,0"/>
+                                <TextBlock IsHitTestVisible="False"
+                   Text="Rechercher . . ."
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Margin="34,0,0,0"
+                   Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <Button Content="Créer" Command="{Binding CreateParticipantCommand}" />
+                    <Button Content="Modifier" Command="{Binding ModifyParticipantCommand}" />
+                    <Button Content="Supprimer" Command="{Binding DeleteParticipantCommand}" />
+                </ui:SimpleStackPanel>
+
+
+            </Grid>
+            <ListView ItemsSource="{Binding ParticipantsView}" 
+                SelectedItem="{Binding SelectedParticipant}"
+                IsSynchronizedWithCurrentItem="True">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="80"/>
+                        <GridViewColumn Header="Âge" DisplayMemberBinding="{Binding Age}" Width="80"/>
+                        <GridViewColumn Header="Taille (cm)" DisplayMemberBinding="{Binding Height}" Width="100"/>
+                        <GridViewColumn Header="Poids (kg)" DisplayMemberBinding="{Binding Weight}" Width="100"/>
+                        <GridViewColumn Header="Sexe assigné" DisplayMemberBinding="{Binding SexAssigned}" Width="120"/>
+                        <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding Gender}" Width="120"/>
+                        <GridViewColumn Header="Résultats" DisplayMemberBinding="{Binding Results.Count}" Width="80"/>
+                    </GridView>
+                </ListView.View>
             </ListView>
         </ui:SimpleStackPanel>
     </Border>
