@@ -6,7 +6,7 @@
       xmlns:viewsKeyMapping="clr-namespace:StroopApp.Views.KeyMapping"
       xmlns:viewsParticipant="clr-namespace:StroopApp.Views.Participant"
       Title="Configuration de l'expérience">
-    <Grid Margin="12">
+    <Grid x:Name="MainGrid" Margin="12">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -24,9 +24,7 @@
                Margin="0,0,0,12"/>
         <viewsProfile:ProfileManagementView Grid.Row="1"/>
         <viewsKeyMapping:KeyMappingView Grid.Row="3"/>
-        <ScrollViewer Grid.Row="5" VerticalScrollBarVisibility="Auto">
-            <viewsParticipant:ParticipantManagementView/>
-        </ScrollViewer>
+        <viewsParticipant:ParticipantManagementView Grid.Row="5"/>
         <StackPanel Grid.Row="7" HorizontalAlignment="Center">
             <Button Content="Lancer l'expérience" 
               Style="{DynamicResource AccentButtonStyle}"

@@ -81,6 +81,7 @@
                ui:ControlHelper.Header="Type de Stroop"
                Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                             IsHitTestVisible="False"
                              Padding="4" Margin="4"/>
                     <!-- Colonne 2 : Durée de la tâche divisée en 3 sous-colonnes -->
                     <Grid Grid.Column="1">
