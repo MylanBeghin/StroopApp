@@ -6,21 +6,29 @@
       xmlns:viewsKeyMapping="clr-namespace:StroopApp.Views.KeyMapping"
       xmlns:viewsParticipant="clr-namespace:StroopApp.Views.Participant"
       Title="Configuration de l'expérience">
-    <ui:SimpleStackPanel Spacing="12" Margin="12">
-        <!-- Titre en haut -->
-        <TextBlock Text="Configuration des paramètres de l'expérience"
+    <Grid x:Name="MainGrid" Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="12"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="12"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="12"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+               Text="Configuration des paramètres de l'expérience"
                Style="{DynamicResource HeaderTextBlockStyle}"
-               HorizontalAlignment="Left"/>
-        <!-- Section supérieure : ProfileManagementView (les deux cards alignées horizontalement) -->
-        <viewsProfile:ProfileManagementView/>
-        <!-- Section intermédiaire : KeyMappingView (les key mappings alignés horizontalement) -->
-        <viewsKeyMapping:KeyMappingView/>
-        <!-- Section du bas : ParticipantManagementView -->
-        <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
-            CornerRadius="8"
-            Padding="16"
-            Margin="0,12,0,0">
-            <viewsParticipant:ParticipantManagementView/>
-        </Border>
-    </ui:SimpleStackPanel>
+               HorizontalAlignment="Left"
+               Margin="0,0,0,12"/>
+        <viewsProfile:ProfileManagementView Grid.Row="1"/>
+        <viewsKeyMapping:KeyMappingView Grid.Row="3"/>
+        <viewsParticipant:ParticipantManagementView Grid.Row="5"/>
+        <StackPanel Grid.Row="7" HorizontalAlignment="Center">
+            <Button Content="Lancer l'expérience" 
+              Style="{DynamicResource AccentButtonStyle}"
+              Command="{Binding LaunchExperimentCommand}"/>
+        </StackPanel>
+    </Grid>
 </Page>

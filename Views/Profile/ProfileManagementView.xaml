@@ -38,11 +38,10 @@
                     ItemsSource="{Binding Profiles}"
                     SelectedItem="{Binding CurrentProfile}"
                     DisplayMemberPath="ProfileName"
-                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-                    BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"/>
+                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}"/>
                     <Button Content="Créer"
                   Command="{Binding CreateProfileCommand}"
-                  Style="{DynamicResource AccentButtonStyle}"
+                  Style="{DynamicResource DefaultButtonStyle}"
                   />
                     <Button Content="Modifier"
                   Command="{Binding ModifyProfileCommand}"
@@ -77,13 +76,12 @@
                     </Grid.ColumnDefinitions>
                     <!-- Colonne 1 : Type de Stroop -->
                     <TextBox Grid.Column="0"
-               Text="{Binding CurrentProfile.StroopType}"
-               IsReadOnly="True"
+               Text="{Binding CurrentProfile.StroopType}"       
                HorizontalAlignment="Stretch"
                ui:ControlHelper.Header="Type de Stroop"
                Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-               IsHitTestVisible="False"
+                             IsHitTestVisible="False"
                              Padding="4" Margin="4"/>
                     <!-- Colonne 2 : Durée de la tâche divisée en 3 sous-colonnes -->
                     <Grid Grid.Column="1">

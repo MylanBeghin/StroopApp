@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace StroopApp.Models
 {
@@ -20,7 +18,7 @@ namespace StroopApp.Models
         Other,
         PreferNotToAnswer
     }
-    public class Participant : INotifyPropertyChanged
+    public class ParticipantModel : INotifyPropertyChanged
     {
         private int _id;
         public int Id
@@ -35,8 +33,6 @@ namespace StroopApp.Models
                 }
             }
         }
-
-        // Height (e.g., in centimeters). Nullable: if the participant prefers not to answer, this can be null.
         private double? _height;
         public double? Height
         {
@@ -50,8 +46,6 @@ namespace StroopApp.Models
                 }
             }
         }
-
-        // Weight (e.g., in kilograms)
         private double? _weight;
         public double? Weight
         {
@@ -65,8 +59,6 @@ namespace StroopApp.Models
                 }
             }
         }
-
-        // Age (in years)
         private int? _age;
         public int? Age
         {
@@ -82,9 +74,6 @@ namespace StroopApp.Models
         }
 
         private SexAssignedAtBirth _sexAssigned;
-        /// <summary>
-        /// Sex assigned at birth.
-        /// </summary>
         public SexAssignedAtBirth SexAssigned
         {
             get => _sexAssigned;
@@ -99,9 +88,6 @@ namespace StroopApp.Models
         }
 
         private Gender _gender;
-        /// <summary>
-        /// The participant's gender.
-        /// </summary>
         public Gender Gender
         {
             get => _gender;
@@ -116,9 +102,6 @@ namespace StroopApp.Models
         }
 
         private List<Result> _results;
-        /// <summary>
-        /// List of results for this participant.
-        /// </summary>
         public List<Result> Results
         {
             get => _results;
@@ -131,9 +114,7 @@ namespace StroopApp.Models
                 }
             }
         }
-
-        // Constructor
-        public Participant()
+        public ParticipantModel()
         {
             Results = new List<Result>();
             Height = null;
