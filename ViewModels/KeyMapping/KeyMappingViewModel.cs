@@ -1,16 +1,15 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using ModernWpf.Controls;
 using StroopApp.Commands;
 using StroopApp.Models;
 using StroopApp.Services.KeyMapping;
-using ModernWpf.Controls;
-
-using KeyMappingModel = StroopApp.Models.KeyMapping;
-using System.Windows.Controls;
-using System.Windows.Media.Animation;
-using System.Windows.Media;
-using System.Windows;
 
 namespace StroopApp.ViewModels
 {
@@ -19,8 +18,8 @@ namespace StroopApp.ViewModels
         private readonly IKeyMappingService _keyMappingService;
         public KeyMappings Mappings { get; set; }
 
-        private KeyMappingModel _editingMapping;
-        public KeyMappingModel EditingMapping
+        private KeyMapping _editingMapping;
+        public KeyMapping EditingMapping
         {
             get => _editingMapping;
             set { _editingMapping = value; OnPropertyChanged(); }
@@ -42,6 +41,7 @@ namespace StroopApp.ViewModels
 
         private async void LoadMappings()
         {
+            // On suppose que LoadKeyMappingsAsync retourne un Task<KeyMappings>
             Mappings = await _keyMappingService.LoadKeyMappingsAsync();
             OnPropertyChanged(nameof(Mappings));
         }
@@ -72,7 +72,7 @@ namespace StroopApp.ViewModels
         {
             StartEditing(color);
 
-            // Message original et panneau d'erreur dans un Grid
+            // Message d'origine et panneau d'erreur dans un Grid
             string originalMessage = "Appuyez sur une touche pour définir le mapping. Appuyez sur Échap pour annuler.";
             var originalText = new TextBlock
             {
@@ -86,10 +86,10 @@ namespace StroopApp.ViewModels
                 Opacity = 0,
                 HorizontalAlignment = HorizontalAlignment.Center
             };
-            // Utilisation de FontIcon de ModernWpf (ou FontIcon standard) pour l'icône d'avertissement
+
             var errorIcon = new FontIcon
             {
-                Glyph = "\uE7BA", // Code unicode pour une icône d'avertissement (à ajuster si besoin)
+                Glyph = "\uE7BA", // Code unicode pour une icône d'avertissement
                 Foreground = new SolidColorBrush(Colors.Red),
                 FontSize = 24,
                 VerticalAlignment = VerticalAlignment.Center
@@ -104,7 +104,6 @@ namespace StroopApp.ViewModels
             errorPanel.Children.Add(errorIcon);
             errorPanel.Children.Add(errorText);
 
-            // Le Grid contient l'affichage normal (originalText) et l'erreur par-dessus
             var grid = new Grid();
             grid.Children.Add(originalText);
             grid.Children.Add(errorPanel);

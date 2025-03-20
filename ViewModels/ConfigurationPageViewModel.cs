@@ -1,73 +1,73 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using ModernWpf.Controls;
 using StroopApp.Commands;
-using StroopApp.Views.Participant;
-using StroopApp.Views.Profile;
-using StroopApp.Views.KeyMapping;
 using StroopApp.Models;
-using StroopApp.Views;
 
 namespace StroopApp.ViewModels
 {
     public class ConfigurationPageViewModel
     {
-        private readonly ProfileManagementView _profileManagementView;
-        private readonly ParticipantManagementView _participantManagementView;
-        private readonly KeyMappingView _keyMappingView;
+        private readonly ProfileManagementViewModel _profileViewModel;
+        private readonly ParticipantManagementViewModel _participantViewModel;
+        private readonly KeyMappingViewModel _keyMappingViewModel;
+
         public ExperimentSettings Settings { get; set; }
         public ICommand LaunchExperimentCommand { get; }
 
-        public ConfigurationPageViewModel(ProfileManagementView profileManagementView,
-                                          ParticipantManagementView participantManagementView,
-                                          KeyMappingView keyMappingView)
+        public ConfigurationPageViewModel(ProfileManagementViewModel profileViewModel,
+                                          ParticipantManagementViewModel participantViewModel,
+                                          KeyMappingViewModel keyMappingViewModel)
         {
-            _profileManagementView = profileManagementView;
-            _participantManagementView = participantManagementView;
-            _keyMappingView = keyMappingView;
+            _profileViewModel = profileViewModel;
+            _participantViewModel = participantViewModel;
+            _keyMappingViewModel = keyMappingViewModel;
+
             Settings = new ExperimentSettings();
             LaunchExperimentCommand = new RelayCommand(LaunchExperiment);
         }
 
         private async void LaunchExperiment()
         {
-            var profileVM = (ProfileManagementViewModel)_profileManagementView.DataContext;
-            var participantVM = (ParticipantManagementViewModel)_participantManagementView.DataContext;
-            var keyMappingVM = (KeyMappingViewModel)_keyMappingView.DataContext;
-            Settings.CurrentProfile = profileVM.CurrentProfile;
-            Settings.Participant = participantVM.SelectedParticipant;
-            Settings.KeyMappings = keyMappingVM.Mappings;
+            Settings.CurrentProfile = _profileViewModel.CurrentProfile;
+            Settings.Participant = _participantViewModel.SelectedParticipant;
+            Settings.KeyMappings = _keyMappingViewModel.Mappings;
 
             if (Settings.CurrentProfile == null)
             {
-                var dialog = new ContentDialog
-                {
-                    Title = "Erreur",
-                    Content = "Veuillez sélectionner un profil d'expérience.",
-                    CloseButtonText = "OK"
-                };
-                await dialog.ShowAsync();
-                return;
-            }
-            if (Settings.Participant == null)
-            {
-                var dialog = new ContentDialog
-                {
-                    Title = "Erreur",
-                    Content = "Veuillez sélectionner un participant.",
-                    CloseButtonText = "OK"
-                };
-                await dialog.ShowAsync();
+                await ShowErrorDialog("Veuillez sélectionner un profil d'expérience.");
                 return;
             }
 
-            var dialogtest = new ContentDialog
+            if (Settings.Participant == null)
+            {
+                await ShowErrorDialog("Veuillez sélectionner un participant.");
+                return;
+            }
+
+            await ShowSuccessDialog("L'expérience va démarrer !");
+        }
+
+        private async Task ShowErrorDialog(string message)
+        {
+            var dialog = new ContentDialog
             {
                 Title = "Erreur",
-                Content = "YES MON GARS",
+                Content = message,
                 CloseButtonText = "OK"
             };
-            await dialogtest.ShowAsync();
-            return;
+            await dialog.ShowAsync();
+        }
+
+        private async Task ShowSuccessDialog(string message)
+        {
+            var dialog = new ContentDialog
+            {
+                Title = "Succès",
+                Content = message,
+                CloseButtonText = "OK"
+            };
+            await dialog.ShowAsync();
         }
     }
 }

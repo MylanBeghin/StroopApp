@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.IO;
+using ModernWpf.Controls;
 using StroopApp.Commands;
 using StroopApp.Models;
 using StroopApp.Services.Participant;
+using StroopApp.Views.Participant;
 
 namespace StroopApp.ViewModels
 {
@@ -80,7 +81,9 @@ namespace StroopApp.ViewModels
             {
                 Id = _participantService.GetNextParticipantId()
             };
-            var participantWindow = new Views.Participant.ParticipantEditorWindow(newParticipant, Participants, _participantService);
+            // Instanciation du ViewModel éditeur
+            var viewModel = new ParticipantEditorViewModel(newParticipant, Participants, _participantService);
+            var participantWindow = new ParticipantEditorWindow(viewModel);
             participantWindow.ShowDialog();
             if (participantWindow.DialogResult == true)
             {
@@ -97,7 +100,9 @@ namespace StroopApp.ViewModels
                 ShowErrorDialog("Veuillez sélectionner un participant à modifier !");
                 return;
             }
-            var participantWindow = new Views.Participant.ParticipantEditorWindow(SelectedParticipant, Participants, _participantService);
+            // Instanciation du ViewModel éditeur avec le participant sélectionné
+            var viewModel = new ParticipantEditorViewModel(SelectedParticipant, Participants, _participantService);
+            var participantWindow = new ParticipantEditorWindow(viewModel);
             participantWindow.ShowDialog();
             if (participantWindow.DialogResult == true)
             {
@@ -114,27 +119,25 @@ namespace StroopApp.ViewModels
                 return;
             }
             _participantService.DeleteParticipant(SelectedParticipant, Participants);
-            if (Participants.Any())
-                SelectedParticipant = Participants.First();
-            else
-                SelectedParticipant = null;
+            SelectedParticipant = Participants.FirstOrDefault();
         }
 
         private void OpenResults(ParticipantModel participant)
         {
             if (participant == null)
                 return;
-            string resultsFolder = Path.Combine("Résultats", participant.Id.ToString());
-            if (!Directory.Exists(resultsFolder))
+
+            string resultsFolder = System.IO.Path.Combine("Résultats", participant.Id.ToString());
+            if (!System.IO.Directory.Exists(resultsFolder))
             {
-                Directory.CreateDirectory(resultsFolder);
+                System.IO.Directory.CreateDirectory(resultsFolder);
             }
             System.Diagnostics.Process.Start("explorer.exe", resultsFolder);
         }
 
         private async void ShowErrorDialog(string message)
         {
-            var dialog = new ModernWpf.Controls.ContentDialog
+            var dialog = new ContentDialog
             {
                 Title = "Erreur",
                 Content = message,
