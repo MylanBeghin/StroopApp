@@ -51,7 +51,6 @@ namespace StroopApp.ViewModels
             if (Participants.Any())
                 SelectedParticipant = Participants.First();
 
-            // Création de la vue pour le filtrage
             ParticipantsView = CollectionViewSource.GetDefaultView(Participants);
             ParticipantsView.Filter = FilterParticipants;
 
@@ -67,7 +66,6 @@ namespace StroopApp.ViewModels
                 return true;
 
             var participant = obj as ParticipantModel;
-            // Vous pouvez personnaliser le filtre selon vos besoins
             return participant.Id.ToString().Contains(SearchText)
                 || (participant.Age?.ToString().Contains(SearchText) ?? false)
                 || (participant.Height?.ToString().Contains(SearchText) ?? false)

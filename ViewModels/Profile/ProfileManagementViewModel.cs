@@ -1,14 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows;
 using System.Windows.Input;
 using ModernWpf.Controls;
 using StroopApp.Commands;
 using StroopApp.Models;
 using StroopApp.Services;
-using StroopApp.Services.Profile;
 using StroopApp.Views;
 
 namespace StroopApp.ViewModels
@@ -40,7 +37,6 @@ namespace StroopApp.ViewModels
         {
             _IprofileService = profileService;
             Profiles = _IprofileService.LoadProfiles();
-            // Charger le dernier profil enregistré
             var lastProfileName = _IprofileService.LoadLastSelectedProfile();
             if (!string.IsNullOrEmpty(lastProfileName))
             {
@@ -76,7 +72,6 @@ namespace StroopApp.ViewModels
             profileEditorWindow.ShowDialog();
             if (profileEditorWindow.DialogResult == true)
             {
-                // Même si profileEditorViewModel.Profile est le même objet, nous forçons la mise à jour.
                 CurrentProfile = profileEditorViewModel.Profile;
                 OnPropertyChanged(nameof(CurrentProfile));
                 _IprofileService.SaveProfiles(Profiles);

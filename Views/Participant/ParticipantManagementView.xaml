@@ -73,7 +73,8 @@
                         </Border>
                         <Button Content="Créer" Command="{Binding CreateParticipantCommand}" />
                         <Button Content="Modifier" Command="{Binding ModifyParticipantCommand}" />
-                        <Button Content="Supprimer" Command="{Binding DeleteParticipantCommand}" />
+                        <Button Content="Supprimer" Command="{Binding DeleteParticipantCommand}">
+                        </Button>
                     </ui:SimpleStackPanel>
                 </Grid>
             </ui:SimpleStackPanel>
@@ -98,8 +99,8 @@
                             <GridViewColumn Header="Âge" DisplayMemberBinding="{Binding Age}" Width="80"/>
                             <GridViewColumn Header="Taille (cm)" DisplayMemberBinding="{Binding Height}" Width="100"/>
                             <GridViewColumn Header="Poids (kg)" DisplayMemberBinding="{Binding Weight}" Width="100"/>
-                            <GridViewColumn Header="Sexe assigné" DisplayMemberBinding="{Binding SexAssigned}" Width="120"/>
-                            <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding Gender}" Width="120"/>
+                            <GridViewColumn Header="Sexe assigné" DisplayMemberBinding="{Binding SexAssigned}" Width="150"/>
+                            <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding Gender}" Width="150"/>
                             <GridViewColumn Header="Résultats" DisplayMemberBinding="{Binding Results}" Width="80"/>
                         </GridView>
                     </ListView.View>
