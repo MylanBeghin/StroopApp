@@ -5,6 +5,7 @@ using ModernWpf.Controls;
 using StroopApp.Commands;
 using StroopApp.Models;
 using StroopApp.Services.Navigation;
+using StroopApp.Views;
 
 namespace StroopApp.ViewModels
 {
@@ -17,16 +18,22 @@ namespace StroopApp.ViewModels
         public ExperimentSettings Settings { get; set; }
         public ICommand LaunchExperimentCommand { get; }
 
+        private readonly INavigationService _navigationService;
+
         public ConfigurationPageViewModel(ProfileManagementViewModel profileViewModel,
                                           ParticipantManagementViewModel participantViewModel,
-                                          KeyMappingViewModel keyMappingViewModel)
+                                          KeyMappingViewModel keyMappingViewModel,
+                                          INavigationService navigationService)
         {
             _profileViewModel = profileViewModel;
             _participantViewModel = participantViewModel;
             _keyMappingViewModel = keyMappingViewModel;
+            _navigationService = navigationService;
+
             Settings = new ExperimentSettings();
             LaunchExperimentCommand = new RelayCommand(LaunchExperiment);
         }
+
 
         private async void LaunchExperiment()
         {
@@ -45,8 +52,8 @@ namespace StroopApp.ViewModels
                 await ShowErrorDialog("Veuillez sélectionner un participant.");
                 return;
             }
+            _navigationService.NavigateTo<ExperimentDashBoardPage>();
 
-            await ShowSuccessDialog("L'expérience va démarrer !");
         }
 
         private async Task ShowErrorDialog(string message)
@@ -54,17 +61,6 @@ namespace StroopApp.ViewModels
             var dialog = new ContentDialog
             {
                 Title = "Erreur",
-                Content = message,
-                CloseButtonText = "OK"
-            };
-            await dialog.ShowAsync();
-        }
-
-        private async Task ShowSuccessDialog(string message)
-        {
-            var dialog = new ContentDialog
-            {
-                Title = "Succès",
                 Content = message,
                 CloseButtonText = "OK"
             };

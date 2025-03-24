@@ -20,4 +20,9 @@ public class NavigationService : INavigationService
             : (Page)Activator.CreateInstance(typeof(T));
         _frame.Navigate(page);
     }
+    public void NavigateTo(Func<Page> pageFactory)
+    {
+        var page = pageFactory();
+        _frame.Navigate(page);
+    }
 }

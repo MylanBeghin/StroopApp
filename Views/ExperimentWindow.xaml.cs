@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using StroopApp.Services;
 using StroopApp.Services.Navigation;
 
@@ -11,7 +12,9 @@ namespace StroopApp.Views
         {
             InitializeComponent();
             NavigationService = new NavigationService(MainFrame);
-            NavigationService.NavigateTo<ConfigurationPage>();
+            var configPage = new ConfigurationPage(NavigationService);
+            NavigationService.NavigateTo(() => configPage);
         }
+
     }
 }
