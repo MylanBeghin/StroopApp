@@ -81,7 +81,6 @@ namespace StroopApp.ViewModels
             {
                 Id = _participantService.GetNextParticipantId()
             };
-            // Instanciation du ViewModel éditeur
             var viewModel = new ParticipantEditorViewModel(newParticipant, Participants, _participantService);
             var participantWindow = new ParticipantEditorWindow(viewModel);
             participantWindow.ShowDialog();
@@ -100,7 +99,6 @@ namespace StroopApp.ViewModels
                 ShowErrorDialog("Veuillez sélectionner un participant à modifier !");
                 return;
             }
-            // Instanciation du ViewModel éditeur avec le participant sélectionné
             var viewModel = new ParticipantEditorViewModel(SelectedParticipant, Participants, _participantService);
             var participantWindow = new ParticipantEditorWindow(viewModel);
             participantWindow.ShowDialog();

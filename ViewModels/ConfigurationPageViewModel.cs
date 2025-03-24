@@ -1,8 +1,10 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using ModernWpf.Controls;
 using StroopApp.Commands;
 using StroopApp.Models;
+using StroopApp.Services.Navigation;
 
 namespace StroopApp.ViewModels
 {
@@ -22,7 +24,6 @@ namespace StroopApp.ViewModels
             _profileViewModel = profileViewModel;
             _participantViewModel = participantViewModel;
             _keyMappingViewModel = keyMappingViewModel;
-
             Settings = new ExperimentSettings();
             LaunchExperimentCommand = new RelayCommand(LaunchExperiment);
         }

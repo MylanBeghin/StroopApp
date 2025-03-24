@@ -77,18 +77,17 @@ namespace StroopApp.ViewModels
                 return;
             }
 
-            // Instanciation du ViewModel éditeur avec le profil existant
+            // Crée le ViewModel éditeur à partir du profil existant
             var viewModel = new ProfileEditorViewModel(CurrentProfile, Profiles, _profileService);
             var profileWindow = new ProfileEditorWindow(viewModel);
             profileWindow.ShowDialog();
             if (profileWindow.DialogResult == true)
             {
-                CurrentProfile = viewModel.Profile;
                 OnPropertyChanged(nameof(CurrentProfile));
                 _profileService.SaveProfiles(Profiles);
-
             }
         }
+
 
         private void DeleteProfile()
         {

@@ -7,7 +7,7 @@ namespace StroopApp.Models
         TaskDuration,
         WordCount
     }
-    public class ExperimentProfile
+    public class ExperimentProfile : INotifyPropertyChanged
     {
         public ExperimentProfile()
         {
