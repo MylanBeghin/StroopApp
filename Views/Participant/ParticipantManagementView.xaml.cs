@@ -1,16 +1,15 @@
 ﻿using System.Windows.Controls;
-using StroopApp.Services.Participant;
 using StroopApp.ViewModels;
+using StroopApp.Services.Participant;
 
 namespace StroopApp.Views.Participant
 {
     public partial class ParticipantManagementView : UserControl
     {
-        public ParticipantManagementView()
+        public ParticipantManagementView(ParticipantManagementViewModel viewModel)
         {
             InitializeComponent();
-            var participantService = new ParticipantService();
-            DataContext = new ParticipantManagementViewModel(participantService);
+            DataContext = viewModel;
         }
     }
 }

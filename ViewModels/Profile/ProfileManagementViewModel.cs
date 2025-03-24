@@ -1,18 +1,20 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using ModernWpf.Controls;
 using StroopApp.Commands;
 using StroopApp.Models;
 using StroopApp.Services;
+using StroopApp.Services.Profile;
 using StroopApp.Views;
 
 namespace StroopApp.ViewModels
 {
     public class ProfileManagementViewModel : INotifyPropertyChanged
     {
-        private readonly IProfileService _IprofileService;
+        private readonly IProfileService _profileService;
         public ObservableCollection<ExperimentProfile> Profiles { get; set; }
 
         private ExperimentProfile? _currentProfile;
@@ -26,22 +28,26 @@ namespace StroopApp.ViewModels
                     _currentProfile = value;
                     OnPropertyChanged();
                     if (_currentProfile != null)
-                        _IprofileService.SaveLastSelectedProfile(_currentProfile);
+                        _profileService.SaveLastSelectedProfile(_currentProfile);
                 }
             }
         }
+
         public ICommand CreateProfileCommand { get; }
         public ICommand ModifyProfileCommand { get; }
         public ICommand DeleteProfileCommand { get; }
+
         public ProfileManagementViewModel(IProfileService profileService)
         {
-            _IprofileService = profileService;
-            Profiles = _IprofileService.LoadProfiles();
-            var lastProfileName = _IprofileService.LoadLastSelectedProfile();
+            _profileService = profileService;
+            Profiles = _profileService.LoadProfiles();
+
+            var lastProfileName = _profileService.LoadLastSelectedProfile();
             if (!string.IsNullOrEmpty(lastProfileName))
             {
                 CurrentProfile = Profiles.FirstOrDefault(p => p.ProfileName == lastProfileName);
             }
+
             CreateProfileCommand = new RelayCommand(CreateProfile);
             ModifyProfileCommand = new RelayCommand(ModifyProfile);
             DeleteProfileCommand = new RelayCommand(DeleteProfile);
@@ -50,15 +56,19 @@ namespace StroopApp.ViewModels
         private void CreateProfile()
         {
             var newProfile = new ExperimentProfile();
-            var profileWindow = new ProfileEditorWindow(newProfile, Profiles, _IprofileService);
+            // Instanciation du ViewModel éditeur
+            var viewModel = new ProfileEditorViewModel(newProfile, Profiles, _profileService);
+            // Injection dans la fenêtre
+            var profileWindow = new ProfileEditorWindow(viewModel);
             profileWindow.ShowDialog();
             if (profileWindow.DialogResult == true)
             {
                 Profiles.Add(newProfile);
-                _IprofileService.SaveProfiles(Profiles);
+                _profileService.SaveProfiles(Profiles);
                 CurrentProfile = newProfile;
             }
         }
+
         private void ModifyProfile()
         {
             if (CurrentProfile == null)
@@ -67,27 +77,27 @@ namespace StroopApp.ViewModels
                 return;
             }
 
-            var profileEditorViewModel = new ProfileEditorViewModel(CurrentProfile, Profiles, _IprofileService);
-            var profileEditorWindow = new ProfileEditorWindow(CurrentProfile, Profiles, _IprofileService);
-            profileEditorWindow.ShowDialog();
-            if (profileEditorWindow.DialogResult == true)
+            // Crée le ViewModel éditeur à partir du profil existant
+            var viewModel = new ProfileEditorViewModel(CurrentProfile, Profiles, _profileService);
+            var profileWindow = new ProfileEditorWindow(viewModel);
+            profileWindow.ShowDialog();
+            if (profileWindow.DialogResult == true)
             {
-                CurrentProfile = profileEditorViewModel.Profile;
                 OnPropertyChanged(nameof(CurrentProfile));
-                _IprofileService.SaveProfiles(Profiles);
+                _profileService.SaveProfiles(Profiles);
             }
         }
 
+
         private void DeleteProfile()
         {
-            if (_currentProfile == null)
+            if (CurrentProfile == null)
             {
                 ShowErrorDialog("Veuillez sélectionner un profil à supprimer !");
                 return;
             }
-
             int currentIndex = Profiles.IndexOf(_currentProfile);
-            _IprofileService.DeleteProfile(_currentProfile, Profiles);
+            _profileService.DeleteProfile(_currentProfile, Profiles);
 
             if (Profiles.Count > 0)
             {
@@ -98,6 +108,7 @@ namespace StroopApp.ViewModels
                 CurrentProfile = null;
             }
         }
+
         private async void ShowErrorDialog(string message)
         {
             var dialog = new ContentDialog
@@ -106,9 +117,9 @@ namespace StroopApp.ViewModels
                 Content = message,
                 CloseButtonText = "OK"
             };
-
             await dialog.ShowAsync();
         }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

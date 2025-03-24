@@ -4,9 +4,10 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:converters="clr-namespace:StroopApp.Converters"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        Title=""
+        Title="Modification du profil"
         Width="510"
         Height="610"
+        WindowStartupLocation="CenterScreen"
         ui:WindowHelper.UseModernWindowStyle="True">
     <Window.Resources>
         <converters:StroopTypeToEnabledConverter x:Key="StroopTypeToEnabledConverter"/>
@@ -110,12 +111,14 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <ui:NumberBox Header="Nombre de mots" 
-                                  Value="{Binding Profile.WordCount}" 
-                                  IsEnabled="False"
+                                  Value="{Binding Profile.WordCount, Mode=TwoWay}" 
+                                  Minimum="1"
+                                  SpinButtonPlacementMode="Inline"
                                   Grid.Column="0"/>
                     <ui:NumberBox Header="Temps de réaction max (ms)" 
-                                  Value="{Binding Profile.MaxReactionTime}" 
-                                  IsEnabled="False"
+                                  Value="{Binding Profile.MaxReactionTime, Mode=TwoWay}" 
+                                  Minimum="1"
+                                  SpinButtonPlacementMode="Inline"
                                   Grid.Column="2"/>
                 </Grid>
                 <ui:SimpleStackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12">
@@ -139,9 +142,9 @@
                               Minimum="1"
                               SpinButtonPlacementMode="Inline"/>
                 <ComboBox ui:ControlHelper.Header="Type de Stroop" 
-           ItemsSource="{Binding Profile.StroopTypes}" 
-           SelectedItem="{Binding Profile.StroopType, Mode=TwoWay}" 
-           Width="120"/>
+                          ItemsSource="{Binding Profile.StroopTypes}" 
+                          SelectedItem="{Binding Profile.StroopType, Mode=TwoWay}" 
+                          Width="120"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -151,26 +154,26 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <ui:NumberBox Header="Durée du mot (ms)" 
-                   Value="{Binding Profile.WordDuration, Mode=TwoWay}" 
-                   Minimum="1" 
-                   SpinButtonPlacementMode="Inline" 
-                   Grid.Column="0"/>
+                                  Value="{Binding Profile.WordDuration, Mode=TwoWay}" 
+                                  Minimum="1" 
+                                  SpinButtonPlacementMode="Inline" 
+                                  Grid.Column="0"/>
                     <ui:NumberBox Header="Durée de fixation (ms)" 
-                   Value="{Binding Profile.FixationDuration, Mode=TwoWay}" 
-                   Minimum="1" 
-                   SpinButtonPlacementMode="Inline" 
-                   Grid.Column="2"/>
+                                  Value="{Binding Profile.FixationDuration, Mode=TwoWay}" 
+                                  Minimum="1" 
+                                  SpinButtonPlacementMode="Inline" 
+                                  Grid.Column="2"/>
                     <ui:NumberBox Header="Durée d'amorce (ms)" 
-                   Value="{Binding Profile.AmorceDuration, Mode=TwoWay}" 
-                   Minimum="0"
-                   IsEnabled="{Binding Profile.StroopType, Converter={StaticResource StroopTypeToEnabledConverter}}"
-                   SpinButtonPlacementMode="Inline"
-                   Grid.Column="4"/>
+                                  Value="{Binding Profile.AmorceDuration, Mode=TwoWay}" 
+                                  Minimum="0"
+                                  IsEnabled="{Binding Profile.StroopType, Converter={StaticResource StroopTypeToEnabledConverter}}"
+                                  SpinButtonPlacementMode="Inline" 
+                                  Grid.Column="4"/>
                 </Grid>
                 <ui:NumberBox Header="Taille du groupe" 
-               Value="{Binding Profile.GroupSize, Mode=TwoWay}" 
-               Minimum="1" 
-               SpinButtonPlacementMode="Inline"/>
+                              Value="{Binding Profile.GroupSize, Mode=TwoWay}" 
+                              Minimum="1" 
+                              SpinButtonPlacementMode="Inline"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -200,8 +203,7 @@
                     <ui:NumberBox Header="Temps de réaction max (ms)" 
                                   Value="{Binding Profile.MaxReactionTime}" 
                                   IsEnabled="False"
-                                  Grid.Column="9"
-                                  Grid.ColumnSpan="2"/>
+                                  Grid.Column="9" Grid.ColumnSpan="2"/>
                 </Grid>
                 <ui:SimpleStackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12">
                     <Button Content="Annuler" Style="{StaticResource DefaultButtonStyle}" Command="{Binding CancelCommand}"/>

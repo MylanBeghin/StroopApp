@@ -1,16 +1,21 @@
 ﻿using System.Windows.Controls;
-using StroopApp.Services.Profile;
 using StroopApp.ViewModels;
+using StroopApp.Services.Profile;
 
 namespace StroopApp.Views.Profile
 {
     public partial class ProfileManagementView : UserControl
     {
-        public ProfileManagementView()
+        // Constructeur sans paramètre pour le XAML
+        public ProfileManagementView() : this(new ProfileManagementViewModel(new ProfileService()))
         {
-            ProfileService profileService = new ProfileService();
+        }
+
+        // Constructeur avec injection du ViewModel
+        public ProfileManagementView(ProfileManagementViewModel viewModel)
+        {
             InitializeComponent();
-            DataContext = new ProfileManagementViewModel(profileService);
+            DataContext = viewModel;
         }
     }
 }
