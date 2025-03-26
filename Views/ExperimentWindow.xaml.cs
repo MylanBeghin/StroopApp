@@ -1,6 +1,5 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
-using StroopApp.Services;
+using StroopApp.ViewModels;
 using StroopApp.Services.Navigation;
 
 namespace StroopApp.Views
@@ -13,7 +12,9 @@ namespace StroopApp.Views
             InitializeComponent();
             NavigationService = new NavigationService(MainFrame);
             var configPage = new ConfigurationPage(NavigationService);
+            var experimentPage = new ExperimentDashBoardPage(NavigationService);
             NavigationService.NavigateTo(() => configPage);
+            DataContext = new ExperimentWindowViewModel();
         }
 
     }

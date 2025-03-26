@@ -11,7 +11,7 @@ using StroopApp.Models;
 using StroopApp.Services.Participant;
 using StroopApp.Views.Participant;
 
-namespace StroopApp.ViewModels
+namespace StroopApp.ViewModels.Configuration.Participant
 {
     public class ParticipantManagementViewModel : INotifyPropertyChanged
     {
@@ -125,10 +125,10 @@ namespace StroopApp.ViewModels
             if (participant == null)
                 return;
 
-            string resultsFolder = System.IO.Path.Combine("Résultats", participant.Id.ToString());
-            if (!System.IO.Directory.Exists(resultsFolder))
+            string resultsFolder = Path.Combine("Résultats", participant.Id.ToString());
+            if (!Directory.Exists(resultsFolder))
             {
-                System.IO.Directory.CreateDirectory(resultsFolder);
+                Directory.CreateDirectory(resultsFolder);
             }
             System.Diagnostics.Process.Start("explorer.exe", resultsFolder);
         }

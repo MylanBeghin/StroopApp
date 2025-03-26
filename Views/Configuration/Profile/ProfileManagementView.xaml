@@ -16,8 +16,6 @@
             <ColumnDefinition Width="0.7*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-
-        <!-- Card 1 : Choix du profil (colonne gauche) -->
         <Border Grid.Column="0"
             Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
             CornerRadius="8,0,0,8"
@@ -52,8 +50,6 @@
                 </ui:SimpleStackPanel>
             </ui:SimpleStackPanel>
         </Border>
-
-        <!-- Card 2 : Détails du profil sélectionné (colonne droite) -->
         <Border Grid.Column="1"
         Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
         CornerRadius="0,8,8,0"

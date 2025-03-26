@@ -10,7 +10,7 @@ using StroopApp.Services;
 using StroopApp.Services.Profile;
 using StroopApp.Views;
 
-namespace StroopApp.ViewModels
+namespace StroopApp.ViewModels.Configuration.Profile
 {
     public class ProfileManagementViewModel : INotifyPropertyChanged
     {

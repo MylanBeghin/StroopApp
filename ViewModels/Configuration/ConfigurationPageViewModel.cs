@@ -5,9 +5,11 @@ using ModernWpf.Controls;
 using StroopApp.Commands;
 using StroopApp.Models;
 using StroopApp.Services.Navigation;
+using StroopApp.ViewModels.Configuration.Participant;
+using StroopApp.ViewModels.Configuration.Profile;
 using StroopApp.Views;
 
-namespace StroopApp.ViewModels
+namespace StroopApp.ViewModels.Configuration
 {
     public class ConfigurationPageViewModel
     {
@@ -52,7 +54,7 @@ namespace StroopApp.ViewModels
                 await ShowErrorDialog("Veuillez sélectionner un participant.");
                 return;
             }
-            _navigationService.NavigateTo<ExperimentDashBoardPage>();
+            _navigationService.NavigateTo<ExperimentDashBoardPage>(Settings);
 
         }
 

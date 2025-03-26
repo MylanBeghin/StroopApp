@@ -12,7 +12,7 @@ using StroopApp.Commands;
 using StroopApp.Models;
 using StroopApp.Services.Participant;
 
-namespace StroopApp.ViewModels
+namespace StroopApp.ViewModels.Configuration.Participant
 {
     public class ParticipantEditorViewModel : INotifyPropertyChanged
     {

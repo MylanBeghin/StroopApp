@@ -11,7 +11,7 @@ using StroopApp.Commands;
 using StroopApp.Models;
 using StroopApp.Services.KeyMapping;
 
-namespace StroopApp.ViewModels
+namespace StroopApp.ViewModels.Configuration
 {
     public class KeyMappingViewModel : INotifyPropertyChanged
     {
@@ -128,10 +128,10 @@ namespace StroopApp.ViewModels
                 else
                 {
                     bool keyAlreadyUsed =
-                        (Mappings.Red.Key == e.Key && EditingMapping != Mappings.Red) ||
-                        (Mappings.Blue.Key == e.Key && EditingMapping != Mappings.Blue) ||
-                        (Mappings.Green.Key == e.Key && EditingMapping != Mappings.Green) ||
-                        (Mappings.Yellow.Key == e.Key && EditingMapping != Mappings.Yellow);
+                        Mappings.Red.Key == e.Key && EditingMapping != Mappings.Red ||
+                        Mappings.Blue.Key == e.Key && EditingMapping != Mappings.Blue ||
+                        Mappings.Green.Key == e.Key && EditingMapping != Mappings.Green ||
+                        Mappings.Yellow.Key == e.Key && EditingMapping != Mappings.Yellow;
 
                     if (keyAlreadyUsed)
                     {

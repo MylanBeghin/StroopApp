@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using StroopApp.ViewModels;
+using StroopApp.ViewModels.Configuration.Participant;
 
 namespace StroopApp.Views.Participant
 {

@@ -1,4 +1,4 @@
-﻿using StroopApp.ViewModels;
+﻿using StroopApp.ViewModels.Configuration.Profile;
 using System.Windows;
 
 namespace StroopApp.Views

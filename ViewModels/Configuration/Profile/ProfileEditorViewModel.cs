@@ -1,5 +1,4 @@
-﻿// ProfileEditorViewModel.cs
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -11,7 +10,7 @@ using StroopApp.Models;
 using StroopApp.Services;
 using StroopApp.Services.Profile;
 
-namespace StroopApp.ViewModels
+namespace StroopApp.ViewModels.Configuration.Profile
 {
     public class ProfileEditorViewModel : INotifyPropertyChanged
     {

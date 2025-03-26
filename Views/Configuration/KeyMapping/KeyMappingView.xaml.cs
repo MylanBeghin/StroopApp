@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
-using StroopApp.ViewModels;
 using StroopApp.Services.KeyMapping;
+using StroopApp.ViewModels.Configuration;
 
 namespace StroopApp.Views.KeyMapping
 {
