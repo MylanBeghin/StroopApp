@@ -15,7 +15,7 @@ namespace StroopApp.Views
             var configPage = new ConfigurationPage(NavigationService);
             NavigationService.NavigateTo(() => configPage);
             var experimentPage = new ExperimentDashBoardPage(NavigationService, Settings);
-            DataContext = new ExperimentWindowViewModel();
+            DataContext = new ExperimentWindowViewModel(configPage, experimentPage);
         }
 
     }

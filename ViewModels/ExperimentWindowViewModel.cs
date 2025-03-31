@@ -29,10 +29,13 @@ namespace StroopApp.ViewModels
         private readonly ConfigurationPageViewModel _configurationPageViewModel;
 
         private readonly ExperimentDashBoardPageViewModel _experimentWindowViewModel;
-        public ExperimentWindowViewModel()
+        public ExperimentWindowViewModel(ConfigurationPage configPage, ExperimentDashBoardPage experimentPage)
         {
+            _configurationPageViewModel = (ConfigurationPageViewModel)configPage.DataContext;
+            _experimentWindowViewModel = (ExperimentDashBoardPageViewModel)experimentPage.DataContext;
             Block = 0;
         }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
