@@ -13,13 +13,13 @@ public class NavigationService : INavigationService
 
     public void NavigateTo<T>(object parameter = null) where T : Page
     {
-        // Crée une instance de la page.
-        // Si la page a besoin d'un paramètre dans son constructeur, elle doit l'accepter.
+        // Si le paramètre est fourni, on injecte également le service de navigation (this) en premier argument.
         var page = parameter != null
-            ? (Page)Activator.CreateInstance(typeof(T), parameter)
-            : (Page)Activator.CreateInstance(typeof(T));
+            ? (Page)Activator.CreateInstance(typeof(T), this, parameter)
+            : (Page)Activator.CreateInstance(typeof(T), this);
         _frame.Navigate(page);
     }
+
     public void NavigateTo(Func<Page> pageFactory)
     {
         var page = pageFactory();

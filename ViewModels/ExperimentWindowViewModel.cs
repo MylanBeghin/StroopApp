@@ -1,4 +1,5 @@
-﻿using StroopApp.ViewModels.Configuration;
+﻿using StroopApp.Models;
+using StroopApp.ViewModels.Configuration;
 using StroopApp.ViewModels.Experiment;
 using StroopApp.Views;
 using System.ComponentModel;
@@ -23,6 +24,8 @@ namespace StroopApp.ViewModels
                     
             }
         }
+        public ExperimentSettings Settings { get; private set; }
+
         private readonly ConfigurationPageViewModel _configurationPageViewModel;
 
         private readonly ExperimentDashBoardPageViewModel _experimentWindowViewModel;

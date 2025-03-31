@@ -17,7 +17,7 @@ namespace StroopApp.ViewModels.Configuration
         private readonly ParticipantManagementViewModel _participantViewModel;
         private readonly KeyMappingViewModel _keyMappingViewModel;
 
-        public ExperimentSettings Settings { get; set; }
+        public ExperimentSettings _settings { get; set; }
         public ICommand LaunchExperimentCommand { get; }
 
         private readonly INavigationService _navigationService;
@@ -25,37 +25,36 @@ namespace StroopApp.ViewModels.Configuration
         public ConfigurationPageViewModel(ProfileManagementViewModel profileViewModel,
                                           ParticipantManagementViewModel participantViewModel,
                                           KeyMappingViewModel keyMappingViewModel,
-                                          INavigationService navigationService)
+                                          INavigationService navigationService
+                                          )
         {
             _profileViewModel = profileViewModel;
             _participantViewModel = participantViewModel;
             _keyMappingViewModel = keyMappingViewModel;
             _navigationService = navigationService;
-
-            Settings = new ExperimentSettings();
+            _settings = new ExperimentSettings();
             LaunchExperimentCommand = new RelayCommand(LaunchExperiment);
         }
 
 
         private async void LaunchExperiment()
         {
-            Settings.CurrentProfile = _profileViewModel.CurrentProfile;
-            Settings.Participant = _participantViewModel.SelectedParticipant;
-            Settings.KeyMappings = _keyMappingViewModel.Mappings;
+            _settings.CurrentProfile = _profileViewModel.CurrentProfile;
+            _settings.Participant = _participantViewModel.SelectedParticipant;
+            _settings.KeyMappings = _keyMappingViewModel.Mappings;
 
-            if (Settings.CurrentProfile == null)
+            if (_settings.CurrentProfile == null)
             {
                 await ShowErrorDialog("Veuillez sélectionner un profil d'expérience.");
                 return;
             }
 
-            if (Settings.Participant == null)
+            if (_settings.Participant == null)
             {
                 await ShowErrorDialog("Veuillez sélectionner un participant.");
                 return;
             }
-            _navigationService.NavigateTo<ExperimentDashBoardPage>(Settings);
-
+            _navigationService.NavigateTo<ExperimentDashBoardPage>(_settings);
         }
 
         private async Task ShowErrorDialog(string message)

@@ -1,4 +1,5 @@
-﻿using StroopApp.Services.KeyMapping;
+﻿using StroopApp.Models;
+using StroopApp.Services.KeyMapping;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Participant;
 using StroopApp.Services.Profile;
