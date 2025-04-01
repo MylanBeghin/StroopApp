@@ -173,8 +173,6 @@ namespace StroopApp.Models
                 }
             }
         }
-
-        // Propriétés dérivées avec setter privé
         private int _taskDuration;
         public int TaskDuration
         {

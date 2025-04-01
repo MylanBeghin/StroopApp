@@ -7,13 +7,13 @@ namespace StroopApp.Views
 {
     public partial class ExperimentDashBoardPage : Page
     {
-        public ExperimentDashBoardPage(INavigationService navigationService, ExperimentSettings sharedSettings)
+        public ExperimentDashBoardPage(INavigationService navigationService, ExperimentSettings settings)
         {
             InitializeComponent();
             
-            var ExperimentProfileView = new ExperimentProfileView(sharedSettings.CurrentProfile);
+            var ExperimentProfileView = new ExperimentProgressView(settings.CurrentProfile);
 
-            DataContext = new ExperimentDashBoardPageViewModel(navigationService, sharedSettings);
+            DataContext = new ExperimentDashBoardPageViewModel(navigationService, settings);
             MainGrid.Children.Add(ExperimentProfileView);
             Grid.SetRow(ExperimentProfileView, 1);
         }

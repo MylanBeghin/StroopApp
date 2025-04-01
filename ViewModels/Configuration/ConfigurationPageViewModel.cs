@@ -55,6 +55,8 @@ namespace StroopApp.ViewModels.Configuration
                 return;
             }
             _navigationService.NavigateTo<ExperimentDashBoardPage>(_settings);
+            var participantWindow = new ParticipantWindow(_settings);
+            participantWindow.Show();
         }
 
         private async Task ShowErrorDialog(string message)
