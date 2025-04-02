@@ -25,6 +25,11 @@ public class StroopViewModel : INotifyPropertyChanged
     private TaskCompletionSource<long> _inputTcs;
     private Stopwatch _currentStopwatch;
     private StroopTrialRecord _currentTrial;
+    public StroopTrialRecord CurrentTrial
+    {
+        get => _currentTrial;
+        set { _currentTrial = value; OnPropertyChanged(); }
+    }
     public StroopViewModel(ExperimentSettings settings)
     {
         _settings = settings;
@@ -76,7 +81,7 @@ public class StroopViewModel : INotifyPropertyChanged
     {
         foreach (var trial in Trials)
         {
-            _currentTrial = trial;
+            CurrentTrial = trial;
             _currentStopwatch = Stopwatch.StartNew();
             _inputTcs = new TaskCompletionSource<long>();
             CurrentControl = new FixationCrossControl();
@@ -125,8 +130,8 @@ public class StroopViewModel : INotifyPropertyChanged
 
             if (answer != null)
             {
-                _currentTrial.GivenAnswer = answer;
-                _currentTrial.IsValidResponse = string.Equals(_currentTrial.ExpectedAnswer, answer, StringComparison.OrdinalIgnoreCase);
+                CurrentTrial.GivenAnswer = answer;
+                CurrentTrial.IsValidResponse = string.Equals(CurrentTrial.ExpectedAnswer, answer, StringComparison.OrdinalIgnoreCase);
                 _inputTcs.TrySetResult(_currentStopwatch.ElapsedMilliseconds);
             }
         }
