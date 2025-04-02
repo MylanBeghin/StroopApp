@@ -41,7 +41,6 @@ namespace StroopApp.ViewModels.Configuration
 
         private async void LoadMappings()
         {
-            // On suppose que LoadKeyMappingsAsync retourne un Task<KeyMappings>
             Mappings = await _keyMappingService.LoadKeyMappingsAsync();
             OnPropertyChanged(nameof(Mappings));
         }
@@ -72,7 +71,6 @@ namespace StroopApp.ViewModels.Configuration
         {
             StartEditing(color);
 
-            // Message d'origine et panneau d'erreur dans un Grid
             string originalMessage = "Appuyez sur une touche pour définir le mapping. Appuyez sur Échap pour annuler.";
             var originalText = new TextBlock
             {
@@ -165,8 +163,8 @@ namespace StroopApp.ViewModels.Configuration
                     }
                     else
                     {
-                        // Touche valide, on affecte et on ferme
                         EditingMapping.Key = e.Key;
+                        await _keyMappingService.SaveKeyMappingsAsync(Mappings);
                         dialog.Hide();
                         e.Handled = true;
                     }

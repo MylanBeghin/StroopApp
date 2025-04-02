@@ -16,6 +16,7 @@ namespace StroopApp.Views.Experiment.Participant
             _viewModel = new StroopViewModel(settings);
             DataContext = _viewModel;
             this.KeyDown += StroopPage_KeyDown;
+            Loaded += (s, e) => Keyboard.Focus(this);
         }
 
         private void StroopPage_KeyDown(object sender, KeyEventArgs e)

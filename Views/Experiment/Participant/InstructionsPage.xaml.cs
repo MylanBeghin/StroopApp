@@ -47,8 +47,6 @@ namespace StroopApp.Views
                         InstructionTextBlock.Inlines.Add(new Run("Si vous avez vu un carré, vous devrez lire le mot.\r\n"));
                         InstructionTextBlock.Inlines.Add(new Run("Si vous avez vu un cercle, vous devrez donner la couleur de l'encre.\r\n\r\n"));
                         InstructionTextBlock.Inlines.Add(new Run("Par exemple :\r\n"));
-
-                        // Création d'un StackPanel horizontal pour regrouper la forme et le mot
                         var horizontalPanel = new StackPanel
                         {
                             Orientation = Orientation.Horizontal,
@@ -56,16 +54,12 @@ namespace StroopApp.Views
                             VerticalAlignment = VerticalAlignment.Center,
                             Margin = new Thickness(40)
                         };
-
-                        // Création du conteneur de la forme (ellipse avec croix)
                         var shapeContainer = new Grid
                         {
                             Width = 200,
                             Height = 200,
                             Margin = new Thickness(0,0,80,0)
                         };
-
-                        // Création de l'ellipse
                         var ellipse = new Ellipse
                         {
                             Width = 200,
@@ -73,8 +67,6 @@ namespace StroopApp.Views
                             Stroke = Brushes.White
                         };
                         shapeContainer.Children.Add(ellipse);
-
-                        // Création du Grid pour la croix
                         var crossGrid = new Grid
                         {
                             HorizontalAlignment = HorizontalAlignment.Center,
@@ -97,11 +89,7 @@ namespace StroopApp.Views
                         crossGrid.Children.Add(horizontalRect);
                         crossGrid.Children.Add(verticalRect);
                         shapeContainer.Children.Add(crossGrid);
-
-                        // Ajout de la forme au StackPanel
                         horizontalPanel.Children.Add(shapeContainer);
-
-                        // Création d'un TextBlock pour le mot "ROUGE"
                         var rougeTextBlock = new TextBlock
                         {
                             Text = "ROUGE",
@@ -111,8 +99,6 @@ namespace StroopApp.Views
                             FontSize = 52
                         };
                         horizontalPanel.Children.Add(rougeTextBlock);
-
-                        // Ajout du StackPanel dans le TextBlock principal via InlineUIContainer
                         InstructionTextBlock.Inlines.Add(new InlineUIContainer(horizontalPanel));
                         break;
                     case 2:

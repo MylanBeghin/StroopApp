@@ -20,8 +20,6 @@ namespace StroopApp.ViewModels.Configuration.Profile
             get => _profile;
             set { _profile = value; OnPropertyChanged(); }
         }
-
-        // Référence vers le profil original (pour modification)
         private ExperimentProfile _originalProfile;
 
         public ObservableCollection<ExperimentProfile> Profiles { get; }
@@ -37,7 +35,6 @@ namespace StroopApp.ViewModels.Configuration.Profile
             _IprofileService = profileService;
             Profiles = profiles;
 
-            // Si le profil existe déjà, on le clone pour éviter une modification directe
             if (Profiles.Contains(profile))
             {
                 _originalProfile = profile;

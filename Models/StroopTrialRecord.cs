@@ -6,8 +6,8 @@ namespace StroopApp.Models
 {
     public class StroopTrialRecord : INotifyPropertyChanged
     {
-        private string _participantId;
-        public string ParticipantId
+        private int _participantId;
+        public int ParticipantId
         {
             get => _participantId;
             set

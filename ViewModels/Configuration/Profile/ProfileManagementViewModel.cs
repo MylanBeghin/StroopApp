@@ -56,9 +56,7 @@ namespace StroopApp.ViewModels.Configuration.Profile
         private void CreateProfile()
         {
             var newProfile = new ExperimentProfile();
-            // Instanciation du ViewModel éditeur
             var viewModel = new ProfileEditorViewModel(newProfile, Profiles, _profileService);
-            // Injection dans la fenêtre
             var profileWindow = new ProfileEditorWindow(viewModel);
             profileWindow.ShowDialog();
             if (profileWindow.DialogResult == true)
@@ -76,8 +74,6 @@ namespace StroopApp.ViewModels.Configuration.Profile
                 ShowErrorDialog("Veuillez sélectionner un profil à modifier !");
                 return;
             }
-
-            // Crée le ViewModel éditeur à partir du profil existant
             var viewModel = new ProfileEditorViewModel(CurrentProfile, Profiles, _profileService);
             var profileWindow = new ProfileEditorWindow(viewModel);
             profileWindow.ShowDialog();
