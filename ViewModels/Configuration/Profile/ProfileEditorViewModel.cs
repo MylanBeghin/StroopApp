@@ -122,6 +122,11 @@ namespace StroopApp.ViewModels.Configuration.Profile
                 ShowErrorDialog("Le type de Stroop ne peut pas être nul.");
                 return;
             }
+            if (Profile.AmorceDuration == 0 && Profile.StroopType == "Amorce")
+            {
+                ShowErrorDialog("Le temps d'amorce est doit être supérieur à 0 !");
+                return;
+            }
             if (Profile.MaxReactionTime <= 0)
             {
                 ShowErrorDialog("Le temps de réaction maximum doit être positif.");

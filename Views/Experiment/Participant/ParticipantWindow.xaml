@@ -9,5 +9,5 @@
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="30"/>
     </WindowChrome.WindowChrome>
-    <Frame x:Name="MainFrame"/>
+    <Frame x:Name="ExperimentFrame" NavigationUIVisibility="Hidden"/>
 </Window>

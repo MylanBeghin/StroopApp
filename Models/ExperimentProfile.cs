@@ -230,13 +230,6 @@ namespace StroopApp.Models
         }
         public void UpdateDerivedValues()
         {
-            // Validation de "Amorce"
-            IsAmorce = StroopType == "Amorce";
-            if (!IsAmorce)
-            {
-                AmorceDuration = 0;
-            }
-
             if (CalculationMode == CalculationMode.TaskDuration)
             {
                 // Calculer TaskDuration depuis le temps saisi

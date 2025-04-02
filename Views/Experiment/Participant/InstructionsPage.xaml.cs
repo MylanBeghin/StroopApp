@@ -1,23 +1,28 @@
-﻿using System;
+﻿using StroopApp.Models;
+using StroopApp.Services.Navigation;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using StroopApp.Views.Experiment.Participant;   
 
 namespace StroopApp.Views
 {
     public partial class InstructionsPage : Page
     {
+        private readonly ExperimentSettings _settings;
         private readonly string _stroopType;
         private int _currentPageIndex = 0;
         private const int TotalPages = 3;
-
-        public InstructionsPage(string stroopType)
+        private readonly INavigationService _navigationService;
+        public InstructionsPage(ExperimentSettings settings, INavigationService navigationService)
         {
             InitializeComponent();
-            _stroopType = stroopType;
+            _settings = settings;
+            _stroopType = settings.CurrentProfile.StroopType;
+            _navigationService = navigationService;
             ShowPage(_currentPageIndex);
             Loaded += (s, e) => Focus();
         }
@@ -42,18 +47,73 @@ namespace StroopApp.Views
                         InstructionTextBlock.Inlines.Add(new Run("Si vous avez vu un carré, vous devrez lire le mot.\r\n"));
                         InstructionTextBlock.Inlines.Add(new Run("Si vous avez vu un cercle, vous devrez donner la couleur de l'encre.\r\n\r\n"));
                         InstructionTextBlock.Inlines.Add(new Run("Par exemple :\r\n"));
-                        var image = new Image
+
+                        // Création d'un StackPanel horizontal pour regrouper la forme et le mot
+                        var horizontalPanel = new StackPanel
                         {
-                            Source = new BitmapImage(new Uri("file:///C:/Users/mylan/Desktop/StroopApp/Resources/Images/circle.jpg", UriKind.Absolute)),
-                            Width = 100,
-                            Height = 100,
-                            Margin = new Thickness(0, 50, 150, 0),
+                            Orientation = Orientation.Horizontal,
+                            HorizontalAlignment = HorizontalAlignment.Center,
                             VerticalAlignment = VerticalAlignment.Center,
-                            HorizontalAlignment = HorizontalAlignment.Center
+                            Margin = new Thickness(40)
                         };
-                        InstructionTextBlock.Inlines.Add(new InlineUIContainer(image));
-                        var exampleRunImage = new Run("ROUGE") { Foreground = Brushes.Blue };
-                        InstructionTextBlock.Inlines.Add(exampleRunImage);
+
+                        // Création du conteneur de la forme (ellipse avec croix)
+                        var shapeContainer = new Grid
+                        {
+                            Width = 200,
+                            Height = 200,
+                            Margin = new Thickness(0,0,80,0)
+                        };
+
+                        // Création de l'ellipse
+                        var ellipse = new Ellipse
+                        {
+                            Width = 200,
+                            Height = 200,
+                            Stroke = Brushes.White
+                        };
+                        shapeContainer.Children.Add(ellipse);
+
+                        // Création du Grid pour la croix
+                        var crossGrid = new Grid
+                        {
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            VerticalAlignment = VerticalAlignment.Center
+                        };
+
+                        var horizontalRect = new Rectangle
+                        {
+                            Width = 40,
+                            Height = 3,
+                            Fill = Brushes.White
+                        };
+                        var verticalRect = new Rectangle
+                        {
+                            Width = 3,
+                            Height = 40,
+                            Fill = Brushes.White
+                        };
+
+                        crossGrid.Children.Add(horizontalRect);
+                        crossGrid.Children.Add(verticalRect);
+                        shapeContainer.Children.Add(crossGrid);
+
+                        // Ajout de la forme au StackPanel
+                        horizontalPanel.Children.Add(shapeContainer);
+
+                        // Création d'un TextBlock pour le mot "ROUGE"
+                        var rougeTextBlock = new TextBlock
+                        {
+                            Text = "ROUGE",
+                            Foreground = Brushes.Blue,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            Margin = new Thickness(10, 0, 0, 0),
+                            FontSize = 52
+                        };
+                        horizontalPanel.Children.Add(rougeTextBlock);
+
+                        // Ajout du StackPanel dans le TextBlock principal via InlineUIContainer
+                        InstructionTextBlock.Inlines.Add(new InlineUIContainer(horizontalPanel));
                         break;
                     case 2:
                         InstructionTextBlock.Inlines.Add(new Run("Avez-vous des questions avant de commencer ?"));
@@ -97,7 +157,7 @@ namespace StroopApp.Views
                     ShowPage(_currentPageIndex);
                 else
                 {
-                    // Navigation vers la suite
+                    _navigationService.NavigateTo<StroopPage>(_settings);
                 }
             }
         }

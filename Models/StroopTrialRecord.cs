@@ -1,124 +1,159 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-public enum StroopType
+namespace StroopApp.Models
 {
-    Congruent,
-    Incongruent,
-    Amorce
-}
-
-public enum AmorceType
-{
-    Round,
-    Square
-}
-
-public class StroopTrialRecord : INotifyPropertyChanged
-{
-    private string _participantId;
-    public string ParticipantId
+    public class StroopTrialRecord : INotifyPropertyChanged
     {
-        get => _participantId;
-        set
+        private string _participantId;
+        public string ParticipantId
         {
-            if (_participantId != value)
+            get => _participantId;
+            set
             {
-                _participantId = value;
-                OnPropertyChanged();
+                if (_participantId != value)
+                {
+                    _participantId = value;
+                    OnPropertyChanged();
+                }
             }
         }
-    }
 
-    public StroopType StroopType { get; set; }
-
-    private int _block;
-    public int Block
-    {
-        get => _block;
-        set
+        private string _stroopType;
+        public string StroopType
         {
-            if (_block != value)
+            get => _stroopType;
+            set
             {
-                _block = value;
-                OnPropertyChanged();
+                if (_stroopType != value)
+                {
+                    _stroopType = value;
+                    OnPropertyChanged();
+                }
             }
         }
-    }
 
-    private string _expectedAnswer;
-    public string ExpectedAnswer
-    {
-        get => _expectedAnswer;
-        set
+        private int _block;
+        public int Block
         {
-            if (_expectedAnswer != value)
+            get => _block;
+            set
             {
-                _expectedAnswer = value;
-                OnPropertyChanged();
+                if (_block != value)
+                {
+                    _block = value;
+                    OnPropertyChanged();
+                }
             }
         }
-    }
-
-    private string _givenAnswer;
-    public string GivenAnswer
-    {
-        get => _givenAnswer;
-        set
+        private Word _stimulus;
+        public Word Stimulus
         {
-            if (_givenAnswer != value)
+            get => _stimulus;
+            set
             {
-                _givenAnswer = value;
-                OnPropertyChanged();
+                if (_stimulus != value)
+                {
+                    _stimulus = value;
+                    OnPropertyChanged();
+                }
             }
         }
-    }
 
-    private bool _isValidResponse;
-    public bool IsValidResponse
-    {
-        get => _isValidResponse;
-        set
+        private string _expectedAnswer;
+        public string ExpectedAnswer
         {
-            if (_isValidResponse != value)
+            get => _expectedAnswer;
+            set
             {
-                _isValidResponse = value;
-                OnPropertyChanged();
+                if (_expectedAnswer != value)
+                {
+                    _expectedAnswer = value;
+                    OnPropertyChanged();
+                }
             }
         }
-    }
 
-    private double _reactionTime;
-    public double ReactionTime
-    {
-        get => _reactionTime;
-        set
+        private string _givenAnswer;
+        public string GivenAnswer
         {
-            if (_reactionTime != value)
+            get => _givenAnswer;
+            set
             {
-                _reactionTime = value;
-                OnPropertyChanged();
+                if (_givenAnswer != value)
+                {
+                    _givenAnswer = value;
+                    OnPropertyChanged();
+                }
             }
         }
-    }
 
-    private int _trialNumber;
-    public int TrialNumber
-    {
-        get => _trialNumber;
-        set
+        private bool _isValidResponse;
+        public bool IsValidResponse
         {
-            if (_trialNumber != value)
+            get => _isValidResponse;
+            set
             {
-                _trialNumber = value;
-                OnPropertyChanged();
+                if (_isValidResponse != value)
+                {
+                    _isValidResponse = value;
+                    OnPropertyChanged();
+                }
             }
         }
+
+        private double _reactionTime;
+        public double ReactionTime
+        {
+            get => _reactionTime;
+            set
+            {
+                if (_reactionTime != value)
+                {
+                    _reactionTime = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private int _trialNumber;
+        public int TrialNumber
+        {
+            get => _trialNumber;
+            set
+            {
+                if (_trialNumber != value)
+                {
+                    _trialNumber = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public AmorceType Amorce { get; set; }
+
+        public void DetermineExpectedAnswer()
+        {
+            if (string.Equals(StroopType, "Amorce", StringComparison.OrdinalIgnoreCase))
+            {
+                ExpectedAnswer = (Amorce == AmorceType.Square) ? Stimulus.Text : Stimulus.Color;
+            }
+            else if (string.Equals(StroopType, "Congruent", StringComparison.OrdinalIgnoreCase))
+            {
+                ExpectedAnswer = Stimulus.Text;
+            }
+            else if (string.Equals(StroopType, "Incongruent", StringComparison.OrdinalIgnoreCase))
+            {
+                ExpectedAnswer = Stimulus.Color;
+            }
+        }
+        public override string ToString()
+        {
+            return "Stimulus : " + Stimulus + "\nType d'amorce :" + Amorce + "\nExpected answer : " + ExpectedAnswer;
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
-
-    public AmorceType Amorce { get; set; }
-
-    public event PropertyChangedEventHandler PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }

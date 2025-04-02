@@ -113,12 +113,12 @@
                     <ui:NumberBox Header="Nombre de mots" 
                                   Value="{Binding Profile.WordCount, Mode=TwoWay}" 
                                   Minimum="1"
-                                  SpinButtonPlacementMode="Inline"
+                                  IsEnabled="False"
                                   Grid.Column="0"/>
                     <ui:NumberBox Header="Temps de réaction max (ms)" 
                                   Value="{Binding Profile.MaxReactionTime, Mode=TwoWay}" 
                                   Minimum="1"
-                                  SpinButtonPlacementMode="Inline"
+                                  IsEnabled="False"
                                   Grid.Column="2"/>
                 </Grid>
                 <ui:SimpleStackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12">
