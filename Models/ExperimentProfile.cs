@@ -173,8 +173,6 @@ namespace StroopApp.Models
                 }
             }
         }
-
-        // Propriétés dérivées avec setter privé
         private int _taskDuration;
         public int TaskDuration
         {
@@ -232,18 +230,9 @@ namespace StroopApp.Models
         }
         public void UpdateDerivedValues()
         {
-            // Validation de "Amorce"
-            IsAmorce = StroopType == "Amorce";
-            if (!IsAmorce)
-            {
-                AmorceDuration = 0;
-            }
-
             if (CalculationMode == CalculationMode.TaskDuration)
             {
-                // Calculer TaskDuration depuis le temps saisi
                 TaskDuration = ((Hours * 3600) + (Minutes * 60) + Seconds) * 1000;
-                // Déduire WordCount
                 if (WordDuration > 0)
                 {
                     WordCount = TaskDuration / WordDuration;
@@ -251,14 +240,11 @@ namespace StroopApp.Models
             }
             else if (CalculationMode == CalculationMode.WordCount)
             {
-                // Utiliser la valeur saisie de WordCount pour recalculer TaskDuration et le temps
                 TaskDuration = WordCount * WordDuration;
                 Hours = TaskDuration / 3600000;
                 Minutes = (TaskDuration % 3600000) / 60000;
                 Seconds = (TaskDuration % 60000) / 1000;
             }
-
-            // Calculer le temps de réaction maximum
             MaxReactionTime = WordDuration - FixationDuration - AmorceDuration;
         }
 

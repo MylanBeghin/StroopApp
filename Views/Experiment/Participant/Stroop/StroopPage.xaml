@@ -1,0 +1,10 @@
+﻿<Page x:Class="StroopApp.Views.Experiment.Participant.StroopPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Focusable="True"
+      KeyDown="StroopPage_KeyDown"
+      Title="Stroop">
+    <Grid>
+        <ContentControl Content="{Binding CurrentControl}" />
+    </Grid>
+</Page>
