@@ -9,7 +9,7 @@
     <Grid>
         <TextBlock Text="{Binding Label}"
                Foreground="{Binding Color}"
-               FontSize="52"
+               FontSize="78"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"/>
     </Grid>

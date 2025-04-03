@@ -16,12 +16,12 @@ namespace StroopApp.ViewModels.Configuration.Participant
 {
     public class ParticipantEditorViewModel : INotifyPropertyChanged
     {
-        private ParticipantModel _participant;
+        private Models.Participant _participant;
         /// <summary>
         /// Participant utilisé pour l'édition dans la fenêtre.
         /// Pour une modification, il s'agit d'une copie du participant original.
         /// </summary>
-        public ParticipantModel Participant
+        public Models.Participant Participant
         {
             get => _participant;
             set
@@ -37,9 +37,9 @@ namespace StroopApp.ViewModels.Configuration.Participant
         /// <summary>
         /// Référence au participant original (non cloné) en cas de modification.
         /// </summary>
-        private ParticipantModel _originalParticipant;
+        private Models.Participant _originalParticipant;
 
-        public ObservableCollection<ParticipantModel> Participants { get; }
+        public ObservableCollection<Models.Participant> Participants { get; }
         public IEnumerable<SexAssignedAtBirth> SexAssignedValues { get; }
         public IEnumerable<Gender> GenderValues { get; }
         public ICommand SaveCommand { get; }
@@ -49,7 +49,7 @@ namespace StroopApp.ViewModels.Configuration.Participant
         public bool? DialogResult { get; private set; }
         public Action? CloseAction { get; set; }
 
-        public ParticipantEditorViewModel(ParticipantModel participant, ObservableCollection<ParticipantModel> participants, IParticipantService participantService)
+        public ParticipantEditorViewModel(Models.Participant participant, ObservableCollection<Models.Participant> participants, IParticipantService participantService)
         {
             _participantService = participantService;
             Participants = participants;
@@ -74,9 +74,9 @@ namespace StroopApp.ViewModels.Configuration.Participant
             CancelCommand = new RelayCommand(Cancel);
         }
 
-        private ParticipantModel CloneParticipant(ParticipantModel p)
+        private Models.Participant CloneParticipant(Models.Participant p)
         {
-            return new ParticipantModel
+            return new Models.Participant
             {
                 Id = p.Id,
                 Age = p.Age,

@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace StroopApp.Models
 {
-    public class StroopTrialRecord : INotifyPropertyChanged
+    public class StroopTrial : INotifyPropertyChanged
     {
         private int _participantId;
         public int ParticipantId

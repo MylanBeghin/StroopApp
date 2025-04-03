@@ -7,19 +7,19 @@
         <Grid.Resources>
             <DataTemplate x:Key="SquareTemplate">
                 <Grid Width="200" Height="200">
-                    <Rectangle Width="200" Height="200" Stroke="White"/>
+                    <Rectangle Width="200" Height="200" Stroke="White" StrokeThickness="6"/>
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Rectangle Width="30" Height="2" Fill="White"/>
-                        <Rectangle Width="2" Height="30" Fill="White"/>
+                        <Rectangle Width="50" Height="6" Fill="White"/>
+                        <Rectangle Width="6" Height="50" Fill="White"/>
                     </Grid>
                 </Grid>
             </DataTemplate>
             <DataTemplate x:Key="CircleTemplate">
                 <Grid Width="200" Height="200">
-                    <Ellipse Width="200" Height="200" Stroke="White"/>
+                    <Ellipse Width="200" Height="200" Stroke="White" StrokeThickness="6"/>
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Rectangle Width="30" Height="2" Fill="White"/>
-                        <Rectangle Width="2" Height="30" Fill="White"/>
+                        <Rectangle Width="50" Height="6" Fill="White"/>
+                        <Rectangle Width="6" Height="50" Fill="White"/>
                     </Grid>
                 </Grid>
             </DataTemplate>

@@ -5,9 +5,9 @@ namespace StroopApp.Services.Participant
 {
     public interface IParticipantService
     {
-        ObservableCollection<ParticipantModel> LoadParticipants();
-        void SaveParticipants(ObservableCollection<ParticipantModel> participants);
-        void DeleteParticipant(ParticipantModel participant, ObservableCollection<ParticipantModel> participants);
+        ObservableCollection<Models.Participant> LoadParticipants();
+        void SaveParticipants(ObservableCollection<Models.Participant> participants);
+        void DeleteParticipant(Models.Participant participant, ObservableCollection<Models.Participant> participants);
         int GetNextParticipantId();
     }
 }

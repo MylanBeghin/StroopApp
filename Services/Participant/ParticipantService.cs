@@ -11,21 +11,21 @@ namespace StroopApp.Services.Participant
         private const string ParticipantFile = "participants.json";
         private const string ResultsFolder = "Résultats";
 
-        public ObservableCollection<ParticipantModel> LoadParticipants()
+        public ObservableCollection<Models.Participant> LoadParticipants()
         {
             if (!File.Exists(ParticipantFile))
-                return new ObservableCollection<ParticipantModel>();
+                return new ObservableCollection<Models.Participant>();
             var json = File.ReadAllText(ParticipantFile);
-            return JsonSerializer.Deserialize<ObservableCollection<ParticipantModel>>(json);
+            return JsonSerializer.Deserialize<ObservableCollection<Models.Participant>>(json);
         }
 
-        public void SaveParticipants(ObservableCollection<ParticipantModel> participants)
+        public void SaveParticipants(ObservableCollection<Models.Participant> participants)
         {
             var json = JsonSerializer.Serialize(participants, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(ParticipantFile, json);
         }
 
-        public void DeleteParticipant(ParticipantModel participant, ObservableCollection<ParticipantModel> participants)
+        public void DeleteParticipant(Models.Participant participant, ObservableCollection<Models.Participant> participants)
         {
             if (participant != null)
             {

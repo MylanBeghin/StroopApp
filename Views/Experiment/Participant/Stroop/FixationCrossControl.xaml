@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              Height="Auto" Width="Auto">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Rectangle Width="30" Height="2" Fill="White"/>
-        <Rectangle Width="2" Height="30" Fill="White"/>
+        <Rectangle Width="50" Height="6" Fill="White"/>
+        <Rectangle Width="6" Height="50" Fill="White"/>
     </Grid>
 </UserControl>

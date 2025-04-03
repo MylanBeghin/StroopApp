@@ -3,9 +3,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-public class SharedExperimentDataModel : INotifyPropertyChanged
+public class SharedExperimentData : INotifyPropertyChanged
 {
-    public ObservableCollection<StroopTrialRecord> TrialRecords { get; }
+    public ObservableCollection<StroopTrial> TrialRecords { get; }
 
     private int _currentTrial;
     public int CurrentTrial
@@ -26,14 +26,14 @@ public class SharedExperimentDataModel : INotifyPropertyChanged
 
     public double Progress => TotalTrials > 0 ? (double)CurrentTrial / TotalTrials : 0;
 
-    public SharedExperimentDataModel(ExperimentSettings Settings)
+    public SharedExperimentData(ExperimentSettings Settings)
     {
-        TrialRecords = new ObservableCollection<StroopTrialRecord>();
+        TrialRecords = new ObservableCollection<StroopTrial>();
         TotalTrials = Settings.CurrentProfile.WordCount;
         CurrentTrial = 0;
     }
 
-    public void AddTrialRecord(StroopTrialRecord record)
+    public void AddTrialRecord(StroopTrial record)
     {
         TrialRecords.Add(record);
         CurrentTrial = TrialRecords.Count;

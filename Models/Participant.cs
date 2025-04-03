@@ -18,7 +18,7 @@ namespace StroopApp.Models
         Other,
         PreferNotToAnswer
     }
-    public class ParticipantModel : INotifyPropertyChanged
+    public class Participant : INotifyPropertyChanged
     {
         private int _id;
         public int Id
@@ -114,7 +114,7 @@ namespace StroopApp.Models
                 }
             }
         }
-        public ParticipantModel()
+        public Participant()
         {
             Results = new List<Result>();
             Height = null;

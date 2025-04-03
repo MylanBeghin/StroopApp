@@ -5,8 +5,8 @@ namespace StroopApp.Models
 {
     public class ExperimentSettings : INotifyPropertyChanged
     {
-        private ParticipantModel _participant;
-        public ParticipantModel Participant
+        private Participant _participant;
+        public Participant Participant
         {
             get => _participant;
             set { _participant = value; OnPropertyChanged(); }

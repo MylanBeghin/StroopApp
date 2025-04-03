@@ -15,7 +15,7 @@ public class StroopViewModel : INotifyPropertyChanged
 {
     private readonly ExperimentSettings _settings;
     private readonly Random random = new Random();
-    public ObservableCollection<StroopTrialRecord> Trials { get; set; } = new ObservableCollection<StroopTrialRecord>();
+    public ObservableCollection<StroopTrial> Trials { get; set; } = new ObservableCollection<StroopTrial>();
     private UserControl _currentControl;
     public UserControl CurrentControl
     {
@@ -24,8 +24,8 @@ public class StroopViewModel : INotifyPropertyChanged
     }
     private TaskCompletionSource<long> _inputTcs;
     private Stopwatch _currentStopwatch;
-    private StroopTrialRecord _currentTrial;
-    public StroopTrialRecord CurrentTrial
+    private StroopTrial _currentTrial;
+    public StroopTrial CurrentTrial
     {
         get => _currentTrial;
         set { _currentTrial = value; OnPropertyChanged(); }
@@ -45,7 +45,7 @@ public class StroopViewModel : INotifyPropertyChanged
         Trials.Clear();
         for (int i = 0; i < _settings.CurrentProfile.WordCount; i++)
         {
-            var trial = new StroopTrialRecord
+            var trial = new StroopTrial
             {
                 TrialNumber = i + 1,
                 StroopType = _settings.CurrentProfile.StroopType,

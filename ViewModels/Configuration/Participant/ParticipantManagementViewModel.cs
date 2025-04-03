@@ -16,13 +16,13 @@ namespace StroopApp.ViewModels.Configuration.Participant
     public class ParticipantManagementViewModel : INotifyPropertyChanged
     {
         private readonly IParticipantService _participantService;
-        public ObservableCollection<ParticipantModel> Participants { get; set; }
+        public ObservableCollection<Models.Participant> Participants { get; set; }
 
         // ICollectionView pour le filtrage
         public ICollectionView ParticipantsView { get; set; }
 
-        private ParticipantModel _selectedParticipant;
-        public ParticipantModel SelectedParticipant
+        private Models.Participant _selectedParticipant;
+        public Models.Participant SelectedParticipant
         {
             get => _selectedParticipant;
             set { _selectedParticipant = value; OnPropertyChanged(); }
@@ -58,7 +58,7 @@ namespace StroopApp.ViewModels.Configuration.Participant
             CreateParticipantCommand = new RelayCommand(CreateParticipant);
             ModifyParticipantCommand = new RelayCommand(ModifyParticipant);
             DeleteParticipantCommand = new RelayCommand(DeleteParticipant);
-            OpenResultsCommand = new RelayCommand<ParticipantModel>(OpenResults);
+            OpenResultsCommand = new RelayCommand<Models.Participant>(OpenResults);
         }
 
         private bool FilterParticipants(object obj)
@@ -66,7 +66,7 @@ namespace StroopApp.ViewModels.Configuration.Participant
             if (string.IsNullOrWhiteSpace(SearchText))
                 return true;
 
-            var participant = obj as ParticipantModel;
+            var participant = obj as Models.Participant;
             return participant.Id.ToString().Contains(SearchText)
                 || (participant.Age?.ToString().Contains(SearchText) ?? false)
                 || (participant.Height?.ToString().Contains(SearchText) ?? false)
@@ -77,7 +77,7 @@ namespace StroopApp.ViewModels.Configuration.Participant
 
         private void CreateParticipant()
         {
-            var newParticipant = new ParticipantModel
+            var newParticipant = new Models.Participant
             {
                 Id = _participantService.GetNextParticipantId()
             };
@@ -120,7 +120,7 @@ namespace StroopApp.ViewModels.Configuration.Participant
             SelectedParticipant = Participants.FirstOrDefault();
         }
 
-        private void OpenResults(ParticipantModel participant)
+        private void OpenResults(Models.Participant participant)
         {
             if (participant == null)
                 return;
