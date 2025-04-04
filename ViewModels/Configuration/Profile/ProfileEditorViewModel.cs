@@ -44,7 +44,7 @@ namespace StroopApp.ViewModels.Configuration.Profile
             {
                 Profile = profile;
             }
-
+            Profile.UpdateDerivedValues();
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
 
@@ -57,7 +57,8 @@ namespace StroopApp.ViewModels.Configuration.Profile
                 e.PropertyName == nameof(Profile.WordDuration) ||
                 e.PropertyName == nameof(Profile.Hours) ||
                 e.PropertyName == nameof(Profile.Minutes) ||
-                e.PropertyName == nameof(Profile.Seconds))
+                e.PropertyName == nameof(Profile.Seconds) ||
+                e.PropertyName == nameof(Profile.CalculationMode))
             {
                 Profile.UpdateDerivedValues();
             }
