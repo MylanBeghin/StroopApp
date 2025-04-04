@@ -54,6 +54,7 @@ namespace StroopApp.ViewModels.Configuration
                 await ShowErrorDialog("Veuillez sélectionner un participant.");
                 return;
             }
+            _settings.ExperimentContext = new SharedExperimentData(_settings);
             _navigationService.NavigateTo<ExperimentDashBoardPage>(_settings);
             var participantWindow = new ParticipantWindow(_settings);
             participantWindow.Show();

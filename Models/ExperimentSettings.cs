@@ -25,14 +25,20 @@ namespace StroopApp.Models
             get => _keyMappings;
             set { _keyMappings = value; OnPropertyChanged(); }
         }
-
+        private SharedExperimentData _experimentContext;
+        public SharedExperimentData ExperimentContext
+        {
+            get => _experimentContext;
+            set { _experimentContext = value; OnPropertyChanged(); }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
         public ExperimentSettings()
         {
             CurrentProfile = new ExperimentProfile();
             KeyMappings = new KeyMappings();
+            ExperimentContext = new SharedExperimentData(this);
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

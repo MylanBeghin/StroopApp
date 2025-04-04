@@ -13,9 +13,13 @@ using StroopApp.Views.Experiment.Participant.Stroop;
 
 public class StroopViewModel : INotifyPropertyChanged
 {
-    private readonly ExperimentSettings _settings;
+    private ExperimentSettings _settings;
+    public ExperimentSettings Settings
+    {
+        get => _settings;
+        set { _settings = value; OnPropertyChanged(); }
+    }
     private readonly Random random = new Random();
-    public ObservableCollection<StroopTrial> Trials { get; set; } = new ObservableCollection<StroopTrial>();
     private UserControl _currentControl;
     public UserControl CurrentControl
     {
@@ -32,7 +36,7 @@ public class StroopViewModel : INotifyPropertyChanged
     }
     public StroopViewModel(ExperimentSettings settings)
     {
-        _settings = settings;
+        Settings = settings;
         GenerateTrials();
         StartTrials();
     }
@@ -42,18 +46,18 @@ public class StroopViewModel : INotifyPropertyChanged
         var wordColors = new[] { "Blue", "Red", "Green", "Yellow" };
         var wordTexts = new[] { "Bleu", "Rouge", "Vert", "Jaune" };
 
-        Trials.Clear();
-        for (int i = 0; i < _settings.CurrentProfile.WordCount; i++)
+        Settings.ExperimentContext.TrialRecords.Clear();
+        for (int i = 0; i < Settings.CurrentProfile.WordCount; i++)
         {
             var trial = new StroopTrial
             {
                 TrialNumber = i + 1,
-                StroopType = _settings.CurrentProfile.StroopType,
+                StroopType = Settings.CurrentProfile.StroopType,
                 Block = 1,
-                ParticipantId = _settings.Participant.Id
+                ParticipantId = Settings.Participant.Id
             };
 
-            if (_settings.CurrentProfile.StroopType == "Congruent")
+            if (Settings.CurrentProfile.StroopType == "Congruent")
             {
                 int index = random.Next(0, 4);
                 trial.Stimulus = new Word(wordColors[index], wordTexts[index]);
@@ -67,21 +71,22 @@ public class StroopViewModel : INotifyPropertyChanged
                 int firstIndex = indices[0];
                 int secondIndex = indices[1];
                 trial.Stimulus = new Word(wordColors[firstIndex], wordTexts[secondIndex]);
-                if (string.Equals(_settings.CurrentProfile.StroopType, "Amorce", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(Settings.CurrentProfile.StroopType, "Amorce", StringComparison.OrdinalIgnoreCase))
                 {
                     trial.Amorce = random.Next(0, 2) == 0 ? AmorceType.Round : AmorceType.Square;
                 }
             }
             trial.DetermineExpectedAnswer();
-            Trials.Add(trial);
+            Settings.ExperimentContext.TrialRecords.Add(trial);
         }
     }
 
     public async void StartTrials()
     {
-        foreach (var trial in Trials)
+        foreach (var trial in Settings.ExperimentContext.TrialRecords)
         {
             CurrentTrial = trial;
+            Settings.ExperimentContext.CurrentTrialNumber = trial.TrialNumber;
             _currentStopwatch = Stopwatch.StartNew();
             _inputTcs = new TaskCompletionSource<long>();
             CurrentControl = new FixationCrossControl();
@@ -119,14 +124,14 @@ public class StroopViewModel : INotifyPropertyChanged
         if (_inputTcs != null && !_inputTcs.Task.IsCompleted)
         {
             string answer = null;
-            if (key == _settings.KeyMappings.Red.Key)
-                answer = _settings.KeyMappings.Red.Color;
-            else if (key == _settings.KeyMappings.Blue.Key)
-                answer = _settings.KeyMappings.Blue.Color;
-            else if (key == _settings.KeyMappings.Green.Key)
-                answer = _settings.KeyMappings.Green.Color;
-            else if (key == _settings.KeyMappings.Yellow.Key)
-                answer = _settings.KeyMappings.Yellow.Color;
+            if (key == Settings.KeyMappings.Red.Key)
+                answer = Settings.KeyMappings.Red.Color;
+            else if (key == Settings.KeyMappings.Blue.Key)
+                answer = Settings.KeyMappings.Blue.Color;
+            else if (key == Settings.KeyMappings.Green.Key)
+                answer = Settings.KeyMappings.Green.Color;
+            else if (key == Settings.KeyMappings.Yellow.Key)
+                answer = Settings.KeyMappings.Yellow.Color;
 
             if (answer != null)
             {
