@@ -11,12 +11,6 @@
         <TextBlock Grid.Row="0" Text="Tableau de bord de l'expérience en cours"
                    Style="{DynamicResource HeaderTextBlockStyle}"
                    HorizontalAlignment="Left" Margin="0,0,0,12"/>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,12">
-            <TextBlock Text="Trial: " FontSize="16" Foreground="Black"/>
-            <TextBlock Text="{Binding CurrentTrialNumber}" FontSize="16" Foreground="Black" Margin="5,0"/>
-            <TextBlock Text=" / " FontSize="16" Foreground="Black" Margin="5,0"/>
-            <TextBlock Text="{Binding TotalTrials}" FontSize="16" Foreground="Black" Margin="5,0"/>
-        </StackPanel>
         <ListView Grid.Row="2" ItemsSource="{Binding TrialRecords}">
             <ListView.View>
                 <GridView>

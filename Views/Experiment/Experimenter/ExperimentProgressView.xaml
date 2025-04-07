@@ -14,52 +14,24 @@
         <converters:MillisecondsToSecondsConverter x:Key="MillisecondsToSecondsConverter" />
     </UserControl.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
         <Border
- Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
- CornerRadius="8"
- Padding="16"
- BorderThickness="0.5"
- BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
-            <ui:SimpleStackPanel Spacing="10">
-                <TextBlock Text="Avancement"
-   Style="{DynamicResource TitleTextBlockStyle}"/>
-            <ui:SimpleStackPanel x:Name="WordCountPanel" Spacing="12">
-                <ui:SimpleStackPanel.Style>
-                    <Style TargetType="ui:SimpleStackPanel">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding CalculationMode}" Value="WordCount">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ui:SimpleStackPanel.Style>
-                    <TextBlock Style="{DynamicResource TitleTextBlockStyle}">
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat=" {0} / {1}">
-                                <Binding Path="WordCount"/>
-                                <Binding Path="WordCount"/>
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
-                    <ProgressBar
-                        x:Name="ProgressBar2"
-                        Width="130"
-                        Value="{Binding ElementName=ProgressValue, Path=Value, Mode=OneWay}" />
+         Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+         CornerRadius="8,0,0,8"
+         Padding="16"
+         BorderThickness="0.5"
+         BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">       
+            <ui:SimpleStackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Spacing="10" >
+                <TextBlock Text="Avancement" Style="{DynamicResource TitleTextBlockStyle}"/>
+                <ui:SimpleStackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" >
+                    <TextBlock Text="{Binding CurrentTrialNumber}" FontSize="16" Foreground="Black" Margin="5,0"/>
+                    <TextBlock Text=" / " FontSize="16" Foreground="Black" Margin="5,0"/>
+                    <TextBlock Text="{Binding TotalTrials}" FontSize="16" Foreground="Black" Margin="5,0"/>
+                    <ui:ProgressBar Value="{Binding Progress, Mode=OneWay}" Width="130"/>
                 </ui:SimpleStackPanel>
-            <ui:SimpleStackPanel x:Name="TimeDurationPanel" Spacing="12">
-                <ui:SimpleStackPanel.Style>
-                    <Style TargetType="ui:SimpleStackPanel">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding CalculationMode}" Value="TaskDuration">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ui:SimpleStackPanel.Style>
-                <TextBlock Text="WOrdCount"/>
-            </ui:SimpleStackPanel>
             </ui:SimpleStackPanel>
         </Border>
     </Grid>

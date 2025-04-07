@@ -13,6 +13,7 @@
 		<PackageReference Include="FontAwesome5" Version="2.1.11" />
 		<PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
 		<PackageReference Include="ModernWpfUI" Version="0.9.6" />
+		<PackageReference Include="RealTimeGraphX.WPF" Version="1.0.13" />
 	</ItemGroup>
 
 </Project>

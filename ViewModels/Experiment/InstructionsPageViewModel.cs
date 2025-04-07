@@ -21,7 +21,7 @@ namespace StroopApp.ViewModels.Experiment
         public UIElement CurrentInstruction { get; private set; }
         public ICommand NextCommand { get; }
         public event EventHandler InstructionChanged;
-        public StroopPage StroopPage { get; }
+        public StroopPage StroopPage { get; set; }
         public InstructionsPageViewModel(ExperimentSettings settings, INavigationService navigationService)
         {
             _settings = settings;
@@ -29,7 +29,7 @@ namespace StroopApp.ViewModels.Experiment
             _stroopType = _settings.CurrentProfile.StroopType;
             NextCommand = new RelayCommand(_ => NextPage());
             CurrentInstruction = GenerateInstructionPage(_currentPageIndex);
-            StroopPage = new StroopPage(_navigationService, _settings);
+
         }
         private void NextPage()
         {
@@ -41,6 +41,7 @@ namespace StroopApp.ViewModels.Experiment
             }
             else
             {
+                StroopPage = new StroopPage(_navigationService, _settings);
                 _navigationService.NavigateTo(() => StroopPage);
             }
         }

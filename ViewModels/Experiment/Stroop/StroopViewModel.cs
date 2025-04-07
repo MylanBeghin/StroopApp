@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
+using System.Windows.Threading;
 using StroopApp.Models;
+using StroopApp.ViewModels.Experiment;
 using StroopApp.Views.Experiment.Participant.Stroop;
 
 public class StroopViewModel : INotifyPropertyChanged
@@ -19,6 +16,7 @@ public class StroopViewModel : INotifyPropertyChanged
         get => _settings;
         set { _settings = value; OnPropertyChanged(); }
     }
+
     private readonly Random random = new Random();
     private UserControl _currentControl;
     public UserControl CurrentControl
@@ -26,19 +24,42 @@ public class StroopViewModel : INotifyPropertyChanged
         get => _currentControl;
         set { _currentControl = value; OnPropertyChanged(); }
     }
-    private TaskCompletionSource<long> _inputTcs;
-    private Stopwatch _currentStopwatch;
+
+    private TaskCompletionSource<double> _inputTcs;
+
+    private Stopwatch _wordTimer;
+
+    private Stopwatch _reactionTimeTimer;
+
     private StroopTrial _currentTrial;
     public StroopTrial CurrentTrial
     {
         get => _currentTrial;
         set { _currentTrial = value; OnPropertyChanged(); }
     }
+
+    private double _wordTimerValue;
+    public double WordTimerValue
+    {
+        get => _wordTimerValue;
+        set { _wordTimerValue = value; OnPropertyChanged(); }
+    }
+
+    private double _reactionTimeTimerValue;
+    public double ReactionTimeTimerValue
+    {
+        get => _reactionTimeTimerValue;
+        set { _reactionTimeTimerValue = value; OnPropertyChanged(); }
+    }
+
     public StroopViewModel(ExperimentSettings settings)
     {
         Settings = settings;
+        _wordTimer = new Stopwatch();
+        _reactionTimeTimer = new Stopwatch();
         GenerateTrials();
         StartTrials();
+        new GraphViewModel(Settings);
     }
 
     private void GenerateTrials()
@@ -85,40 +106,68 @@ public class StroopViewModel : INotifyPropertyChanged
     {
         foreach (var trial in Settings.ExperimentContext.TrialRecords)
         {
-            CurrentTrial = trial;
-            Settings.ExperimentContext.CurrentTrialNumber = trial.TrialNumber;
-            _currentStopwatch = Stopwatch.StartNew();
-            _inputTcs = new TaskCompletionSource<long>();
+            Settings.ExperimentContext.CurrentTrial = trial;
+            _wordTimer.Reset();
+            _reactionTimeTimer.Reset();
+            _wordTimer.Start();
+
+            var debugTimer = new DispatcherTimer();
+            debugTimer.Interval = TimeSpan.FromMilliseconds(10);
+            debugTimer.Tick += (s, e) =>
+            {
+                WordTimerValue = _wordTimer.Elapsed.TotalMilliseconds;
+                ReactionTimeTimerValue = _reactionTimeTimer.IsRunning ? _reactionTimeTimer.Elapsed.TotalMilliseconds : ReactionTimeTimerValue;
+            };
+            debugTimer.Start();
+
             CurrentControl = new FixationCrossControl();
-            await Task.Delay(_settings.CurrentProfile.FixationDuration);
-            if (trial.StroopType=="Amorce")
+            await Task.Delay((int)Settings.CurrentProfile.FixationDuration);
+
+            if (trial.StroopType == "Amorce")
             {
                 CurrentControl = new AmorceControl(trial.Amorce);
-                await Task.Delay(_settings.CurrentProfile.AmorceDuration);
+                await Task.Delay((int)Settings.CurrentProfile.AmorceDuration);
             }
-            var wordControl = new WordControl(trial.Stimulus.Text, trial.Stimulus.Color);
-            CurrentControl = wordControl;
-            var delayTask = Task.Delay(_settings.CurrentProfile.WordDuration);
+
+            CurrentControl = new WordControl(trial.Stimulus.Text, trial.Stimulus.Color);
+            _reactionTimeTimer.Start();
+            _inputTcs = new TaskCompletionSource<double>();
+
+
+            var delayTask = Task.Delay((int)Settings.CurrentProfile.MaxReactionTime);
             var completedTask = await Task.WhenAny(_inputTcs.Task, delayTask);
-            long reactionTime = 0;
+            double reactionTime = 0;
             if (completedTask == _inputTcs.Task)
             {
-                reactionTime = _inputTcs.Task.Result - _settings.CurrentProfile.FixationDuration - _settings.CurrentProfile.AmorceDuration ;
-                long remaining = _settings.CurrentProfile.WordDuration - reactionTime;
-                if (remaining > 0)
-                {
-                    CurrentControl = new FixationCrossControl();
-                    await Task.Delay((int)remaining);
-                }
+                _reactionTimeTimer.Stop();
+                reactionTime = _inputTcs.Task.Result;
+                CurrentControl = new FixationCrossControl();
             }
             else
             {
-                reactionTime = _settings.CurrentProfile.WordDuration;
+                _reactionTimeTimer.Stop();
+                reactionTime = _reactionTimeTimer.Elapsed.TotalMilliseconds;
             }
-            _currentStopwatch.Stop();
+
+            double remaining = Settings.CurrentProfile.WordDuration - _wordTimer.Elapsed.TotalMilliseconds;
+            if (remaining > 0)
+            {
+                await Task.Delay((int)remaining);
+            }
+            _wordTimer.Stop();
+
             trial.ReactionTime = reactionTime;
+            Settings.ExperimentContext.CurrentTrial = trial;
+            debugTimer.Stop();
+            WordTimerValue = _wordTimer.Elapsed.TotalMilliseconds;
+            ReactionTimeTimerValue = _reactionTimeTimer.Elapsed.TotalMilliseconds;
+            OnPropertyChanged(nameof(WordTimerValue));
+            OnPropertyChanged(nameof(ReactionTimeTimerValue));
+            _wordTimer.Reset();
+            _reactionTimeTimer.Reset();
         }
     }
+
     public void ProcessInput(Key key)
     {
         if (_inputTcs != null && !_inputTcs.Task.IsCompleted)
@@ -135,9 +184,9 @@ public class StroopViewModel : INotifyPropertyChanged
 
             if (answer != null)
             {
-                CurrentTrial.GivenAnswer = answer;
-                CurrentTrial.IsValidResponse = string.Equals(CurrentTrial.ExpectedAnswer, answer, StringComparison.OrdinalIgnoreCase);
-                _inputTcs.TrySetResult(_currentStopwatch.ElapsedMilliseconds);
+                Settings.ExperimentContext.CurrentTrial.GivenAnswer = answer;
+                Settings.ExperimentContext.CurrentTrial.IsValidResponse = string.Equals(Settings.ExperimentContext.CurrentTrial.ExpectedAnswer, answer, StringComparison.OrdinalIgnoreCase);
+                _inputTcs.TrySetResult(_reactionTimeTimer.Elapsed.TotalMilliseconds);
             }
         }
     }

@@ -5,7 +5,7 @@ namespace StroopApp.Views.Experiment
 {
     public partial class ExperimentProgressView : UserControl
     {
-        public ExperimentProgressView(ExperimentProfile Settings)
+        public ExperimentProgressView(ExperimentSettings Settings)
         {
             InitializeComponent();
             DataContext = new ExperimentProgressViewModel(Settings);

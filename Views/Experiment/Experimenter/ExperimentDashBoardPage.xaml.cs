@@ -11,8 +11,7 @@ namespace StroopApp.Views
         {
             InitializeComponent();
             
-            var ExperimentProfileView = new ExperimentProgressView(settings.CurrentProfile);
-
+            var ExperimentProfileView = new ExperimentProgressView(settings);
             DataContext = new ExperimentDashBoardPageViewModel(navigationService, settings);
             MainGrid.Children.Add(ExperimentProfileView);
             Grid.SetRow(ExperimentProfileView, 1);
