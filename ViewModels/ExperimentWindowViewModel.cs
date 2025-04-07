@@ -9,21 +9,7 @@ namespace StroopApp.ViewModels
 {
     public class ExperimentWindowViewModel : INotifyPropertyChanged
     {
-        private int block;
-
-        public int Block
-        {
-            get => block;
-            set
-            {
-                if (value != block)
-                {
-                    block = value;
-                    OnPropertyChanged();
-                }
-                    
-            }
-        }
+        
         public ExperimentSettings Settings { get; private set; }
 
         private readonly ConfigurationPageViewModel _configurationPageViewModel;
@@ -33,7 +19,6 @@ namespace StroopApp.ViewModels
         {
             _configurationPageViewModel = (ConfigurationPageViewModel)configPage.DataContext;
             _experimentWindowViewModel = (ExperimentDashBoardPageViewModel)experimentPage.DataContext;
-            Block = 0;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

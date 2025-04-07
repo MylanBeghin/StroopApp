@@ -5,6 +5,21 @@ namespace StroopApp.Models
 {
     public class ExperimentSettings : INotifyPropertyChanged
     {
+        private int block;
+
+        public int Block
+        {
+            get => block;
+            set
+            {
+                if (value != block)
+                {
+                    block = value;
+                    OnPropertyChanged();
+                }
+
+            }
+        }
         private Participant _participant;
         public Participant Participant
         {
@@ -37,6 +52,7 @@ namespace StroopApp.Models
             CurrentProfile = new ExperimentProfile();
             KeyMappings = new KeyMappings();
             ExperimentContext = new SharedExperimentData(this);
+            Block = 0;
         }
         
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
