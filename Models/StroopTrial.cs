@@ -103,8 +103,8 @@ namespace StroopApp.Models
             }
         }
 
-        private double _reactionTime;
-        public double ReactionTime
+        private double? _reactionTime;
+        public double? ReactionTime
         {
             get => _reactionTime;
             set
@@ -130,7 +130,6 @@ namespace StroopApp.Models
                 }
             }
         }
-
         public AmorceType Amorce { get; set; }
 
         public void DetermineExpectedAnswer()

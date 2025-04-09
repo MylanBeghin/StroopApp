@@ -11,9 +11,8 @@
 	<ItemGroup>
 		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.7.25103.5738" />
 		<PackageReference Include="FontAwesome5" Version="2.1.11" />
-		<PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
+		<PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-rc5.4" />
 		<PackageReference Include="ModernWpfUI" Version="0.9.6" />
-		<PackageReference Include="RealTimeGraphX.WPF" Version="1.0.13" />
 	</ItemGroup>
 
 </Project>

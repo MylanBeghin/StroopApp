@@ -4,9 +4,11 @@ using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using LiveChartsCore.SkiaSharpView;
 using StroopApp.Models;
-using StroopApp.ViewModels.Experiment;
+using StroopApp.ViewModels.Experiment.Experimenter;
 using StroopApp.Views.Experiment.Participant.Stroop;
+using LiveChartsCore.Defaults;
 
 public class StroopViewModel : INotifyPropertyChanged
 {
@@ -59,7 +61,7 @@ public class StroopViewModel : INotifyPropertyChanged
         _reactionTimeTimer = new Stopwatch();
         GenerateTrials();
         StartTrials();
-        new GraphViewModel(Settings);
+        new ExperimentGraphViewModel(Settings);
     }
 
     private void GenerateTrials()
@@ -136,7 +138,8 @@ public class StroopViewModel : INotifyPropertyChanged
 
             var delayTask = Task.Delay((int)Settings.CurrentProfile.MaxReactionTime);
             var completedTask = await Task.WhenAny(_inputTcs.Task, delayTask);
-            double reactionTime = 0;
+            double? reactionTime = null;
+
             if (completedTask == _inputTcs.Task)
             {
                 _reactionTimeTimer.Stop();
@@ -146,7 +149,6 @@ public class StroopViewModel : INotifyPropertyChanged
             else
             {
                 _reactionTimeTimer.Stop();
-                reactionTime = _reactionTimeTimer.Elapsed.TotalMilliseconds;
             }
 
             double remaining = Settings.CurrentProfile.WordDuration - _wordTimer.Elapsed.TotalMilliseconds;
@@ -155,9 +157,21 @@ public class StroopViewModel : INotifyPropertyChanged
                 await Task.Delay((int)remaining);
             }
             _wordTimer.Stop();
+            if((int)_reactionTimeTimer.Elapsed.TotalMilliseconds >= Settings.CurrentProfile.WordDuration)
+            {
+                trial.ReactionTime = null;
+                bool? isCorrect = reactionTime.HasValue ? trial.IsValidResponse : (bool?)null;
+                var point = new ReactionTimePoint(trial.TrialNumber, null, isCorrect);
+                Settings.ExperimentContext.ReactionPoints.Add(point);
+            }
+            else
+            {
+                trial.ReactionTime = reactionTime;
+                bool? isCorrect = reactionTime.HasValue ? trial.IsValidResponse : (bool?)null;
+                var point = new ReactionTimePoint(trial.TrialNumber, reactionTime, isCorrect);
+                Settings.ExperimentContext.ReactionPoints.Add(point);
 
-            trial.ReactionTime = reactionTime;
-            Settings.ExperimentContext.CurrentTrial = trial;
+            }
             debugTimer.Stop();
             WordTimerValue = _wordTimer.Elapsed.TotalMilliseconds;
             ReactionTimeTimerValue = _reactionTimeTimer.Elapsed.TotalMilliseconds;
@@ -172,7 +186,7 @@ public class StroopViewModel : INotifyPropertyChanged
     {
         if (_inputTcs != null && !_inputTcs.Task.IsCompleted)
         {
-            string answer = null;
+            string? answer = null;
             if (key == Settings.KeyMappings.Red.Key)
                 answer = Settings.KeyMappings.Red.Color;
             else if (key == Settings.KeyMappings.Blue.Key)
