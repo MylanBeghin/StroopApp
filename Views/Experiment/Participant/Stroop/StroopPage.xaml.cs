@@ -13,7 +13,7 @@ namespace StroopApp.Views.Experiment.Participant
         public StroopPage(INavigationService navigationService, ExperimentSettings settings)
         {
             InitializeComponent();
-            _viewModel = new StroopViewModel(settings);
+            _viewModel = new StroopViewModel(settings, navigationService);
             DataContext = _viewModel;
             this.KeyDown += StroopPage_KeyDown;
             Loaded += (s, e) => Keyboard.Focus(this);

@@ -4,12 +4,12 @@ using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
-using LiveChartsCore.SkiaSharpView;
 using StroopApp.Models;
 using StroopApp.ViewModels.Experiment.Experimenter;
 using StroopApp.Views.Experiment.Participant.Stroop;
-using LiveChartsCore.Defaults;
-
+using StroopApp.Views.Experiment.Participant;
+using StroopApp.Services.Navigation;
+using System.Windows.Navigation;
 public class StroopViewModel : INotifyPropertyChanged
 {
     private ExperimentSettings _settings;
@@ -53,10 +53,11 @@ public class StroopViewModel : INotifyPropertyChanged
         get => _reactionTimeTimerValue;
         set { _reactionTimeTimerValue = value; OnPropertyChanged(); }
     }
-
-    public StroopViewModel(ExperimentSettings settings)
+    private readonly INavigationService _navigationService;
+    public StroopViewModel(ExperimentSettings settings, INavigationService navigationService)
     {
         Settings = settings;
+        _navigationService = navigationService;
         _wordTimer = new Stopwatch();
         _reactionTimeTimer = new Stopwatch();
         GenerateTrials();
@@ -180,6 +181,15 @@ public class StroopViewModel : INotifyPropertyChanged
             _wordTimer.Reset();
             _reactionTimeTimer.Reset();
         }
+        EndExperiment();
+    }
+    public void EndExperiment()
+    {
+        Settings.ExperimentContext.CurrentTrial = null;
+        _inputTcs = null;
+        _wordTimer.Reset();
+        _reactionTimeTimer.Reset();
+        _navigationService.NavigateTo(()=> new EndInstructionsPage());
     }
 
     public void ProcessInput(Key key)

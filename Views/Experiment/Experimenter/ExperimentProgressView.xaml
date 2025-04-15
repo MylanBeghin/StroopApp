@@ -39,10 +39,8 @@
                            FontSize="16"
                            HorizontalAlignment="Center">
                     <TextBlock.Text>
-                        <MultiBinding StringFormat="{}{0}   /   {1}">
-                            <Binding Path="CurrentTrialNumber"
-                                     Mode="OneWay" />
-                            <Binding Path="TotalTrials"
+                        <MultiBinding StringFormat="{}{0} %">
+                            <Binding Path="Progress"
                                      Mode="OneWay" />
                         </MultiBinding>
                     </TextBlock.Text>

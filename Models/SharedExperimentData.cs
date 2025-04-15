@@ -31,7 +31,6 @@ namespace StroopApp.Models
                         _currentTrial.PropertyChanged -= CurrentTrial_PropertyChanged;
                     _currentTrial = value;
                     OnPropertyChanged(nameof(CurrentTrial));
-                    OnPropertyChanged(nameof(Progress));
                     if (_currentTrial != null)
                         _currentTrial.PropertyChanged += CurrentTrial_PropertyChanged;
                 }
@@ -41,15 +40,11 @@ namespace StroopApp.Models
         {
             if (e.PropertyName == nameof(StroopTrial.TrialNumber))
             {
-                OnPropertyChanged(nameof(Progress));
                 OnPropertyChanged(nameof(CurrentTrial));
                 
             }
         }
         public int TotalTrials { get; set; }
-        public double Progress => TotalTrials > 0 && CurrentTrial != null
-            ? (double)CurrentTrial.TrialNumber / TotalTrials
-            : 0;
 
         public SharedExperimentData(ExperimentSettings settings)
         {
