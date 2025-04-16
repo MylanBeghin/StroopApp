@@ -11,10 +11,10 @@ namespace StroopApp.Models
 
         public KeyMappings()
         {
-            Red = new KeyMapping("Rouge", Key.R);
-            Blue = new KeyMapping("Bleu", Key.B);
-            Green = new KeyMapping("Vert", Key.V);
-            Yellow = new KeyMapping("Jaune", Key.J);
+            Red = new KeyMapping("Red", Key.R);
+            Blue = new KeyMapping("Blue", Key.B);
+            Green = new KeyMapping("Green", Key.V);
+            Yellow = new KeyMapping("Yellow", Key.J);
         }
     }
 }

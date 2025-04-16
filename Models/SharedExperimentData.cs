@@ -17,7 +17,9 @@ namespace StroopApp.Models
     {
         public ObservableCollection<StroopTrial> TrialRecords { get; }
         public ObservableCollection<ReactionTimePoint> ReactionPoints { get; set; }
-        public ObservableCollection<ISeries> Series { get; set; }
+        public ObservableCollection<double?> ReactionTimes { get; set; }
+        public ObservableCollection<ISeries> ColumnSerie { get; set; }
+        public ObservableCollection<ISeries> GlobalSerie { get; set; }
 
         private StroopTrial _currentTrial;
         public StroopTrial CurrentTrial
@@ -41,7 +43,7 @@ namespace StroopApp.Models
             if (e.PropertyName == nameof(StroopTrial.TrialNumber))
             {
                 OnPropertyChanged(nameof(CurrentTrial));
-                
+
             }
         }
         public int TotalTrials { get; set; }
@@ -51,7 +53,8 @@ namespace StroopApp.Models
             TrialRecords = new ObservableCollection<StroopTrial>();
             TotalTrials = settings.CurrentProfile.WordCount;
             ReactionPoints = new ObservableCollection<ReactionTimePoint>();
-            Series = new ObservableCollection<ISeries>
+            ReactionTimes = new ObservableCollection<double?>();
+            ColumnSerie = new ObservableCollection<ISeries>
             {
                 new ColumnSeries<ReactionTimePoint>
                 {
@@ -73,12 +76,7 @@ namespace StroopApp.Models
     {
         if (p.Visual is null) return;
         var model = p.Model;
-        if (model?.ReactionTime == null)
-        {
-            p.Visual.Fill = new SolidColorPaint(SKColors.Gray);
-            p.Visual.Stroke = new SolidColorPaint(SKColors.Gray);
-        }
-        else if (model.IsValidResponse.HasValue && model.IsValidResponse.Value)
+        if ( model.IsValidResponse.Value)
         {
             // Bonne réponse : point vert
             p.Visual.Fill = new SolidColorPaint(SKColors.Green);
@@ -92,6 +90,17 @@ namespace StroopApp.Models
         }
     })
             };
+            GlobalSerie = new ObservableCollection<ISeries>
+            {
+                new LineSeries<double?>
+                {
+                    Values = ReactionTimes,
+                    GeometrySize = 2,
+                    GeometryFill = new SolidColorPaint(SKColors.CornflowerBlue)
+                }
+
+            };
+
         }
 
         public void AddTrialRecord(StroopTrial record)

@@ -1,8 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using LiveChartsCore;
-using LiveChartsCore.Defaults;
 using StroopApp.Models;
 
 namespace StroopApp.ViewModels.Experiment.Experimenter
@@ -10,13 +7,18 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
     public class ExperimentGraphViewModel
     {
 
-        public ObservableCollection<ISeries> Series { get; set; }
+        public ObservableCollection<ISeries> ColumnSerie { get; set; }
+        public ObservableCollection<ISeries> GlobalSerie { get; set; }
         public ObservableCollection<ReactionTimePoint> ReactionPoints { get; set; }
-
+        public int WordCount { get; set; }
+        public int MaxReactionTime { get; set; }
         public ExperimentGraphViewModel(ExperimentSettings settings)
         {
             ReactionPoints = settings.ExperimentContext.ReactionPoints;
-            Series = settings.ExperimentContext.Series;
+            ColumnSerie = settings.ExperimentContext.ColumnSerie;
+            GlobalSerie = settings.ExperimentContext.GlobalSerie;
+            WordCount = settings.CurrentProfile.WordCount;
+            MaxReactionTime = settings.CurrentProfile.MaxReactionTime;
         }
     }
 }

@@ -28,15 +28,13 @@
                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
             <ui:SimpleStackPanel Orientation="Vertical"
                                  HorizontalAlignment="Stretch"
-                                 VerticalAlignment="Center"
-                                 Spacing="10">
+                                 VerticalAlignment="Top"
+                                 Spacing="16">
                 <TextBlock Text="Avancement"
                            Style="{DynamicResource TitleTextBlockStyle}"
-                           HorizontalAlignment="Center" />
+                           HorizontalAlignment="Left" />
                 <TextBlock Grid.Column="0"
-                           Padding="16,8"
-                           Margin="0,0,16,0"
-                           FontSize="16"
+                           FontSize="14"
                            HorizontalAlignment="Center">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0} %">
@@ -49,7 +47,6 @@
                                 Value="{Binding Progress, Mode=OneWay}"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Center"
-                                Margin="5"
                                 Height="10"/>
             </ui:SimpleStackPanel>
         </Border>

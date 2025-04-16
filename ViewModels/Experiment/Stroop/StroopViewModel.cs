@@ -68,7 +68,7 @@ public class StroopViewModel : INotifyPropertyChanged
     private void GenerateTrials()
     {
         var wordColors = new[] { "Blue", "Red", "Green", "Yellow" };
-        var wordTexts = new[] { "Bleu", "Rouge", "Vert", "Jaune" };
+        var wordTexts = new[] { "Blue", "Red", "Green", "Yellow" };
 
         Settings.ExperimentContext.TrialRecords.Clear();
         for (int i = 0; i < Settings.CurrentProfile.WordCount; i++)
@@ -160,16 +160,15 @@ public class StroopViewModel : INotifyPropertyChanged
             _wordTimer.Stop();
             if((int)_reactionTimeTimer.Elapsed.TotalMilliseconds >= Settings.CurrentProfile.WordDuration)
             {
-                trial.ReactionTime = null;
-                bool? isCorrect = reactionTime.HasValue ? trial.IsValidResponse : (bool?)null;
-                var point = new ReactionTimePoint(trial.TrialNumber, null, isCorrect);
+                var point = new ReactionTimePoint(trial.TrialNumber, double.NaN, false);
+                Settings.ExperimentContext.ReactionTimes.Add(double.NaN);
                 Settings.ExperimentContext.ReactionPoints.Add(point);
             }
             else
             {
                 trial.ReactionTime = reactionTime;
-                bool? isCorrect = reactionTime.HasValue ? trial.IsValidResponse : (bool?)null;
-                var point = new ReactionTimePoint(trial.TrialNumber, reactionTime, isCorrect);
+                var point = new ReactionTimePoint(trial.TrialNumber, reactionTime, Settings.ExperimentContext.CurrentTrial.IsValidResponse);
+                Settings.ExperimentContext.ReactionTimes.Add(reactionTime);
                 Settings.ExperimentContext.ReactionPoints.Add(point);
 
             }
