@@ -11,7 +11,7 @@
     <Border Grid.Column="1"
             Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
             CornerRadius="8"
-            Padding="16"
+            Padding="8"
             BorderThickness="0.5"
             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
         <lvc:CartesianChart Series="{Binding ColumnSerie}"

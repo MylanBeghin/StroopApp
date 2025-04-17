@@ -14,7 +14,7 @@
             BorderThickness="0.5"
             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
         <Grid x:Name="MainGrid"
-              Margin="10">
+              Margin="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.8*" />
                 <ColumnDefinition Width="8" />

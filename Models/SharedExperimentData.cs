@@ -8,8 +8,6 @@ using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 using LiveChartsCore.Kernel;
-using LiveChartsCore.Defaults;
-using System.Runtime;
 
 namespace StroopApp.Models
 {
@@ -47,7 +45,19 @@ namespace StroopApp.Models
             }
         }
         public int TotalTrials { get; set; }
-
+        private bool _isExperimentFinished = false;
+        public bool IsExperimentFinished
+        {
+            get => _isExperimentFinished;
+            set
+            {
+                if (_isExperimentFinished != value)
+                {
+                    _isExperimentFinished = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public SharedExperimentData(ExperimentSettings settings)
         {
             TrialRecords = new ObservableCollection<StroopTrial>();
@@ -63,7 +73,7 @@ namespace StroopApp.Models
                     DataLabelsSize = 16,
                     DataLabelsPaint = new SolidColorPaint(SKColors.Black),
                     DataLabelsFormatter = point =>
-                double.IsNaN(point.Coordinate.PrimaryValue)
+                point.Coordinate.PrimaryValue.Equals(null)
                     ? "Aucune réponse"
                     : point.Coordinate.PrimaryValue.ToString("N0"),
                     Mapping = (point, index) => new Coordinate(
@@ -76,26 +86,29 @@ namespace StroopApp.Models
     {
         if (p.Visual is null) return;
         var model = p.Model;
-        if ( model.IsValidResponse.Value)
+        if (model.IsValidResponse.HasValue)
         {
+            if(model.IsValidResponse.Value)
+            {
             // Bonne réponse : point vert
             p.Visual.Fill = new SolidColorPaint(SKColors.Green);
             p.Visual.Stroke = new SolidColorPaint(SKColors.Green);
-        }
-        else
-        {
+            }
+            else
+            {
             // Mauvaise réponse : point rouge
             p.Visual.Fill = new SolidColorPaint(SKColors.Red);
             p.Visual.Stroke = new SolidColorPaint(SKColors.Red);
+            }
         }
-    })
+            })
             };
             GlobalSerie = new ObservableCollection<ISeries>
             {
                 new LineSeries<double?>
                 {
                     Values = ReactionTimes,
-                    GeometrySize = 2,
+                    GeometrySize = 0,
                     GeometryFill = new SolidColorPaint(SKColors.CornflowerBlue)
                 }
 

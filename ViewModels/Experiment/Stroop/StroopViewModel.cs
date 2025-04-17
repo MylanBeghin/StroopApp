@@ -3,13 +3,11 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Threading;
 using StroopApp.Models;
 using StroopApp.ViewModels.Experiment.Experimenter;
 using StroopApp.Views.Experiment.Participant.Stroop;
 using StroopApp.Views.Experiment.Participant;
 using StroopApp.Services.Navigation;
-using System.Windows.Navigation;
 public class StroopViewModel : INotifyPropertyChanged
 {
     private ExperimentSettings _settings;
@@ -113,16 +111,6 @@ public class StroopViewModel : INotifyPropertyChanged
             _wordTimer.Reset();
             _reactionTimeTimer.Reset();
             _wordTimer.Start();
-
-            var debugTimer = new DispatcherTimer();
-            debugTimer.Interval = TimeSpan.FromMilliseconds(10);
-            debugTimer.Tick += (s, e) =>
-            {
-                WordTimerValue = _wordTimer.Elapsed.TotalMilliseconds;
-                ReactionTimeTimerValue = _reactionTimeTimer.IsRunning ? _reactionTimeTimer.Elapsed.TotalMilliseconds : ReactionTimeTimerValue;
-            };
-            debugTimer.Start();
-
             CurrentControl = new FixationCrossControl();
             await Task.Delay((int)Settings.CurrentProfile.FixationDuration);
 
@@ -139,40 +127,35 @@ public class StroopViewModel : INotifyPropertyChanged
 
             var delayTask = Task.Delay((int)Settings.CurrentProfile.MaxReactionTime);
             var completedTask = await Task.WhenAny(_inputTcs.Task, delayTask);
-            double? reactionTime = null;
 
             if (completedTask == _inputTcs.Task)
             {
                 _reactionTimeTimer.Stop();
-                reactionTime = _inputTcs.Task.Result;
+                trial.ReactionTime = _inputTcs.Task.Result;
+                var point = new ReactionTimePoint(trial.TrialNumber, trial.ReactionTime, Settings.ExperimentContext.CurrentTrial.IsValidResponse);
+                Settings.ExperimentContext.ReactionTimes.Add(trial.ReactionTime);
+                Settings.ExperimentContext.ReactionPoints.Add(point);
+                Settings.ExperimentContext.CurrentTrial.GivenAnswer = trial.GivenAnswer;
+                Settings.ExperimentContext.CurrentTrial.IsValidResponse = trial.IsValidResponse;
+                Settings.ExperimentContext.CurrentTrial.ReactionTime = trial.ReactionTime;
                 CurrentControl = new FixationCrossControl();
             }
             else
             {
                 _reactionTimeTimer.Stop();
+                var point = new ReactionTimePoint(trial.TrialNumber, double.NaN, null);
+                Settings.ExperimentContext.ReactionTimes.Add(null); // Bien mettre null et pas Double.Nan, sinon les points ne s'affichent plus sur le graph !
+                Settings.ExperimentContext.ReactionPoints.Add(point);
+                Settings.ExperimentContext.CurrentTrial.GivenAnswer = trial.GivenAnswer;
+                Settings.ExperimentContext.CurrentTrial.IsValidResponse = trial.IsValidResponse;
+                Settings.ExperimentContext.CurrentTrial.ReactionTime = trial.ReactionTime;
             }
-
             double remaining = Settings.CurrentProfile.WordDuration - _wordTimer.Elapsed.TotalMilliseconds;
             if (remaining > 0)
             {
                 await Task.Delay((int)remaining);
             }
             _wordTimer.Stop();
-            if((int)_reactionTimeTimer.Elapsed.TotalMilliseconds >= Settings.CurrentProfile.WordDuration)
-            {
-                var point = new ReactionTimePoint(trial.TrialNumber, double.NaN, false);
-                Settings.ExperimentContext.ReactionTimes.Add(double.NaN);
-                Settings.ExperimentContext.ReactionPoints.Add(point);
-            }
-            else
-            {
-                trial.ReactionTime = reactionTime;
-                var point = new ReactionTimePoint(trial.TrialNumber, reactionTime, Settings.ExperimentContext.CurrentTrial.IsValidResponse);
-                Settings.ExperimentContext.ReactionTimes.Add(reactionTime);
-                Settings.ExperimentContext.ReactionPoints.Add(point);
-
-            }
-            debugTimer.Stop();
             WordTimerValue = _wordTimer.Elapsed.TotalMilliseconds;
             ReactionTimeTimerValue = _reactionTimeTimer.Elapsed.TotalMilliseconds;
             OnPropertyChanged(nameof(WordTimerValue));
@@ -189,6 +172,7 @@ public class StroopViewModel : INotifyPropertyChanged
         _wordTimer.Reset();
         _reactionTimeTimer.Reset();
         _navigationService.NavigateTo(()=> new EndInstructionsPage());
+        Settings.ExperimentContext.IsExperimentFinished = true;
     }
 
     public void ProcessInput(Key key)
