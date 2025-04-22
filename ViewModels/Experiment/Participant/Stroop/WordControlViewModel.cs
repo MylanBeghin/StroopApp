@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StroopApp.ViewModels.Experiment.Stroop
+namespace StroopApp.ViewModels.Experiment.Participant.Stroop
 {
     public class WordControlViewModel : INotifyPropertyChanged
     {

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using DocumentFormat.OpenXml.Wordprocessing;
 using ModernWpf.Controls;
 using StroopApp.Commands;
 using StroopApp.Models;
@@ -55,9 +56,9 @@ namespace StroopApp.ViewModels.Configuration
                 return;
             }
             _settings.ExperimentContext = new SharedExperimentData(_settings);
-            _navigationService.NavigateTo<ExperimentDashBoardPage>(_settings);
-            var participantWindow = new ParticipantWindow(_settings);
-            participantWindow.Show();
+            _navigationService.NavigateTo(() => new ExperimentDashBoardPage(_settings));
+            var partWin = new ParticipantWindow(_settings);
+            partWin.Show();
         }
 
         private async Task ShowErrorDialog(string message)

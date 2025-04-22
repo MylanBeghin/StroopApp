@@ -9,7 +9,7 @@ using StroopApp.Models;
 using StroopApp.Services.Navigation;
 using StroopApp.Views.Experiment.Participant;
 
-namespace StroopApp.ViewModels.Experiment
+namespace StroopApp.ViewModels.Experiment.Participant
 {
     public class InstructionsPageViewModel
     {

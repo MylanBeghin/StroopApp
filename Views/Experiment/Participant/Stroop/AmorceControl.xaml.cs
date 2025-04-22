@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using StroopApp.ViewModels.Experiment.Stroop;
+using StroopApp.ViewModels.Experiment.Participant.Stroop;
 namespace StroopApp.Views.Experiment.Participant.Stroop
 {
     public partial class AmorceControl : UserControl

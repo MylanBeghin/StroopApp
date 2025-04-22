@@ -11,6 +11,13 @@ using LiveChartsCore.Kernel;
 
 namespace StroopApp.Models
 {
+    public enum ExperimentAction
+    {
+        None,
+        RestartBlock,
+        NewExperiment,
+        Quit
+    }
     public class SharedExperimentData : INotifyPropertyChanged
     {
         public ObservableCollection<StroopTrial> TrialRecords { get; }
@@ -57,6 +64,12 @@ namespace StroopApp.Models
                     OnPropertyChanged();
                 }
             }
+        }
+        ExperimentAction _nextAction;
+        public ExperimentAction NextAction
+        {
+            get => _nextAction;
+            set { _nextAction = value; OnPropertyChanged(); }
         }
         public SharedExperimentData(ExperimentSettings settings)
         {

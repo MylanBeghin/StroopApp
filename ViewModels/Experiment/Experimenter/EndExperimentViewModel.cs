@@ -27,7 +27,6 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
         }
         private void Restart()
         {
-            // Logic to restart the experiment
         }
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
