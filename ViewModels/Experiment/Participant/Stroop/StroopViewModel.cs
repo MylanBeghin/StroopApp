@@ -162,16 +162,16 @@ public class StroopViewModel : INotifyPropertyChanged
             _wordTimer.Reset();
             _reactionTimeTimer.Reset();
         }
-        EndExperiment();
+        EndBlock();
     }
-    public void EndExperiment()
+    public void EndBlock()
     {
         Settings.ExperimentContext.CurrentTrial = null;
         _inputTcs = null;
         _wordTimer.Reset();
         _reactionTimeTimer.Reset();
         _navigationService.NavigateTo(()=> new EndInstructionsPage());
-        Settings.ExperimentContext.IsExperimentFinished = true;
+        Settings.ExperimentContext.IsBlockFinished = true;
     }
 
     public void ProcessInput(Key key)

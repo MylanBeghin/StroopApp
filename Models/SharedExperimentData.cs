@@ -58,15 +58,15 @@ namespace StroopApp.Models
             }
         }
         public int TotalTrials { get; set; }
-        private bool _isExperimentFinished = false;
-        public bool IsExperimentFinished
+        private bool _isBlockFinished = false;
+        public bool IsBlockFinished
         {
-            get => _isExperimentFinished;
+            get => _isBlockFinished;
             set
             {
-                if (_isExperimentFinished != value)
+                if (_isBlockFinished != value)
                 {
-                    _isExperimentFinished = value;
+                    _isBlockFinished = value;
                     OnPropertyChanged();
                 }
             }

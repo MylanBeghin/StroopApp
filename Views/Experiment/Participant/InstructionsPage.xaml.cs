@@ -12,10 +12,10 @@ namespace StroopApp.Views.Experiment.Participant
     public partial class InstructionsPage : Page
     {
         private readonly InstructionsPageViewModel _viewModel;
-        public InstructionsPage(ExperimentSettings settings, INavigationService navigationService)
+        public InstructionsPage(ExperimentSettings settings, INavigationService participantWindowNavigationService)
         {
             InitializeComponent();
-            _viewModel = new InstructionsPageViewModel(settings, navigationService);
+            _viewModel = new InstructionsPageViewModel(settings, participantWindowNavigationService);
             DataContext = _viewModel;
             _viewModel.InstructionChanged += (s, e) => InstructionContentControl.Content = _viewModel.CurrentInstruction;
             Loaded += (s, e) =>

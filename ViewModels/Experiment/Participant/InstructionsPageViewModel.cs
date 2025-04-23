@@ -14,7 +14,7 @@ namespace StroopApp.ViewModels.Experiment.Participant
     {
         private readonly ExperimentSettings _settings;
         private readonly INavigationService _navigationService;
-        private int _currentPageIndex = 0;
+        private int _currentPageIndex;
         private const int TotalPages = 3;
         private readonly string _stroopType;
         public UIElement CurrentInstruction { get; private set; }
@@ -23,6 +23,7 @@ namespace StroopApp.ViewModels.Experiment.Participant
         public StroopPage StroopPage { get; set; }
         public InstructionsPageViewModel(ExperimentSettings settings, INavigationService navigationService)
         {
+            _currentPageIndex = 0;
             _settings = settings;
             _navigationService = navigationService;
             _stroopType = _settings.CurrentProfile.StroopType;

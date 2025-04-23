@@ -1,4 +1,6 @@
-﻿using StroopApp.Core;
+﻿using LiveChartsCore;
+using StroopApp.Core;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -63,6 +65,9 @@ namespace StroopApp.Models
         public void NewBlock()
         {
             Block++;
+            ExperimentContext.ReactionPoints.Clear();
+            ExperimentContext.ColumnSerie.Clear();
+            ExperimentContext.IsBlockFinished = false;
         }
     }
 }
