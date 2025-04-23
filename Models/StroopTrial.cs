@@ -1,10 +1,12 @@
-﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using StroopApp.Core;
 
 namespace StroopApp.Models
 {
-    public class StroopTrial : INotifyPropertyChanged
+    /// <summary>
+    /// Represents a single trial in a Stroop task, containing stimulus data, participant responses,
+    /// reaction time, and trial metadata such as block and trial number.
+    /// </summary>
+    public class StroopTrial : ModelBase
     {
         private int _participantId;
         public int ParticipantId
@@ -151,8 +153,5 @@ namespace StroopApp.Models
         {
             return "Stimulus : " + Stimulus + "\nType d'amorce :" + Amorce + "\nExpected answer : " + ExpectedAnswer;
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

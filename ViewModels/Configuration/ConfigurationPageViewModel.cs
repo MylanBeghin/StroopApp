@@ -1,18 +1,13 @@
-﻿using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows.Navigation;
-using DocumentFormat.OpenXml.Wordprocessing;
-using ModernWpf.Controls;
-using StroopApp.Commands;
+﻿using StroopApp.Core;
 using StroopApp.Models;
-using StroopApp.Services.Navigation;
 using StroopApp.ViewModels.Configuration.Participant;
 using StroopApp.ViewModels.Configuration.Profile;
 using StroopApp.Views;
+using System.Windows.Input;
 
 namespace StroopApp.ViewModels.Configuration
 {
-    public class ConfigurationPageViewModel
+    public class ConfigurationPageViewModel : ViewModelBase
     {
         private readonly ProfileManagementViewModel _profileViewModel;
         private readonly ParticipantManagementViewModel _participantViewModel;
@@ -21,18 +16,14 @@ namespace StroopApp.ViewModels.Configuration
         public ExperimentSettings _settings { get; set; }
         public ICommand LaunchExperimentCommand { get; }
 
-        private readonly INavigationService _navigationService;
-
         public ConfigurationPageViewModel(ProfileManagementViewModel profileViewModel,
                                           ParticipantManagementViewModel participantViewModel,
-                                          KeyMappingViewModel keyMappingViewModel,
-                                          INavigationService navigationService
+                                          KeyMappingViewModel keyMappingViewModel
                                           )
         {
             _profileViewModel = profileViewModel;
             _participantViewModel = participantViewModel;
             _keyMappingViewModel = keyMappingViewModel;
-            _navigationService = navigationService;
             _settings = new ExperimentSettings();
             LaunchExperimentCommand = new RelayCommand(LaunchExperiment);
         }
@@ -46,30 +37,19 @@ namespace StroopApp.ViewModels.Configuration
 
             if (_settings.CurrentProfile == null)
             {
-                await ShowErrorDialog("Veuillez sélectionner un profil d'expérience.");
+                ShowErrorDialog("Veuillez sélectionner un profil d'expérience.");
                 return;
             }
 
             if (_settings.Participant == null)
             {
-                await ShowErrorDialog("Veuillez sélectionner un participant.");
+                ShowErrorDialog("Veuillez sélectionner un participant.");
                 return;
             }
             _settings.ExperimentContext = new SharedExperimentData(_settings);
-            _navigationService.NavigateTo(() => new ExperimentDashBoardPage(_settings));
+            App.ExperimentWindowNavigationService.NavigateTo(() => new ExperimentDashBoardPage(_settings));
             var partWin = new ParticipantWindow(_settings);
             partWin.Show();
-        }
-
-        private async Task ShowErrorDialog(string message)
-        {
-            var dialog = new ContentDialog
-            {
-                Title = "Erreur",
-                Content = message,
-                CloseButtonText = "OK"
-            };
-            await dialog.ShowAsync();
         }
     }
 }

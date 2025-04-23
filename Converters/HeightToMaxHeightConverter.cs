@@ -3,6 +3,12 @@ using System.Windows.Data;
 
 namespace StroopApp.Converters
 {
+    /// <summary>
+    /// Converter associated with <see cref="ParticipantManagementView"/>.
+    /// Converts a height value into a maximum height by applying a scaling factor.
+    /// Used to adapt UI responsiveness.
+    /// </summary>
+
     public class HeightToMaxHeightConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

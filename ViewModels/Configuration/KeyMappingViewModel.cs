@@ -7,7 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using ModernWpf.Controls;
-using StroopApp.Commands;
+using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Services.KeyMapping;
 

@@ -17,7 +17,7 @@ namespace StroopApp.Views
             Settings = settings;
             App.ExperimentWindowNavigationService = new NavigationService(MainFrame);
 
-            var configPage = new ConfigurationPage(App.ExperimentWindowNavigationService);
+            var configPage = new ConfigurationPage();
             App.ExperimentWindowNavigationService.NavigateTo(() => configPage);
 
             var experimentPage = new ExperimentDashBoardPage(Settings);

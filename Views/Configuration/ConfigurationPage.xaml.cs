@@ -15,7 +15,7 @@ namespace StroopApp.Views
 {
     public partial class ConfigurationPage : Page
     {
-        public ConfigurationPage(INavigationService navigationService)
+        public ConfigurationPage()
         {
             InitializeComponent();
 
@@ -30,7 +30,7 @@ namespace StroopApp.Views
             var keyMappingViewModel = new KeyMappingViewModel(keyMappingService);
 
             // Instanciation du ViewModel principal et liaison au DataContext
-            DataContext = new ConfigurationPageViewModel(profileViewModel, participantViewModel, keyMappingViewModel, navigationService);
+            DataContext = new ConfigurationPageViewModel(profileViewModel, participantViewModel, keyMappingViewModel);
 
             // Instanciation des vues en injectant les ViewModels partagés
             var profileManagementView = new ProfileManagementView(profileViewModel);

@@ -1,13 +1,23 @@
-﻿using System.ComponentModel;
+﻿using StroopApp.Core;
+using System.ComponentModel;
 
 namespace StroopApp.Models
 {
+    /// /// <summary>
+    /// Defines the calculation mode used to determine experiment length:
+    /// either by total task duration or by word count.
+    /// </summary>
+
     public enum CalculationMode
     {
         TaskDuration,
         WordCount
     }
-    public class ExperimentProfile : INotifyPropertyChanged
+    /// <summary>
+    /// Represents a saved set of experiment parameters, including durations, timings, group size, and calculation mode.
+    /// Automatically updates derived values based on the selected <see cref="CalculationMode"/>.
+    /// </summary>
+    public class ExperimentProfile : ModelBase
     {
         public ExperimentProfile()
         {
@@ -246,12 +256,6 @@ namespace StroopApp.Models
                 Seconds = (TaskDuration % 60000) / 1000;
             }
             MaxReactionTime = WordDuration - FixationDuration - AmorceDuration;
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

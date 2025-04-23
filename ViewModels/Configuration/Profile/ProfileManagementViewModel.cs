@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using ModernWpf.Controls;
-using StroopApp.Commands;
+using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Services;
 using StroopApp.Views;

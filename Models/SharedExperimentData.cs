@@ -1,16 +1,18 @@
-﻿using StroopApp.Models;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using LiveChartsCore;
 using LiveChartsCore.Kernel.Events;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 using LiveChartsCore.Kernel;
+using StroopApp.Core;
 
 namespace StroopApp.Models
 {
+    /// <summary>
+    /// Defines the next action to take after a block ends: Restart, Start new experiment, or Quit.
+    /// </summary>
     public enum ExperimentAction
     {
         None,
@@ -18,7 +20,11 @@ namespace StroopApp.Models
         NewExperiment,
         Quit
     }
-    public class SharedExperimentData : INotifyPropertyChanged
+    /// <summary>
+    /// Centralized data container used during the experiment to store trials, reaction times, and chart series.
+    /// Also tracks current trial and experiment flow control state.
+    /// </summary>
+    public class SharedExperimentData : ModelBase
     {
         public ObservableCollection<StroopTrial> TrialRecords { get; }
         public ObservableCollection<ReactionTimePoint> ReactionPoints { get; set; }
@@ -126,16 +132,10 @@ namespace StroopApp.Models
                 }
 
             };
-
         }
-
         public void AddTrialRecord(StroopTrial record)
         {
             TrialRecords.Add(record);
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

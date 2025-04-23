@@ -1,15 +1,22 @@
-﻿using System;
+﻿using StroopApp.Core;
+using System;
 using System.ComponentModel;
 
 namespace StroopApp.Models
 {
+    /// <summary>
+    /// Represents the type of visual cue ("Amorce") used in a Stroop trial: None, Round, or Square.
+    /// </summary>
     public enum AmorceType
     {
-        None,    // For non-amorce Stroop types
+        None,
         Round,
         Square
     }
-    public class Result : INotifyPropertyChanged
+    /// <summary>
+    /// Represents a single reaction time data point for a given trial, including validity of the response.
+    /// </summary>
+    public class Result : ModelBase
     {
         private int _participantId;
         public int ParticipantId
@@ -40,9 +47,6 @@ namespace StroopApp.Models
         }
 
         private int _block;
-        /// <summary>
-        /// Block number; for instance, 1 for the first block, 2 for the second, etc.
-        /// </summary>
         public int Block
         {
             get => _block;
@@ -86,15 +90,9 @@ namespace StroopApp.Models
             }
         }
 
-        /// <summary>
-        /// Returns true if the expected response equals the given response (case-insensitive).
-        /// </summary>
         public bool IsCorrect => string.Equals(ExpectedResponse, GivenResponse, StringComparison.OrdinalIgnoreCase);
 
         private int _reactionTime;
-        /// <summary>
-        /// Reaction time in milliseconds.
-        /// </summary>
         public int ReactionTime
         {
             get => _reactionTime;
@@ -109,9 +107,6 @@ namespace StroopApp.Models
         }
 
         private int _trialNumber;
-        /// <summary>
-        /// Trial number (i.e., the word number in the block).
-        /// </summary>
         public int TrialNumber
         {
             get => _trialNumber;
@@ -126,9 +121,6 @@ namespace StroopApp.Models
         }
 
         private AmorceType _amorce;
-        /// <summary>
-        /// Cue type: Round or Square; set to None if the Stroop type is not "Amorce".
-        /// </summary>
         public AmorceType Amorce
         {
             get => _amorce;
@@ -141,8 +133,6 @@ namespace StroopApp.Models
                 }
             }
         }
-
-        // Constructor
         public Result()
         {
             ParticipantId = 0;
@@ -154,9 +144,5 @@ namespace StroopApp.Models
             TrialNumber = 0;
             Amorce = AmorceType.None;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

@@ -2,6 +2,9 @@
 
 namespace StroopApp.Models
 {
+    /// <summary>
+    /// Stores the set of key mappings for each color used in the Stroop task (Red, Blue, Green, Yellow).
+    /// </summary>
     public class KeyMappings
     {
         public KeyMapping Red { get; set; }

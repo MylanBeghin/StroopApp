@@ -1,10 +1,9 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using StroopApp.Commands;
+using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Services.Navigation;
 using StroopApp.Views.Experiment.Participant;

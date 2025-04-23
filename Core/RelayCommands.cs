@@ -1,8 +1,12 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
-namespace StroopApp.Commands
+namespace StroopApp.Core
 {
+    /// <summary>
+    /// A generic command implementation of <see cref="ICommand"/> that delegates execution and can-execute logic.
+    /// Supports commands with or without parameters.
+    /// </summary>
+
     public class RelayCommand : ICommand
     {
         private readonly Action<object> _execute;
@@ -14,8 +18,6 @@ namespace StroopApp.Commands
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
         }
-
-        // Constructeur pour commande sans paramètre
         public RelayCommand(Action execute, Func<bool> canExecute = null)
             : this(o => execute(), o => canExecute == null || canExecute())
         {
@@ -25,7 +27,9 @@ namespace StroopApp.Commands
         public void Execute(object parameter) => _execute(parameter);
         public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
     }
-
+    /// <summary>
+    /// A strongly-typed generic implementation of <see cref="ICommand"/> for commands using a parameter of type <typeparamref name="T"/>.
+    /// </summary>
     public class RelayCommand<T> : ICommand
     {
         private readonly Action<T> _execute;
@@ -37,8 +41,6 @@ namespace StroopApp.Commands
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
         }
-
-        // Constructeur pour commande sans paramètre (même si T n'est pas utilisé)
         public RelayCommand(Action execute, Func<bool> canExecute = null)
             : this(o => execute(), o => canExecute == null || canExecute())
         {
@@ -49,14 +51,14 @@ namespace StroopApp.Commands
             if (_canExecute == null)
                 return true;
             if (parameter == null && typeof(T).IsValueType)
-                return _canExecute(default(T));
+                return _canExecute(default);
             return _canExecute((T)parameter);
         }
 
         public void Execute(object parameter)
         {
             if (parameter == null && typeof(T).IsValueType)
-                _execute(default(T));
+                _execute(default);
             else
                 _execute((T)parameter);
         }

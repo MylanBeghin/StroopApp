@@ -1,9 +1,15 @@
-﻿using System.ComponentModel;
+﻿using StroopApp.Core;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace StroopApp.Models
 {
-    public class ExperimentSettings : INotifyPropertyChanged
+    /// <summary>
+    /// Holds the current configuration state for an experiment, including the selected participant,
+    /// preset profile, key mappings, shared context, and current block index.
+    /// </summary>
+
+    public class ExperimentSettings : ModelBase
     {
         private int block;
 
@@ -54,8 +60,9 @@ namespace StroopApp.Models
             ExperimentContext = new SharedExperimentData(this);
             Block = 0;
         }
-        
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        public void NewBlock()
+        {
+            Block++;
+        }
     }
 }

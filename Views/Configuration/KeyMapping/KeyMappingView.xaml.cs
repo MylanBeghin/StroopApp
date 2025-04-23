@@ -10,8 +10,6 @@ namespace StroopApp.Views.KeyMapping
         public KeyMappingView() : this(new KeyMappingViewModel(new KeyMappingService()))
         {
         }
-
-        // Constructeur avec injection du ViewModel
         public KeyMappingView(KeyMappingViewModel viewModel)
         {
             InitializeComponent();

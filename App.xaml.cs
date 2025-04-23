@@ -1,8 +1,7 @@
-﻿using System.Windows;
-using StroopApp.Models;
-using StroopApp.Services.Exportation;
+﻿using StroopApp.Models;
 using StroopApp.Services.Navigation;
 using StroopApp.Views;
+using System.Windows;
 
 namespace StroopApp
 {

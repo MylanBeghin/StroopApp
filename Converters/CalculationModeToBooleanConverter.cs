@@ -1,13 +1,16 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Data;
 using StroopApp.Models;
 
 namespace StroopApp.Converters
 {
+    /// <summary>
+    /// Converter associated with <see cref="ProfileEditorWindow"/>.
+    /// Converts between a <see cref="CalculationMode"/> and a boolean value for selection logic.
+    /// </summary>
+
     public class CalculationModeToBooleanConverter : IValueConverter
     {
-        // Convertit une valeur CalculationMode en booléen selon le paramètre.
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null || parameter == null)
@@ -19,8 +22,6 @@ namespace StroopApp.Converters
             }
             return false;
         }
-
-        // Si le radio button est coché, retourne la valeur indiquée par ConverterParameter.
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is bool isChecked && isChecked && parameter != null)

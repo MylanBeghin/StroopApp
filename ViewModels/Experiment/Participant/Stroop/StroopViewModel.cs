@@ -68,7 +68,6 @@ public class StroopViewModel : INotifyPropertyChanged
         var wordColors = new[] { "Blue", "Red", "Green", "Yellow" };
         var wordTexts = new[] { "Blue", "Red", "Green", "Yellow" };
 
-        Settings.ExperimentContext.TrialRecords.Clear();
         for (int i = 0; i < Settings.CurrentProfile.WordCount; i++)
         {
             var trial = new StroopTrial

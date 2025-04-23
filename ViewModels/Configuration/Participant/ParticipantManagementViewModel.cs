@@ -6,7 +6,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.IO;
 using ModernWpf.Controls;
-using StroopApp.Commands;
+using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Services.Participant;
 using StroopApp.Views.Participant;

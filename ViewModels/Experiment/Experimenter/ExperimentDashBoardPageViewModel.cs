@@ -2,7 +2,6 @@
 using System.Runtime.CompilerServices;
 using StroopApp.Views.Experiment.Experimenter;
 using StroopApp.Models;
-using StroopApp.Services.Exportation;
 
 namespace StroopApp.ViewModels.Experiment
 {
@@ -18,7 +17,7 @@ namespace StroopApp.ViewModels.Experiment
                     && _experimentContext.IsExperimentFinished)
                 {
                     App.ExperimentWindowNavigationService.NavigateTo(
-                        () => new CustomDialogPage(settings));
+                        () => new EndExperimentPage(settings));
                 }
             };
         }

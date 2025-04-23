@@ -1,7 +1,12 @@
-﻿using System.ComponentModel;
+﻿using StroopApp.Core;
+using System.ComponentModel;
 
 namespace StroopApp.Models
 {
+    /// <summary>
+    /// Contains information about a participant, including demographics and experiment results.
+    /// </summary>
+
     public enum SexAssignedAtBirth
     {
         Male,
@@ -18,7 +23,7 @@ namespace StroopApp.Models
         Other,
         PreferNotToAnswer
     }
-    public class Participant : INotifyPropertyChanged
+    public class Participant : ModelBase
     {
         private int _id;
         public int Id
@@ -123,9 +128,5 @@ namespace StroopApp.Models
             SexAssigned = SexAssignedAtBirth.PreferNotToAnswer;
             Gender = Gender.PreferNotToAnswer;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

@@ -1,5 +1,8 @@
 ﻿namespace StroopApp.Models
 {
+    /// <summary>
+    /// Represents a single reaction time data point for a given trial, including validity of the response.
+    /// </summary>
     public class ReactionTimePoint
     {
         public int TrialNumber { get; set; }
