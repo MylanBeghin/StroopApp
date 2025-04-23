@@ -7,15 +7,5 @@
       Title="Stroop">
     <Grid>
         <ContentControl Content="{Binding CurrentControl}" />
-        <ui:SimpleStackPanel Orientation="Vertical" 
-                HorizontalAlignment="Right" 
-                VerticalAlignment="Bottom" 
-                Margin="10" 
-                Background="#66000000" Spacing="5">
-            <TextBlock Text="Word Timer:" Foreground="White" FontSize="12"/>
-            <TextBlock Text="{Binding WordTimerValue}" Foreground="White" FontSize="12"/>
-            <TextBlock Text="Reaction Timer:" Foreground="White" FontSize="12" Margin="0,5,0,0"/>
-            <TextBlock Text="{Binding ReactionTimeTimerValue}" Foreground="White" FontSize="12"/>
-        </ui:SimpleStackPanel>
     </Grid>
 </Page>

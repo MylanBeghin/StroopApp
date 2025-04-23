@@ -5,7 +5,7 @@ using System.Windows.Media;
 using System.Windows.Documents;
 using StroopApp.Models;
 using StroopApp.Services.Navigation;
-using StroopApp.ViewModels.Experiment;
+using StroopApp.ViewModels.Experiment.Participant;
 
 namespace StroopApp.Views.Experiment.Participant
 {

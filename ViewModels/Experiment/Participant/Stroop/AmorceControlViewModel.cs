@@ -1,6 +1,6 @@
 ﻿using StroopApp.Models;
 
-namespace StroopApp.ViewModels.Experiment.Stroop
+namespace StroopApp.ViewModels.Experiment.Participant.Stroop
 {
     public class AmorceControlViewModel
     {

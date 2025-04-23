@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StroopApp.ViewModels.Experiment.Stroop
+namespace StroopApp.ViewModels.Experiment.Participant.Stroop
 {
     public class WordControlViewModel : INotifyPropertyChanged
     {
@@ -33,7 +33,21 @@ namespace StroopApp.ViewModels.Experiment.Stroop
 
         public WordControlViewModel(string label, string color)
         {
-            Label = label;
+            switch (label)
+            {
+                case "Blue":
+                    Label = "Bleu";
+                    break;
+                case "Red":
+                        Label = "Rouge";
+                    break;
+                case "Green":
+                    Label = "Vert";
+                    break;
+                case "Yellow":
+                    Label = "Jaune";
+                    break;
+            }
             Color = color;
         }
         public event PropertyChangedEventHandler? PropertyChanged;

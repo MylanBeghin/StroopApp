@@ -6,18 +6,13 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="12" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Tableau de bord de l'expérience en cours"
+        <TextBlock Grid.Row="0"
+                   Text="Tableau de bord de l'expérience en cours"
                    Style="{DynamicResource HeaderTextBlockStyle}"
-                   HorizontalAlignment="Left" Margin="0,0,0,12"/>
-        <ListView Grid.Row="2" ItemsSource="{Binding TrialRecords}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Trial Number" DisplayMemberBinding="{Binding TrialNumber}" Width="120"/>
-                    <GridViewColumn Header="Reaction Time (ms)" DisplayMemberBinding="{Binding ReactionTime}" Width="180"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+                   HorizontalAlignment="Left"
+                   Margin="0,0,0,12" />
     </Grid>
 </Page>
