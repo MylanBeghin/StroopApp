@@ -3,6 +3,7 @@ using StroopApp.Models;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.Views;
+using System.Windows;
 using System.Windows.Input;
 
 namespace StroopApp.ViewModels.Experiment.Experimenter
@@ -24,7 +25,6 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
         private readonly IWindowManager _windowManager;
 
         public ICommand ContinueCommand { get; }
-        public ICommand RestartCommand { get; }
         public ICommand QuitCommand { get; }
         public EndExperimentViewModel(ExperimentSettings settings, IExportationService exportationService, INavigationService experimenterNavigationService, IWindowManager windowManager)
         {
@@ -34,7 +34,6 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
             _windowManager = windowManager;
             ContinueCommand = new RelayCommand(Continue);
             QuitCommand = new RelayCommand(Quit);
-            RestartCommand = new RelayCommand(Restart);
         }
         private void Continue()
         {
@@ -44,10 +43,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
         private void Quit()
         {
             _exportationService.ExportDataAsync();
-        }
-        private void Restart()
-        {
-            _exportationService.ExportDataAsync();
+            Application.Current.Shutdown();
         }
     }
 }
