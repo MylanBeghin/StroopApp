@@ -35,20 +35,33 @@ namespace StroopApp.Services.Exportation
             using var workbook = new XLWorkbook();
             var ws = workbook.Worksheets.Add("Export");
 
-            ws.Cell(1, 1).Value = "Participant";
-            ws.Cell(1, 2).Value = "Profil";
+            ws.Cell(1, 1).Value = "Numéro du participant";
+            ws.Cell(1, 2).Value = "Type de Stroop";
             ws.Cell(1, 3).Value = "Bloc";
-            ws.Cell(1, 4).Value = "Essai";
-            ws.Cell(1, 5).Value = "Temps(ms)";
+            ws.Cell(1, 4).Value = "Réponse attendue";
+            ws.Cell(1, 5).Value = "Réponse donnée";
+            ws.Cell(1, 6).Value = "Validité de la réponse";
+            ws.Cell(1, 7).Value = "Temps de réaction";
+            ws.Cell(1, 8).Value = "Essai";
+            ws.Cell(1, 9).Value = "Amorce";
 
             var row = 2;
             foreach (var r in results)
             {
                 ws.Cell(row, 1).Value = participant.Id;
-                ws.Cell(row, 2).Value = profile.ProfileName;
-                ws.Cell(row, 3).Value = block;
-                ws.Cell(row, 4).Value = r.TrialNumber;
-                ws.Cell(row, 5).Value = r.ReactionTime;
+                ws.Cell(row, 2).Value = r.StroopType;
+                ws.Cell(row, 3).Value = r.Block;
+                ws.Cell(row, 4).Value = r.ExpectedAnswer;
+                ws.Cell(row, 5).Value = r.GivenAnswer;
+                ws.Cell(row, 6).Value = r.IsValidResponse;
+                ws.Cell(row, 7).Value = r.ReactionTime;
+                ws.Cell(row, 8).Value = r.TrialNumber;
+                ws.Cell(row, 9).Value = r.Amorce switch
+                {
+                    AmorceType.Square => "Carré",
+                    AmorceType.Round => "Cercle",
+                    _ => ""
+                }; ;
                 row++;
             }
 

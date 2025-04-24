@@ -58,6 +58,7 @@ namespace StroopApp.Models
             }
         }
         public int TotalTrials { get; set; }
+
         private bool _isBlockFinished = false;
         public bool IsBlockFinished
         {
@@ -80,7 +81,6 @@ namespace StroopApp.Models
         public SharedExperimentData(ExperimentSettings settings)
         {
             TrialRecords = new ObservableCollection<StroopTrial>();
-            TotalTrials = settings.CurrentProfile.WordCount;
             ReactionPoints = new ObservableCollection<ReactionTimePoint>();
             ReactionTimes = new ObservableCollection<double?>();
             ColumnSerie = new ObservableCollection<ISeries>

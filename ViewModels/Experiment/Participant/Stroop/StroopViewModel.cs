@@ -60,7 +60,6 @@ public class StroopViewModel : INotifyPropertyChanged
         _reactionTimeTimer = new Stopwatch();
         GenerateTrials();
         StartTrials();
-        new ExperimentGraphViewModel(Settings);
     }
 
     private void GenerateTrials()
@@ -74,7 +73,7 @@ public class StroopViewModel : INotifyPropertyChanged
             {
                 TrialNumber = i + 1,
                 StroopType = Settings.CurrentProfile.StroopType,
-                Block = 1,
+                Block = Settings.Block,
                 ParticipantId = Settings.Participant.Id
             };
 
@@ -99,12 +98,13 @@ public class StroopViewModel : INotifyPropertyChanged
             }
             trial.DetermineExpectedAnswer();
             Settings.ExperimentContext.TrialRecords.Add(trial);
+            Settings.ExperimentContext.TotalTrials = Settings.ExperimentContext.TrialRecords.Count();
         }
     }
 
     public async void StartTrials()
     {
-        foreach (var trial in Settings.ExperimentContext.TrialRecords)
+        foreach (var trial in Settings.ExperimentContext.TrialRecords.Where(trial => trial.Block == Settings.Block))
         {
             Settings.ExperimentContext.CurrentTrial = trial;
             _wordTimer.Reset();
@@ -170,7 +170,7 @@ public class StroopViewModel : INotifyPropertyChanged
         _inputTcs = null;
         _wordTimer.Reset();
         _reactionTimeTimer.Reset();
-        _navigationService.NavigateTo(()=> new EndInstructionsPage());
+        _navigationService.NavigateTo(() => new EndInstructionsPage());
         Settings.ExperimentContext.IsBlockFinished = true;
     }
 

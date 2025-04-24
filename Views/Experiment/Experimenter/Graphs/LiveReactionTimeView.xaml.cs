@@ -1,4 +1,5 @@
-﻿using StroopApp.ViewModels.Experiment.Experimenter;
+﻿using StroopApp.Models;
+using StroopApp.ViewModels.Experiment.Experimenter;
 using System.Windows.Controls;
 
 
@@ -6,10 +7,13 @@ namespace StroopApp.Views.Experiment.Experimenter.Graphs
 {
     public partial class LiveReactionTimeView : UserControl
     {
-        public LiveReactionTimeView(ExperimentGraphViewModel viewModel)
+        private readonly ExperimentSettings _settings;
+
+        public LiveReactionTimeView(ExperimentSettings settings)
         {
             InitializeComponent();
-            DataContext = viewModel;
+            _settings = settings;
+            DataContext = new LiveReactionTimeViewModel(settings);
         }
     }
 }
