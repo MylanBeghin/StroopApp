@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using ClosedXML.Excel;
 using StroopApp.Models;
+using StroopApp.Services.Participants;
 
 namespace StroopApp.Services.Exportation
 {
@@ -22,11 +23,14 @@ namespace StroopApp.Services.Exportation
             var block = _settings.Block;
             var results = _settings.ExperimentContext.TrialRecords;
 
-            // dossier de l’exécutable
+            // Directory of the app
             var exeDir = AppDomain.CurrentDomain.BaseDirectory;
-            var participantFolder = Path.Combine(exeDir, "StroopExports", p.Id.ToString());
-            if (!Directory.Exists(participantFolder))
-                Directory.CreateDirectory(participantFolder);
+            var baseFolder = Path.Combine(exeDir, ParticipantService.ResultsDir);
+            Directory.CreateDirectory(baseFolder);
+
+            // Directory of the participant
+            var participantFolder = Path.Combine(baseFolder, p.Id.ToString());
+            Directory.CreateDirectory(participantFolder);
 
             // nom de fichier avec date et heure
             var fileName = $"{p.Id}_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.xlsx";

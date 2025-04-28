@@ -40,9 +40,9 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
             Settings.NewBlock();
             _experimenterNavigationService.NavigateTo(() => new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
         }
-        private void Quit()
+        private async void Quit()
         {
-            _exportationService.ExportDataAsync();
+            await _exportationService.ExportDataAsync();
             Application.Current.Shutdown();
         }
     }
