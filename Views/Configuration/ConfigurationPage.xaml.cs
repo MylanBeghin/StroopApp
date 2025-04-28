@@ -1,7 +1,7 @@
 ﻿using StroopApp.Models;
 using StroopApp.Services.KeyMapping;
 using StroopApp.Services.Navigation;
-using StroopApp.Services.Participant;
+using StroopApp.Services.Participants;
 using StroopApp.Services.Profile;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.Configuration;

@@ -17,51 +17,51 @@ namespace StroopApp.Services.Exportation
 
         public async Task ExportDataAsync()
         {
-            var participant = _settings.Participant;
+            var p = _settings.Participant;
             var profile = _settings.CurrentProfile;
             var block = _settings.Block;
             var results = _settings.ExperimentContext.TrialRecords;
 
-            var folder = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                "StroopExports");
-            if (!Directory.Exists(folder))
-                Directory.CreateDirectory(folder);
+            // dossier de l’exécutable
+            var exeDir = AppDomain.CurrentDomain.BaseDirectory;
+            var participantFolder = Path.Combine(exeDir, "StroopExports", p.Id.ToString());
+            if (!Directory.Exists(participantFolder))
+                Directory.CreateDirectory(participantFolder);
 
-            var filePath = Path.Combine(
-                folder,
-                $"{participant.Id}_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx");
+            // nom de fichier avec date et heure
+            var fileName = $"{p.Id}_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.xlsx";
+            var filePath = Path.Combine(participantFolder, fileName);
 
             using var workbook = new XLWorkbook();
-            var ws = workbook.Worksheets.Add("Export");
+            var worksheet = workbook.Worksheets.Add("Export");
 
-            ws.Cell(1, 1).Value = "Numéro du participant";
-            ws.Cell(1, 2).Value = "Type de Stroop";
-            ws.Cell(1, 3).Value = "Bloc";
-            ws.Cell(1, 4).Value = "Réponse attendue";
-            ws.Cell(1, 5).Value = "Réponse donnée";
-            ws.Cell(1, 6).Value = "Validité de la réponse";
-            ws.Cell(1, 7).Value = "Temps de réaction";
-            ws.Cell(1, 8).Value = "Essai";
-            ws.Cell(1, 9).Value = "Amorce";
+            worksheet.Cell(1, 1).Value = "Numéro du participant";
+            worksheet.Cell(1, 2).Value = "Type de Stroop";
+            worksheet.Cell(1, 3).Value = "Bloc";
+            worksheet.Cell(1, 4).Value = "Réponse attendue";
+            worksheet.Cell(1, 5).Value = "Réponse donnée";
+            worksheet.Cell(1, 6).Value = "Validité de la réponse";
+            worksheet.Cell(1, 7).Value = "Temps de réaction";
+            worksheet.Cell(1, 8).Value = "Essai";
+            worksheet.Cell(1, 9).Value = "Amorce";
 
             var row = 2;
             foreach (var r in results)
             {
-                ws.Cell(row, 1).Value = participant.Id;
-                ws.Cell(row, 2).Value = r.StroopType;
-                ws.Cell(row, 3).Value = r.Block;
-                ws.Cell(row, 4).Value = r.ExpectedAnswer;
-                ws.Cell(row, 5).Value = r.GivenAnswer;
-                ws.Cell(row, 6).Value = r.IsValidResponse;
-                ws.Cell(row, 7).Value = r.ReactionTime;
-                ws.Cell(row, 8).Value = r.TrialNumber;
-                ws.Cell(row, 9).Value = r.Amorce switch
+                worksheet.Cell(row, 1).Value = p.Id;
+                worksheet.Cell(row, 2).Value = r.StroopType;
+                worksheet.Cell(row, 3).Value = r.Block;
+                worksheet.Cell(row, 4).Value = r.ExpectedAnswer;
+                worksheet.Cell(row, 5).Value = r.GivenAnswer;
+                worksheet.Cell(row, 6).Value = r.IsValidResponse;
+                worksheet.Cell(row, 7).Value = r.ReactionTime;
+                worksheet.Cell(row, 8).Value = r.TrialNumber;
+                worksheet.Cell(row, 9).Value = r.Amorce switch
                 {
                     AmorceType.Square => "Carré",
                     AmorceType.Round => "Cercle",
                     _ => ""
-                }; ;
+                };
                 row++;
             }
 

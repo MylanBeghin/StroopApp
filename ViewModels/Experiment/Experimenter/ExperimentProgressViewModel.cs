@@ -8,6 +8,8 @@ namespace StroopApp.ViewModels.Experiment
     public class ExperimentProgressViewModel : ViewModelBase
     {
         private readonly ExperimentSettings _settings;
+        public ExperimentSettings Settings => _settings;
+
         public int Progress => (_settings.CurrentProfile.WordCount > 0) && (_settings.ExperimentContext != null)
     ? (int)(((double)_settings.ExperimentContext.ReactionPoints.Count / _settings.CurrentProfile.WordCount) * 100)
     : 0;
