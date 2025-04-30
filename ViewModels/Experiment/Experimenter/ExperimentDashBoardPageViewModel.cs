@@ -2,8 +2,8 @@
 using System.Runtime.CompilerServices;
 using StroopApp.Views.Experiment.Experimenter;
 using StroopApp.Models;
-using StroopApp.Services.Navigation;
 using StroopApp.Core;
+using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 
 namespace StroopApp.ViewModels.Experiment

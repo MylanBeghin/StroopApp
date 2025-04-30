@@ -27,6 +27,7 @@ namespace StroopApp.Models
     public class SharedExperimentData : ModelBase
     {
         public ObservableCollection<StroopTrial> TrialRecords { get; }
+        public ObservableCollection<Block> Blocks { get; }
         public ObservableCollection<ReactionTimePoint> ReactionPoints { get; set; }
         public ObservableCollection<double?> ReactionTimes { get; set; }
         public ObservableCollection<ISeries> ColumnSerie { get; set; }
@@ -81,6 +82,8 @@ namespace StroopApp.Models
         public SharedExperimentData(ExperimentSettings settings)
         {
             TrialRecords = new ObservableCollection<StroopTrial>();
+            Blocks = new ObservableCollection<Block>();
+            TotalTrials = settings.CurrentProfile.WordCount;
             ReactionPoints = new ObservableCollection<ReactionTimePoint>();
             ReactionTimes = new ObservableCollection<double?>();
             ColumnSerie = new ObservableCollection<ISeries>
@@ -136,6 +139,10 @@ namespace StroopApp.Models
         public void AddTrialRecord(StroopTrial record)
         {
             TrialRecords.Add(record);
+        }
+        public void AddCurrentBlock(ExperimentSettings settings)
+        {
+            Blocks.Add(new Block(settings));
         }
     }
 }
