@@ -2,27 +2,27 @@
 using System.Runtime.CompilerServices;
 using StroopApp.Views.Experiment.Experimenter;
 using StroopApp.Models;
+using StroopApp.Services.Navigation;
+using StroopApp.Core;
+using StroopApp.Services.Window;
 
 namespace StroopApp.ViewModels.Experiment
 {
-    public class ExperimentDashBoardPageViewModel : INotifyPropertyChanged
+    public class ExperimentDashBoardPageViewModel : ViewModelBase
     {
         readonly SharedExperimentData _experimentContext;
-        public ExperimentDashBoardPageViewModel( ExperimentSettings settings)
+        public ExperimentDashBoardPageViewModel( ExperimentSettings settings, INavigationService experimenterNavigationService, IWindowManager windowManager)
         {
             _experimentContext = settings.ExperimentContext;
             _experimentContext.PropertyChanged += (s, e) =>
             {
-                if (e.PropertyName == nameof(_experimentContext.IsExperimentFinished)
-                    && _experimentContext.IsExperimentFinished)
+                if (e.PropertyName == nameof(_experimentContext.IsBlockFinished)
+                    && _experimentContext.IsBlockFinished)
                 {
-                    App.ExperimentWindowNavigationService.NavigateTo(
-                        () => new EndExperimentPage(settings));
+                    experimenterNavigationService.NavigateTo(
+                        () => new EndExperimentPage(settings, experimenterNavigationService, windowManager));
                 }
             };
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

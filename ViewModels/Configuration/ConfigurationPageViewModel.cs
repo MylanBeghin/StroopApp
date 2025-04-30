@@ -1,5 +1,7 @@
 ﻿using StroopApp.Core;
 using StroopApp.Models;
+using StroopApp.Services.Navigation;
+using StroopApp.Services.Window;
 using StroopApp.ViewModels.Configuration.Participant;
 using StroopApp.ViewModels.Configuration.Profile;
 using StroopApp.Views;
@@ -12,19 +14,25 @@ namespace StroopApp.ViewModels.Configuration
         private readonly ProfileManagementViewModel _profileViewModel;
         private readonly ParticipantManagementViewModel _participantViewModel;
         private readonly KeyMappingViewModel _keyMappingViewModel;
+        private readonly INavigationService _experimenterNavigationService;
+        private readonly IWindowManager _windowManager;
 
         public ExperimentSettings _settings { get; set; }
         public ICommand LaunchExperimentCommand { get; }
-
-        public ConfigurationPageViewModel(ProfileManagementViewModel profileViewModel,
-                                          ParticipantManagementViewModel participantViewModel,
-                                          KeyMappingViewModel keyMappingViewModel
-                                          )
+        public ConfigurationPageViewModel(ExperimentSettings settings,
+    ProfileManagementViewModel profileViewModel,
+                                  ParticipantManagementViewModel participantViewModel,
+                                  KeyMappingViewModel keyMappingViewModel,
+                                  INavigationService experimenterNavigationService,
+                                  IWindowManager windowManager
+                                  )
         {
             _profileViewModel = profileViewModel;
             _participantViewModel = participantViewModel;
             _keyMappingViewModel = keyMappingViewModel;
-            _settings = new ExperimentSettings();
+            _experimenterNavigationService = experimenterNavigationService;
+            _windowManager = windowManager;
+            _settings = settings;
             LaunchExperimentCommand = new RelayCommand(LaunchExperiment);
         }
 
@@ -46,10 +54,8 @@ namespace StroopApp.ViewModels.Configuration
                 ShowErrorDialog("Veuillez sélectionner un participant.");
                 return;
             }
-            _settings.ExperimentContext = new SharedExperimentData(_settings);
-            App.ExperimentWindowNavigationService.NavigateTo(() => new ExperimentDashBoardPage(_settings));
-            var partWin = new ParticipantWindow(_settings);
-            partWin.Show();
+            _experimenterNavigationService.NavigateTo(() => new ExperimentDashBoardPage(_settings, _experimenterNavigationService, _windowManager));
+              _windowManager.ShowParticipantWindow(_settings);
         }
     }
 }

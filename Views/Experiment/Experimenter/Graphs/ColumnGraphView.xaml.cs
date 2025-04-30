@@ -1,15 +1,17 @@
-﻿using System.Windows.Controls;
-using LiveChartsCore.SkiaSharpView;
-using StroopApp.ViewModels.Experiment.Experimenter;
+﻿using LiveChartsCore.SkiaSharpView;
+using StroopApp.Models;
+using System.Windows.Controls;
 
 namespace StroopApp.Views.Experiment.Experimenter.Graphs
 {
     public partial class ColumnGraphView : UserControl
     {
-        public ColumnGraphView(ExperimentGraphViewModel viewModel)
+        private readonly ExperimentSettings _settings;
+        public ColumnGraphView(ExperimentSettings settings)
         {
             InitializeComponent();
-            DataContext = viewModel;
+            _settings = settings;
+            DataContext = _settings.ExperimentContext;
             var xAxis = new Axis
             {
                 MinLimit = -0.5,
@@ -20,13 +22,13 @@ namespace StroopApp.Views.Experiment.Experimenter.Graphs
             var yAxis = new Axis
             {
                 MinLimit = 0,
-                MaxLimit = viewModel.MaxReactionTime * 1.1
+                MaxLimit = _settings.CurrentProfile.MaxReactionTime * 1.1
             };
             ReactionTimeGraph.XAxes = new List<Axis> { xAxis };
             ReactionTimeGraph.YAxes = new List<Axis> { yAxis };
-            viewModel.ReactionPoints.CollectionChanged += (s, e) =>
+            _settings.ExperimentContext.ReactionPoints.CollectionChanged += (s, e) =>
             {
-                int count = viewModel.ReactionPoints.Count;
+                int count = _settings.ExperimentContext.ReactionPoints.Count;
                 const int window = 10;
 
                 if(count > window)
@@ -35,6 +37,7 @@ namespace StroopApp.Views.Experiment.Experimenter.Graphs
                     xAxis.MaxLimit = count;
                 }
             };
-        }
+            
+        }       
     }
 }

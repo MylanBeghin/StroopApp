@@ -1,18 +1,17 @@
-﻿using System;
+﻿using StroopApp.Core;
+using StroopApp.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using StroopApp.Models;
 
 namespace StroopApp.ViewModels.Experiment
 {
-    public class ExperimentProgressViewModel : INotifyPropertyChanged
+    public class ExperimentProgressViewModel : ViewModelBase
     {
         private readonly ExperimentSettings _settings;
         public ExperimentSettings Settings => _settings;
-        public int TotalTrials => _settings.ExperimentContext?.TotalTrials ?? 0;
-        public int Progress => (TotalTrials > 0) && (_settings.ExperimentContext != null)
-    ? (int)(((double)_settings.ExperimentContext.ReactionPoints.Count / TotalTrials) * 100)
+
+        public int Progress => (_settings.CurrentProfile.WordCount > 0) && (_settings.ExperimentContext != null)
+    ? (int)(((double)_settings.ExperimentContext.ReactionPoints.Count / _settings.CurrentProfile.WordCount) * 100)
     : 0;
 
         public ObservableCollection<StroopTrial> TrialRecords => _settings.ExperimentContext?.TrialRecords ?? new ObservableCollection<StroopTrial>();
@@ -28,13 +27,8 @@ namespace StroopApp.ViewModels.Experiment
 
         private void ExperimentContext_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged(nameof(TotalTrials));
             OnPropertyChanged(nameof(Progress));
             OnPropertyChanged(nameof(TrialRecords));
         }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

@@ -1,24 +1,19 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
+﻿using System.Windows.Input;
 using System.Windows.Data;
-using System.Windows.Input;
-using System.IO;
+using System.Collections.ObjectModel;
 using ModernWpf.Controls;
 using StroopApp.Core;
-using StroopApp.Models;
 using StroopApp.Services.Participant;
 using StroopApp.Views.Participant;
+using System.ComponentModel;
+using System.IO;
 
 namespace StroopApp.ViewModels.Configuration.Participant
 {
-    public class ParticipantManagementViewModel : INotifyPropertyChanged
+    public class ParticipantManagementViewModel : ViewModelBase
     {
-        private readonly IParticipantService _participantService;
+        readonly IParticipantService _participantService;
         public ObservableCollection<Models.Participant> Participants { get; set; }
-
-        // ICollectionView pour le filtrage
         public ICollectionView ParticipantsView { get; set; }
 
         private Models.Participant _selectedParticipant;
@@ -32,12 +27,7 @@ namespace StroopApp.ViewModels.Configuration.Participant
         public string SearchText
         {
             get => _searchText;
-            set
-            {
-                _searchText = value;
-                OnPropertyChanged();
-                ParticipantsView.Refresh();
-            }
+            set { _searchText = value; OnPropertyChanged(); ParticipantsView.Refresh(); }
         }
 
         public ICommand CreateParticipantCommand { get; }
@@ -49,104 +39,88 @@ namespace StroopApp.ViewModels.Configuration.Participant
         {
             _participantService = participantService;
             Participants = _participantService.LoadParticipants();
-            if (Participants.Any())
-                SelectedParticipant = Participants.First();
+            if (Participants.Any()) SelectedParticipant = Participants.First();
 
             ParticipantsView = CollectionViewSource.GetDefaultView(Participants);
             ParticipantsView.Filter = FilterParticipants;
 
             CreateParticipantCommand = new RelayCommand(CreateParticipant);
             ModifyParticipantCommand = new RelayCommand(ModifyParticipant);
-            DeleteParticipantCommand = new RelayCommand(DeleteParticipant);
+            DeleteParticipantCommand = new RelayCommand(async () => await DeleteParticipant());
             OpenResultsCommand = new RelayCommand<Models.Participant>(OpenResults);
         }
 
-        private bool FilterParticipants(object obj)
+        bool FilterParticipants(object obj)
         {
-            if (string.IsNullOrWhiteSpace(SearchText))
-                return true;
-
-            var participant = obj as Models.Participant;
-            return participant.Id.ToString().Contains(SearchText)
-                || (participant.Age?.ToString().Contains(SearchText) ?? false)
-                || (participant.Height?.ToString().Contains(SearchText) ?? false)
-                || (participant.Weight?.ToString().Contains(SearchText) ?? false)
-                || participant.SexAssigned.ToString().Contains(SearchText)
-                || participant.Gender.ToString().Contains(SearchText);
+            if (string.IsNullOrWhiteSpace(SearchText)) return true;
+            var p = obj as Models.Participant;
+            return p.Id.ToString().Contains(SearchText)
+                || p.Age?.ToString().Contains(SearchText) == true
+                || p.Height?.ToString().Contains(SearchText) == true
+                || p.Weight?.ToString().Contains(SearchText) == true
+                || p.SexAssigned.ToString().Contains(SearchText)
+                || p.Gender.ToString().Contains(SearchText);
         }
 
-        private void CreateParticipant()
+        void CreateParticipant()
         {
-            var newParticipant = new Models.Participant
+            var newP = new Models.Participant { Id = _participantService.GetNextParticipantId() };
+            var vm = new ParticipantEditorViewModel(newP, Participants, _participantService);
+            var win = new ParticipantEditorWindow(vm);
+            win.ShowDialog();
+            if (win.DialogResult == true)
             {
-                Id = _participantService.GetNextParticipantId()
-            };
-            var viewModel = new ParticipantEditorViewModel(newParticipant, Participants, _participantService);
-            var participantWindow = new ParticipantEditorWindow(viewModel);
-            participantWindow.ShowDialog();
-            if (participantWindow.DialogResult == true)
-            {
-                Participants.Add(newParticipant);
+                Participants.Add(newP);
                 _participantService.SaveParticipants(Participants);
-                SelectedParticipant = newParticipant;
+                SelectedParticipant = newP;
             }
         }
 
-        private void ModifyParticipant()
+        void ModifyParticipant()
         {
             if (SelectedParticipant == null)
             {
                 ShowErrorDialog("Veuillez sélectionner un participant à modifier !");
                 return;
             }
-            var viewModel = new ParticipantEditorViewModel(SelectedParticipant, Participants, _participantService);
-            var participantWindow = new ParticipantEditorWindow(viewModel);
-            participantWindow.ShowDialog();
-            if (participantWindow.DialogResult == true)
+            var vm = new ParticipantEditorViewModel(SelectedParticipant, Participants, _participantService);
+            var win = new ParticipantEditorWindow(vm);
+            win.ShowDialog();
+            if (win.DialogResult == true)
             {
-                OnPropertyChanged(nameof(SelectedParticipant));
                 _participantService.SaveParticipants(Participants);
+                OnPropertyChanged(nameof(SelectedParticipant));
             }
         }
 
-        private void DeleteParticipant()
+        async System.Threading.Tasks.Task DeleteParticipant()
         {
             if (SelectedParticipant == null)
             {
                 ShowErrorDialog("Veuillez sélectionner un participant à supprimer !");
                 return;
             }
-            _participantService.DeleteParticipant(SelectedParticipant, Participants);
+
+            var dlg = new ContentDialog
+            {
+                Title = "Confirmation de suppression",
+                Content = "Voulez-vous vraiment supprimer ce participant ? Ses données seront archivées.",
+                PrimaryButtonText = "Supprimer",
+                CloseButtonText = "Annuler"
+            };
+            if (await dlg.ShowAsync() != ContentDialogResult.Primary) return;
+
+            _participantService.DeleteParticipant(SelectedParticipant.Id);
+            Participants.Remove(SelectedParticipant);
             SelectedParticipant = Participants.FirstOrDefault();
         }
 
-        private void OpenResults(Models.Participant participant)
+        void OpenResults(Models.Participant p)
         {
-            if (participant == null)
-                return;
-
-            string resultsFolder = Path.Combine("Résultats", participant.Id.ToString());
-            if (!Directory.Exists(resultsFolder))
-            {
-                Directory.CreateDirectory(resultsFolder);
-            }
-            System.Diagnostics.Process.Start("explorer.exe", resultsFolder);
+            if (p == null) return;
+            var folder = Path.Combine("Résultats", p.Id.ToString());
+            if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
+            System.Diagnostics.Process.Start("explorer.exe", folder);
         }
-
-        private async void ShowErrorDialog(string message)
-        {
-            var dialog = new ContentDialog
-            {
-                Title = "Erreur",
-                Content = message,
-                CloseButtonText = "OK"
-            };
-
-            await dialog.ShowAsync();
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propName = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
     }
 }

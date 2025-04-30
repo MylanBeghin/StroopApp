@@ -17,12 +17,9 @@
                            TextWrapping="Wrap"
                            Margin="0,0,0,20" />
                 <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Right">
+                            HorizontalAlignment="Center">
                     <Button Content="Relancer"
                             Command="{Binding ContinueCommand}"
-                            Margin="0,0,5,0" />
-                    <Button Content="Nouvelle expérience"
-                            Command="{Binding RestartCommand}"
                             Margin="0,0,5,0" />
                     <Button Content="Quitter"
                             Command="{Binding QuitCommand}" />

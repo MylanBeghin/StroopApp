@@ -1,8 +1,9 @@
 ﻿using StroopApp.Models;
 using StroopApp.Services.KeyMapping;
 using StroopApp.Services.Navigation;
-using StroopApp.Services.Participant;
+using StroopApp.Services.Participants;
 using StroopApp.Services.Profile;
+using StroopApp.Services.Window;
 using StroopApp.ViewModels.Configuration;
 using StroopApp.ViewModels.Configuration.Participant;
 using StroopApp.ViewModels.Configuration.Profile;
@@ -15,7 +16,7 @@ namespace StroopApp.Views
 {
     public partial class ConfigurationPage : Page
     {
-        public ConfigurationPage()
+        public ConfigurationPage(ExperimentSettings settings, INavigationService experimentNavigationService, IWindowManager windowManager)
         {
             InitializeComponent();
 
@@ -30,7 +31,7 @@ namespace StroopApp.Views
             var keyMappingViewModel = new KeyMappingViewModel(keyMappingService);
 
             // Instanciation du ViewModel principal et liaison au DataContext
-            DataContext = new ConfigurationPageViewModel(profileViewModel, participantViewModel, keyMappingViewModel);
+            DataContext = new ConfigurationPageViewModel(settings, profileViewModel, participantViewModel, keyMappingViewModel, experimentNavigationService, windowManager);
 
             // Instanciation des vues en injectant les ViewModels partagés
             var profileManagementView = new ProfileManagementView(profileViewModel);

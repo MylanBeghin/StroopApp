@@ -1,6 +1,9 @@
 ﻿using StroopApp.Core;
 using StroopApp.Models;
+using StroopApp.Services.Navigation;
+using StroopApp.Services.Window;
 using StroopApp.Views;
+using System.Windows;
 using System.Windows.Input;
 
 namespace StroopApp.ViewModels.Experiment.Experimenter
@@ -17,29 +20,30 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
                 OnPropertyChanged();
             }
         }
-        public IExportationService ExportationService { get; }
+        private readonly IExportationService _exportationService;
+        private readonly INavigationService _experimenterNavigationService;
+        private readonly IWindowManager _windowManager;
+
         public ICommand ContinueCommand { get; }
-        public ICommand RestartCommand { get; }
         public ICommand QuitCommand { get; }
-        public EndExperimentViewModel(ExperimentSettings settings, IExportationService exportationService)
+        public EndExperimentViewModel(ExperimentSettings settings, IExportationService exportationService, INavigationService experimenterNavigationService, IWindowManager windowManager)
         {
             Settings = settings;
-            ExportationService = exportationService;
+            _exportationService = exportationService;
+            _experimenterNavigationService = experimenterNavigationService;
+            _windowManager = windowManager;
             ContinueCommand = new RelayCommand(Continue);
             QuitCommand = new RelayCommand(Quit);
-            RestartCommand = new RelayCommand(Restart);
         }
         private void Continue()
         {
-            App.ExperimentWindowNavigationService.NavigateTo(() => new ConfigurationPage());
+            Settings.NewBlock();
+            _experimenterNavigationService.NavigateTo(() => new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
         }
-        private void Quit()
+        private async void Quit()
         {
-            ExportationService.ExportDataAsync();
-        }
-        private void Restart()
-        {
-            ExportationService.ExportDataAsync();
+            await _exportationService.ExportDataAsync();
+            Application.Current.Shutdown();
         }
     }
 }

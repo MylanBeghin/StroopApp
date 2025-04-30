@@ -1,6 +1,5 @@
-﻿using System.Windows.Controls;
-using StroopApp.Services.Participant;
-using StroopApp.ViewModels.Configuration.Participant;
+﻿using StroopApp.ViewModels.Configuration.Participant;
+using System.Windows.Controls;
 
 namespace StroopApp.Views.Participant
 {
