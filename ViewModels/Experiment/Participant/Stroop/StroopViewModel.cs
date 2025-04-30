@@ -1,13 +1,12 @@
-﻿using System.ComponentModel;
+﻿using StroopApp.Models;
+using StroopApp.Services.Navigation;
+using StroopApp.Views.Experiment.Participant;
+using StroopApp.Views.Experiment.Participant.Stroop;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
-using StroopApp.Models;
-using StroopApp.ViewModels.Experiment.Experimenter;
-using StroopApp.Views.Experiment.Participant.Stroop;
-using StroopApp.Views.Experiment.Participant;
-using StroopApp.Services.Navigation;
 public class StroopViewModel : INotifyPropertyChanged
 {
     private ExperimentSettings _settings;

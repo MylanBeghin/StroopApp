@@ -58,5 +58,12 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <ui:SimpleStackPanel Orientation="Horizontal" Spacing="16" Grid.Row="2">
+            <Button Content="Relancer" Command="{Binding ContinueCommand}"/>
+            <Button Content="Nouvelle expérience"
+                    Command="{Binding RestartCommand}" />
+            <Button Content="Quitter l'application"
+                    Command="{Binding QuitCommand}" />
+        </ui:SimpleStackPanel>
     </Grid>
 </Page>

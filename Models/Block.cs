@@ -35,14 +35,11 @@ public class Block : ModelBase
     private readonly string _stroopType;
     public string StroopType => _stroopType;
 
-    private readonly IEnumerable<StroopTrial> _allTrials;
-
     public Block(ExperimentSettings settings)
     {
-        _allTrials = settings.ExperimentContext.TrialRecords;
         _stroopType = settings.CurrentProfile.StroopType;
         BlockNumber = settings.Block;
-        var trials = _allTrials.Where(t => t.Block == BlockNumber).ToList();
+        var trials = settings.ExperimentContext.TrialRecords.Where(t => t.Block == BlockNumber).ToList();
         TotalTrials = trials.Count;
         Accuracy = trials.Any()
                       ? trials.Count(t => t.IsValidResponse) / (double)TotalTrials * 100

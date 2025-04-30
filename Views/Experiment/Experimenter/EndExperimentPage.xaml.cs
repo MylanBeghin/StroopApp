@@ -15,7 +15,6 @@ namespace StroopApp.Views.Experiment.Experimenter
             InitializeComponent();
             var ExportationService = new ExportationService(settings);
             DataContext = new EndExperimentViewModel(settings, ExportationService, experimenterNavigationService, windowManager);
-
         }
     }
 }

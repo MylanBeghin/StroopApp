@@ -4,27 +4,21 @@ using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.Views;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace StroopApp.ViewModels.Experiment.Experimenter
 {
     public class EndExperimentViewModel : ViewModelBase
     {
-        private ExperimentSettings _settings;
-        public ExperimentSettings Settings
-        {
-            get => _settings;
-            set
-            {
-                _settings = value;
-                OnPropertyChanged();
-            }
-        }
+        public ExperimentSettings Settings { get; }
+        public ObservableCollection<Block> Blocks { get; }
         private readonly IExportationService _exportationService;
         private readonly INavigationService _experimenterNavigationService;
         private readonly IWindowManager _windowManager;
 
         public ICommand ContinueCommand { get; }
+        public ICommand RestartCommand { get; }
         public ICommand QuitCommand { get; }
         private string _currentDay;
         public string CurrentDay
@@ -47,25 +41,22 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<Block> Blocks => Settings.ExperimentContext.Blocks;
-
-        public EndExperimentViewModel(ExperimentSettings settings, IExportationService svc)
-        {
-            Settings = settings;
-            ExportationService = svc;
-            ContinueCommand = new RelayCommand(Continue);
-            RestartCommand = new RelayCommand(Restart);
-            QuitCommand = new RelayCommand(Quit);
-            UpdateTime();
-            Settings.ExperimentContext.AddCurrentBlock(settings);
-        public EndExperimentViewModel(ExperimentSettings settings, IExportationService exportationService, INavigationService experimenterNavigationService, IWindowManager windowManager)
+        public EndExperimentViewModel(ExperimentSettings settings,
+                                  IExportationService exportationService,
+                                  INavigationService experimenterNavigationService,
+                                  IWindowManager windowManager)
         {
             Settings = settings;
             _exportationService = exportationService;
             _experimenterNavigationService = experimenterNavigationService;
             _windowManager = windowManager;
             ContinueCommand = new RelayCommand(Continue);
+            RestartCommand = new RelayCommand(Restart);
             QuitCommand = new RelayCommand(Quit);
+
+            UpdateTime();
+            Settings.NewBlock();
+            Blocks = Settings.ExperimentContext.Blocks;
         }
 
         private void UpdateTime()
@@ -76,8 +67,12 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
 
         private void Continue()
         {
-            Settings.NewBlock();
             _experimenterNavigationService.NavigateTo(() => new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
+        }
+        private async void Restart()
+        {
+            await _exportationService.ExportDataAsync();
+            _experimenterNavigationService.NavigateTo(() => new ConfigurationPage(new ExperimentSettings(), _experimenterNavigationService, _windowManager));
         }
         private async void Quit()
         {

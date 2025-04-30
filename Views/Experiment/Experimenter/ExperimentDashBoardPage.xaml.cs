@@ -1,11 +1,10 @@
 ﻿using StroopApp.Models;
-using System.Windows.Controls;
-using StroopApp.Views.Experiment.Experimenter;
 using StroopApp.Services.Navigation;
-using StroopApp.ViewModels.Experiment;
-using StroopApp.Views.Experiment.Experimenter.Graphs;
-using StroopApp.Services.Exportation;
 using StroopApp.Services.Window;
+using StroopApp.ViewModels.Experiment;
+using StroopApp.Views.Experiment.Experimenter;
+using StroopApp.Views.Experiment.Experimenter.Graphs;
+using System.Windows.Controls;
 
 namespace StroopApp.Views
 {

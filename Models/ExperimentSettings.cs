@@ -67,6 +67,7 @@ namespace StroopApp.Models
         }
         public void NewBlock()
         {
+            ExperimentContext.AddCurrentBlock(this);
             Block++;
             ExperimentContext.IsBlockFinished = false;
             ExperimentContext.ReactionPoints = new ObservableCollection<ReactionTimePoint>();
