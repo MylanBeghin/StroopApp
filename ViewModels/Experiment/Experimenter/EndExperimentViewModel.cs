@@ -1,5 +1,7 @@
 ﻿using StroopApp.Core;
 using StroopApp.Models;
+using StroopApp.Services.Navigation;
+using StroopApp.Services.Window;
 using StroopApp.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -18,11 +20,12 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
                 OnPropertyChanged();
             }
         }
-        public IExportationService ExportationService { get; }
-        public ICommand ContinueCommand { get; }
-        public ICommand RestartCommand { get; }
-        public ICommand QuitCommand { get; }
+        private readonly IExportationService _exportationService;
+        private readonly INavigationService _experimenterNavigationService;
+        private readonly IWindowManager _windowManager;
 
+        public ICommand ContinueCommand { get; }
+        public ICommand QuitCommand { get; }
         private string _currentDay;
         public string CurrentDay
         {
@@ -55,6 +58,14 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
             QuitCommand = new RelayCommand(Quit);
             UpdateTime();
             Settings.ExperimentContext.AddCurrentBlock(settings);
+        public EndExperimentViewModel(ExperimentSettings settings, IExportationService exportationService, INavigationService experimenterNavigationService, IWindowManager windowManager)
+        {
+            Settings = settings;
+            _exportationService = exportationService;
+            _experimenterNavigationService = experimenterNavigationService;
+            _windowManager = windowManager;
+            ContinueCommand = new RelayCommand(Continue);
+            QuitCommand = new RelayCommand(Quit);
         }
 
         private void UpdateTime()
@@ -65,15 +76,13 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
 
         private void Continue()
         {
-            App.ExperimentWindowNavigationService.NavigateTo(() => new ConfigurationPage());
+            Settings.NewBlock();
+            _experimenterNavigationService.NavigateTo(() => new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
         }
-        private void Quit()
+        private async void Quit()
         {
-            ExportationService.ExportDataAsync();
-        }
-        private void Restart()
-        {
-            ExportationService.ExportDataAsync();
+            await _exportationService.ExportDataAsync();
+            Application.Current.Shutdown();
         }
     }
 }

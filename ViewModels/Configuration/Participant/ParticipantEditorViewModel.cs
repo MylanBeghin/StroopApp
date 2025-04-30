@@ -1,20 +1,12 @@
-﻿// ParticipantEditorViewModel.cs
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Input;
-using ModernWpf.Controls;
-using StroopApp.Core;
+﻿using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Services.Participant;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace StroopApp.ViewModels.Configuration.Participant
 {
-    public class ParticipantEditorViewModel : INotifyPropertyChanged
+    public class ParticipantEditorViewModel : ViewModelBase
     {
         private Models.Participant _participant;
         /// <summary>
@@ -99,25 +91,13 @@ namespace StroopApp.ViewModels.Configuration.Participant
                 double.IsNaN(Participant.Height.Value) ||
                 double.IsInfinity(Participant.Height.Value))
             {
-                var dialog = new ContentDialog
-                {
-                    Title = "Erreur",
-                    Content = "Veuillez remplir correctement tous les champs obligatoires.",
-                    CloseButtonText = "OK"
-                };
-                await dialog.ShowAsync();
+                ShowErrorDialog("Veuillez remplir correctement tous les champs obligatoires.");
                 return;
             }
             // Vérification d'unicité de l'ID
             if (Participants.Any(p => p.Id == Participant.Id && p != (_originalParticipant ?? Participant)))
             {
-                var dialog = new ContentDialog
-                {
-                    Title = "Erreur",
-                    Content = "Cet identifiant est déjà utilisé pour un autre participant",
-                    CloseButtonText = "OK"
-                };
-                await dialog.ShowAsync();
+                ShowErrorDialog("Cet identifiant est déjà utilisé pour un autre participant");
                 return;
             }
 
@@ -142,9 +122,5 @@ namespace StroopApp.ViewModels.Configuration.Participant
             DialogResult = false;
             CloseAction?.Invoke();
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

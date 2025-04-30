@@ -1,7 +1,12 @@
-﻿using StroopApp.Core;
+﻿using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView;
+using SkiaSharp;
+using StroopApp.Core;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
+using LiveChartsCore.Kernel;
+using LiveChartsCore.Kernel.Events;
 namespace StroopApp.Models
 {
     /// <summary>
@@ -63,6 +68,48 @@ namespace StroopApp.Models
         public void NewBlock()
         {
             Block++;
+            ExperimentContext.IsBlockFinished = false;
+            ExperimentContext.ReactionPoints = new ObservableCollection<ReactionTimePoint>();
+            ExperimentContext.ColumnSerie = new ObservableCollection<ISeries>
+            {
+                new ColumnSeries<ReactionTimePoint>
+                {
+                    Values = ExperimentContext.ReactionPoints,
+                    DataLabelsPosition = LiveChartsCore.Measure.DataLabelsPosition.Top,
+                    DataLabelsSize = 16,
+                    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+                    DataLabelsFormatter = point =>
+                point.Coordinate.PrimaryValue.Equals(null)
+                    ? "Aucune réponse"
+                    : point.Coordinate.PrimaryValue.ToString("N0"),
+                    Mapping = (point, index) => new Coordinate(
+                        point.TrialNumber-1,
+                        point.ReactionTime != null
+                            ? point.ReactionTime.Value
+                            : double.NaN
+                    )
+                }.OnPointCreated(p =>
+    {
+        if (p.Visual is null) return;
+        var model = p.Model;
+        if (model.IsValidResponse.HasValue)
+        {
+            if(model.IsValidResponse.Value)
+            {
+            // Bonne réponse : point vert
+            p.Visual.Fill = new SolidColorPaint(SKColors.Green);
+            p.Visual.Stroke = new SolidColorPaint(SKColors.Green);
+            }
+            else
+            {
+            // Mauvaise réponse : point rouge
+            p.Visual.Fill = new SolidColorPaint(SKColors.Red);
+            p.Visual.Stroke = new SolidColorPaint(SKColors.Red);
+            }
+        }
+            })
+            };
+
         }
     }
 }

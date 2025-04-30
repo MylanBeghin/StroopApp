@@ -10,7 +10,7 @@ using StroopApp.Views;
 
 namespace StroopApp.ViewModels.Configuration.Profile
 {
-    public class ProfileManagementViewModel : INotifyPropertyChanged
+    public class ProfileManagementViewModel : ViewModelBase
     {
         private readonly IProfileService _profileService;
         public ObservableCollection<ExperimentProfile> Profiles { get; set; }
@@ -102,20 +102,5 @@ namespace StroopApp.ViewModels.Configuration.Profile
                 CurrentProfile = null;
             }
         }
-
-        private async void ShowErrorDialog(string message)
-        {
-            var dialog = new ContentDialog
-            {
-                Title = "Erreur",
-                Content = message,
-                CloseButtonText = "OK"
-            };
-            await dialog.ShowAsync();
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

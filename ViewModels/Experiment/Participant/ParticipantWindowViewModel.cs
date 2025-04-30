@@ -1,16 +1,15 @@
-﻿using StroopApp.Models;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using StroopApp.Models;
 using StroopApp.Services.Navigation;
+using StroopApp.Views.Experiment.Participant;
 
 namespace StroopApp.ViewModels.Experiment.Participant
 {
     public class ParticipantWindowViewModel
     {
-        public ExperimentSettings Settings { get; }
-        public INavigationService NavigationService { get; }
-        public ParticipantWindowViewModel(ExperimentSettings settings, INavigationService navigationService)
+        public ParticipantWindowViewModel(ExperimentSettings settings, INavigationService participantWindowNavigationService)
         {
-            Settings = settings;
-            NavigationService = navigationService;
+            participantWindowNavigationService.NavigateTo(() => new InstructionsPage(settings, participantWindowNavigationService));
         }
     }
 }

@@ -9,10 +9,9 @@ namespace StroopApp.Views.Experiment.Experimenter.Graphs
         public GraphsView(ExperimentSettings settings)
         {
             InitializeComponent();
-            var GraphVM = new ExperimentGraphViewModel(settings);
-            var ColumnGraphView = new ColumnGraphView(GraphVM);
-            var GlobalGraphView = new GlobalGraphView(GraphVM);
-            var LiveReactionTimeView = new LiveReactionTimeView(GraphVM);
+            var ColumnGraphView = new ColumnGraphView(settings);
+            var GlobalGraphView = new GlobalGraphView(settings);
+            var LiveReactionTimeView = new LiveReactionTimeView(settings);
             MainGrid.Children.Add(GlobalGraphView);
             Grid.SetRow(GlobalGraphView, 2);
             Grid.SetColumn(GlobalGraphView, 0);

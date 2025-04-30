@@ -1,28 +1,16 @@
 ﻿using StroopApp.Models;
-using StroopApp.ViewModels.Configuration;
-using StroopApp.ViewModels.Experiment;
+using StroopApp.Services.Navigation;
+using StroopApp.Services.Window;
 using StroopApp.Views;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace StroopApp.ViewModels
 {
-    public class ExperimentWindowViewModel : INotifyPropertyChanged
+    public class ExperimentWindowViewModel
     {
-        
-        public ExperimentSettings Settings { get; private set; }
-
-        private readonly ConfigurationPageViewModel _configurationPageViewModel;
-
-        private readonly ExperimentDashBoardPageViewModel _experimentWindowViewModel;
-        public ExperimentWindowViewModel(ConfigurationPage configPage, ExperimentDashBoardPage experimentPage)
+        public ExperimentWindowViewModel(ExperimentSettings settings, INavigationService experimentNavigationService, IWindowManager windowManager)
         {
-            _configurationPageViewModel = (ConfigurationPageViewModel)configPage.DataContext;
-            _experimentWindowViewModel = (ExperimentDashBoardPageViewModel)experimentPage.DataContext;
+            experimentNavigationService.NavigateTo(() => new ConfigurationPage(settings, experimentNavigationService, windowManager));
         }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        
     }
 }
