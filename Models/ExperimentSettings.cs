@@ -58,7 +58,7 @@ namespace StroopApp.Models
             CurrentProfile = new ExperimentProfile();
             KeyMappings = new KeyMappings();
             ExperimentContext = new SharedExperimentData(this);
-            Block = 0;
+            Block = 1;
         }
         public void NewBlock()
         {

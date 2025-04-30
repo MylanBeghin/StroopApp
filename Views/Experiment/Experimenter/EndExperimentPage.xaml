@@ -1,33 +1,62 @@
 ﻿<Page x:Class="StroopApp.Views.Experiment.Experimenter.EndExperimentPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      Background="Transparent">
-    <Grid Background="#80000000">
-        <Border Background="White"
-                Padding="20"
+      xmlns:ui="http://schemas.modernwpf.com/2019"
+      xmlns:models="clr-namespace:StroopApp.Models">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="0.4*" />
+            <RowDefinition Height="0.4*" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0"
+                Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
                 CornerRadius="8"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-            <StackPanel>
-                <TextBlock Text="Fin de l'expérience"
-                           FontSize="20"
-                           FontWeight="Bold"
-                           Margin="0,0,0,10" />
-                <TextBlock Text="Que voulez-vous faire maintenant ?"
-                           TextWrapping="Wrap"
-                           Margin="0,0,0,20" />
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Right">
-                    <Button Content="Relancer"
-                            Command="{Binding ContinueCommand}"
-                            Margin="0,0,5,0" />
-                    <Button Content="Nouvelle expérience"
-                            Command="{Binding RestartCommand}"
-                            Margin="0,0,5,0" />
-                    <Button Content="Quitter"
-                            Command="{Binding QuitCommand}" />
-                </StackPanel>
-            </StackPanel>
+                Padding="16"
+                BorderThickness="0.5"
+                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+                           Text="Bloc terminé"
+                           Style="{DynamicResource TitleTextBlockStyle}"
+                           VerticalAlignment="Center" />
+                <ui:SimpleStackPanel Grid.Column="1"
+                                     Orientation="Horizontal"
+                                     HorizontalAlignment="Right"
+                                     VerticalAlignment="Center"
+                                     Spacing="10">
+                    <TextBlock Text="{Binding CurrentDay}"
+                               Style="{DynamicResource CaptionTextBlockStyle}" />
+                    <TextBlock Text="{Binding CurrentTime}"
+                               Style="{DynamicResource CaptionTextBlockStyle}" />
+                </ui:SimpleStackPanel>
+            </Grid>
         </Border>
+        <ListView Grid.Row="1"
+                  ItemsSource="{Binding Blocks}">
+            <ListView.View>
+                <GridView>
+                    <!-- première colonne : numéro de bloc -->
+                    <GridViewColumn Header=""
+                                    DisplayMemberBinding="{Binding BlockNumber, StringFormat='Bloc {0}'}" />
+                    <!-- total essais -->
+                    <GridViewColumn Header="Essais"
+                                    DisplayMemberBinding="{Binding TotalTrials}" />
+                    <!-- précision en % -->
+                    <GridViewColumn Header="Précision"
+                                    DisplayMemberBinding="{Binding Accuracy, StringFormat=' {0} %'}" />
+                    <!-- temps moyen -->
+                    <GridViewColumn Header="Temps moyen"
+                                    DisplayMemberBinding="{Binding ResponseTimeMean, StringFormat=' {0} ms'}" />
+                    <!-- type de Stroop -->
+                    <GridViewColumn Header="Type Stroop"
+                                    DisplayMemberBinding="{Binding StroopType}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Page>

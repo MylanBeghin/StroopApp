@@ -2,10 +2,11 @@
 using System.Runtime.CompilerServices;
 using StroopApp.Views.Experiment.Experimenter;
 using StroopApp.Models;
+using StroopApp.Core;
 
 namespace StroopApp.ViewModels.Experiment
 {
-    public class ExperimentDashBoardPageViewModel : INotifyPropertyChanged
+    public class ExperimentDashBoardPageViewModel : ViewModelBase
     {
         readonly SharedExperimentData _experimentContext;
         public ExperimentDashBoardPageViewModel( ExperimentSettings settings)
@@ -21,8 +22,5 @@ namespace StroopApp.ViewModels.Experiment
                 }
             };
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
