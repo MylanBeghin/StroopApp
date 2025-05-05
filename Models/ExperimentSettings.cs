@@ -71,7 +71,7 @@ namespace StroopApp.Models
             Block++;
             ExperimentContext.IsBlockFinished = false;
             ExperimentContext.ReactionPoints = new ObservableCollection<ReactionTimePoint>();
-            ExperimentContext.ColumnSerie = new ObservableCollection<ISeries>
+            ExperimentContext.ColumnSeries = new ObservableCollection<ISeries>
             {
                 new ColumnSeries<ReactionTimePoint>
                 {

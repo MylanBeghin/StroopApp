@@ -31,12 +31,13 @@ public class Block : ModelBase
         get => _responseTimeMean;
         set { _responseTimeMean = value; OnPropertyChanged(); }
     }
-
+    public readonly string _profileName;
     private readonly string _stroopType;
     public string StroopType => _stroopType;
 
     public Block(ExperimentSettings settings)
     {
+        
         _stroopType = settings.CurrentProfile.StroopType;
         BlockNumber = settings.Block;
         var trials = settings.ExperimentContext.TrialRecords.Where(t => t.Block == BlockNumber).ToList();
@@ -48,5 +49,6 @@ public class Block : ModelBase
                                     .Where(trial => trial.ReactionTime.HasValue && trial.Block == BlockNumber)
                                     .Select(trial => trial.ReactionTime)
                                     .Average();
+        _profileName = settings.CurrentProfile.ProfileName;
     }
 }

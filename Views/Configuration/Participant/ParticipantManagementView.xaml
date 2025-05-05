@@ -8,61 +8,74 @@
              xmlns:fa5="http://schemas.fontawesome.com/icons/"
              xmlns:conv="clr-namespace:StroopApp.Converters">
     <UserControl.Resources>
-        <conv:HeightToMaxHeightConverter x:Key="HeightToMaxHeightConverter"/>
+        <conv:HeightToMaxHeightConverter x:Key="HeightToMaxHeightConverter" />
     </UserControl.Resources>
     <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
-          CornerRadius="8"
-          Padding="16"
-          BorderThickness="0.5"
-          BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+            CornerRadius="8"
+            Padding="16"
+            BorderThickness="0.5"
+            BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <!-- Barre de recherche et boutons -->
-            <ui:SimpleStackPanel Grid.Row="0" Spacing="10">
-                <TextBlock Text="Choix du participant" Style="{StaticResource TitleTextBlockStyle}"/>
+            <ui:SimpleStackPanel Grid.Row="0"
+                                 Spacing="10">
+                <TextBlock Text="Choix du participant"
+                           Style="{StaticResource TitleTextBlockStyle}" />
                 <Grid HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0"
-                     Text="Sélectionnez un participant pour lancer l'expérience."
-                     HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <ui:SimpleStackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Border Background="{DynamicResource SystemControlBackgroundTransparentBrush}" CornerRadius="2">
+                               Text="Sélectionnez un participant pour lancer l'expérience."
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center" />
+                    <ui:SimpleStackPanel Grid.Column="1"
+                                         Orientation="Horizontal"
+                                         Spacing="10"
+                                         HorizontalAlignment="Right"
+                                         VerticalAlignment="Center">
+                        <Border Background="{DynamicResource SystemControlBackgroundTransparentBrush}"
+                                CornerRadius="2">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="250"/>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="250" />
                                 </Grid.ColumnDefinitions>
-                                <fa5:FontAwesome Grid.Column="0" 
-                                 Icon="Solid_Search" 
-                                 Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}" 
-                                 Width="24" Height="24" 
-                                 VerticalAlignment="Center" 
-                                 Margin="0,0,-35,-12" Panel.ZIndex="1"/>
+                                <fa5:FontAwesome Grid.Column="0"
+                                                 Icon="Solid_Search"
+                                                 Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"
+                                                 Width="24"
+                                                 Height="24"
+                                                 VerticalAlignment="Center"
+                                                 Margin="0,0,-35,-12"
+                                                 Panel.ZIndex="1" />
                                 <Grid Grid.Column="1">
                                     <TextBox x:Name="SearchTermTextBox"
-                           VerticalAlignment="Center"
-                           Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                           Padding="34,6,0,0"/>
+                                             VerticalAlignment="Center"
+                                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                             Padding="34,6,0,0" />
                                     <TextBlock IsHitTestVisible="False"
-                             Text="Rechercher . . ."
-                             VerticalAlignment="Center"
-                             HorizontalAlignment="Left"
-                             Margin="34,0,0,0"
-                             Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}">
+                                               Text="Rechercher . . ."
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Margin="34,0,0,0"
+                                               Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}">
                                         <TextBlock.Style>
-                                            <Style TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
-                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style TargetType="TextBlock"
+                                                   BasedOn="{StaticResource BodyTextBlockStyle}">
+                                                <Setter Property="Visibility"
+                                                        Value="Collapsed" />
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
-                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}"
+                                                                 Value="">
+                                                        <Setter Property="Visibility"
+                                                                Value="Visible" />
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -71,37 +84,50 @@
                                 </Grid>
                             </Grid>
                         </Border>
-                        <Button Content="Créer" Command="{Binding CreateParticipantCommand}" />
-                        <Button Content="Modifier" Command="{Binding ModifyParticipantCommand}" />
-                        <Button Content="Supprimer" Command="{Binding DeleteParticipantCommand}">
+                        <Button Content="Créer"
+                                Command="{Binding CreateParticipantCommand}" />
+                        <Button Content="Modifier"
+                                Command="{Binding ModifyParticipantCommand}" />
+                        <Button Content="Supprimer"
+                                Command="{Binding DeleteParticipantCommand}">
                         </Button>
                     </ui:SimpleStackPanel>
                 </Grid>
             </ui:SimpleStackPanel>
-
-            <!-- Ajoutez éventuellement d'autres éléments au-dessus ou en dessous si nécessaire -->
-
-            <!-- Liste des participants dans un conteneur qui contraint la hauteur -->
             <Border Grid.Row="3"
-              Margin="0,12,0,0"
-              Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
-              CornerRadius="8"
-              Padding="8"
-              BorderThickness="0.5"
-              BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
-                <ListView ItemsSource="{Binding ParticipantsView}" 
-                  SelectedItem="{Binding SelectedParticipant}"
-                  IsSynchronizedWithCurrentItem="True"
-                  ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    Margin="0,12,0,0"
+                    Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+                    CornerRadius="8"
+                    Padding="8"
+                    BorderThickness="0.5"
+                    BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+                <ListView ItemsSource="{Binding ParticipantsView}"
+                          SelectedItem="{Binding SelectedParticipant}"
+                          IsSynchronizedWithCurrentItem="True"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="80"/>
-                            <GridViewColumn Header="Âge" DisplayMemberBinding="{Binding Age}" Width="80"/>
-                            <GridViewColumn Header="Taille (cm)" DisplayMemberBinding="{Binding Height}" Width="100"/>
-                            <GridViewColumn Header="Poids (kg)" DisplayMemberBinding="{Binding Weight}" Width="100"/>
-                            <GridViewColumn Header="Sexe assigné" DisplayMemberBinding="{Binding SexAssigned}" Width="150"/>
-                            <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding Gender}" Width="150"/>
-                            <GridViewColumn Header="Résultats" DisplayMemberBinding="{Binding Results}" Width="80"/>
+                            <GridViewColumn Header="ID"
+                                            DisplayMemberBinding="{Binding Id}"
+                                            Width="80" />
+                            <GridViewColumn Header="Âge"
+                                            DisplayMemberBinding="{Binding Age}"
+                                            Width="80" />
+                            <GridViewColumn Header="Taille (cm)"
+                                            DisplayMemberBinding="{Binding Height}"
+                                            Width="100" />
+                            <GridViewColumn Header="Poids (kg)"
+                                            DisplayMemberBinding="{Binding Weight}"
+                                            Width="100" />
+                            <GridViewColumn Header="Sexe assigné"
+                                            DisplayMemberBinding="{Binding SexAssigned}"
+                                            Width="150" />
+                            <GridViewColumn Header="Genre"
+                                            DisplayMemberBinding="{Binding Gender}"
+                                            Width="150" />
+                            <GridViewColumn Header="Résultats"
+                                            DisplayMemberBinding="{Binding Results}"
+                                            Width="80" />
                         </GridView>
                     </ListView.View>
                 </ListView>

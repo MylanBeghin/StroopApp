@@ -131,7 +131,7 @@ namespace StroopApp.Models
                 {
                     Values = ReactionTimes,
                     GeometrySize = 0,
-                    GeometryFill = new SolidColorPaint(SKColors.CornflowerBlue)
+                    Stroke = new SolidColorPaint(palette[idx % palette.Length]) { StrokeThickness = 2 },
                 }
 
             };

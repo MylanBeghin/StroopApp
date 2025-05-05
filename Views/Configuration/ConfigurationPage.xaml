@@ -26,6 +26,6 @@
             <Button Content="Lancer l'expérience" 
               Style="{DynamicResource AccentButtonStyle}"
               Command="{Binding LaunchExperimentCommand}"/>
-        </StackPanel>
+        </StackPanel> 
     </Grid>
 </Page>
