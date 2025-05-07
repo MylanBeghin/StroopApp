@@ -1,10 +1,7 @@
-﻿using System.Windows;
-using StroopApp.Models;
+﻿using StroopApp.Models;
 using StroopApp.Services.Navigation;
-using StroopApp.Views.Experiment.Participant;
 using StroopApp.ViewModels.Experiment.Participant;
-using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.Wordprocessing;
+using System.Windows;
 
 namespace StroopApp.Views
 {
@@ -20,7 +17,7 @@ namespace StroopApp.Views
             _settings = Settings;
         }
 
-        
+
 
         public void Reset()
         {

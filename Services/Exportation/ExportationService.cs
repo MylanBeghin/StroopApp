@@ -1,9 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using ClosedXML.Excel;
+﻿using ClosedXML.Excel;
 using StroopApp.Models;
 using StroopApp.Services.Participants;
+using System.IO;
 
 namespace StroopApp.Services.Exportation
 {
@@ -19,26 +17,20 @@ namespace StroopApp.Services.Exportation
         public async Task ExportDataAsync()
         {
             var p = _settings.Participant;
-            var profile = _settings.CurrentProfile;
-            var block = _settings.Block;
-            var results = _settings.ExperimentContext.TrialRecords;
-
-            // Directory of the app
+            var blocks = _settings.ExperimentContext.Blocks;
             var exeDir = AppDomain.CurrentDomain.BaseDirectory;
             var baseFolder = Path.Combine(exeDir, ParticipantService.ResultsDir);
             Directory.CreateDirectory(baseFolder);
-
-            // Directory of the participant
             var participantFolder = Path.Combine(baseFolder, p.Id.ToString());
             Directory.CreateDirectory(participantFolder);
 
-            // nom de fichier avec date et heure
             var fileName = $"{p.Id}_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.xlsx";
             var filePath = Path.Combine(participantFolder, fileName);
 
             using var workbook = new XLWorkbook();
             var worksheet = workbook.Worksheets.Add("Export");
 
+            // en-têtes
             worksheet.Cell(1, 1).Value = "Numéro du participant";
             worksheet.Cell(1, 2).Value = "Type de Stroop";
             worksheet.Cell(1, 3).Value = "Bloc";
@@ -50,27 +42,31 @@ namespace StroopApp.Services.Exportation
             worksheet.Cell(1, 9).Value = "Amorce";
 
             var row = 2;
-            foreach (var r in results)
+            foreach (var block in blocks)
             {
-                worksheet.Cell(row, 1).Value = p.Id;
-                worksheet.Cell(row, 2).Value = r.StroopType;
-                worksheet.Cell(row, 3).Value = r.Block;
-                worksheet.Cell(row, 4).Value = r.ExpectedAnswer;
-                worksheet.Cell(row, 5).Value = r.GivenAnswer;
-                worksheet.Cell(row, 6).Value = r.IsValidResponse;
-                worksheet.Cell(row, 7).Value = r.ReactionTime;
-                worksheet.Cell(row, 8).Value = r.TrialNumber;
-                worksheet.Cell(row, 9).Value = r.Amorce switch
+                foreach (var r in block.TrialRecords)
                 {
-                    AmorceType.Square => "Carré",
-                    AmorceType.Round => "Cercle",
-                    _ => ""
-                };
-                row++;
+                    worksheet.Cell(row, 1).Value = p.Id;
+                    worksheet.Cell(row, 2).Value = block.StroopType;
+                    worksheet.Cell(row, 3).Value = block.BlockNumber;
+                    worksheet.Cell(row, 4).Value = r.ExpectedAnswer;
+                    worksheet.Cell(row, 5).Value = r.GivenAnswer;
+                    worksheet.Cell(row, 6).Value = r.IsValidResponse;
+                    worksheet.Cell(row, 7).Value = r.ReactionTime;
+                    worksheet.Cell(row, 8).Value = r.TrialNumber;
+                    worksheet.Cell(row, 9).Value = r.Amorce switch
+                    {
+                        AmorceType.Square => "Carré",
+                        AmorceType.Round => "Cercle",
+                        _ => ""
+                    };
+                    row++;
+                }
             }
 
             workbook.SaveAs(filePath);
             await Task.CompletedTask;
         }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using StroopApp.Core;
+﻿using LiveChartsCore.SkiaSharpView;
+using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
@@ -20,7 +21,7 @@ namespace StroopApp.ViewModels.Configuration
         public ExperimentSettings _settings { get; set; }
         public ICommand LaunchExperimentCommand { get; }
         public ConfigurationPageViewModel(ExperimentSettings settings,
-    ProfileManagementViewModel profileViewModel,
+                                  ProfileManagementViewModel profileViewModel,
                                   ParticipantManagementViewModel participantViewModel,
                                   KeyMappingViewModel keyMappingViewModel,
                                   INavigationService experimenterNavigationService,
@@ -54,8 +55,10 @@ namespace StroopApp.ViewModels.Configuration
                 ShowErrorDialog("Veuillez sélectionner un participant.");
                 return;
             }
+            
+            _settings.ExperimentContext.AddNewSerie(_settings);
             _experimenterNavigationService.NavigateTo(() => new ExperimentDashBoardPage(_settings, _experimenterNavigationService, _windowManager));
-              _windowManager.ShowParticipantWindow(_settings);
+            _windowManager.ShowParticipantWindow(_settings);
         }
     }
 }

@@ -1,4 +1,10 @@
-﻿using StroopApp.Core;
+﻿using LiveChartsCore;
+using LiveChartsCore.Kernel;
+using LiveChartsCore.Kernel.Events;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
+using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
@@ -53,10 +59,55 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
             ContinueCommand = new RelayCommand(Continue);
             RestartCommand = new RelayCommand(Restart);
             QuitCommand = new RelayCommand(Quit);
-
-            UpdateTime();
-            Settings.NewBlock();
             Blocks = Settings.ExperimentContext.Blocks;
+            UpdateTime();
+            UpdateBlock();
+        }
+
+        private void UpdateBlock()
+        {
+            Settings.Block++;
+            Settings.ExperimentContext.ReactionPoints = new ObservableCollection<ReactionTimePoint>();
+            Settings.ExperimentContext.ColumnSerie = new ObservableCollection<ISeries>
+            {
+                new ColumnSeries<ReactionTimePoint>
+                {
+                    Values = Settings.ExperimentContext.ReactionPoints,
+                    DataLabelsPosition = LiveChartsCore.Measure.DataLabelsPosition.Top,
+                    DataLabelsSize = 16,
+                    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+                    DataLabelsFormatter = point =>
+                point.Coordinate.PrimaryValue.Equals(null)
+                    ? "Aucune réponse"
+                    : point.Coordinate.PrimaryValue.ToString("N0"),
+                    Mapping = (point, index) => new Coordinate(
+                        point.TrialNumber-1,
+                        point.ReactionTime != null
+                            ? point.ReactionTime.Value
+                            : double.NaN
+                    )
+                }.OnPointCreated(p =>
+    {
+        if (p.Visual is null) return;
+        var model = p.Model;
+        if (model.IsValidResponse.HasValue)
+        {
+            if(model.IsValidResponse.Value)
+            {
+            // Bonne réponse : point vert
+            p.Visual.Fill = new SolidColorPaint(SKColors.Green);
+            p.Visual.Stroke = new SolidColorPaint(SKColors.Green);
+            }
+            else
+            {
+            // Mauvaise réponse : point rouge
+            p.Visual.Fill = new SolidColorPaint(SKColors.Red);
+            p.Visual.Stroke = new SolidColorPaint(SKColors.Red);
+            }
+        }
+            })
+            };
+
         }
 
         private void UpdateTime()

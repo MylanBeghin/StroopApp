@@ -1,12 +1,12 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using LiveChartsCore;
+﻿using LiveChartsCore;
+using LiveChartsCore.Kernel;
 using LiveChartsCore.Kernel.Events;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
-using LiveChartsCore.Kernel;
 using StroopApp.Core;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace StroopApp.Models
 {
@@ -26,12 +26,28 @@ namespace StroopApp.Models
     /// </summary>
     public class SharedExperimentData : ModelBase
     {
-        public ObservableCollection<StroopTrial> TrialRecords { get; }
+
         public ObservableCollection<Block> Blocks { get; }
-        public ObservableCollection<ReactionTimePoint> ReactionPoints { get; set; }
-        public ObservableCollection<double?> ReactionTimes { get; set; }
+        public ObservableCollection<ISeries> BlockSeries { get; }
+
+        private Block _currentBlock;
+        public Block CurrentBlock
+        {
+            get => _currentBlock;
+            set
+            {
+                if (_currentBlock != value)
+                {
+                    _currentBlock = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public ObservableCollection<ISeries> ColumnSerie { get; set; }
-        public ObservableCollection<ISeries> GlobalSerie { get; set; }
+        public ObservableCollection<ReactionTimePoint> ReactionPoints { get; set; }
+        public ObservableCollection<RectangularSection> Sections { get; set; }
+        public int currentBlockStart;
+        public int currentBlockEnd;
 
         private StroopTrial _currentTrial;
         public StroopTrial CurrentTrial
@@ -58,8 +74,6 @@ namespace StroopApp.Models
 
             }
         }
-        public int TotalTrials { get; set; }
-
         private bool _isBlockFinished = false;
         public bool IsBlockFinished
         {
@@ -79,70 +93,100 @@ namespace StroopApp.Models
             get => _nextAction;
             set { _nextAction = value; OnPropertyChanged(); }
         }
-        public SharedExperimentData(ExperimentSettings settings)
-        {
-            TrialRecords = new ObservableCollection<StroopTrial>();
-            Blocks = new ObservableCollection<Block>();
-            TotalTrials = settings.CurrentProfile.WordCount;
-            ReactionPoints = new ObservableCollection<ReactionTimePoint>();
-            ReactionTimes = new ObservableCollection<double?>();
-            ColumnSerie = new ObservableCollection<ISeries>
-            {
-                new ColumnSeries<ReactionTimePoint>
-                {
-                    Values = ReactionPoints,
-                    DataLabelsPosition = LiveChartsCore.Measure.DataLabelsPosition.Top,
-                    DataLabelsSize = 16,
-                    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
-                    DataLabelsFormatter = point =>
-                point.Coordinate.PrimaryValue.Equals(null)
-                    ? "Aucune réponse"
-                    : point.Coordinate.PrimaryValue.ToString("N0"),
-                    Mapping = (point, index) => new Coordinate(
-                        point.TrialNumber-1,
-                        point.ReactionTime != null
-                            ? point.ReactionTime.Value
-                            : double.NaN
-                    )
-                }.OnPointCreated(p =>
-    {
-        if (p.Visual is null) return;
-        var model = p.Model;
-        if (model.IsValidResponse.HasValue)
-        {
-            if(model.IsValidResponse.Value)
-            {
-            // Bonne réponse : point vert
-            p.Visual.Fill = new SolidColorPaint(SKColors.Green);
-            p.Visual.Stroke = new SolidColorPaint(SKColors.Green);
-            }
-            else
-            {
-            // Mauvaise réponse : point rouge
-            p.Visual.Fill = new SolidColorPaint(SKColors.Red);
-            p.Visual.Stroke = new SolidColorPaint(SKColors.Red);
-            }
-        }
-            })
-            };
-            GlobalSerie = new ObservableCollection<ISeries>
-            {
-                new LineSeries<double?>
-                {
-                    Values = ReactionTimes,
-                    GeometrySize = 0,
-                    Stroke = new SolidColorPaint(palette[idx % palette.Length]) { StrokeThickness = 2 },
-                }
 
-            };
-        }
-        public void AddTrialRecord(StroopTrial record)
+        private readonly SKColor[] _palette = {
+    SKColors.CornflowerBlue,
+    SKColors.OrangeRed,
+    SKColors.MediumSeaGreen,
+    SKColors.Goldenrod
+};
+        public int _colorIndex;
+
+
+        public SharedExperimentData()
         {
-            TrialRecords.Add(record);
+            Blocks = new ObservableCollection<Block>();
+            BlockSeries = new ObservableCollection<ISeries>();
+            Sections = new ObservableCollection<RectangularSection>();
+            ReactionPoints = new ObservableCollection<ReactionTimePoint>();
+            NewColumnSerie();
+            currentBlockStart = 1;
         }
-        public void AddCurrentBlock(ExperimentSettings settings)
+
+        private void NewColumnSerie()
         {
-            Blocks.Add(new Block(settings));
+            ColumnSerie =
+                new ObservableCollection<ISeries>   {
+            new ColumnSeries<ReactionTimePoint>
+            {
+                Values = ReactionPoints,
+                DataLabelsPosition = LiveChartsCore.Measure.DataLabelsPosition.Top,
+                DataLabelsSize = 16,
+                DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+                DataLabelsFormatter = point =>
+            point.Coordinate.PrimaryValue.Equals(null)
+                ? "Aucune réponse"
+                : point.Coordinate.PrimaryValue.ToString("N0"),
+                Mapping = (point, index) => new Coordinate(
+                    point.TrialNumber-1,
+                    point.ReactionTime != null
+                        ? point.ReactionTime.Value
+                        : double.NaN
+                )
+            }.OnPointCreated(p =>
+{
+    if (p.Visual is null) return;
+    var model = p.Model;
+    if (model.IsValidResponse.HasValue)
+    {
+        if(model.IsValidResponse.Value)
+        {
+        // Bonne réponse : point vert
+        p.Visual.Fill = new SolidColorPaint(SKColors.Green);
+        p.Visual.Stroke = new SolidColorPaint(SKColors.Green);
+        }
+        else
+        {
+        // Mauvaise réponse : point rouge
+        p.Visual.Fill = new SolidColorPaint(SKColors.Red);
+        p.Visual.Stroke = new SolidColorPaint(SKColors.Red);
+        }
+    }
+        })
+        };
+
+        }
+
+        public void AddNewSerie(ExperimentSettings _settings)
+        {
+            CurrentBlock = new Block(_settings);
+            Blocks.Add(CurrentBlock);
+            var color = _palette[_colorIndex % _palette.Length];
+            var fillColor = color.WithAlpha(50);
+
+            var start = currentBlockStart;
+            var count = _settings.CurrentProfile.WordCount;
+            var end = start + count - 1;
+            currentBlockEnd = end;
+            BlockSeries.Add(new LineSeries<double?>
+            {
+                Values = CurrentBlock.TrialTimes,
+                Stroke = new SolidColorPaint(SKColors.Black, 2),
+                Fill = new SolidColorPaint(SKColors.Black.WithAlpha(60)),
+                LineSmoothness = 0.4f,
+                GeometrySize = 6,
+                GeometryStroke = new SolidColorPaint(SKColors.Black, 2),
+                GeometryFill = new SolidColorPaint(SKColors.White),
+                Mapping = (pt, idx) => new Coordinate(start + idx, pt.Value)
+            });
+            Sections.Add(new RectangularSection
+            {
+                Xi = start,
+                Xj = end,
+                Fill = new SolidColorPaint(fillColor)
+            });
+            _colorIndex++;
+            currentBlockStart = end + 1;
         }
     }
 }

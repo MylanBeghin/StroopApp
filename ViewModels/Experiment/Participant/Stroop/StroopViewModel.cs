@@ -1,13 +1,12 @@
-﻿using StroopApp.Models;
+﻿using StroopApp.Core;
+using StroopApp.Models;
 using StroopApp.Services.Navigation;
 using StroopApp.Views.Experiment.Participant;
 using StroopApp.Views.Experiment.Participant.Stroop;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
-public class StroopViewModel : INotifyPropertyChanged
+public class StroopViewModel : ViewModelBase
 {
     private ExperimentSettings _settings;
     public ExperimentSettings Settings
@@ -26,37 +25,18 @@ public class StroopViewModel : INotifyPropertyChanged
 
     private TaskCompletionSource<double> _inputTcs;
 
-    private Stopwatch _wordTimer;
+    private Stopwatch _responseTime;
+    private Stopwatch  _wordTimer;
 
-    private Stopwatch _reactionTimeTimer;
-
-    private StroopTrial _currentTrial;
-    public StroopTrial CurrentTrial
-    {
-        get => _currentTrial;
-        set { _currentTrial = value; OnPropertyChanged(); }
-    }
-
-    private double _wordTimerValue;
-    public double WordTimerValue
-    {
-        get => _wordTimerValue;
-        set { _wordTimerValue = value; OnPropertyChanged(); }
-    }
-
-    private double _reactionTimeTimerValue;
-    public double ReactionTimeTimerValue
-    {
-        get => _reactionTimeTimerValue;
-        set { _reactionTimeTimerValue = value; OnPropertyChanged(); }
-    }
     private readonly INavigationService _navigationService;
+    
+
     public StroopViewModel(ExperimentSettings settings, INavigationService navigationService)
     {
         Settings = settings;
         _navigationService = navigationService;
+        _responseTime = new Stopwatch();
         _wordTimer = new Stopwatch();
-        _reactionTimeTimer = new Stopwatch();
         GenerateTrials();
         StartTrials();
     }
@@ -96,19 +76,16 @@ public class StroopViewModel : INotifyPropertyChanged
                 }
             }
             trial.DetermineExpectedAnswer();
-            Settings.ExperimentContext.TrialRecords.Add(trial);
-            Settings.ExperimentContext.TotalTrials = Settings.ExperimentContext.TrialRecords.Count();
+            Settings.ExperimentContext.CurrentBlock.TrialRecords.Add(trial);
         }
     }
 
     public async void StartTrials()
     {
-        foreach (var trial in Settings.ExperimentContext.TrialRecords.Where(trial => trial.Block == Settings.Block))
+        foreach (var trial in Settings.ExperimentContext.CurrentBlock.TrialRecords)
         {
             Settings.ExperimentContext.CurrentTrial = trial;
-            _wordTimer.Reset();
-            _reactionTimeTimer.Reset();
-            _wordTimer.Start();
+
             CurrentControl = new FixationCrossControl();
             await Task.Delay((int)Settings.CurrentProfile.FixationDuration);
 
@@ -119,19 +96,18 @@ public class StroopViewModel : INotifyPropertyChanged
             }
 
             CurrentControl = new WordControl(trial.Stimulus.Text, trial.Stimulus.Color);
-            _reactionTimeTimer.Start();
+            _responseTime.Restart();
+            _wordTimer.Restart();
             _inputTcs = new TaskCompletionSource<double>();
-
 
             var delayTask = Task.Delay((int)Settings.CurrentProfile.MaxReactionTime);
             var completedTask = await Task.WhenAny(_inputTcs.Task, delayTask);
-
             if (completedTask == _inputTcs.Task)
             {
-                _reactionTimeTimer.Stop();
+                _responseTime.Stop();
                 trial.ReactionTime = _inputTcs.Task.Result;
                 var point = new ReactionTimePoint(trial.TrialNumber, trial.ReactionTime, Settings.ExperimentContext.CurrentTrial.IsValidResponse);
-                Settings.ExperimentContext.ReactionTimes.Add(trial.ReactionTime);
+                Settings.ExperimentContext.CurrentBlock.TrialTimes.Add(trial.ReactionTime);
                 Settings.ExperimentContext.ReactionPoints.Add(point);
                 Settings.ExperimentContext.CurrentTrial.GivenAnswer = trial.GivenAnswer;
                 Settings.ExperimentContext.CurrentTrial.IsValidResponse = trial.IsValidResponse;
@@ -140,9 +116,9 @@ public class StroopViewModel : INotifyPropertyChanged
             }
             else
             {
-                _reactionTimeTimer.Stop();
+                _responseTime.Stop();
                 var point = new ReactionTimePoint(trial.TrialNumber, double.NaN, null);
-                Settings.ExperimentContext.ReactionTimes.Add(null); // Bien mettre null et pas Double.Nan, sinon les points ne s'affichent plus sur le graph !
+                Settings.ExperimentContext.CurrentBlock.TrialTimes.Add(null); // Bien mettre null et pas Double.Nan, sinon les points ne s'affichent plus sur le graph !
                 Settings.ExperimentContext.ReactionPoints.Add(point);
                 Settings.ExperimentContext.CurrentTrial.GivenAnswer = trial.GivenAnswer;
                 Settings.ExperimentContext.CurrentTrial.IsValidResponse = trial.IsValidResponse;
@@ -153,22 +129,17 @@ public class StroopViewModel : INotifyPropertyChanged
             {
                 await Task.Delay((int)remaining);
             }
+            _responseTime.Stop();
             _wordTimer.Stop();
-            WordTimerValue = _wordTimer.Elapsed.TotalMilliseconds;
-            ReactionTimeTimerValue = _reactionTimeTimer.Elapsed.TotalMilliseconds;
-            OnPropertyChanged(nameof(WordTimerValue));
-            OnPropertyChanged(nameof(ReactionTimeTimerValue));
-            _wordTimer.Reset();
-            _reactionTimeTimer.Reset();
         }
         EndBlock();
     }
     public void EndBlock()
     {
+        Settings.ExperimentContext.CurrentBlock.CalculateValues();
         Settings.ExperimentContext.CurrentTrial = null;
         _inputTcs = null;
-        _wordTimer.Reset();
-        _reactionTimeTimer.Reset();
+        _responseTime.Reset();
         _navigationService.NavigateTo(() => new EndInstructionsPage());
         Settings.ExperimentContext.IsBlockFinished = true;
     }
@@ -191,12 +162,8 @@ public class StroopViewModel : INotifyPropertyChanged
             {
                 Settings.ExperimentContext.CurrentTrial.GivenAnswer = answer;
                 Settings.ExperimentContext.CurrentTrial.IsValidResponse = string.Equals(Settings.ExperimentContext.CurrentTrial.ExpectedAnswer, answer, StringComparison.OrdinalIgnoreCase);
-                _inputTcs.TrySetResult(_reactionTimeTimer.Elapsed.TotalMilliseconds);
+                _inputTcs.TrySetResult(_responseTime.Elapsed.TotalMilliseconds);
             }
         }
     }
-
-    public event PropertyChangedEventHandler PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }
