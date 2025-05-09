@@ -1,5 +1,4 @@
 ﻿using StroopApp.Core;
-using System.ComponentModel;
 
 namespace StroopApp.Models
 {

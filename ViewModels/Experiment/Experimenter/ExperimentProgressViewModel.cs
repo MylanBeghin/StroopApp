@@ -7,21 +7,22 @@ namespace StroopApp.ViewModels.Experiment
 {
     public class ExperimentProgressViewModel : ViewModelBase
     {
-        private readonly ExperimentSettings _settings;
-        public ExperimentSettings Settings => _settings;
-
-        public int Progress => (_settings.CurrentProfile.WordCount > 0) && (_settings.ExperimentContext != null)
-    ? (int)(((double)_settings.ExperimentContext.ReactionPoints.Count / _settings.CurrentProfile.WordCount) * 100)
+        public ExperimentSettings settings
+        {
+            get;
+        }
+        public int Progress => (settings.CurrentProfile.WordCount > 0) && (settings.ExperimentContext != null)
+    ? (int)(((double)settings.ExperimentContext.ReactionPoints.Count / settings.CurrentProfile.WordCount) * 100)
         : 0;
 
-        public ObservableCollection<StroopTrial> TrialRecords => _settings.ExperimentContext?.Blocks[_settings.Block].TrialRecords ?? new ObservableCollection<StroopTrial>();
+        public ObservableCollection<StroopTrial> TrialRecords => settings.ExperimentContext?.Blocks[settings.Block].TrialRecords ?? new ObservableCollection<StroopTrial>();
 
         public ExperimentProgressViewModel(ExperimentSettings settings)
         {
-            _settings = settings;
-            if (_settings.ExperimentContext != null)
+            this.settings = settings;
+            if (this.settings.ExperimentContext != null)
             {
-                _settings.ExperimentContext.PropertyChanged += ExperimentContext_PropertyChanged;
+                this.settings.ExperimentContext.PropertyChanged += ExperimentContext_PropertyChanged;
             }
         }
 

@@ -20,10 +20,5 @@ namespace StroopApp.Views.Experiment.Experimenter
             MainGrid.Children.Add(GlobalGraph);
             Grid.SetRow(GlobalGraph, 4);
         }
-
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

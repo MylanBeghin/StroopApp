@@ -12,7 +12,11 @@ public class StroopViewModel : ViewModelBase
     public ExperimentSettings Settings
     {
         get => _settings;
-        set { _settings = value; OnPropertyChanged(); }
+        set
+        {
+            _settings = value;
+            OnPropertyChanged();
+        }
     }
 
     private readonly Random random = new Random();
@@ -20,16 +24,20 @@ public class StroopViewModel : ViewModelBase
     public UserControl CurrentControl
     {
         get => _currentControl;
-        set { _currentControl = value; OnPropertyChanged(); }
+        set
+        {
+            _currentControl = value;
+            OnPropertyChanged();
+        }
     }
 
     private TaskCompletionSource<double> _inputTcs;
 
     private Stopwatch _responseTime;
-    private Stopwatch  _wordTimer;
+    private Stopwatch _wordTimer;
 
     private readonly INavigationService _navigationService;
-    
+
 
     public StroopViewModel(ExperimentSettings settings, INavigationService navigationService)
     {
@@ -46,7 +54,7 @@ public class StroopViewModel : ViewModelBase
         var wordColors = new[] { "Blue", "Red", "Green", "Yellow" };
         var wordTexts = new[] { "Blue", "Red", "Green", "Yellow" };
 
-        for (int i = 0; i < Settings.CurrentProfile.WordCount; i++)
+        for (int i = 0 ; i < Settings.CurrentProfile.WordCount ; i++)
         {
             var trial = new StroopTrial
             {
@@ -87,12 +95,12 @@ public class StroopViewModel : ViewModelBase
             Settings.ExperimentContext.CurrentTrial = trial;
 
             CurrentControl = new FixationCrossControl();
-            await Task.Delay((int)Settings.CurrentProfile.FixationDuration);
+            await Task.Delay(Settings.CurrentProfile.FixationDuration);
 
             if (trial.StroopType == "Amorce")
             {
                 CurrentControl = new AmorceControl(trial.Amorce);
-                await Task.Delay((int)Settings.CurrentProfile.AmorceDuration);
+                await Task.Delay(Settings.CurrentProfile.AmorceDuration);
             }
 
             CurrentControl = new WordControl(trial.Stimulus.Text, trial.Stimulus.Color);
@@ -100,7 +108,7 @@ public class StroopViewModel : ViewModelBase
             _wordTimer.Restart();
             _inputTcs = new TaskCompletionSource<double>();
 
-            var delayTask = Task.Delay((int)Settings.CurrentProfile.MaxReactionTime);
+            var delayTask = Task.Delay(Settings.CurrentProfile.MaxReactionTime);
             var completedTask = await Task.WhenAny(_inputTcs.Task, delayTask);
             if (completedTask == _inputTcs.Task)
             {
@@ -109,9 +117,7 @@ public class StroopViewModel : ViewModelBase
                 var point = new ReactionTimePoint(trial.TrialNumber, trial.ReactionTime, Settings.ExperimentContext.CurrentTrial.IsValidResponse);
                 Settings.ExperimentContext.CurrentBlock.TrialTimes.Add(trial.ReactionTime);
                 Settings.ExperimentContext.ReactionPoints.Add(point);
-                Settings.ExperimentContext.CurrentTrial.GivenAnswer = trial.GivenAnswer;
-                Settings.ExperimentContext.CurrentTrial.IsValidResponse = trial.IsValidResponse;
-                Settings.ExperimentContext.CurrentTrial.ReactionTime = trial.ReactionTime;
+                Settings.ExperimentContext.CurrentTrial = trial;
                 CurrentControl = new FixationCrossControl();
             }
             else
@@ -120,9 +126,7 @@ public class StroopViewModel : ViewModelBase
                 var point = new ReactionTimePoint(trial.TrialNumber, double.NaN, null);
                 Settings.ExperimentContext.CurrentBlock.TrialTimes.Add(null); // Bien mettre null et pas Double.Nan, sinon les points ne s'affichent plus sur le graph !
                 Settings.ExperimentContext.ReactionPoints.Add(point);
-                Settings.ExperimentContext.CurrentTrial.GivenAnswer = trial.GivenAnswer;
-                Settings.ExperimentContext.CurrentTrial.IsValidResponse = trial.IsValidResponse;
-                Settings.ExperimentContext.CurrentTrial.ReactionTime = trial.ReactionTime;
+                Settings.ExperimentContext.CurrentTrial = trial;
             }
             double remaining = Settings.CurrentProfile.WordDuration - _wordTimer.Elapsed.TotalMilliseconds;
             if (remaining > 0)
@@ -162,7 +166,7 @@ public class StroopViewModel : ViewModelBase
             {
                 Settings.ExperimentContext.CurrentTrial.GivenAnswer = answer;
                 Settings.ExperimentContext.CurrentTrial.IsValidResponse = string.Equals(Settings.ExperimentContext.CurrentTrial.ExpectedAnswer, answer, StringComparison.OrdinalIgnoreCase);
-                _inputTcs.TrySetResult(_responseTime.Elapsed.TotalMilliseconds);
+                _ = _inputTcs.TrySetResult(_responseTime.Elapsed.TotalMilliseconds);
             }
         }
     }

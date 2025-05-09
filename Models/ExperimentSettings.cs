@@ -1,5 +1,4 @@
 ﻿using StroopApp.Core;
-using System.ComponentModel;
 namespace StroopApp.Models
 {
     /// <summary>
@@ -28,27 +27,49 @@ namespace StroopApp.Models
         public Participant Participant
         {
             get => _participant;
-            set { _participant = value; OnPropertyChanged(); }
+            set
+            {
+                _participant = value;
+                OnPropertyChanged();
+            }
         }
 
         private ExperimentProfile _currentProfile;
         public ExperimentProfile CurrentProfile
         {
             get => _currentProfile;
-            set { _currentProfile = value; OnPropertyChanged(); }
+            set
+            {
+                _currentProfile = value;
+                OnPropertyChanged();
+            }
         }
 
         private KeyMappings _keyMappings;
         public KeyMappings KeyMappings
         {
             get => _keyMappings;
-            set { _keyMappings = value; OnPropertyChanged(); }
+            set
+            {
+                _keyMappings = value;
+                OnPropertyChanged();
+            }
         }
         private SharedExperimentData _experimentContext;
         public SharedExperimentData ExperimentContext
         {
             get => _experimentContext;
-            set { _experimentContext = value; OnPropertyChanged(); }
+            set
+            {
+                _experimentContext = value;
+                OnPropertyChanged();
+            }
+        }
+        public void Reset()
+        {
+            ExperimentContext.Reset();
+            Block = 1;
+            OnPropertyChanged(string.Empty);
         }
         public ExperimentSettings()
         {

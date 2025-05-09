@@ -119,7 +119,7 @@
                             <GridViewColumn Header="Poids (kg)"
                                             DisplayMemberBinding="{Binding Weight}"
                                             Width="100" />
-                            <GridViewColumn Header="Sexe assigné"
+                            <GridViewColumn Header="Sexe"
                                             DisplayMemberBinding="{Binding SexAssigned}"
                                             Width="150" />
                             <GridViewColumn Header="Genre"

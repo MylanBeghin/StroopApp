@@ -27,8 +27,14 @@ namespace StroopApp.Models
     public class SharedExperimentData : ModelBase
     {
 
-        public ObservableCollection<Block> Blocks { get; }
-        public ObservableCollection<ISeries> BlockSeries { get; }
+        public ObservableCollection<Block> Blocks
+        {
+            get;
+        }
+        public ObservableCollection<ISeries> BlockSeries
+        {
+            get;
+        }
 
         private Block _currentBlock;
         public Block CurrentBlock
@@ -43,9 +49,18 @@ namespace StroopApp.Models
                 }
             }
         }
-        public ObservableCollection<ISeries> ColumnSerie { get; set; }
-        public ObservableCollection<ReactionTimePoint> ReactionPoints { get; set; }
-        public ObservableCollection<RectangularSection> Sections { get; set; }
+        public ObservableCollection<ISeries> ColumnSerie
+        {
+            get; set;
+        }
+        public ObservableCollection<ReactionTimePoint> ReactionPoints
+        {
+            get; set;
+        }
+        public ObservableCollection<RectangularSection> Sections
+        {
+            get; set;
+        }
         public int currentBlockStart;
         public int currentBlockEnd;
 
@@ -74,6 +89,7 @@ namespace StroopApp.Models
 
             }
         }
+
         private bool _isBlockFinished = false;
         public bool IsBlockFinished
         {
@@ -87,21 +103,21 @@ namespace StroopApp.Models
                 }
             }
         }
+
         ExperimentAction _nextAction;
         public ExperimentAction NextAction
         {
             get => _nextAction;
-            set { _nextAction = value; OnPropertyChanged(); }
+            set
+            {
+                _nextAction = value;
+                OnPropertyChanged();
+            }
         }
 
-        private readonly SKColor[] _palette = {
-    SKColors.CornflowerBlue,
-    SKColors.OrangeRed,
-    SKColors.MediumSeaGreen,
-    SKColors.Goldenrod
-};
-        public int _colorIndex;
+        private readonly SKColor[] _palette = { SKColors.CornflowerBlue, SKColors.OrangeRed, SKColors.MediumSeaGreen, SKColors.Goldenrod };
 
+        public int _colorIndex;
 
         public SharedExperimentData()
         {
@@ -116,45 +132,38 @@ namespace StroopApp.Models
         private void NewColumnSerie()
         {
             ColumnSerie =
-                new ObservableCollection<ISeries>   {
-            new ColumnSeries<ReactionTimePoint>
+            new ObservableCollection<ISeries>
             {
-                Values = ReactionPoints,
-                DataLabelsPosition = LiveChartsCore.Measure.DataLabelsPosition.Top,
-                DataLabelsSize = 16,
-                DataLabelsPaint = new SolidColorPaint(SKColors.Black),
-                DataLabelsFormatter = point =>
-            point.Coordinate.PrimaryValue.Equals(null)
-                ? "Aucune réponse"
-                : point.Coordinate.PrimaryValue.ToString("N0"),
-                Mapping = (point, index) => new Coordinate(
-                    point.TrialNumber-1,
-                    point.ReactionTime != null
-                        ? point.ReactionTime.Value
-                        : double.NaN
+                new ColumnSeries<ReactionTimePoint>
+                {
+                    Values = ReactionPoints,
+                    DataLabelsPosition = LiveChartsCore.Measure.DataLabelsPosition.Top,
+                    DataLabelsSize = 16,
+                    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+                    DataLabelsFormatter = point => point.Coordinate.PrimaryValue.Equals(double.NaN) ? "Aucune réponse" : point.Coordinate.PrimaryValue.ToString("N0"),
+                    Mapping = (point, index) => new Coordinate( point.TrialNumber-1,point.ReactionTime != null ? point.ReactionTime.Value : double.NaN)
+                }.OnPointCreated(p =>
+                    {
+                        if (p.Visual is null) return;
+                        var model = p.Model;
+                        if (model.IsValidResponse.HasValue)
+                        {
+                            if(model.IsValidResponse.Value)
+                            {
+                            // Bonne réponse : point vert
+                            p.Visual.Fill = new SolidColorPaint(SKColors.Green);
+                            p.Visual.Stroke = new SolidColorPaint(SKColors.Green);
+                            }
+                            else
+                            { 
+                            // Mauvaise réponse : point rouge
+                            p.Visual.Fill = new SolidColorPaint(SKColors.Red);
+                            p.Visual.Stroke = new SolidColorPaint(SKColors.Red);
+                            }
+                        }
+                    }
                 )
-            }.OnPointCreated(p =>
-{
-    if (p.Visual is null) return;
-    var model = p.Model;
-    if (model.IsValidResponse.HasValue)
-    {
-        if(model.IsValidResponse.Value)
-        {
-        // Bonne réponse : point vert
-        p.Visual.Fill = new SolidColorPaint(SKColors.Green);
-        p.Visual.Stroke = new SolidColorPaint(SKColors.Green);
-        }
-        else
-        {
-        // Mauvaise réponse : point rouge
-        p.Visual.Fill = new SolidColorPaint(SKColors.Red);
-        p.Visual.Stroke = new SolidColorPaint(SKColors.Red);
-        }
-    }
-        })
-        };
-
+            };
         }
 
         public void AddNewSerie(ExperimentSettings _settings)
@@ -183,10 +192,27 @@ namespace StroopApp.Models
             {
                 Xi = start,
                 Xj = end,
-                Fill = new SolidColorPaint(fillColor)
+                Fill = new SolidColorPaint(fillColor),
+                Label = $"Bloc n°{_settings.Block}",
+                LabelSize = 16,
+                LabelPaint = new SolidColorPaint(SKColors.Black)
             });
             _colorIndex++;
             currentBlockStart = end + 1;
+        }
+        public void Reset()
+        {
+            Blocks.Clear();
+            BlockSeries.Clear();
+            Sections.Clear();
+            ReactionPoints.Clear();
+            _colorIndex = 0;
+            currentBlockStart = 1;
+            currentBlockEnd = 0;
+            CurrentBlock = null;
+            IsBlockFinished = false;
+            NextAction = ExperimentAction.None;
+            NewColumnSerie();
         }
     }
 }

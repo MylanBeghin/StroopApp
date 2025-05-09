@@ -43,7 +43,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <ComboBox Grid.Column="0"
-                      ui:ControlHelper.Header="Sexe assigné à la naissance"
+                      ui:ControlHelper.Header="Sexe"
                       ItemsSource="{Binding SexAssignedValues}"
                       SelectedItem="{Binding Participant.SexAssigned, Mode=TwoWay}"
                       Width="200"/>

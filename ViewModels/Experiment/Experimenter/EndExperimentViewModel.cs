@@ -17,15 +17,30 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
 {
     public class EndExperimentViewModel : ViewModelBase
     {
-        public ExperimentSettings Settings { get; }
-        public ObservableCollection<Block> Blocks { get; }
+        public ExperimentSettings Settings
+        {
+            get;
+        }
+        public ObservableCollection<Block> Blocks
+        {
+            get;
+        }
         private readonly IExportationService _exportationService;
         private readonly INavigationService _experimenterNavigationService;
         private readonly IWindowManager _windowManager;
 
-        public ICommand ContinueCommand { get; }
-        public ICommand RestartCommand { get; }
-        public ICommand QuitCommand { get; }
+        public ICommand ContinueCommand
+        {
+            get;
+        }
+        public ICommand RestartCommand
+        {
+            get;
+        }
+        public ICommand QuitCommand
+        {
+            get;
+        }
         private string _currentDay;
         public string CurrentDay
         {
@@ -66,7 +81,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
 
         private void UpdateBlock()
         {
-            Settings.Block++;
+
             Settings.ExperimentContext.ReactionPoints = new ObservableCollection<ReactionTimePoint>();
             Settings.ExperimentContext.ColumnSerie = new ObservableCollection<ISeries>
             {
@@ -118,13 +133,19 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
 
         private void Continue()
         {
+            Settings.Block++;
+            Settings.ExperimentContext.IsBlockFinished = false;
             _experimenterNavigationService.NavigateTo(() => new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
         }
         private async void Restart()
         {
             await _exportationService.ExportDataAsync();
-            _experimenterNavigationService.NavigateTo(() => new ConfigurationPage(new ExperimentSettings(), _experimenterNavigationService, _windowManager));
+            Settings.ExperimentContext.IsBlockFinished = false;
+            Settings.Reset();
+            _experimenterNavigationService.NavigateTo(
+                () => new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
         }
+
         private async void Quit()
         {
             await _exportationService.ExportDataAsync();

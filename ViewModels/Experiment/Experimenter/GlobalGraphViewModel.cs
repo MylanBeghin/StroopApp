@@ -8,17 +8,29 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.Graphs
 {
     public partial class GlobalGraphViewModel : ObservableObject
     {
-        public ObservableCollection<ISeries> Series { get; }
-        public ObservableCollection<RectangularSection> Sections { get; }
-        public Axis[] XAxes { get; }
-        public Axis[] YAxes { get; }
+        public ObservableCollection<ISeries> Series
+        {
+            get;
+        }
+        public ObservableCollection<RectangularSection> Sections
+        {
+            get;
+        }
+        public Axis[] XAxes
+        {
+            get;
+        }
+        public Axis[] YAxes
+        {
+            get;
+        }
         public GlobalGraphViewModel(ExperimentSettings settings)
         {
             Series = settings.ExperimentContext.BlockSeries;
             Sections = settings.ExperimentContext.Sections;
-
-
             var totalTrials = settings.ExperimentContext.Blocks.Sum(b => b.TrialRecords.Count()) + settings.CurrentProfile.WordCount;
+            if (settings.ExperimentContext.IsBlockFinished)
+                totalTrials -= settings.CurrentProfile.WordCount;
             XAxes = new[]
             {
                 new Axis

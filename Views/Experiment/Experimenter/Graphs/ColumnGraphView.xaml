@@ -15,7 +15,8 @@
             BorderThickness="0.5"
             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
         <lvc:CartesianChart Series="{Binding ColumnSerie}"
-                            x:Name="ReactionTimeGraph">
+                            XAxes="{Binding XAxes}"
+                            YAxes="{Binding YAxes}">
         </lvc:CartesianChart>
     </Border>
 </UserControl>
