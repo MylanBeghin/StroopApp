@@ -29,9 +29,11 @@
                                  HorizontalAlignment="Right"
                                  VerticalAlignment="Center"
                                  Spacing="10">
-                <TextBlock Text="{Binding CurrentDay}"
+                <TextBlock Text="{Binding CurrentProfile}"
                            Style="{DynamicResource TitleTextBlockStyle}" />
-                <TextBlock Text="{Binding CurrentTime}"
+                <TextBlock Text=" - "
+                           Style="{DynamicResource TitleTextBlockStyle}"/>
+                <TextBlock Text="{Binding CurrentParticipant}"
                            Style="{DynamicResource TitleTextBlockStyle}" />
             </ui:SimpleStackPanel>
         </Grid>
@@ -94,13 +96,17 @@
         </Border>
         <ui:SimpleStackPanel Orientation="Horizontal"
                              Spacing="16"
-                             Grid.Row="6">
+                             Grid.Row="6"
+                             HorizontalAlignment="Center">
             <Button Content="Relancer"
-                    Command="{Binding ContinueCommand}" />
+                    Command="{Binding ContinueCommand}"
+                    Style="{DynamicResource AccentButtonStyle}"
+                    IsDefault="True" />
             <Button Content="Nouvelle expérience"
-                    Command="{Binding RestartCommand}" />
+                    Command="{Binding RestartCommand}"/>
             <Button Content="Quitter l'application"
-                    Command="{Binding QuitCommand}" />
+                    Command="{Binding QuitCommand}"
+                    IsCancel="True" />
         </ui:SimpleStackPanel>
     </Grid>
 </Page>

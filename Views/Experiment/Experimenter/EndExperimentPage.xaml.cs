@@ -4,6 +4,7 @@ using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.Experiment.Experimenter;
 using StroopApp.Views.Experiment.Experimenter.Graphs;
+using System.IO;
 using System.Windows.Controls;
 
 namespace StroopApp.Views.Experiment.Experimenter
@@ -14,7 +15,10 @@ namespace StroopApp.Views.Experiment.Experimenter
         public EndExperimentPage(ExperimentSettings settings, INavigationService experimenterNavigationService, IWindowManager windowManager)
         {
             InitializeComponent();
-            var ExportationService = new ExportationService(settings);
+            var configDir = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "StroopApp");
+            var ExportationService = new ExportationService(settings, configDir);
             DataContext = new EndExperimentViewModel(settings, ExportationService, experimenterNavigationService, windowManager);
             var GlobalGraph = new GlobalGraphView(settings);
             MainGrid.Children.Add(GlobalGraph);

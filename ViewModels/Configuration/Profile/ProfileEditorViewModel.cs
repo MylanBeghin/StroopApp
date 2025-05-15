@@ -1,32 +1,46 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
-using ModernWpf.Controls;
-using StroopApp.Core;
+﻿using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Services;
-using StroopApp.Services.Profile;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Input;
 
 namespace StroopApp.ViewModels.Configuration.Profile
 {
-    public class ProfileEditorViewModel : INotifyPropertyChanged
+    public class ProfileEditorViewModel : ViewModelBase
     {
         private ExperimentProfile _profile;
         public ExperimentProfile Profile
         {
             get => _profile;
-            set { _profile = value; OnPropertyChanged(); }
+            set
+            {
+                _profile = value;
+                OnPropertyChanged();
+            }
         }
         private ExperimentProfile _originalProfile;
 
-        public ObservableCollection<ExperimentProfile> Profiles { get; }
-        public bool? DialogResult { get; private set; }
-        public Action? CloseAction { get; set; }
-        public ICommand SaveCommand { get; }
-        public ICommand CancelCommand { get; }
+        public ObservableCollection<ExperimentProfile> Profiles
+        {
+            get;
+        }
+        public bool? DialogResult
+        {
+            get; private set;
+        }
+        public Action? CloseAction
+        {
+            get; set;
+        }
+        public ICommand SaveCommand
+        {
+            get;
+        }
+        public ICommand CancelCommand
+        {
+            get;
+        }
 
         private readonly IProfileService _IprofileService;
 
@@ -99,7 +113,7 @@ namespace StroopApp.ViewModels.Configuration.Profile
                 ShowErrorDialog("Le nom du profil ne peut pas être vide ou contenir uniquement des espaces.");
                 return;
             }
-            if (Profiles.Any(p => p != Profile && p != _originalProfile && p.ProfileName==Profile.ProfileName ))
+            if (Profiles.Any(p => p != Profile && p != _originalProfile && p.ProfileName == Profile.ProfileName))
             {
                 ShowErrorDialog("Un profil avec ce nom existe déjà. Veuillez choisir un autre nom.");
                 return;
@@ -156,21 +170,5 @@ namespace StroopApp.ViewModels.Configuration.Profile
             DialogResult = false;
             CloseAction?.Invoke();
         }
-
-        private async void ShowErrorDialog(string message)
-        {
-            var dialog = new ContentDialog
-            {
-                Title = "Erreur",
-                Content = message,
-                CloseButtonText = "OK"
-            };
-
-            await dialog.ShowAsync();
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

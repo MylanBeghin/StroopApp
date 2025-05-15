@@ -1,30 +1,38 @@
-﻿using System.Collections.ObjectModel;
+﻿using StroopApp.Models;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
-using StroopApp.Models;
 
 namespace StroopApp.Services.Profile
 {
     public class ProfileService : IProfileService
     {
-        private const string ProfilesFilePath = "profiles.json";
-        private const string LastProfileFile = "lastProfile.txt";
+        private readonly string _configDir;
+        private readonly string _profilesPath;
+        private readonly string _lastProfileFile;
+
+        public ProfileService(string configDir)
+        {
+            _configDir = configDir;
+            _profilesPath = Path.Combine(_configDir, "profiles.json");
+            _lastProfileFile = "lastProfile.txt";
+        }
 
         public ObservableCollection<ExperimentProfile> LoadProfiles()
         {
-            if (File.Exists(ProfilesFilePath))
-            {
-                var json = File.ReadAllText(ProfilesFilePath);
-                return JsonSerializer.Deserialize<ObservableCollection<ExperimentProfile>>(json)
-                       ?? new ObservableCollection<ExperimentProfile>();
-            }
-            return new ObservableCollection<ExperimentProfile>();
+            if (!File.Exists(_profilesPath))
+                return new ObservableCollection<ExperimentProfile>();
+
+            var json = File.ReadAllText(_profilesPath);
+            return JsonSerializer.Deserialize<ObservableCollection<ExperimentProfile>>(json)
+                   ?? new ObservableCollection<ExperimentProfile>();
         }
 
         public void SaveProfiles(ObservableCollection<ExperimentProfile> profiles)
         {
+            Directory.CreateDirectory(_configDir);
             var json = JsonSerializer.Serialize(profiles, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(ProfilesFilePath, json);
+            File.WriteAllText(_profilesPath, json);
         }
 
         public void AddProfile(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles)
@@ -44,16 +52,16 @@ namespace StroopApp.Services.Profile
 
         public string? LoadLastSelectedProfile()
         {
-            if (File.Exists(LastProfileFile))
+            if (File.Exists(_lastProfileFile))
             {
-                return File.ReadAllText(LastProfileFile);
+                return File.ReadAllText(_lastProfileFile);
             }
             return null;
         }
 
         public void SaveLastSelectedProfile(ExperimentProfile profile)
         {
-            File.WriteAllText(LastProfileFile, profile.ProfileName);
+            File.WriteAllText(_lastProfileFile, profile.ProfileName);
         }
     }
 }

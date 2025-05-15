@@ -41,11 +41,12 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.Graphs
                 }
         };
 
-            double maxRt = settings.ExperimentContext.CurrentBlock.TrialRecords
-                .Where(t => t.ReactionTime.HasValue)
-                .Select(t => t.ReactionTime.Value)
-                .DefaultIfEmpty(0)
-                .Max();
+            double maxRt = settings.ExperimentContext.Blocks
+    .SelectMany(b => b.TrialRecords)
+    .Where(t => t.ReactionTime.HasValue)
+    .Select(t => t.ReactionTime.Value)
+    .DefaultIfEmpty(0)
+    .Max();
             YAxes = new[]
                 {
                 new Axis { MinLimit = 0, MaxLimit = Math.Max(maxRt, settings.CurrentProfile.MaxReactionTime)

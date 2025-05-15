@@ -1,19 +1,19 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
-using ModernWpf.Controls;
-using StroopApp.Core;
+﻿using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Services;
 using StroopApp.Views;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace StroopApp.ViewModels.Configuration.Profile
 {
     public class ProfileManagementViewModel : ViewModelBase
     {
         private readonly IProfileService _profileService;
-        public ObservableCollection<ExperimentProfile> Profiles { get; set; }
+        public ObservableCollection<ExperimentProfile> Profiles
+        {
+            get; set;
+        }
 
         private ExperimentProfile? _currentProfile;
         public ExperimentProfile CurrentProfile
@@ -30,10 +30,18 @@ namespace StroopApp.ViewModels.Configuration.Profile
                 }
             }
         }
-
-        public ICommand CreateProfileCommand { get; }
-        public ICommand ModifyProfileCommand { get; }
-        public ICommand DeleteProfileCommand { get; }
+        public ICommand CreateProfileCommand
+        {
+            get;
+        }
+        public ICommand ModifyProfileCommand
+        {
+            get;
+        }
+        public ICommand DeleteProfileCommand
+        {
+            get;
+        }
 
         public ProfileManagementViewModel(IProfileService profileService)
         {

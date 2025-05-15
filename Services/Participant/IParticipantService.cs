@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using StroopApp.Models;
 
 namespace StroopApp.Services.Participant
 {
@@ -7,7 +6,8 @@ namespace StroopApp.Services.Participant
     {
         ObservableCollection<Models.Participant> LoadParticipants();
         void SaveParticipants(ObservableCollection<Models.Participant> participants);
-        void DeleteParticipant(int participantId);
+        void AddParticipant(ObservableCollection<Models.Participant> participants, Models.Participant participant);
+        void DeleteParticipant(ObservableCollection<Models.Participant> participants, int participantId);
         int GetNextParticipantId();
     }
 }

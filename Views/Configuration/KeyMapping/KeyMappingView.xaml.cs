@@ -1,15 +1,10 @@
-﻿using System.Windows.Controls;
-using StroopApp.Services.KeyMapping;
-using StroopApp.ViewModels.Configuration;
+﻿using StroopApp.ViewModels.Configuration;
+using System.Windows.Controls;
 
 namespace StroopApp.Views.KeyMapping
 {
     public partial class KeyMappingView : UserControl
     {
-        // Constructeur sans paramètre pour le XAML
-        public KeyMappingView() : this(new KeyMappingViewModel(new KeyMappingService()))
-        {
-        }
         public KeyMappingView(KeyMappingViewModel viewModel)
         {
             InitializeComponent();

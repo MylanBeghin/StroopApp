@@ -1,5 +1,4 @@
 ﻿using StroopApp.Core;
-using System.ComponentModel;
 
 namespace StroopApp.Models
 {
@@ -31,6 +30,8 @@ namespace StroopApp.Models
             _stroopType = StroopTypes[0];
             _groupSize = 5;
             _calculationMode = CalculationMode.TaskDuration;
+            _congruencePourcentage = 50;
+            _switchPourcentage = 50;
             UpdateDerivedValues();
         }
 
@@ -221,6 +222,7 @@ namespace StroopApp.Models
                 {
                     _maxReactionTime = value;
                     OnPropertyChanged(nameof(MaxReactionTime));
+                    UpdateDerivedValues();
                 }
             }
         }
@@ -235,6 +237,32 @@ namespace StroopApp.Models
                     _calculationMode = value;
                     OnPropertyChanged(nameof(CalculationMode));
                     UpdateDerivedValues();
+                }
+            }
+        }
+        private int _switchPourcentage;
+        public int SwitchPourcentage
+        {
+            get => _switchPourcentage;
+            set
+            {
+                if (_switchPourcentage != value)
+                {
+                    _switchPourcentage = value;
+                    OnPropertyChanged(nameof(SwitchPourcentage));
+                }
+            }
+        }
+        private int _congruencePourcentage;
+        public int CongruencePourcentage
+        {
+            get => _switchPourcentage;
+            set
+            {
+                if (_congruencePourcentage != value)
+                {
+                    _congruencePourcentage = value;
+                    OnPropertyChanged(nameof(CongruencePourcentage));
                 }
             }
         }
@@ -255,7 +283,7 @@ namespace StroopApp.Models
                 Minutes = (TaskDuration % 3600000) / 60000;
                 Seconds = (TaskDuration % 60000) / 1000;
             }
-            MaxReactionTime = WordDuration - FixationDuration - AmorceDuration;
+            WordDuration = MaxReactionTime + FixationDuration + AmorceDuration;
         }
     }
 }

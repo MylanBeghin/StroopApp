@@ -36,8 +36,8 @@ namespace StroopApp.Models
             get;
         }
 
-        private Block _currentBlock;
-        public Block CurrentBlock
+        private Block? _currentBlock;
+        public Block? CurrentBlock
         {
             get => _currentBlock;
             set
@@ -49,7 +49,7 @@ namespace StroopApp.Models
                 }
             }
         }
-        public ObservableCollection<ISeries> ColumnSerie
+        public ObservableCollection<ISeries>? ColumnSerie
         {
             get; set;
         }
@@ -64,8 +64,8 @@ namespace StroopApp.Models
         public int currentBlockStart;
         public int currentBlockEnd;
 
-        private StroopTrial _currentTrial;
-        public StroopTrial CurrentTrial
+        private StroopTrial? _currentTrial;
+        public StroopTrial? CurrentTrial
         {
             get => _currentTrial;
             set
@@ -103,7 +103,19 @@ namespace StroopApp.Models
                 }
             }
         }
-
+        private bool _isParticipantSelectionEnabled = true;
+        public bool IsParticipantSelectionEnabled
+        {
+            get => _isParticipantSelectionEnabled;
+            set
+            {
+                if (_isParticipantSelectionEnabled != value)
+                {
+                    _isParticipantSelectionEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         ExperimentAction _nextAction;
         public ExperimentAction NextAction
         {
@@ -146,7 +158,7 @@ namespace StroopApp.Models
                     {
                         if (p.Visual is null) return;
                         var model = p.Model;
-                        if (model.IsValidResponse.HasValue)
+                        if (model!= null && model.IsValidResponse.HasValue)
                         {
                             if(model.IsValidResponse.Value)
                             {

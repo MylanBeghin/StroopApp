@@ -31,15 +31,36 @@ namespace StroopApp.ViewModels.Configuration.Participant
         /// </summary>
         private Models.Participant _originalParticipant;
 
-        public ObservableCollection<Models.Participant> Participants { get; }
-        public IEnumerable<SexAssignedAtBirth> SexAssignedValues { get; }
-        public IEnumerable<Gender> GenderValues { get; }
-        public ICommand SaveCommand { get; }
-        public ICommand CancelCommand { get; }
+        public ObservableCollection<Models.Participant> Participants
+        {
+            get;
+        }
+        public IEnumerable<SexAssignedAtBirth> SexAssignedValues
+        {
+            get;
+        }
+        public IEnumerable<Gender> GenderValues
+        {
+            get;
+        }
+        public ICommand SaveCommand
+        {
+            get;
+        }
+        public ICommand CancelCommand
+        {
+            get;
+        }
 
         private readonly IParticipantService _participantService;
-        public bool? DialogResult { get; private set; }
-        public Action? CloseAction { get; set; }
+        public bool? DialogResult
+        {
+            get; private set;
+        }
+        public Action? CloseAction
+        {
+            get; set;
+        }
 
         public ParticipantEditorViewModel(Models.Participant participant, ObservableCollection<Models.Participant> participants, IParticipantService participantService)
         {
@@ -80,7 +101,7 @@ namespace StroopApp.ViewModels.Configuration.Participant
             };
         }
 
-        private async void Save()
+        private void Save()
         {
             // Validation des champs obligatoires
             if (!Participant.Age.HasValue ||

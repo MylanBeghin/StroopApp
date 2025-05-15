@@ -14,7 +14,8 @@
             CornerRadius="8"
             Padding="16"
             BorderThickness="0.5"
-            BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+            BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+            IsEnabled="{Binding IsParticipantSelectionEnabled}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -104,7 +105,8 @@
                 <ListView ItemsSource="{Binding ParticipantsView}"
                           SelectedItem="{Binding SelectedParticipant}"
                           IsSynchronizedWithCurrentItem="True"
-                          ScrollViewer.VerticalScrollBarVisibility="Auto">
+                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                          >
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="ID"

@@ -65,6 +65,20 @@ namespace StroopApp.Models
                 OnPropertyChanged();
             }
         }
+        private string _exportFolderPath;
+
+        public string ExportFolderPath
+        {
+            get => _exportFolderPath;
+            set
+            {
+                if (_exportFolderPath != value)
+                {
+                    _exportFolderPath = value;
+                    OnPropertyChanged(nameof(ExportFolderPath));
+                }
+            }
+        }
         public void Reset()
         {
             ExperimentContext.Reset();
@@ -76,6 +90,7 @@ namespace StroopApp.Models
             CurrentProfile = new ExperimentProfile();
             KeyMappings = new KeyMappings();
             ExperimentContext = new SharedExperimentData();
+            ExportFolderPath = "";
             Block = 1;
         }
     }

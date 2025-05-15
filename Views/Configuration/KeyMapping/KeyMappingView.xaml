@@ -7,19 +7,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:fa5="http://schemas.fontawesome.com/icons/"
              mc:Ignorable="d"
-             d:DesignHeight="400" d:DesignWidth="600">
+             d:DesignHeight="400"
+             d:DesignWidth="600">
     <UserControl.Resources>
-        <conv:KeyToStringConverter x:Key="KeyToStringConverter"/>
+        <conv:KeyToStringConverter x:Key="KeyToStringConverter" />
     </UserControl.Resources>
     <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
-          CornerRadius="8"
-          Padding="16"
-          BorderThickness="0.5"
-          BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
-        <ui:SimpleStackPanel Spacing="10" VerticalAlignment="Center">
+            CornerRadius="8"
+            Padding="16"
+            BorderThickness="0.5"
+            BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+            >
+        <ui:SimpleStackPanel Spacing="10"
+                             VerticalAlignment="Center">
             <!-- Titre et description -->
-            <TextBlock Text="Choix des touches" Style="{StaticResource TitleTextBlockStyle}"/>
-            <TextBlock Text="Sélectionnez les touches à associer aux couleurs."/>
+            <TextBlock Text="Choix des touches"
+                       Style="{StaticResource TitleTextBlockStyle}" />
+            <TextBlock Text="Sélectionnez les touches à associer aux couleurs." />
             <!-- Grille à 4 colonnes pour les 4 couleurs -->
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -28,126 +32,138 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-
                 <!-- Rouge -->
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <!-- Header simple -->
-                    <TextBlock Grid.Row="0" Text="Touche associée à la couleur rouge :" Style="{DynamicResource BodyTextBlockStyle}" 
-                               HorizontalAlignment="Left" Margin="0,0,0,4"/>
+                    <TextBlock Grid.Row="0"
+                               Text="Touche associée à la couleur rouge :"
+                               Style="{DynamicResource BodyTextBlockStyle}"
+                               HorizontalAlignment="Left"
+                               Margin="0,0,0,4" />
                     <!-- Contenu : TextBox et Bouton -->
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Column="0"
-                                  BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                     Text="{Binding Mappings.Red.Key, Converter={StaticResource KeyToStringConverter}}"
-                     IsReadOnly="True"
-                     IsHitTestVisible="False"
-                     Focusable="False"
-                     Width="200"
-                     Height="16"
-                     VerticalAlignment="Center"
-                     Margin="0,0,8,0"/>
+                                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                                 Text="{Binding Mappings.Red.Key, Converter={StaticResource KeyToStringConverter}}"
+                                 IsReadOnly="True"
+                                 IsHitTestVisible="False"
+                                 Focusable="False"
+                                 Width="143"
+                                 Height="16"
+                                 VerticalAlignment="Center"
+                                 Margin="0,0,8,0" />
                         <Button Grid.Column="1"
-                    Command="{Binding OpenKeyMappingEditorCommand}"
-                    CommandParameter="Rouge"
-                    VerticalAlignment="Center"
-                    Content="Modifier"/>
+                                Command="{Binding OpenKeyMappingEditorCommand}"
+                                CommandParameter="Rouge"
+                                VerticalAlignment="Center"
+                                Content="Modifier" />
                     </Grid>
                 </Grid>
-
                 <!-- Bleu -->
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Touche associée à la couleur bleue :"  Style="{DynamicResource BodyTextBlockStyle}" HorizontalAlignment="Left" Margin="0,0,0,4"/>
+                    <TextBlock Grid.Row="0"
+                               Text="Touche associée à la couleur bleue :"
+                               Style="{DynamicResource BodyTextBlockStyle}"
+                               HorizontalAlignment="Left"
+                               Margin="0,0,0,4" />
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0"  BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                     Text="{Binding Mappings.Blue.Key, Converter={StaticResource KeyToStringConverter}}"
-                     IsReadOnly="True"
-                     IsHitTestVisible="False"
-                     Focusable="False"
-                     Width="200"
-                     Height="16"
-                     VerticalAlignment="Center"
-                     Margin="0,0,8,0"/>
+                        <TextBox Grid.Column="0"
+                                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                                 Text="{Binding Mappings.Blue.Key, Converter={StaticResource KeyToStringConverter}}"
+                                 IsReadOnly="True"
+                                 IsHitTestVisible="False"
+                                 Focusable="False"
+                                 Width="143"
+                                 Height="16"
+                                 VerticalAlignment="Center"
+                                 Margin="0,0,8,0" />
                         <Button Grid.Column="1"
-                    Command="{Binding OpenKeyMappingEditorCommand}"
-                    CommandParameter="Bleu"
-                    VerticalAlignment="Center"
-                    Content="Modifier"/>
+                                Command="{Binding OpenKeyMappingEditorCommand}"
+                                CommandParameter="Bleu"
+                                VerticalAlignment="Center"
+                                Content="Modifier" />
                     </Grid>
                 </Grid>
-
                 <!-- Vert -->
                 <Grid Grid.Column="2">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Touche associée à la couleur verte :" Style="{DynamicResource BodyTextBlockStyle}" HorizontalAlignment="Left" Margin="0,0,0,4"/>
+                    <TextBlock Grid.Row="0"
+                               Text="Touche associée à la couleur verte :"
+                               Style="{DynamicResource BodyTextBlockStyle}"
+                               HorizontalAlignment="Left"
+                               Margin="0,0,0,4" />
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Column="0"
-                     Text="{Binding Mappings.Green.Key, Converter={StaticResource KeyToStringConverter}}"
+                                 Text="{Binding Mappings.Green.Key, Converter={StaticResource KeyToStringConverter}}"
                                  BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                     IsReadOnly="True"
-                     IsHitTestVisible="False"
-                     Focusable="False"
-                     Width="200"
-                     Height="16"
-                     VerticalAlignment="Center"
-                     Margin="0,0,8,0"/>
+                                 IsReadOnly="True"
+                                 IsHitTestVisible="False"
+                                 Focusable="False"
+                                 Width="143"
+                                 Height="16"
+                                 VerticalAlignment="Center"
+                                 Margin="0,0,8,0" />
                         <Button Grid.Column="1"
-                    Command="{Binding OpenKeyMappingEditorCommand}"
-                    CommandParameter="Vert"
-                    VerticalAlignment="Center"
-                    Content="Modifier"/>
+                                Command="{Binding OpenKeyMappingEditorCommand}"
+                                CommandParameter="Vert"
+                                VerticalAlignment="Center"
+                                Content="Modifier" />
                     </Grid>
                 </Grid>
-
                 <!-- Jaune -->
                 <Grid Grid.Column="3">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Touche associée à la couleur jaune :" Style="{DynamicResource BodyTextBlockStyle}" HorizontalAlignment="Left" Margin="0,0,0,4"/>
+                    <TextBlock Grid.Row="0"
+                               Text="Touche associée à la couleur jaune :"
+                               Style="{DynamicResource BodyTextBlockStyle}"
+                               HorizontalAlignment="Left"
+                               Margin="0,0,0,4" />
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Column="0"
-                     Text="{Binding Mappings.Yellow.Key, Converter={StaticResource KeyToStringConverter}}"
+                                 Text="{Binding Mappings.Yellow.Key, Converter={StaticResource KeyToStringConverter}}"
                                  BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                     IsReadOnly="True"
-                     IsHitTestVisible="False"
-                     Focusable="False"
-                     Width="200"
-                     Height="16"
-                     VerticalAlignment="Center"
-                     Margin="0,0,8,0"/>
+                                 IsReadOnly="True"
+                                 IsHitTestVisible="False"
+                                 Focusable="False"
+                                 Width="143"
+                                 Height="16"
+                                 VerticalAlignment="Center"
+                                 Margin="0,0,8,0" />
                         <Button Grid.Column="1"
-                    Command="{Binding OpenKeyMappingEditorCommand}"
-                    CommandParameter="Jaune"
-                    VerticalAlignment="Center"
-                    Content="Modifier"/>
+                                Command="{Binding OpenKeyMappingEditorCommand}"
+                                CommandParameter="Jaune"
+                                VerticalAlignment="Center"
+                                Content="Modifier" />
                     </Grid>
                 </Grid>
             </Grid>

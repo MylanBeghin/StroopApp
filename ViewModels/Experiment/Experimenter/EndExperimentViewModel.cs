@@ -6,6 +6,7 @@ using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 using StroopApp.Core;
 using StroopApp.Models;
+using StroopApp.Services.Exportation;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.Views;
@@ -41,24 +42,23 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
         {
             get;
         }
-        private string _currentDay;
-        public string CurrentDay
+        private string _currentParticipant;
+        public string CurrentParticipant
         {
-            get => _currentDay;
+            get => _currentParticipant;
             set
             {
-                _currentDay = value;
+                _currentParticipant = value;
                 OnPropertyChanged();
             }
         }
-
-        private string _currentTime;
-        public string CurrentTime
+        private string _currentProfile;
+        public string CurrentProfile
         {
-            get => _currentTime;
+            get => _currentProfile;
             set
             {
-                _currentTime = value;
+                _currentProfile = value;
                 OnPropertyChanged();
             }
         }
@@ -75,7 +75,8 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
             RestartCommand = new RelayCommand(Restart);
             QuitCommand = new RelayCommand(Quit);
             Blocks = Settings.ExperimentContext.Blocks;
-            UpdateTime();
+            CurrentParticipant = "Participant n° " + Settings.Participant.Id.ToString();
+            CurrentProfile = "Tâche : " + Settings.CurrentProfile.ProfileName;
             UpdateBlock();
         }
 
@@ -125,22 +126,18 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
 
         }
 
-        private void UpdateTime()
-        {
-            CurrentDay = DateTime.Now.ToString("dddd, dd MMMM yyyy");
-            CurrentTime = DateTime.Now.ToString("HH:mm");
-        }
-
         private void Continue()
         {
             Settings.Block++;
             Settings.ExperimentContext.IsBlockFinished = false;
+            Settings.ExperimentContext.IsParticipantSelectionEnabled = false;
             _experimenterNavigationService.NavigateTo(() => new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
         }
         private async void Restart()
         {
             await _exportationService.ExportDataAsync();
             Settings.ExperimentContext.IsBlockFinished = false;
+            Settings.ExperimentContext.IsParticipantSelectionEnabled = true;
             Settings.Reset();
             _experimenterNavigationService.NavigateTo(
                 () => new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
