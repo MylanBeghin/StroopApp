@@ -139,18 +139,29 @@ namespace StroopApp.ViewModels.Experiment.Participant
                     case 0:
                         tb.Inlines.Add(new Run("Nous allons maintenant réaliser une première tâche mentale.\r\n\r\n"));
                         tb.Inlines.Add(new Run("A chaque essai, vous verrez apparaître une croix de fixation '+' au milieu de l'écran, suivie d'un nom de couleur : 'ROUGE', 'VERT', 'BLEU', 'JAUNE'.\r\n\r\n"));
-                        tb.Inlines.Add(new Run(_settings.CurrentProfile.CongruencePourcentage == 0
-                            ? "Ces noms seront toujours écrits dans la même couleur que le sens du mot.\r\n\r\n"
-                            : "Ces noms seront toujours écrits dans une couleur différente du sens du mot.\r\n\r\n"));
+                        switch (_settings.CurrentProfile.CongruencePourcentage)
+                        {
+                            case 100:
+                                tb.Inlines.Add(new Run("Ces noms seront toujours écrits dans la même couleur que le sens du mot.\r\n\r\n"));
+                                break;
+                            case 0:
+                                tb.Inlines.Add(new Run("Ces noms seront toujours écrits dans une couleur différente du sens du mot.\r\n\r\n"));
+                                break;
+                            case > 0 and < 100:
+                                tb.Inlines.Add(new Run(
+                                    $"Dans cette tâche, {_settings.CurrentProfile.CongruencePourcentage}% des mots seront congruents (texte = couleur) " +
+                                    $"et {100 - _settings.CurrentProfile.CongruencePourcentage}% seront incongruents (texte ≠ couleur).\r\n\r\n"));
+                                break;
+                        }
                         tb.Inlines.Add(new Run("Par exemple :\r\n\r\n"));
                         tb.Inlines.Add(new Run("ROUGE")
                         {
-                            Foreground = _settings.CurrentProfile.CongruencePourcentage == 0 ? Brushes.Red : Brushes.Blue,
+                            Foreground = _settings.CurrentProfile.CongruencePourcentage == 100 ? Brushes.Red : Brushes.Blue,
                             FontSize = 78,
                         });
                         break;
                     case 1:
-                        tb.Inlines.Add(new Run("Vous devrez appuyer sur le bouton correspondant à la couleur du mot le plus rapidement possible."));
+                        tb.Inlines.Add(new Run("Vous devrez appuyer sur le bouton correspondant à la couleur de l'encre le plus rapidement possible."));
                         break;
                     case 2:
                         tb.Inlines.Add(new Run("Avez-vous des questions avant de commencer ?"));

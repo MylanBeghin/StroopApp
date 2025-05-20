@@ -21,16 +21,57 @@ namespace StroopApp.Models
                 }
             }
         }
+        private bool _isCongruent;
 
-        private string _stroopType;
-        public string StroopType
+        public bool IsCongruent
         {
-            get => _stroopType;
+            get => _isCongruent;
             set
             {
-                if (_stroopType != value)
+                if (_isCongruent != value)
                 {
-                    _stroopType = value;
+                    _isCongruent = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private bool _isAmorce;
+
+        public bool IsAmorce
+        {
+            get => _isAmorce;
+            set
+            {
+                if (_isAmorce != value)
+                {
+                    _isAmorce = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private int _switchPourcentage;
+        public int SwitchPourcentage
+        {
+            get => _switchPourcentage;
+            set
+            {
+                if (_switchPourcentage != value)
+                {
+                    _switchPourcentage = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private int _congruencePourcentage;
+        public int CongruencePourcentage
+        {
+            get => _congruencePourcentage;
+            set
+            {
+                if (_congruencePourcentage != value)
+                {
+                    _congruencePourcentage = value;
                     OnPropertyChanged();
                 }
             }
@@ -139,15 +180,15 @@ namespace StroopApp.Models
 
         public void DetermineExpectedAnswer()
         {
-            if (string.Equals(StroopType, "Amorce", StringComparison.OrdinalIgnoreCase))
+            if (IsAmorce)
             {
                 ExpectedAnswer = (Amorce == AmorceType.Square) ? Stimulus.Text : Stimulus.Color;
             }
-            else if (string.Equals(StroopType, "Congruent", StringComparison.OrdinalIgnoreCase))
+            else if (IsCongruent)
             {
                 ExpectedAnswer = Stimulus.Text;
             }
-            else if (string.Equals(StroopType, "Incongruent", StringComparison.OrdinalIgnoreCase))
+            else
             {
                 ExpectedAnswer = Stimulus.Color;
             }
