@@ -1,35 +1,67 @@
-﻿using System.Collections.ObjectModel;
+﻿using StroopApp.Models;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
-using StroopApp.Models;
 
 namespace StroopApp.Services.Profile
 {
     public class ProfileService : IProfileService
     {
-        private const string ProfilesFilePath = "profiles.json";
-        private const string LastProfileFile = "lastProfile.txt";
+        private readonly string _configDir;
+        private readonly string _profilesPath;
+        private readonly string _lastProfileFile;
+
+        public ProfileService(string configDir)
+        {
+            _configDir = configDir;
+            _profilesPath = Path.Combine(_configDir, "profiles.json");
+            _lastProfileFile = "lastProfile.txt";
+        }
 
         public ObservableCollection<ExperimentProfile> LoadProfiles()
         {
-            if (File.Exists(ProfilesFilePath))
-            {
-                var json = File.ReadAllText(ProfilesFilePath);
-                return JsonSerializer.Deserialize<ObservableCollection<ExperimentProfile>>(json)
-                       ?? new ObservableCollection<ExperimentProfile>();
-            }
-            return new ObservableCollection<ExperimentProfile>();
+            if (!File.Exists(_profilesPath))
+                return new ObservableCollection<ExperimentProfile>();
+
+            var json = File.ReadAllText(_profilesPath);
+            return JsonSerializer.Deserialize<ObservableCollection<ExperimentProfile>>(json)
+                   ?? new ObservableCollection<ExperimentProfile>();
         }
 
         public void SaveProfiles(ObservableCollection<ExperimentProfile> profiles)
         {
+            Directory.CreateDirectory(_configDir);
             var json = JsonSerializer.Serialize(profiles, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(ProfilesFilePath, json);
+            File.WriteAllText(_profilesPath, json);
         }
 
         public void AddProfile(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles)
         {
             profiles.Add(profile);
+            SaveProfiles(profiles);
+        }
+        public void UpdateProfileById(ExperimentProfile modifiedProfile, Guid profileId, ObservableCollection<ExperimentProfile> profiles)
+        {
+            var target = profiles.FirstOrDefault(p => p.Id == profileId);
+            if (target == null)
+                return;
+
+            target.ProfileName = modifiedProfile.ProfileName;
+            target.Hours = modifiedProfile.Hours;
+            target.Minutes = modifiedProfile.Minutes;
+            target.Seconds = modifiedProfile.Seconds;
+            target.WordDuration = modifiedProfile.WordDuration;
+            target.FixationDuration = modifiedProfile.FixationDuration;
+            target.AmorceDuration = modifiedProfile.AmorceDuration;
+            target.IsAmorce = modifiedProfile.IsAmorce;
+            target.GroupSize = modifiedProfile.GroupSize;
+            target.TaskDuration = modifiedProfile.TaskDuration;
+            target.WordCount = modifiedProfile.WordCount;
+            target.MaxReactionTime = modifiedProfile.MaxReactionTime;
+            target.CalculationMode = modifiedProfile.CalculationMode;
+            target.SwitchPourcentage = modifiedProfile.SwitchPourcentage;
+            target.CongruencePourcentage = modifiedProfile.CongruencePourcentage;
+            target.UpdateDerivedValues();
             SaveProfiles(profiles);
         }
 
@@ -42,18 +74,20 @@ namespace StroopApp.Services.Profile
             }
         }
 
-        public string? LoadLastSelectedProfile()
+        public Guid? LoadLastSelectedProfile()
         {
-            if (File.Exists(LastProfileFile))
+            if (File.Exists(_lastProfileFile))
             {
-                return File.ReadAllText(LastProfileFile);
+                var text = File.ReadAllText(_lastProfileFile);
+                if (Guid.TryParse(text, out var id))
+                    return id;
             }
             return null;
         }
 
         public void SaveLastSelectedProfile(ExperimentProfile profile)
         {
-            File.WriteAllText(LastProfileFile, profile.ProfileName);
+            File.WriteAllText(_lastProfileFile, profile.Id.ToString());
         }
     }
 }

@@ -1,45 +1,81 @@
-﻿using System.Windows.Input;
-using System.Windows.Data;
-using System.Collections.ObjectModel;
-using ModernWpf.Controls;
+﻿using ModernWpf.Controls;
 using StroopApp.Core;
 using StroopApp.Services.Participant;
 using StroopApp.Views.Participant;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
+using System.Windows.Data;
+using System.Windows.Input;
 
 namespace StroopApp.ViewModels.Configuration.Participant
 {
     public class ParticipantManagementViewModel : ViewModelBase
     {
         readonly IParticipantService _participantService;
-        public ObservableCollection<Models.Participant> Participants { get; set; }
-        public ICollectionView ParticipantsView { get; set; }
+        public ObservableCollection<Models.Participant> Participants
+        {
+            get; set;
+        }
+        public ICollectionView ParticipantsView
+        {
+            get; set;
+        }
 
         private Models.Participant _selectedParticipant;
         public Models.Participant SelectedParticipant
         {
             get => _selectedParticipant;
-            set { _selectedParticipant = value; OnPropertyChanged(); }
+            set
+            {
+                _selectedParticipant = value;
+                OnPropertyChanged();
+            }
         }
 
         private string _searchText;
         public string SearchText
         {
             get => _searchText;
-            set { _searchText = value; OnPropertyChanged(); ParticipantsView.Refresh(); }
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged();
+                ParticipantsView.Refresh();
+            }
         }
+        private bool _isParticipantSelectionEnabled;
 
-        public ICommand CreateParticipantCommand { get; }
-        public ICommand ModifyParticipantCommand { get; }
-        public ICommand DeleteParticipantCommand { get; }
-        public ICommand OpenResultsCommand { get; }
-
-        public ParticipantManagementViewModel(IParticipantService participantService)
+        public bool IsParticipantSelectionEnabled
         {
+            get => _isParticipantSelectionEnabled;
+            set
+            {
+                if (_isParticipantSelectionEnabled != value)
+                {
+                    _isParticipantSelectionEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public ICommand CreateParticipantCommand
+        {
+            get;
+        }
+        public ICommand ModifyParticipantCommand
+        {
+            get;
+        }
+        public ICommand DeleteParticipantCommand
+        {
+            get;
+        }
+        public ParticipantManagementViewModel(IParticipantService participantService, bool isParticipantSelectionEnabled)
+        {
+            IsParticipantSelectionEnabled = isParticipantSelectionEnabled;
             _participantService = participantService;
             Participants = _participantService.LoadParticipants();
-            if (Participants.Any()) SelectedParticipant = Participants.First();
+            if (Participants.Any())
+                SelectedParticipant = Participants.First();
 
             ParticipantsView = CollectionViewSource.GetDefaultView(Participants);
             ParticipantsView.Filter = FilterParticipants;
@@ -47,19 +83,14 @@ namespace StroopApp.ViewModels.Configuration.Participant
             CreateParticipantCommand = new RelayCommand(CreateParticipant);
             ModifyParticipantCommand = new RelayCommand(ModifyParticipant);
             DeleteParticipantCommand = new RelayCommand(async () => await DeleteParticipant());
-            OpenResultsCommand = new RelayCommand<Models.Participant>(OpenResults);
         }
 
         bool FilterParticipants(object obj)
         {
-            if (string.IsNullOrWhiteSpace(SearchText)) return true;
+            if (string.IsNullOrWhiteSpace(SearchText))
+                return true;
             var p = obj as Models.Participant;
-            return p.Id.ToString().Contains(SearchText)
-                || p.Age?.ToString().Contains(SearchText) == true
-                || p.Height?.ToString().Contains(SearchText) == true
-                || p.Weight?.ToString().Contains(SearchText) == true
-                || p.SexAssigned.ToString().Contains(SearchText)
-                || p.Gender.ToString().Contains(SearchText);
+            return p.Id.ToString().Contains(SearchText);
         }
 
         void CreateParticipant()
@@ -70,8 +101,8 @@ namespace StroopApp.ViewModels.Configuration.Participant
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                Participants.Add(newP);
-                _participantService.SaveParticipants(Participants);
+
+                _participantService.AddParticipant(Participants, newP);
                 SelectedParticipant = newP;
             }
         }
@@ -83,17 +114,20 @@ namespace StroopApp.ViewModels.Configuration.Participant
                 ShowErrorDialog("Veuillez sélectionner un participant à modifier !");
                 return;
             }
-            var vm = new ParticipantEditorViewModel(SelectedParticipant, Participants, _participantService);
-            var win = new ParticipantEditorWindow(vm);
-            win.ShowDialog();
-            if (win.DialogResult == true)
+            var viewModel = new ParticipantEditorViewModel(SelectedParticipant, Participants, _participantService);
+            var participantWindow = new ParticipantEditorWindow(viewModel);
+            participantWindow.ShowDialog();
+            if (participantWindow.DialogResult == true)
             {
-                _participantService.SaveParticipants(Participants);
+                _participantService.UpdateParticipantById(
+                    SelectedParticipant.Id,
+                    SelectedParticipant,
+                    Participants);
                 OnPropertyChanged(nameof(SelectedParticipant));
             }
         }
 
-        async System.Threading.Tasks.Task DeleteParticipant()
+        async Task DeleteParticipant()
         {
             if (SelectedParticipant == null)
             {
@@ -108,19 +142,11 @@ namespace StroopApp.ViewModels.Configuration.Participant
                 PrimaryButtonText = "Supprimer",
                 CloseButtonText = "Annuler"
             };
-            if (await dlg.ShowAsync() != ContentDialogResult.Primary) return;
+            if (await dlg.ShowAsync() != ContentDialogResult.Primary)
+                return;
 
-            _participantService.DeleteParticipant(SelectedParticipant.Id);
-            Participants.Remove(SelectedParticipant);
+            _participantService.DeleteParticipant(Participants, SelectedParticipant.Id);
             SelectedParticipant = Participants.FirstOrDefault();
-        }
-
-        void OpenResults(Models.Participant p)
-        {
-            if (p == null) return;
-            var folder = Path.Combine("Résultats", p.Id.ToString());
-            if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
-            System.Diagnostics.Process.Start("explorer.exe", folder);
         }
     }
 }

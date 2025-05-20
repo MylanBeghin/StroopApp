@@ -132,7 +132,10 @@ namespace StroopApp.Models
                 }
             }
         }
-        public AmorceType Amorce { get; set; }
+        public AmorceType Amorce
+        {
+            get; set;
+        }
 
         public void DetermineExpectedAnswer()
         {

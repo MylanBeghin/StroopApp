@@ -1,8 +1,8 @@
-﻿using System.Windows.Controls;
-using System.Windows.Input;
+﻿// StroopPage.xaml.cs
 using StroopApp.Models;
 using StroopApp.Services.Navigation;
-using StroopApp.ViewModels;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace StroopApp.Views.Experiment.Participant
 {

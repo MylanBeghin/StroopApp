@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ModernWpf.Controls;
+using StroopApp.Core;
+using StroopApp.Models;
+using StroopApp.Services.KeyMapping;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -6,28 +9,40 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using ModernWpf.Controls;
-using StroopApp.Core;
-using StroopApp.Models;
-using StroopApp.Services.KeyMapping;
 
 namespace StroopApp.ViewModels.Configuration
 {
     public class KeyMappingViewModel : INotifyPropertyChanged
     {
         private readonly IKeyMappingService _keyMappingService;
-        public KeyMappings Mappings { get; set; }
+        public KeyMappings Mappings
+        {
+            get; set;
+        }
 
         private KeyMapping _editingMapping;
         public KeyMapping EditingMapping
         {
             get => _editingMapping;
-            set { _editingMapping = value; OnPropertyChanged(); }
+            set
+            {
+                _editingMapping = value;
+                OnPropertyChanged();
+            }
         }
 
-        public ICommand EditMappingCommand { get; }
-        public ICommand KeyPressedCommand { get; }
-        public ICommand OpenKeyMappingEditorCommand { get; }
+        public ICommand EditMappingCommand
+        {
+            get;
+        }
+        public ICommand KeyPressedCommand
+        {
+            get;
+        }
+        public ICommand OpenKeyMappingEditorCommand
+        {
+            get;
+        }
 
         public KeyMappingViewModel(IKeyMappingService keyMappingService)
         {
@@ -41,7 +56,7 @@ namespace StroopApp.ViewModels.Configuration
 
         private async void LoadMappings()
         {
-            Mappings = await _keyMappingService.LoadKeyMappingsAsync();
+            Mappings = await _keyMappingService.LoadKeyMappings();
             OnPropertyChanged(nameof(Mappings));
         }
 
@@ -164,7 +179,7 @@ namespace StroopApp.ViewModels.Configuration
                     else
                     {
                         EditingMapping.Key = e.Key;
-                        await _keyMappingService.SaveKeyMappingsAsync(Mappings);
+                        await _keyMappingService.SaveKeyMappings(Mappings);
                         dialog.Hide();
                         e.Handled = true;
                     }

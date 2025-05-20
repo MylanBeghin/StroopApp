@@ -1,5 +1,4 @@
 ﻿using StroopApp.Core;
-using System.ComponentModel;
 
 namespace StroopApp.Models
 {
@@ -127,6 +126,15 @@ namespace StroopApp.Models
             Age = null;
             SexAssigned = SexAssignedAtBirth.PreferNotToAnswer;
             Gender = Gender.PreferNotToAnswer;
+        }
+        public void CopyPropertiesFrom(Participant src)
+        {
+            Results = src.Results;
+            Height = src.Height;
+            Weight = src.Weight;
+            Age = src.Age;
+            SexAssigned = src.SexAssigned;
+            Gender = src.Gender;
         }
     }
 }

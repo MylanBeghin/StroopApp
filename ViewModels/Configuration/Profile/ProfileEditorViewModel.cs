@@ -1,32 +1,52 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
-using ModernWpf.Controls;
-using StroopApp.Core;
+﻿using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Services;
-using StroopApp.Services.Profile;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Input;
 
 namespace StroopApp.ViewModels.Configuration.Profile
 {
-    public class ProfileEditorViewModel : INotifyPropertyChanged
+    public class ProfileEditorViewModel : ViewModelBase
     {
         private ExperimentProfile _profile;
+
         public ExperimentProfile Profile
         {
             get => _profile;
-            set { _profile = value; OnPropertyChanged(); }
+            set
+            {
+                _profile = value;
+                OnPropertyChanged();
+            }
         }
-        private ExperimentProfile _originalProfile;
 
-        public ObservableCollection<ExperimentProfile> Profiles { get; }
-        public bool? DialogResult { get; private set; }
-        public Action? CloseAction { get; set; }
-        public ICommand SaveCommand { get; }
-        public ICommand CancelCommand { get; }
+        public ExperimentProfile ModifiedProfile => Profile;
+
+        public ObservableCollection<ExperimentProfile> Profiles
+        {
+            get;
+        }
+
+        public bool? DialogResult
+        {
+            get; private set;
+        }
+
+        public Action? CloseAction
+        {
+            get; set;
+        }
+
+        public ICommand SaveCommand
+        {
+            get;
+        }
+
+        public ICommand CancelCommand
+        {
+            get;
+        }
 
         private readonly IProfileService _IprofileService;
 
@@ -35,16 +55,9 @@ namespace StroopApp.ViewModels.Configuration.Profile
             _IprofileService = profileService;
             Profiles = profiles;
 
-            if (Profiles.Contains(profile))
-            {
-                _originalProfile = profile;
-                Profile = CloneProfile(profile);
-            }
-            else
-            {
-                Profile = profile;
-            }
+            Profile = Profiles.Contains(profile) ? CloneProfile(profile) : profile;
             Profile.UpdateDerivedValues();
+
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
 
@@ -62,9 +75,9 @@ namespace StroopApp.ViewModels.Configuration.Profile
             {
                 Profile.UpdateDerivedValues();
             }
-            else if (e.PropertyName == nameof(Profile.StroopType))
+            else if (e.PropertyName == nameof(Profile.IsAmorce))
             {
-                if (Profile.StroopType != "Amorce")
+                if (Profile.IsAmorce)
                 {
                     Profile.AmorceDuration = 0;
                 }
@@ -75,6 +88,7 @@ namespace StroopApp.ViewModels.Configuration.Profile
         {
             return new ExperimentProfile
             {
+                Id = profile.Id,
                 ProfileName = profile.ProfileName,
                 CalculationMode = profile.CalculationMode,
                 Hours = profile.Hours,
@@ -84,11 +98,12 @@ namespace StroopApp.ViewModels.Configuration.Profile
                 WordDuration = profile.WordDuration,
                 MaxReactionTime = profile.MaxReactionTime,
                 GroupSize = profile.GroupSize,
-                StroopType = profile.StroopType,
                 AmorceDuration = profile.AmorceDuration,
                 FixationDuration = profile.FixationDuration,
                 WordCount = profile.WordCount,
-                StroopTypes = profile.StroopTypes
+                IsAmorce = profile.IsAmorce,
+                SwitchPourcentage = profile.SwitchPourcentage,
+                CongruencePourcentage = profile.CongruencePourcentage
             };
         }
 
@@ -99,52 +114,36 @@ namespace StroopApp.ViewModels.Configuration.Profile
                 ShowErrorDialog("Le nom du profil ne peut pas être vide ou contenir uniquement des espaces.");
                 return;
             }
-            if (Profiles.Any(p => p != Profile && p != _originalProfile && p.ProfileName==Profile.ProfileName ))
+
+            if (Profiles.Any(p => p.Id != Profile.Id && p.ProfileName == Profile.ProfileName))
             {
                 ShowErrorDialog("Un profil avec ce nom existe déjà. Veuillez choisir un autre nom.");
                 return;
             }
+
             if (Profile.WordDuration <= 0 || Profile.TaskDuration % Profile.WordDuration != 0)
             {
                 ShowErrorDialog("La durée du mot doit être positive et TaskDuration doit être divisible par WordDuration.");
                 return;
             }
+
             int wordNumber = Profile.TaskDuration / Profile.WordDuration;
             if (Profile.GroupSize <= 0 || wordNumber % Profile.GroupSize != 0)
             {
                 ShowErrorDialog("La taille du groupe doit être positive et diviser le nombre de mots.");
                 return;
             }
-            if (string.IsNullOrEmpty(Profile.StroopType))
-            {
-                ShowErrorDialog("Le type de Stroop ne peut pas être nul.");
-                return;
-            }
-            if (Profile.AmorceDuration == 0 && Profile.StroopType == "Amorce")
+
+            if (Profile.AmorceDuration == 0 && Profile.IsAmorce)
             {
                 ShowErrorDialog("Le temps d'amorce est doit être supérieur à 0 !");
                 return;
             }
+
             if (Profile.MaxReactionTime <= 0)
             {
                 ShowErrorDialog("Le temps de réaction maximum doit être positif.");
                 return;
-            }
-            if (_originalProfile != null)
-            {
-                _originalProfile.ProfileName = Profile.ProfileName;
-                _originalProfile.CalculationMode = Profile.CalculationMode;
-                _originalProfile.Hours = Profile.Hours;
-                _originalProfile.Minutes = Profile.Minutes;
-                _originalProfile.Seconds = Profile.Seconds;
-                _originalProfile.TaskDuration = Profile.TaskDuration;
-                _originalProfile.WordDuration = Profile.WordDuration;
-                _originalProfile.MaxReactionTime = Profile.MaxReactionTime;
-                _originalProfile.GroupSize = Profile.GroupSize;
-                _originalProfile.StroopType = Profile.StroopType;
-                _originalProfile.AmorceDuration = Profile.AmorceDuration;
-                _originalProfile.FixationDuration = Profile.FixationDuration;
-                _originalProfile.WordCount = Profile.WordCount;
             }
 
             DialogResult = true;
@@ -156,21 +155,5 @@ namespace StroopApp.ViewModels.Configuration.Profile
             DialogResult = false;
             CloseAction?.Invoke();
         }
-
-        private async void ShowErrorDialog(string message)
-        {
-            var dialog = new ContentDialog
-            {
-                Title = "Erreur",
-                Content = message,
-                CloseButtonText = "OK"
-            };
-
-            await dialog.ShowAsync();
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

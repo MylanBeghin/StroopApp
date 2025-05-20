@@ -16,11 +16,20 @@ namespace StroopApp.ViewModels.Configuration
         private readonly KeyMappingViewModel _keyMappingViewModel;
         private readonly INavigationService _experimenterNavigationService;
         private readonly IWindowManager _windowManager;
-
-        public ExperimentSettings _settings { get; set; }
-        public ICommand LaunchExperimentCommand { get; }
+        public ExperimentSettings _settings
+        {
+            get; set;
+        }
+        public ICommand LaunchExperimentCommand
+        {
+            get;
+        }
+        public ICommand BrowseExportFolderCommand
+        {
+            get;
+        }
         public ConfigurationPageViewModel(ExperimentSettings settings,
-    ProfileManagementViewModel profileViewModel,
+                                  ProfileManagementViewModel profileViewModel,
                                   ParticipantManagementViewModel participantViewModel,
                                   KeyMappingViewModel keyMappingViewModel,
                                   INavigationService experimenterNavigationService,
@@ -37,7 +46,7 @@ namespace StroopApp.ViewModels.Configuration
         }
 
 
-        private async void LaunchExperiment()
+        private void LaunchExperiment()
         {
             _settings.CurrentProfile = _profileViewModel.CurrentProfile;
             _settings.Participant = _participantViewModel.SelectedParticipant;
@@ -54,8 +63,10 @@ namespace StroopApp.ViewModels.Configuration
                 ShowErrorDialog("Veuillez sélectionner un participant.");
                 return;
             }
+
+            _settings.ExperimentContext.AddNewSerie(_settings);
             _experimenterNavigationService.NavigateTo(() => new ExperimentDashBoardPage(_settings, _experimenterNavigationService, _windowManager));
-              _windowManager.ShowParticipantWindow(_settings);
+            _windowManager.ShowParticipantWindow(_settings);
         }
     }
 }

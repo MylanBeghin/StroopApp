@@ -5,8 +5,8 @@
         xmlns:converters="clr-namespace:StroopApp.Converters"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         Title="Modification du profil"
-        Width="510"
-        Height="610"
+        Width="750"
+        Height="850"
         WindowStartupLocation="CenterScreen"
         ui:WindowHelper.UseModernWindowStyle="True">
     <Window.Resources>
@@ -16,34 +16,161 @@
         <converters:MillisecondsToMinutesConverter x:Key="MillisecondsToMinutesConverter" />
         <converters:MillisecondsToSecondsConverter x:Key="MillisecondsToSecondsConverter" />
     </Window.Resources>
-    <ui:SimpleStackPanel Margin="12"
-                         Spacing="12">
+    <ui:SimpleStackPanel Margin="16"
+                         Spacing="16">
         <TextBlock Text="Modification du profil"
                    Style="{StaticResource TitleTextBlockStyle}" />
-        <ui:SimpleStackPanel Orientation="Vertical"
-                             Spacing="12">
-            <TextBox ui:ControlHelper.Header="Nom du profil"
-                     Text="{Binding Profile.ProfileName, Mode=TwoWay}" />
-            <ui:SimpleStackPanel Orientation="Vertical">
-                <TextBlock Text="Choix du mode" />
-                <ui:SimpleStackPanel Orientation="Horizontal"
-                                     HorizontalAlignment="Stretch"
-                                     Margin="0,12,0,0"
-                                     Spacing="12">
-                    <RadioButton Content="En fonction du temps"
-                                 GroupName="CalculationModeGroup"
-                                 IsChecked="{Binding Profile.CalculationMode, Mode=TwoWay, Converter={StaticResource CalculationModeToBooleanConverter}, ConverterParameter=TaskDuration}" />
-                    <RadioButton Content="En fonction du nombre de mots"
-                                 GroupName="CalculationModeGroup"
-                                 IsChecked="{Binding Profile.CalculationMode, Mode=TwoWay, Converter={StaticResource CalculationModeToBooleanConverter}, ConverterParameter=WordCount}" />
-                </ui:SimpleStackPanel>
+        <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+                CornerRadius="8"
+                Padding="16"
+                BorderThickness="0.5"
+                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+            <ui:SimpleStackPanel Spacing="12">
+                <TextBox ui:ControlHelper.Header="Nom du profil"
+                         Text="{Binding Profile.ProfileName, Mode=TwoWay}" />
+                <CheckBox Content="Ajouter une amorce"
+                          IsChecked="{Binding Profile.IsAmorce}"
+                          />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.7*" />
+                        <ColumnDefinition Width="16" />
+                        <ColumnDefinition Width="0.3*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="12" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Slider ui:ControlHelper.Header="Pourcentage de switch"
+                            Minimum="0"
+                            Maximum="100"
+                            LargeChange="5"
+                            SmallChange="1"
+                            Value="{Binding Profile.SwitchPourcentage, Mode=TwoWay}"
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            IsEnabled="{Binding Profile.IsAmorce}"/>
+                    <ui:NumberBox Header=" "
+                                  Value="{Binding Profile.SwitchPourcentage, Mode=TwoWay}"
+                                  Minimum="0"
+                                  Maximum="100"
+                                  SpinButtonPlacementMode="Inline"
+                                  Grid.Column="2"
+                                  Grid.Row="0"
+                                  IsEnabled="{Binding Profile.IsAmorce}"/>
+                    <Slider ui:ControlHelper.Header="Pourcentage de congruence"
+                            Minimum="0"
+                            Maximum="100"
+                            LargeChange="5"
+                            SmallChange="1"
+                            Value="{Binding Profile.CongruencePourcentage, Mode=TwoWay}"
+                            Grid.Column="0"
+                            Grid.Row="2" />
+                    <ui:NumberBox Header=" "
+                                  Value="{Binding Profile.CongruencePourcentage, Mode=TwoWay}"
+                                  Minimum="0"
+                                  Maximum="100"
+                                  SpinButtonPlacementMode="Inline"
+                                  Grid.Row="2"
+                                  Grid.Column="2" />
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="4" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="16" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="16" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="16" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <!-- En-têtes des colonnes -->
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="0"
+                               Text="Durée du mot (ms)"
+                               Width="120" />
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="2"
+                               Text="Temps de réponse max (ms)" />
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="4"
+                               Text="Durée de fixation (ms)" />
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="6"
+                               Text="Durée d'amorce (ms)" />
+                    <!-- Valeurs et signes alignés uniquement sur la ligne des inputs -->
+                    <TextBox Grid.Row="2"
+                             Grid.Column="0"
+                             Text="{Binding Profile.WordDuration}"
+                             Style="{StaticResource ModernReadOnlyTextBoxStyle}"
+                             Width="120" />
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="1"
+                               VerticalAlignment="Center"
+                               Text=" = "
+                               HorizontalAlignment="Center"
+                               FontSize="20" />
+                    <ui:NumberBox Grid.Row="2"
+                                  Grid.Column="2"
+                                  Value="{Binding Profile.MaxReactionTime, Mode=TwoWay}"
+                                  Minimum="1"
+                                  SpinButtonPlacementMode="Inline" />
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="3"
+                               VerticalAlignment="Center"
+                               Text=" + "
+                               HorizontalAlignment="Center"
+                               FontSize="20" />
+                    <ui:NumberBox Grid.Row="2"
+                                  Grid.Column="4"
+                                  Value="{Binding Profile.FixationDuration, Mode=TwoWay}"
+                                  Minimum="1"
+                                  SpinButtonPlacementMode="Inline" />
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="5"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="20"
+                               Text=" + " />
+                    <ui:NumberBox Grid.Row="2"
+                                  Grid.Column="6"
+                                  Value="{Binding Profile.AmorceDuration, Mode=TwoWay}"
+                                  Minimum="0"
+                                  IsEnabled="{Binding Profile.IsAmorce}"
+                                  SpinButtonPlacementMode="Inline" />
+                </Grid>
             </ui:SimpleStackPanel>
-        </ui:SimpleStackPanel>
-        <ui:SimpleStackPanel Spacing="12">
-            <ui:SimpleStackPanel x:Name="TimeModePanel"
+        </Border>
+        <ui:SimpleStackPanel Spacing="16">
+            <TextBlock Text="Mode de calcul"
+                       Style="{StaticResource SubtitleTextBlockStyle}" />
+            <ui:SimpleStackPanel Orientation="Horizontal"
                                  Spacing="12">
-                <ui:SimpleStackPanel.Style>
-                    <Style TargetType="ui:SimpleStackPanel">
+                <RadioButton Content="En fonction de la durée de la tâche"
+                             GroupName="CalculationModeGroup"
+                             IsChecked="{Binding Profile.CalculationMode,
+                                         Converter={StaticResource CalculationModeToBooleanConverter},
+                                         ConverterParameter=TaskDuration}" />
+                <RadioButton Content="En fonction du nombre de mots"
+                             GroupName="CalculationModeGroup"
+                             IsChecked="{Binding Profile.CalculationMode,
+                                         Converter={StaticResource CalculationModeToBooleanConverter},
+                                         ConverterParameter=WordCount}" />
+            </ui:SimpleStackPanel>
+            <!-- Section TaskDuration -->
+            <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+                    CornerRadius="8"
+                    Padding="16"
+                    BorderThickness="0.5"
+                    BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+                <Border.Style>
+                    <Style TargetType="Border">
                         <Setter Property="Visibility"
                                 Value="Collapsed" />
                         <Style.Triggers>
@@ -54,98 +181,64 @@
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </ui:SimpleStackPanel.Style>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="12" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="12" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <ui:NumberBox Header="Heures"
-                                  Value="{Binding Profile.Hours, Mode=TwoWay}"
-                                  Minimum="0"
-                                  SpinButtonPlacementMode="Inline"
-                                  Grid.Column="0" />
-                    <ui:NumberBox Header="Minutes"
-                                  Value="{Binding Profile.Minutes, Mode=TwoWay}"
-                                  Minimum="0"
-                                  Maximum="59"
-                                  SpinButtonPlacementMode="Inline"
-                                  Grid.Column="2" />
-                    <ui:NumberBox Header="Secondes"
-                                  Value="{Binding Profile.Seconds, Mode=TwoWay}"
-                                  Minimum="0"
-                                  Maximum="59"
-                                  SpinButtonPlacementMode="Inline"
-                                  Grid.Column="4" />
-                </Grid>
-                <ComboBox ui:ControlHelper.Header="Type de Stroop"
-                          ItemsSource="{Binding Profile.StroopTypes}"
-                          SelectedItem="{Binding Profile.StroopType, Mode=TwoWay}"
-                          Width="120" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="12" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="12" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <ui:NumberBox Header="Durée du mot (ms)"
-                                  Value="{Binding Profile.WordDuration, Mode=TwoWay}"
-                                  Minimum="1"
-                                  SpinButtonPlacementMode="Inline"
-                                  Grid.Column="0" />
-                    <ui:NumberBox Header="Durée de fixation (ms)"
-                                  Value="{Binding Profile.FixationDuration, Mode=TwoWay}"
-                                  Minimum="1"
-                                  SpinButtonPlacementMode="Inline"
-                                  Grid.Column="2" />
-                    <ui:NumberBox Header="Durée d'amorce (ms)"
-                                  Value="{Binding Profile.AmorceDuration, Mode=TwoWay}"
-                                  Minimum="0"
-                                  IsEnabled="{Binding Profile.StroopType, Converter={StaticResource StroopTypeToEnabledConverter}}"
-                                  SpinButtonPlacementMode="Inline"
-                                  Grid.Column="4" />
-                </Grid>
-                <ui:NumberBox Header="Taille du groupe"
-                              Value="{Binding Profile.GroupSize, Mode=TwoWay}"
-                              Minimum="1"
-                              SpinButtonPlacementMode="Inline" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="12" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <ui:NumberBox Header="Nombre de mots"
-                                  Value="{Binding Profile.WordCount, Mode=TwoWay}"
-                                  Minimum="1"
-                                  IsEnabled="False"
-                                  Grid.Column="0" />
-                    <ui:NumberBox Header="Temps de réaction max (ms)"
-                                  Value="{Binding Profile.MaxReactionTime, Mode=TwoWay}"
-                                  Minimum="1"
-                                  IsEnabled="False"
-                                  Grid.Column="2" />
-                </Grid>
-                <ui:SimpleStackPanel Orientation="Horizontal"
-                                     HorizontalAlignment="Center"
-                                     Spacing="12">
-                    <Button Content="Annuler"
-                            Style="{StaticResource DefaultButtonStyle}"
-                            Command="{Binding CancelCommand}" />
-                    <Button Content="Enregistrer"
-                            Style="{StaticResource AccentButtonStyle}"
-                            Command="{Binding SaveCommand}" />
+                </Border.Style>
+                <ui:SimpleStackPanel Spacing="12">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ui:NumberBox Header="Heures"
+                                      Value="{Binding Profile.Hours, Mode=TwoWay}"
+                                      Minimum="0"
+                                      SpinButtonPlacementMode="Inline"
+                                      Grid.Column="0" />
+                        <ui:NumberBox Header="Minutes"
+                                      Value="{Binding Profile.Minutes, Mode=TwoWay}"
+                                      Minimum="0"
+                                      Maximum="59"
+                                      SpinButtonPlacementMode="Inline"
+                                      Grid.Column="2" />
+                        <ui:NumberBox Header="Secondes"
+                                      Value="{Binding Profile.Seconds, Mode=TwoWay}"
+                                      Minimum="0"
+                                      Maximum="59"
+                                      SpinButtonPlacementMode="Inline"
+                                      Grid.Column="4" />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ui:NumberBox Header="Taille du groupe"
+                                      Value="{Binding Profile.GroupSize, Mode=TwoWay}"
+                                      Minimum="1"
+                                      SpinButtonPlacementMode="Inline"
+                                      Grid.Column="0" />
+                    </Grid>
+                    <ui:SimpleStackPanel Spacing="6">
+                        <TextBlock Text="Nombre de mots" />
+                        <TextBox Text="{Binding Profile.WordCount, Mode=TwoWay}"
+                                 Style="{StaticResource ModernReadOnlyTextBoxStyle}"
+                                 Grid.Column="0" />
+                    </ui:SimpleStackPanel>
                 </ui:SimpleStackPanel>
-            </ui:SimpleStackPanel>
-            <ui:SimpleStackPanel x:Name="WordCountPanel"
-                                 Spacing="12">
-                <ui:SimpleStackPanel.Style>
-                    <Style TargetType="ui:SimpleStackPanel">
+            </Border>
+            <!-- Section WordCount -->
+            <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+                    CornerRadius="8"
+                    Padding="16"
+                    BorderThickness="0.5"
+                    BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+                <Border.Style>
+                    <Style TargetType="Border">
                         <Setter Property="Visibility"
                                 Value="Collapsed" />
                         <Style.Triggers>
@@ -156,86 +249,77 @@
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </ui:SimpleStackPanel.Style>
-                <ui:NumberBox Header="Nombre de mots"
-                              Value="{Binding Profile.WordCount, Mode=TwoWay}"
-                              Minimum="1"
-                              SpinButtonPlacementMode="Inline" />
-                <ComboBox ui:ControlHelper.Header="Type de Stroop"
-                          ItemsSource="{Binding Profile.StroopTypes}"
-                          SelectedItem="{Binding Profile.StroopType, Mode=TwoWay}"
-                          Width="120" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="12" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="12" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <ui:NumberBox Header="Durée du mot (ms)"
-                                  Value="{Binding Profile.WordDuration, Mode=TwoWay}"
+                </Border.Style>
+                <ui:SimpleStackPanel Spacing="12">
+                    <ui:NumberBox Header="Nombre de mots"
+                                  Value="{Binding Profile.WordCount, Mode=TwoWay}"
                                   Minimum="1"
-                                  SpinButtonPlacementMode="Inline"
-                                  Grid.Column="0" />
-                    <ui:NumberBox Header="Durée de fixation (ms)"
-                                  Value="{Binding Profile.FixationDuration, Mode=TwoWay}"
-                                  Minimum="1"
-                                  SpinButtonPlacementMode="Inline"
-                                  Grid.Column="2" />
-                    <ui:NumberBox Header="Durée d'amorce (ms)"
-                                  Value="{Binding Profile.AmorceDuration, Mode=TwoWay}"
-                                  Minimum="0"
-                                  IsEnabled="{Binding Profile.StroopType, Converter={StaticResource StroopTypeToEnabledConverter}}"
-                                  SpinButtonPlacementMode="Inline"
-                                  Grid.Column="4" />
-                </Grid>
-                <ui:NumberBox Header="Taille du groupe"
-                              Value="{Binding Profile.GroupSize, Mode=TwoWay}"
-                              Minimum="1"
-                              SpinButtonPlacementMode="Inline" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="0" />
-                        <ColumnDefinition Width="12" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="0" />
-                        <ColumnDefinition Width="12" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="0" />
-                        <ColumnDefinition Width="12" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <ui:NumberBox Header="Heures"
-                                  Value="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToHoursConverter}}"
-                                  IsEnabled="False"
-                                  Grid.Column="0" />
-                    <ui:NumberBox Header="Minutes"
-                                  Value="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToMinutesConverter}}"
-                                  IsEnabled="False"
-                                  Grid.Column="3" />
-                    <ui:NumberBox Header="Secondes"
-                                  Value="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToSecondsConverter}}"
-                                  IsEnabled="False"
-                                  Grid.Column="6" />
-                    <ui:NumberBox Header="Temps de réaction max (ms)"
-                                  Value="{Binding Profile.MaxReactionTime}"
-                                  IsEnabled="False"
-                                  Grid.Column="9"
-                                  Grid.ColumnSpan="2" />
-                </Grid>
-                <ui:SimpleStackPanel Orientation="Horizontal"
-                                     HorizontalAlignment="Center"
-                                     Spacing="12">
-                    <Button Content="Annuler"
-                            Style="{StaticResource DefaultButtonStyle}"
-                            Command="{Binding CancelCommand}" />
-                    <Button Content="Enregistrer"
-                            Style="{StaticResource AccentButtonStyle}"
-                            Command="{Binding SaveCommand}" />
+                                  SpinButtonPlacementMode="Inline" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ui:NumberBox Header="Taille du groupe"
+                                      Value="{Binding Profile.GroupSize, Mode=TwoWay}"
+                                      Minimum="1"
+                                      SpinButtonPlacementMode="Inline"
+                                      Grid.Column="0" />
+                        <ui:NumberBox Header="Pourcentage de switch"
+                                      Value="{Binding Profile.SwitchPourcentage, Mode=TwoWay}"
+                                      Minimum="1"
+                                      SpinButtonPlacementMode="Inline"
+                                      Grid.Column="2" />
+                        <ui:NumberBox Header="Pourcentage de congruence"
+                                      Value="{Binding Profile.CongruencePourcentage, Mode=TwoWay}"
+                                      Minimum="1"
+                                      SpinButtonPlacementMode="Inline"
+                                      Grid.Column="4" />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ui:SimpleStackPanel Spacing="6">
+                            <TextBlock Text="Heures" />
+                            <TextBox Text="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToHoursConverter}}"
+                                     Style="{StaticResource ModernReadOnlyTextBoxStyle}"
+                                     Grid.Column="0" />
+                        </ui:SimpleStackPanel>
+                        <ui:SimpleStackPanel Spacing="6"
+                                             Grid.Column="2">
+                            <TextBlock Text="Minutes" />
+                            <TextBox Text="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToMinutesConverter}}"
+                                     Style="{StaticResource ModernReadOnlyTextBoxStyle}"
+                                     Grid.Column="0" />
+                        </ui:SimpleStackPanel>
+                        <ui:SimpleStackPanel Spacing="6"
+                                             Grid.Column="4">
+                            <TextBlock Text="Secondes" />
+                            <TextBox Text="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToSecondsConverter}}"
+                                     Style="{StaticResource ModernReadOnlyTextBoxStyle}"
+                                     Grid.Column="0" />
+                        </ui:SimpleStackPanel>
+                    </Grid>
                 </ui:SimpleStackPanel>
+            </Border>
+            <!-- Boutons communs -->
+            <ui:SimpleStackPanel Orientation="Horizontal"
+                                 HorizontalAlignment="Center"
+                                 Spacing="12">
+                <Button Content="Annuler"
+                        Style="{StaticResource DefaultButtonStyle}"
+                        Command="{Binding CancelCommand}" />
+                <Button Content="Enregistrer"
+                        Style="{StaticResource AccentButtonStyle}"
+                        Command="{Binding SaveCommand}" />
             </ui:SimpleStackPanel>
         </ui:SimpleStackPanel>
     </ui:SimpleStackPanel>

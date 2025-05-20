@@ -1,32 +1,39 @@
-﻿using System.Windows;
+﻿using StroopApp.Core;
+using StroopApp.Models;
+using StroopApp.Services.Navigation;
+using StroopApp.Views.Experiment.Participant;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using StroopApp.Core;
-using StroopApp.Models;
-using StroopApp.Services.Navigation;
-using StroopApp.Views.Experiment.Participant;
 
 namespace StroopApp.ViewModels.Experiment.Participant
 {
-    public class InstructionsPageViewModel
+    public class InstructionsPageViewModel : ViewModelBase
     {
         private readonly ExperimentSettings _settings;
         private readonly INavigationService _navigationService;
         private int _currentPageIndex;
         private const int TotalPages = 3;
-        private readonly string _stroopType;
-        public UIElement CurrentInstruction { get; private set; }
-        public ICommand NextCommand { get; }
+        public UIElement CurrentInstruction
+        {
+            get; private set;
+        }
+        public ICommand NextCommand
+        {
+            get;
+        }
         public event EventHandler InstructionChanged;
-        public StroopPage StroopPage { get; set; }
+        public StroopPage StroopPage
+        {
+            get; set;
+        }
         public InstructionsPageViewModel(ExperimentSettings settings, INavigationService navigationService)
         {
             _currentPageIndex = 0;
             _settings = settings;
             _navigationService = navigationService;
-            _stroopType = _settings.CurrentProfile.StroopType;
             NextCommand = new RelayCommand(_ => NextPage());
             CurrentInstruction = GenerateInstructionPage(_currentPageIndex);
 
@@ -57,14 +64,16 @@ namespace StroopApp.ViewModels.Experiment.Participant
                 VerticalAlignment = VerticalAlignment.Center,
                 TextAlignment = TextAlignment.Center
             };
-            if (_stroopType.Equals("Amorce", StringComparison.OrdinalIgnoreCase))
+            if (_settings.CurrentProfile.IsAmorce)
             {
                 switch (index)
                 {
                     case 0:
                         tb.Inlines.Add(new Run("Nous allons maintenant réaliser une première tâche mentale.\r\n\r\n"));
                         tb.Inlines.Add(new Run("A chaque essai, vous verrez apparaître une croix de fixation '+' au milieu de l'écran, suivie d'une amorce et d'un nom de couleur : 'ROUGE', 'VERT', 'BLEU', 'JAUNE'.\r\n\r\n"));
-                        tb.Inlines.Add(new Run("Ces noms seront toujours écrits dans une couleur différente du sens du mot.\r\n\r\n"));
+                        tb.Inlines.Add(new Run(_settings.CurrentProfile.CongruencePourcentage == 0
+                            ? "Ces noms seront toujours écrits dans la même couleur que le sens du mot.\r\n\r\n"
+                            : "Ces noms seront toujours écrits dans une couleur différente du sens du mot.\r\n\r\n"));
                         tb.Inlines.Add(new Run("Par exemple :\r\n\r\n"));
                         tb.Inlines.Add(new Run("ROUGE")
                         {
@@ -114,7 +123,7 @@ namespace StroopApp.ViewModels.Experiment.Participant
                             VerticalAlignment = VerticalAlignment.Center,
                             Margin = new Thickness(10, 0, 0, 0),
                             FontSize = 78,
- 
+
                         });
                         tb.Inlines.Add(new InlineUIContainer(sp));
                         break;
@@ -130,13 +139,13 @@ namespace StroopApp.ViewModels.Experiment.Participant
                     case 0:
                         tb.Inlines.Add(new Run("Nous allons maintenant réaliser une première tâche mentale.\r\n\r\n"));
                         tb.Inlines.Add(new Run("A chaque essai, vous verrez apparaître une croix de fixation '+' au milieu de l'écran, suivie d'un nom de couleur : 'ROUGE', 'VERT', 'BLEU', 'JAUNE'.\r\n\r\n"));
-                        tb.Inlines.Add(new Run(_stroopType.Equals("Congruent", StringComparison.OrdinalIgnoreCase)
+                        tb.Inlines.Add(new Run(_settings.CurrentProfile.CongruencePourcentage == 0
                             ? "Ces noms seront toujours écrits dans la même couleur que le sens du mot.\r\n\r\n"
                             : "Ces noms seront toujours écrits dans une couleur différente du sens du mot.\r\n\r\n"));
                         tb.Inlines.Add(new Run("Par exemple :\r\n\r\n"));
                         tb.Inlines.Add(new Run("ROUGE")
                         {
-                            Foreground = _stroopType.Equals("Congruent", StringComparison.OrdinalIgnoreCase) ? Brushes.Red : Brushes.Blue,
+                            Foreground = _settings.CurrentProfile.CongruencePourcentage == 0 ? Brushes.Red : Brushes.Blue,
                             FontSize = 78,
                         });
                         break;
