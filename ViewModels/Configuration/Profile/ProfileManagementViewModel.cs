@@ -48,11 +48,9 @@ namespace StroopApp.ViewModels.Configuration.Profile
             _profileService = profileService;
             Profiles = _profileService.LoadProfiles();
 
-            var lastProfileName = _profileService.LoadLastSelectedProfile();
-            if (!string.IsNullOrEmpty(lastProfileName))
-            {
-                CurrentProfile = Profiles.FirstOrDefault(p => p.ProfileName == lastProfileName);
-            }
+            var lastId = _profileService.LoadLastSelectedProfile();
+            if (lastId.HasValue)
+                CurrentProfile = Profiles.FirstOrDefault(p => p.Id == lastId.Value);
 
             CreateProfileCommand = new RelayCommand(CreateProfile);
             ModifyProfileCommand = new RelayCommand(ModifyProfile);
@@ -67,8 +65,7 @@ namespace StroopApp.ViewModels.Configuration.Profile
             profileWindow.ShowDialog();
             if (profileWindow.DialogResult == true)
             {
-                Profiles.Add(newProfile);
-                _profileService.SaveProfiles(Profiles);
+                _profileService.AddProfile(newProfile, Profiles);
                 CurrentProfile = newProfile;
             }
         }
@@ -85,8 +82,11 @@ namespace StroopApp.ViewModels.Configuration.Profile
             profileWindow.ShowDialog();
             if (profileWindow.DialogResult == true)
             {
+                _profileService.UpdateProfileById(
+                    viewModel.ModifiedProfile,
+                    viewModel.ModifiedProfile.Id,
+                    Profiles);
                 OnPropertyChanged(nameof(CurrentProfile));
-                _profileService.SaveProfiles(Profiles);
             }
         }
 

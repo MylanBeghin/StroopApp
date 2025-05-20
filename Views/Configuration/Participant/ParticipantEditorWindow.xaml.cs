@@ -10,7 +10,6 @@ namespace StroopApp.Views.Participant
         {
 
             InitializeComponent();
-            this.SizeToContent = System.Windows.SizeToContent.WidthAndHeight;
             DataContext = viewModel;
             viewModel.CloseAction = () =>
             {

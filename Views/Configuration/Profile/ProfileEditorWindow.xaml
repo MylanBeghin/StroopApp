@@ -6,7 +6,7 @@
         xmlns:ui="http://schemas.modernwpf.com/2019"
         Title="Modification du profil"
         Width="750"
-        Height="750"
+        Height="850"
         WindowStartupLocation="CenterScreen"
         ui:WindowHelper.UseModernWindowStyle="True">
     <Window.Resources>
@@ -28,10 +28,53 @@
             <ui:SimpleStackPanel Spacing="12">
                 <TextBox ui:ControlHelper.Header="Nom du profil"
                          Text="{Binding Profile.ProfileName, Mode=TwoWay}" />
-                <ComboBox ui:ControlHelper.Header="Type de Stroop"
-                          ItemsSource="{Binding Profile.StroopTypes}"
-                          SelectedItem="{Binding Profile.StroopType, Mode=TwoWay}"
-                          Width="200" />
+                <CheckBox Content="Ajouter une amorce"
+                          IsChecked="{Binding Profile.IsAmorce}"
+                          />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.7*" />
+                        <ColumnDefinition Width="16" />
+                        <ColumnDefinition Width="0.3*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="12" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Slider ui:ControlHelper.Header="Pourcentage de switch"
+                            Minimum="0"
+                            Maximum="100"
+                            LargeChange="5"
+                            SmallChange="1"
+                            Value="{Binding Profile.SwitchPourcentage, Mode=TwoWay}"
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            IsEnabled="{Binding Profile.IsAmorce}"/>
+                    <ui:NumberBox Header=" "
+                                  Value="{Binding Profile.SwitchPourcentage, Mode=TwoWay}"
+                                  Minimum="0"
+                                  Maximum="100"
+                                  SpinButtonPlacementMode="Inline"
+                                  Grid.Column="2"
+                                  Grid.Row="0"
+                                  IsEnabled="{Binding Profile.IsAmorce}"/>
+                    <Slider ui:ControlHelper.Header="Pourcentage de congruence"
+                            Minimum="0"
+                            Maximum="100"
+                            LargeChange="5"
+                            SmallChange="1"
+                            Value="{Binding Profile.CongruencePourcentage, Mode=TwoWay}"
+                            Grid.Column="0"
+                            Grid.Row="2" />
+                    <ui:NumberBox Header=" "
+                                  Value="{Binding Profile.CongruencePourcentage, Mode=TwoWay}"
+                                  Minimum="0"
+                                  Maximum="100"
+                                  SpinButtonPlacementMode="Inline"
+                                  Grid.Row="2"
+                                  Grid.Column="2" />
+                </Grid>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -99,7 +142,7 @@
                                   Grid.Column="6"
                                   Value="{Binding Profile.AmorceDuration, Mode=TwoWay}"
                                   Minimum="0"
-                                  IsEnabled="{Binding Profile.StroopType, Converter={StaticResource StroopTypeToEnabledConverter}}"
+                                  IsEnabled="{Binding Profile.IsAmorce}"
                                   SpinButtonPlacementMode="Inline" />
                 </Grid>
             </ui:SimpleStackPanel>
@@ -179,16 +222,6 @@
                                       Minimum="1"
                                       SpinButtonPlacementMode="Inline"
                                       Grid.Column="0" />
-                        <ui:NumberBox Header="Pourcentage de switch"
-                                      Value="{Binding Profile.SwitchPourcentage, Mode=TwoWay}"
-                                      Minimum="1"
-                                      SpinButtonPlacementMode="Inline"
-                                      Grid.Column="2" />
-                        <ui:NumberBox Header="Pourcentage de congruence"
-                                      Value="{Binding Profile.CongruencePourcentage, Mode=TwoWay}"
-                                      Minimum="1"
-                                      SpinButtonPlacementMode="Inline"
-                                      Grid.Column="4" />
                     </Grid>
                     <ui:SimpleStackPanel Spacing="6">
                         <TextBlock Text="Nombre de mots" />
@@ -230,13 +263,38 @@
                             <ColumnDefinition Width="12" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
+                        <ui:NumberBox Header="Taille du groupe"
+                                      Value="{Binding Profile.GroupSize, Mode=TwoWay}"
+                                      Minimum="1"
+                                      SpinButtonPlacementMode="Inline"
+                                      Grid.Column="0" />
+                        <ui:NumberBox Header="Pourcentage de switch"
+                                      Value="{Binding Profile.SwitchPourcentage, Mode=TwoWay}"
+                                      Minimum="1"
+                                      SpinButtonPlacementMode="Inline"
+                                      Grid.Column="2" />
+                        <ui:NumberBox Header="Pourcentage de congruence"
+                                      Value="{Binding Profile.CongruencePourcentage, Mode=TwoWay}"
+                                      Minimum="1"
+                                      SpinButtonPlacementMode="Inline"
+                                      Grid.Column="4" />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
                         <ui:SimpleStackPanel Spacing="6">
                             <TextBlock Text="Heures" />
                             <TextBox Text="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToHoursConverter}}"
                                      Style="{StaticResource ModernReadOnlyTextBoxStyle}"
                                      Grid.Column="0" />
                         </ui:SimpleStackPanel>
-                        <ui:SimpleStackPanel Spacing="6" Grid.Column="2">
+                        <ui:SimpleStackPanel Spacing="6"
+                                             Grid.Column="2">
                             <TextBlock Text="Minutes" />
                             <TextBox Text="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToMinutesConverter}}"
                                      Style="{StaticResource ModernReadOnlyTextBoxStyle}"
@@ -249,7 +307,6 @@
                                      Style="{StaticResource ModernReadOnlyTextBoxStyle}"
                                      Grid.Column="0" />
                         </ui:SimpleStackPanel>
-
                     </Grid>
                 </ui:SimpleStackPanel>
             </Border>

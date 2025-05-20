@@ -56,35 +56,76 @@ public class StroopViewModel : ViewModelBase
         _wordTimer.Restart();
         _inputTcs = new TaskCompletionSource<double>();
     }
+    private List<AmorceType> GenerateAmorceSequence(int count, int switchPercentage)
+    {
+        int switchCount = (count - 1) * switchPercentage / 100;
+        int noSwitchCount = (count - 1) - switchCount;
+
+        var switches = new List<bool>();
+        switches.AddRange(Enumerable.Repeat(true, switchCount));
+        switches.AddRange(Enumerable.Repeat(false, noSwitchCount));
+        switches = switches.OrderBy(_ => random.Next()).ToList();
+
+        var sequence = new List<AmorceType>();
+        var current = random.Next(0, 2) == 0 ? AmorceType.Round : AmorceType.Square;
+        sequence.Add(current);
+
+        foreach (var isSwitch in switches)
+        {
+            if (isSwitch)
+                current = current == AmorceType.Round ? AmorceType.Square : AmorceType.Round;
+
+            sequence.Add(current);
+        }
+
+        return sequence;
+    }
 
     private void GenerateTrials()
     {
         var wordColors = new[] { "Blue", "Red", "Green", "Yellow" };
         var wordTexts = new[] { "Blue", "Red", "Green", "Yellow" };
+        int total = Settings.CurrentProfile.WordCount;
 
-        for (int i = 0 ; i < Settings.CurrentProfile.WordCount ; i++)
+        int congruentCount = total * (100 - Settings.CurrentProfile.CongruencePourcentage) / 100;
+        int incongruentCount = total - congruentCount;
+        var congruenceFlags = new List<bool>();
+        congruenceFlags.AddRange(Enumerable.Repeat(true, congruentCount));      // true = congruent
+        congruenceFlags.AddRange(Enumerable.Repeat(false, incongruentCount));   // false = incongruent
+        congruenceFlags = congruenceFlags.OrderBy(_ => random.Next()).ToList();
+
+        List<AmorceType>? amorceSequence = null;
+        if (Settings.CurrentProfile.IsAmorce)
         {
+            amorceSequence = GenerateAmorceSequence(total, Settings.CurrentProfile.SwitchPourcentage);
+        }
+
+        for (int i = 0 ; i < total ; i++)
+        {
+            int type = random.Next(0, 1);
             var trial = new StroopTrial
             {
                 TrialNumber = i + 1,
-                StroopType = Settings.CurrentProfile.StroopType,
                 Block = Settings.Block,
                 ParticipantId = Settings.Participant.Id
             };
-
-            if (Settings.CurrentProfile.StroopType == "Congruent")
+            bool isCongruent = congruenceFlags[i];
+            trial.StroopType = isCongruent ? "Congruent" : "Incongruent";
+            if (isCongruent)
             {
-                int idx = random.Next(0, 4);
+                int idx = random.Next(0, wordColors.Length);
                 trial.Stimulus = new Word(wordColors[idx], wordTexts[idx]);
             }
             else
             {
-                var indices = Enumerable.Range(0, 4).OrderBy(_ => random.Next()).Take(2).ToArray();
+                var indices = Enumerable.Range(0, wordColors.Length).OrderBy(_ => random.Next()).Take(2).ToArray();
                 trial.Stimulus = new Word(wordColors[indices[0]], wordTexts[indices[1]]);
-                if (string.Equals(Settings.CurrentProfile.StroopType, "Amorce", StringComparison.OrdinalIgnoreCase))
-                    trial.Amorce = random.Next(0, 2) == 0 ? AmorceType.Round : AmorceType.Square;
             }
 
+            if (amorceSequence != null)
+            {
+                trial.Amorce = amorceSequence[i];
+            }
             trial.DetermineExpectedAnswer();
             Settings.ExperimentContext.CurrentBlock.TrialRecords.Add(trial);
         }

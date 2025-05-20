@@ -37,6 +37,14 @@ namespace StroopApp.Services.Participants
             SaveParticipants(participants);
 
         }
+        public void UpdateParticipantById(int id, Models.Participant modified, ObservableCollection<Models.Participant> list)
+        {
+            var target = list.FirstOrDefault(p => p.Id == id);
+            if (target == null)
+                return;
+            target.CopyPropertiesFrom(modified);
+            SaveParticipants(list);
+        }
         public void DeleteParticipant(ObservableCollection<Models.Participant> participants, int participantId)
         {
             var toRemove = participants.FirstOrDefault(x => x.Id == participantId);

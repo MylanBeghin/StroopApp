@@ -20,21 +20,25 @@ namespace StroopApp.Models
     {
         public ExperimentProfile()
         {
+            _id = Guid.NewGuid();
             _profileName = "Nouveau Profil";
-            _hours = 0;
-            _minutes = 30;
-            _seconds = 0;
-            _wordDuration = 2000;
             _fixationDuration = 100;
+            _maxReactionTime = 400;
             _amorceDuration = 0;
-            _stroopType = StroopTypes[0];
             _groupSize = 5;
-            _calculationMode = CalculationMode.TaskDuration;
+            _isAmorce = false;
+            _wordCount = 10;
+            _calculationMode = CalculationMode.WordCount;
             _congruencePourcentage = 50;
             _switchPourcentage = 50;
             UpdateDerivedValues();
         }
-
+        private Guid _id;
+        public Guid Id
+        {
+            get => _id;
+            set => _id = value;
+        }
         private string _profileName;
 
         public string ProfileName
@@ -149,27 +153,17 @@ namespace StroopApp.Models
                 if (_isAmorce != value)
                 {
                     _isAmorce = value;
+                    if (_isAmorce == false)
+                    {
+                        AmorceDuration = 0;
+                        SwitchPourcentage = 50;
+                    }
+
                     OnPropertyChanged(nameof(IsAmorce));
                     UpdateDerivedValues();
                 }
             }
         }
-
-        private string? _stroopType;
-        public string? StroopType
-        {
-            get => _stroopType;
-            set
-            {
-                if (_stroopType != value)
-                {
-                    _stroopType = value;
-                    OnPropertyChanged(nameof(StroopType));
-                    UpdateDerivedValues();
-                }
-            }
-        }
-        public List<string> StroopTypes { get; set; } = new List<string> { "Congruent", "Incongruent", "Amorce" };
 
         private int _groupSize;
         public int GroupSize
@@ -256,7 +250,7 @@ namespace StroopApp.Models
         private int _congruencePourcentage;
         public int CongruencePourcentage
         {
-            get => _switchPourcentage;
+            get => _congruencePourcentage;
             set
             {
                 if (_congruencePourcentage != value)
@@ -283,7 +277,26 @@ namespace StroopApp.Models
                 Minutes = (TaskDuration % 3600000) / 60000;
                 Seconds = (TaskDuration % 60000) / 1000;
             }
-            WordDuration = MaxReactionTime + FixationDuration + AmorceDuration;
+            WordDuration = IsAmorce ? MaxReactionTime + FixationDuration + AmorceDuration : MaxReactionTime + FixationDuration;
         }
+        public void CopyPropertiesFrom(ExperimentProfile source)
+        {
+            ProfileName = source.ProfileName;
+            Hours = source.Hours;
+            Minutes = source.Minutes;
+            Seconds = source.Seconds;
+            TaskDuration = source.TaskDuration;
+            WordDuration = source.WordDuration;
+            FixationDuration = source.FixationDuration;
+            AmorceDuration = source.AmorceDuration;
+            IsAmorce = source.IsAmorce;
+            GroupSize = source.GroupSize;
+            WordCount = source.WordCount;
+            MaxReactionTime = source.MaxReactionTime;
+            CalculationMode = source.CalculationMode;
+            SwitchPourcentage = source.SwitchPourcentage;
+            CongruencePourcentage = source.CongruencePourcentage;
+        }
+
     }
 }

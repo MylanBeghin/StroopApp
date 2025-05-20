@@ -4,7 +4,6 @@ using StroopApp.Services.Participant;
 using StroopApp.Views.Participant;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -70,11 +69,6 @@ namespace StroopApp.ViewModels.Configuration.Participant
         {
             get;
         }
-        public ICommand OpenResultsCommand
-        {
-            get;
-        }
-
         public ParticipantManagementViewModel(IParticipantService participantService, bool isParticipantSelectionEnabled)
         {
             IsParticipantSelectionEnabled = isParticipantSelectionEnabled;
@@ -89,7 +83,6 @@ namespace StroopApp.ViewModels.Configuration.Participant
             CreateParticipantCommand = new RelayCommand(CreateParticipant);
             ModifyParticipantCommand = new RelayCommand(ModifyParticipant);
             DeleteParticipantCommand = new RelayCommand(async () => await DeleteParticipant());
-            OpenResultsCommand = new RelayCommand<Models.Participant>(OpenResults);
         }
 
         bool FilterParticipants(object obj)
@@ -121,12 +114,15 @@ namespace StroopApp.ViewModels.Configuration.Participant
                 ShowErrorDialog("Veuillez sélectionner un participant à modifier !");
                 return;
             }
-            var vm = new ParticipantEditorViewModel(SelectedParticipant, Participants, _participantService);
-            var win = new ParticipantEditorWindow(vm);
-            win.ShowDialog();
-            if (win.DialogResult == true)
+            var viewModel = new ParticipantEditorViewModel(SelectedParticipant, Participants, _participantService);
+            var participantWindow = new ParticipantEditorWindow(viewModel);
+            participantWindow.ShowDialog();
+            if (participantWindow.DialogResult == true)
             {
-                _participantService.SaveParticipants(Participants);
+                _participantService.UpdateParticipantById(
+                    SelectedParticipant.Id,
+                    SelectedParticipant,
+                    Participants);
                 OnPropertyChanged(nameof(SelectedParticipant));
             }
         }
@@ -151,16 +147,6 @@ namespace StroopApp.ViewModels.Configuration.Participant
 
             _participantService.DeleteParticipant(Participants, SelectedParticipant.Id);
             SelectedParticipant = Participants.FirstOrDefault();
-        }
-
-        void OpenResults(Models.Participant p)
-        {
-            if (p == null)
-                return;
-            var folder = Path.Combine("Résultats", p.Id.ToString());
-            if (!Directory.Exists(folder))
-                Directory.CreateDirectory(folder);
-            System.Diagnostics.Process.Start("explorer.exe", folder);
         }
     }
 }

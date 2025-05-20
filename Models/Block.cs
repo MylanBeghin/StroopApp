@@ -8,28 +8,44 @@ public class Block : ModelBase
     public int BlockNumber
     {
         get => _blockNumber;
-        set { _blockNumber = value; OnPropertyChanged(); }
+        set
+        {
+            _blockNumber = value;
+            OnPropertyChanged();
+        }
     }
 
     private int _totalTrials;
     public int TotalTrials
     {
         get => _totalTrials;
-        set { _totalTrials = value; OnPropertyChanged(); }
+        set
+        {
+            _totalTrials = value;
+            OnPropertyChanged();
+        }
     }
 
     private double _accuracy;
     public double Accuracy
     {
         get => _accuracy;
-        set { _accuracy = value; OnPropertyChanged(); }
+        set
+        {
+            _accuracy = value;
+            OnPropertyChanged();
+        }
     }
 
     private double? _responseTimeMean;
     public double? ResponseTimeMean
     {
         get => _responseTimeMean;
-        set { _responseTimeMean = value; OnPropertyChanged(); }
+        set
+        {
+            _responseTimeMean = value;
+            OnPropertyChanged();
+        }
     }
     private readonly ExperimentSettings _settings;
 
@@ -41,7 +57,6 @@ public class Block : ModelBase
     public Block(ExperimentSettings settings)
     {
         _settings = settings;
-        _stroopType = settings.CurrentProfile.StroopType;
         BlockNumber = settings.Block;
         _profileName = settings.CurrentProfile.ProfileName;
     }

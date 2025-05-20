@@ -29,7 +29,7 @@ namespace StroopApp.ViewModels.Configuration.Participant
         /// <summary>
         /// Référence au participant original (non cloné) en cas de modification.
         /// </summary>
-        private Models.Participant _originalParticipant;
+        private Models.Participant ModifiedParticipant => Participant;
 
         public ObservableCollection<Models.Participant> Participants
         {
@@ -67,18 +67,7 @@ namespace StroopApp.ViewModels.Configuration.Participant
             _participantService = participantService;
             Participants = participants;
 
-            // Si le participant existe déjà dans la collection, on considère qu'il s'agit d'une modification.
-            // On clone alors le participant pour éviter la mise à jour immédiate des valeurs.
-            if (Participants.Contains(participant))
-            {
-                _originalParticipant = participant;
-                Participant = CloneParticipant(participant);
-            }
-            else
-            {
-                // Pour la création, on utilise directement l'objet.
-                Participant = participant;
-            }
+            Participant = Participants.Contains(participant) ? CloneParticipant(participant) : participant;
 
             SexAssignedValues = (SexAssignedAtBirth[])Enum.GetValues(typeof(SexAssignedAtBirth));
             GenderValues = (Gender[])Enum.GetValues(typeof(Gender));
@@ -103,7 +92,6 @@ namespace StroopApp.ViewModels.Configuration.Participant
 
         private void Save()
         {
-            // Validation des champs obligatoires
             if (!Participant.Age.HasValue ||
                 !Participant.Weight.HasValue ||
                 !Participant.Height.HasValue ||
@@ -115,23 +103,10 @@ namespace StroopApp.ViewModels.Configuration.Participant
                 ShowErrorDialog("Veuillez remplir correctement tous les champs obligatoires.");
                 return;
             }
-            // Vérification d'unicité de l'ID
-            if (Participants.Any(p => p.Id == Participant.Id && p != (_originalParticipant ?? Participant)))
+            if (Participants.Any(p => p.Id == Participant.Id && p != Participant))
             {
                 ShowErrorDialog("Cet identifiant est déjà utilisé pour un autre participant");
                 return;
-            }
-
-            // Pour une modification, on met à jour le participant original avec les nouvelles valeurs.
-            if (_originalParticipant != null)
-            {
-                _originalParticipant.Id = Participant.Id;
-                _originalParticipant.Age = Participant.Age;
-                _originalParticipant.Weight = Participant.Weight;
-                _originalParticipant.Height = Participant.Height;
-                _originalParticipant.SexAssigned = Participant.SexAssigned;
-                _originalParticipant.Gender = Participant.Gender;
-                _originalParticipant.Results = Participant.Results;
             }
 
             DialogResult = true;
