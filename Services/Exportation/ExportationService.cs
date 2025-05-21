@@ -80,14 +80,14 @@ namespace StroopApp.Services.Exportation
             var ws = wb.Worksheets.Add("Export");
             ws.Cell(1, 1).Value = "Numéro du participant";
             ws.Cell(1, 2).Value = "Congruence";
-            ws.Cell(1, 3).Value = "Amorce";
+            ws.Cell(1, 3).Value = "Amorce ?";
             ws.Cell(1, 4).Value = "Bloc";
             ws.Cell(1, 5).Value = "Réponse attendue";
             ws.Cell(1, 6).Value = "Réponse donnée";
             ws.Cell(1, 7).Value = "Validité de la réponse";
             ws.Cell(1, 8).Value = "Temps de réaction";
             ws.Cell(1, 9).Value = "Essai";
-            ws.Cell(1, 10).Value = "Amorce";
+            ws.Cell(1, 10).Value = "Type d'amorce";
 
             var row = 2;
             foreach (var block in _settings.ExperimentContext.Blocks)
@@ -95,7 +95,7 @@ namespace StroopApp.Services.Exportation
                 {
                     ws.Cell(row, 1).Value = p.Id;
                     ws.Cell(row, 2).Value = r.IsCongruent;
-                    ws.Cell(row, 3).Value = r.IsCongruent;
+                    ws.Cell(row, 3).Value = _settings.CurrentProfile.IsAmorce;
                     ws.Cell(row, 4).Value = block.BlockNumber;
                     ws.Cell(row, 5).Value = r.ExpectedAnswer;
                     ws.Cell(row, 6).Value = r.GivenAnswer;

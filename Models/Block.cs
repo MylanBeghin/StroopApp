@@ -50,8 +50,6 @@ public class Block : ModelBase
     private readonly ExperimentSettings _settings;
 
     public readonly string _profileName;
-    private readonly string _stroopType;
-    public string StroopType => _stroopType;
     public ObservableCollection<StroopTrial> TrialRecords { get; } = new();
     public ObservableCollection<double?> TrialTimes { get; } = new();
     public Block(ExperimentSettings settings)
