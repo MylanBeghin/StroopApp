@@ -87,7 +87,7 @@ public class StroopViewModel : ViewModelBase
         var wordTexts = new[] { "Blue", "Red", "Green", "Yellow" };
         int total = Settings.CurrentProfile.WordCount;
 
-        int congruentCount = total * (100 - Settings.CurrentProfile.CongruencePourcentage) / 100;
+        int congruentCount = total * Settings.CurrentProfile.CongruencePourcentage / 100;
         int incongruentCount = total - congruentCount;
         var congruenceFlags = new List<bool>();
         congruenceFlags.AddRange(Enumerable.Repeat(true, congruentCount));      // true = congruent
@@ -107,19 +107,23 @@ public class StroopViewModel : ViewModelBase
             {
                 TrialNumber = i + 1,
                 Block = Settings.Block,
-                ParticipantId = Settings.Participant.Id
+                ParticipantId = Settings.Participant.Id,
+                IsAmorce = Settings.CurrentProfile.IsAmorce,
+                SwitchPourcentage = Settings.CurrentProfile.SwitchPourcentage,
+                CongruencePourcentage = Settings.CurrentProfile.CongruencePourcentage
             };
             bool isCongruent = congruenceFlags[i];
-            trial.StroopType = isCongruent ? "Congruent" : "Incongruent";
             if (isCongruent)
             {
                 int idx = random.Next(0, wordColors.Length);
                 trial.Stimulus = new Word(wordColors[idx], wordTexts[idx]);
+                trial.IsCongruent = true;
             }
             else
             {
                 var indices = Enumerable.Range(0, wordColors.Length).OrderBy(_ => random.Next()).Take(2).ToArray();
                 trial.Stimulus = new Word(wordColors[indices[0]], wordTexts[indices[1]]);
+                trial.IsCongruent = false;
             }
 
             if (amorceSequence != null)
@@ -140,7 +144,7 @@ public class StroopViewModel : ViewModelBase
             CurrentControl = new FixationCrossControl();
             await Task.Delay(Settings.CurrentProfile.FixationDuration);
 
-            if (trial.StroopType == "Amorce")
+            if (Settings.CurrentProfile.IsAmorce)
             {
                 CurrentControl = new AmorceControl(trial.Amorce);
                 await Task.Delay(Settings.CurrentProfile.AmorceDuration);

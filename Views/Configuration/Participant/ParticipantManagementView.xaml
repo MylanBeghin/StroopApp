@@ -80,8 +80,7 @@
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
-                                        </TextBlock.Style>
-                                    </TextBlock>
+                                        </TextBlock.Style></TextBlock>
                                 </Grid>
                             </Grid>
                         </Border>
@@ -90,8 +89,7 @@
                         <Button Content="Modifier"
                                 Command="{Binding ModifyParticipantCommand}" />
                         <Button Content="Supprimer"
-                                Command="{Binding DeleteParticipantCommand}">
-                        </Button>
+                                Command="{Binding DeleteParticipantCommand}"></Button>
                     </ui:SimpleStackPanel>
                 </Grid>
             </ui:SimpleStackPanel>
@@ -105,8 +103,7 @@
                 <ListView ItemsSource="{Binding ParticipantsView}"
                           SelectedItem="{Binding SelectedParticipant}"
                           IsSynchronizedWithCurrentItem="True"
-                          ScrollViewer.VerticalScrollBarVisibility="Auto"
-                          >
+                          ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="ID"

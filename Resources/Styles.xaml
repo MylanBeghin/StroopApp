@@ -6,7 +6,7 @@
         <Setter Property="IsReadOnly"
                 Value="True" />
         <Setter Property="IsHitTestVisible"
-                Value="False" />
+                Value="True" />
         <Setter Property="Focusable"
                 Value="False" />
         <Setter Property="IsTabStop"
@@ -17,16 +17,44 @@
                 Value="{DynamicResource SystemControlBackgroundBaseLowBrush}" />
         <Setter Property="Foreground"
                 Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
-        <Setter Property="BorderBrush"
-                Value="{DynamicResource SystemControlForegroundBaseLowBrush}" />
         <Setter Property="BorderThickness"
-                Value="1" />
+                Value="0" />
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource SystemControlBackgroundBaseLowBrush}" />
         <Setter Property="Padding"
-                Value="6,4" />
+                Value="6" />
+        <Setter Property="Margin"
+                Value="4" />
         <Setter Property="FontSize"
                 Value="14" />
         <Setter Property="FontFamily"
                 Value="Segoe UI" />
+        <Setter Property="Cursor"
+                Value="Arrow" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+                
+                <Setter Property="Background"
+                        Value="{DynamicResource SystemControlBackgroundBaseLowBrush}" />
+                <Setter Property="BorderBrush"
+                        Value="White" />
+                <Setter Property="BorderThickness"
+                        Value="0" />
+            </Trigger>
+            <!-- Verrouille bordure au focus clavier -->
+            <Trigger Property="IsKeyboardFocused"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="{DynamicResource SystemControlBackgroundBaseLowBrush}" />
+                <Setter Property="BorderBrush"
+                        Value="{DynamicResource SystemControlBackgroundBaseLowBrush}" />
+                <Setter Property="Foreground"
+                        Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
+                <Setter Property="BorderThickness"
+                        Value="0" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>
    

@@ -79,28 +79,30 @@ namespace StroopApp.Services.Exportation
             using var wb = new XLWorkbook();
             var ws = wb.Worksheets.Add("Export");
             ws.Cell(1, 1).Value = "Numéro du participant";
-            ws.Cell(1, 2).Value = "Type de Stroop";
-            ws.Cell(1, 3).Value = "Bloc";
-            ws.Cell(1, 4).Value = "Réponse attendue";
-            ws.Cell(1, 5).Value = "Réponse donnée";
-            ws.Cell(1, 6).Value = "Validité de la réponse";
-            ws.Cell(1, 7).Value = "Temps de réaction";
-            ws.Cell(1, 8).Value = "Essai";
-            ws.Cell(1, 9).Value = "Amorce";
+            ws.Cell(1, 2).Value = "Congruence";
+            ws.Cell(1, 3).Value = "Amorce ?";
+            ws.Cell(1, 4).Value = "Bloc";
+            ws.Cell(1, 5).Value = "Réponse attendue";
+            ws.Cell(1, 6).Value = "Réponse donnée";
+            ws.Cell(1, 7).Value = "Validité de la réponse";
+            ws.Cell(1, 8).Value = "Temps de réaction";
+            ws.Cell(1, 9).Value = "Essai";
+            ws.Cell(1, 10).Value = "Type d'amorce";
 
             var row = 2;
             foreach (var block in _settings.ExperimentContext.Blocks)
                 foreach (var r in block.TrialRecords)
                 {
                     ws.Cell(row, 1).Value = p.Id;
-                    ws.Cell(row, 2).Value = block.StroopType;
-                    ws.Cell(row, 3).Value = block.BlockNumber;
-                    ws.Cell(row, 4).Value = r.ExpectedAnswer;
-                    ws.Cell(row, 5).Value = r.GivenAnswer;
-                    ws.Cell(row, 6).Value = r.IsValidResponse;
-                    ws.Cell(row, 7).Value = r.ReactionTime;
-                    ws.Cell(row, 8).Value = r.TrialNumber;
-                    ws.Cell(row, 9).Value = r.Amorce switch
+                    ws.Cell(row, 2).Value = r.IsCongruent;
+                    ws.Cell(row, 3).Value = _settings.CurrentProfile.IsAmorce;
+                    ws.Cell(row, 4).Value = block.BlockNumber;
+                    ws.Cell(row, 5).Value = r.ExpectedAnswer;
+                    ws.Cell(row, 6).Value = r.GivenAnswer;
+                    ws.Cell(row, 7).Value = r.IsValidResponse;
+                    ws.Cell(row, 8).Value = r.ReactionTime;
+                    ws.Cell(row, 9).Value = r.TrialNumber;
+                    ws.Cell(row, 10).Value = r.Amorce switch
                     {
                         AmorceType.Square => "Carré",
                         AmorceType.Round => "Cercle",

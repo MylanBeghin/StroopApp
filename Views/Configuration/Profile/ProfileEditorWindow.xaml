@@ -268,16 +268,6 @@
                                       Minimum="1"
                                       SpinButtonPlacementMode="Inline"
                                       Grid.Column="0" />
-                        <ui:NumberBox Header="Pourcentage de switch"
-                                      Value="{Binding Profile.SwitchPourcentage, Mode=TwoWay}"
-                                      Minimum="1"
-                                      SpinButtonPlacementMode="Inline"
-                                      Grid.Column="2" />
-                        <ui:NumberBox Header="Pourcentage de congruence"
-                                      Value="{Binding Profile.CongruencePourcentage, Mode=TwoWay}"
-                                      Minimum="1"
-                                      SpinButtonPlacementMode="Inline"
-                                      Grid.Column="4" />
                     </Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>

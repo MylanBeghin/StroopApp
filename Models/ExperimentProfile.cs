@@ -49,7 +49,7 @@ namespace StroopApp.Models
                 if (_profileName != value)
                 {
                     _profileName = value;
-                    OnPropertyChanged(nameof(ProfileName));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -63,7 +63,7 @@ namespace StroopApp.Models
                 if (_hours != value)
                 {
                     _hours = value;
-                    OnPropertyChanged(nameof(Hours));
+                    OnPropertyChanged();
                     UpdateDerivedValues();
                 }
             }
@@ -78,7 +78,7 @@ namespace StroopApp.Models
                 if (_minutes != value)
                 {
                     _minutes = value;
-                    OnPropertyChanged(nameof(Minutes));
+                    OnPropertyChanged();
                     UpdateDerivedValues();
                 }
             }
@@ -93,7 +93,7 @@ namespace StroopApp.Models
                 if (_seconds != value)
                 {
                     _seconds = value;
-                    OnPropertyChanged(nameof(Seconds));
+                    OnPropertyChanged();
                     UpdateDerivedValues();
                 }
             }
@@ -108,7 +108,7 @@ namespace StroopApp.Models
                 if (_wordDuration != value)
                 {
                     _wordDuration = value;
-                    OnPropertyChanged(nameof(WordDuration));
+                    OnPropertyChanged();
                     UpdateDerivedValues();
                 }
             }
@@ -123,7 +123,7 @@ namespace StroopApp.Models
                 if (_fixationDuration != value)
                 {
                     _fixationDuration = value;
-                    OnPropertyChanged(nameof(FixationDuration));
+                    OnPropertyChanged();
                     UpdateDerivedValues();
                 }
             }
@@ -138,7 +138,7 @@ namespace StroopApp.Models
                 if (_amorceDuration != value)
                 {
                     _amorceDuration = value;
-                    OnPropertyChanged(nameof(AmorceDuration));
+                    OnPropertyChanged();
                     UpdateDerivedValues();
                 }
             }
@@ -159,7 +159,7 @@ namespace StroopApp.Models
                         SwitchPourcentage = 50;
                     }
 
-                    OnPropertyChanged(nameof(IsAmorce));
+                    OnPropertyChanged();
                     UpdateDerivedValues();
                 }
             }
@@ -174,7 +174,7 @@ namespace StroopApp.Models
                 if (_groupSize != value)
                 {
                     _groupSize = value;
-                    OnPropertyChanged(nameof(GroupSize));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -187,7 +187,7 @@ namespace StroopApp.Models
                 if (_taskDuration != value)
                 {
                     _taskDuration = value;
-                    OnPropertyChanged(nameof(TaskDuration));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -201,7 +201,7 @@ namespace StroopApp.Models
                 if (_wordCount != value)
                 {
                     _wordCount = value;
-                    OnPropertyChanged(nameof(WordCount));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -215,7 +215,7 @@ namespace StroopApp.Models
                 if (_maxReactionTime != value)
                 {
                     _maxReactionTime = value;
-                    OnPropertyChanged(nameof(MaxReactionTime));
+                    OnPropertyChanged();
                     UpdateDerivedValues();
                 }
             }
@@ -229,7 +229,7 @@ namespace StroopApp.Models
                 if (_calculationMode != value)
                 {
                     _calculationMode = value;
-                    OnPropertyChanged(nameof(CalculationMode));
+                    OnPropertyChanged();
                     UpdateDerivedValues();
                 }
             }
@@ -243,7 +243,7 @@ namespace StroopApp.Models
                 if (_switchPourcentage != value)
                 {
                     _switchPourcentage = value;
-                    OnPropertyChanged(nameof(SwitchPourcentage));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -256,7 +256,7 @@ namespace StroopApp.Models
                 if (_congruencePourcentage != value)
                 {
                     _congruencePourcentage = value;
-                    OnPropertyChanged(nameof(CongruencePourcentage));
+                    OnPropertyChanged();
                 }
             }
         }
