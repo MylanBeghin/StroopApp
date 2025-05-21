@@ -13,6 +13,7 @@
         <converters:MillisecondsToHoursConverter x:Key="MillisecondsToHoursConverter" />
         <converters:MillisecondsToMinutesConverter x:Key="MillisecondsToMinutesConverter" />
         <converters:MillisecondsToSecondsConverter x:Key="MillisecondsToSecondsConverter" />
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -41,18 +42,16 @@
                             <Binding Path="Progress"
                                      Mode="OneWay" />
                         </MultiBinding>
-                    </TextBlock.Text>
-                </TextBlock>
+                    </TextBlock.Text></TextBlock>
                 <ui:ProgressBar Grid.Column="1"
                                 Value="{Binding Progress, Mode=OneWay}"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Center"
-                                Height="10"/>
+                                Height="10" />
             </ui:SimpleStackPanel>
         </Border>
         <Border Grid.Column="1"
                 Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
-
                 Padding="16"
                 BorderThickness="0.5"
                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
@@ -96,89 +95,101 @@
                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
             <ui:SimpleStackPanel Spacing="10">
                 <!-- Section Détails de l'expérience -->
-            <TextBlock Text="Détails de l'expérience"
-                       Style="{DynamicResource TitleTextBlockStyle}" />
-            <Grid Margin="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
+                <TextBlock Text="Détails de l'expérience"
+                           Style="{DynamicResource TitleTextBlockStyle}" />
+                <Grid Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <!-- Type de Stroop -->
+                        <ColumnDefinition Width="Auto" />
+                        <!-- Heures -->
+                        <ColumnDefinition Width="Auto" />
+                        <!-- Minutes -->
+                        <ColumnDefinition Width="Auto" />
+                        <!-- Secondes -->
+                        <ColumnDefinition Width="Auto" />
+                        <!-- Temps de réaction max (ms) -->
+                        <ColumnDefinition Width="*" />
+                        <!-- Durée par mot (ms) -->
+                    </Grid.ColumnDefinitions>
                     <!-- Type de Stroop -->
-                    <ColumnDefinition Width="Auto" />
+                    <TextBox Grid.Column="0"
+                             Text="{Binding settings.CurrentProfile.CongruencePourcentage}"
+                             HorizontalAlignment="Stretch"
+                             ui:ControlHelper.Header="Pourcentage de congruence"
+                             Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+                             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                             IsHitTestVisible="False"
+                             Padding="4"
+                             Margin="4" />
+                    <TextBox Grid.Column="1"
+                             Text="{Binding settings.CurrentProfile.SwitchPourcentage}"
+                             HorizontalAlignment="Stretch"
+                             ui:ControlHelper.Header="Pourcentage de switch"
+                             Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+                             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                             IsHitTestVisible="False"
+                             Padding="4"
+                             Margin="4"
+                             Visibility="{Binding settings.CurrentProfile.IsAmorce,
+                              Converter={StaticResource BoolToVisibilityConverter}}" />
                     <!-- Heures -->
-                    <ColumnDefinition Width="Auto" />
+                    <TextBox Grid.Column="2"
+                             Text="{Binding settings.CurrentProfile.Hours}"
+                             IsReadOnly="True"
+                             HorizontalAlignment="Center"
+                             ui:ControlHelper.Header="Heures"
+                             Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+                             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                             Padding="4"
+                             Margin="4"
+                             IsHitTestVisible="False" />
                     <!-- Minutes -->
-                    <ColumnDefinition Width="Auto" />
+                    <TextBox Grid.Column="3"
+                             Text="{Binding settings.CurrentProfile.Minutes}"
+                             IsReadOnly="True"
+                             HorizontalAlignment="Center"
+                             ui:ControlHelper.Header="Minutes"
+                             Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+                             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                             Padding="4"
+                             Margin="4"
+                             IsHitTestVisible="False" />
                     <!-- Secondes -->
-                    <ColumnDefinition Width="*" />
+                    <TextBox Grid.Column="4"
+                             Text="{Binding settings.CurrentProfile.Seconds}"
+                             IsReadOnly="True"
+                             HorizontalAlignment="Center"
+                             ui:ControlHelper.Header="Secondes"
+                             Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+                             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                             Padding="4"
+                             Margin="4"
+                             IsHitTestVisible="False" />
                     <!-- Temps de réaction max (ms) -->
-                    <ColumnDefinition Width="*" />
+                    <TextBox Grid.Column="5"
+                             Text="{Binding settings.CurrentProfile.MaxReactionTime}"
+                             IsReadOnly="True"
+                             HorizontalAlignment="Stretch"
+                             ui:ControlHelper.Header="Temps de réaction max (ms)"
+                             Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+                             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                             Padding="4"
+                             Margin="4"
+                             IsHitTestVisible="False" />
                     <!-- Durée par mot (ms) -->
-                </Grid.ColumnDefinitions>
-                <!-- Type de Stroop -->
-                <TextBox Grid.Column="0"
-                         Text="{Binding settings.CurrentProfile.StroopType}"
-                         HorizontalAlignment="Stretch"
-                         ui:ControlHelper.Header="Type de Stroop"
-                         Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-                         BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                         IsHitTestVisible="False"
-                         Padding="4"
-                         Margin="4" />
-                <!-- Heures -->
-                <TextBox Grid.Column="1"
-                         Text="{Binding settings.CurrentProfile.Hours}"
-                         IsReadOnly="True"
-                         HorizontalAlignment="Center"
-                         ui:ControlHelper.Header="Heures"
-                         Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-                         BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                         Padding="4"
-                         Margin="4"
-                         IsHitTestVisible="False" />
-                <!-- Minutes -->
-                <TextBox Grid.Column="2"
-                         Text="{Binding settings.CurrentProfile.Minutes}"
-                         IsReadOnly="True"
-                         HorizontalAlignment="Center"
-                         ui:ControlHelper.Header="Minutes"
-                         Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-                         BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                         Padding="4"
-                         Margin="4"
-                         IsHitTestVisible="False" />
-                <!-- Secondes -->
-                <TextBox Grid.Column="3"
-                         Text="{Binding settings.CurrentProfile.Seconds}"
-                         IsReadOnly="True"
-                         HorizontalAlignment="Center"
-                         ui:ControlHelper.Header="Secondes"
-                         Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-                         BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                         Padding="4"
-                         Margin="4"
-                         IsHitTestVisible="False" />
-                <!-- Temps de réaction max (ms) -->
-                <TextBox Grid.Column="4"
-                         Text="{Binding settings.CurrentProfile.MaxReactionTime}"
-                         IsReadOnly="True"
-                         HorizontalAlignment="Stretch"
-                         ui:ControlHelper.Header="Temps de réaction max (ms)"
-                         Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-                         BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                         Padding="4"
-                         Margin="4"
-                         IsHitTestVisible="False" />
-                <!-- Durée par mot (ms) -->
-                <TextBox Grid.Column="5"
-                         Text="{Binding settings.CurrentProfile.WordDuration}"
-                         IsReadOnly="True"
-                         HorizontalAlignment="Stretch"
-                         ui:ControlHelper.Header="Durée par mot (ms)"
-                         Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-                         BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                         Padding="4"
-                         Margin="4"
-                         IsHitTestVisible="False" />
-            </Grid>
+                    <TextBox Grid.Column="6"
+                             Text="{Binding settings.CurrentProfile.WordDuration}"
+                             IsReadOnly="True"
+                             HorizontalAlignment="Stretch"
+                             ui:ControlHelper.Header="Durée par mot (ms)"
+                             Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+                             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                             Padding="4"
+                             Margin="4"
+                             IsHitTestVisible="False" />
+                </Grid>
             </ui:SimpleStackPanel>
         </Border>
     </Grid>

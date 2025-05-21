@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="StroopApp.Controls.InfoBubble"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Width="16"
+             Height="16"
+             Background="Transparent"
+             ToolTipService.ToolTip="{Binding InfoText, RelativeSource={RelativeSource Self}}"
+             ToolTipService.Placement="Mouse"
+             ToolTipService.ShowOnDisabled="True">
+    <Grid>
+        <TextBlock Text=""
+                   FontFamily="Segoe MDL2 Assets"
+                   FontSize="14"
+                   Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"
+                   ToolTip="Ceci est un test"></TextBlock>
+    </Grid>
+</UserControl>
