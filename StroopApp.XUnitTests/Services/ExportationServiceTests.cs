@@ -27,7 +27,7 @@ namespace StroopApp.XUnitTests.Services
 			{
 				IsCongruent = true,
 				ExpectedAnswer = "Rouge",
-				GivenAnswer = "Rouge",
+				GivenAnswer = "Bleu",
 				IsValidResponse = true,
 				ReactionTime = 500,
 				TrialNumber = 1,
