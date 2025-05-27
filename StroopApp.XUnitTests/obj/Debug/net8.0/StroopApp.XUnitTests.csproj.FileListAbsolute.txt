@@ -1,0 +1,5 @@
+C:\Users\mylan\Desktop\StroopApp.XUnitTests\obj\Debug\net8.0\StroopApp.XUnitTests.csproj.AssemblyReference.cache
+C:\Users\mylan\Desktop\StroopApp.XUnitTests\obj\Debug\net8.0\StroopApp.XUnitTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mylan\Desktop\StroopApp.XUnitTests\obj\Debug\net8.0\StroopApp.XUnitTests.AssemblyInfoInputs.cache
+C:\Users\mylan\Desktop\StroopApp.XUnitTests\obj\Debug\net8.0\StroopApp.XUnitTests.AssemblyInfo.cs
+C:\Users\mylan\Desktop\StroopApp.XUnitTests\obj\Debug\net8.0\StroopApp.XUnitTests.csproj.CoreCompileInputs.cache

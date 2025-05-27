@@ -1,0 +1,112 @@
+﻿<Page x:Class="StroopApp.Views.Experiment.Experimenter.EndExperimentPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.modernwpf.com/2019"
+      xmlns:models="clr-namespace:StroopApp.Models">
+    <Grid x:Name="MainGrid"
+          Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="12" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="12" />
+            <RowDefinition Height="0.4*" />
+            <RowDefinition Height="12" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Margin="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0"
+                       Text="Bloc terminé"
+                       Style="{DynamicResource HeaderTextBlockStyle}"
+                       VerticalAlignment="Center" />
+
+            <ui:SimpleStackPanel Grid.Column="1"
+                                 Orientation="Horizontal"
+                                 HorizontalAlignment="Right"
+                                 VerticalAlignment="Center"
+                                 Spacing="10">
+                <TextBlock Text="{Binding CurrentProfile}"
+                           Style="{DynamicResource TitleTextBlockStyle}" />
+                <TextBlock Text=" - "
+                           Style="{DynamicResource TitleTextBlockStyle}"/>
+                <TextBlock Text="{Binding CurrentParticipant}"
+                           Style="{DynamicResource TitleTextBlockStyle}" />
+            </ui:SimpleStackPanel>
+        </Grid>
+        <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+                CornerRadius="8"
+                Padding="16"
+                BorderThickness="0.5"
+                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                Grid.Row="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                           Text="Résumé des blocs"
+                           Style="{DynamicResource TitleTextBlockStyle}"
+                           Margin="0,0,0,12" />
+                <Border Grid.Row="3"
+                        Margin="0,12,0,0"
+                        Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+                        CornerRadius="8"
+                        Padding="8"
+                        BorderThickness="0.5"
+                        BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+                    <DataGrid Grid.Row="1"
+                              ItemsSource="{Binding Blocks}"
+                              IsReadOnly="True"
+                              HeadersVisibility="Column"
+                              AutoGenerateColumns="False">
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="IsHitTestVisible"
+                                        Value="False" />
+                            </Style>
+                        </DataGrid.RowStyle>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Bloc"
+                                                Binding="{Binding BlockNumber, StringFormat=Bloc {0}}" />
+                            <DataGridTextColumn Header="Essais"
+                                                Binding="{Binding TotalTrials}" />
+                            <DataGridTextColumn Header="Précision"
+                                                Binding="{Binding Accuracy, StringFormat={}{0}%}" />
+                            <DataGridTextColumn Header="Temps moyen de réponse"
+                                                Binding="{Binding ResponseTimeMean, StringFormat={}{0} ms}" />
+                            <DataGridTextColumn Header="Type Stroop"
+                                                Binding="{Binding StroopType}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="4"
+                Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+                CornerRadius="8"
+                Padding="16"
+                BorderThickness="0.5"
+                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+        </Border>
+        <ui:SimpleStackPanel Orientation="Horizontal"
+                             Spacing="16"
+                             Grid.Row="6"
+                             HorizontalAlignment="Center">
+            <Button Content="Relancer"
+                    Command="{Binding ContinueCommand}"
+                    Style="{DynamicResource AccentButtonStyle}"
+                    IsDefault="True" />
+            <Button Content="Nouvelle expérience"
+                    Command="{Binding RestartCommand}"/>
+            <Button Content="Quitter l'application"
+                    Command="{Binding QuitCommand}"
+                    IsCancel="True" />
+        </ui:SimpleStackPanel>
+    </Grid>
+</Page>

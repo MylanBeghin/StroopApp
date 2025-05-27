@@ -1,0 +1,59 @@
+﻿<Window x:Class="StroopApp.Views.Participant.ParticipantEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        Title="Modification du participant"
+        Width="450"
+        Height="360"
+        WindowStartupLocation="CenterScreen"
+        ui:WindowHelper.UseModernWindowStyle="True">
+    <ui:SimpleStackPanel Margin="12" Spacing="12">
+        <TextBlock Text="Modification du participant" Style="{StaticResource TitleTextBlockStyle}"/>
+        <TextBox ui:ControlHelper.Header="ID" 
+            Text="{Binding Participant.Id, Mode=TwoWay}" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="6" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="6" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ui:NumberBox ui:ControlHelper.Header="Âge" 
+                Value="{Binding Participant.Age, Mode=TwoWay}" 
+                Minimum="0" 
+                Grid.Column="0"
+                SpinButtonPlacementMode="Inline"/>
+            <ui:NumberBox ui:ControlHelper.Header="Poids (kg)" 
+                Value="{Binding Participant.Weight, Mode=TwoWay}" 
+                Minimum="0" 
+                Grid.Column="2"
+                SpinButtonPlacementMode="Inline"/>
+            <ui:NumberBox ui:ControlHelper.Header="Taille (cm)" 
+                Value="{Binding Participant.Height, Mode=TwoWay}" 
+                Minimum="0" 
+                Grid.Column="4"
+                SpinButtonPlacementMode="Inline"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ComboBox Grid.Column="0"
+                      ui:ControlHelper.Header="Sexe"
+                      ItemsSource="{Binding SexAssignedValues}"
+                      SelectedItem="{Binding Participant.SexAssigned, Mode=TwoWay}"
+                      Width="200"/>
+            <ComboBox Grid.Column="1"
+                      ui:ControlHelper.Header="Genre"
+                      ItemsSource="{Binding GenderValues}"
+                      SelectedItem="{Binding Participant.Gender, Mode=TwoWay}"
+                      Width="200"/>
+        </Grid>
+        <ui:SimpleStackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12">
+            <Button Content="Annuler" Style="{StaticResource DefaultButtonStyle}" Command="{Binding CancelCommand}"/>
+            <Button Content="Enregistrer" Style="{StaticResource AccentButtonStyle}" Command="{Binding SaveCommand}"/>
+        </ui:SimpleStackPanel>
+    </ui:SimpleStackPanel>
+</Window>
