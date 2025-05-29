@@ -9,6 +9,7 @@
       "StroopApp.XUnitTests/1.0.0": {
         "dependencies": {
           "ClosedXML": "0.104.2",
+          "Extended.Wpf.Toolkit": "4.7.25104.5739",
           "Microsoft.NET.Test.Sdk": "17.8.0",
           "Moq": "4.20.72",
           "StroopApp": "1.0.0",

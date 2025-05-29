@@ -14,7 +14,8 @@
           "FontAwesome5": "2.1.11",
           "LiveChartsCore.SkiaSharpView.WPF": "2.0.0-rc5.4",
           "ModernWpfUI": "0.9.6",
-          "Ookii.Dialogs.Wpf": "5.0.1"
+          "Ookii.Dialogs.Wpf": "5.0.1",
+          "coverlet.collector": "6.0.0"
         },
         "runtime": {
           "StroopApp.dll": {}
@@ -51,6 +52,7 @@
           }
         }
       },
+      "coverlet.collector/6.0.0": {},
       "DocumentFormat.OpenXml/3.1.1": {
         "dependencies": {
           "DocumentFormat.OpenXml.Framework": "3.1.1"
@@ -783,6 +785,13 @@
       "sha512": "sha512-tqVU8yc/ADO9oiTRyTnwhFN68hCwvkliMierptWOudIAvWY1mWCh5VFh+guwHJmpMwfg0J0rY+yyd5Oy7ty9Uw==",
       "path": "communitytoolkit.mvvm/8.4.0",
       "hashPath": "communitytoolkit.mvvm.8.4.0.nupkg.sha512"
+    },
+    "coverlet.collector/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tW3lsNS+dAEII6YGUX/VMoJjBS1QvsxqJeqLaJXub08y1FSjasFPtQ4UBUsudE9PNrzLjooClMsPtY2cZLdXpQ==",
+      "path": "coverlet.collector/6.0.0",
+      "hashPath": "coverlet.collector.6.0.0.nupkg.sha512"
     },
     "DocumentFormat.OpenXml/3.1.1": {
       "type": "package",

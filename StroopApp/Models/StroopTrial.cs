@@ -132,8 +132,8 @@ namespace StroopApp.Models
 			}
 		}
 
-		private bool _isValidResponse;
-		public bool IsValidResponse
+		private bool? _isValidResponse;
+		public bool? IsValidResponse
 		{
 			get => _isValidResponse;
 			set

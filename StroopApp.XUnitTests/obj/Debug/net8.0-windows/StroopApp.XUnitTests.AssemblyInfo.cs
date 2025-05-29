@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StroopApp.XUnitTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9b9f034a6989a4cd885ceb5ef10880976289d93")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d12b91dd89a2274911105f7dc13b230d65ad0dc9")]
 [assembly: System.Reflection.AssemblyProductAttribute("StroopApp.XUnitTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StroopApp.XUnitTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

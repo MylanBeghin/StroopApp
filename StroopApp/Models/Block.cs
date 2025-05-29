@@ -63,7 +63,7 @@ public class Block : ModelBase
 	{
 		TotalTrials = TrialRecords.Count;
 		Accuracy = TrialRecords.Any()
-					  ? TrialRecords.Count(t => t.IsValidResponse) / (double)TotalTrials * 100
+					  ? TrialRecords.Count(t => t.IsValidResponse == true) / (double)TotalTrials * 100
 					  : 0;
 		ResponseTimeMean = TrialRecords
 									.Where(trial => trial.ReactionTime.HasValue && trial.Block == BlockNumber)

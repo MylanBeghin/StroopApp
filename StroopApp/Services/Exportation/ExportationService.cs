@@ -107,7 +107,13 @@ namespace StroopApp.Services.Exportation
 					ws.Cell(row, 4).Value = block.BlockNumber;
 					ws.Cell(row, 5).Value = r.ExpectedAnswer;
 					ws.Cell(row, 6).Value = r.GivenAnswer;
-					ws.Cell(row, 7).Value = r.IsValidResponse;
+
+					var validCell = ws.Cell(row, 7);
+					if (r.IsValidResponse.HasValue)
+						validCell.Value = r.IsValidResponse.Value;   // true ou false
+					else
+						validCell.Clear();                           // pas de réponse => cellule vide
+
 					ws.Cell(row, 8).Value = r.ReactionTime;
 					ws.Cell(row, 9).Value = r.TrialNumber;
 					ws.Cell(row, 10).Value = r.Amorce switch
@@ -118,6 +124,7 @@ namespace StroopApp.Services.Exportation
 					};
 					row++;
 				}
+
 
 			wb.SaveAs(filePath);
 
