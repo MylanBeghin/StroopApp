@@ -98,7 +98,7 @@ public class StroopViewModel : ViewModelBase
 		List<AmorceType>? amorceSequence = null;
 		if (Settings.CurrentProfile.IsAmorce)
 		{
-			amorceSequence = GenerateAmorceSequence(total, Settings.CurrentProfile.SwitchPourcentage);
+			amorceSequence = GenerateAmorceSequence(total, Settings.CurrentProfile.DominantPercent);
 		}
 
 		for (int i = 0 ; i < total ; i++)
@@ -110,7 +110,7 @@ public class StroopViewModel : ViewModelBase
 				Block = Settings.Block,
 				ParticipantId = Settings.Participant.Id,
 				IsAmorce = Settings.CurrentProfile.IsAmorce,
-				SwitchPourcentage = Settings.CurrentProfile.SwitchPourcentage,
+				SwitchPourcentage = Settings.CurrentProfile.DominantPercent,
 				CongruencePourcentage = Settings.CurrentProfile.CongruencePourcentage
 			};
 			bool isCongruent = congruenceFlags[i];
