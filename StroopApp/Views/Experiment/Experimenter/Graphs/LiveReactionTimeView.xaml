@@ -106,14 +106,14 @@
                                                     <Setter Property="Text"
                                                             Value="Correct" />
                                                     <Setter Property="Foreground"
-                                                            Value="Green" />
+                                                            Value="#5B2EFF" />
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding IsValidResponse}"
                                                              Value="False">
                                                     <Setter Property="Text"
                                                             Value="Incorrect" />
                                                     <Setter Property="Foreground"
-                                                            Value="Red" />
+                                                            Value="#FFA600" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>

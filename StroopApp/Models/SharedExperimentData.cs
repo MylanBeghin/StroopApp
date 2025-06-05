@@ -169,25 +169,27 @@ namespace StroopApp.Models
 					},
 					Mapping = (point, index) => new Coordinate( point.TrialNumber-1,point.ReactionTime != null ? point.ReactionTime.Value : double.NaN)
 				}.OnPointCreated(p =>
-					{
+						{
 						if (p.Visual is null) return;
 						var model = p.Model;
 						if (model!= null && model.IsValidResponse.HasValue)
 						{
+							var orange = new SKColor(255, 166, 0);      // #FFA600
+							// Violet (mauvaise réponse)
+							var violet = new SKColor(91, 46, 255);      // #5B2EFF
 							if(model.IsValidResponse.Value)
 							{
                             // Bonne réponse : point vert
-                            p.Visual.Fill = new SolidColorPaint(SKColors.Green);
-							p.Visual.Stroke = new SolidColorPaint(SKColors.Green);
+                                p.Visual.Fill = new SolidColorPaint(orange);
+								p.Visual.Stroke = new SolidColorPaint(orange);
 							}
 							else
-							{ 
-                            // Mauvaise réponse : point rouge
-                            p.Visual.Fill = new SolidColorPaint(SKColors.Red);
-							p.Visual.Stroke = new SolidColorPaint(SKColors.Red);
+							{
+								p.Visual.Fill = new SolidColorPaint(violet);
+								p.Visual.Stroke = new SolidColorPaint(violet);
 							}
 						}
-					}
+						}
 				)
 			};
 		}
