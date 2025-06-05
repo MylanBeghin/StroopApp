@@ -12,5 +12,12 @@
                FontSize="78"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"/>
+        <Border Width="32"
+                Height="32"
+                Background="White"
+                CornerRadius="4"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Margin="16" />
     </Grid>
 </UserControl>
