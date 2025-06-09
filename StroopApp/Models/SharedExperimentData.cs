@@ -73,14 +73,17 @@ namespace StroopApp.Models
 			get => _currentTrial;
 			set
 			{
-				if (_currentTrial != value)
+				if (_currentTrial != null)
+					_currentTrial.PropertyChanged -= CurrentTrial_PropertyChanged;
+
+				_currentTrial = value;
+
+				OnPropertyChanged(nameof(CurrentTrial));
+
+				if (_currentTrial != null)
 				{
-					if (_currentTrial != null)
-						_currentTrial.PropertyChanged -= CurrentTrial_PropertyChanged;
-					_currentTrial = value;
-					OnPropertyChanged(nameof(CurrentTrial));
-					if (_currentTrial != null)
-						_currentTrial.PropertyChanged += CurrentTrial_PropertyChanged;
+					_currentTrial.PropertyChanged -= CurrentTrial_PropertyChanged;
+					_currentTrial.PropertyChanged += CurrentTrial_PropertyChanged;
 				}
 			}
 		}
@@ -228,7 +231,7 @@ namespace StroopApp.Models
 			_colorIndex++;
 			currentBlockStart = end + 1;
 		}
-		public void Reset()
+		public virtual void Reset()
 		{
 			Blocks.Clear();
 			BlockSeries.Clear();
