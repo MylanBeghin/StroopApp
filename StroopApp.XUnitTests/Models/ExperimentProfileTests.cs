@@ -56,7 +56,7 @@ namespace StroopApp.XUnitTests.Models
 			{
 				IsAmorce = true,
 				AmorceDuration = 80,
-				SwitchPourcentage = 30
+				SwitchPourcent = 30
 			};
 
 			// Act
@@ -65,7 +65,7 @@ namespace StroopApp.XUnitTests.Models
 			// Assert
 			Assert.False(profile.IsAmorce);
 			Assert.Equal(0, profile.AmorceDuration);
-			Assert.Equal(50, profile.SwitchPourcentage);
+			Assert.Equal(50, profile.SwitchPourcent);
 		}
 
 		[Fact]
