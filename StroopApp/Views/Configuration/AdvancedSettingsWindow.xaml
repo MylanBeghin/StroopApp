@@ -8,6 +8,10 @@
         WindowStartupLocation="CenterScreen"
         ui:WindowHelper.UseModernWindowStyle="True"
         Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}">
+    <Window.InputBindings>
+        <KeyBinding Key="Enter"
+                    Command="{Binding SendCommand}" />
+    </Window.InputBindings>
     <Grid Margin="16">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -146,7 +150,8 @@
                      MinWidth="100" />
             <Button Content="Envoyer"
                     Command="{Binding SendCommand}"
-                    Style="{StaticResource AccentButtonStyle}" />
+                    Style="{StaticResource AccentButtonStyle}"
+                    IsDefault="True"/>
         </ui:SimpleStackPanel>
     </Grid>
 </Window>

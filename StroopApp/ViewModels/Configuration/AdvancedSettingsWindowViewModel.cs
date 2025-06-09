@@ -1,13 +1,12 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO.Ports;
+using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Input;
 
-using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
-using StroopApp.Core;
-
-public class AdvancedSettingsWindowViewModel : ViewModelBase
+public class AdvancedSettingsWindowViewModel : INotifyPropertyChanged
 {
 	public ObservableCollection<string> SerialPorts { get; } = new();
 	public ObservableCollection<int> BaudRates { get; } = new() { 9600, 19200, 38400, 57600, 115200 };
@@ -125,30 +124,34 @@ public class AdvancedSettingsWindowViewModel : ViewModelBase
 			{
 				_messageToSend = value;
 				OnPropertyChanged(nameof(MessageToSend));
+				((CommunityToolkit.Mvvm.Input.RelayCommand)SendCommand).NotifyCanExecuteChanged();
 			}
 		}
+
+
 	}
 
-	public ICommand RefreshCommand
+	public IRelayCommand RefreshCommand
 	{
 		get;
 	}
-	public ICommand ConnectCommand
+	public IRelayCommand ConnectCommand
 	{
 		get;
 	}
-	public ICommand SendCommand
+	public IRelayCommand SendCommand
 	{
 		get;
 	}
-	public ICommand CopyLogCommand
+	public IRelayCommand CopyLogCommand
 	{
 		get;
 	}
-	public ICommand ClearLogCommand
+	public IRelayCommand ClearLogCommand
 	{
 		get;
 	}
+
 
 	private SerialPort _serialPort;
 
@@ -159,6 +162,7 @@ public class AdvancedSettingsWindowViewModel : ViewModelBase
 		SendCommand = new RelayCommand(SendMessage, CanSendMessage);
 		CopyLogCommand = new RelayCommand(CopyLogToClipboard);
 		ClearLogCommand = new RelayCommand(ClearLog);
+
 
 		RefreshSerialPorts();
 	}
@@ -221,7 +225,11 @@ public class AdvancedSettingsWindowViewModel : ViewModelBase
 				MessageBox.Show($"Erreur lors de la déconnexion : {ex.Message}");
 			}
 		}
+
+		// Toujours notifier le changement de possibilité d’envoi !
+		SendCommand.NotifyCanExecuteChanged();
 	}
+
 
 	private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
 	{
@@ -274,4 +282,8 @@ public class AdvancedSettingsWindowViewModel : ViewModelBase
 	{
 		MessageLog = string.Empty;
 	}
+	public event PropertyChangedEventHandler PropertyChanged;
+
+	protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+		=> PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }
