@@ -31,7 +31,7 @@ namespace StroopApp.Models
 			_calculationMode = CalculationMode.WordCount;
 			_congruencePourcentage = 50;
 			_dominantPercent = 50;
-			_switchPourcent = 50;
+			_switchPourcent = null;
 			UpdateDerivedValues();
 		}
 		private Guid _id;
@@ -154,11 +154,11 @@ namespace StroopApp.Models
 				if (_isAmorce != value)
 				{
 					_isAmorce = value;
-					if (_isAmorce == false)
+					if (!_isAmorce)
 					{
 						AmorceDuration = 0;
 						DominantPercent = 50;
-						SwitchPourcent = 50;
+						SwitchPourcent = null;
 					}
 
 					OnPropertyChanged();
@@ -262,8 +262,8 @@ namespace StroopApp.Models
 				}
 			}
 		}
-		private int _switchPourcent;
-		public int SwitchPourcent
+		private int? _switchPourcent;
+		public int? SwitchPourcent
 		{
 			get => _switchPourcent;
 			set
