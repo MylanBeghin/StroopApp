@@ -7,10 +7,9 @@
         xmlns:ui="http://schemas.modernwpf.com/2019"
         Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}"
         Title="Modification du profil"
-        MinWidth="400"
-        MaxWidth="650"
-        MinHeight="400"
-        MaxHeight="900"
+        MinWidth="685"
+        Width="685"
+        Height="700"
         WindowStartupLocation="CenterScreen"
         ui:WindowHelper.UseModernWindowStyle="True">
     <Window.Resources>
