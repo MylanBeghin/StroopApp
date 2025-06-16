@@ -29,10 +29,11 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
                 .Skip(start - 1).Take(end - start + 1)
                 .Where(p => p.ReactionTime.HasValue && !double.IsNaN(p.ReactionTime.Value))
                 .Select(p => p.ReactionTime.Value);
-            GroupAverageLabel = $"Moyenne pour les mots {start} – {end} :";
+            var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
+            GroupAverageLabel = string.Format(loc?["LiveAverage_Label"] ?? "", start, end);
             GroupAverageValue = group.Any()
-                ? $"{group.Average():N0} ms"
-                : "Aucune donnée valide";
+                ? $"{group.Average():N0} ms"
+                : loc?["LiveAverage_NoData"];
             OnPropertyChanged(nameof(GroupAverageLabel));
             OnPropertyChanged(nameof(GroupAverageValue));
         }

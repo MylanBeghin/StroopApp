@@ -120,4 +120,98 @@
   <data name="App_Title" xml:space="preserve">
     <value>Application de tâche cognitive</value>
   </data>
+  <data name="ExperimentWindow_Title" xml:space="preserve">
+    <value>Expérience Stroop</value>
+  </data>
+  <data name="ParticipantWindow_Title" xml:space="preserve">
+    <value>Fenêtre Participant</value>
+  </data>
+  <data name="ConfigPage_Title" xml:space="preserve">
+    <value>Configuration de l'expérience</value>
+  </data>
+  <data name="Button_LaunchExperiment" xml:space="preserve">
+    <value>Lancer l'expérience</value>
+  </data>
+  <data name="Error_SelectProfile" xml:space="preserve">
+    <value>Veuillez sélectionner un profil d'expérience.</value>
+  </data>
+  <data name="Error_SelectParticipant" xml:space="preserve">
+    <value>Veuillez sélectionner un participant.</value>
+  </data>
+  <data name="Error_SelectProfileToModify" xml:space="preserve">
+    <value>Veuillez sélectionner un profil à modifier&nbsp;!</value>
+  </data>
+  <data name="Error_SelectProfileToDelete" xml:space="preserve">
+    <value>Veuillez sélectionner un profil à supprimer&nbsp;!</value>
+  </data>
+  <data name="Error_ProfileNameEmpty" xml:space="preserve">
+    <value>Le nom du profil ne peut pas être vide ou contenir uniquement des espaces.</value>
+  </data>
+  <data name="Error_ProfileNameExists" xml:space="preserve">
+    <value>Un profil avec ce nom existe déjà. Veuillez choisir un autre nom.</value>
+  </data>
+  <data name="Error_WordDurationInvalid" xml:space="preserve">
+    <value>La durée du mot doit être positive et la durée totale doit être divisible par la durée du mot.</value>
+  </data>
+  <data name="Error_GroupSizeInvalid" xml:space="preserve">
+    <value>La taille du groupe doit être positive et diviser le nombre de mots.</value>
+  </data>
+  <data name="Error_AmorceTimeInvalid" xml:space="preserve">
+    <value>Le temps d'amorce doit être supérieur à 0&nbsp;!</value>
+  </data>
+  <data name="Error_MaxReactionInvalid" xml:space="preserve">
+    <value>Le temps de réaction maximum doit être positif.</value>
+  </data>
+  <data name="Error_SelectParticipantToModify" xml:space="preserve">
+    <value>Veuillez sélectionner un participant à modifier&nbsp;!</value>
+  </data>
+  <data name="Error_SelectParticipantToDelete" xml:space="preserve">
+    <value>Veuillez sélectionner un participant à supprimer&nbsp;!</value>
+  </data>
+  <data name="Error_ParticipantFieldsInvalid" xml:space="preserve">
+    <value>Veuillez remplir correctement tous les champs obligatoires.</value>
+  </data>
+  <data name="Error_DuplicateParticipantId" xml:space="preserve">
+    <value>Cet identifiant est déjà utilisé pour un autre participant.</value>
+  </data>
+  <data name="Error_NoExportFolder" xml:space="preserve">
+    <value>Aucun dossier d'export configuré.</value>
+  </data>
+  <data name="Export_Completed_Title" xml:space="preserve">
+    <value>Export terminé</value>
+  </data>
+  <data name="Export_Completed_Message" xml:space="preserve">
+    <value>Fichier enregistré&nbsp;:
+{0}</value>
+  </data>
+  <data name="Error_Title" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="EndExperiment_CurrentParticipant" xml:space="preserve">
+    <value>Participant n°&nbsp;{0}</value>
+  </data>
+  <data name="EndExperiment_CurrentProfile" xml:space="preserve">
+    <value>Tâche&nbsp;: {0}</value>
+  </data>
+  <data name="LiveAverage_Label" xml:space="preserve">
+    <value>Moyenne pour les mots {0}&nbsp;–&nbsp;{1}&nbsp;:</value>
+  </data>
+  <data name="LiveAverage_NoData" xml:space="preserve">
+    <value>Aucune donnée valide</value>
+  </data>
+  <data name="Column_NoResponse" xml:space="preserve">
+    <value>Aucune réponse</value>
+  </data>
+  <data name="DeleteConfirmation_Title" xml:space="preserve">
+    <value>Confirmation de suppression</value>
+  </data>
+  <data name="DeleteConfirmation_Message" xml:space="preserve">
+    <value>Voulez-vous vraiment supprimer ce participant ? Ses données seront archivées.</value>
+  </data>
+  <data name="DeleteConfirmation_Primary" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="DeleteConfirmation_Close" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
 </root>

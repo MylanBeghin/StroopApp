@@ -74,7 +74,8 @@ namespace StroopApp.ViewModels.Configuration.Profile
         {
             if (CurrentProfile == null)
             {
-                ShowErrorDialog("Veuillez sélectionner un profil à modifier !");
+                var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
+                ShowErrorDialog(loc?["Error_SelectProfileToModify"] ?? "");
                 return;
             }
             var viewModel = new ProfileEditorViewModel(CurrentProfile, Profiles, _profileService);
@@ -95,7 +96,8 @@ namespace StroopApp.ViewModels.Configuration.Profile
         {
             if (CurrentProfile == null)
             {
-                ShowErrorDialog("Veuillez sélectionner un profil à supprimer !");
+                var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
+                ShowErrorDialog(loc?["Error_SelectProfileToDelete"] ?? "");
                 return;
             }
             int currentIndex = Profiles.IndexOf(_currentProfile);
