@@ -2,14 +2,17 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:StroopApp"
-             xmlns:ui="http://schemas.modernwpf.com/2019">
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:loc="clr-namespace:StroopApp.Core">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ui:ThemeResources RequestedTheme="Light" AccentColor="CornflowerBlue"/>
+                <ui:ThemeResources RequestedTheme="Light"
+                                   AccentColor="CornflowerBlue" />
                 <ui:XamlControlsResources />
                 <ResourceDictionary Source="Resources/styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <loc:LocalizedStrings x:Key="Loc" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
