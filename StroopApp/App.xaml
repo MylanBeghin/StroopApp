@@ -5,6 +5,7 @@
              xmlns:ui="http://schemas.modernwpf.com/2019">
     <Application.Resources>
         <ResourceDictionary>
+            <local:LocalizedStrings x:Key="Loc" />
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemeResources RequestedTheme="Light" AccentColor="CornflowerBlue"/>
                 <ui:XamlControlsResources />

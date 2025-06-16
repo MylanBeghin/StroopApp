@@ -15,11 +15,12 @@ using StroopApp.Views.Configuration;
 using StroopApp.Views.KeyMapping;
 using StroopApp.Views.Participant;
 using StroopApp.Views.Profile;
+using System.Windows;
 
 namespace StroopApp.Views
 {
-	public partial class ConfigurationPage : Page
-	{
+        public partial class ConfigurationPage : Page
+        {
 		public ConfigurationPage(ExperimentSettings settings, INavigationService experimentNavigationService, IWindowManager windowManager)
 		{
 			InitializeComponent();
@@ -55,9 +56,20 @@ namespace StroopApp.Views
 			Grid.SetColumn(keyMappingView, 0);
 			KeyMappingContainer.Children.Add(exportFolderView);
 			Grid.SetColumn(exportFolderView, 2);
-			MainGrid.Children.Add(participantManagementView);
-			Grid.SetRow(participantManagementView, 5);
-		}
-	}
+                        MainGrid.Children.Add(participantManagementView);
+                        Grid.SetRow(participantManagementView, 5);
+                }
+
+                private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+                {
+                        if (LanguageComboBox.SelectedItem is ComboBoxItem item && item.Tag is string culture)
+                        {
+                                if (Application.Current.Resources["Loc"] is LocalizedStrings loc)
+                                {
+                                        loc.SetCulture(culture);
+                                }
+                        }
+                }
+        }
 }
 

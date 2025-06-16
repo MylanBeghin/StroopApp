@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <data name="Configuration_Title" xml:space="preserve">
+    <value>Experiment Configuration</value>
+  </data>
+  <data name="Configuration_Header" xml:space="preserve">
+    <value>Experiment parameters configuration</value>
+  </data>
+  <data name="Button_Launch" xml:space="preserve">
+    <value>Launch experiment</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+</root>
