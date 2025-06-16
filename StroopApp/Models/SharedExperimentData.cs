@@ -73,14 +73,17 @@ namespace StroopApp.Models
 			get => _currentTrial;
 			set
 			{
-				if (_currentTrial != value)
+				if (_currentTrial != null)
+					_currentTrial.PropertyChanged -= CurrentTrial_PropertyChanged;
+
+				_currentTrial = value;
+
+				OnPropertyChanged(nameof(CurrentTrial));
+
+				if (_currentTrial != null)
 				{
-					if (_currentTrial != null)
-						_currentTrial.PropertyChanged -= CurrentTrial_PropertyChanged;
-					_currentTrial = value;
-					OnPropertyChanged(nameof(CurrentTrial));
-					if (_currentTrial != null)
-						_currentTrial.PropertyChanged += CurrentTrial_PropertyChanged;
+					_currentTrial.PropertyChanged -= CurrentTrial_PropertyChanged;
+					_currentTrial.PropertyChanged += CurrentTrial_PropertyChanged;
 				}
 			}
 		}
@@ -174,19 +177,19 @@ namespace StroopApp.Models
 						var model = p.Model;
 						if (model!= null && model.IsValidResponse.HasValue)
 						{
+							// Orange (wrong answer)
 							var orange = new SKColor(255, 166, 0);      // #FFA600
-							// Violet (mauvaise réponse)
+							// Violet (right answer)
 							var violet = new SKColor(91, 46, 255);      // #5B2EFF
 							if(model.IsValidResponse.Value)
 							{
-                            // Bonne réponse : point vert
-                                p.Visual.Fill = new SolidColorPaint(orange);
-								p.Visual.Stroke = new SolidColorPaint(orange);
+								p.Visual.Fill = new SolidColorPaint(violet);
+								p.Visual.Stroke = new SolidColorPaint(violet);
 							}
 							else
 							{
-								p.Visual.Fill = new SolidColorPaint(violet);
-								p.Visual.Stroke = new SolidColorPaint(violet);
+								p.Visual.Fill = new SolidColorPaint(orange);
+								p.Visual.Stroke = new SolidColorPaint(orange);
 							}
 						}
 						}
@@ -228,7 +231,7 @@ namespace StroopApp.Models
 			_colorIndex++;
 			currentBlockStart = end + 1;
 		}
-		public void Reset()
+		public virtual void Reset()
 		{
 			Blocks.Clear();
 			BlockSeries.Clear();
