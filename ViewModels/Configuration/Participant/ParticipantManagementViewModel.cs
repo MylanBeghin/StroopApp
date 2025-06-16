@@ -111,7 +111,8 @@ namespace StroopApp.ViewModels.Configuration.Participant
         {
             if (SelectedParticipant == null)
             {
-                ShowErrorDialog("Veuillez sélectionner un participant à modifier !");
+                var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
+                ShowErrorDialog(loc?["Error_SelectParticipantToModify"] ?? "");
                 return;
             }
             var viewModel = new ParticipantEditorViewModel(SelectedParticipant, Participants, _participantService);
@@ -131,16 +132,18 @@ namespace StroopApp.ViewModels.Configuration.Participant
         {
             if (SelectedParticipant == null)
             {
-                ShowErrorDialog("Veuillez sélectionner un participant à supprimer !");
+                var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
+                ShowErrorDialog(loc?["Error_SelectParticipantToDelete"] ?? "");
                 return;
             }
 
+            var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
             var dlg = new ContentDialog
             {
-                Title = "Confirmation de suppression",
-                Content = "Voulez-vous vraiment supprimer ce participant ? Ses données seront archivées.",
-                PrimaryButtonText = "Supprimer",
-                CloseButtonText = "Annuler"
+                Title = loc?["DeleteConfirmation_Title"],
+                Content = loc?["DeleteConfirmation_Message"],
+                PrimaryButtonText = loc?["DeleteConfirmation_Primary"],
+                CloseButtonText = loc?["DeleteConfirmation_Close"]
             };
             if (await dlg.ShowAsync() != ContentDialogResult.Primary)
                 return;

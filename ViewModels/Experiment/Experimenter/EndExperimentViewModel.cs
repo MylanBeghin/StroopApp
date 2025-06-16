@@ -75,8 +75,9 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
             RestartCommand = new RelayCommand(Restart);
             QuitCommand = new RelayCommand(Quit);
             Blocks = Settings.ExperimentContext.Blocks;
-            CurrentParticipant = "Participant n° " + Settings.Participant.Id.ToString();
-            CurrentProfile = "Tâche : " + Settings.CurrentProfile.ProfileName;
+            var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
+            CurrentParticipant = string.Format(loc?["EndExperiment_CurrentParticipant"] ?? "Participant {0}", Settings.Participant.Id);
+            CurrentProfile = string.Format(loc?["EndExperiment_CurrentProfile"] ?? "Task: {0}", Settings.CurrentProfile.ProfileName);
             UpdateBlock();
         }
 
@@ -94,7 +95,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
                     DataLabelsPaint = new SolidColorPaint(SKColors.Black),
                     DataLabelsFormatter = point =>
                 point.Coordinate.PrimaryValue.Equals(null)
-                    ? "Aucune réponse"
+                    ? (App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings)?["Column_NoResponse"]
                     : point.Coordinate.PrimaryValue.ToString("N0"),
                     Mapping = (point, index) => new Coordinate(
                         point.TrialNumber-1,

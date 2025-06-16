@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:StroopApp.Views"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         mc:Ignorable="d"
-        Title="" Height="450" Width="800"
+        Title="{Binding Source={StaticResource Loc}, Path=[ExperimentWindow_Title]}" Height="450" Width="800"
         ui:WindowHelper.UseModernWindowStyle="True"
         Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}"
         WindowState="Maximized">
