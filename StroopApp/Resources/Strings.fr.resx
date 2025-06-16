@@ -139,10 +139,10 @@
     <value>Veuillez sélectionner un participant.</value>
   </data>
   <data name="Error_SelectProfileToModify" xml:space="preserve">
-    <value>Veuillez sélectionner un profil à modifier&nbsp;!</value>
+    <value>Veuillez sélectionner un profil à modifier !</value>
   </data>
   <data name="Error_SelectProfileToDelete" xml:space="preserve">
-    <value>Veuillez sélectionner un profil à supprimer&nbsp;!</value>
+    <value>Veuillez sélectionner un profil à supprimer !</value>
   </data>
   <data name="Error_ProfileNameEmpty" xml:space="preserve">
     <value>Le nom du profil ne peut pas être vide ou contenir uniquement des espaces.</value>
@@ -157,16 +157,16 @@
     <value>La taille du groupe doit être positive et diviser le nombre de mots.</value>
   </data>
   <data name="Error_AmorceTimeInvalid" xml:space="preserve">
-    <value>Le temps d'amorce doit être supérieur à 0&nbsp;!</value>
+    <value>Le temps d'affichage de l'amorce doit être supérieur à 0 !</value>
   </data>
   <data name="Error_MaxReactionInvalid" xml:space="preserve">
     <value>Le temps de réaction maximum doit être positif.</value>
   </data>
   <data name="Error_SelectParticipantToModify" xml:space="preserve">
-    <value>Veuillez sélectionner un participant à modifier&nbsp;!</value>
+    <value>Veuillez sélectionner un participant à modifier !</value>
   </data>
   <data name="Error_SelectParticipantToDelete" xml:space="preserve">
-    <value>Veuillez sélectionner un participant à supprimer&nbsp;!</value>
+    <value>Veuillez sélectionner un participant à supprimer !</value>
   </data>
   <data name="Error_ParticipantFieldsInvalid" xml:space="preserve">
     <value>Veuillez remplir correctement tous les champs obligatoires.</value>
@@ -181,20 +181,20 @@
     <value>Export terminé</value>
   </data>
   <data name="Export_Completed_Message" xml:space="preserve">
-    <value>Fichier enregistré&nbsp;:
+    <value>Fichier sauvegardé : 
 {0}</value>
   </data>
   <data name="Error_Title" xml:space="preserve">
     <value>Erreur</value>
   </data>
   <data name="EndExperiment_CurrentParticipant" xml:space="preserve">
-    <value>Participant n°&nbsp;{0}</value>
+    <value>Participant n° {0}</value>
   </data>
   <data name="EndExperiment_CurrentProfile" xml:space="preserve">
-    <value>Tâche&nbsp;: {0}</value>
+    <value>Tâche : {0}</value>
   </data>
   <data name="LiveAverage_Label" xml:space="preserve">
-    <value>Moyenne pour les mots {0}&nbsp;–&nbsp;{1}&nbsp;:</value>
+    <value>Moyenne pour les mots {0}-{1}</value>
   </data>
   <data name="LiveAverage_NoData" xml:space="preserve">
     <value>Aucune donnée valide</value>
@@ -213,5 +213,11 @@
   </data>
   <data name="DeleteConfirmation_Close" xml:space="preserve">
     <value>Annuler</value>
+  </data>
+  <data name="Menu_Display" xml:space="preserve">
+    <value>Affichage</value>
+  </data>
+  <data name="Menu_Languages" xml:space="preserve">
+    <value>Langues</value>
   </data>
 </root>

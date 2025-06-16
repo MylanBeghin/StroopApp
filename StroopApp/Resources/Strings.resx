@@ -191,7 +191,7 @@
     <value>Participant no. {0}</value>
   </data>
   <data name="EndExperiment_CurrentProfile" xml:space="preserve">
-    <value>Task: {0}</value>
+    <value>Task : {0}</value>
   </data>
   <data name="LiveAverage_Label" xml:space="preserve">
     <value>Average for words {0}–{1}:</value>
@@ -213,5 +213,11 @@
   </data>
   <data name="DeleteConfirmation_Close" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="Menu_Display" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="Menu_Languages" xml:space="preserve">
+    <value>Languages</value>
   </data>
 </root>
