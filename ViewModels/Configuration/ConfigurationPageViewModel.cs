@@ -54,13 +54,15 @@ namespace StroopApp.ViewModels.Configuration
 
             if (_settings.CurrentProfile == null)
             {
-                ShowErrorDialog("Veuillez sélectionner un profil d'expérience.");
+                var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
+                ShowErrorDialog(loc?["Error_SelectProfile"] ?? "");
                 return;
             }
 
             if (_settings.Participant == null)
             {
-                ShowErrorDialog("Veuillez sélectionner un participant.");
+                var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
+                ShowErrorDialog(loc?["Error_SelectParticipant"] ?? "");
                 return;
             }
 

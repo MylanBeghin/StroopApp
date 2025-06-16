@@ -120,4 +120,98 @@
   <data name="App_Title" xml:space="preserve">
     <value>Cognitive Tasks App</value>
   </data>
+  <data name="ExperimentWindow_Title" xml:space="preserve">
+    <value>Stroop Experiment</value>
+  </data>
+  <data name="ParticipantWindow_Title" xml:space="preserve">
+    <value>Participant Window</value>
+  </data>
+  <data name="ConfigPage_Title" xml:space="preserve">
+    <value>Experiment Configuration</value>
+  </data>
+  <data name="Button_LaunchExperiment" xml:space="preserve">
+    <value>Start Experiment</value>
+  </data>
+  <data name="Error_SelectProfile" xml:space="preserve">
+    <value>Please select an experiment profile.</value>
+  </data>
+  <data name="Error_SelectParticipant" xml:space="preserve">
+    <value>Please select a participant.</value>
+  </data>
+  <data name="Error_SelectProfileToModify" xml:space="preserve">
+    <value>Please select a profile to modify!</value>
+  </data>
+  <data name="Error_SelectProfileToDelete" xml:space="preserve">
+    <value>Please select a profile to delete!</value>
+  </data>
+  <data name="Error_ProfileNameEmpty" xml:space="preserve">
+    <value>Profile name cannot be empty or whitespace.</value>
+  </data>
+  <data name="Error_ProfileNameExists" xml:space="preserve">
+    <value>A profile with this name already exists. Choose another name.</value>
+  </data>
+  <data name="Error_WordDurationInvalid" xml:space="preserve">
+    <value>Word duration must be positive and divide task duration.</value>
+  </data>
+  <data name="Error_GroupSizeInvalid" xml:space="preserve">
+    <value>Group size must be positive and divide the number of words.</value>
+  </data>
+  <data name="Error_AmorceTimeInvalid" xml:space="preserve">
+    <value>Prime time must be greater than 0!</value>
+  </data>
+  <data name="Error_MaxReactionInvalid" xml:space="preserve">
+    <value>Maximum reaction time must be positive.</value>
+  </data>
+  <data name="Error_SelectParticipantToModify" xml:space="preserve">
+    <value>Please select a participant to modify!</value>
+  </data>
+  <data name="Error_SelectParticipantToDelete" xml:space="preserve">
+    <value>Please select a participant to delete!</value>
+  </data>
+  <data name="Error_ParticipantFieldsInvalid" xml:space="preserve">
+    <value>Please fill in all required participant fields correctly.</value>
+  </data>
+  <data name="Error_DuplicateParticipantId" xml:space="preserve">
+    <value>This identifier is already used for another participant.</value>
+  </data>
+  <data name="Error_NoExportFolder" xml:space="preserve">
+    <value>No export folder configured.</value>
+  </data>
+  <data name="Export_Completed_Title" xml:space="preserve">
+    <value>Export completed</value>
+  </data>
+  <data name="Export_Completed_Message" xml:space="preserve">
+    <value>File saved:
+{0}</value>
+  </data>
+  <data name="Error_Title" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="EndExperiment_CurrentParticipant" xml:space="preserve">
+    <value>Participant no. {0}</value>
+  </data>
+  <data name="EndExperiment_CurrentProfile" xml:space="preserve">
+    <value>Task: {0}</value>
+  </data>
+  <data name="LiveAverage_Label" xml:space="preserve">
+    <value>Average for words {0}–{1}:</value>
+  </data>
+  <data name="LiveAverage_NoData" xml:space="preserve">
+    <value>No valid data</value>
+  </data>
+  <data name="Column_NoResponse" xml:space="preserve">
+    <value>No response</value>
+  </data>
+  <data name="DeleteConfirmation_Title" xml:space="preserve">
+    <value>Delete confirmation</value>
+  </data>
+  <data name="DeleteConfirmation_Message" xml:space="preserve">
+    <value>Do you really want to delete this participant? Their data will be archived.</value>
+  </data>
+  <data name="DeleteConfirmation_Primary" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteConfirmation_Close" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
 </root>
