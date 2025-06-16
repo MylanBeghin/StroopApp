@@ -61,7 +61,10 @@ namespace StroopApp.Services.Exportation
         {
             var root = ExportRootDirectory;
             if (string.IsNullOrWhiteSpace(root))
-                throw new InvalidOperationException("Aucun dossier d'export configuré.");
+            {
+                var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
+                throw new InvalidOperationException(loc?["Error_NoExportFolder"] ?? "");
+            }
 
             Directory.CreateDirectory(root);
             var resultsDir = Path.Combine(root, "Results");
@@ -113,10 +116,11 @@ namespace StroopApp.Services.Exportation
 
             wb.SaveAs(filePath);
 
+            var locDlg = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
             var dlg = new ContentDialog
             {
-                Title = "Export terminé",
-                Content = $"Fichier enregistré :\n{filePath}",
+                Title = locDlg?["Export_Completed_Title"],
+                Content = string.Format(locDlg?["Export_Completed_Message"] ?? "{0}", filePath),
                 CloseButtonText = "OK"
             };
             await dlg.ShowAsync();

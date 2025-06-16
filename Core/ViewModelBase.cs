@@ -16,9 +16,10 @@ namespace StroopApp.Core
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         protected async void ShowErrorDialog(string message)
         {
+            var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
             var dialog = new ContentDialog
             {
-                Title = "Erreur",
+                Title = loc?["Error_Title"],
                 Content = message,
                 CloseButtonText = "OK"
             };

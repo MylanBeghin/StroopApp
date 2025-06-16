@@ -100,12 +100,14 @@ namespace StroopApp.ViewModels.Configuration.Participant
                 double.IsNaN(Participant.Height.Value) ||
                 double.IsInfinity(Participant.Height.Value))
             {
-                ShowErrorDialog("Veuillez remplir correctement tous les champs obligatoires.");
+                var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
+                ShowErrorDialog(loc?["Error_ParticipantFieldsInvalid"] ?? "");
                 return;
             }
             if (Participants.Any(p => p.Id == Participant.Id && p != Participant))
             {
-                ShowErrorDialog("Cet identifiant est déjà utilisé pour un autre participant");
+                var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
+                ShowErrorDialog(loc?["Error_DuplicateParticipantId"] ?? "");
                 return;
             }
 
