@@ -86,7 +86,8 @@ namespace StroopApp.ViewModels.Configuration
         {
             StartEditing(color);
 
-            string originalMessage = "Appuyez sur une touche pour définir le mapping. Appuyez sur Échap pour annuler.";
+            var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
+            string originalMessage = loc?["KeyMapping_Prompt"] ?? string.Empty;
             var originalText = new TextBlock
             {
                 Text = originalMessage,
@@ -109,7 +110,7 @@ namespace StroopApp.ViewModels.Configuration
             };
             var errorText = new TextBlock
             {
-                Text = "Cette touche est déjà utilisée. Veuillez choisir une autre touche.",
+                Text = loc?["KeyMapping_ErrorKeyUsed"],
                 Foreground = new SolidColorBrush(Colors.Red),
                 Margin = new Thickness(8, 0, 0, 0),
                 VerticalAlignment = VerticalAlignment.Center
@@ -123,7 +124,7 @@ namespace StroopApp.ViewModels.Configuration
 
             var dialog = new ContentDialog
             {
-                Title = $"Modification du mapping pour {color}",
+                Title = string.Format(loc?["KeyMapping_DialogTitle"] ?? "{0}", color),
                 Content = grid,
                 PrimaryButtonText = string.Empty,
                 SecondaryButtonText = string.Empty
