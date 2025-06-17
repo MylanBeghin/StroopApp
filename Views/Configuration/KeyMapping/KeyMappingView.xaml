@@ -21,9 +21,9 @@
         <ui:SimpleStackPanel Spacing="10"
                              VerticalAlignment="Center">
             <!-- Titre et description -->
-            <TextBlock Text="Choix des touches"
+            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[KeyMapping_Title]}"
                        Style="{StaticResource TitleTextBlockStyle}" />
-            <TextBlock Text="Sélectionnez les touches à associer aux couleurs." />
+            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[KeyMapping_Description]}" />
             <!-- Grille à 4 colonnes pour les 4 couleurs -->
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -40,7 +40,7 @@
                     </Grid.RowDefinitions>
                     <!-- Header simple -->
                     <TextBlock Grid.Row="0"
-                               Text="Touche associée à la couleur rouge :"
+                               Text="{Binding Source={StaticResource Loc}, Path=[Label_KeyRed]}"
                                Style="{DynamicResource BodyTextBlockStyle}"
                                HorizontalAlignment="Left"
                                Margin="0,0,0,4" />
@@ -64,7 +64,7 @@
                                 Command="{Binding OpenKeyMappingEditorCommand}"
                                 CommandParameter="Rouge"
                                 VerticalAlignment="Center"
-                                Content="Modifier" />
+                                Content="{Binding Source={StaticResource Loc}, Path=[Button_Edit]}" />
                     </Grid>
                 </Grid>
                 <!-- Bleu -->
@@ -74,7 +74,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0"
-                               Text="Touche associée à la couleur bleue :"
+                               Text="{Binding Source={StaticResource Loc}, Path=[Label_KeyBlue]}"
                                Style="{DynamicResource BodyTextBlockStyle}"
                                HorizontalAlignment="Left"
                                Margin="0,0,0,4" />
@@ -97,7 +97,7 @@
                                 Command="{Binding OpenKeyMappingEditorCommand}"
                                 CommandParameter="Bleu"
                                 VerticalAlignment="Center"
-                                Content="Modifier" />
+                                Content="{Binding Source={StaticResource Loc}, Path=[Button_Edit]}" />
                     </Grid>
                 </Grid>
                 <!-- Vert -->
@@ -107,7 +107,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0"
-                               Text="Touche associée à la couleur verte :"
+                               Text="{Binding Source={StaticResource Loc}, Path=[Label_KeyGreen]}"
                                Style="{DynamicResource BodyTextBlockStyle}"
                                HorizontalAlignment="Left"
                                Margin="0,0,0,4" />
@@ -130,7 +130,7 @@
                                 Command="{Binding OpenKeyMappingEditorCommand}"
                                 CommandParameter="Vert"
                                 VerticalAlignment="Center"
-                                Content="Modifier" />
+                                Content="{Binding Source={StaticResource Loc}, Path=[Button_Edit]}" />
                     </Grid>
                 </Grid>
                 <!-- Jaune -->
@@ -140,7 +140,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0"
-                               Text="Touche associée à la couleur jaune :"
+                               Text="{Binding Source={StaticResource Loc}, Path=[Label_KeyYellow]}"
                                Style="{DynamicResource BodyTextBlockStyle}"
                                HorizontalAlignment="Left"
                                Margin="0,0,0,4" />
@@ -163,7 +163,7 @@
                                 Command="{Binding OpenKeyMappingEditorCommand}"
                                 CommandParameter="Jaune"
                                 VerticalAlignment="Center"
-                                Content="Modifier" />
+                                Content="{Binding Source={StaticResource Loc}, Path=[Button_Edit]}" />
                     </Grid>
                 </Grid>
             </Grid>

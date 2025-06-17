@@ -8,9 +8,9 @@
             BorderThickness="0.5"
             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
         <ui:SimpleStackPanel Spacing="12" VerticalAlignment="Stretch">
-            <TextBlock Text="Choix du dossier des résultats"
-                   Style="{StaticResource TitleTextBlockStyle}" />
-            <TextBlock Text="Sélectionnez le dossier d'exportation des résultats." />
+            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ExportFolderSelector_Title]}"
+                       Style="{StaticResource TitleTextBlockStyle}" />
+            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ExportFolderSelector_Description]}" />
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -18,7 +18,7 @@
                 </Grid.RowDefinitions>
                 <!-- Header simple -->
                 <TextBlock Grid.Row="0"
-                           Text="Touche associée à la couleur rouge :"
+                           Text="{Binding Source={StaticResource Loc}, Path=[ExportFolderSelector_PathLabel]}"
                            Style="{DynamicResource BodyTextBlockStyle}"
                            HorizontalAlignment="Left"
                            Margin="0,0,0,4" />
@@ -37,7 +37,7 @@
                              Height="16"
                              VerticalAlignment="Center"
                              Margin="0,0,8,0" />
-                    <Button Content="Parcourir"
+                    <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Browse]}"
                             Grid.Column="1"
                             Command="{Binding BrowseCommand}"
                             VerticalAlignment="Center"
