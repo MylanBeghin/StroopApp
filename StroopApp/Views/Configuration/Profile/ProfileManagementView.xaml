@@ -14,7 +14,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.7*" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0"
@@ -32,20 +32,35 @@
                                      HorizontalAlignment="Left"
                                      VerticalAlignment="Bottom"
                                      Spacing="10">
-                    <ComboBox Width="350"
-                              ItemsSource="{Binding Profiles}"
-                              SelectedItem="{Binding CurrentProfile}"
-                              DisplayMemberPath="ProfileName"
-                              Background="{DynamicResource SystemControlBackgroundAltHighBrush}" />
-                    <Button Content="Créer"
-                            Command="{Binding CreateProfileCommand}"
-                            Style="{DynamicResource DefaultButtonStyle}" />
-                    <Button Content="Modifier"
-                            Command="{Binding ModifyProfileCommand}"
-                            Style="{DynamicResource DefaultButtonStyle}" />
-                    <Button Content="Supprimer"
-                            Command="{Binding DeleteProfileCommand}"
-                            Style="{DynamicResource DefaultButtonStyle}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Width="200"
+                                  Grid.Column="0"
+                                  ItemsSource="{Binding Profiles}"
+                                  SelectedItem="{Binding CurrentProfile}"
+                                  DisplayMemberPath="ProfileName"
+                                  Background="{DynamicResource SystemControlBackgroundAltHighBrush}" />
+                        <Button Grid.Column="2"
+                                Content="Créer"
+                                Command="{Binding CreateProfileCommand}"
+                                Style="{DynamicResource DefaultButtonStyle}" />
+                        <Button Grid.Column="4"
+                                Content="Modifier"
+                                Command="{Binding ModifyProfileCommand}"
+                                Style="{DynamicResource DefaultButtonStyle}" />
+                        <Button Grid.Column="6"
+                                Content="Supprimer"
+                                Command="{Binding DeleteProfileCommand}"
+                                Style="{DynamicResource DefaultButtonStyle}" />
+                    </Grid>
                 </ui:SimpleStackPanel>
             </ui:SimpleStackPanel>
         </Border>
@@ -60,10 +75,10 @@
                            Style="{DynamicResource TitleTextBlockStyle}" />
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1.2*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBox Text="{Binding CurrentProfile.CongruencePourcentage}"
@@ -93,7 +108,7 @@
                             <ui:SimpleStackPanel Orientation="Horizontal"
                                                  VerticalAlignment="Center"
                                                  Spacing="4"
-                                                 ToolTip="Définit la fréquence de changement de forme d’amorce entre deux essais.Un switch correspond à un passage d’un carré à un rond, ou inversement.
+                                                 ToolTip="Définit la fréquence de changement de forme d’amorce entre deux essais. Un switch correspond à un passage d’un carré à un rond, ou inversement.
                                                  Exemple : 100 % = alternance à chaque essai, 0 % = toujours la même forme."
                                                  ToolTipService.Placement="Top"
                                                  ToolTipService.InitialShowDelay="100">
