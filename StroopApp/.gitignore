@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Ignore build output for StroopApp and StroopApp.XUnitTests
+/StroopApp/bin/
+/StroopApp/obj/
+/StroopApp.XUnitTests/bin/
+/StroopApp.XUnitTests/obj/

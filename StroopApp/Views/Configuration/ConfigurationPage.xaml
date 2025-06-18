@@ -23,6 +23,10 @@
                    Style="{DynamicResource HeaderTextBlockStyle}"
                    HorizontalAlignment="Left"
                    Margin="0,0,0,12" />
+        <Button Grid.Row="0"
+                HorizontalAlignment="Right"
+                Content="Paramètres avancés"
+                Command="{Binding OpenAdvancedSettingsCommand}"/>
         <Grid x:Name="KeyMappingContainer"
               Grid.Row="3">
             <Grid.ColumnDefinitions>
