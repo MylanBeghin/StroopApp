@@ -20,6 +20,11 @@
         },
         "runtime": {
           "StroopApp.dll": {}
+        },
+        "resources": {
+          "fr/StroopApp.resources.dll": {
+            "locale": "fr"
+          }
         }
       },
       "ClosedXML/0.104.2": {

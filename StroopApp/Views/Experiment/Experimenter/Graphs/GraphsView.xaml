@@ -27,7 +27,7 @@
                 <RowDefinition Height="8" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock Text="Suivi de l'expérience"
+            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[GraphsView_Title]}"
                        Style="{DynamicResource TitleTextBlockStyle}"
                        Grid.Row="0" />
         </Grid>

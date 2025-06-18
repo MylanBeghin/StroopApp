@@ -38,7 +38,7 @@
                       Grid.RowSpan="2">
             <ui:SimpleStackPanel Margin="16,16,16,64"
                                  Spacing="16">
-                <TextBlock Text="Modification du profil"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ProfileEditorWindow_Title]}"
                            Style="{StaticResource TitleTextBlockStyle}" />
                 <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
                         CornerRadius="8"
@@ -46,7 +46,7 @@
                         BorderThickness="0.5"
                         BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
                     <ui:SimpleStackPanel Spacing="12">
-                        <TextBox ui:ControlHelper.Header="Nom du profil"
+                        <TextBox ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Field_ProfileName]}"
                                  Text="{Binding Profile.ProfileName, Mode=TwoWay}" />
                         <Grid Margin="0,8,0,8">
                             <Grid.ColumnDefinitions>
@@ -54,7 +54,7 @@
                                 <ColumnDefinition Width="16" />
                                 <ColumnDefinition Width="0.3*" />
                             </Grid.ColumnDefinitions>
-                            <Slider ui:ControlHelper.Header="Pourcentage de congruence"
+                            <Slider ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Congruence]}"
                                     Minimum="0"
                                     Maximum="100"
                                     LargeChange="5"
@@ -87,16 +87,16 @@
                             <!-- En-têtes des colonnes -->
                             <TextBlock Grid.Row="0"
                                        Grid.Column="0"
-                                       Text="Durée de l'essai (ms)" />
+                                       Text="{Binding Source={StaticResource Loc}, Path=[Header_TrialDuration]}" />
                             <TextBlock Grid.Row="0"
                                        Grid.Column="2"
-                                       Text="Durée de fixation (ms)" />
+                                       Text="{Binding Source={StaticResource Loc}, Path=[Header_FixationDuration]}" />
                             <TextBlock Grid.Row="0"
                                        Grid.Column="4"
-                                       Text="Durée d'amorce (ms)" />
+                                       Text="{Binding Source={StaticResource Loc}, Path=[Header_PrimeDuration]}" />
                             <TextBlock Grid.Row="0"
                                        Grid.Column="6"
-                                       Text="Temps de réponse max (ms)" />
+                                       Text="{Binding Source={StaticResource Loc}, Path=[Header_MaxReactionTime]}" />
                             <!-- Valeurs et signes alignés uniquement sur la ligne des inputs -->
                             <TextBox Grid.Row="2"
                                      Grid.Column="0"
@@ -162,11 +162,11 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="Activer l'amorce"
+                            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Check_AddPrime] }"
                                        VerticalAlignment="Center" />
                             <ui:ToggleSwitch IsOn="{Binding Profile.IsAmorce, Mode=TwoWay}"
-                                             OnContent="Activé"
-                                             OffContent="Désactivé"
+                                             OnContent="{Binding Source={StaticResource Loc}, Path=[Toggle_On]}"
+                                             OffContent="{Binding Source={StaticResource Loc}, Path=[Toggle_Off]}"
                                              VerticalAlignment="Center"
                                              Grid.Column="1"
                                              HorizontalAlignment="Right"
@@ -178,16 +178,16 @@
                                                      Visibility="{Binding DataContext.Profile.IsAmorce, ElementName=RootPanel, Converter={StaticResource BoolToVisibilityConverter}}" />
                 </ui:SimpleStackPanel>
                 <ui:SimpleStackPanel Spacing="16">
-                    <TextBlock Text="Mode de calcul"
+                    <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Label_CalculationMode]}"
                                Style="{StaticResource SubtitleTextBlockStyle}" />
                     <ui:SimpleStackPanel Orientation="Horizontal"
                                          Spacing="12">
-                        <RadioButton Content="En fonction de la durée de la tâche"
+                        <RadioButton Content="{Binding Source={StaticResource Loc}, Path=[Radio_TaskDuration]}"
                                      GroupName="CalculationModeGroup"
                                      IsChecked="{Binding Profile.CalculationMode,
                                          Converter={StaticResource CalculationModeToBooleanConverter},
                                          ConverterParameter=TaskDuration}" />
-                        <RadioButton Content="En fonction du nombre de mots"
+                        <RadioButton Content="{Binding Source={StaticResource Loc}, Path=[Radio_WordCount]}"
                                      GroupName="CalculationModeGroup"
                                      IsChecked="{Binding Profile.CalculationMode,
                                          Converter={StaticResource CalculationModeToBooleanConverter},
@@ -221,18 +221,18 @@
                                     <ColumnDefinition Width="12" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <ui:NumberBox Header="Heures"
+                                <ui:NumberBox Header="{Binding Source={StaticResource Loc}, Path=[Header_Hours]}"
                                               Value="{Binding Profile.Hours, Mode=TwoWay}"
                                               Minimum="0"
                                               SpinButtonPlacementMode="Inline"
                                               Grid.Column="0" />
-                                <ui:NumberBox Header="Minutes"
+                                <ui:NumberBox Header="{Binding Source={StaticResource Loc}, Path=[Header_Minutes]}"
                                               Value="{Binding Profile.Minutes, Mode=TwoWay}"
                                               Minimum="0"
                                               Maximum="59"
                                               SpinButtonPlacementMode="Inline"
                                               Grid.Column="2" />
-                                <ui:NumberBox Header="Secondes"
+                                <ui:NumberBox Header="{Binding Source={StaticResource Loc}, Path=[Header_Seconds]}"
                                               Value="{Binding Profile.Seconds, Mode=TwoWay}"
                                               Minimum="0"
                                               Maximum="59"
@@ -247,14 +247,14 @@
                                     <ColumnDefinition Width="12" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <ui:NumberBox Header="Taille du groupe"
+                                <ui:NumberBox Header="{Binding Source={StaticResource Loc}, Path=[Field_GroupSize]}"
                                               Value="{Binding Profile.GroupSize, Mode=TwoWay}"
                                               Minimum="1"
                                               SpinButtonPlacementMode="Inline"
                                               Grid.Column="0" />
                             </Grid>
                             <ui:SimpleStackPanel Spacing="6">
-                                <TextBlock Text="Nombre de mots" />
+                                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Field_WordCount]}" />
                                 <TextBox Text="{Binding Profile.WordCount, Mode=TwoWay}"
                                          Style="{StaticResource ModernReadOnlyTextBoxStyle}" />
                             </ui:SimpleStackPanel>
@@ -280,7 +280,7 @@
                             </Style>
                         </Border.Style>
                         <ui:SimpleStackPanel Spacing="12">
-                            <ui:NumberBox Header="Nombre de mots"
+                            <ui:NumberBox Header="{Binding Source={StaticResource Loc}, Path=[Field_WordCount]}"
                                           Value="{Binding Profile.WordCount, Mode=TwoWay}"
                                           Minimum="1"
                                           SpinButtonPlacementMode="Inline" />
@@ -292,7 +292,7 @@
                                     <ColumnDefinition Width="12" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <ui:NumberBox Header="Taille du groupe"
+                                <ui:NumberBox Header="{Binding Source={StaticResource Loc}, Path=[Field_GroupSize]}"
                                               Value="{Binding Profile.GroupSize, Mode=TwoWay}"
                                               Minimum="1"
                                               SpinButtonPlacementMode="Inline"
@@ -307,19 +307,19 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <ui:SimpleStackPanel Spacing="6">
-                                    <TextBlock Text="Heures" />
+                                    <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_Hours]}" />
                                     <TextBox Text="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToHoursConverter}}"
                                              Style="{StaticResource ModernReadOnlyTextBoxStyle}" />
                                 </ui:SimpleStackPanel>
                                 <ui:SimpleStackPanel Spacing="6"
                                                      Grid.Column="2">
-                                    <TextBlock Text="Minutes" />
+                                    <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_Minutes]}" />
                                     <TextBox Text="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToMinutesConverter}}"
                                              Style="{StaticResource ModernReadOnlyTextBoxStyle}" />
                                 </ui:SimpleStackPanel>
                                 <ui:SimpleStackPanel Spacing="6"
                                                      Grid.Column="4">
-                                    <TextBlock Text="Secondes" />
+                                    <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_Seconds]}" />
                                     <TextBox Text="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToSecondsConverter}}"
                                              Style="{StaticResource ModernReadOnlyTextBoxStyle}" />
                                 </ui:SimpleStackPanel>
@@ -337,10 +337,10 @@
                                  Spacing="16"
                                  VerticalAlignment="Center"
                                  HorizontalAlignment="Center">
-                <Button Content="Annuler"
+                <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Cancel]}"
                         Style="{StaticResource OpaqueButtonStyle}"
                         Command="{Binding CancelCommand}" />
-                <Button Content="Enregistrer"
+                <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Save]}"
                         Style="{StaticResource AccentButtonStyle}"
                         Command="{Binding SaveCommand}" />
             </ui:SimpleStackPanel>

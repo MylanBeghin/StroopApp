@@ -9,6 +9,24 @@
         WindowStyle="SingleBorderWindow"
         WindowState="Maximized"
         ui:WindowHelper.UseModernWindowStyle="True">
-    <Frame x:Name="MainFrame"
-           NavigationUIVisibility="Hidden" />
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="{Binding Source={StaticResource Loc}, Path=[Menu_Display], FallbackValue=Display}">
+                <MenuItem Header="{Binding Source={StaticResource Loc}, Path=[Menu_Languages], FallbackValue=Languages}">
+                    <MenuItem Header="English"
+                              IsCheckable="True"
+                              IsChecked="{Binding IsEnglishSelected, Mode=OneWay}"
+                              Command="{Binding ChangeLanguageCommand}"
+                              CommandParameter="en" />
+                    <MenuItem Header="Français"
+                              IsCheckable="True"
+                              IsChecked="{Binding IsFrenchSelected, Mode=OneWay}"
+                              Command="{Binding ChangeLanguageCommand}"
+                              CommandParameter="fr" />
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <Frame x:Name="MainFrame"
+               NavigationUIVisibility="Hidden" />
+    </DockPanel>
 </Window>

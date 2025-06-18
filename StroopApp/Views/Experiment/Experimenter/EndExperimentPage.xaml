@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0"
-                       Text="Bloc terminé"
+                       Text="{Binding Source={StaticResource Loc}, Path=[EndExperiment_BlockFinished]}"
                        Style="{DynamicResource HeaderTextBlockStyle}"
                        VerticalAlignment="Center" />
 
@@ -49,7 +49,7 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0"
-                           Text="Résumé des blocs"
+                           Text="{Binding Source={StaticResource Loc}, Path=[EndExperiment_BlockSummary]}"
                            Style="{DynamicResource TitleTextBlockStyle}"
                            Margin="0,0,0,12" />
                 <Border Grid.Row="3"
@@ -71,15 +71,15 @@
                             </Style>
                         </DataGrid.RowStyle>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Bloc"
+                            <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_Block]}"
                                                 Binding="{Binding BlockNumber, StringFormat=Bloc {0}}" />
-                            <DataGridTextColumn Header="Essais"
+                            <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_Trials]}"
                                                 Binding="{Binding TotalTrials}" />
-                            <DataGridTextColumn Header="Précision"
+                            <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_Accuracy]}"
                                                 Binding="{Binding Accuracy, StringFormat={}{0}%}" />
-                            <DataGridTextColumn Header="Temps moyen de réponse"
+                            <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_MeanReactionTime]}"
                                                 Binding="{Binding ResponseTimeMean, StringFormat={}{0} ms}" />
-                            <DataGridTextColumn Header="Type Stroop"
+                            <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_StroopType]}"
                                                 Binding="{Binding StroopType}" />
                         </DataGrid.Columns>
                     </DataGrid>
@@ -98,13 +98,13 @@
                              Spacing="16"
                              Grid.Row="6"
                              HorizontalAlignment="Center">
-            <Button Content="Relancer"
+            <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Continue]}"
                     Command="{Binding ContinueCommand}"
                     Style="{DynamicResource AccentButtonStyle}"
                     IsDefault="True" />
-            <Button Content="Nouvelle expérience"
+            <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_NewExperiment]}"
                     Command="{Binding RestartCommand}"/>
-            <Button Content="Quitter l'application"
+            <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Quit]}"
                     Command="{Binding QuitCommand}"
                     IsCancel="True" />
         </ui:SimpleStackPanel>

@@ -8,8 +8,8 @@
         WindowStartupLocation="CenterScreen"
         ui:WindowHelper.UseModernWindowStyle="True">
     <ui:SimpleStackPanel Margin="12" Spacing="12">
-        <TextBlock Text="Modification du participant" Style="{StaticResource TitleTextBlockStyle}"/>
-        <TextBox ui:ControlHelper.Header="ID" 
+        <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ParticipantEditorWindow_Title]}" Style="{StaticResource TitleTextBlockStyle}"/>
+        <TextBox ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Field_ID]}" 
             Text="{Binding Participant.Id, Mode=TwoWay}" />
         <Grid>
             <Grid.ColumnDefinitions>
@@ -19,17 +19,17 @@
                 <ColumnDefinition Width="6" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <ui:NumberBox ui:ControlHelper.Header="Âge" 
+            <ui:NumberBox ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Field_Age]}" 
                 Value="{Binding Participant.Age, Mode=TwoWay}" 
                 Minimum="0" 
                 Grid.Column="0"
                 SpinButtonPlacementMode="Inline"/>
-            <ui:NumberBox ui:ControlHelper.Header="Poids (kg)" 
+            <ui:NumberBox ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Field_Weight]}" 
                 Value="{Binding Participant.Weight, Mode=TwoWay}" 
                 Minimum="0" 
                 Grid.Column="2"
                 SpinButtonPlacementMode="Inline"/>
-            <ui:NumberBox ui:ControlHelper.Header="Taille (cm)" 
+            <ui:NumberBox ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Field_Height]}" 
                 Value="{Binding Participant.Height, Mode=TwoWay}" 
                 Minimum="0" 
                 Grid.Column="4"
@@ -41,19 +41,19 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <ComboBox Grid.Column="0"
-                      ui:ControlHelper.Header="Sexe"
+                      ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Field_Sex]}"
                       ItemsSource="{Binding SexAssignedValues}"
                       SelectedItem="{Binding Participant.SexAssigned, Mode=TwoWay}"
                       Width="200"/>
             <ComboBox Grid.Column="1"
-                      ui:ControlHelper.Header="Genre"
+                      ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Field_Gender]}"
                       ItemsSource="{Binding GenderValues}"
                       SelectedItem="{Binding Participant.Gender, Mode=TwoWay}"
                       Width="200"/>
         </Grid>
         <ui:SimpleStackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12">
-            <Button Content="Annuler" Style="{StaticResource DefaultButtonStyle}" Command="{Binding CancelCommand}"/>
-            <Button Content="Enregistrer" Style="{StaticResource AccentButtonStyle}" Command="{Binding SaveCommand}"/>
+            <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Cancel]}" Style="{StaticResource DefaultButtonStyle}" Command="{Binding CancelCommand}"/>
+            <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Save]}" Style="{StaticResource AccentButtonStyle}" Command="{Binding SaveCommand}"/>
         </ui:SimpleStackPanel>
     </ui:SimpleStackPanel>
 </Window>

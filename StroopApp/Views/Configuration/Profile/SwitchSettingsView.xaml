@@ -88,7 +88,7 @@
                     <ColumnDefinition Width="16" />
                     <ColumnDefinition Width="0.3*" />
                 </Grid.ColumnDefinitions>
-                <Slider ui:ControlHelper.Header="Pourcentage de switch"
+                <Slider ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Switch] }"
                         Minimum="0"
                         Maximum="100"
                         LargeChange="5"
