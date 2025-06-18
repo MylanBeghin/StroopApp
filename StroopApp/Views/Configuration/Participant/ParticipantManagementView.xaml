@@ -25,7 +25,7 @@
             </Grid.RowDefinitions>
             <ui:SimpleStackPanel Grid.Row="0"
                                  Spacing="10">
-                <TextBlock Text="Choix du participant"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ParticipantManagement_Title]}"
                            Style="{StaticResource TitleTextBlockStyle}" />
                 <Grid HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
@@ -33,7 +33,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0"
-                               Text="Sélectionnez un participant pour lancer l'expérience."
+                               Text="{Binding Source={StaticResource Loc}, Path=[ParticipantManagement_Description]}"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Center" />
                     <ui:SimpleStackPanel Grid.Column="1"
@@ -62,7 +62,7 @@
                                              Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                                              Padding="34,6,0,0" />
                                     <TextBlock IsHitTestVisible="False"
-                                               Text="Rechercher . . ."
+                                               Text="{Binding Source={StaticResource Loc}, Path=[Search_Placeholder]}"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Left"
                                                Margin="34,0,0,0"
@@ -84,11 +84,11 @@
                                 </Grid>
                             </Grid>
                         </Border>
-                        <Button Content="Créer"
+                        <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Create]}"
                                 Command="{Binding CreateParticipantCommand}" />
-                        <Button Content="Modifier"
+                        <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Edit]}"
                                 Command="{Binding ModifyParticipantCommand}" />
-                        <Button Content="Supprimer"
+                        <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Delete]}"
                                 Command="{Binding DeleteParticipantCommand}"></Button>
                     </ui:SimpleStackPanel>
                 </Grid>
@@ -106,22 +106,22 @@
                           ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="ID"
+                            <GridViewColumn Header="{Binding Source={StaticResource Loc}, Path=[Field_ID]}"
                                             DisplayMemberBinding="{Binding Id}"
                                             Width="80" />
-                            <GridViewColumn Header="Âge"
+                            <GridViewColumn Header="{Binding Source={StaticResource Loc}, Path=[Field_Age]}"
                                             DisplayMemberBinding="{Binding Age}"
                                             Width="80" />
-                            <GridViewColumn Header="Taille (cm)"
+                            <GridViewColumn Header="{Binding Source={StaticResource Loc}, Path=[Field_Height]}"
                                             DisplayMemberBinding="{Binding Height}"
                                             Width="100" />
-                            <GridViewColumn Header="Poids (kg)"
+                            <GridViewColumn Header="{Binding Source={StaticResource Loc}, Path=[Field_Weight]}"
                                             DisplayMemberBinding="{Binding Weight}"
                                             Width="100" />
-                            <GridViewColumn Header="Sexe"
+                            <GridViewColumn Header="{Binding Source={StaticResource Loc}, Path=[Field_Sex]}"
                                             DisplayMemberBinding="{Binding SexAssigned}"
                                             Width="150" />
-                            <GridViewColumn Header="Genre"
+                            <GridViewColumn Header="{Binding Source={StaticResource Loc}, Path=[Field_Gender]}"
                                             DisplayMemberBinding="{Binding Gender}"
                                             Width="150" />
                             <GridViewColumn Header="Résultats"

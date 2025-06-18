@@ -19,7 +19,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
-                   Text="Configuration des paramètres de l'expérience"
+                   Text="{Binding Source={StaticResource Loc}, Path=[App_Title]}"
                    Style="{DynamicResource HeaderTextBlockStyle}"
                    HorizontalAlignment="Left"
                    Margin="0,0,0,12" />
@@ -37,7 +37,7 @@
         </Grid>
         <StackPanel Grid.Row="7"
                     HorizontalAlignment="Center">
-            <Button Content="Lancer l'expérience"
+            <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_LaunchExperiment]}"
                     Style="{DynamicResource AccentButtonStyle}"
                     Command="{Binding LaunchExperimentCommand}" />
         </StackPanel>

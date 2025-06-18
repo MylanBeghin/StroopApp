@@ -4,7 +4,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:converters="clr-namespace:StroopApp.Converters"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        Title="Modification du profil"
+        Title="{Binding Source={StaticResource Loc}, Path=[ProfileEditorWindow_Title]}"
         Width="750"
         Height="850"
         WindowStartupLocation="CenterScreen"
@@ -18,7 +18,7 @@
     </Window.Resources>
     <ui:SimpleStackPanel Margin="16"
                          Spacing="16">
-        <TextBlock Text="Modification du profil"
+        <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ProfileEditorWindow_Title]}"
                    Style="{StaticResource TitleTextBlockStyle}" />
         <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
                 CornerRadius="8"
@@ -26,9 +26,9 @@
                 BorderThickness="0.5"
                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
             <ui:SimpleStackPanel Spacing="12">
-                <TextBox ui:ControlHelper.Header="Nom du profil"
+                <TextBox ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Field_ProfileName]}"
                          Text="{Binding Profile.ProfileName, Mode=TwoWay}" />
-                <CheckBox Content="Ajouter une amorce"
+                <CheckBox Content="{Binding Source={StaticResource Loc}, Path=[Check_AddPrime]}"
                           IsChecked="{Binding Profile.IsAmorce}"
                           />
                 <Grid>
@@ -42,7 +42,7 @@
                         <RowDefinition Height="12" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Slider ui:ControlHelper.Header="Pourcentage de switch"
+                    <Slider ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Switch] }"
                             Minimum="0"
                             Maximum="100"
                             LargeChange="5"
@@ -59,7 +59,7 @@
                                   Grid.Column="2"
                                   Grid.Row="0"
                                   IsEnabled="{Binding Profile.IsAmorce}"/>
-                    <Slider ui:ControlHelper.Header="Pourcentage de congruence"
+                    <Slider ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Congruence]}"
                             Minimum="0"
                             Maximum="100"
                             LargeChange="5"
@@ -93,17 +93,17 @@
                     <!-- En-têtes des colonnes -->
                     <TextBlock Grid.Row="0"
                                Grid.Column="0"
-                               Text="Durée du mot (ms)"
+                               Text="{Binding Source={StaticResource Loc}, Path=[Header_WordDuration]}"
                                Width="120" />
                     <TextBlock Grid.Row="0"
                                Grid.Column="2"
-                               Text="Temps de réponse max (ms)" />
+                               Text="{Binding Source={StaticResource Loc}, Path=[Header_MaxReactionTime]}" />
                     <TextBlock Grid.Row="0"
                                Grid.Column="4"
-                               Text="Durée de fixation (ms)" />
+                               Text="{Binding Source={StaticResource Loc}, Path=[Header_FixationDuration]}" />
                     <TextBlock Grid.Row="0"
                                Grid.Column="6"
-                               Text="Durée d'amorce (ms)" />
+                               Text="{Binding Source={StaticResource Loc}, Path=[Header_PrimeDuration]}" />
                     <!-- Valeurs et signes alignés uniquement sur la ligne des inputs -->
                     <TextBox Grid.Row="2"
                              Grid.Column="0"
@@ -148,16 +148,16 @@
             </ui:SimpleStackPanel>
         </Border>
         <ui:SimpleStackPanel Spacing="16">
-            <TextBlock Text="Mode de calcul"
+            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Label_CalculationMode]}"
                        Style="{StaticResource SubtitleTextBlockStyle}" />
             <ui:SimpleStackPanel Orientation="Horizontal"
                                  Spacing="12">
-                <RadioButton Content="En fonction de la durée de la tâche"
+                <RadioButton Content="{Binding Source={StaticResource Loc}, Path=[Radio_TaskDuration]}"
                              GroupName="CalculationModeGroup"
                              IsChecked="{Binding Profile.CalculationMode,
                                          Converter={StaticResource CalculationModeToBooleanConverter},
                                          ConverterParameter=TaskDuration}" />
-                <RadioButton Content="En fonction du nombre de mots"
+                <RadioButton Content="{Binding Source={StaticResource Loc}, Path=[Radio_WordCount]}"
                              GroupName="CalculationModeGroup"
                              IsChecked="{Binding Profile.CalculationMode,
                                          Converter={StaticResource CalculationModeToBooleanConverter},
@@ -304,10 +304,10 @@
             <ui:SimpleStackPanel Orientation="Horizontal"
                                  HorizontalAlignment="Center"
                                  Spacing="12">
-                <Button Content="Annuler"
+                <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Cancel]}"
                         Style="{StaticResource DefaultButtonStyle}"
                         Command="{Binding CancelCommand}" />
-                <Button Content="Enregistrer"
+                <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Save]}"
                         Style="{StaticResource AccentButtonStyle}"
                         Command="{Binding SaveCommand}" />
             </ui:SimpleStackPanel>

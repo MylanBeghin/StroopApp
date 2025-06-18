@@ -111,38 +111,44 @@ namespace StroopApp.ViewModels.Configuration.Profile
         {
             if (string.IsNullOrWhiteSpace(Profile.ProfileName))
             {
-                ShowErrorDialog("Le nom du profil ne peut pas être vide ou contenir uniquement des espaces.");
+                var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
+                ShowErrorDialog(loc?["Error_ProfileNameEmpty"] ?? "");
                 return;
             }
 
             if (Profiles.Any(p => p.Id != Profile.Id && p.ProfileName == Profile.ProfileName))
             {
-                ShowErrorDialog("Un profil avec ce nom existe déjà. Veuillez choisir un autre nom.");
+                var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
+                ShowErrorDialog(loc?["Error_ProfileNameExists"] ?? "");
                 return;
             }
 
             if (Profile.WordDuration <= 0 || Profile.TaskDuration % Profile.WordDuration != 0)
             {
-                ShowErrorDialog("La durée du mot doit être positive et TaskDuration doit être divisible par WordDuration.");
+                var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
+                ShowErrorDialog(loc?["Error_WordDurationInvalid"] ?? "");
                 return;
             }
 
             int wordNumber = Profile.TaskDuration / Profile.WordDuration;
             if (Profile.GroupSize <= 0 || wordNumber % Profile.GroupSize != 0)
             {
-                ShowErrorDialog("La taille du groupe doit être positive et diviser le nombre de mots.");
+                var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
+                ShowErrorDialog(loc?["Error_GroupSizeInvalid"] ?? "");
                 return;
             }
 
             if (Profile.AmorceDuration == 0 && Profile.IsAmorce)
             {
-                ShowErrorDialog("Le temps d'amorce est doit être supérieur à 0 !");
+                var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
+                ShowErrorDialog(loc?["Error_AmorceTimeInvalid"] ?? "");
                 return;
             }
 
             if (Profile.MaxReactionTime <= 0)
             {
-                ShowErrorDialog("Le temps de réaction maximum doit être positif.");
+                var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
+                ShowErrorDialog(loc?["Error_MaxReactionInvalid"] ?? "");
                 return;
             }
 

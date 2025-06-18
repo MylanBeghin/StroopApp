@@ -5,7 +5,7 @@
       xmlns:viewsProfile="clr-namespace:StroopApp.Views.Profile"
       xmlns:viewsKeyMapping="clr-namespace:StroopApp.Views.KeyMapping"
       xmlns:viewsParticipant="clr-namespace:StroopApp.Views.Participant"
-      Title="Configuration de l'expérience">
+      Title="{Binding Source={StaticResource Loc}, Path=[ConfigPage_Title]}">
     <Grid x:Name="MainGrid"
           Margin="12">
         <Grid.RowDefinitions>
@@ -19,7 +19,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
-                   Text="Configuration des paramètres de l'expérience"
+                   Text="{Binding Source={StaticResource Loc}, Path=[ConfigPage_Title]}"
                    Style="{DynamicResource HeaderTextBlockStyle}"
                    HorizontalAlignment="Left"
                    Margin="0,0,0,12" />
@@ -33,7 +33,7 @@
         </Grid>
         <StackPanel Grid.Row="7"
                     HorizontalAlignment="Center">
-            <Button Content="Lancer l'expérience"
+            <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_LaunchExperiment]}"
                     Style="{DynamicResource AccentButtonStyle}"
                     Command="{Binding LaunchExperimentCommand}" />
         </StackPanel>

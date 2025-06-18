@@ -1797,6 +1797,11 @@
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
+        },
+        "resources": {
+          "fr/StroopApp.resources.dll": {
+            "locale": "fr"
+          }
         }
       }
     }

@@ -555,6 +555,7 @@ C:\Users\mylan\Desktop\Projet\StroopApp.XUnitTests\bin\Debug\net8.0-windows\runt
 C:\Users\mylan\Desktop\Projet\StroopApp.XUnitTests\bin\Debug\net8.0-windows\runtimes\win-x86\native\libSkiaSharp.dll
 C:\Users\mylan\Desktop\Projet\StroopApp.XUnitTests\bin\Debug\net8.0-windows\StroopApp.dll
 C:\Users\mylan\Desktop\Projet\StroopApp.XUnitTests\bin\Debug\net8.0-windows\StroopApp.pdb
+C:\Users\mylan\Desktop\Projet\StroopApp.XUnitTests\bin\Debug\net8.0-windows\fr\StroopApp.resources.dll
 C:\Users\mylan\Desktop\Projet\StroopApp.XUnitTests\obj\Debug\net8.0-windows\StroopApp.XUnitTests.csproj.AssemblyReference.cache
 C:\Users\mylan\Desktop\Projet\StroopApp.XUnitTests\obj\Debug\net8.0-windows\StroopApp.XUnitTests.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\mylan\Desktop\Projet\StroopApp.XUnitTests\obj\Debug\net8.0-windows\StroopApp.XUnitTests.AssemblyInfoInputs.cache

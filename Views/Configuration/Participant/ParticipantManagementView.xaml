@@ -25,7 +25,7 @@
             </Grid.RowDefinitions>
             <ui:SimpleStackPanel Grid.Row="0"
                                  Spacing="10">
-                <TextBlock Text="Choix du participant"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ParticipantManagement_Title]}"
                            Style="{StaticResource TitleTextBlockStyle}" />
                 <Grid HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
@@ -33,7 +33,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0"
-                               Text="Sélectionnez un participant pour lancer l'expérience."
+                               Text="{Binding Source={StaticResource Loc}, Path=[ParticipantManagement_Description]}"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Center" />
                     <ui:SimpleStackPanel Grid.Column="1"
@@ -62,7 +62,7 @@
                                              Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                                              Padding="34,6,0,0" />
                                     <TextBlock IsHitTestVisible="False"
-                                               Text="Rechercher . . ."
+                                               Text="{Binding Source={StaticResource Loc}, Path=[Search_Placeholder]}"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Left"
                                                Margin="34,0,0,0"
@@ -84,11 +84,11 @@
                                 </Grid>
                             </Grid>
                         </Border>
-                        <Button Content="Créer"
+                        <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Create]}"
                                 Command="{Binding CreateParticipantCommand}" />
-                        <Button Content="Modifier"
+                        <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Modify]}"
                                 Command="{Binding ModifyParticipantCommand}" />
-                        <Button Content="Supprimer"
+                        <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Delete]}"
                                 Command="{Binding DeleteParticipantCommand}"></Button>
                     </ui:SimpleStackPanel>
                 </Grid>

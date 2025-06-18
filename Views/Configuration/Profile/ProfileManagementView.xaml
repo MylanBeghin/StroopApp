@@ -24,9 +24,9 @@
                 BorderThickness="0.5"
                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
             <ui:SimpleStackPanel Spacing="10">
-                <TextBlock Text="Choix du profil de l'expérience"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ProfileManagement_Title]}"
                            Style="{DynamicResource TitleTextBlockStyle}" />
-                <TextBlock Text="Sélectionnez le profil à utiliser pour configurer votre expérience."
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ProfileManagement_Description]}"
                            Style="{DynamicResource CaptionTextBlockStyle}" />
                 <ui:SimpleStackPanel Orientation="Horizontal"
                                      HorizontalAlignment="Left"
@@ -37,13 +37,13 @@
                               SelectedItem="{Binding CurrentProfile}"
                               DisplayMemberPath="ProfileName"
                               Background="{DynamicResource SystemControlBackgroundAltHighBrush}" />
-                    <Button Content="Créer"
+                    <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Create]}"
                             Command="{Binding CreateProfileCommand}"
                             Style="{DynamicResource DefaultButtonStyle}" />
-                    <Button Content="Modifier"
+                    <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Modify]}"
                             Command="{Binding ModifyProfileCommand}"
                             Style="{DynamicResource DefaultButtonStyle}" />
-                    <Button Content="Supprimer"
+                    <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Delete]}"
                             Command="{Binding DeleteProfileCommand}"
                             Style="{DynamicResource DefaultButtonStyle}" />
                 </ui:SimpleStackPanel>
@@ -56,7 +56,7 @@
                 BorderThickness="0.5"
                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
             <ui:SimpleStackPanel Spacing="10">
-                <TextBlock Text="Détails du profil sélectionné"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ProfileManagement_DetailsTitle]}"
                            Style="{DynamicResource TitleTextBlockStyle}" />
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
@@ -77,7 +77,7 @@
                                                  Exemple : 25 % = 75 % d’incongruents, 25 % de congruents."
                                                  ToolTipService.Placement="Top"
                                                  ToolTipService.InitialShowDelay="100">
-                                <TextBlock Text="Congruence (%)" />
+                                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_Congruence]}" />
                                 <TextBlock Text=""
                                            FontFamily="Segoe MDL2 Assets"
                                            FontSize="14"
@@ -97,7 +97,7 @@
                                                  Exemple : 100 % = alternance à chaque essai, 0 % = toujours la même forme."
                                                  ToolTipService.Placement="Top"
                                                  ToolTipService.InitialShowDelay="100">
-                                <TextBlock Text="Switch (%)" />
+                                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_Switch]}" />
                                 <TextBlock Text=""
                                            FontFamily="Segoe MDL2 Assets"
                                            FontSize="14"
@@ -113,25 +113,25 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Column="0"
-                                 ui:ControlHelper.Header="Heures"
+                                 ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Hours]}"
                                  Text="{Binding CurrentProfile.TaskDuration, Converter={StaticResource MillisecondsToHoursConverter}}"
                                  Style="{DynamicResource ModernReadOnlyTextBoxStyle}" />
                         <TextBox Grid.Column="1"
                                  Text="{Binding CurrentProfile.TaskDuration, Converter={StaticResource MillisecondsToMinutesConverter}}"
-                                 ui:ControlHelper.Header="Minutes"
+                                 ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Minutes]}"
                                  Style="{DynamicResource ModernReadOnlyTextBoxStyle}" />
                         <TextBox Grid.Column="2"
                                  Text="{Binding CurrentProfile.TaskDuration, Converter={StaticResource MillisecondsToSecondsConverter}}"
-                                 ui:ControlHelper.Header="Secondes"
+                                 ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Seconds]}"
                                  Style="{DynamicResource ModernReadOnlyTextBoxStyle}" />
                     </Grid>
                     <TextBox Grid.Column="3"
                              Text="{Binding CurrentProfile.MaxReactionTime}"
-                             ui:ControlHelper.Header="Temps de réaction max (ms)"
+                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_MaxReactionTime]}"
                              Style="{DynamicResource ModernReadOnlyTextBoxStyle}" />
                     <TextBox Grid.Column="4"
                              Text="{Binding CurrentProfile.WordDuration}"
-                             ui:ControlHelper.Header="Durée par mot (ms)"
+                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_WordDuration]}"
                              Style="{DynamicResource ModernReadOnlyTextBoxStyle}" />
                 </Grid>
             </ui:SimpleStackPanel>

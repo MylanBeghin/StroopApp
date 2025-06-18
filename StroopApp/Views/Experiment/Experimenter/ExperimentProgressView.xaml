@@ -31,7 +31,7 @@
                                  HorizontalAlignment="Stretch"
                                  VerticalAlignment="Top"
                                  Spacing="16">
-                <TextBlock Text="Avancement"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Progress_Title]}"
                            Style="{DynamicResource TitleTextBlockStyle}"
                            HorizontalAlignment="Left" />
                 <TextBlock Grid.Column="0"
@@ -57,7 +57,7 @@
                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
             <ui:SimpleStackPanel Spacing="10">
                 <!-- Section Détails du participant -->
-                <TextBlock Text="Détails du participant"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ParticipantDetails_Title]}"
                            Style="{DynamicResource TitleTextBlockStyle}" />
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
@@ -68,7 +68,7 @@
                     <TextBox Grid.Column="0"
                              Text="{Binding settings.Participant.Id}"
                              HorizontalAlignment="Stretch"
-                             ui:ControlHelper.Header="Participant ID"
+                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_ParticipantId]}"
                              Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
                              BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
                              IsHitTestVisible="False"
@@ -78,7 +78,7 @@
                     <TextBox Grid.Column="1"
                              Text="{Binding settings.Block}"
                              HorizontalAlignment="Stretch"
-                             ui:ControlHelper.Header="Bloc"
+                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Block]}"
                              Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
                              BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
                              IsHitTestVisible="False"
@@ -95,7 +95,7 @@
                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
             <ui:SimpleStackPanel Spacing="10">
                 <!-- Section Détails de l'expérience -->
-                <TextBlock Text="Détails de l'expérience"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ExperimentDetails_Title]}"
                            Style="{DynamicResource TitleTextBlockStyle}" />
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
@@ -117,7 +117,7 @@
                     <TextBox Grid.Column="0"
                              Text="{Binding settings.CurrentProfile.CongruencePourcentage}"
                              HorizontalAlignment="Stretch"
-                             ui:ControlHelper.Header="Pourcentage de congruence"
+                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Congruence]}"
                              Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
                              BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
                              IsHitTestVisible="False"
@@ -126,7 +126,7 @@
                     <TextBox Grid.Column="1"
                              Text="{Binding settings.CurrentProfile.SwitchPourcentage}"
                              HorizontalAlignment="Stretch"
-                             ui:ControlHelper.Header="Pourcentage de switch"
+                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Switch]}"
                              Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
                              BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
                              IsHitTestVisible="False"
@@ -139,7 +139,7 @@
                              Text="{Binding settings.CurrentProfile.Hours}"
                              IsReadOnly="True"
                              HorizontalAlignment="Center"
-                             ui:ControlHelper.Header="Heures"
+                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Hours]}"
                              Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
                              BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
                              Padding="4"
@@ -150,7 +150,7 @@
                              Text="{Binding settings.CurrentProfile.Minutes}"
                              IsReadOnly="True"
                              HorizontalAlignment="Center"
-                             ui:ControlHelper.Header="Minutes"
+                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Minutes]}"
                              Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
                              BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
                              Padding="4"
@@ -161,7 +161,7 @@
                              Text="{Binding settings.CurrentProfile.Seconds}"
                              IsReadOnly="True"
                              HorizontalAlignment="Center"
-                             ui:ControlHelper.Header="Secondes"
+                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Seconds]}"
                              Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
                              BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
                              Padding="4"
@@ -172,7 +172,7 @@
                              Text="{Binding settings.CurrentProfile.MaxReactionTime}"
                              IsReadOnly="True"
                              HorizontalAlignment="Stretch"
-                             ui:ControlHelper.Header="Temps de réaction max (ms)"
+                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_MaxReactionTime]}"
                              Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
                              BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
                              Padding="4"
@@ -183,7 +183,7 @@
                              Text="{Binding settings.CurrentProfile.WordDuration}"
                              IsReadOnly="True"
                              HorizontalAlignment="Stretch"
-                             ui:ControlHelper.Header="Durée par mot (ms)"
+                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_WordDuration]}"
                              Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
                              BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
                              Padding="4"
