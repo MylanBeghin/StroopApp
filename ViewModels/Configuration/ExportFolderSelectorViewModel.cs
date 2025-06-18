@@ -27,9 +27,10 @@ namespace StroopApp.ViewModels.Configuration
 
             BrowseCommand = new RelayCommand(() =>
             {
+                var loc = App.Current.Resources["Loc"] as StroopApp.Core.LocalizedStrings;
                 var dlg = new VistaFolderBrowserDialog
                 {
-                    Description = "Sélectionner le dossier d’exportation pour vos résultats",
+                    Description = loc?["ExportFolderDialog_Description"],
                     SelectedPath = Settings.ExportFolderPath
                 };
                 if (dlg.ShowDialog() == true)
