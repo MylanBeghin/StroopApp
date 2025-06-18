@@ -14,7 +14,7 @@ namespace StroopApp.XUnitTests.Models
 
 			// Assert
 			Assert.Equal(50, profile.CongruencePourcentage);
-			Assert.Equal(50, profile.SwitchPourcent);
+			Assert.Equal(null, profile.SwitchPourcent);
 			Assert.False(profile.IsAmorce);
 			Assert.Equal(100, profile.FixationDuration);
 			Assert.Equal(400, profile.MaxReactionTime);
