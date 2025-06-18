@@ -1,0 +1,157 @@
+﻿<Window x:Class="StroopApp.Views.Configuration.AdvancedSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        Title="Paramètres avancés"
+        Height="650"
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}">
+    <Window.InputBindings>
+        <KeyBinding Key="Enter"
+                    Command="{Binding SendCommand}" />
+    </Window.InputBindings>
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="16" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="16" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="16" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <!-- Titre -->
+        <TextBlock Grid.Row="0"
+                   Text="Ports SERIAL"
+                   Style="{StaticResource TitleTextBlockStyle}" />
+        <!-- Bloc options port + connexion -->
+        <Border Grid.Row="2"
+                Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+                CornerRadius="8"
+                Padding="16"
+                BorderThickness="0.5"
+                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="0.5*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="8" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="8" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="8" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Liste des ports"
+                           Grid.Row="0"
+                           Grid.Column="0" />
+                <ComboBox ItemsSource="{Binding SerialPorts}"
+                          SelectedItem="{Binding SelectedPort}"
+                          HorizontalAlignment="Stretch"
+                          Grid.Row="2"
+                          Grid.Column="0" />
+                <Button Content="Rafraîchir"
+                        Command="{Binding RefreshCommand }"
+                        Grid.Row="2"
+                        Grid.Column="2" />
+                <TextBlock Text="Baudrate"
+                           Grid.Row="4"
+                           Grid.Column="0" />
+                <ComboBox ItemsSource="{Binding BaudRates}"
+                          SelectedItem="{Binding SelectedBaudRate}"
+                          MinWidth="120"
+                          Grid.Row="6"
+                          Grid.Column="0"
+                          HorizontalAlignment="Stretch"
+                          IsEnabled="{Binding IsPortSelected}" />
+                <TextBlock Text="Parité"
+                           Grid.Row="4"
+                           Grid.Column="2" />
+                <ComboBox ItemsSource="{Binding Parities}"
+                          SelectedItem="{Binding SelectedParity}"
+                          Grid.Row="6"
+                          Grid.Column="2"
+                          HorizontalAlignment="Stretch"
+                          IsEnabled="{Binding IsPortSelected}" />
+                <TextBlock Text="Bits de stop"
+                           Grid.Row="4"
+                           Grid.Column="4" />
+                <ComboBox ItemsSource="{Binding StopBitsOptions}"
+                          SelectedItem="{Binding SelectedStopBits}"
+                          MinWidth="80"
+                          Grid.Row="6"
+                          Grid.Column="4"
+                          HorizontalAlignment="Stretch"
+                          IsEnabled="{Binding IsPortSelected}" />
+            </Grid>
+        </Border>
+        <!-- Ligne connexion / état -->
+        <ui:SimpleStackPanel Grid.Row="4"
+                             Orientation="Horizontal"
+                             Spacing="16"
+                             VerticalAlignment="Center">
+            <Button Content="{Binding ConnectButtonText}"
+                    Command="{Binding ConnectCommand}"
+                    Style="{StaticResource AccentButtonStyle}"
+                    MinWidth="120"
+                    IsEnabled="{Binding IsPortSelected}" />
+            <TextBlock Text="{Binding ConnectionStatus}"
+                       VerticalAlignment="Center" />
+        </ui:SimpleStackPanel>
+        <!-- Zone log échanges -->
+        <Border Grid.Row="6"
+                Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+                CornerRadius="8"
+                Padding="8"
+                BorderThickness="0.5"
+                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+            <DockPanel LastChildFill="True">
+                <ui:SimpleStackPanel Orientation="Horizontal"
+                                     DockPanel.Dock="Top"
+                                     Spacing="8"
+                                     Margin="0,0,0,4">
+                    <TextBlock Text="Historique des échanges"
+                               VerticalAlignment="Center" />
+                    <Button Content="Copier"
+                            Command="{Binding CopyLogCommand}"
+                            MinWidth="80" />
+                    <Button Content="Effacer"
+                            Command="{Binding ClearLogCommand}"
+                            MinWidth="80" />
+                </ui:SimpleStackPanel>
+                <TextBox Text="{Binding MessageLog}"
+                         IsReadOnly="True"
+                         AcceptsReturn="True"
+                         VerticalScrollBarVisibility="Auto"
+                         FontFamily="Consolas"
+                         Background="White"
+                         BorderThickness="0"
+                         Margin="0"
+                         Height="200" />
+            </DockPanel>
+        </Border>
+        <!-- Ligne saisie envoi -->
+        <ui:SimpleStackPanel Grid.Row="7"
+                             Orientation="Horizontal"
+                             Spacing="8"
+                             Margin="0,8,0,0"
+                             HorizontalAlignment="Stretch">
+            <TextBox Text="{Binding MessageToSend, UpdateSourceTrigger=PropertyChanged}"
+                     Width="400"
+                     MinWidth="100" />
+            <Button Content="Envoyer"
+                    Command="{Binding SendCommand}"
+                    Style="{StaticResource AccentButtonStyle}"
+                    IsDefault="True"/>
+        </ui:SimpleStackPanel>
+    </Grid>
+</Window>
