@@ -115,7 +115,7 @@
                     </Grid.ColumnDefinitions>
                     <!-- Type de Stroop -->
                     <TextBox Grid.Column="0"
-                             Text="{Binding settings.CurrentProfile.CongruencePourcentage}"
+                             Text="{Binding settings.CurrentProfile.CongruencePercent}"
                              HorizontalAlignment="Stretch"
                              ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Congruence]}"
                              Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
@@ -124,7 +124,7 @@
                              Padding="4"
                              Margin="4" />
                     <TextBox Grid.Column="1"
-                             Text="{Binding settings.CurrentProfile.SwitchPourcentage}"
+                             Text="{Binding settings.CurrentProfile.SwitchPercent}"
                              HorizontalAlignment="Stretch"
                              ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Switch]}"
                              Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
