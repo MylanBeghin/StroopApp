@@ -7,6 +7,11 @@
       KeyDown="StroopPage_KeyDown"
       Title="Stroop">
     <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
+            <TextBlock Text="{Binding FixationTimerMs, StringFormat=Fixation: {0:F0} ms}" Foreground="White"/>
+            <TextBlock Text="{Binding AmorceTimerMs, StringFormat=Cue: {0:F0} ms}" Foreground="White"/>
+            <TextBlock Text="{Binding WordTimerMs, StringFormat=Word: {0:F0} ms}" Foreground="White"/>
+        </StackPanel>
         <ContentControl Content="{Binding CurrentControl}" />
     </Grid>
 </Page>
