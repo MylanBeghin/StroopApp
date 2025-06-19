@@ -7,8 +7,8 @@ public class SwitchSettingsViewModel : ViewModelBase
 {
 
 
-	private int _switchPercent = 50;
-	public int SwitchPercent
+	private int? _switchPercent;
+	public int? SwitchPercent
 	{
 		get => _switchPercent;
 		set
@@ -61,7 +61,6 @@ public class SwitchSettingsViewModel : ViewModelBase
 			if (CarrePercent != clamped)
 			{
 				DominantPercent = 100 - clamped;
-				// OnPropertyChanged(nameof(CarrePercent)); // Déjà fait dans DominantPercent
 			}
 		}
 	}
@@ -75,7 +74,6 @@ public class SwitchSettingsViewModel : ViewModelBase
 			if (RondPercent != clamped)
 			{
 				DominantPercent = clamped;
-				// OnPropertyChanged(nameof(RondPercent)); // Déjà fait dans DominantPercent
 			}
 		}
 	}
@@ -101,7 +99,7 @@ public class SwitchSettingsViewModel : ViewModelBase
 		var preview = new StringBuilder();
 		preview.Append(lastForm == "Carré" ? "■" : "●").Append(" ");
 
-		for (int i = 1 ; i < total ; i++)
+		for (int i = 1; i < total; i++)
 		{
 			bool doitSwitch = rnd.Next(100) < SwitchPercent;
 
