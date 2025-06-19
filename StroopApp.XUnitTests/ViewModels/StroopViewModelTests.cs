@@ -13,7 +13,7 @@ namespace StroopApp.XUnitTests.Models
 			var profile = new ExperimentProfile();
 
 			// Assert
-			Assert.Equal(50, profile.CongruencePourcentage);
+			Assert.Equal(50, profile.CongruencePourcent);
 			Assert.Equal(null, profile.SwitchPourcent);
 			Assert.False(profile.IsAmorce);
 			Assert.Equal(100, profile.FixationDuration);

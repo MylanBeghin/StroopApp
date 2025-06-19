@@ -50,33 +50,46 @@ namespace StroopApp.Models
 				}
 			}
 		}
-		private int _switchPourcentage;
-		public int SwitchPourcentage
+		private int? _switchPourcent;
+		public int? SwitchPourcent
 		{
-			get => _switchPourcentage;
+			get => _switchPourcent;
 			set
 			{
-				if (_switchPourcentage != value)
+				if (_switchPourcent != value)
 				{
-					_switchPourcentage = value;
+					_switchPourcent = value;
 					OnPropertyChanged();
 				}
 			}
 		}
-		private int _congruencePourcentage;
-		public int CongruencePourcentage
+		private int _congruencePourcent;
+		public int CongruencePourcent
 		{
-			get => _congruencePourcentage;
+			get => _congruencePourcent;
 			set
 			{
-				if (_congruencePourcentage != value)
+				if (_congruencePourcent != value)
 				{
-					_congruencePourcentage = value;
+					_congruencePourcent = value;
 					OnPropertyChanged();
 				}
 			}
 		}
+		private int _dominancePourcent;
 
+		public int DominancePourcent
+		{
+			get => _dominancePourcent;
+			set
+			{
+				if (_dominancePourcent != value)
+				{
+					_dominancePourcent = value;
+					OnPropertyChanged();
+				}
+			}
+		}
 		private int _block;
 		public int Block
 		{
@@ -146,38 +159,38 @@ namespace StroopApp.Models
 			}
 		}
 
-                private double? _reactionTime;
-                public double? ReactionTime
-                {
-                        get => _reactionTime;
-                        set
-                        {
-                                if (_reactionTime != value)
-                                {
-                                        _reactionTime = value;
-                                        OnPropertyChanged();
-                                }
-                        }
-                }
+		private double? _reactionTime;
+		public double? ReactionTime
+		{
+			get => _reactionTime;
+			set
+			{
+				if (_reactionTime != value)
+				{
+					_reactionTime = value;
+					OnPropertyChanged();
+				}
+			}
+		}
 
-                // Timestamp when the fixation cross appears
-                public DateTime? FixationStartTime { get; set; }
-                // Timestamp when the cue appears
-                public DateTime? AmorceStartTime { get; set; }
-                // Timestamp when the word appears
-                public DateTime? WordStartTime { get; set; }
-                // Timestamp when the word disappears
-                public DateTime? WordEndTime { get; set; }
+		// Timestamp when the fixation cross appears
+		public DateTime? FixationStartTime { get; set; }
+		// Timestamp when the cue appears
+		public DateTime? AmorceStartTime { get; set; }
+		// Timestamp when the word appears
+		public DateTime? WordStartTime { get; set; }
+		// Timestamp when the word disappears
+		public DateTime? WordEndTime { get; set; }
 
-                // Durations computed from the system clock
-                public double? DurationFixation_ClockMs { get; set; }
-                public double? DurationAmorce_ClockMs { get; set; }
-                public double? DurationWord_ClockMs { get; set; }
+		// Durations computed from the system clock
+		public double? DurationFixation_ClockMs { get; set; }
+		public double? DurationAmorce_ClockMs { get; set; }
+		public double? DurationWord_ClockMs { get; set; }
 
-                // Durations measured by Stopwatch timers
-                public double? FixationTimerDurationMs { get; set; }
-                public double? AmorceTimerDurationMs { get; set; }
-                public double? WordTimerDurationMs { get; set; }
+		// Durations measured by Stopwatch timers
+		public double? FixationTimerDurationMs { get; set; }
+		public double? AmorceTimerDurationMs { get; set; }
+		public double? WordTimerDurationMs { get; set; }
 
 		private int _trialNumber;
 		public int TrialNumber

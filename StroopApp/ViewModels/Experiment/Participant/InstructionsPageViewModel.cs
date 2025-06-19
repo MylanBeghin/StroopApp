@@ -71,7 +71,7 @@ namespace StroopApp.ViewModels.Experiment.Participant
                     case 0:
                         tb.Inlines.Add(new Run("Nous allons maintenant réaliser une première tâche mentale.\r\n\r\n"));
                         tb.Inlines.Add(new Run("A chaque essai, vous verrez apparaître une croix de fixation '+' au milieu de l'écran, suivie d'une amorce et d'un nom de couleur : 'ROUGE', 'VERT', 'BLEU', 'JAUNE'.\r\n\r\n"));
-                        tb.Inlines.Add(new Run(_settings.CurrentProfile.CongruencePourcentage == 0
+                        tb.Inlines.Add(new Run(_settings.CurrentProfile.CongruencePourcent == 0
                             ? "Ces noms seront toujours écrits dans la même couleur que le sens du mot.\r\n\r\n"
                             : "Ces noms seront toujours écrits dans une couleur différente du sens du mot.\r\n\r\n"));
                         tb.Inlines.Add(new Run("Par exemple :\r\n\r\n"));
@@ -139,7 +139,7 @@ namespace StroopApp.ViewModels.Experiment.Participant
                     case 0:
                         tb.Inlines.Add(new Run("Nous allons maintenant réaliser une première tâche mentale.\r\n\r\n"));
                         tb.Inlines.Add(new Run("A chaque essai, vous verrez apparaître une croix de fixation '+' au milieu de l'écran, suivie d'un nom de couleur : 'ROUGE', 'VERT', 'BLEU', 'JAUNE'.\r\n\r\n"));
-                        switch (_settings.CurrentProfile.CongruencePourcentage)
+                        switch (_settings.CurrentProfile.CongruencePourcent)
                         {
                             case 100:
                                 tb.Inlines.Add(new Run("Ces noms seront toujours écrits dans la même couleur que le sens du mot.\r\n\r\n"));
@@ -149,14 +149,14 @@ namespace StroopApp.ViewModels.Experiment.Participant
                                 break;
                             case > 0 and < 100:
                                 tb.Inlines.Add(new Run(
-                                    $"Dans cette tâche, {_settings.CurrentProfile.CongruencePourcentage}% des mots seront congruents (texte = couleur) " +
-                                    $"et {100 - _settings.CurrentProfile.CongruencePourcentage}% seront incongruents (texte ≠ couleur).\r\n\r\n"));
+                                    $"Dans cette tâche, {_settings.CurrentProfile.CongruencePourcent}% des mots seront congruents (texte = couleur) " +
+                                    $"et {100 - _settings.CurrentProfile.CongruencePourcent}% seront incongruents (texte ≠ couleur).\r\n\r\n"));
                                 break;
                         }
                         tb.Inlines.Add(new Run("Par exemple :\r\n\r\n"));
                         tb.Inlines.Add(new Run("ROUGE")
                         {
-                            Foreground = _settings.CurrentProfile.CongruencePourcentage == 100 ? Brushes.Red : Brushes.Blue,
+                            Foreground = _settings.CurrentProfile.CongruencePourcent == 100 ? Brushes.Red : Brushes.Blue,
                             FontSize = 78,
                         });
                         break;
