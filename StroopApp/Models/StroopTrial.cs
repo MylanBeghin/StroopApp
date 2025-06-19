@@ -50,42 +50,42 @@ namespace StroopApp.Models
 				}
 			}
 		}
-		private int? _switchPourcent;
-		public int? SwitchPourcent
+		private int? _switchPercent;
+		public int? SwitchPercent
 		{
-			get => _switchPourcent;
+			get => _switchPercent;
 			set
 			{
-				if (_switchPourcent != value)
+				if (_switchPercent != value)
 				{
-					_switchPourcent = value;
+					_switchPercent = value;
 					OnPropertyChanged();
 				}
 			}
 		}
-		private int _congruencePourcent;
-		public int CongruencePourcent
+		private int _congruencePercent;
+		public int CongruencePercent
 		{
-			get => _congruencePourcent;
+			get => _congruencePercent;
 			set
 			{
-				if (_congruencePourcent != value)
+				if (_congruencePercent != value)
 				{
-					_congruencePourcent = value;
+					_congruencePercent = value;
 					OnPropertyChanged();
 				}
 			}
 		}
-		private int _dominancePourcent;
+		private int _dominancePercent;
 
-		public int DominancePourcent
+		public int DominancePercent
 		{
-			get => _dominancePourcent;
+			get => _dominancePercent;
 			set
 			{
-				if (_dominancePourcent != value)
+				if (_dominancePercent != value)
 				{
-					_dominancePourcent = value;
+					_dominancePercent = value;
 					OnPropertyChanged();
 				}
 			}

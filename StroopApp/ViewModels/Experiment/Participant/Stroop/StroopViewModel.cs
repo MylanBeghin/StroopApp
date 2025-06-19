@@ -108,7 +108,7 @@ public class StroopViewModel : ViewModelBase
 		var wordTexts = new[] { "Blue", "Red", "Green", "Yellow" };
 		int total = Settings.CurrentProfile.WordCount;
 
-		int congruentCount = total * Settings.CurrentProfile.CongruencePourcent / 100;
+		int congruentCount = total * Settings.CurrentProfile.CongruencePercent / 100;
 		int incongruentCount = total - congruentCount;
 		var congruenceFlags = new List<bool>();
 		congruenceFlags.AddRange(Enumerable.Repeat(true, congruentCount));      // true = congruent
@@ -130,8 +130,8 @@ public class StroopViewModel : ViewModelBase
 				Block = Settings.Block,
 				ParticipantId = Settings.Participant.Id,
 				IsAmorce = Settings.CurrentProfile.IsAmorce,
-				SwitchPourcent = Settings.CurrentProfile.DominantPercent,
-				CongruencePourcent = Settings.CurrentProfile.CongruencePourcent,
+				SwitchPercent = Settings.CurrentProfile.DominantPercent,
+				CongruencePercent = Settings.CurrentProfile.CongruencePercent,
 			};
 			bool isCongruent = congruenceFlags[i];
 			if (isCongruent)

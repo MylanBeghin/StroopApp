@@ -61,8 +61,8 @@ namespace StroopApp.Services.Profile
 			target.MaxReactionTime = modifiedProfile.MaxReactionTime;
 			target.CalculationMode = modifiedProfile.CalculationMode;
 			target.DominantPercent = modifiedProfile.DominantPercent;
-			target.CongruencePourcent = modifiedProfile.CongruencePourcent;
-			target.SwitchPourcent = modifiedProfile.SwitchPourcent;
+			target.CongruencePercent = modifiedProfile.CongruencePercent;
+			target.SwitchPercent = modifiedProfile.SwitchPercent;
 			target.UpdateDerivedValues();
 			SaveProfiles(profiles);
 		}
