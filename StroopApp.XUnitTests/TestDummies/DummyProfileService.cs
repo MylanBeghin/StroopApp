@@ -11,9 +11,6 @@ namespace StroopApp.XUnitTests.TestDummies
 		public void SaveProfiles(ObservableCollection<ExperimentProfile> profiles)
 		{
 		}
-		public void AddProfile(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles)
-		{
-		}
 		public void DeleteProfile(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles)
 		{
 		}
