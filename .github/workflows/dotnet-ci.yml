@@ -1,8 +1,6 @@
 name: .NET CI
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -27,4 +25,14 @@ jobs:
       run: dotnet build StroopApp.sln --configuration Release --no-restore
 
     - name: Run tests
-      run: dotnet test StroopApp.sln --no-build --verbosity normal
+      run: dotnet test StroopApp.sln --no-build --configuration Release --verbosity normal
+
+    - name: Publish self-contained single EXE
+      run: |
+        dotnet publish StroopApp/StroopApp.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
+
+    - name: Upload single-file EXE artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: StroopApp-standalone-exe
+        path: StroopApp/bin/Release/net8.0-windows/win-x64/publish/StroopApp.exe
