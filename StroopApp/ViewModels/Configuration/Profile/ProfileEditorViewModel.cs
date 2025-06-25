@@ -120,7 +120,7 @@ namespace StroopApp.ViewModels.Configuration.Profile
 				return;
 			}
 
-			if (Profile.AmorceDuration == 0)
+			if (Profile.AmorceDuration == 0 && Profile.IsAmorce)
 			{
 				ShowErrorDialog("Le temps d'amorce est doit être supérieur à 0 !");
 				return;

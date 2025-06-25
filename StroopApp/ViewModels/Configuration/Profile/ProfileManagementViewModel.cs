@@ -68,8 +68,13 @@ namespace StroopApp.ViewModels.Configuration.Profile
 			profileWindow.ShowDialog();
 			if (profileWindow.DialogResult == true)
 			{
-				_profileService.AddProfile(newProfile, Profiles);
-				CurrentProfile = newProfile;
+				var updatedProfiles = _profileService.UpsertProfile(newProfile);
+				Profiles.Clear();
+				foreach (var prof in updatedProfiles)
+				{
+					Profiles.Add(prof);
+				}
+				CurrentProfile = Profiles.FirstOrDefault(p => p.Id == newProfile.Id);
 			}
 		}
 

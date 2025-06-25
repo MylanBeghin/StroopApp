@@ -8,7 +8,6 @@ namespace StroopApp.Services
 	{
 		ObservableCollection<ExperimentProfile> LoadProfiles();
 		void SaveProfiles(ObservableCollection<ExperimentProfile> profiles);
-		void AddProfile(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles);
 		ObservableCollection<ExperimentProfile> UpsertProfile(ExperimentProfile profile);
 		void DeleteProfile(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles);
 		Guid? LoadLastSelectedProfile();
