@@ -157,7 +157,6 @@ namespace StroopApp.Models
 					if (!_isAmorce)
 					{
 						AmorceDuration = 0;
-<<<<<<< fix/profile-editor-bug
 						_dominantPercent = 50;
 						_switchPercent = null;
 						OnPropertyChanged(nameof(DominantPercent));
@@ -167,14 +166,6 @@ namespace StroopApp.Models
 					{
 						_switchPercent = 50;
 						OnPropertyChanged(nameof(SwitchPercent));
-=======
-						DominantPercent = 50;
-						SwitchPercent = null;
-					}
-					else
-					{
-						SwitchPercent = 50;
->>>>>>> master
 					}
 					OnPropertyChanged();
 					UpdateDerivedValues();
@@ -266,7 +257,6 @@ namespace StroopApp.Models
 		}
 		private int _congruencePercent;
 		public int CongruencePercent
-<<<<<<< fix/profile-editor-bug
 		{
 			get => _congruencePercent;
 			set
@@ -274,28 +264,7 @@ namespace StroopApp.Models
 				if (_congruencePercent != value)
 				{
 					_congruencePercent = value;
-=======
-		{
-			get => _congruencePercent;
-			set
-			{
-				if (_congruencePercent != value)
-				{
-					_congruencePercent = value;
-					OnPropertyChanged();
-				}
-			}
-		}
-		private int? _switchPercent;
-		public int? SwitchPercent
-		{
-			get => _switchPercent;
-			set
-			{
-				if (_switchPercent != value)
-				{
-					_switchPercent = value;
->>>>>>> master
+
 					OnPropertyChanged();
 				}
 			}
