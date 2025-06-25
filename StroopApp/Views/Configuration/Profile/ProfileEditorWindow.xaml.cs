@@ -6,26 +6,34 @@ namespace StroopApp.Views
 {
 	public partial class ProfileEditorWindow : Window
 	{
-		public SwitchSettingsViewModel SwitchSettingsViewModel
-		{
-			get;
-		}
 		public ProfileEditorWindow(ProfileEditorViewModel viewModel)
 		{
 			InitializeComponent();
 			DataContext = viewModel;
 
-			SwitchSettingsViewModel = new SwitchSettingsViewModel();
+			// Utilise le SwitchSettingsViewModel du viewModel
+			var switchVM = viewModel.SwitchSettingsViewModel;
 
-			SwitchSettingsViewModel.DominantForm = viewModel.Profile.SelectedDominantForm ?? "Aucune";
-			SwitchSettingsViewModel.DominantPercent = viewModel.Profile.DominantPercent;
+			// Synchronise les valeurs du profil vers le VM d'UI
+			switchVM.DominantPercent = viewModel.Profile.DominantPercent;
+			switchVM.SwitchPercent = viewModel.Profile.SwitchPercent;
 
-			SwitchSettingsViewModel.PropertyChanged += (s, e) =>
+			// Quand l'utilisateur modifie dans l'UI, on met à jour le profil
+			switchVM.PropertyChanged += (s, e) =>
 			{
-				if (e.PropertyName == nameof(SwitchSettingsViewModel.DominantForm))
-					viewModel.Profile.SelectedDominantForm = SwitchSettingsViewModel.DominantForm;
-				if (e.PropertyName == nameof(SwitchSettingsViewModel.DominantPercent))
-					viewModel.Profile.DominantPercent = SwitchSettingsViewModel.DominantPercent;
+				if (e.PropertyName == nameof(switchVM.DominantPercent))
+					viewModel.Profile.DominantPercent = switchVM.DominantPercent;
+				if (e.PropertyName == nameof(switchVM.SwitchPercent))
+					viewModel.Profile.SwitchPercent = switchVM.SwitchPercent;
+			};
+
+			// Quand le profil change (par code), on met à jour le VM d'UI
+			viewModel.Profile.PropertyChanged += (s, e) =>
+			{
+				if (e.PropertyName == nameof(viewModel.Profile.DominantPercent))
+					switchVM.DominantPercent = viewModel.Profile.DominantPercent;
+				if (e.PropertyName == nameof(viewModel.Profile.SwitchPercent))
+					switchVM.SwitchPercent = viewModel.Profile.SwitchPercent;
 			};
 
 			viewModel.CloseAction = () =>

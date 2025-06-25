@@ -43,7 +43,7 @@
                            Grid.Row="0"
                            Grid.Column="4" />
                 <!-- NumberBox, symboles et slider -->
-                <ui:NumberBox Value="{Binding CarrePercent, Mode=TwoWay}"
+                <ui:NumberBox Value="{Binding SquarePercent, Mode=TwoWay}"
                               Minimum="0"
                               Maximum="100"
                               SpinButtonPlacementMode="Inline"
@@ -73,7 +73,7 @@
                            HorizontalAlignment="Center"
                            Grid.Row="1"
                            Grid.Column="3" />
-                <ui:NumberBox Value="{Binding RondPercent, Mode=TwoWay}"
+                <ui:NumberBox Value="{Binding CirclePercent, Mode=TwoWay}"
                               Minimum="0"
                               Maximum="100"
                               SpinButtonPlacementMode="Inline"
