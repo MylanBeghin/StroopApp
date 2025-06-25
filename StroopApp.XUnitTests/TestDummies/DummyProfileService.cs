@@ -14,15 +14,16 @@ namespace StroopApp.XUnitTests.TestDummies
 		public void AddProfile(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles)
 		{
 		}
-		public void UpdateProfileById(ExperimentProfile modifiedProfile, Guid profileId, ObservableCollection<ExperimentProfile> profiles)
-		{
-		}
 		public void DeleteProfile(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles)
 		{
 		}
 		public Guid? LoadLastSelectedProfile() => null;
 		public void SaveLastSelectedProfile(ExperimentProfile profile)
 		{
+		}
+		public ObservableCollection<ExperimentProfile> UpsertProfile(ExperimentProfile profile)
+		{
+			return new ObservableCollection<ExperimentProfile> { profile };
 		}
 	}
 }

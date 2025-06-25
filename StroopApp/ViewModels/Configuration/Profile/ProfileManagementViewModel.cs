@@ -85,10 +85,9 @@ namespace StroopApp.ViewModels.Configuration.Profile
 			profileWindow.ShowDialog();
 			if (profileWindow.DialogResult == true)
 			{
-				_profileService.UpdateProfileById(
-					viewModel.ModifiedProfile,
-					viewModel.ModifiedProfile.Id,
-					Profiles);
+				_profileService.UpsertProfile(
+					viewModel.ModifiedProfile);
+				CurrentProfile = viewModel.ModifiedProfile;
 				OnPropertyChanged(nameof(CurrentProfile));
 			}
 		}
