@@ -35,7 +35,7 @@ public class SwitchSettingsViewModel : ViewModelBase
 			}
 		}
 	}
-	private int _dominantPercent = 50; // 0 = 100% Carré, 100 = 100% Rond
+	private int _dominantPercent = 50; // 0 = 100% square, 100 = 100% circle
 	public int DominantPercent
 	{
 		get => _dominantPercent;
@@ -45,33 +45,33 @@ public class SwitchSettingsViewModel : ViewModelBase
 			{
 				_dominantPercent = Math.Max(0, Math.Min(100, value));
 				OnPropertyChanged(nameof(DominantPercent));
-				OnPropertyChanged(nameof(CarrePercent));
-				OnPropertyChanged(nameof(RondPercent));
+				OnPropertyChanged(nameof(SquarePercent));
+				OnPropertyChanged(nameof(CirclePercent));
 				OnPropertyChanged(nameof(SwitchPreview));
 			}
 		}
 	}
 
-	public int CarrePercent
+	public int SquarePercent
 	{
 		get => 100 - DominantPercent;
 		set
 		{
 			int clamped = Math.Max(0, Math.Min(100, value));
-			if (CarrePercent != clamped)
+			if (SquarePercent != clamped)
 			{
 				DominantPercent = 100 - clamped;
 			}
 		}
 	}
 
-	public int RondPercent
+	public int CirclePercent
 	{
 		get => DominantPercent;
 		set
 		{
 			int clamped = Math.Max(0, Math.Min(100, value));
-			if (RondPercent != clamped)
+			if (CirclePercent != clamped)
 			{
 				DominantPercent = clamped;
 			}

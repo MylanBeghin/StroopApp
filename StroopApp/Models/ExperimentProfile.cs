@@ -157,12 +157,15 @@ namespace StroopApp.Models
 					if (!_isAmorce)
 					{
 						AmorceDuration = 0;
-						DominantPercent = 50;
-						SwitchPercent = null;
+						_dominantPercent = 50;
+						_switchPercent = null;
+						OnPropertyChanged(nameof(DominantPercent));
+						OnPropertyChanged(nameof(SwitchPercent));
 					}
 					else
 					{
-						SwitchPercent = 50;
+						_switchPercent = 50;
+						OnPropertyChanged(nameof(SwitchPercent));
 					}
 					OnPropertyChanged();
 					UpdateDerivedValues();
@@ -274,20 +277,6 @@ namespace StroopApp.Models
 				if (_switchPercent != value)
 				{
 					_switchPercent = value;
-					OnPropertyChanged();
-				}
-			}
-		}
-		private string _selectedDominantForm;
-
-		public string SelectedDominantForm
-		{
-			get => _selectedDominantForm;
-			set
-			{
-				if (_selectedDominantForm != value)
-				{
-					_selectedDominantForm = value;
 					OnPropertyChanged();
 				}
 			}
