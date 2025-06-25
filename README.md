@@ -23,6 +23,14 @@ Technical validation (timing accuracy) and user testing sessions are scheduled.
 
 An open-source release is planned, along with submission to the *Journal of Open Source Software (JOSS)*.  
 
+## Screenshots
+
+Here are a few screenshots of StroopApp:
+
+![Experiment Setup](StroopApp/Resources/Images/ExperimenterWindow_Configuration.png)
+![Live Results](StroopApp/Resources/Images/ExperimenterWindow_RunningExperiment.png)
+
+
 ## Technology stack
 
 - .NET 8
