@@ -16,7 +16,7 @@ namespace StroopApp.Services.Profile
 		{
 			_configDir = configDir;
 			_profilesPath = Path.Combine(_configDir, "profiles.json");
-			_lastProfileFile = "lastProfile.txt";
+			_lastProfileFile = Path.Combine(_configDir, "lastProfile.json");
 		}
 
 		public ObservableCollection<ExperimentProfile> LoadProfiles()
@@ -36,20 +36,15 @@ namespace StroopApp.Services.Profile
 			File.WriteAllText(_profilesPath, json);
 		}
 
-		public void AddProfile(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles)
-		{
-			profiles.Add(profile);
-			SaveProfiles(profiles);
-		}
 		public ObservableCollection<ExperimentProfile> UpsertProfile(ExperimentProfile profile)
 		{
-			// On charge la liste actuelle depuis le JSON
+
 			var allProfiles = LoadProfiles();
 
-			// On recherche si ce profil existe déjà
+
 			var existing = allProfiles.FirstOrDefault(p => p.Id == profile.Id);
 
-			// S’il n’existe pas, on l’ajoute
+
 			if (existing == null)
 			{
 				if (profile.Id == Guid.Empty)
@@ -58,7 +53,7 @@ namespace StroopApp.Services.Profile
 			}
 			else
 			{
-				// Sinon, on met à jour ses propriétés
+
 				existing.ProfileName = profile.ProfileName;
 				existing.Hours = profile.Hours;
 				existing.Minutes = profile.Minutes;
@@ -78,12 +73,13 @@ namespace StroopApp.Services.Profile
 				existing.UpdateDerivedValues();
 			}
 
-			// Sauvegarde de la liste
+
 			SaveProfiles(allProfiles);
 
-			// Renvoi de la liste actualisée
+
 			return LoadProfiles();
 		}
+
 		public void DeleteProfile(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles)
 		{
 			if (profiles.Contains(profile))
@@ -106,50 +102,9 @@ namespace StroopApp.Services.Profile
 
 		public void SaveLastSelectedProfile(ExperimentProfile profile)
 		{
-			File.WriteAllText(_lastProfileFile, profile.Id.ToString());
-		}
-		public ExperimentProfile UpsertProfileWithoutReload(ExperimentProfile profile, ObservableCollection<ExperimentProfile> localProfiles)
-		{
-
-			var allProfiles = LoadProfiles();
-
-
-			var existing = allProfiles.FirstOrDefault(p => p.Id == profile.Id);
-
-
-			if (existing == null)
-			{
-				if (profile.Id == Guid.Empty)
-					profile.Id = Guid.NewGuid();
-				allProfiles.Add(profile);
-			}
-			else
-			{
-
-				existing.ProfileName = profile.ProfileName;
-				existing.WordDuration = profile.WordDuration;
-				// ... etc.
-			}
-			SaveProfiles(allProfiles);
-
-			// Mise à jour côté mémoire, sans rafraîchir toute la liste
-			var localExisting = localProfiles.FirstOrDefault(p => p.Id == profile.Id);
-
-			if (localExisting == null)
-			{
-				// Ajout local
-				localProfiles.Add(profile);
-			}
-			else
-			{
-				// Mise à jour locale
-				localExisting.ProfileName = profile.ProfileName;
-				localExisting.WordDuration = profile.WordDuration;
-				// ... etc.
-			}
-
-			// On renvoie le profil (ou la référence “finale” après mise à jour)
-			return profile;
+			Directory.CreateDirectory(_configDir);
+			var json = JsonSerializer.Serialize(profile.Id.ToString(), new JsonSerializerOptions { WriteIndented = true });
+			File.WriteAllText(_lastProfileFile, json);
 		}
 	}
 }
