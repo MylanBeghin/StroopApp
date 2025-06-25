@@ -50,33 +50,46 @@ namespace StroopApp.Models
 				}
 			}
 		}
-		private int _switchPourcentage;
-		public int SwitchPourcentage
+		private int? _switchPercent;
+		public int? SwitchPercent
 		{
-			get => _switchPourcentage;
+			get => _switchPercent;
 			set
 			{
-				if (_switchPourcentage != value)
+				if (_switchPercent != value)
 				{
-					_switchPourcentage = value;
+					_switchPercent = value;
 					OnPropertyChanged();
 				}
 			}
 		}
-		private int _congruencePourcentage;
-		public int CongruencePourcentage
+		private int _congruencePercent;
+		public int CongruencePercent
 		{
-			get => _congruencePourcentage;
+			get => _congruencePercent;
 			set
 			{
-				if (_congruencePourcentage != value)
+				if (_congruencePercent != value)
 				{
-					_congruencePourcentage = value;
+					_congruencePercent = value;
 					OnPropertyChanged();
 				}
 			}
 		}
+		private int _dominancePercent;
 
+		public int DominancePercent
+		{
+			get => _dominancePercent;
+			set
+			{
+				if (_dominancePercent != value)
+				{
+					_dominancePercent = value;
+					OnPropertyChanged();
+				}
+			}
+		}
 		private int _block;
 		public int Block
 		{
@@ -159,6 +172,25 @@ namespace StroopApp.Models
 				}
 			}
 		}
+
+		// Timestamp when the fixation cross appears
+		public DateTime? FixationStartTime { get; set; }
+		// Timestamp when the cue appears
+		public DateTime? AmorceStartTime { get; set; }
+		// Timestamp when the word appears
+		public DateTime? WordStartTime { get; set; }
+		// Timestamp when the word disappears
+		public DateTime? WordEndTime { get; set; }
+
+		// Durations computed from the system clock
+		public double? DurationFixation_ClockMs { get; set; }
+		public double? DurationAmorce_ClockMs { get; set; }
+		public double? DurationWord_ClockMs { get; set; }
+
+		// Durations measured by Stopwatch timers
+		public double? FixationTimerDurationMs { get; set; }
+		public double? AmorceTimerDurationMs { get; set; }
+		public double? WordTimerDurationMs { get; set; }
 
 		private int _trialNumber;
 		public int TrialNumber

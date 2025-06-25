@@ -7,8 +7,8 @@ public class SwitchSettingsViewModel : ViewModelBase
 {
 
 
-	private int _switchPercent = 50;
-	public int SwitchPercent
+	private int? _switchPercent;
+	public int? SwitchPercent
 	{
 		get => _switchPercent;
 		set
@@ -61,7 +61,6 @@ public class SwitchSettingsViewModel : ViewModelBase
 			if (CarrePercent != clamped)
 			{
 				DominantPercent = 100 - clamped;
-				// OnPropertyChanged(nameof(CarrePercent)); // Déjà fait dans DominantPercent
 			}
 		}
 	}
@@ -75,7 +74,6 @@ public class SwitchSettingsViewModel : ViewModelBase
 			if (RondPercent != clamped)
 			{
 				DominantPercent = clamped;
-				// OnPropertyChanged(nameof(RondPercent)); // Déjà fait dans DominantPercent
 			}
 		}
 	}
@@ -86,7 +84,16 @@ public class SwitchSettingsViewModel : ViewModelBase
 
 	private string GeneratePreview()
 	{
-		// Génère une séquence qui respecte dominance et pourcentage de switch
+
+		if (DominantPercent == 100)
+		{
+			return string.Join(" ", Enumerable.Repeat("●", 20));
+		}
+		if (DominantPercent == 0)
+		{
+			return string.Join(" ", Enumerable.Repeat("■", 20));
+		}
+
 		var rnd = new Random();
 		int total = 20;
 		int dominantTotal = (int)(total * DominantPercent / 100.0);
@@ -94,21 +101,19 @@ public class SwitchSettingsViewModel : ViewModelBase
 		string dominantSymbol = DominantForm == "Carré" ? "■" : "●";
 		string otherSymbol = DominantForm == "Carré" ? "●" : "■";
 
-		// Démarrage sur la forme dominante ou non (plus naturel)
 		string lastForm = DominantForm;
 		int currentDominant = 1;
 		int currentOther = 0;
 		var preview = new StringBuilder();
 		preview.Append(lastForm == "Carré" ? "■" : "●").Append(" ");
 
-		for (int i = 1 ; i < total ; i++)
+		for (int i = 1; i < total; i++)
 		{
-			bool doitSwitch = rnd.Next(100) < SwitchPercent;
+			bool doitSwitch = SwitchPercent.HasValue && SwitchPercent.Value > 0 && rnd.Next(100) < SwitchPercent.Value;
 
 			string nextForm;
 			if (doitSwitch)
 			{
-				// Switch à l’autre forme, seulement si quota pas dépassé
 				if (lastForm == DominantForm && currentOther < otherTotal)
 				{
 					nextForm = otherSymbol;
@@ -123,7 +128,6 @@ public class SwitchSettingsViewModel : ViewModelBase
 				}
 				else
 				{
-					// Pas de switch possible, on reste
 					nextForm = lastForm == "Carré" ? "■" : "●";
 					if (lastForm == DominantForm)
 						currentDominant++;
@@ -133,7 +137,6 @@ public class SwitchSettingsViewModel : ViewModelBase
 			}
 			else
 			{
-				// Reste sur la même forme (si quota pas dépassé)
 				if (lastForm == DominantForm && currentDominant < dominantTotal)
 				{
 					nextForm = dominantSymbol;
@@ -146,7 +149,6 @@ public class SwitchSettingsViewModel : ViewModelBase
 				}
 				else
 				{
-					// Force switch si quota de la forme actuelle dépassé
 					nextForm = lastForm == DominantForm ? otherSymbol : dominantSymbol;
 					if (nextForm == dominantSymbol)
 						currentDominant++;

@@ -1,4 +1,5 @@
 ﻿// StroopViewModel.cs
+using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,6 +39,13 @@ public class StroopViewModel : ViewModelBase
 	private TaskCompletionSource<double> _inputTcs;
 	private readonly Stopwatch _responseTime;
 	private readonly Stopwatch _wordTimer;
+	private readonly Stopwatch _fixationTimer;
+	private readonly Stopwatch _amorceTimer;
+	private readonly DispatcherTimer _displayTimer;
+
+	public double FixationTimerMs => _fixationTimer.Elapsed.TotalMilliseconds;
+	public double AmorceTimerMs => _amorceTimer.Elapsed.TotalMilliseconds;
+	public double WordTimerMs => _wordTimer.Elapsed.TotalMilliseconds;
 	private readonly INavigationService _navigationService;
 	private readonly Random random = new Random();
 
@@ -47,6 +55,18 @@ public class StroopViewModel : ViewModelBase
 		_navigationService = navigationService;
 		_responseTime = new Stopwatch();
 		_wordTimer = new Stopwatch();
+		_fixationTimer = new Stopwatch();
+		_amorceTimer = new Stopwatch();
+
+		_displayTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1) };
+		_displayTimer.Tick += (_, _) =>
+		{
+			OnPropertyChanged(nameof(FixationTimerMs));
+			OnPropertyChanged(nameof(AmorceTimerMs));
+			OnPropertyChanged(nameof(WordTimerMs));
+		};
+		_displayTimer.Start();
+
 		GenerateTrials();
 		StartTrials();
 	}
@@ -88,7 +108,7 @@ public class StroopViewModel : ViewModelBase
 		var wordTexts = new[] { "Blue", "Red", "Green", "Yellow" };
 		int total = Settings.CurrentProfile.WordCount;
 
-		int congruentCount = total * Settings.CurrentProfile.CongruencePourcentage / 100;
+		int congruentCount = total * Settings.CurrentProfile.CongruencePercent / 100;
 		int incongruentCount = total - congruentCount;
 		var congruenceFlags = new List<bool>();
 		congruenceFlags.AddRange(Enumerable.Repeat(true, congruentCount));      // true = congruent
@@ -101,7 +121,7 @@ public class StroopViewModel : ViewModelBase
 			amorceSequence = GenerateAmorceSequence(total, Settings.CurrentProfile.DominantPercent);
 		}
 
-		for (int i = 0 ; i < total ; i++)
+		for (int i = 0; i < total; i++)
 		{
 			int type = random.Next(0, 1);
 			var trial = new StroopTrial
@@ -110,8 +130,8 @@ public class StroopViewModel : ViewModelBase
 				Block = Settings.Block,
 				ParticipantId = Settings.Participant.Id,
 				IsAmorce = Settings.CurrentProfile.IsAmorce,
-				SwitchPourcentage = Settings.CurrentProfile.DominantPercent,
-				CongruencePourcentage = Settings.CurrentProfile.CongruencePourcentage
+				SwitchPercent = Settings.CurrentProfile.DominantPercent,
+				CongruencePercent = Settings.CurrentProfile.CongruencePercent,
 			};
 			bool isCongruent = congruenceFlags[i];
 			if (isCongruent)
@@ -143,12 +163,20 @@ public class StroopViewModel : ViewModelBase
 			Settings.ExperimentContext.CurrentTrial = trial;
 
 			CurrentControl = new FixationCrossControl();
+			_fixationTimer.Restart();
+			trial.FixationStartTime = DateTime.UtcNow;
 			await Task.Delay(Settings.CurrentProfile.FixationDuration);
+			_fixationTimer.Stop();
+			trial.FixationTimerDurationMs = _fixationTimer.Elapsed.TotalMilliseconds;
 
 			if (Settings.CurrentProfile.IsAmorce)
 			{
 				CurrentControl = new AmorceControl(trial.Amorce);
+				_amorceTimer.Restart();
+				trial.AmorceStartTime = DateTime.UtcNow;
 				await Task.Delay(Settings.CurrentProfile.AmorceDuration);
+				_amorceTimer.Stop();
+				trial.AmorceTimerDurationMs = _amorceTimer.Elapsed.TotalMilliseconds;
 			}
 
 			var wordControl = new WordControl(trial.Stimulus.Text, trial.Stimulus.Color);
@@ -158,6 +186,7 @@ public class StroopViewModel : ViewModelBase
 			{
 				_responseTime.Restart();
 				_wordTimer.Restart();
+				trial.WordStartTime = DateTime.UtcNow;
 				_inputTcs = new TaskCompletionSource<double>();
 			}), DispatcherPriority.Render);
 
@@ -180,11 +209,30 @@ public class StroopViewModel : ViewModelBase
 				Settings.ExperimentContext.ReactionPoints.Add(new ReactionTimePoint(trial.TrialNumber, double.NaN, null));
 			}
 
-			double remaining = Settings.CurrentProfile.WordDuration - _wordTimer.Elapsed.TotalMilliseconds;
+			double remaining = Settings.CurrentProfile.MaxReactionTime - _wordTimer.Elapsed.TotalMilliseconds;
 			if (remaining > 0)
 				await Task.Delay((int)remaining);
 
 			_wordTimer.Stop();
+			trial.WordTimerDurationMs = _wordTimer.Elapsed.TotalMilliseconds;
+			trial.WordEndTime = DateTime.UtcNow;
+
+			// compute actual durations based on timestamps
+			if (Settings.CurrentProfile.IsAmorce)
+			{
+				if (trial.AmorceStartTime.HasValue && trial.FixationStartTime.HasValue)
+					trial.DurationFixation_ClockMs = (trial.AmorceStartTime.Value - trial.FixationStartTime.Value).TotalMilliseconds;
+				if (trial.WordStartTime.HasValue && trial.AmorceStartTime.HasValue)
+					trial.DurationAmorce_ClockMs = (trial.WordStartTime.Value - trial.AmorceStartTime.Value).TotalMilliseconds;
+			}
+			else
+			{
+				if (trial.WordStartTime.HasValue && trial.FixationStartTime.HasValue)
+					trial.DurationFixation_ClockMs = (trial.WordStartTime.Value - trial.FixationStartTime.Value).TotalMilliseconds;
+				trial.DurationAmorce_ClockMs = null;
+			}
+			if (trial.WordEndTime.HasValue && trial.WordStartTime.HasValue)
+				trial.DurationWord_ClockMs = (trial.WordEndTime.Value - trial.WordStartTime.Value).TotalMilliseconds;
 		}
 
 		EndBlock();

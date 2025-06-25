@@ -62,7 +62,7 @@ namespace StroopApp.ViewModels.Configuration.Profile
 
 			SwitchSettingsViewModel = new SwitchSettingsViewModel();
 
-			Profile = Profiles.Contains(profile) ? CloneProfile(profile) : profile;
+			Profile = Profiles.Contains(profile) ? profile.CloneProfile() : profile;
 			Profile.UpdateDerivedValues();
 
 			SaveCommand = new RelayCommand(Save);
@@ -91,28 +91,7 @@ namespace StroopApp.ViewModels.Configuration.Profile
 			}
 		}
 
-		private ExperimentProfile CloneProfile(ExperimentProfile profile)
-		{
-			return new ExperimentProfile
-			{
-				Id = profile.Id,
-				ProfileName = profile.ProfileName,
-				CalculationMode = profile.CalculationMode,
-				Hours = profile.Hours,
-				Minutes = profile.Minutes,
-				Seconds = profile.Seconds,
-				TaskDuration = profile.TaskDuration,
-				WordDuration = profile.WordDuration,
-				MaxReactionTime = profile.MaxReactionTime,
-				GroupSize = profile.GroupSize,
-				AmorceDuration = profile.AmorceDuration,
-				FixationDuration = profile.FixationDuration,
-				WordCount = profile.WordCount,
-				IsAmorce = profile.IsAmorce,
-				DominantPercent = profile.DominantPercent,
-				CongruencePourcentage = profile.CongruencePourcentage
-			};
-		}
+
 
 		public void Save()
 		{
@@ -141,7 +120,7 @@ namespace StroopApp.ViewModels.Configuration.Profile
 				return;
 			}
 
-			if (Profile.AmorceDuration == 0 && Profile.IsAmorce)
+			if (Profile.AmorceDuration == 0)
 			{
 				ShowErrorDialog("Le temps d'amorce est doit être supérieur à 0 !");
 				return;
@@ -152,7 +131,17 @@ namespace StroopApp.ViewModels.Configuration.Profile
 				ShowErrorDialog("Le temps de réaction maximum doit être positif.");
 				return;
 			}
-
+			var updatedProfiles = _IprofileService.UpsertProfile(Profile);
+			Profiles.Clear();
+			foreach (var prof in updatedProfiles)
+			{
+				Profiles.Add(prof);
+			}
+			var matchedProfile = Profiles.FirstOrDefault(p => p.Id == Profile.Id);
+			if (matchedProfile != null)
+			{
+				Profile = matchedProfile;
+			}
 			DialogResult = true;
 			CloseAction?.Invoke();
 		}

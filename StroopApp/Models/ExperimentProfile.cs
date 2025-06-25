@@ -29,9 +29,9 @@ namespace StroopApp.Models
 			_isAmorce = false;
 			_wordCount = 10;
 			_calculationMode = CalculationMode.WordCount;
-			_congruencePourcentage = 50;
+			_congruencePercent = 50;
 			_dominantPercent = 50;
-			_switchPourcent = null;
+			_switchPercent = null;
 			UpdateDerivedValues();
 		}
 		private Guid _id;
@@ -158,9 +158,12 @@ namespace StroopApp.Models
 					{
 						AmorceDuration = 0;
 						DominantPercent = 50;
-						SwitchPourcent = null;
+						SwitchPercent = null;
 					}
-
+					else
+					{
+						SwitchPercent = 50;
+					}
 					OnPropertyChanged();
 					UpdateDerivedValues();
 				}
@@ -249,28 +252,28 @@ namespace StroopApp.Models
 				}
 			}
 		}
-		private int _congruencePourcentage;
-		public int CongruencePourcentage
+		private int _congruencePercent;
+		public int CongruencePercent
 		{
-			get => _congruencePourcentage;
+			get => _congruencePercent;
 			set
 			{
-				if (_congruencePourcentage != value)
+				if (_congruencePercent != value)
 				{
-					_congruencePourcentage = value;
+					_congruencePercent = value;
 					OnPropertyChanged();
 				}
 			}
 		}
-		private int? _switchPourcent;
-		public int? SwitchPourcent
+		private int? _switchPercent;
+		public int? SwitchPercent
 		{
-			get => _switchPourcent;
+			get => _switchPercent;
 			set
 			{
-				if (_switchPourcent != value)
+				if (_switchPercent != value)
 				{
-					_switchPourcent = value;
+					_switchPercent = value;
 					OnPropertyChanged();
 				}
 			}
@@ -308,24 +311,28 @@ namespace StroopApp.Models
 				Seconds = (TaskDuration % 60000) / 1000;
 			}
 		}
-		public void CopyPropertiesFrom(ExperimentProfile source)
+		public ExperimentProfile CloneProfile()
 		{
-			ProfileName = source.ProfileName;
-			Hours = source.Hours;
-			Minutes = source.Minutes;
-			Seconds = source.Seconds;
-			TaskDuration = source.TaskDuration;
-			WordDuration = source.WordDuration;
-			FixationDuration = source.FixationDuration;
-			AmorceDuration = source.AmorceDuration;
-			IsAmorce = source.IsAmorce;
-			GroupSize = source.GroupSize;
-			WordCount = source.WordCount;
-			MaxReactionTime = source.MaxReactionTime;
-			CalculationMode = source.CalculationMode;
-			DominantPercent = source.DominantPercent;
-			CongruencePourcentage = source.CongruencePourcentage;
+			return new ExperimentProfile
+			{
+				Id = this.Id,
+				ProfileName = this.ProfileName,
+				CalculationMode = this.CalculationMode,
+				Hours = this.Hours,
+				Minutes = this.Minutes,
+				Seconds = this.Seconds,
+				TaskDuration = this.TaskDuration,
+				WordDuration = this.WordDuration,
+				MaxReactionTime = this.MaxReactionTime,
+				GroupSize = this.GroupSize,
+				AmorceDuration = this.AmorceDuration,
+				FixationDuration = this.FixationDuration,
+				WordCount = this.WordCount,
+				IsAmorce = this.IsAmorce,
+				DominantPercent = this.DominantPercent,
+				CongruencePercent = this.CongruencePercent,
+				SwitchPercent = this.SwitchPercent
+			};
 		}
-
 	}
 }
