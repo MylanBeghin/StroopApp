@@ -103,8 +103,7 @@ namespace StroopApp.Services.Profile
 		public void SaveLastSelectedProfile(ExperimentProfile profile)
 		{
 			Directory.CreateDirectory(_configDir);
-			var json = JsonSerializer.Serialize(profile.Id.ToString(), new JsonSerializerOptions { WriteIndented = true });
-			File.WriteAllText(_lastProfileFile, json);
+			File.WriteAllText(_lastProfileFile, profile.Id.ToString());
 		}
 	}
 }
