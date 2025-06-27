@@ -23,7 +23,6 @@
                        Text="{Binding Source={StaticResource Loc}, Path=[EndExperiment_BlockFinished]}"
                        Style="{DynamicResource HeaderTextBlockStyle}"
                        VerticalAlignment="Center" />
-
             <ui:SimpleStackPanel Grid.Column="1"
                                  Orientation="Horizontal"
                                  HorizontalAlignment="Right"
@@ -32,7 +31,7 @@
                 <TextBlock Text="{Binding CurrentProfile}"
                            Style="{DynamicResource TitleTextBlockStyle}" />
                 <TextBlock Text=" - "
-                           Style="{DynamicResource TitleTextBlockStyle}"/>
+                           Style="{DynamicResource TitleTextBlockStyle}" />
                 <TextBlock Text="{Binding CurrentParticipant}"
                            Style="{DynamicResource TitleTextBlockStyle}" />
             </ui:SimpleStackPanel>
@@ -86,27 +85,22 @@
                 </Border>
             </Grid>
         </Border>
-
         <Border Grid.Row="4"
                 Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
                 CornerRadius="8"
                 Padding="16"
                 BorderThickness="0.5"
-                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
-        </Border>
+                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"></Border>
         <ui:SimpleStackPanel Orientation="Horizontal"
                              Spacing="16"
                              Grid.Row="6"
                              HorizontalAlignment="Center">
             <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Continue]}"
-                    Command="{Binding ContinueCommand}"
-                    Style="{DynamicResource AccentButtonStyle}"
-                    IsDefault="True" />
-            <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_NewExperiment]}"
-                    Command="{Binding RestartCommand}"/>
-            <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Quit]}"
-                    Command="{Binding QuitCommand}"
-                    IsCancel="True" />
+                    Command="{Binding ContinueCommand}" />
+            <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Export]}"
+                    Command="{Binding ExportCommand}" />
+            <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Quit_Without_Export]}"
+                    Command="{Binding QuitWihtoutExportCommand}" />
         </ui:SimpleStackPanel>
     </Grid>
 </Page>

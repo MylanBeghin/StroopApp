@@ -16,8 +16,9 @@ using StroopApp.Services.Exportation;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.Views;
+using StroopApp.Views.Experiment.Experimenter.End;
 
-namespace StroopApp.ViewModels.Experiment.Experimenter
+namespace StroopApp.ViewModels.Experiment.Experimenter.End
 {
 	public class EndExperimentViewModel : ViewModelBase
 	{
@@ -37,11 +38,11 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
 		{
 			get;
 		}
-		public ICommand RestartCommand
+		public ICommand ExportCommand
 		{
 			get;
 		}
-		public ICommand QuitCommand
+		public ICommand QuitWihtoutExportCommand
 		{
 			get;
 		}
@@ -75,8 +76,8 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
 			_experimenterNavigationService = experimenterNavigationService;
 			_windowManager = windowManager;
 			ContinueCommand = new RelayCommand(Continue);
-			RestartCommand = new RelayCommand(Restart);
-			QuitCommand = new RelayCommand(Quit);
+			ExportCommand = new RelayCommand(Export);
+			QuitWihtoutExportCommand = new RelayCommand(QuitWihtoutExport);
 			Blocks = Settings.ExperimentContext.Blocks;
 			CurrentParticipant = "Participant n° " + Settings.Participant.Id.ToString();
 			CurrentProfile = "Tâche : " + Settings.CurrentProfile.ProfileName;
@@ -138,20 +139,18 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
 			Settings.ExperimentContext.IsParticipantSelectionEnabled = false;
 			_experimenterNavigationService.NavigateTo(() => new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
 		}
-		private async void Restart()
+		private async void Export()
 		{
-			await _exportationService.ExportDataAsync();
-			Settings.ExperimentContext.IsBlockFinished = false;
-			Settings.ExperimentContext.IsParticipantSelectionEnabled = true;
-			Settings.Reset();
-			_experimenterNavigationService.NavigateTo(
-				() => new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
+			var exportEndExperimentWindow = new ExportEndExperimentWindow(Settings, _exportationService);
+			exportEndExperimentWindow.ShowDialog();
 		}
-
-		private async void Quit()
+		private async void QuitWihtoutExport()
 		{
-			await _exportationService.ExportDataAsync();
-			Application.Current.Shutdown();
+			if (await ShowConfirmationDialog("Êtes-vous sûr de vouloir quitter l'application sans exporter les résultats ? Toutes données non exportées seront perdues"))
+			{
+				Application.Current.Shutdown();
+			}
+			return;
 		}
 	}
 }

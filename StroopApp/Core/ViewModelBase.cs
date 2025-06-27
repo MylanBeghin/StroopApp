@@ -26,5 +26,16 @@ namespace StroopApp.Core
 
 			await dialog.ShowAsync();
 		}
+		protected async virtual Task<bool> ShowConfirmationDialog(string message)
+		{
+			var dialog = new ContentDialog
+			{
+				Title = "Confirmation",
+				Content = message,
+				PrimaryButtonText = "Confirmer",
+				CloseButtonText = "Annuler"
+			};
+			return await dialog.ShowAsync() == ContentDialogResult.Primary;
+		}
 	}
 }

@@ -124,6 +124,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Export.
+        /// </summary>
+        internal static string Button_Export {
+            get {
+                return ResourceManager.GetString("Button_Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Start Experiment.
         /// </summary>
         internal static string Button_LaunchExperiment {
@@ -156,6 +165,15 @@ namespace StroopApp.Resources {
         internal static string Button_Quit {
             get {
                 return ResourceManager.GetString("Button_Quit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Quit without export.
+        /// </summary>
+        internal static string Button_Quit_Without_Export {
+            get {
+                return ResourceManager.GetString("Button_Quit_Without_Export", resourceCulture);
             }
         }
         
