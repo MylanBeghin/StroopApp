@@ -1,0 +1,131 @@
+﻿<Window x:Class="StroopApp.Views.Experiment.Experimenter.End.ExportEndExperimentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StroopApp.Views.Experiment.Experimenter.End"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        mc:Ignorable="d"
+        Title="ExportEndExperimentWindow"
+        Height="450"
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}">
+    <Grid x:Name="EndGrid"
+          Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="12" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   Text="Exportation des résultats"
+                   Style="{StaticResource TitleTextBlockStyle}" />
+        <ContentControl Grid.Row="2"
+                        Content="{Binding}">
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsExporting}"
+                                     Value="True">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <ui:SimpleStackPanel HorizontalAlignment="Center"
+                                                             VerticalAlignment="Center">
+                                            <ui:ProgressRing IsActive="True"
+                                                             Height="64"
+                                                             Width="64" />
+                                            <TextBlock Margin="0,16,0,0"
+                                                       Text="Export en cours..." />
+                                        </ui:SimpleStackPanel>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ExportSuccess}"
+                                     Value="True">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <ui:SimpleStackPanel HorizontalAlignment="Center"
+                                                             VerticalAlignment="Center"
+                                                             Spacing="16">
+                                            <TextBlock FontWeight="Bold"
+                                                       Foreground="Green"
+                                                       Text="Export réussi !" />
+                                            <TextBlock Text="{Binding ExportPath, StringFormat='Résultats enregistrés ici : {0}'}"
+                                                       TextWrapping="Wrap" />
+                                            <ui:SimpleStackPanel Orientation="Horizontal"
+                                                                 HorizontalAlignment="Center"
+                                                                 Spacing="8">
+                                                <Button Content="Nouvelle expérience"
+                                                        Command="{Binding NewExperimentCommand}" />
+                                                <Button Content="Quitter l'application"
+                                                        Command="{Binding QuitCommand}" />
+                                            </ui:SimpleStackPanel>
+                                        </ui:SimpleStackPanel>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ExportError}"
+                                     Value="True">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <ui:SimpleStackPanel HorizontalAlignment="Center"
+                                                             VerticalAlignment="Center"
+                                                             Spacing="16">
+                                            <TextBlock FontWeight="Bold"
+                                                       Foreground="Red"
+                                                       Text="Erreur lors de l’export" />
+                                            <TextBlock Text="{Binding ErrorMessage}"
+                                                       TextWrapping="Wrap" />
+                                            <ui:SimpleStackPanel Orientation="Horizontal"
+                                                                 HorizontalAlignment="Center"
+                                                                 Spacing="8">
+                                                <Button Content="Réessayer"
+                                                        Command="{Binding RetryCommand}" />
+                                                <Button Content="Quitter l'application"
+                                                        Command="{Binding QuitCommand}" />
+                                            </ui:SimpleStackPanel>
+                                        </ui:SimpleStackPanel>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding DefaultView}"
+                                     Value="True">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <ui:SimpleStackPanel Spacing="16">
+                                            <TextBlock Text="Sélectionnez le dossier d’exportation :" />
+                                            <ui:SimpleStackPanel Orientation="Horizontal"
+                                                        Spacing="8">
+                                                <TextBox Width="350"
+                                                         Text="{Binding ExportPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                <Button Content="..."
+                                                        Command="{Binding BrowseFolderCommand}" />
+                                            </ui:SimpleStackPanel>
+                                            <ui:SimpleStackPanel Orientation="Horizontal"
+                                                        Spacing="8"
+                                                        HorizontalAlignment="Center">
+                                                <Button Content="Exporter"
+                                                        Command="{Binding ExportCommand}" />
+                                                <Button Content="Annuler"
+                                                        Command="{Binding QuitCommand}" />
+                                            </ui:SimpleStackPanel>
+                                        </ui:SimpleStackPanel>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+        </ContentControl>
+    </Grid>
+</Window>

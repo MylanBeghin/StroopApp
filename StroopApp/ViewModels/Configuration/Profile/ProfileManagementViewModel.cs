@@ -103,25 +103,19 @@ namespace StroopApp.ViewModels.Configuration.Profile
 				ShowErrorDialog("Veuillez sélectionner un profil à supprimer !");
 				return;
 			}
-			var dlg = new ContentDialog
+			if (await ShowConfirmationDialog("Êtes-vous sûr de vouloir supprimer ce profil ? Cette action est irréversible."))
 			{
-				Title = "Confirmation de suppression",
-				Content = "Voulez-vous vraiment supprimer ce profil ?",
-				PrimaryButtonText = "Supprimer",
-				CloseButtonText = "Annuler"
-			};
-			if (await dlg.ShowAsync() != ContentDialogResult.Primary)
-				return;
-			int currentIndex = Profiles.IndexOf(_currentProfile);
-			_profileService.DeleteProfile(_currentProfile, Profiles);
+				int currentIndex = Profiles.IndexOf(_currentProfile);
+				_profileService.DeleteProfile(_currentProfile, Profiles);
 
-			if (Profiles.Count > 0)
-			{
-				CurrentProfile = Profiles[0];
-			}
-			else
-			{
-				CurrentProfile = null;
+				if (Profiles.Count > 0)
+				{
+					CurrentProfile = Profiles[0];
+				}
+				else
+				{
+					CurrentProfile = null;
+				}
 			}
 		}
 	}
