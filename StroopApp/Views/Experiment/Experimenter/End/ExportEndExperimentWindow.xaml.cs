@@ -18,6 +18,12 @@ namespace StroopApp.Views.Experiment.Experimenter.End
 		{
 			InitializeComponent();
 			DataContext = new ExportEndExperimentWindowViewModel(Settings, exportationService, this);
+			var folderSelectorVM = new ExportFolderSelectorViewModel(Settings, exportationService);
+			var folderSelectorView = new ExportFolderSelectorView(folderSelectorVM);
+
+			// Ajoute la vue dans le Grid à la première ligne
+			EndGrid.Children.Add(folderSelectorView);
+			Grid.SetRow(folderSelectorView, 0);
 		}
 
 	}

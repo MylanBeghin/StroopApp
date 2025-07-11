@@ -19,9 +19,6 @@
             <RowDefinition Height="12" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0"
-                   Text="Exportation des résultats"
-                   Style="{StaticResource TitleTextBlockStyle}" />
         <ContentControl Grid.Row="2"
                         Content="{Binding}">
             <ContentControl.Style>
@@ -101,23 +98,13 @@
                             <Setter Property="ContentTemplate">
                                 <Setter.Value>
                                     <DataTemplate>
-                                        <ui:SimpleStackPanel Spacing="16">
-                                            <TextBlock Text="Sélectionnez le dossier d’exportation :" />
-                                            <ui:SimpleStackPanel Orientation="Horizontal"
-                                                        Spacing="8">
-                                                <TextBox Width="350"
-                                                         Text="{Binding ExportPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                                <Button Content="..."
-                                                        Command="{Binding BrowseFolderCommand}" />
-                                            </ui:SimpleStackPanel>
-                                            <ui:SimpleStackPanel Orientation="Horizontal"
-                                                        Spacing="8"
-                                                        HorizontalAlignment="Center">
-                                                <Button Content="Exporter"
-                                                        Command="{Binding ExportCommand}" />
-                                                <Button Content="Annuler"
-                                                        Command="{Binding QuitCommand}" />
-                                            </ui:SimpleStackPanel>
+                                        <ui:SimpleStackPanel Orientation="Horizontal"
+                                                             HorizontalAlignment="Center"
+                                                             Spacing="16">
+                                            <Button Content="Exporter"
+                                                    Command="{Binding ExportCommand}" />
+                                            <Button Content="Annuler"
+                                                    Command="{Binding QuitCommand}" />
                                         </ui:SimpleStackPanel>
                                     </DataTemplate>
                                 </Setter.Value>

@@ -89,6 +89,8 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 			IsExporting = true;
 			try
 			{
+				// Utilise le dossier sélectionné dans _settings.ExportFolderPath
+				_exportationService.LoadExportFolderPath();
 				await _exportationService.ExportDataAsync();
 				IsExporting = false;
 				ExportSuccess = true;
