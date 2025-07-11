@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="App_Title" xml:space="preserve">
-    <value>Application de tâche cognitive</value>
+    <value>StroopApp</value>
   </data>
   <data name="ExperimentWindow_Title" xml:space="preserve">
     <value>Expérience Stroop</value>
@@ -220,213 +220,235 @@
   <data name="Menu_Languages" xml:space="preserve">
     <value>Langues</value>
   </data>
-<data name="ExportFolderSelector_Title" xml:space="preserve">
-  <value>Choix du dossier des résultats</value>
-</data>
-<data name="ExportFolderSelector_Description" xml:space="preserve">
-  <value>Sélectionnez le dossier d'exportation des résultats.</value>
-</data>
-<data name="ExportFolderSelector_PathLabel" xml:space="preserve">
-  <value>Dossier des résultats :</value>
-</data>
-<data name="Button_Browse" xml:space="preserve">
-  <value>Parcourir</value>
-</data>
-<data name="ParticipantManagement_Title" xml:space="preserve">
-  <value>Choix du participant</value>
-</data>
-<data name="ParticipantManagement_Description" xml:space="preserve">
-  <value>Sélectionnez un participant pour lancer l'expérience.</value>
-</data>
-<data name="Button_Create" xml:space="preserve">
-  <value>Créer</value>
-</data>
-<data name="Button_Modify" xml:space="preserve">
-  <value>Modifier</value>
-</data>
-<data name="Button_Delete" xml:space="preserve">
-  <value>Supprimer</value>
-</data>
-<data name="Search_Placeholder" xml:space="preserve">
-  <value>Rechercher...</value>
-</data>
-<data name="ParticipantEditorWindow_Title" xml:space="preserve">
-  <value>Modification du participant</value>
-</data>
-<data name="Field_ID" xml:space="preserve">
-  <value>ID</value>
-</data>
-<data name="Field_Age" xml:space="preserve">
-  <value>Âge</value>
-</data>
-<data name="Field_Weight" xml:space="preserve">
-  <value>Poids (kg)</value>
-</data>
-<data name="Field_Height" xml:space="preserve">
-  <value>Taille (cm)</value>
-</data>
-<data name="Field_Sex" xml:space="preserve">
-  <value>Sexe</value>
-</data>
-<data name="Field_Gender" xml:space="preserve">
-  <value>Genre</value>
-</data>
-<data name="Button_Cancel" xml:space="preserve">
-  <value>Annuler</value>
-</data>
-<data name="Button_Save" xml:space="preserve">
-  <value>Enregistrer</value>
-</data>
-<data name="ProfileManagement_Title" xml:space="preserve">
-  <value>Choix du profil de l'expérience</value>
-</data>
-<data name="ProfileManagement_Description" xml:space="preserve">
-  <value>Sélectionnez le profil à utiliser pour configurer votre expérience.</value>
-</data>
-<data name="ProfileManagement_DetailsTitle" xml:space="preserve">
-  <value>Détails du profil sélectionné</value>
-</data>
-<data name="Header_Congruence" xml:space="preserve">
-  <value>Congruence (%)</value>
-</data>
-<data name="Tooltip_Congruence" xml:space="preserve">
-  <value>Définit la proportion de mots congruents dans le bloc. Un mot est congruent lorsque sa signification correspond à sa couleur (ex. le mot Rouge écrit en rouge). Exemple : 25 % = 75 % d’incongruents, 25 % de congruents.</value>
-</data>
-<data name="Header_Switch" xml:space="preserve">
-  <value>Switch (%)</value>
-</data>
-<data name="Tooltip_Switch" xml:space="preserve">
-  <value>Définit la fréquence de changement de forme d’amorce entre deux essais. Un switch correspond à un passage d’un carré à un rond, ou inversement. Exemple : 100 % = alternance à chaque essai, 0 % = toujours la même forme.</value>
-</data>
-<data name="Header_Hours" xml:space="preserve">
-  <value>Heures</value>
-</data>
-<data name="Header_Minutes" xml:space="preserve">
-  <value>Minutes</value>
-</data>
-<data name="Header_Seconds" xml:space="preserve">
-  <value>Secondes</value>
-</data>
-<data name="Header_MaxReactionTime" xml:space="preserve">
-  <value>Temps de réaction max (ms)</value>
-</data>
-<data name="Header_WordDuration" xml:space="preserve">
-  <value>Durée par mot (ms)</value>
-</data>
-<data name="ProfileEditorWindow_Title" xml:space="preserve">
-  <value>Modification du profil</value>
-</data>
-<data name="Field_ProfileName" xml:space="preserve">
-  <value>Nom du profil</value>
-</data>
-<data name="Check_AddPrime" xml:space="preserve">
-  <value>Ajouter une amorce</value>
-</data>
-<data name="Label_CalculationMode" xml:space="preserve">
-  <value>Mode de calcul</value>
-</data>
-<data name="Radio_TaskDuration" xml:space="preserve">
-  <value>En fonction de la durée de la tâche</value>
-</data>
-<data name="Radio_WordCount" xml:space="preserve">
-  <value>En fonction du nombre de mots</value>
-</data>
-<data name="Field_GroupSize" xml:space="preserve">
-  <value>Taille du groupe</value>
-</data>
-<data name="Field_WordCount" xml:space="preserve">
-  <value>Nombre de mots</value>
-</data>
-<data name="KeyMapping_Title" xml:space="preserve">
-  <value>Choix des touches</value>
-</data>
-<data name="KeyMapping_Description" xml:space="preserve">
-  <value>Sélectionnez les touches à associer aux couleurs.</value>
-</data>
-<data name="Label_KeyRed" xml:space="preserve">
-  <value>Touche associée à la couleur rouge :</value>
-</data>
-<data name="Label_KeyBlue" xml:space="preserve">
-  <value>Touche associée à la couleur bleue :</value>
-</data>
-<data name="Label_KeyGreen" xml:space="preserve">
-  <value>Touche associée à la couleur verte :</value>
-</data>
-<data name="Label_KeyYellow" xml:space="preserve">
-  <value>Touche associée à la couleur jaune :</value>
-</data>
-<data name="Button_Edit" xml:space="preserve">
-  <value>Modifier</value>
-</data>
-<data name="KeyMapping_Prompt" xml:space="preserve">
-  <value>Appuyez sur une touche pour définir le mapping. Appuyez sur Échap pour annuler.</value>
-</data>
-<data name="KeyMapping_ErrorKeyUsed" xml:space="preserve">
-  <value>Cette touche est déjà utilisée. Veuillez choisir une autre touche.</value>
-</data>
-<data name="KeyMapping_DialogTitle" xml:space="preserve">
-  <value>Modification du mapping pour {0}</value>
-</data>
-<data name="ExportFolderDialog_Description" xml:space="preserve">
-  <value>Sélectionner le dossier d’exportation pour vos résultats</value>
-</data>
-<data name="Dashboard_Title" xml:space="preserve">
-  <value>Tableau de bord de l'expérience en cours</value>
-</data>
-<data name="Progress_Title" xml:space="preserve">
-  <value>Avancement</value>
-</data>
-<data name="ParticipantDetails_Title" xml:space="preserve">
-  <value>Détails du participant</value>
-</data>
-<data name="ExperimentDetails_Title" xml:space="preserve">
-  <value>Détails de l'expérience</value>
-</data>
-<data name="EndExperiment_BlockFinished" xml:space="preserve">
-  <value>Bloc terminé</value>
-</data>
-<data name="EndExperiment_BlockSummary" xml:space="preserve">
-  <value>Résumé des blocs</value>
-</data>
-<data name="Button_Continue" xml:space="preserve">
-  <value>Relancer</value>
-</data>
-<data name="Button_NewExperiment" xml:space="preserve">
-  <value>Nouvelle expérience</value>
-</data>
-<data name="Button_Quit" xml:space="preserve">
-  <value>Quitter l'application</value>
-</data>
-<data name="EndInstructions_Title" xml:space="preserve">
-  <value>Fin de l'expérience</value>
-</data>
-<data name="EndInstructions_Message" xml:space="preserve">
-  <value>Félicitations ! Vous avez terminé l'expérience.</value>
-</data>
-<data name="Reaction_None" xml:space="preserve">
-  <value>Aucune réponse</value>
-</data>
-<data name="Reaction_Correct" xml:space="preserve">
-  <value>Correct</value>
-</data>
-<data name="Reaction_Incorrect" xml:space="preserve">
-  <value>Incorrect</value>
-</data>
-<data name="GraphsView_Title" xml:space="preserve">
-  <value>Suivi de l'expérience</value>
-</data>
+  <data name="ExportFolderSelector_Title" xml:space="preserve">
+    <value>Choix du dossier des résultats</value>
+  </data>
+  <data name="ExportFolderSelector_Description" xml:space="preserve">
+    <value>Sélectionnez le dossier d'exportation des résultats.</value>
+  </data>
+  <data name="ExportFolderSelector_PathLabel" xml:space="preserve">
+    <value>Dossier des résultats :</value>
+  </data>
+  <data name="Button_Browse" xml:space="preserve">
+    <value>Parcourir</value>
+  </data>
+  <data name="ParticipantManagement_Title" xml:space="preserve">
+    <value>Choix du participant</value>
+  </data>
+  <data name="ParticipantManagement_Description" xml:space="preserve">
+    <value>Sélectionnez un participant pour lancer l'expérience.</value>
+  </data>
+  <data name="Button_Create" xml:space="preserve">
+    <value>Créer</value>
+  </data>
+  <data name="Button_Modify" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="Button_Delete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="Search_Placeholder" xml:space="preserve">
+    <value>Rechercher...</value>
+  </data>
+  <data name="ParticipantEditorWindow_Title" xml:space="preserve">
+    <value>Modification du participant</value>
+  </data>
+  <data name="Field_ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Field_Age" xml:space="preserve">
+    <value>Âge</value>
+  </data>
+  <data name="Field_Weight" xml:space="preserve">
+    <value>Poids (kg)</value>
+  </data>
+  <data name="Field_Height" xml:space="preserve">
+    <value>Taille (cm)</value>
+  </data>
+  <data name="Field_Sex" xml:space="preserve">
+    <value>Sexe</value>
+  </data>
+  <data name="Field_Gender" xml:space="preserve">
+    <value>Genre</value>
+  </data>
+  <data name="Button_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Button_Save" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="ProfileManagement_Title" xml:space="preserve">
+    <value>Choix du profil de l'expérience</value>
+  </data>
+  <data name="ProfileManagement_Description" xml:space="preserve">
+    <value>Sélectionnez le profil à utiliser pour configurer votre expérience.</value>
+  </data>
+  <data name="ProfileManagement_DetailsTitle" xml:space="preserve">
+    <value>Détails du profil sélectionné</value>
+  </data>
+  <data name="Header_Congruence" xml:space="preserve">
+    <value>Congruence (%)</value>
+  </data>
+  <data name="Tooltip_Congruence" xml:space="preserve">
+    <value>Définit la proportion de mots congruents dans le bloc. Un mot est congruent lorsque sa signification correspond à sa couleur (ex. le mot Rouge écrit en rouge). Exemple : 25 % = 75 % d’incongruents, 25 % de congruents.</value>
+  </data>
+  <data name="Header_Switch" xml:space="preserve">
+    <value>Switch (%)</value>
+  </data>
+  <data name="Tooltip_Switch" xml:space="preserve">
+    <value>Définit la fréquence de changement de forme d’amorce entre deux essais. Un switch correspond à un passage d’un carré à un rond, ou inversement. Exemple : 100 % = alternance à chaque essai, 0 % = toujours la même forme.</value>
+  </data>
+  <data name="Header_Hours" xml:space="preserve">
+    <value>Heures</value>
+  </data>
+  <data name="Header_Minutes" xml:space="preserve">
+    <value>Minutes</value>
+  </data>
+  <data name="Header_Seconds" xml:space="preserve">
+    <value>Secondes</value>
+  </data>
+  <data name="Header_MaxReactionTime" xml:space="preserve">
+    <value>Temps de réaction max (ms)</value>
+  </data>
+  <data name="Header_WordDuration" xml:space="preserve">
+    <value>Durée par mot (ms)</value>
+  </data>
+  <data name="ProfileEditorWindow_Title" xml:space="preserve">
+    <value>Modification du profil</value>
+  </data>
+  <data name="Field_ProfileName" xml:space="preserve">
+    <value>Nom du profil</value>
+  </data>
+  <data name="Check_AddPrime" xml:space="preserve">
+    <value>Ajouter une amorce</value>
+  </data>
+  <data name="Label_CalculationMode" xml:space="preserve">
+    <value>Mode de calcul</value>
+  </data>
+  <data name="Radio_TaskDuration" xml:space="preserve">
+    <value>En fonction de la durée de la tâche</value>
+  </data>
+  <data name="Radio_WordCount" xml:space="preserve">
+    <value>En fonction du nombre de mots</value>
+  </data>
+  <data name="Field_GroupSize" xml:space="preserve">
+    <value>Taille du groupe</value>
+  </data>
+  <data name="Field_WordCount" xml:space="preserve">
+    <value>Nombre de mots</value>
+  </data>
+  <data name="KeyMapping_Title" xml:space="preserve">
+    <value>Choix des touches</value>
+  </data>
+  <data name="KeyMapping_Description" xml:space="preserve">
+    <value>Sélectionnez les touches à associer aux couleurs.</value>
+  </data>
+  <data name="Label_KeyRed" xml:space="preserve">
+    <value>Touche associée à la couleur rouge :</value>
+  </data>
+  <data name="Label_KeyBlue" xml:space="preserve">
+    <value>Touche associée à la couleur bleue :</value>
+  </data>
+  <data name="Label_KeyGreen" xml:space="preserve">
+    <value>Touche associée à la couleur verte :</value>
+  </data>
+  <data name="Label_KeyYellow" xml:space="preserve">
+    <value>Touche associée à la couleur jaune :</value>
+  </data>
+  <data name="Button_Edit" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="KeyMapping_Prompt" xml:space="preserve">
+    <value>Appuyez sur une touche pour définir le mapping. Appuyez sur Échap pour annuler.</value>
+  </data>
+  <data name="KeyMapping_ErrorKeyUsed" xml:space="preserve">
+    <value>Cette touche est déjà utilisée. Veuillez choisir une autre touche.</value>
+  </data>
+  <data name="KeyMapping_DialogTitle" xml:space="preserve">
+    <value>Modification du mapping pour {0}</value>
+  </data>
+  <data name="ExportFolderDialog_Description" xml:space="preserve">
+    <value>Sélectionner le dossier d’exportation pour vos résultats</value>
+  </data>
+  <data name="Dashboard_Title" xml:space="preserve">
+    <value>Tableau de bord de l'expérience en cours</value>
+  </data>
+  <data name="Progress_Title" xml:space="preserve">
+    <value>Avancement</value>
+  </data>
+  <data name="ParticipantDetails_Title" xml:space="preserve">
+    <value>Détails du participant</value>
+  </data>
+  <data name="ExperimentDetails_Title" xml:space="preserve">
+    <value>Détails de l'expérience</value>
+  </data>
+  <data name="EndExperiment_BlockFinished" xml:space="preserve">
+    <value>Bloc terminé</value>
+  </data>
+  <data name="EndExperiment_BlockSummary" xml:space="preserve">
+    <value>Résumé des blocs</value>
+  </data>
+  <data name="Button_Continue" xml:space="preserve">
+    <value>Relancer</value>
+  </data>
+  <data name="Button_NewExperiment" xml:space="preserve">
+    <value>Nouvelle expérience</value>
+  </data>
+  <data name="Button_Quit" xml:space="preserve">
+    <value>Quitter l'application</value>
+  </data>
+  <data name="EndInstructions_Title" xml:space="preserve">
+    <value>Fin de l'expérience</value>
+  </data>
+  <data name="EndInstructions_Message" xml:space="preserve">
+    <value>Félicitations ! Vous avez terminé l'expérience.</value>
+  </data>
+  <data name="Reaction_None" xml:space="preserve">
+    <value>Aucune réponse</value>
+  </data>
+  <data name="Reaction_Correct" xml:space="preserve">
+    <value>Correct</value>
+  </data>
+  <data name="Reaction_Incorrect" xml:space="preserve">
+    <value>Incorrect</value>
+  </data>
+  <data name="GraphsView_Title" xml:space="preserve">
+    <value>Suivi de l'expérience</value>
+  </data>
   <data name="Dialog_OK" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="Header_TrialDuration" xml:space="preserve"><value>Durée de l'essai (ms)</value></data>
-  <data name="Header_ParticipantId" xml:space="preserve"><value>ID du participant</value></data>
-  <data name="Header_Block" xml:space="preserve"><value>Bloc</value></data>
-  <data name="Header_Trials" xml:space="preserve"><value>Essais</value></data>
-  <data name="Header_Accuracy" xml:space="preserve"><value>Précision</value></data>
-  <data name="Header_MeanReactionTime" xml:space="preserve"><value>Temps moyen de réponse</value></data>
-  <data name="Header_StroopType" xml:space="preserve"><value>Type Stroop</value></data>
-  <data name="Toggle_On" xml:space="preserve"><value>Activé</value></data>
-  <data name="Toggle_Off" xml:space="preserve"><value>Désactivé</value></data>
-  <data name="Header_FixationDuration" xml:space="preserve"><value>Durée de fixation (ms)</value></data>
-  <data name="Header_PrimeDuration" xml:space="preserve"><value>Durée d'amorce (ms)</value></data>
+  <data name="Header_TrialDuration" xml:space="preserve">
+    <value>Durée de l'essai (ms)</value>
+  </data>
+  <data name="Header_ParticipantId" xml:space="preserve">
+    <value>ID du participant</value>
+  </data>
+  <data name="Header_Block" xml:space="preserve">
+    <value>Bloc</value>
+  </data>
+  <data name="Header_Trials" xml:space="preserve">
+    <value>Essais</value>
+  </data>
+  <data name="Header_Accuracy" xml:space="preserve">
+    <value>Précision</value>
+  </data>
+  <data name="Header_MeanReactionTime" xml:space="preserve">
+    <value>Temps moyen de réponse</value>
+  </data>
+  <data name="Header_StroopType" xml:space="preserve">
+    <value>Type Stroop</value>
+  </data>
+  <data name="Toggle_On" xml:space="preserve">
+    <value>Activé</value>
+  </data>
+  <data name="Toggle_Off" xml:space="preserve">
+    <value>Désactivé</value>
+  </data>
+  <data name="Header_FixationDuration" xml:space="preserve">
+    <value>Durée de fixation (ms)</value>
+  </data>
+  <data name="Header_PrimeDuration" xml:space="preserve">
+    <value>Durée d'amorce (ms)</value>
+  </data>
 </root>

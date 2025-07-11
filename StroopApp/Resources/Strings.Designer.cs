@@ -61,7 +61,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Cognitive Tasks App.
+        ///   Recherche une chaîne localisée semblable à StroopApp.
         /// </summary>
         internal static string App_Title {
             get {
