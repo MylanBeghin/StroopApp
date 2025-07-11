@@ -141,7 +141,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 		}
 		private async void Export()
 		{
-			var exportEndExperimentWindow = new ExportEndExperimentWindow(Settings, _exportationService);
+			var exportEndExperimentWindow = new ExportEndExperimentWindow(Settings, _exportationService, _experimenterNavigationService, _windowManager);
 			exportEndExperimentWindow.ShowDialog();
 		}
 		private async void QuitWihtoutExport()

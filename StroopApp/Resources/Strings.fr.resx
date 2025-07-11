@@ -457,4 +457,7 @@
   <data name="Button_Quit_Without_Export" xml:space="preserve">
     <value>Quitter l'application sans exporter</value>
   </data>
+  <data name="Button_OpenExportFolder" xml:space="preserve">
+    <value>Ouvrir le dossier</value>
+  </data>
 </root>

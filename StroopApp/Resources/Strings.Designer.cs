@@ -160,6 +160,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Open the folder.
+        /// </summary>
+        internal static string Button_OpenExportFolder {
+            get {
+                return ResourceManager.GetString("Button_OpenExportFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Quit application.
         /// </summary>
         internal static string Button_Quit {

@@ -17,7 +17,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="12" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <ContentControl Grid.Row="2"
                         Content="{Binding}">
@@ -46,17 +46,31 @@
                             <Setter Property="ContentTemplate">
                                 <Setter.Value>
                                     <DataTemplate>
-                                        <ui:SimpleStackPanel HorizontalAlignment="Center"
-                                                             VerticalAlignment="Center"
-                                                             Spacing="16">
-                                            <TextBlock FontWeight="Bold"
-                                                       Foreground="Green"
-                                                       Text="Export réussi !" />
-                                            <TextBlock Text="{Binding ExportPath, StringFormat='Résultats enregistrés ici : {0}'}"
-                                                       TextWrapping="Wrap" />
+                                        <ui:SimpleStackPanel>
+                                            <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+                                                    CornerRadius="8"
+                                                    Padding="16"
+                                                    BorderThickness="0.5"
+                                                    BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+                                                <ui:SimpleStackPanel HorizontalAlignment="Left"
+                                                                     VerticalAlignment="Center"
+                                                                     Spacing="16">
+                                                    <TextBlock FontWeight="Bold"
+                                                               Foreground="Green"
+                                                               Text="Export réussi !" />
+                                                    <TextBlock Text="{Binding ExportPath, StringFormat='Résultats enregistrés ici : {0}'}"
+                                                               TextWrapping="Wrap" />
+                                                    <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_OpenExportFolder]}"
+                                                            Command="{Binding OpenAndSelectTodayExportFileCommand}" />
+                                                </ui:SimpleStackPanel>
+                                            </Border>
                                             <ui:SimpleStackPanel Orientation="Horizontal"
                                                                  HorizontalAlignment="Center"
-                                                                 Spacing="8">
+                                                                 Spacing="8"
+                                                                 Margin="0,16,0,0">
+                                                <Button Content="Nouvel export"
+                                                        Command="{Binding ReExportCommand}"
+                                                        Visibility="{Binding CanReExport}" />
                                                 <Button Content="Nouvelle expérience"
                                                         Command="{Binding NewExperimentCommand}" />
                                                 <Button Content="Quitter l'application"
@@ -104,7 +118,7 @@
                                             <Button Content="Exporter"
                                                     Command="{Binding ExportCommand}" />
                                             <Button Content="Annuler"
-                                                    Command="{Binding QuitCommand}" />
+                                                    Command="{Binding CancelCommand}" />
                                         </ui:SimpleStackPanel>
                                     </DataTemplate>
                                 </Setter.Value>
