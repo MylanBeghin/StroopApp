@@ -39,13 +39,6 @@ public class StroopViewModel : ViewModelBase
 	private TaskCompletionSource<double> _inputTcs;
 	private readonly Stopwatch _responseTime;
 	private readonly Stopwatch _wordTimer;
-	private readonly Stopwatch _fixationTimer;
-	private readonly Stopwatch _amorceTimer;
-	private readonly DispatcherTimer _displayTimer;
-
-	public double FixationTimerMs => _fixationTimer.Elapsed.TotalMilliseconds;
-	public double AmorceTimerMs => _amorceTimer.Elapsed.TotalMilliseconds;
-	public double WordTimerMs => _wordTimer.Elapsed.TotalMilliseconds;
 	private readonly INavigationService _navigationService;
 	private readonly Random random = new Random();
 
@@ -55,18 +48,6 @@ public class StroopViewModel : ViewModelBase
 		_navigationService = navigationService;
 		_responseTime = new Stopwatch();
 		_wordTimer = new Stopwatch();
-		_fixationTimer = new Stopwatch();
-		_amorceTimer = new Stopwatch();
-
-		_displayTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1) };
-		_displayTimer.Tick += (_, _) =>
-		{
-			OnPropertyChanged(nameof(FixationTimerMs));
-			OnPropertyChanged(nameof(AmorceTimerMs));
-			OnPropertyChanged(nameof(WordTimerMs));
-		};
-		_displayTimer.Start();
-
 		GenerateTrials();
 		StartTrials();
 	}
@@ -163,20 +144,11 @@ public class StroopViewModel : ViewModelBase
 			Settings.ExperimentContext.CurrentTrial = trial;
 
 			CurrentControl = new FixationCrossControl();
-			_fixationTimer.Restart();
-			trial.FixationStartTime = DateTime.UtcNow;
 			await Task.Delay(Settings.CurrentProfile.FixationDuration);
-			_fixationTimer.Stop();
-			trial.FixationTimerDurationMs = _fixationTimer.Elapsed.TotalMilliseconds;
-
 			if (Settings.CurrentProfile.IsAmorce)
 			{
 				CurrentControl = new AmorceControl(trial.Amorce);
-				_amorceTimer.Restart();
-				trial.AmorceStartTime = DateTime.UtcNow;
 				await Task.Delay(Settings.CurrentProfile.AmorceDuration);
-				_amorceTimer.Stop();
-				trial.AmorceTimerDurationMs = _amorceTimer.Elapsed.TotalMilliseconds;
 			}
 
 			var wordControl = new WordControl(trial.Stimulus.Text, trial.Stimulus.Color);
@@ -186,7 +158,6 @@ public class StroopViewModel : ViewModelBase
 			{
 				_responseTime.Restart();
 				_wordTimer.Restart();
-				trial.WordStartTime = DateTime.UtcNow;
 				_inputTcs = new TaskCompletionSource<double>();
 			}), DispatcherPriority.Render);
 
@@ -214,25 +185,6 @@ public class StroopViewModel : ViewModelBase
 				await Task.Delay((int)remaining);
 
 			_wordTimer.Stop();
-			trial.WordTimerDurationMs = _wordTimer.Elapsed.TotalMilliseconds;
-			trial.WordEndTime = DateTime.UtcNow;
-
-			// compute actual durations based on timestamps
-			if (Settings.CurrentProfile.IsAmorce)
-			{
-				if (trial.AmorceStartTime.HasValue && trial.FixationStartTime.HasValue)
-					trial.DurationFixation_ClockMs = (trial.AmorceStartTime.Value - trial.FixationStartTime.Value).TotalMilliseconds;
-				if (trial.WordStartTime.HasValue && trial.AmorceStartTime.HasValue)
-					trial.DurationAmorce_ClockMs = (trial.WordStartTime.Value - trial.AmorceStartTime.Value).TotalMilliseconds;
-			}
-			else
-			{
-				if (trial.WordStartTime.HasValue && trial.FixationStartTime.HasValue)
-					trial.DurationFixation_ClockMs = (trial.WordStartTime.Value - trial.FixationStartTime.Value).TotalMilliseconds;
-				trial.DurationAmorce_ClockMs = null;
-			}
-			if (trial.WordEndTime.HasValue && trial.WordStartTime.HasValue)
-				trial.DurationWord_ClockMs = (trial.WordEndTime.Value - trial.WordStartTime.Value).TotalMilliseconds;
 		}
 
 		EndBlock();

@@ -367,3 +367,4 @@ FodyWeavers.xsd
 /StroopApp/obj/
 /StroopApp.XUnitTests/bin/
 /StroopApp.XUnitTests/obj/
+/ViewModel for clarity, and updated OnPropertyChanged usage.

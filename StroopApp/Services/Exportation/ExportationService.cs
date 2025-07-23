@@ -86,22 +86,22 @@ namespace StroopApp.Services.Exportation
 
 			using var wb = new XLWorkbook();
 			var ws = wb.Worksheets.Add("Export");
-                        ws.Cell(1, 1).Value = "Numéro du participant";
-                        ws.Cell(1, 2).Value = "Congruence";
-                        ws.Cell(1, 3).Value = "Amorce ?";
-                        ws.Cell(1, 4).Value = "Bloc";
-                        ws.Cell(1, 5).Value = "Réponse attendue";
-                        ws.Cell(1, 6).Value = "Réponse donnée";
-                        ws.Cell(1, 7).Value = "Validité de la réponse";
-                        ws.Cell(1, 8).Value = "Temps de réaction";
-                        ws.Cell(1, 9).Value = "Essai";
-                        ws.Cell(1, 10).Value = "Type d'amorce";
-                        ws.Cell(1, 11).Value = "DurationFixation_ClockMs";
-                        ws.Cell(1, 12).Value = "DurationAmorce_ClockMs";
-                        ws.Cell(1, 13).Value = "DurationWord_ClockMs";
-                        ws.Cell(1, 14).Value = "FixationTimerDurationMs";
-                        ws.Cell(1, 15).Value = "AmorceTimerDurationMs";
-                        ws.Cell(1, 16).Value = "WordTimerDurationMs";
+			ws.Cell(1, 1).Value = "Numéro du participant";
+			ws.Cell(1, 2).Value = "Congruence";
+			ws.Cell(1, 3).Value = "Amorce ?";
+			ws.Cell(1, 4).Value = "Bloc";
+			ws.Cell(1, 5).Value = "Réponse attendue";
+			ws.Cell(1, 6).Value = "Réponse donnée";
+			ws.Cell(1, 7).Value = "Validité de la réponse";
+			ws.Cell(1, 8).Value = "Temps de réaction";
+			ws.Cell(1, 9).Value = "Essai";
+			ws.Cell(1, 10).Value = "Type d'amorce";
+			ws.Cell(1, 11).Value = "DurationFixation_ClockMs";
+			ws.Cell(1, 12).Value = "DurationAmorce_ClockMs";
+			ws.Cell(1, 13).Value = "DurationWord_ClockMs";
+			ws.Cell(1, 14).Value = "FixationTimerDurationMs";
+			ws.Cell(1, 15).Value = "AmorceTimerDurationMs";
+			ws.Cell(1, 16).Value = "WordTimerDurationMs";
 
 			var row = 2;
 			foreach (var block in _settings.ExperimentContext.Blocks)
@@ -122,31 +122,14 @@ namespace StroopApp.Services.Exportation
 
 					ws.Cell(row, 8).Value = r.ReactionTime;
 					ws.Cell(row, 9).Value = r.TrialNumber;
-                                        ws.Cell(row, 10).Value = r.Amorce switch
-                                        {
-                                                AmorceType.Square => "Carré",
-                                                AmorceType.Round => "Cercle",
-                                                _ => ""
-                                        };
-                                        double? durFix = r.DurationFixation_ClockMs;
-                                        double? durAmorce = r.DurationAmorce_ClockMs;
-                                        double? durWord = r.DurationWord_ClockMs;
-
-                                        if (!durFix.HasValue && r.FixationStartTime.HasValue && r.AmorceStartTime.HasValue)
-                                                durFix = (r.AmorceStartTime.Value - r.FixationStartTime.Value).TotalMilliseconds;
-                                        if (!durAmorce.HasValue && r.AmorceStartTime.HasValue && r.WordStartTime.HasValue)
-                                                durAmorce = (r.WordStartTime.Value - r.AmorceStartTime.Value).TotalMilliseconds;
-                                        if (!durWord.HasValue && r.WordStartTime.HasValue && r.WordEndTime.HasValue)
-                                                durWord = (r.WordEndTime.Value - r.WordStartTime.Value).TotalMilliseconds;
-
-                                        ws.Cell(row, 11).Value = durFix;
-                                        ws.Cell(row, 12).Value = durAmorce;
-                                        ws.Cell(row, 13).Value = durWord;
-                                        ws.Cell(row, 14).Value = r.FixationTimerDurationMs;
-                                        ws.Cell(row, 15).Value = r.AmorceTimerDurationMs;
-                                        ws.Cell(row, 16).Value = r.WordTimerDurationMs;
-                                        row++;
-                                }
+					ws.Cell(row, 10).Value = r.Amorce switch
+					{
+						AmorceType.Square => "Carré",
+						AmorceType.Round => "Cercle",
+						_ => ""
+					};
+					row++;
+				}
 
 
 			wb.SaveAs(filePath);
