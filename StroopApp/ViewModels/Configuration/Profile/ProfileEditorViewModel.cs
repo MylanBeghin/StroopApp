@@ -4,6 +4,7 @@ using System.Windows.Input;
 
 using StroopApp.Core;
 using StroopApp.Models;
+using StroopApp.Resources;
 using StroopApp.Services;
 
 namespace StroopApp.ViewModels.Configuration.Profile
@@ -97,38 +98,38 @@ namespace StroopApp.ViewModels.Configuration.Profile
 		{
 			if (string.IsNullOrWhiteSpace(Profile.ProfileName))
 			{
-				ShowErrorDialog("Le nom du profil ne peut pas être vide ou contenir uniquement des espaces.");
+				ShowErrorDialog(Strings.Error_ProfileNameEmpty);
 				return;
 			}
 
 			if (Profiles.Any(p => p.Id != Profile.Id && p.ProfileName == Profile.ProfileName))
 			{
-				ShowErrorDialog("Un profil avec ce nom existe déjà. Veuillez choisir un autre nom.");
+				ShowErrorDialog(Strings.Error_ProfileNameExists);
 				return;
 			}
 
 			if (Profile.WordDuration <= 0 || Profile.TaskDuration % Profile.WordDuration != 0)
 			{
-				ShowErrorDialog("La durée du mot doit être positive et TaskDuration doit être divisible par WordDuration.");
+				ShowErrorDialog(Strings.Error_MaxReactionTimeInvalid);
 				return;
 			}
 
 			int wordNumber = Profile.TaskDuration / Profile.WordDuration;
 			if (Profile.GroupSize <= 0 || wordNumber % Profile.GroupSize != 0)
 			{
-				ShowErrorDialog("La taille du groupe doit être positive et diviser le nombre de mots.");
+				ShowErrorDialog(Strings.Error_GroupSizeInvalid);
 				return;
 			}
 
 			if (Profile.AmorceDuration == 0 && Profile.IsAmorce)
 			{
-				ShowErrorDialog("Le temps d'amorce est doit être supérieur à 0 !");
+				ShowErrorDialog(Strings.Error_AmorceDurationInvalid);
 				return;
 			}
 
 			if (Profile.MaxReactionTime <= 0)
 			{
-				ShowErrorDialog("Le temps de réaction maximum doit être positif.");
+				ShowErrorDialog(Strings.Error_MaxReactionTimeInvalid);
 				return;
 			}
 			var updatedProfiles = _IprofileService.UpsertProfile(Profile);

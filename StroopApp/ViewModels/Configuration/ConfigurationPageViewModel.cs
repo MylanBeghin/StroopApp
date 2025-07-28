@@ -3,6 +3,7 @@ using System.Windows.Input;
 
 using StroopApp.Core;
 using StroopApp.Models;
+using StroopApp.Resources;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.Configuration.Participant;
@@ -58,13 +59,13 @@ namespace StroopApp.ViewModels.Configuration
 
 			if (_settings.CurrentProfile == null)
 			{
-				ShowErrorDialog("Veuillez sélectionner un profil d'expérience.");
+				ShowErrorDialog(Strings.Error_SelectProfile);
 				return;
 			}
 
 			if (_settings.Participant == null)
 			{
-				ShowErrorDialog("Veuillez sélectionner un participant.");
+				ShowErrorDialog(Strings.Error_SelectParticipant);
 				return;
 			}
 

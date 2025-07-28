@@ -6,7 +6,10 @@ using System.Windows;
 
 using CommunityToolkit.Mvvm.Input;
 
-public class AdvancedSettingsWindowViewModel : INotifyPropertyChanged
+using StroopApp.Core;
+using StroopApp.Resources;
+
+public class AdvancedSettingsWindowViewModel : ViewModelBase
 {
 	public ObservableCollection<string> SerialPorts { get; } = new();
 	public ObservableCollection<int> BaudRates { get; } = new() { 9600, 19200, 38400, 57600, 115200 };
@@ -72,7 +75,7 @@ public class AdvancedSettingsWindowViewModel : INotifyPropertyChanged
 
 	public bool IsPortSelected => !string.IsNullOrWhiteSpace(SelectedPort);
 
-	private string _connectionStatus = "Déconnecté";
+	private string _connectionStatus = Strings.Label_Disconnected;
 	public string ConnectionStatus
 	{
 		get => _connectionStatus;
@@ -86,7 +89,7 @@ public class AdvancedSettingsWindowViewModel : INotifyPropertyChanged
 		}
 	}
 
-	private string _connectButtonText = "Se connecter";
+	private string _connectButtonText = Strings.Button_Connect;
 	public string ConnectButtonText
 	{
 		get => _connectButtonText;
@@ -157,11 +160,11 @@ public class AdvancedSettingsWindowViewModel : INotifyPropertyChanged
 
 	public AdvancedSettingsWindowViewModel()
 	{
-		RefreshCommand = new RelayCommand(RefreshSerialPorts);
-		ConnectCommand = new RelayCommand(ConnectOrDisconnect);
-		SendCommand = new RelayCommand(SendMessage, CanSendMessage);
-		CopyLogCommand = new RelayCommand(CopyLogToClipboard);
-		ClearLogCommand = new RelayCommand(ClearLog);
+		RefreshCommand = new CommunityToolkit.Mvvm.Input.RelayCommand(RefreshSerialPorts);
+		ConnectCommand = new CommunityToolkit.Mvvm.Input.RelayCommand(ConnectOrDisconnect);
+		SendCommand = new CommunityToolkit.Mvvm.Input.RelayCommand(SendMessage, CanSendMessage);
+		CopyLogCommand = new CommunityToolkit.Mvvm.Input.RelayCommand(CopyLogToClipboard);
+		ClearLogCommand = new CommunityToolkit.Mvvm.Input.RelayCommand(ClearLog);
 
 
 		RefreshSerialPorts();
@@ -193,7 +196,7 @@ public class AdvancedSettingsWindowViewModel : INotifyPropertyChanged
 		{
 			if (string.IsNullOrEmpty(SelectedPort))
 			{
-				MessageBox.Show("Aucun port sélectionné.");
+				ShowErrorDialog(Strings.Error_NoPortSelected);
 				return;
 			}
 
@@ -202,12 +205,13 @@ public class AdvancedSettingsWindowViewModel : INotifyPropertyChanged
 				_serialPort = new SerialPort(SelectedPort, SelectedBaudRate, SelectedParity, 8, SelectedStopBits);
 				_serialPort.DataReceived += SerialPort_DataReceived;
 				_serialPort.Open();
-				ConnectionStatus = $"Connecté à {SelectedPort}";
-				ConnectButtonText = "Se déconnecter";
+				ConnectionStatus = string.Format(Strings.Label_PortConnected, SelectedPort);
+				ConnectButtonText = Strings.Button_Disconnect;
+
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Erreur lors de la connexion : {ex.Message}");
+				ShowErrorDialog(string.Format(Strings.Error_ConnectionError, ex.Message));
 			}
 		}
 		else
@@ -217,15 +221,15 @@ public class AdvancedSettingsWindowViewModel : INotifyPropertyChanged
 				_serialPort.DataReceived -= SerialPort_DataReceived;
 				_serialPort.Close();
 				_serialPort = null;
-				ConnectionStatus = "Déconnecté";
-				ConnectButtonText = "Se connecter";
+				ConnectionStatus = Strings.Label_Disconnected;
+				ConnectButtonText = Strings.Button_Connect;
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Erreur lors de la déconnexion : {ex.Message}");
+				ShowErrorDialog(string.Format(Strings.Error_DisconnectionError, ex.Message));
 			}
-		}
 
+		}
 		// Toujours notifier le changement de possibilité d’envoi !
 		SendCommand.NotifyCanExecuteChanged();
 	}
@@ -246,7 +250,7 @@ public class AdvancedSettingsWindowViewModel : INotifyPropertyChanged
 		{
 			Application.Current.Dispatcher.Invoke(() =>
 			{
-				MessageLog += $"[ERREUR] {ex.Message}{Environment.NewLine}";
+				MessageLog += $"[ERROR] {ex.Message}{Environment.NewLine}";
 			});
 		}
 	}
@@ -263,7 +267,7 @@ public class AdvancedSettingsWindowViewModel : INotifyPropertyChanged
 			}
 			catch (Exception ex)
 			{
-				MessageLog += $"[ERREUR] {ex.Message}{Environment.NewLine}";
+				MessageLog += $"[ERROR] {ex.Message}{Environment.NewLine}";
 			}
 		}
 	}
@@ -282,8 +286,4 @@ public class AdvancedSettingsWindowViewModel : INotifyPropertyChanged
 	{
 		MessageLog = string.Empty;
 	}
-	public event PropertyChangedEventHandler PropertyChanged;
-
-	protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-		=> PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }

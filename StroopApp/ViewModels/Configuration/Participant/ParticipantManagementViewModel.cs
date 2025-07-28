@@ -6,6 +6,7 @@ using System.Windows.Input;
 using ModernWpf.Controls;
 
 using StroopApp.Core;
+using StroopApp.Resources;
 using StroopApp.Services.Participant;
 using StroopApp.Views.Participant;
 
@@ -113,7 +114,7 @@ namespace StroopApp.ViewModels.Configuration.Participant
 		{
 			if (SelectedParticipant == null)
 			{
-				ShowErrorDialog("Veuillez sélectionner un participant à modifier !");
+				ShowErrorDialog(Strings.Error_SelectParticipantToModify);
 				return;
 			}
 			var viewModel = new ParticipantEditorViewModel(SelectedParticipant, Participants, _participantService);
@@ -133,22 +134,15 @@ namespace StroopApp.ViewModels.Configuration.Participant
 		{
 			if (SelectedParticipant == null)
 			{
-				ShowErrorDialog("Veuillez sélectionner un participant à supprimer !");
+				ShowErrorDialog(Strings.Error_SelectParticipantToDelete);
 				return;
 			}
-
-			var dlg = new ContentDialog
+			if (await ConfirmationDialog(Strings.Message_DeleteParticipantConfirmation))
 			{
-				Title = "Confirmation de suppression",
-				Content = "Voulez-vous vraiment supprimer ce participant ? Ses données seront archivées.",
-				PrimaryButtonText = "Supprimer",
-				CloseButtonText = "Annuler"
-			};
-			if (await dlg.ShowAsync() != ContentDialogResult.Primary)
-				return;
-
-			_participantService.DeleteParticipant(Participants, SelectedParticipant.Id);
-			SelectedParticipant = Participants.FirstOrDefault();
+				_participantService.DeleteParticipant(Participants, SelectedParticipant.Id);
+				SelectedParticipant = Participants.FirstOrDefault();
+			}
+			return;
 		}
 	}
 }

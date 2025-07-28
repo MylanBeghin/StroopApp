@@ -3,6 +3,8 @@ using System.Runtime.CompilerServices;
 
 using ModernWpf.Controls;
 
+using StroopApp.Resources;
+
 namespace StroopApp.Core
 {
 	/// <summary>
@@ -26,5 +28,17 @@ namespace StroopApp.Core
 
 			await dialog.ShowAsync();
 		}
+		public async Task<bool> ConfirmationDialog(string message)
+		{
+			var dlg = new ContentDialog
+			{
+				Title = Strings.Title_DeleteConfirmation,
+				Content = message,
+				PrimaryButtonText = Strings.Button_Delete,
+				CloseButtonText = Strings.Button_Cancel
+			};
+			return await dlg.ShowAsync() == ContentDialogResult.Primary;
+		}
+
 	}
 }

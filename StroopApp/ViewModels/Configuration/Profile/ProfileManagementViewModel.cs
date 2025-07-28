@@ -5,6 +5,7 @@ using ModernWpf.Controls;
 
 using StroopApp.Core;
 using StroopApp.Models;
+using StroopApp.Resources;
 using StroopApp.Services;
 using StroopApp.Views;
 
@@ -82,7 +83,7 @@ namespace StroopApp.ViewModels.Configuration.Profile
 		{
 			if (CurrentProfile == null)
 			{
-				ShowErrorDialog("Veuillez sélectionner un profil à modifier !");
+				ShowErrorDialog(Strings.Error_SelectProfileToModify);
 				return;
 			}
 			var viewModel = new ProfileEditorViewModel(CurrentProfile, Profiles, _profileService);
@@ -100,29 +101,24 @@ namespace StroopApp.ViewModels.Configuration.Profile
 		{
 			if (CurrentProfile == null)
 			{
-				ShowErrorDialog("Veuillez sélectionner un profil à supprimer !");
+				ShowErrorDialog(Strings.Error_SelectProfileToDelete);
 				return;
 			}
-			var dlg = new ContentDialog
+			if (await ConfirmationDialog(Strings.Message_DeleteProfileConfirmation))
 			{
-				Title = "Confirmation de suppression",
-				Content = "Voulez-vous vraiment supprimer ce profil ?",
-				PrimaryButtonText = "Supprimer",
-				CloseButtonText = "Annuler"
-			};
-			if (await dlg.ShowAsync() != ContentDialogResult.Primary)
-				return;
-			int currentIndex = Profiles.IndexOf(_currentProfile);
-			_profileService.DeleteProfile(_currentProfile, Profiles);
+				int currentIndex = Profiles.IndexOf(_currentProfile);
+				_profileService.DeleteProfile(_currentProfile, Profiles);
 
-			if (Profiles.Count > 0)
-			{
-				CurrentProfile = Profiles[0];
+				if (Profiles.Count > 0)
+				{
+					CurrentProfile = Profiles[0];
+				}
+				else
+				{
+					CurrentProfile = null;
+				}
 			}
-			else
-			{
-				CurrentProfile = null;
-			}
+			return;
 		}
 	}
 }

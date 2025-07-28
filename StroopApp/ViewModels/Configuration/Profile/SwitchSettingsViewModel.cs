@@ -21,7 +21,7 @@ public class SwitchSettingsViewModel : ViewModelBase
 			}
 		}
 	}
-	private string _dominantForm = "Rond";
+	private string _dominantForm = "Circle";
 	public string DominantForm
 	{
 		get => _dominantForm;
@@ -78,7 +78,7 @@ public class SwitchSettingsViewModel : ViewModelBase
 		}
 	}
 
-	public ObservableCollection<string> DominantForms { get; } = new() { "Carré", "Rond" };
+	public ObservableCollection<string> DominantForms { get; } = new() { "Square", "Circle" };
 
 	public string SwitchPreview => GeneratePreview();
 
@@ -98,14 +98,14 @@ public class SwitchSettingsViewModel : ViewModelBase
 		int total = 20;
 		int dominantTotal = (int)(total * DominantPercent / 100.0);
 		int otherTotal = total - dominantTotal;
-		string dominantSymbol = DominantForm == "Carré" ? "■" : "●";
-		string otherSymbol = DominantForm == "Carré" ? "●" : "■";
+		string dominantSymbol = DominantForm == "Square" ? "■" : "●";
+		string otherSymbol = DominantForm == "Square" ? "●" : "■";
 
 		string lastForm = DominantForm;
 		int currentDominant = 1;
 		int currentOther = 0;
 		var preview = new StringBuilder();
-		preview.Append(lastForm == "Carré" ? "■" : "●").Append(" ");
+		preview.Append(lastForm == "Square" ? "■" : "●").Append(" ");
 
 		for (int i = 1; i < total; i++)
 		{
@@ -118,17 +118,17 @@ public class SwitchSettingsViewModel : ViewModelBase
 				{
 					nextForm = otherSymbol;
 					currentOther++;
-					lastForm = otherSymbol == "■" ? "Carré" : "Rond";
+					lastForm = otherSymbol == "■" ? "Square" : "Circle";
 				}
 				else if (lastForm != DominantForm && currentDominant < dominantTotal)
 				{
 					nextForm = dominantSymbol;
 					currentDominant++;
-					lastForm = dominantSymbol == "■" ? "Carré" : "Rond";
+					lastForm = dominantSymbol == "■" ? "Square" : "Circle";
 				}
 				else
 				{
-					nextForm = lastForm == "Carré" ? "■" : "●";
+					nextForm = lastForm == "Square" ? "■" : "●";
 					if (lastForm == DominantForm)
 						currentDominant++;
 					else
@@ -154,7 +154,7 @@ public class SwitchSettingsViewModel : ViewModelBase
 						currentDominant++;
 					else
 						currentOther++;
-					lastForm = nextForm == "■" ? "Carré" : "Rond";
+					lastForm = nextForm == "■" ? "Square" : "Circle";
 				}
 			}
 			preview.Append(nextForm).Append(" ");

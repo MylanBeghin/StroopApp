@@ -3,6 +3,7 @@ using System.Windows.Input;
 
 using StroopApp.Core;
 using StroopApp.Models;
+using StroopApp.Resources;
 using StroopApp.Services.Participant;
 
 namespace StroopApp.ViewModels.Configuration.Participant
@@ -100,12 +101,13 @@ namespace StroopApp.ViewModels.Configuration.Participant
 				double.IsNaN(Participant.Height.Value) ||
 				double.IsInfinity(Participant.Height.Value))
 			{
-				ShowErrorDialog("Veuillez remplir correctement tous les champs obligatoires.");
+				ShowErrorDialog(Strings.Error_FillRequiredFieldsProperly
+);
 				return;
 			}
 			if (Participants.Any(p => p.Id == Participant.Id && p != Participant))
 			{
-				ShowErrorDialog("Cet identifiant est déjà utilisé pour un autre participant");
+				ShowErrorDialog(Strings.Error_ParticipantIdAlreadyUsed);
 				return;
 			}
 
