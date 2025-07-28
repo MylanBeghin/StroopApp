@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0"
-                       Text="{Binding Source={StaticResource Loc}, Path=[EndExperiment_BlockFinished]}"
+                       Text="{Binding Source={StaticResource Loc}, Path=[Label_EndExperiment_BlockFinished]}"
                        Style="{DynamicResource HeaderTextBlockStyle}"
                        VerticalAlignment="Center" />
 
@@ -49,7 +49,7 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0"
-                           Text="{Binding Source={StaticResource Loc}, Path=[EndExperiment_BlockSummary]}"
+                           Text="{Binding Source={StaticResource Loc}, Path=[Label_EndExperiment_BlockSummary]}"
                            Style="{DynamicResource TitleTextBlockStyle}"
                            Margin="0,0,0,12" />
                 <Border Grid.Row="3"
@@ -77,7 +77,7 @@
                                                 Binding="{Binding TotalTrials}" />
                             <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_Accuracy]}"
                                                 Binding="{Binding Accuracy, StringFormat={}{0}%}" />
-                            <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_MeanReactionTime]}"
+                            <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_MeanResponseTime]}"
                                                 Binding="{Binding ResponseTimeMean, StringFormat={}{0} ms}" />
                             <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_StroopType]}"
                                                 Binding="{Binding StroopType}" />

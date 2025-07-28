@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         ui:WindowHelper.UseModernWindowStyle="True">
     <ui:SimpleStackPanel Margin="12" Spacing="12">
-        <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ParticipantEditorWindow_Title]}" Style="{StaticResource TitleTextBlockStyle}"/>
+        <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Title_ParticipantEditorWindow]}" Style="{StaticResource TitleTextBlockStyle}"/>
         <TextBox ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Field_ID]}" 
             Text="{Binding Participant.Id, Mode=TwoWay}" />
         <Grid>

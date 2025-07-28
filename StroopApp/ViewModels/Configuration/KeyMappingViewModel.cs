@@ -67,16 +67,16 @@ namespace StroopApp.ViewModels.Configuration
 		{
 			switch (color)
 			{
-				case "Rouge":
+				case "Red":
 				EditingMapping = Mappings.Red;
 				break;
-				case "Bleu":
+				case "Blue":
 				EditingMapping = Mappings.Blue;
 				break;
-				case "Vert":
+				case "Green":
 				EditingMapping = Mappings.Green;
 				break;
-				case "Jaune":
+				case "Yellow":
 				EditingMapping = Mappings.Yellow;
 				break;
 				default:

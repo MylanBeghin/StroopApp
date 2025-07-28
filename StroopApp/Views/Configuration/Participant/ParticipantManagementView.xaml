@@ -25,7 +25,7 @@
             </Grid.RowDefinitions>
             <ui:SimpleStackPanel Grid.Row="0"
                                  Spacing="10">
-                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ParticipantManagement_Title]}"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Title_ParticipantManagement]}"
                            Style="{StaticResource TitleTextBlockStyle}" />
                 <Grid HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
@@ -33,7 +33,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0"
-                               Text="{Binding Source={StaticResource Loc}, Path=[ParticipantManagement_Description]}"
+                               Text="{Binding Source={StaticResource Loc}, Path=[Description_ParticipantManagement]}"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Center" />
                     <ui:SimpleStackPanel Grid.Column="1"
@@ -62,7 +62,7 @@
                                              Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                                              Padding="34,6,0,0" />
                                     <TextBlock IsHitTestVisible="False"
-                                               Text="{Binding Source={StaticResource Loc}, Path=[Search_Placeholder]}"
+                                               Text="{Binding Source={StaticResource Loc}, Path=[Placeholder_Search]}"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Left"
                                                Margin="34,0,0,0"

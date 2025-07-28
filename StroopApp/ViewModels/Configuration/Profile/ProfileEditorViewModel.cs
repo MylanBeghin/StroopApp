@@ -110,7 +110,7 @@ namespace StroopApp.ViewModels.Configuration.Profile
 
 			if (Profile.WordDuration <= 0 || Profile.TaskDuration % Profile.WordDuration != 0)
 			{
-				ShowErrorDialog(Strings.Error_MaxReactionTimeInvalid);
+				ShowErrorDialog(Strings.Error_MaxResponseTimeInvalid);
 				return;
 			}
 
@@ -129,7 +129,7 @@ namespace StroopApp.ViewModels.Configuration.Profile
 
 			if (Profile.MaxReactionTime <= 0)
 			{
-				ShowErrorDialog(Strings.Error_MaxReactionTimeInvalid);
+				ShowErrorDialog(Strings.Error_MaxResponseTimeInvalid);
 				return;
 			}
 			var updatedProfiles = _IprofileService.UpsertProfile(Profile);

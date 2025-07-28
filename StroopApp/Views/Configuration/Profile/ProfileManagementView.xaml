@@ -24,9 +24,9 @@
                 BorderThickness="0.5"
                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
             <ui:SimpleStackPanel Spacing="10">
-                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ProfileManagement_Title]}"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Title_ProfileManagement]}"
                            Style="{DynamicResource TitleTextBlockStyle}" />
-                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ProfileManagement_Description]}"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Description_ParticipantManagement]}"
                            Style="{DynamicResource CaptionTextBlockStyle}" />
                 <ui:SimpleStackPanel Orientation="Horizontal"
                                      HorizontalAlignment="Left"
@@ -56,7 +56,7 @@
                 BorderThickness="0.5"
                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
             <ui:SimpleStackPanel Spacing="10">
-                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ProfileManagement_DetailsTitle]}"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Title_ExperimentDetails]}"
                            Style="{DynamicResource TitleTextBlockStyle}" />
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
@@ -127,7 +127,7 @@
                     </Grid>
                     <TextBox Grid.Column="3"
                              Text="{Binding CurrentProfile.MaxReactionTime}"
-                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_MaxReactionTime]}"
+                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_MaxResponseTime]}"
                              Style="{DynamicResource ModernReadOnlyTextBoxStyle}" />
                     <TextBox Grid.Column="4"
                              Text="{Binding CurrentProfile.WordDuration}"

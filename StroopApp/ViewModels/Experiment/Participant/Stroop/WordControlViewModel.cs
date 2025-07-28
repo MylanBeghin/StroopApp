@@ -38,16 +38,16 @@ namespace StroopApp.ViewModels.Experiment.Participant.Stroop
 			switch (label)
 			{
 				case "Blue":
-				Label = "Bleu";
+				Label = "Blue";
 				break;
 				case "Red":
-				Label = "Rouge";
+				Label = "Red";
 				break;
 				case "Green":
-				Label = "Vert";
+				Label = "Green";
 				break;
 				case "Yellow":
-				Label = "Jaune";
+				Label = "Yellow";
 				break;
 			}
 			Color = color;

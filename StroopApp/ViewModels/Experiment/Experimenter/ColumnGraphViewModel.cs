@@ -41,7 +41,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
 			{
 				true => Strings.Label_ResponseCorrect,
 				false => Strings.Label_ResponseIncorrect,
-				_ => Strings.Label_ReactionValidityUnknown
+				_ => Strings.Label_ResponseValidityUnknown
 
 			};
 

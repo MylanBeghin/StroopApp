@@ -34,11 +34,11 @@
                     <!-- Rond (%) -->
                 </Grid.ColumnDefinitions>
                 <!-- Labels des pourcentages -->
-                <TextBlock Text="Carré (%)"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Label_SquarePercentage]}"
                            HorizontalAlignment="Left"
                            Grid.Row="0"
                            Grid.Column="0" />
-                <TextBlock Text=" Rond (%)"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Label_CirclePercentage]}"
                            HorizontalAlignment="Left"
                            Grid.Row="0"
                            Grid.Column="4" />
@@ -106,7 +106,7 @@
             <!-- Preview -->
             <TextBox Text="{Binding SwitchPreview, Mode=OneWay}"
                      Style="{StaticResource ModernReadOnlyTextBoxStyle}"
-                     ui:ControlHelper.Header="Aperçu :" />
+                     ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Label_Overview]}" />
         </ui:SimpleStackPanel>
     </Border>
 </UserControl>
