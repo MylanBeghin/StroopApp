@@ -22,7 +22,7 @@ namespace StroopApp.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
+    public class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace StroopApp.Resources {
         ///   Retourne l'instance ResourceManager mise en cache utilisée par cette classe.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("StroopApp.Resources.Strings", typeof(Strings).Assembly);
@@ -51,7 +51,7 @@ namespace StroopApp.Resources {
         ///   les recherches de ressources à l'aide de cette classe de ressource fortement typée.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,16 +63,25 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à StroopApp.
         /// </summary>
-        internal static string App_Title {
+        public static string App_Title {
             get {
                 return ResourceManager.GetString("App_Title", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Advanced settings.
+        /// </summary>
+        public static string Button_AdvancedSettings {
+            get {
+                return ResourceManager.GetString("Button_AdvancedSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Browse.
         /// </summary>
-        internal static string Button_Browse {
+        public static string Button_Browse {
             get {
                 return ResourceManager.GetString("Button_Browse", resourceCulture);
             }
@@ -81,25 +90,52 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Cancel.
         /// </summary>
-        internal static string Button_Cancel {
+        public static string Button_Cancel {
             get {
                 return ResourceManager.GetString("Button_Cancel", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Clear.
+        /// </summary>
+        public static string Button_Clear {
+            get {
+                return ResourceManager.GetString("Button_Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Connect.
+        /// </summary>
+        public static string Button_Connect {
+            get {
+                return ResourceManager.GetString("Button_Connect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Continue.
         /// </summary>
-        internal static string Button_Continue {
+        public static string Button_Continue {
             get {
                 return ResourceManager.GetString("Button_Continue", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Copy.
+        /// </summary>
+        public static string Button_Copy {
+            get {
+                return ResourceManager.GetString("Button_Copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Create.
         /// </summary>
-        internal static string Button_Create {
+        public static string Button_Create {
             get {
                 return ResourceManager.GetString("Button_Create", resourceCulture);
             }
@@ -108,16 +144,25 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Delete.
         /// </summary>
-        internal static string Button_Delete {
+        public static string Button_Delete {
             get {
                 return ResourceManager.GetString("Button_Delete", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Disconnect.
+        /// </summary>
+        public static string Button_Disconnect {
+            get {
+                return ResourceManager.GetString("Button_Disconnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Edit.
         /// </summary>
-        internal static string Button_Edit {
+        public static string Button_Edit {
             get {
                 return ResourceManager.GetString("Button_Edit", resourceCulture);
             }
@@ -126,241 +171,250 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Start Experiment.
         /// </summary>
-        internal static string Button_LaunchExperiment {
+        public static string Button_LaunchExperiment {
             get {
                 return ResourceManager.GetString("Button_LaunchExperiment", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Edit.
-        /// </summary>
-        internal static string Button_Modify {
-            get {
-                return ResourceManager.GetString("Button_Modify", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à New experiment.
         /// </summary>
-        internal static string Button_NewExperiment {
+        public static string Button_NewExperiment {
             get {
                 return ResourceManager.GetString("Button_NewExperiment", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à OK.
+        /// </summary>
+        public static string Button_OK {
+            get {
+                return ResourceManager.GetString("Button_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Quit application.
         /// </summary>
-        internal static string Button_Quit {
+        public static string Button_Quit {
             get {
                 return ResourceManager.GetString("Button_Quit", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Refresh.
+        /// </summary>
+        public static string Button_Refresh {
+            get {
+                return ResourceManager.GetString("Button_Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Save.
         /// </summary>
-        internal static string Button_Save {
+        public static string Button_Save {
             get {
                 return ResourceManager.GetString("Button_Save", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Add prime.
+        ///   Recherche une chaîne localisée semblable à Send.
         /// </summary>
-        internal static string Check_AddPrime {
+        public static string Button_Send {
             get {
-                return ResourceManager.GetString("Check_AddPrime", resourceCulture);
+                return ResourceManager.GetString("Button_Send", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à No response.
+        ///   Recherche une chaîne localisée semblable à Blue.
         /// </summary>
-        internal static string Column_NoResponse {
+        public static string Color_Blue {
             get {
-                return ResourceManager.GetString("Column_NoResponse", resourceCulture);
+                return ResourceManager.GetString("Color_Blue", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Experiment Configuration.
+        ///   Recherche une chaîne localisée semblable à Green.
         /// </summary>
-        internal static string ConfigPage_Title {
+        public static string Color_Green {
             get {
-                return ResourceManager.GetString("ConfigPage_Title", resourceCulture);
+                return ResourceManager.GetString("Color_Green", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Current experiment dashboard.
+        ///   Recherche une chaîne localisée semblable à Red.
         /// </summary>
-        internal static string Dashboard_Title {
+        public static string Color_Red {
             get {
-                return ResourceManager.GetString("Dashboard_Title", resourceCulture);
+                return ResourceManager.GetString("Color_Red", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Cancel.
+        ///   Recherche une chaîne localisée semblable à Yellow.
         /// </summary>
-        internal static string DeleteConfirmation_Close {
+        public static string Color_Yellow {
             get {
-                return ResourceManager.GetString("DeleteConfirmation_Close", resourceCulture);
+                return ResourceManager.GetString("Color_Yellow", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Do you really want to delete this participant? Their data will be archived..
+        ///   Recherche une chaîne localisée semblable à Select the export folder for your results.
         /// </summary>
-        internal static string DeleteConfirmation_Message {
+        public static string Description_ExportFolderDialog {
             get {
-                return ResourceManager.GetString("DeleteConfirmation_Message", resourceCulture);
+                return ResourceManager.GetString("Description_ExportFolderDialog", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Delete.
+        ///   Recherche une chaîne localisée semblable à Select the export folder for the results..
         /// </summary>
-        internal static string DeleteConfirmation_Primary {
+        public static string Description_ExportFolderSelector {
             get {
-                return ResourceManager.GetString("DeleteConfirmation_Primary", resourceCulture);
+                return ResourceManager.GetString("Description_ExportFolderSelector", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Delete confirmation.
+        ///   Recherche une chaîne localisée semblable à Select the keys associated with the colors..
         /// </summary>
-        internal static string DeleteConfirmation_Title {
+        public static string Description_KeyMapping {
             get {
-                return ResourceManager.GetString("DeleteConfirmation_Title", resourceCulture);
+                return ResourceManager.GetString("Description_KeyMapping", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à OK.
+        ///   Recherche une chaîne localisée semblable à Select a participant to start the experiment..
         /// </summary>
-        internal static string Dialog_OK {
+        public static string Description_ParticipantManagement {
             get {
-                return ResourceManager.GetString("Dialog_OK", resourceCulture);
+                return ResourceManager.GetString("Description_ParticipantManagement", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Block completed.
+        ///   Recherche une chaîne localisée semblable à Select the profile to configure your experiment..
         /// </summary>
-        internal static string EndExperiment_BlockFinished {
+        public static string Description_ProfileManagement {
             get {
-                return ResourceManager.GetString("EndExperiment_BlockFinished", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Block summary.
-        /// </summary>
-        internal static string EndExperiment_BlockSummary {
-            get {
-                return ResourceManager.GetString("EndExperiment_BlockSummary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Participant no. {0}.
-        /// </summary>
-        internal static string EndExperiment_CurrentParticipant {
-            get {
-                return ResourceManager.GetString("EndExperiment_CurrentParticipant", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Task : {0}.
-        /// </summary>
-        internal static string EndExperiment_CurrentProfile {
-            get {
-                return ResourceManager.GetString("EndExperiment_CurrentProfile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Congratulations! You have completed the experiment..
-        /// </summary>
-        internal static string EndInstructions_Message {
-            get {
-                return ResourceManager.GetString("EndInstructions_Message", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à End of experiment.
-        /// </summary>
-        internal static string EndInstructions_Title {
-            get {
-                return ResourceManager.GetString("EndInstructions_Title", resourceCulture);
+                return ResourceManager.GetString("Description_ProfileManagement", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Prime time must be greater than 0!.
         /// </summary>
-        internal static string Error_AmorceTimeInvalid {
+        public static string Error_AmorceDurationInvalid {
             get {
-                return ResourceManager.GetString("Error_AmorceTimeInvalid", resourceCulture);
+                return ResourceManager.GetString("Error_AmorceDurationInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error during connection: {0}.
+        /// </summary>
+        public static string Error_ConnectionError {
+            get {
+                return ResourceManager.GetString("Error_ConnectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error during disconnection: {0}.
+        /// </summary>
+        public static string Error_DisconnectionError {
+            get {
+                return ResourceManager.GetString("Error_DisconnectionError", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à This identifier is already used for another participant..
         /// </summary>
-        internal static string Error_DuplicateParticipantId {
+        public static string Error_DuplicateParticipantId {
             get {
                 return ResourceManager.GetString("Error_DuplicateParticipantId", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please fill out all required fields correctly..
+        /// </summary>
+        public static string Error_FillRequiredFieldsProperly {
+            get {
+                return ResourceManager.GetString("Error_FillRequiredFieldsProperly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Group size must be positive and divide the number of words..
         /// </summary>
-        internal static string Error_GroupSizeInvalid {
+        public static string Error_GroupSizeInvalid {
             get {
                 return ResourceManager.GetString("Error_GroupSizeInvalid", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Maximum reaction time must be positive..
+        ///   Recherche une chaîne localisée semblable à This key is already used. Please choose another one..
         /// </summary>
-        internal static string Error_MaxReactionInvalid {
+        public static string Error_KeyMappingKeyUsed {
             get {
-                return ResourceManager.GetString("Error_MaxReactionInvalid", resourceCulture);
+                return ResourceManager.GetString("Error_KeyMappingKeyUsed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Maximum response time must be positive..
+        /// </summary>
+        public static string Error_MaxResponseTimeInvalid {
+            get {
+                return ResourceManager.GetString("Error_MaxResponseTimeInvalid", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à No export folder configured..
         /// </summary>
-        internal static string Error_NoExportFolder {
+        public static string Error_NoExportFolder {
             get {
                 return ResourceManager.GetString("Error_NoExportFolder", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Please fill in all required participant fields correctly..
+        ///   Recherche une chaîne localisée semblable à No port selected..
         /// </summary>
-        internal static string Error_ParticipantFieldsInvalid {
+        public static string Error_NoPortSelected {
             get {
-                return ResourceManager.GetString("Error_ParticipantFieldsInvalid", resourceCulture);
+                return ResourceManager.GetString("Error_NoPortSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à This identifier is already in use for another participant..
+        /// </summary>
+        public static string Error_ParticipantIdAlreadyUsed {
+            get {
+                return ResourceManager.GetString("Error_ParticipantIdAlreadyUsed", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Profile name cannot be empty or whitespace..
         /// </summary>
-        internal static string Error_ProfileNameEmpty {
+        public static string Error_ProfileNameEmpty {
             get {
                 return ResourceManager.GetString("Error_ProfileNameEmpty", resourceCulture);
             }
@@ -369,7 +423,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à A profile with this name already exists. Choose another name..
         /// </summary>
-        internal static string Error_ProfileNameExists {
+        public static string Error_ProfileNameExists {
             get {
                 return ResourceManager.GetString("Error_ProfileNameExists", resourceCulture);
             }
@@ -378,7 +432,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Please select a participant..
         /// </summary>
-        internal static string Error_SelectParticipant {
+        public static string Error_SelectParticipant {
             get {
                 return ResourceManager.GetString("Error_SelectParticipant", resourceCulture);
             }
@@ -387,7 +441,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Please select a participant to delete!.
         /// </summary>
-        internal static string Error_SelectParticipantToDelete {
+        public static string Error_SelectParticipantToDelete {
             get {
                 return ResourceManager.GetString("Error_SelectParticipantToDelete", resourceCulture);
             }
@@ -396,7 +450,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Please select a participant to modify!.
         /// </summary>
-        internal static string Error_SelectParticipantToModify {
+        public static string Error_SelectParticipantToModify {
             get {
                 return ResourceManager.GetString("Error_SelectParticipantToModify", resourceCulture);
             }
@@ -405,7 +459,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Please select an experiment profile..
         /// </summary>
-        internal static string Error_SelectProfile {
+        public static string Error_SelectProfile {
             get {
                 return ResourceManager.GetString("Error_SelectProfile", resourceCulture);
             }
@@ -414,7 +468,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Please select a profile to delete!.
         /// </summary>
-        internal static string Error_SelectProfileToDelete {
+        public static string Error_SelectProfileToDelete {
             get {
                 return ResourceManager.GetString("Error_SelectProfileToDelete", resourceCulture);
             }
@@ -423,7 +477,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Please select a profile to modify!.
         /// </summary>
-        internal static string Error_SelectProfileToModify {
+        public static string Error_SelectProfileToModify {
             get {
                 return ResourceManager.GetString("Error_SelectProfileToModify", resourceCulture);
             }
@@ -432,7 +486,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Error.
         /// </summary>
-        internal static string Error_Title {
+        public static string Error_Title {
             get {
                 return ResourceManager.GetString("Error_Title", resourceCulture);
             }
@@ -441,89 +495,16 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Word duration must be positive and divide task duration..
         /// </summary>
-        internal static string Error_WordDurationInvalid {
+        public static string Error_WordDurationInvalid {
             get {
                 return ResourceManager.GetString("Error_WordDurationInvalid", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Experiment details.
-        /// </summary>
-        internal static string ExperimentDetails_Title {
-            get {
-                return ResourceManager.GetString("ExperimentDetails_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Stroop Experiment.
-        /// </summary>
-        internal static string ExperimentWindow_Title {
-            get {
-                return ResourceManager.GetString("ExperimentWindow_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à File saved:
-        ///{0}.
-        /// </summary>
-        internal static string Export_Completed_Message {
-            get {
-                return ResourceManager.GetString("Export_Completed_Message", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Export completed.
-        /// </summary>
-        internal static string Export_Completed_Title {
-            get {
-                return ResourceManager.GetString("Export_Completed_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Select the export folder for your results.
-        /// </summary>
-        internal static string ExportFolderDialog_Description {
-            get {
-                return ResourceManager.GetString("ExportFolderDialog_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Select the export folder for the results..
-        /// </summary>
-        internal static string ExportFolderSelector_Description {
-            get {
-                return ResourceManager.GetString("ExportFolderSelector_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Results folder:.
-        /// </summary>
-        internal static string ExportFolderSelector_PathLabel {
-            get {
-                return ResourceManager.GetString("ExportFolderSelector_PathLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Results folder selection.
-        /// </summary>
-        internal static string ExportFolderSelector_Title {
-            get {
-                return ResourceManager.GetString("ExportFolderSelector_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Age.
         /// </summary>
-        internal static string Field_Age {
+        public static string Field_Age {
             get {
                 return ResourceManager.GetString("Field_Age", resourceCulture);
             }
@@ -532,7 +513,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Gender.
         /// </summary>
-        internal static string Field_Gender {
+        public static string Field_Gender {
             get {
                 return ResourceManager.GetString("Field_Gender", resourceCulture);
             }
@@ -541,7 +522,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Group size.
         /// </summary>
-        internal static string Field_GroupSize {
+        public static string Field_GroupSize {
             get {
                 return ResourceManager.GetString("Field_GroupSize", resourceCulture);
             }
@@ -550,7 +531,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Height (cm).
         /// </summary>
-        internal static string Field_Height {
+        public static string Field_Height {
             get {
                 return ResourceManager.GetString("Field_Height", resourceCulture);
             }
@@ -559,7 +540,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à ID.
         /// </summary>
-        internal static string Field_ID {
+        public static string Field_ID {
             get {
                 return ResourceManager.GetString("Field_ID", resourceCulture);
             }
@@ -568,7 +549,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Profile name.
         /// </summary>
-        internal static string Field_ProfileName {
+        public static string Field_ProfileName {
             get {
                 return ResourceManager.GetString("Field_ProfileName", resourceCulture);
             }
@@ -577,7 +558,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Sex.
         /// </summary>
-        internal static string Field_Sex {
+        public static string Field_Sex {
             get {
                 return ResourceManager.GetString("Field_Sex", resourceCulture);
             }
@@ -586,7 +567,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Weight (kg).
         /// </summary>
-        internal static string Field_Weight {
+        public static string Field_Weight {
             get {
                 return ResourceManager.GetString("Field_Weight", resourceCulture);
             }
@@ -595,25 +576,16 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Word count.
         /// </summary>
-        internal static string Field_WordCount {
+        public static string Field_WordCount {
             get {
                 return ResourceManager.GetString("Field_WordCount", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Experiment tracking.
-        /// </summary>
-        internal static string GraphsView_Title {
-            get {
-                return ResourceManager.GetString("GraphsView_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Accuracy.
         /// </summary>
-        internal static string Header_Accuracy {
+        public static string Header_Accuracy {
             get {
                 return ResourceManager.GetString("Header_Accuracy", resourceCulture);
             }
@@ -622,7 +594,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Block.
         /// </summary>
-        internal static string Header_Block {
+        public static string Header_Block {
             get {
                 return ResourceManager.GetString("Header_Block", resourceCulture);
             }
@@ -631,7 +603,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Congruence (%).
         /// </summary>
-        internal static string Header_Congruence {
+        public static string Header_Congruence {
             get {
                 return ResourceManager.GetString("Header_Congruence", resourceCulture);
             }
@@ -640,7 +612,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Fixation duration (ms).
         /// </summary>
-        internal static string Header_FixationDuration {
+        public static string Header_FixationDuration {
             get {
                 return ResourceManager.GetString("Header_FixationDuration", resourceCulture);
             }
@@ -649,34 +621,34 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Hours.
         /// </summary>
-        internal static string Header_Hours {
+        public static string Header_Hours {
             get {
                 return ResourceManager.GetString("Header_Hours", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Max reaction time (ms).
+        ///   Recherche une chaîne localisée semblable à Max response time (ms).
         /// </summary>
-        internal static string Header_MaxReactionTime {
+        public static string Header_MaxResponseTime {
             get {
-                return ResourceManager.GetString("Header_MaxReactionTime", resourceCulture);
+                return ResourceManager.GetString("Header_MaxResponseTime", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Average response time.
         /// </summary>
-        internal static string Header_MeanReactionTime {
+        public static string Header_MeanResponseTime {
             get {
-                return ResourceManager.GetString("Header_MeanReactionTime", resourceCulture);
+                return ResourceManager.GetString("Header_MeanResponseTime", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Minutes.
         /// </summary>
-        internal static string Header_Minutes {
+        public static string Header_Minutes {
             get {
                 return ResourceManager.GetString("Header_Minutes", resourceCulture);
             }
@@ -685,7 +657,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Participant ID.
         /// </summary>
-        internal static string Header_ParticipantId {
+        public static string Header_ParticipantId {
             get {
                 return ResourceManager.GetString("Header_ParticipantId", resourceCulture);
             }
@@ -694,25 +666,43 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Prime duration (ms).
         /// </summary>
-        internal static string Header_PrimeDuration {
+        public static string Header_PrimeDuration {
             get {
                 return ResourceManager.GetString("Header_PrimeDuration", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Response time (ms).
+        /// </summary>
+        public static string Header_ResponseTime {
+            get {
+                return ResourceManager.GetString("Header_ResponseTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Seconds.
         /// </summary>
-        internal static string Header_Seconds {
+        public static string Header_Seconds {
             get {
                 return ResourceManager.GetString("Header_Seconds", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Serial ports.
+        /// </summary>
+        public static string Header_SerialPorts {
+            get {
+                return ResourceManager.GetString("Header_SerialPorts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Stroop type.
         /// </summary>
-        internal static string Header_StroopType {
+        public static string Header_StroopType {
             get {
                 return ResourceManager.GetString("Header_StroopType", resourceCulture);
             }
@@ -721,7 +711,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Switch (%).
         /// </summary>
-        internal static string Header_Switch {
+        public static string Header_Switch {
             get {
                 return ResourceManager.GetString("Header_Switch", resourceCulture);
             }
@@ -730,7 +720,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Trial duration (ms).
         /// </summary>
-        internal static string Header_TrialDuration {
+        public static string Header_TrialDuration {
             get {
                 return ResourceManager.GetString("Header_TrialDuration", resourceCulture);
             }
@@ -739,7 +729,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Trials.
         /// </summary>
-        internal static string Header_Trials {
+        public static string Header_Trials {
             get {
                 return ResourceManager.GetString("Header_Trials", resourceCulture);
             }
@@ -748,70 +738,106 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Word duration (ms).
         /// </summary>
-        internal static string Header_WordDuration {
+        public static string Header_WordDuration {
             get {
                 return ResourceManager.GetString("Header_WordDuration", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Select the keys associated with the colors..
+        ///   Recherche une chaîne localisée semblable à Add prime.
         /// </summary>
-        internal static string KeyMapping_Description {
+        public static string Label_AddPrime {
             get {
-                return ResourceManager.GetString("KeyMapping_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Edit mapping for {0}.
-        /// </summary>
-        internal static string KeyMapping_DialogTitle {
-            get {
-                return ResourceManager.GetString("KeyMapping_DialogTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à This key is already used. Please choose another one..
-        /// </summary>
-        internal static string KeyMapping_ErrorKeyUsed {
-            get {
-                return ResourceManager.GetString("KeyMapping_ErrorKeyUsed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Press a key to define the mapping. Press Esc to cancel..
-        /// </summary>
-        internal static string KeyMapping_Prompt {
-            get {
-                return ResourceManager.GetString("KeyMapping_Prompt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Key mapping.
-        /// </summary>
-        internal static string KeyMapping_Title {
-            get {
-                return ResourceManager.GetString("KeyMapping_Title", resourceCulture);
+                return ResourceManager.GetString("Label_AddPrime", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Calculation mode.
         /// </summary>
-        internal static string Label_CalculationMode {
+        public static string Label_CalculationMode {
             get {
                 return ResourceManager.GetString("Label_CalculationMode", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Label_Circle (%).
+        /// </summary>
+        public static string Label_CirclePercentage {
+            get {
+                return ResourceManager.GetString("Label_CirclePercentage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Participant no. {0}.
+        /// </summary>
+        public static string Label_CurrentParticipant {
+            get {
+                return ResourceManager.GetString("Label_CurrentParticipant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Task: {0}.
+        /// </summary>
+        public static string Label_CurrentProfile {
+            get {
+                return ResourceManager.GetString("Label_CurrentProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Disconnected.
+        /// </summary>
+        public static string Label_Disconnected {
+            get {
+                return ResourceManager.GetString("Label_Disconnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Block completed.
+        /// </summary>
+        public static string Label_EndExperiment_BlockFinished {
+            get {
+                return ResourceManager.GetString("Label_EndExperiment_BlockFinished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Block summary.
+        /// </summary>
+        public static string Label_EndExperiment_BlockSummary {
+            get {
+                return ResourceManager.GetString("Label_EndExperiment_BlockSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Exchange history.
+        /// </summary>
+        public static string Label_ExchangeHistory {
+            get {
+                return ResourceManager.GetString("Label_ExchangeHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Results folder:.
+        /// </summary>
+        public static string Label_ExportFolderSelector_PathLabel {
+            get {
+                return ResourceManager.GetString("Label_ExportFolderSelector_PathLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Key associated with the blue color:.
         /// </summary>
-        internal static string Label_KeyBlue {
+        public static string Label_KeyBlue {
             get {
                 return ResourceManager.GetString("Label_KeyBlue", resourceCulture);
             }
@@ -820,7 +846,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Key associated with the green color:.
         /// </summary>
-        internal static string Label_KeyGreen {
+        public static string Label_KeyGreen {
             get {
                 return ResourceManager.GetString("Label_KeyGreen", resourceCulture);
             }
@@ -829,7 +855,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Key associated with the red color:.
         /// </summary>
-        internal static string Label_KeyRed {
+        public static string Label_KeyRed {
             get {
                 return ResourceManager.GetString("Label_KeyRed", resourceCulture);
             }
@@ -838,7 +864,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Key associated with the yellow color:.
         /// </summary>
-        internal static string Label_KeyYellow {
+        public static string Label_KeyYellow {
             get {
                 return ResourceManager.GetString("Label_KeyYellow", resourceCulture);
             }
@@ -847,25 +873,133 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Average for words {0}–{1}:.
         /// </summary>
-        internal static string LiveAverage_Label {
+        public static string Label_LiveAverage {
             get {
-                return ResourceManager.GetString("LiveAverage_Label", resourceCulture);
+                return ResourceManager.GetString("Label_LiveAverage", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à No valid data.
         /// </summary>
-        internal static string LiveAverage_NoData {
+        public static string Label_LiveAverageNoData {
             get {
-                return ResourceManager.GetString("LiveAverage_NoData", resourceCulture);
+                return ResourceManager.GetString("Label_LiveAverageNoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à No response.
+        /// </summary>
+        public static string Label_NoResponse {
+            get {
+                return ResourceManager.GetString("Label_NoResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Overview :.
+        /// </summary>
+        public static string Label_Overview {
+            get {
+                return ResourceManager.GetString("Label_Overview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Parity.
+        /// </summary>
+        public static string Label_Parity {
+            get {
+                return ResourceManager.GetString("Label_Parity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Connected to {0}.
+        /// </summary>
+        public static string Label_PortConnected {
+            get {
+                return ResourceManager.GetString("Label_PortConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Correct.
+        /// </summary>
+        public static string Label_ResponseCorrect {
+            get {
+                return ResourceManager.GetString("Label_ResponseCorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Incorrect.
+        /// </summary>
+        public static string Label_ResponseIncorrect {
+            get {
+                return ResourceManager.GetString("Label_ResponseIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Response time: {0:N0} ms.
+        /// </summary>
+        public static string Label_ResponseTime {
+            get {
+                return ResourceManager.GetString("Label_ResponseTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Validity unknown.
+        /// </summary>
+        public static string Label_ResponseValidityUnknown {
+            get {
+                return ResourceManager.GetString("Label_ResponseValidityUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à List of ports.
+        /// </summary>
+        public static string Label_SerialPortsList {
+            get {
+                return ResourceManager.GetString("Label_SerialPortsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Square (%).
+        /// </summary>
+        public static string Label_SquarePercentage {
+            get {
+                return ResourceManager.GetString("Label_SquarePercentage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Stop bits.
+        /// </summary>
+        public static string Label_StopBits {
+            get {
+                return ResourceManager.GetString("Label_StopBits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Trial: {0}.
+        /// </summary>
+        public static string Label_TrialNumber {
+            get {
+                return ResourceManager.GetString("Label_TrialNumber", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Display.
         /// </summary>
-        internal static string Menu_Display {
+        public static string Menu_Display {
             get {
                 return ResourceManager.GetString("Menu_Display", resourceCulture);
             }
@@ -874,106 +1008,71 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Languages.
         /// </summary>
-        internal static string Menu_Languages {
+        public static string Menu_Languages {
             get {
                 return ResourceManager.GetString("Menu_Languages", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Participant details.
+        ///   Recherche une chaîne localisée semblable à Do you really want to delete this participant? Their data will be archived..
         /// </summary>
-        internal static string ParticipantDetails_Title {
+        public static string Message_DeleteParticipantConfirmation {
             get {
-                return ResourceManager.GetString("ParticipantDetails_Title", resourceCulture);
+                return ResourceManager.GetString("Message_DeleteParticipantConfirmation", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Edit participant.
+        ///   Recherche une chaîne localisée semblable à Do you really want to delete this profile?.
         /// </summary>
-        internal static string ParticipantEditorWindow_Title {
+        public static string Message_DeleteProfileConfirmation {
             get {
-                return ResourceManager.GetString("ParticipantEditorWindow_Title", resourceCulture);
+                return ResourceManager.GetString("Message_DeleteProfileConfirmation", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Select a participant to start the experiment..
+        ///   Recherche une chaîne localisée semblable à Congratulations! You have completed the experiment..
         /// </summary>
-        internal static string ParticipantManagement_Description {
+        public static string Message_EndInstructions {
             get {
-                return ResourceManager.GetString("ParticipantManagement_Description", resourceCulture);
+                return ResourceManager.GetString("Message_EndInstructions", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Select participant.
+        ///   Recherche une chaîne localisée semblable à File saved:
+        ///{0}.
         /// </summary>
-        internal static string ParticipantManagement_Title {
+        public static string Message_Export_Completed {
             get {
-                return ResourceManager.GetString("ParticipantManagement_Title", resourceCulture);
+                return ResourceManager.GetString("Message_Export_Completed", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Participant Window.
+        ///   Recherche une chaîne localisée semblable à Press a key to define the mapping. Press Esc to cancel..
         /// </summary>
-        internal static string ParticipantWindow_Title {
+        public static string Message_KeyMapping {
             get {
-                return ResourceManager.GetString("ParticipantWindow_Title", resourceCulture);
+                return ResourceManager.GetString("Message_KeyMapping", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Edit profile.
+        ///   Recherche une chaîne localisée semblable à Search....
         /// </summary>
-        internal static string ProfileEditorWindow_Title {
+        public static string Placeholder_Search {
             get {
-                return ResourceManager.GetString("ProfileEditorWindow_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Select the profile to configure your experiment..
-        /// </summary>
-        internal static string ProfileManagement_Description {
-            get {
-                return ResourceManager.GetString("ProfileManagement_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Selected profile details.
-        /// </summary>
-        internal static string ProfileManagement_DetailsTitle {
-            get {
-                return ResourceManager.GetString("ProfileManagement_DetailsTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Select task profile.
-        /// </summary>
-        internal static string ProfileManagement_Title {
-            get {
-                return ResourceManager.GetString("ProfileManagement_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Progress.
-        /// </summary>
-        internal static string Progress_Title {
-            get {
-                return ResourceManager.GetString("Progress_Title", resourceCulture);
+                return ResourceManager.GetString("Placeholder_Search", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Based on task duration.
         /// </summary>
-        internal static string Radio_TaskDuration {
+        public static string Radio_TaskDuration {
             get {
                 return ResourceManager.GetString("Radio_TaskDuration", resourceCulture);
             }
@@ -982,52 +1081,187 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Based on word count.
         /// </summary>
-        internal static string Radio_WordCount {
+        public static string Radio_WordCount {
             get {
                 return ResourceManager.GetString("Radio_WordCount", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Correct.
+        ///   Recherche une chaîne localisée semblable à Experiment Configuration.
         /// </summary>
-        internal static string Reaction_Correct {
+        public static string Title_ConfigPage {
             get {
-                return ResourceManager.GetString("Reaction_Correct", resourceCulture);
+                return ResourceManager.GetString("Title_ConfigPage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Incorrect.
+        ///   Recherche une chaîne localisée semblable à Current experiment dashboard.
         /// </summary>
-        internal static string Reaction_Incorrect {
+        public static string Title_Dashboard {
             get {
-                return ResourceManager.GetString("Reaction_Incorrect", resourceCulture);
+                return ResourceManager.GetString("Title_Dashboard", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à No response.
+        ///   Recherche une chaîne localisée semblable à Delete confirmation.
         /// </summary>
-        internal static string Reaction_None {
+        public static string Title_DeleteConfirmation {
             get {
-                return ResourceManager.GetString("Reaction_None", resourceCulture);
+                return ResourceManager.GetString("Title_DeleteConfirmation", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Search....
+        ///   Recherche une chaîne localisée semblable à End of experiment.
         /// </summary>
-        internal static string Search_Placeholder {
+        public static string Title_EndInstructions {
             get {
-                return ResourceManager.GetString("Search_Placeholder", resourceCulture);
+                return ResourceManager.GetString("Title_EndInstructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Experiment details.
+        /// </summary>
+        public static string Title_ExperimentDetails {
+            get {
+                return ResourceManager.GetString("Title_ExperimentDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Stroop Experiment.
+        /// </summary>
+        public static string Title_ExperimentWindow {
+            get {
+                return ResourceManager.GetString("Title_ExperimentWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Export completed.
+        /// </summary>
+        public static string Title_Export_Completed {
+            get {
+                return ResourceManager.GetString("Title_Export_Completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Results folder selection.
+        /// </summary>
+        public static string Title_ExportFolderSelector {
+            get {
+                return ResourceManager.GetString("Title_ExportFolderSelector", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Experiment tracking.
+        /// </summary>
+        public static string Title_GraphsView {
+            get {
+                return ResourceManager.GetString("Title_GraphsView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Key mapping.
+        /// </summary>
+        public static string Title_KeyMapping {
+            get {
+                return ResourceManager.GetString("Title_KeyMapping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Edit mapping for {0}.
+        /// </summary>
+        public static string Title_KeyMappingDialog {
+            get {
+                return ResourceManager.GetString("Title_KeyMappingDialog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Participant details.
+        /// </summary>
+        public static string Title_ParticipantDetails {
+            get {
+                return ResourceManager.GetString("Title_ParticipantDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Edit participant.
+        /// </summary>
+        public static string Title_ParticipantEditorWindow {
+            get {
+                return ResourceManager.GetString("Title_ParticipantEditorWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select participant.
+        /// </summary>
+        public static string Title_ParticipantManagement {
+            get {
+                return ResourceManager.GetString("Title_ParticipantManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Participant Window.
+        /// </summary>
+        public static string Title_ParticipantWindow {
+            get {
+                return ResourceManager.GetString("Title_ParticipantWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Edit profile.
+        /// </summary>
+        public static string Title_ProfileEditorWindow {
+            get {
+                return ResourceManager.GetString("Title_ProfileEditorWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select task profile.
+        /// </summary>
+        public static string Title_ProfileManagement {
+            get {
+                return ResourceManager.GetString("Title_ProfileManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Selected profile details.
+        /// </summary>
+        public static string Title_ProfileManagementDetails {
+            get {
+                return ResourceManager.GetString("Title_ProfileManagementDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Progress.
+        /// </summary>
+        public static string Title_Progress {
+            get {
+                return ResourceManager.GetString("Title_Progress", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Off.
         /// </summary>
-        internal static string Toggle_Off {
+        public static string Toggle_Off {
             get {
                 return ResourceManager.GetString("Toggle_Off", resourceCulture);
             }
@@ -1036,7 +1270,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à On.
         /// </summary>
-        internal static string Toggle_On {
+        public static string Toggle_On {
             get {
                 return ResourceManager.GetString("Toggle_On", resourceCulture);
             }
@@ -1045,7 +1279,7 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Defines the proportion of congruent words in the block. A word is congruent when its meaning matches its color (e.g. the word Red written in red). Example: 25% = 75% incongruent, 25% congruent..
         /// </summary>
-        internal static string Tooltip_Congruence {
+        public static string Tooltip_Congruence {
             get {
                 return ResourceManager.GetString("Tooltip_Congruence", resourceCulture);
             }
@@ -1054,9 +1288,18 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Defines how often the prime shape changes between two trials. A switch is a transition from square to circle or vice versa. Example: 100% = alternation each trial, 0% = always the same shape..
         /// </summary>
-        internal static string Tooltip_Switch {
+        public static string Tooltip_Switch {
             get {
                 return ResourceManager.GetString("Tooltip_Switch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à {0:N0} ms.
+        /// </summary>
+        public static string Value_LiveAverage {
+            get {
+                return ResourceManager.GetString("Value_LiveAverage", resourceCulture);
             }
         }
     }

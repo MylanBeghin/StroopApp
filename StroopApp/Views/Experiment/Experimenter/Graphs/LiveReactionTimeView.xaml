@@ -97,21 +97,21 @@
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
                                             <Setter Property="Text"
-                                                    Value="Aucune réponse" />
+                                                    Value="{Binding Source={StaticResource Loc}, Path=[Label_NoResponse]}" />
                                             <Setter Property="Foreground"
                                                     Value="Black" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding IsValidResponse}"
                                                              Value="True">
                                                     <Setter Property="Text"
-                                                            Value="Correct" />
+                                                            Value="{Binding Source={StaticResource Loc}, Path=[Label_ResponseCorrect]}" />
                                                     <Setter Property="Foreground"
                                                             Value="#5B2EFF" />
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding IsValidResponse}"
                                                              Value="False">
                                                     <Setter Property="Text"
-                                                            Value="Incorrect" />
+                                                            Value="{Binding Source={StaticResource Loc}, Path=[Label_ResponseIncorrect]}" />
                                                     <Setter Property="Foreground"
                                                             Value="#FFA600" />
                                                 </DataTrigger>

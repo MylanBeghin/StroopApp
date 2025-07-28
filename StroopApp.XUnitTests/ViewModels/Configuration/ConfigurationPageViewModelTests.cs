@@ -1,4 +1,5 @@
 ﻿using StroopApp.Models;
+using StroopApp.Resources;
 using StroopApp.ViewModels.Configuration;
 using StroopApp.ViewModels.Configuration.Participant;
 using StroopApp.ViewModels.Configuration.Profile;
@@ -86,7 +87,7 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 
 			// Assert
 			Assert.True(viewModel.ErrorDialogShown);
-			Assert.Equal("Veuillez sélectionner un profil d'expérience.", viewModel.LastErrorMessage);
+			Assert.Equal(Strings.Error_SelectProfile, viewModel.LastErrorMessage);
 			Assert.False(dummyNavigationService.Navigated);
 			Assert.False(dummyWindowManager.ShowCalled);
 		}
@@ -124,7 +125,7 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 
 			// Assert
 			Assert.True(viewModel.ErrorDialogShown);
-			Assert.Equal("Veuillez sélectionner un participant.", viewModel.LastErrorMessage);
+			Assert.Equal(Strings.Error_SelectParticipant, viewModel.LastErrorMessage);
 			Assert.False(dummyNavigationService.Navigated);
 			Assert.False(dummyWindowManager.ShowCalled);
 		}

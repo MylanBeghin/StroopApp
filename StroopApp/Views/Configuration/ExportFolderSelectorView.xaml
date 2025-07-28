@@ -8,9 +8,9 @@
             BorderThickness="0.5"
             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
         <ui:SimpleStackPanel Spacing="12" VerticalAlignment="Stretch">
-            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ExportFolderSelector_Title]}"
+            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Title_ExportFolderSelector]}"
                    Style="{StaticResource TitleTextBlockStyle}" />
-            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ExportFolderSelector_Description]}" />
+            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Description_ExportFolderSelector]}" />
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -18,7 +18,7 @@
                 </Grid.RowDefinitions>
                 <!-- Header simple -->
                 <TextBlock Grid.Row="0"
-                           Text="{Binding Source={StaticResource Loc}, Path=[ExportFolderSelector_PathLabel]}"
+                           Text="{Binding Source={StaticResource Loc}, Path=[Label_ExportFolderSelector_PathLabel]}"
                            Style="{DynamicResource BodyTextBlockStyle}"
                            HorizontalAlignment="Left"
                            Margin="0,0,0,4" />

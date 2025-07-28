@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
         <!-- Titre -->
         <TextBlock Grid.Row="0"
-                   Text="Ports SERIAL"
+                   Text="{Binding Source={StaticResource Loc}, Path=[Header_SerialPorts]}"
                    Style="{StaticResource TitleTextBlockStyle}" />
         <!-- Bloc options port + connexion -->
         <Border Grid.Row="2"
@@ -51,7 +51,7 @@
                     <RowDefinition Height="8" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBlock Text="Liste des ports"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Label_SerialPortsList]}"
                            Grid.Row="0"
                            Grid.Column="0" />
                 <ComboBox ItemsSource="{Binding SerialPorts}"
@@ -59,7 +59,7 @@
                           HorizontalAlignment="Stretch"
                           Grid.Row="2"
                           Grid.Column="0" />
-                <Button Content="Rafraîchir"
+                <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Refresh]}"
                         Command="{Binding RefreshCommand }"
                         Grid.Row="2"
                         Grid.Column="2" />
@@ -73,7 +73,7 @@
                           Grid.Column="0"
                           HorizontalAlignment="Stretch"
                           IsEnabled="{Binding IsPortSelected}" />
-                <TextBlock Text="Parité"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Label_Parity]}"
                            Grid.Row="4"
                            Grid.Column="2" />
                 <ComboBox ItemsSource="{Binding Parities}"
@@ -82,7 +82,7 @@
                           Grid.Column="2"
                           HorizontalAlignment="Stretch"
                           IsEnabled="{Binding IsPortSelected}" />
-                <TextBlock Text="Bits de stop"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Label_StopBits]}"
                            Grid.Row="4"
                            Grid.Column="4" />
                 <ComboBox ItemsSource="{Binding StopBitsOptions}"
@@ -119,12 +119,12 @@
                                      DockPanel.Dock="Top"
                                      Spacing="8"
                                      Margin="0,0,0,4">
-                    <TextBlock Text="Historique des échanges"
+                    <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Label_ExchangeHistory]}"
                                VerticalAlignment="Center" />
-                    <Button Content="Copier"
+                    <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Copy]}"
                             Command="{Binding CopyLogCommand}"
                             MinWidth="80" />
-                    <Button Content="Effacer"
+                    <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Clear]}"
                             Command="{Binding ClearLogCommand}"
                             MinWidth="80" />
                 </ui:SimpleStackPanel>
@@ -148,7 +148,7 @@
             <TextBox Text="{Binding MessageToSend, UpdateSourceTrigger=PropertyChanged}"
                      Width="400"
                      MinWidth="100" />
-            <Button Content="Envoyer"
+            <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Send]}"
                     Command="{Binding SendCommand}"
                     Style="{StaticResource AccentButtonStyle}"
                     IsDefault="True"/>

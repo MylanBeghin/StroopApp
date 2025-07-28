@@ -34,7 +34,7 @@
 
 	<ItemGroup>
 	  <EmbeddedResource Update="Resources\Strings.resx">
-	    <Generator>ResXFileCodeGenerator</Generator>
+	    <Generator>PublicResXFileCodeGenerator</Generator>
 	    <CustomToolNamespace>StroopApp.Resources</CustomToolNamespace>
 	    <LastGenOutput>Strings.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
