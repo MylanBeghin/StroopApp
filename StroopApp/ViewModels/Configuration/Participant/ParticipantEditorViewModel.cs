@@ -76,7 +76,6 @@ namespace StroopApp.ViewModels.Configuration.Participant
 			SaveCommand = new RelayCommand(Save);
 			CancelCommand = new RelayCommand(Cancel);
 		}
-
 		private Models.Participant CloneParticipant(Models.Participant p)
 		{
 			return new Models.Participant
@@ -92,15 +91,9 @@ namespace StroopApp.ViewModels.Configuration.Participant
 
 		private void Save()
 		{
-			if (!Participant.Age.HasValue ||
-				!Participant.Weight.HasValue ||
-				!Participant.Height.HasValue ||
-				double.IsNaN(Participant.Weight.Value) ||
-				double.IsInfinity(Participant.Weight.Value) ||
-				double.IsNaN(Participant.Height.Value) ||
-				double.IsInfinity(Participant.Height.Value))
+			if (string.IsNullOrWhiteSpace(Participant.Id))
 			{
-				ShowErrorDialog("Veuillez remplir correctement tous les champs obligatoires.");
+				ShowErrorDialog(Strings.Error_FillIdField);
 				return;
 			}
 			if (Participants.Any(p => p.Id == Participant.Id && p != Participant))

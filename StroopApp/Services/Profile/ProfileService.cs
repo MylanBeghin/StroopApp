@@ -94,8 +94,15 @@ namespace StroopApp.Services.Profile
 			if (File.Exists(_lastProfileFile))
 			{
 				var text = File.ReadAllText(_lastProfileFile);
-				if (Guid.TryParse(text, out var id))
+				try
+				{
+					var id = JsonSerializer.Deserialize<Guid>(text);
 					return id;
+				}
+				catch
+				{
+					return null;
+				}
 			}
 			return null;
 		}
@@ -103,7 +110,8 @@ namespace StroopApp.Services.Profile
 		public void SaveLastSelectedProfile(ExperimentProfile profile)
 		{
 			Directory.CreateDirectory(_configDir);
-			File.WriteAllText(_lastProfileFile, profile.Id.ToString());
+			var json = JsonSerializer.Serialize(profile.Id, new JsonSerializerOptions { WriteIndented = true });
+			File.WriteAllText(_lastProfileFile, json);
 		}
 	}
 }

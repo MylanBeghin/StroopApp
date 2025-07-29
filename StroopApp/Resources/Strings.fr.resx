@@ -457,7 +457,228 @@
   <data name="Button_Quit_Without_Export" xml:space="preserve">
     <value>Quitter l'application sans exporter</value>
   </data>
-  <data name="Button_OpenExportFolder" xml:space="preserve">
-    <value>Ouvrir le dossier</value>
+  <data name="Title_ConfigPage" xml:space="preserve">
+    <value>Configuration de l'expérience</value>
+  </data>
+  <data name="Error_AmorceDurationInvalid" xml:space="preserve">
+    <value>Le temps d'affichage de l'amorce doit être supérieur à 0 !</value>
+  </data>
+  <data name="Error_MaxResponseTimeInvalid" xml:space="preserve">
+    <value>Le temps de réposnemaximum doit être positif.</value>
+  </data>
+  <data name="Title_Export_Completed" xml:space="preserve">
+    <value>Export terminé</value>
+  </data>
+  <data name="Message_Export_Completed" xml:space="preserve">
+    <value>Fichier sauvegardé : 
+{0}</value>
+  </data>
+  <data name="Label_LiveAverage" xml:space="preserve">
+    <value>Moyenne pour les mots {0}-{1}</value>
+  </data>
+  <data name="Label_LiveAverageNoData" xml:space="preserve">
+    <value>Aucune donnée valide</value>
+  </data>
+  <data name="Label_NoResponse" xml:space="preserve">
+    <value>Aucune réponse</value>
+  </data>
+  <data name="Title_DeleteConfirmation" xml:space="preserve">
+    <value>Confirmation de suppression</value>
+  </data>
+  <data name="Message_DeleteParticipantConfirmation" xml:space="preserve">
+    <value>Voulez-vous vraiment supprimer ce participant ? Ses données seront archivées.</value>
+  </data>
+  <data name="Title_ExportFolderSelector" xml:space="preserve">
+    <value>Choix du dossier des résultats</value>
+  </data>
+  <data name="Description_ExportFolderSelector" xml:space="preserve">
+    <value>Sélectionnez le dossier d'exportation des résultats.</value>
+  </data>
+  <data name="Label_ExportFolderSelector_PathLabel" xml:space="preserve">
+    <value>Dossier des résultats :</value>
+  </data>
+  <data name="Title_ParticipantManagement" xml:space="preserve">
+    <value>Choix du participant</value>
+  </data>
+  <data name="Description_ParticipantManagement" xml:space="preserve">
+    <value>Sélectionnez un participant pour lancer l'expérience.</value>
+  </data>
+  <data name="Placeholder_Search" xml:space="preserve">
+    <value>Rechercher...</value>
+  </data>
+  <data name="Title_ParticipantEditorWindow" xml:space="preserve">
+    <value>Modification du participant</value>
+  </data>
+  <data name="Title_ProfileManagement" xml:space="preserve">
+    <value>Choix du profil de l'expérience</value>
+  </data>
+  <data name="Description_ProfileManagement" xml:space="preserve">
+    <value>Sélectionnez le profil à utiliser pour configurer votre expérience.</value>
+  </data>
+  <data name="Title_ProfileManagementDetails" xml:space="preserve">
+    <value>Détails du profil sélectionné</value>
+  </data>
+  <data name="Title_ProfileEditorWindow" xml:space="preserve">
+    <value>Modification du profil</value>
+  </data>
+  <data name="Label_AddPrime" xml:space="preserve">
+    <value>Ajouter une amorce</value>
+  </data>
+  <data name="Title_KeyMapping" xml:space="preserve">
+    <value>Choix des touches</value>
+  </data>
+  <data name="Description_KeyMapping" xml:space="preserve">
+    <value>Sélectionnez les touches à associer aux couleurs.</value>
+  </data>
+  <data name="Title_KeyMappingDialog" xml:space="preserve">
+    <value>Modification du mapping pour {0}</value>
+  </data>
+  <data name="Description_ExportFolderDialog" xml:space="preserve">
+    <value>Sélectionner le dossier d’exportation pour vos résultats</value>
+  </data>
+  <data name="Title_Dashboard" xml:space="preserve">
+    <value>Tableau de bord de l'expérience en cours</value>
+  </data>
+  <data name="Title_Progress" xml:space="preserve">
+    <value>Avancement</value>
+  </data>
+  <data name="Title_ParticipantDetails" xml:space="preserve">
+    <value>Détails du participant</value>
+  </data>
+  <data name="Title_ExperimentDetails" xml:space="preserve">
+    <value>Détails de l'expérience</value>
+  </data>
+  <data name="Label_EndExperiment_BlockFinished" xml:space="preserve">
+    <value>Bloc terminé</value>
+  </data>
+  <data name="Label_EndExperiment_BlockSummary" xml:space="preserve">
+    <value>Résumé des blocs</value>
+  </data>
+  <data name="Title_EndInstructions" xml:space="preserve">
+    <value>Fin de l'expérience</value>
+  </data>
+  <data name="Message_EndInstructions" xml:space="preserve">
+    <value>Félicitations ! Vous avez terminé l'expérience.</value>
+  </data>
+  <data name="Label_ResponseCorrect" xml:space="preserve">
+    <value>Correct</value>
+  </data>
+  <data name="Label_ResponseIncorrect" xml:space="preserve">
+    <value>Incorrect</value>
+  </data>
+  <data name="Title_GraphsView" xml:space="preserve">
+    <value>Suivi de l'expérience</value>
+  </data>
+  <data name="Button_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Error_ParticipantIdAlreadyUsed" xml:space="preserve">
+    <value>Cet identifiant est déjà utilisé pour un autre participant</value>
+  </data>
+  <data name="Message_DeleteProfileConfirmation" xml:space="preserve">
+    <value>Voulez-vous vraiment supprimer ce profil ?</value>
+  </data>
+  <data name="Label_Disconnected" xml:space="preserve">
+    <value>Déconnecté</value>
+  </data>
+  <data name="Button_Connect" xml:space="preserve">
+    <value>Se connecter</value>
+  </data>
+  <data name="Error_NoPortSelected" xml:space="preserve">
+    <value>Aucun port sélectionné.</value>
+  </data>
+  <data name="Error_ConnectionError" xml:space="preserve">
+    <value>Erreur lors de la connexion : {0}</value>
+  </data>
+  <data name="Button_Disconnect" xml:space="preserve">
+    <value>Se déconnecter</value>
+  </data>
+  <data name="Label_PortConnected" xml:space="preserve">
+    <value>Connecté à {0}</value>
+  </data>
+  <data name="Error_DisconnectionError" xml:space="preserve">
+    <value>Erreur lors de la déconnexion : {0}</value>
+  </data>
+  <data name="Message_KeyMapping" xml:space="preserve">
+    <value>Appuyez sur une touche pour définir le mapping. Appuyez sur Échap pour annuler.</value>
+  </data>
+  <data name="Error_KeyMappingKeyUsed" xml:space="preserve">
+    <value>Cette touche est déjà utilisée. Veuillez choisir une autre touche.</value>
+  </data>
+  <data name="Label_TrialNumber" xml:space="preserve">
+    <value>Essai : {0}</value>
+  </data>
+  <data name="Label_ResponseTime" xml:space="preserve">
+    <value>Temps de réponse : {0:N0} ms</value>
+  </data>
+  <data name="Label_ResponseValidityUnknown" xml:space="preserve">
+    <value>Validité inconnue</value>
+  </data>
+  <data name="Header_ResponseTime" xml:space="preserve">
+    <value>Temps de réponse (ms)</value>
+  </data>
+  <data name="Label_CurrentParticipant" xml:space="preserve">
+    <value>Participant n° {0}</value>
+  </data>
+  <data name="Label_CurrentProfile" xml:space="preserve">
+    <value>Tâche : {0}</value>
+  </data>
+  <data name="Value_LiveAverage" xml:space="preserve">
+    <value>{0:N0} ms</value>
+  </data>
+  <data name="Color_Yellow" xml:space="preserve">
+    <value>Jaune</value>
+  </data>
+  <data name="Color_Blue" xml:space="preserve">
+    <value>Bleu</value>
+  </data>
+  <data name="Color_Red" xml:space="preserve">
+    <value>Rouge</value>
+  </data>
+  <data name="Color_Green" xml:space="preserve">
+    <value>Vert</value>
+  </data>
+  <data name="Label_SquarePercentage" xml:space="preserve">
+    <value>Carré (%)</value>
+  </data>
+  <data name="Label_CirclePercentage" xml:space="preserve">
+    <value>Rond (%)</value>
+  </data>
+  <data name="Label_Overview" xml:space="preserve">
+    <value>Aperçu :</value>
+  </data>
+  <data name="Header_SerialPorts" xml:space="preserve">
+    <value>Ports série</value>
+  </data>
+  <data name="Label_SerialPortsList" xml:space="preserve">
+    <value>Liste des ports</value>
+  </data>
+  <data name="Button_Refresh" xml:space="preserve">
+    <value>Rafraîchir</value>
+  </data>
+  <data name="Label_ExchangeHistory" xml:space="preserve">
+    <value>Historique des échanges</value>
+  </data>
+  <data name="Button_Copy" xml:space="preserve">
+    <value>Copier</value>
+  </data>
+  <data name="Button_Clear" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
+  <data name="Button_Send" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="Button_AdvancedSettings" xml:space="preserve">
+    <value>Paramètres avancés</value>
+  </data>
+  <data name="Label_StopBits" xml:space="preserve">
+    <value>Stop bits</value>
+  </data>
+  <data name="Label_Parity" xml:space="preserve">
+    <value>Parité</value>
+  </data>
+  <data name="Error_FillIdField" xml:space="preserve">
+    <value>Veuillez remplir au moins le champ ID.
+</value>
   </data>
 </root>

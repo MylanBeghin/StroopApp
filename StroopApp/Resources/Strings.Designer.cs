@@ -322,11 +322,11 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à End of experiment.
+        ///   Recherche une chaîne localisée semblable à Please fill out all at least the ID field..
         /// </summary>
-        internal static string EndInstructions_Title {
+        public static string Error_FillIdField {
             get {
-                return ResourceManager.GetString("EndInstructions_Title", resourceCulture);
+                return ResourceManager.GetString("Error_FillIdField", resourceCulture);
             }
         }
         

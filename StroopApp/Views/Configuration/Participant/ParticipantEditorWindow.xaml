@@ -23,7 +23,8 @@
                 Value="{Binding Participant.Age, Mode=TwoWay}" 
                 Minimum="0" 
                 Grid.Column="0"
-                SpinButtonPlacementMode="Inline"/>
+                SpinButtonPlacementMode="Inline"
+                          />
             <ui:NumberBox ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Field_Weight]}" 
                 Value="{Binding Participant.Weight, Mode=TwoWay}" 
                 Minimum="0" 
