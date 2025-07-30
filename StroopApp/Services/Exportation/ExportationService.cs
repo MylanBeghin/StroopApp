@@ -35,7 +35,7 @@ namespace StroopApp.Services.Exportation
 			_settings = settings;
 			_configDir = configDir;
 			Directory.CreateDirectory(configDir);
-			_exportFolderConfigFile = Path.Combine(_configDir, "exportFolder.txt");
+			_exportFolderConfigFile = Path.Combine(_configDir, "exportFolder.json");
 			_exportRootDirectory = LoadExportFolderPath();
 			_settings.ExportFolderPath = _exportRootDirectory;
 
@@ -66,7 +66,7 @@ namespace StroopApp.Services.Exportation
 		}
 		public async Task<string> ExportDataAsync()
 		{
-			var root = ExportRootDirectory;
+			var root = _settings.ExportFolderPath;
 			if (string.IsNullOrWhiteSpace(root))
 				throw new InvalidOperationException("Aucun dossier d'export configuré.");
 
@@ -133,12 +133,8 @@ namespace StroopApp.Services.Exportation
 
 
 			wb.SaveAs(filePath);
-
-			await _notifier.NotifyAsync("Export terminé", $"Fichier enregistré :\n{filePath}");
-
 			return filePath;
 		}
-
 		public void Dispose()
 		{
 			_settings.CurrentProfile.PropertyChanged -= OnProfileExportPathChanged;

@@ -211,6 +211,7 @@
     <value>Switch (%)</value>
   </data>
   <data name="Tooltip_Switch" xml:space="preserve">
+    <value>Définit la fréquence de changement de forme d'indice visuel entre deux essais. Un switch correspond à un passage d’un carré à un rond, ou inversement. Exemple : 100 % = alternance à chaque essai, 0 % = toujours la même forme.</value>
     <value>Définit la fréquence de changement de forme d’indice visuel entre deux essais. Un switch correspond à un passage d’un carré à un rond, ou inversement. Exemple : 100 % = alternance à chaque essai, 0 % = toujours la même forme.</value>
   </data>
   <data name="Header_Hours" xml:space="preserve">
@@ -310,6 +311,7 @@
     <value>Configuration de l'expérience</value>
   </data>
   <data name="Error_AmorceDurationInvalid" xml:space="preserve">
+    <value>Le temps d'affichage de l'indice visuel doit être supérieur à 0 !</value>
     <value>La durée d'affichage de l'indice visuel doit être supérieure à 0 !</value>
   </data>
   <data name="Error_MaxResponseTimeInvalid" xml:space="preserve">
@@ -525,6 +527,34 @@
   </data>
   <data name="Label_Parity" xml:space="preserve">
     <value>Parité</value>
+  </data>
+  <data name="ConfigPage_Title" xml:space="preserve">
+    <value>Configuration de l'expérience</value>
+  </data>
+  <data name="Column_NoResponse" xml:space="preserve">
+    <value>Aucune réponse</value>
+  </data>
+  <data name="Button_Modify" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="Check_AddPrime" xml:space="preserve">
+    <value>Ajouter indice visuel</value>
+  </data>
+  <data name="Dashboard_Title" xml:space="preserve">
+    <value>Tableau de bord</value>
+  </data>
+  <data name="Error_FillRequiredFieldsProperly" xml:space="preserve">
+    <value>Veuillez remplir correctement tous les champs obligatoires.
+</value>
+  </data>
+  <data name="Button_Quit_Without_Export" xml:space="preserve">
+    <value>Quitter l'application sans exporter</value>
+  </data>
+  <data name="Header_MaxResponseTime" xml:space="preserve">
+    <value>Temps de réponse max (ms)</value>
+  </data>
+  <data name="Header_PrimeDuration" xml:space="preserve">
+    <value>Durée d'indice visuel (ms)</value>
   </data>
   <data name="Header_MaxResponseTime" xml:space="preserve">
     <value>Temps de réponse max (ms)</value>

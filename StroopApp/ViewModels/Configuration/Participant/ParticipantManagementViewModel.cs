@@ -137,7 +137,7 @@ namespace StroopApp.ViewModels.Configuration.Participant
 				ShowErrorDialog(Strings.Error_SelectParticipantToDelete);
 				return;
 			}
-			if (await ConfirmationDialog(Strings.Message_DeleteParticipantConfirmation))
+			if (await ShowConfirmationDialog(Strings.Message_DeleteParticipantConfirmation))
 			{
 				_participantService.DeleteParticipant(Participants, SelectedParticipant.Id);
 				SelectedParticipant = Participants.FirstOrDefault();

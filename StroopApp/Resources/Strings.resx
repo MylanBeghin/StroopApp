@@ -259,7 +259,7 @@
     <value>Edit</value>
   </data>
   <data name="Button_Continue" xml:space="preserve">
-    <value>Continue</value>
+    <value>Continue </value>
   </data>
   <data name="Button_NewExperiment" xml:space="preserve">
     <value>New experiment</value>
@@ -293,6 +293,12 @@
   </data>
   <data name="Header_FixationDuration" xml:space="preserve">
     <value>Fixation duration (ms)</value>
+  </data>
+  <data name="Title_ExperimentWindow" xml:space="preserve">
+    <value>Stroop Experiment</value>
+  </data>
+  <data name="Title_ParticipantWindow" xml:space="preserve">
+    <value>Participant Window</value>
   </data>
   <data name="Header_PrimeDuration" xml:space="preserve">
     <value>Visual cue duration (ms)</value>
@@ -516,6 +522,163 @@
   </data>
   <data name="Label_Parity" xml:space="preserve">
     <value>Parity</value>
+  </data>
+  <data name="ExperimentWindow_Title" xml:space="preserve">
+    <value>Stroop Experiment</value>
+  </data>
+  <data name="ParticipantWindow_Title" xml:space="preserve">
+    <value>Participant Window</value>
+  </data>
+  <data name="ConfigPage_Title" xml:space="preserve">
+    <value>Experiment Configuration</value>
+  </data>
+  <data name="Error_MaxReactionInvalid" xml:space="preserve">
+    <value>Maximum reaction time must be positive.</value>
+  </data>
+  <data name="Error_ParticipantFieldsInvalid" xml:space="preserve">
+    <value>Please fill in all required participant fields correctly.</value>
+  </data>
+  <data name="Export_Completed_Title" xml:space="preserve">
+    <value>Export completed</value>
+  </data>
+  <data name="Export_Completed_Message" xml:space="preserve">
+    <value>File saved:
+{0}</value>
+  </data>
+  <data name="EndExperiment_CurrentParticipant" xml:space="preserve">
+    <value>Participant no. {0}</value>
+  </data>
+  <data name="EndExperiment_CurrentProfile" xml:space="preserve">
+    <value>Task : {0}</value>
+  </data>
+  <data name="LiveAverage_Label" xml:space="preserve">
+    <value>Average for words {0}–{1}:</value>
+  </data>
+  <data name="LiveAverage_NoData" xml:space="preserve">
+    <value>No valid data</value>
+  </data>
+  <data name="Column_NoResponse" xml:space="preserve">
+    <value>No response</value>
+  </data>
+  <data name="DeleteConfirmation_Title" xml:space="preserve">
+    <value>Delete confirmation</value>
+  </data>
+  <data name="DeleteConfirmation_Message" xml:space="preserve">
+    <value>Do you really want to delete this participant? Their data will be archived.</value>
+  </data>
+  <data name="DeleteConfirmation_Primary" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ExportFolderSelector_Title" xml:space="preserve">
+    <value>Results folder selection</value>
+  </data>
+  <data name="ExportFolderSelector_Description" xml:space="preserve">
+    <value>Select the export folder for the results.</value>
+  </data>
+  <data name="ExportFolderSelector_PathLabel" xml:space="preserve">
+    <value>Results folder:</value>
+  </data>
+  <data name="ParticipantManagement_Title" xml:space="preserve">
+    <value>Select participant</value>
+  </data>
+  <data name="ParticipantManagement_Description" xml:space="preserve">
+    <value>Select a participant to start the experiment.</value>
+  </data>
+  <data name="Button_Modify" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Search_Placeholder" xml:space="preserve">
+    <value>Search...</value>
+  </data>
+  <data name="ParticipantEditorWindow_Title" xml:space="preserve">
+    <value>Edit participant</value>
+  </data>
+  <data name="ProfileManagement_Title" xml:space="preserve">
+    <value>Select task profile</value>
+  </data>
+  <data name="ProfileManagement_Description" xml:space="preserve">
+    <value>Select the profile to configure your experiment.</value>
+  </data>
+  <data name="ProfileManagement_DetailsTitle" xml:space="preserve">
+    <value>Selected profile details</value>
+  </data>
+  <data name="Header_MaxReactionTime" xml:space="preserve">
+    <value>Max reaction time (ms)</value>
+  </data>
+  <data name="ProfileEditorWindow_Title" xml:space="preserve">
+    <value>Edit profile</value>
+  </data>
+  <data name="Check_AddPrime" xml:space="preserve">
+    <value>Add visual cue</value>
+  </data>
+  <data name="KeyMapping_Title" xml:space="preserve">
+    <value>Key mapping</value>
+  </data>
+  <data name="KeyMapping_Description" xml:space="preserve">
+    <value>Select the keys associated with the colors.</value>
+  </data>
+  <data name="KeyMapping_Prompt" xml:space="preserve">
+    <value>Press a key to define the mapping. Press Esc to cancel.</value>
+  </data>
+  <data name="KeyMapping_ErrorKeyUsed" xml:space="preserve">
+    <value>This key is already used. Please choose another one.</value>
+  </data>
+  <data name="KeyMapping_DialogTitle" xml:space="preserve">
+    <value>Edit mapping for {0}</value>
+  </data>
+  <data name="ExportFolderDialog_Description" xml:space="preserve">
+    <value>Select the export folder for your results</value>
+  </data>
+  <data name="Dashboard_Title" xml:space="preserve">
+    <value>Experiment dashboard</value>
+  </data>
+  <data name="Progress_Title" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="ParticipantDetails_Title" xml:space="preserve">
+    <value>Participant details</value>
+  </data>
+  <data name="ExperimentDetails_Title" xml:space="preserve">
+    <value>Experiment details</value>
+  </data>
+  <data name="EndExperiment_BlockFinished" xml:space="preserve">
+    <value>Block completed</value>
+  </data>
+  <data name="EndExperiment_BlockSummary" xml:space="preserve">
+    <value>Block summary</value>
+  </data>
+  <data name="EndInstructions_Title" xml:space="preserve">
+    <value>End of experiment</value>
+  </data>
+  <data name="EndInstructions_Message" xml:space="preserve">
+    <value>Congratulations! You have completed the experiment.</value>
+  </data>
+  <data name="Reaction_None" xml:space="preserve">
+    <value>No response</value>
+  </data>
+  <data name="Reaction_Correct" xml:space="preserve">
+    <value>Correct</value>
+  </data>
+  <data name="Reaction_Incorrect" xml:space="preserve">
+    <value>Incorrect</value>
+  </data>
+  <data name="GraphsView_Title" xml:space="preserve">
+    <value>Experiment tracking</value>
+  </data>
+  <data name="Dialog_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Error_FillRequiredFieldsProperly" xml:space="preserve">
+    <value>Please fill out all required fields correctly.</value>
+  </data>
+  <data name="Button_Quit_Without_Export" xml:space="preserve">
+    <value>Quit application without export</value>
+  </data>
+  <data name="Error_FillIdField" xml:space="preserve">
+    <value>Please fill at least the ID field</value>
+  </data>
+  <data name="Header_PrimeDuration" xml:space="preserve">
+    <value>Visual cue duration (ms)</value>
   </data>
   <data name="Header_MaxResponseTime" xml:space="preserve">
     <value>Max response time (ms)</value>
