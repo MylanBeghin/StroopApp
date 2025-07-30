@@ -37,13 +37,13 @@
                               SelectedItem="{Binding CurrentProfile}"
                               DisplayMemberPath="ProfileName"
                               Background="{DynamicResource SystemControlBackgroundAltHighBrush}" />
-                    <Button Content="Créer"
+                    <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Create]}"
                             Command="{Binding CreateProfileCommand}"
                             Style="{DynamicResource DefaultButtonStyle}" />
-                    <Button Content="Modifier"
+                    <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Edit]}"
                             Command="{Binding ModifyProfileCommand}"
                             Style="{DynamicResource DefaultButtonStyle}" />
-                    <Button Content="Supprimer"
+                    <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Delete]}"
                             Command="{Binding DeleteProfileCommand}"
                             Style="{DynamicResource DefaultButtonStyle}" />
                 </ui:SimpleStackPanel>

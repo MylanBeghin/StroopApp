@@ -16,7 +16,6 @@ namespace StroopApp.ViewModels.Configuration
 		{
 			get;
 		}
-
 		public ICommand BrowseCommand
 		{
 			get;
