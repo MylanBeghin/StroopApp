@@ -89,7 +89,7 @@ namespace StroopApp.XUnitTests.Services
 			service.ExportRootDirectory = custom;
 
 			// Assert
-			var cfg = Path.Combine(configDir, "exportFolder.txt");
+			var cfg = Path.Combine(configDir, "exportFolder.json");
 			Assert.True(File.Exists(cfg));
 			var loaded = JsonSerializer.Deserialize<string>(File.ReadAllText(cfg));
 			Assert.Equal(custom, loaded);
