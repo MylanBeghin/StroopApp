@@ -142,10 +142,10 @@
     <value>A profile with this name already exists. Choose another name.</value>
   </data>
   <data name="Error_WordDurationInvalid" xml:space="preserve">
-    <value>Word duration must be positive and divide task duration.</value>
+    <value>Trial duration must be positive and divide task duration.</value>
   </data>
   <data name="Error_GroupSizeInvalid" xml:space="preserve">
-    <value>Group size must be positive and divide the number of words.</value>
+    <value>Group size must be positive and divide the number of trials.</value>
   </data>
   <data name="Error_SelectParticipantToModify" xml:space="preserve">
     <value>Please select a participant to modify!</value>
@@ -205,7 +205,7 @@
     <value>Congruence (%)</value>
   </data>
   <data name="Tooltip_Congruence" xml:space="preserve">
-    <value>Defines the proportion of congruent words in the block. A word is congruent when its meaning matches its color (e.g. the word Red written in red). Example: 25% = 75% incongruent, 25% congruent.</value>
+    <value>Defines the proportion of congruent trials in the block. A trial is congruent when its meaning matches its color (e.g. the word Red written in red). Example: 25% = 75% incongruent, 25% congruent.</value>
   </data>
   <data name="Header_Switch" xml:space="preserve">
     <value>Switch (%)</value>
@@ -222,11 +222,8 @@
   <data name="Header_Seconds" xml:space="preserve">
     <value>Seconds</value>
   </data>
-  <data name="Header_MaxResponseTime" xml:space="preserve">
-    <value>Max response time (ms)</value>
-  </data>
   <data name="Header_WordDuration" xml:space="preserve">
-    <value>Word duration (ms)</value>
+    <value>Trial duration (ms)</value>
   </data>
   <data name="Field_ProfileName" xml:space="preserve">
     <value>Profile name</value>
@@ -238,13 +235,13 @@
     <value>Based on task duration</value>
   </data>
   <data name="Radio_WordCount" xml:space="preserve">
-    <value>Based on word count</value>
+    <value>Based on trial count</value>
   </data>
   <data name="Field_GroupSize" xml:space="preserve">
     <value>Group size</value>
   </data>
   <data name="Field_WordCount" xml:space="preserve">
-    <value>Word count</value>
+    <value>Trials count</value>
   </data>
   <data name="Label_KeyRed" xml:space="preserve">
     <value>Key associated with the red color:</value>
@@ -301,7 +298,7 @@
     <value>Fixation duration (ms)</value>
   </data>
   <data name="Header_PrimeDuration" xml:space="preserve">
-    <value>Prime duration (ms)</value>
+    <value>Visual cue duration (ms)</value>
   </data>
   <data name="Title_ExperimentWindow" xml:space="preserve">
     <value>Stroop Experiment</value>
@@ -313,7 +310,7 @@
     <value>Experiment Configuration</value>
   </data>
   <data name="Error_AmorceDurationInvalid" xml:space="preserve">
-    <value>Prime time must be greater than 0!</value>
+    <value>Visual cue duration must be greater than 0 !</value>
   </data>
   <data name="Error_MaxResponseTimeInvalid" xml:space="preserve">
     <value>Maximum response time must be positive.</value>
@@ -326,7 +323,7 @@
 {0}</value>
   </data>
   <data name="Label_LiveAverage" xml:space="preserve">
-    <value>Average for words {0}–{1}:</value>
+    <value>Average for trials {0}–{1}:</value>
   </data>
   <data name="Label_LiveAverageNoData" xml:space="preserve">
     <value>No valid data</value>
@@ -374,7 +371,7 @@
     <value>Edit profile</value>
   </data>
   <data name="Label_AddPrime" xml:space="preserve">
-    <value>Add prime</value>
+    <value>Add visual cue</value>
   </data>
   <data name="Title_KeyMapping" xml:space="preserve">
     <value>Key mapping</value>
@@ -389,7 +386,7 @@
     <value>Select the export folder for your results</value>
   </data>
   <data name="Title_Dashboard" xml:space="preserve">
-    <value>Current experiment dashboard</value>
+    <value>Experiment dashboard</value>
   </data>
   <data name="Title_Progress" xml:space="preserve">
     <value>Progress</value>
@@ -423,9 +420,6 @@
   </data>
   <data name="Button_OK" xml:space="preserve">
     <value>OK</value>
-  </data>
-  <data name="Error_FillRequiredFieldsProperly" xml:space="preserve">
-    <value>Please fill out all required fields correctly.</value>
   </data>
   <data name="Error_ParticipantIdAlreadyUsed" xml:space="preserve">
     <value>This identifier is already in use for another participant.</value>
@@ -531,5 +525,11 @@
   </data>
   <data name="Label_Parity" xml:space="preserve">
     <value>Parity</value>
+  </data>
+  <data name="Header_MaxResponseTime" xml:space="preserve">
+    <value>Max response time (ms)</value>
+  </data>
+  <data name="Error_FillRequiredFieldsProperly" xml:space="preserve">
+    <value>Please fill out all required fields correctly.</value>
   </data>
 </root>

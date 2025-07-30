@@ -313,7 +313,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Prime time must be greater than 0!.
+        ///   Recherche une chaîne localisée semblable à Visual cue duration must be greater than 0 !.
         /// </summary>
         public static string Error_AmorceDurationInvalid {
             get {
@@ -358,7 +358,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Group size must be positive and divide the number of words..
+        ///   Recherche une chaîne localisée semblable à Group size must be positive and divide the number of trials..
         /// </summary>
         public static string Error_GroupSizeInvalid {
             get {
@@ -493,7 +493,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Word duration must be positive and divide task duration..
+        ///   Recherche une chaîne localisée semblable à Trial duration must be positive and divide task duration..
         /// </summary>
         public static string Error_WordDurationInvalid {
             get {
@@ -574,7 +574,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Word count.
+        ///   Recherche une chaîne localisée semblable à Trials count.
         /// </summary>
         public static string Field_WordCount {
             get {
@@ -664,7 +664,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Prime duration (ms).
+        ///   Recherche une chaîne localisée semblable à Visual cue duration (ms).
         /// </summary>
         public static string Header_PrimeDuration {
             get {
@@ -736,7 +736,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Word duration (ms).
+        ///   Recherche une chaîne localisée semblable à Trial duration (ms).
         /// </summary>
         public static string Header_WordDuration {
             get {
@@ -745,7 +745,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Add prime.
+        ///   Recherche une chaîne localisée semblable à Add visual cue.
         /// </summary>
         public static string Label_AddPrime {
             get {
@@ -871,7 +871,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Average for words {0}–{1}:.
+        ///   Recherche une chaîne localisée semblable à Average for trials {0}–{1}:.
         /// </summary>
         public static string Label_LiveAverage {
             get {
@@ -1079,7 +1079,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Based on word count.
+        ///   Recherche une chaîne localisée semblable à Based on trial count.
         /// </summary>
         public static string Radio_WordCount {
             get {
@@ -1097,7 +1097,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Current experiment dashboard.
+        ///   Recherche une chaîne localisée semblable à Experiment dashboard.
         /// </summary>
         public static string Title_Dashboard {
             get {
@@ -1277,7 +1277,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Defines the proportion of congruent words in the block. A word is congruent when its meaning matches its color (e.g. the word Red written in red). Example: 25% = 75% incongruent, 25% congruent..
+        ///   Recherche une chaîne localisée semblable à Defines the proportion of congruent trials in the block. A trial is congruent when its meaning matches its color (e.g. the word Red written in red). Example: 25% = 75% incongruent, 25% congruent..
         /// </summary>
         public static string Tooltip_Congruence {
             get {
