@@ -94,8 +94,18 @@ namespace StroopApp.Services.Profile
 			if (File.Exists(_lastProfileFile))
 			{
 				var text = File.ReadAllText(_lastProfileFile);
-				if (Guid.TryParse(text, out var id))
-					return id;
+				try
+				{
+					var guidString = JsonSerializer.Deserialize<string>(text);
+					if (Guid.TryParse(guidString, out var id))
+						return id;
+				}
+				catch (JsonException)
+				{
+					// Fallback pour les anciens fichiers qui pourraient contenir du texte brut
+					if (Guid.TryParse(text, out var id))
+						return id;
+				}
 			}
 			return null;
 		}
