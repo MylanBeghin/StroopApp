@@ -439,7 +439,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Please select a participant to delete!.
+        ///   Recherche une chaîne localisée semblable à Please select a participant to delete !.
         /// </summary>
         public static string Error_SelectParticipantToDelete {
             get {
@@ -466,7 +466,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Please select a profile to delete!.
+        ///   Recherche une chaîne localisée semblable à Please select a profile to delete !.
         /// </summary>
         public static string Error_SelectProfileToDelete {
             get {
@@ -763,7 +763,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Label_Circle (%).
+        ///   Recherche une chaîne localisée semblable à Circle (%).
         /// </summary>
         public static string Label_CirclePercentage {
             get {
@@ -1151,7 +1151,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Results folder selection.
+        ///   Recherche une chaîne localisée semblable à Results folder.
         /// </summary>
         public static string Title_ExportFolderSelector {
             get {
@@ -1169,7 +1169,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Key mapping.
+        ///   Recherche une chaîne localisée semblable à Key mappings.
         /// </summary>
         public static string Title_KeyMapping {
             get {
@@ -1205,7 +1205,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Select participant.
+        ///   Recherche une chaîne localisée semblable à Participant.
         /// </summary>
         public static string Title_ParticipantManagement {
             get {
@@ -1232,7 +1232,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Select task profile.
+        ///   Recherche une chaîne localisée semblable à Experiment profile.
         /// </summary>
         public static string Title_ProfileManagement {
             get {
@@ -1286,7 +1286,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Defines how often the prime shape changes between two trials. A switch is a transition from square to circle or vice versa. Example: 100% = alternation each trial, 0% = always the same shape..
+        ///   Recherche une chaîne localisée semblable à Defines how often the visual cue changes between two trials. A switch is a transition from square to circle or vice versa. Example: 100% = alternation each trial, 0% = always the same shape..
         /// </summary>
         public static string Tooltip_Switch {
             get {

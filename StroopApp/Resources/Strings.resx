@@ -133,7 +133,7 @@
     <value>Please select a profile to modify!</value>
   </data>
   <data name="Error_SelectProfileToDelete" xml:space="preserve">
-    <value>Please select a profile to delete!</value>
+    <value>Please select a profile to delete !</value>
   </data>
   <data name="Error_ProfileNameEmpty" xml:space="preserve">
     <value>Profile name cannot be empty or whitespace.</value>
@@ -151,7 +151,7 @@
     <value>Please select a participant to modify!</value>
   </data>
   <data name="Error_SelectParticipantToDelete" xml:space="preserve">
-    <value>Please select a participant to delete!</value>
+    <value>Please select a participant to delete !</value>
   </data>
   <data name="Error_DuplicateParticipantId" xml:space="preserve">
     <value>This identifier is already used for another participant.</value>
@@ -211,7 +211,7 @@
     <value>Switch (%)</value>
   </data>
   <data name="Tooltip_Switch" xml:space="preserve">
-    <value>Defines how often the prime shape changes between two trials. A switch is a transition from square to circle or vice versa. Example: 100% = alternation each trial, 0% = always the same shape.</value>
+    <value>Defines how often the visual cue changes between two trials. A switch is a transition from square to circle or vice versa. Example: 100% = alternation each trial, 0% = always the same shape.</value>
   </data>
   <data name="Header_Hours" xml:space="preserve">
     <value>Hours</value>
@@ -282,9 +282,6 @@
   <data name="Header_Accuracy" xml:space="preserve">
     <value>Accuracy</value>
   </data>
-  <data name="Header_MeanResponseTime" xml:space="preserve">
-    <value>Average response time</value>
-  </data>
   <data name="Header_StroopType" xml:space="preserve">
     <value>Stroop type</value>
   </data>
@@ -299,12 +296,6 @@
   </data>
   <data name="Header_PrimeDuration" xml:space="preserve">
     <value>Visual cue duration (ms)</value>
-  </data>
-  <data name="Title_ExperimentWindow" xml:space="preserve">
-    <value>Stroop Experiment</value>
-  </data>
-  <data name="Title_ParticipantWindow" xml:space="preserve">
-    <value>Participant Window</value>
   </data>
   <data name="Title_ConfigPage" xml:space="preserve">
     <value>Experiment Configuration</value>
@@ -338,7 +329,7 @@
     <value>Do you really want to delete this participant? Their data will be archived.</value>
   </data>
   <data name="Title_ExportFolderSelector" xml:space="preserve">
-    <value>Results folder selection</value>
+    <value>Results folder</value>
   </data>
   <data name="Description_ExportFolderSelector" xml:space="preserve">
     <value>Select the export folder for the results.</value>
@@ -347,7 +338,7 @@
     <value>Results folder:</value>
   </data>
   <data name="Title_ParticipantManagement" xml:space="preserve">
-    <value>Select participant</value>
+    <value>Participant</value>
   </data>
   <data name="Description_ParticipantManagement" xml:space="preserve">
     <value>Select a participant to start the experiment.</value>
@@ -359,7 +350,7 @@
     <value>Edit participant</value>
   </data>
   <data name="Title_ProfileManagement" xml:space="preserve">
-    <value>Select task profile</value>
+    <value>Experiment profile</value>
   </data>
   <data name="Description_ProfileManagement" xml:space="preserve">
     <value>Select the profile to configure your experiment.</value>
@@ -374,7 +365,7 @@
     <value>Add visual cue</value>
   </data>
   <data name="Title_KeyMapping" xml:space="preserve">
-    <value>Key mapping</value>
+    <value>Key mappings</value>
   </data>
   <data name="Description_KeyMapping" xml:space="preserve">
     <value>Select the keys associated with the colors.</value>
@@ -491,7 +482,7 @@
     <value>Square (%)</value>
   </data>
   <data name="Label_CirclePercentage" xml:space="preserve">
-    <value>Label_Circle (%)</value>
+    <value>Circle (%)</value>
   </data>
   <data name="Label_Overview" xml:space="preserve">
     <value>Overview :</value>
@@ -528,6 +519,15 @@
   </data>
   <data name="Header_MaxResponseTime" xml:space="preserve">
     <value>Max response time (ms)</value>
+  </data>
+  <data name="Header_MeanResponseTime" xml:space="preserve">
+    <value>Average response time</value>
+  </data>
+  <data name="Title_ExperimentWindow" xml:space="preserve">
+    <value>Stroop Experiment</value>
+  </data>
+  <data name="Title_ParticipantWindow" xml:space="preserve">
+    <value>Participant Window</value>
   </data>
   <data name="Error_FillRequiredFieldsProperly" xml:space="preserve">
     <value>Please fill out all required fields correctly.</value>
