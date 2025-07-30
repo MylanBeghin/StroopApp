@@ -31,7 +31,7 @@
                                  HorizontalAlignment="Stretch"
                                  VerticalAlignment="Top"
                                  Spacing="16">
-                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Progress_Title]}"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Title_Progress]}"
                            Style="{DynamicResource TitleTextBlockStyle}"
                            HorizontalAlignment="Left" />
                 <TextBlock Grid.Column="0"
@@ -57,7 +57,7 @@
                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
             <ui:SimpleStackPanel Spacing="10">
                 <!-- Section Détails du participant -->
-                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ParticipantDetails_Title]}"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Title_ParticipantDetails]}"
                            Style="{DynamicResource TitleTextBlockStyle}" />
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
@@ -95,7 +95,7 @@
                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
             <ui:SimpleStackPanel Spacing="10">
                 <!-- Section Détails de l'expérience -->
-                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ExperimentDetails_Title]}"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Title_ExperimentDetails]}"
                            Style="{DynamicResource TitleTextBlockStyle}" />
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
@@ -172,7 +172,7 @@
                              Text="{Binding settings.CurrentProfile.MaxReactionTime}"
                              IsReadOnly="True"
                              HorizontalAlignment="Stretch"
-                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_MaxReactionTime]}"
+                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_MaxResponseTime]}"
                              Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
                              BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
                              Padding="4"

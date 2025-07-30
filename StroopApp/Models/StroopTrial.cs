@@ -172,26 +172,6 @@ namespace StroopApp.Models
 				}
 			}
 		}
-
-		// Timestamp when the fixation cross appears
-		public DateTime? FixationStartTime { get; set; }
-		// Timestamp when the cue appears
-		public DateTime? AmorceStartTime { get; set; }
-		// Timestamp when the word appears
-		public DateTime? WordStartTime { get; set; }
-		// Timestamp when the word disappears
-		public DateTime? WordEndTime { get; set; }
-
-		// Durations computed from the system clock
-		public double? DurationFixation_ClockMs { get; set; }
-		public double? DurationAmorce_ClockMs { get; set; }
-		public double? DurationWord_ClockMs { get; set; }
-
-		// Durations measured by Stopwatch timers
-		public double? FixationTimerDurationMs { get; set; }
-		public double? AmorceTimerDurationMs { get; set; }
-		public double? WordTimerDurationMs { get; set; }
-
 		private int _trialNumber;
 		public int TrialNumber
 		{

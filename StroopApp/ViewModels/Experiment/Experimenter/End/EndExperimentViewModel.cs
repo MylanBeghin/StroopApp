@@ -12,6 +12,7 @@ using SkiaSharp;
 
 using StroopApp.Core;
 using StroopApp.Models;
+using StroopApp.Resources;
 using StroopApp.Services.Exportation;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
@@ -79,8 +80,8 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 			ExportCommand = new RelayCommand(Export);
 			QuitWihtoutExportCommand = new RelayCommand(QuitWihtoutExport);
 			Blocks = Settings.ExperimentContext.Blocks;
-			CurrentParticipant = "Participant n° " + Settings.Participant.Id.ToString();
-			CurrentProfile = "Tâche : " + Settings.CurrentProfile.ProfileName;
+			CurrentParticipant = string.Format(Strings.Label_CurrentParticipant, Settings.Participant.Id);
+			CurrentProfile = string.Format(Strings.Label_CurrentProfile, Settings.CurrentProfile.ProfileName);
 			UpdateBlock();
 		}
 

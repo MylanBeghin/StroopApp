@@ -21,9 +21,9 @@
         <ui:SimpleStackPanel Spacing="10"
                              VerticalAlignment="Center">
             <!-- Titre et description -->
-            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[KeyMapping_Title]}"
+            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Title_KeyMapping]}"
                        Style="{StaticResource TitleTextBlockStyle}" />
-            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[KeyMapping_Description]}" />
+            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Description_KeyMapping]}" />
             <!-- Grille à 4 colonnes pour les 4 couleurs -->
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -62,7 +62,7 @@
                                  Margin="0,0,8,0" />
                         <Button Grid.Column="1"
                                 Command="{Binding OpenKeyMappingEditorCommand}"
-                                CommandParameter="Rouge"
+                                CommandParameter="{Binding Source={StaticResource Loc}, Path=[Color_Red]}"
                                 VerticalAlignment="Center"
                                 Content="{Binding Source={StaticResource Loc}, Path=[Button_Edit]}" />
                     </Grid>
@@ -95,7 +95,7 @@
                                  Margin="0,0,8,0" />
                         <Button Grid.Column="1"
                                 Command="{Binding OpenKeyMappingEditorCommand}"
-                                CommandParameter="Bleu"
+                                CommandParameter="{Binding Source={StaticResource Loc}, Path=[Color_Blue]}"
                                 VerticalAlignment="Center"
                                 Content="{Binding Source={StaticResource Loc}, Path=[Button_Edit]}" />
                     </Grid>
@@ -128,7 +128,7 @@
                                  Margin="0,0,8,0" />
                         <Button Grid.Column="1"
                                 Command="{Binding OpenKeyMappingEditorCommand}"
-                                CommandParameter="Vert"
+                                CommandParameter="{Binding Source={StaticResource Loc}, Path=[Color_Green]}"
                                 VerticalAlignment="Center"
                                 Content="{Binding Source={StaticResource Loc}, Path=[Button_Edit]}" />
                     </Grid>
@@ -161,7 +161,7 @@
                                  Margin="0,0,8,0" />
                         <Button Grid.Column="1"
                                 Command="{Binding OpenKeyMappingEditorCommand}"
-                                CommandParameter="Jaune"
+                                CommandParameter="{Binding Source={StaticResource Loc}, Path=[Color_Yellow]}"
                                 VerticalAlignment="Center"
                                 Content="{Binding Source={StaticResource Loc}, Path=[Button_Edit]}" />
                     </Grid>

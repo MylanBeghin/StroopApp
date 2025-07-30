@@ -4,6 +4,7 @@ using Ookii.Dialogs.Wpf;
 
 using StroopApp.Core;
 using StroopApp.Models;
+using StroopApp.Resources;
 using StroopApp.Services.Exportation;
 
 namespace StroopApp.ViewModels.Configuration
@@ -30,13 +31,13 @@ namespace StroopApp.ViewModels.Configuration
 			{
 				var dlg = new VistaFolderBrowserDialog
 				{
-					Description = "Sélectionner le dossier d’exportation pour vos résultats",
+					Description = Strings.Description_ExportFolderDialog,
 					SelectedPath = Settings.ExportFolderPath
 				};
 				if (dlg.ShowDialog() == true)
 				{
+					Settings.ExportFolderPath = dlg.SelectedPath;
 					_exportationService.SaveExportFolderPath(dlg.SelectedPath);
-					Settings.ExportFolderPath = _exportationService.LoadExportFolderPath();
 				}
 			});
 		}

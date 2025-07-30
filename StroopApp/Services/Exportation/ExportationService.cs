@@ -128,23 +128,6 @@ namespace StroopApp.Services.Exportation
 						AmorceType.Round => "Cercle",
 						_ => ""
 					};
-					double? durFix = r.DurationFixation_ClockMs;
-					double? durAmorce = r.DurationAmorce_ClockMs;
-					double? durWord = r.DurationWord_ClockMs;
-
-					if (!durFix.HasValue && r.FixationStartTime.HasValue && r.AmorceStartTime.HasValue)
-						durFix = (r.AmorceStartTime.Value - r.FixationStartTime.Value).TotalMilliseconds;
-					if (!durAmorce.HasValue && r.AmorceStartTime.HasValue && r.WordStartTime.HasValue)
-						durAmorce = (r.WordStartTime.Value - r.AmorceStartTime.Value).TotalMilliseconds;
-					if (!durWord.HasValue && r.WordStartTime.HasValue && r.WordEndTime.HasValue)
-						durWord = (r.WordEndTime.Value - r.WordStartTime.Value).TotalMilliseconds;
-
-					ws.Cell(row, 11).Value = durFix;
-					ws.Cell(row, 12).Value = durAmorce;
-					ws.Cell(row, 13).Value = durWord;
-					ws.Cell(row, 14).Value = r.FixationTimerDurationMs;
-					ws.Cell(row, 15).Value = r.AmorceTimerDurationMs;
-					ws.Cell(row, 16).Value = r.WordTimerDurationMs;
 					row++;
 				}
 

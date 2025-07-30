@@ -38,7 +38,7 @@
                       Grid.RowSpan="2">
             <ui:SimpleStackPanel Margin="16,16,16,64"
                                  Spacing="16">
-                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ProfileEditorWindow_Title]}"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Title_ProfileEditorWindow]}"
                            Style="{StaticResource TitleTextBlockStyle}" />
                 <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
                         CornerRadius="8"
@@ -96,7 +96,7 @@
                                        Text="{Binding Source={StaticResource Loc}, Path=[Header_PrimeDuration]}" />
                             <TextBlock Grid.Row="0"
                                        Grid.Column="6"
-                                       Text="{Binding Source={StaticResource Loc}, Path=[Header_MaxReactionTime]}" />
+                                       Text="{Binding Source={StaticResource Loc}, Path=[Header_MaxResponseTime]}" />
                             <!-- Valeurs et signes alignés uniquement sur la ligne des inputs -->
                             <TextBox Grid.Row="2"
                                      Grid.Column="0"
@@ -162,7 +162,7 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Check_AddPrime] }"
+                            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Label_AddPrime] }"
                                        VerticalAlignment="Center" />
                             <ui:ToggleSwitch IsOn="{Binding Profile.IsAmorce, Mode=TwoWay}"
                                              OnContent="{Binding Source={StaticResource Loc}, Path=[Toggle_On]}"

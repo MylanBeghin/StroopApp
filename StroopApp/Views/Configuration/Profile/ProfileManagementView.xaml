@@ -24,9 +24,9 @@
                 BorderThickness="0.5"
                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
             <ui:SimpleStackPanel Spacing="10">
-                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ProfileManagement_Title]}"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Title_ProfileManagement]}"
                            Style="{DynamicResource TitleTextBlockStyle}" />
-                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ProfileManagement_Description]}"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Description_ParticipantManagement]}"
                            Style="{DynamicResource CaptionTextBlockStyle}" />
                 <ui:SimpleStackPanel Orientation="Horizontal"
                                      HorizontalAlignment="Left"
@@ -56,7 +56,7 @@
                 BorderThickness="0.5"
                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
             <ui:SimpleStackPanel Spacing="10">
-                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[ProfileManagement_DetailsTitle]}"
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Title_ExperimentDetails]}"
                            Style="{DynamicResource TitleTextBlockStyle}" />
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
@@ -72,9 +72,7 @@
                             <ui:SimpleStackPanel Orientation="Horizontal"
                                                  VerticalAlignment="Center"
                                                  Spacing="4"
-                                                 ToolTip="Définit la proportion de mots congruents dans le bloc. Un mot est congruent lorsque sa signification correspond à sa couleur (ex. le mot Rouge écrit en rouge).
-                                                 
-                                                 Exemple : 25 % = 75 % d’incongruents, 25 % de congruents."
+                                                 ToolTip="{Binding Source={StaticResource Loc}, Path=[Tooltip_Congruence]}"
                                                  ToolTipService.Placement="Top"
                                                  ToolTipService.InitialShowDelay="100">
                                 <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_Congruence]}" />
@@ -93,8 +91,7 @@
                             <ui:SimpleStackPanel Orientation="Horizontal"
                                                  VerticalAlignment="Center"
                                                  Spacing="4"
-                                                 ToolTip="Définit la fréquence de changement de forme d’amorce entre deux essais. Un switch correspond à un passage d’un carré à un rond, ou inversement.
-                                                 Exemple : 100 % = alternance à chaque essai, 0 % = toujours la même forme."
+                                                 ToolTip="{Binding Source={StaticResource Loc}, Path=[Tooltip_Switch]}"
                                                  ToolTipService.Placement="Top"
                                                  ToolTipService.InitialShowDelay="100">
                                 <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_Switch]}" />
@@ -127,7 +124,7 @@
                     </Grid>
                     <TextBox Grid.Column="3"
                              Text="{Binding CurrentProfile.MaxReactionTime}"
-                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_MaxReactionTime]}"
+                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_MaxResponseTime]}"
                              Style="{DynamicResource ModernReadOnlyTextBoxStyle}" />
                     <TextBox Grid.Column="4"
                              Text="{Binding CurrentProfile.WordDuration}"

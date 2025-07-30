@@ -10,6 +10,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Utilities\**" />
+	  <EmbeddedResource Remove="Utilities\**" />
+	  <None Remove="Utilities\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="ClosedXML" Version="0.104.2" />
 		<PackageReference Include="coverlet.collector" Version="6.0.0" />
 		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.7.25104.5739" />
@@ -20,9 +26,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\StroopApp\StroopApp.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-		<Folder Include="Utilities\" />
 	</ItemGroup>
 
 </Project>

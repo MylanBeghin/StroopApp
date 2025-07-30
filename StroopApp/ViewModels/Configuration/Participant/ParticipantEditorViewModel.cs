@@ -99,7 +99,7 @@ namespace StroopApp.ViewModels.Configuration.Participant
 			}
 			if (Participants.Any(p => p.Id == Participant.Id && p != Participant))
 			{
-				ShowErrorDialog("Cet identifiant est déjà utilisé pour un autre participant");
+				ShowErrorDialog(Strings.Error_ParticipantIdAlreadyUsed);
 				return;
 			}
 
