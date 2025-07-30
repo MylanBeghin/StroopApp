@@ -433,8 +433,8 @@
   <data name="Header_Accuracy" xml:space="preserve">
     <value>Précision</value>
   </data>
-  <data name="Header_MeanReactionTime" xml:space="preserve">
-    <value>Temps moyen de réponse</value>
+  <data name="Header_MeanResponseTime" xml:space="preserve">
+    <value>Temps de réponse moyen (ms)</value>
   </data>
   <data name="Header_StroopType" xml:space="preserve">
     <value>Type Stroop</value>
@@ -451,11 +451,11 @@
   <data name="Header_PrimeDuration" xml:space="preserve">
     <value>Durée d'amorce (ms)</value>
   </data>
-  <data name="Button_Export" xml:space="preserve">
-    <value>Exporter</value>
+  <data name="Title_ExperimentWindow" xml:space="preserve">
+    <value>Expérience de Stroop</value>
   </data>
-  <data name="Button_Quit_Without_Export" xml:space="preserve">
-    <value>Quitter l'application sans exporter</value>
+  <data name="Title_ParticipantWindow" xml:space="preserve">
+    <value>Fenêtre participant</value>
   </data>
   <data name="Title_ConfigPage" xml:space="preserve">
     <value>Configuration de l'expérience</value>
@@ -676,6 +676,12 @@
   </data>
   <data name="Label_Parity" xml:space="preserve">
     <value>Parité</value>
+  </data>
+  <data name="Button_Export" xml:space="preserve">
+    <value>Exporter</value>
+  </data>
+  <data name="Button_Quit_Without_Export" xml:space="preserve">
+    <value>Quitter l'application sans exporter</value>
   </data>
   <data name="Error_FillIdField" xml:space="preserve">
     <value>Veuillez remplir au moins le champ ID.

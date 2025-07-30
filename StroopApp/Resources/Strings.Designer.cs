@@ -223,7 +223,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Quit without export.
+        ///   Recherche une chaîne localisée semblable à Quit application without export.
         /// </summary>
         internal static string Button_Quit_Without_Export {
             get {
@@ -475,7 +475,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Prime time must be greater than 0!.
+        ///   Recherche une chaîne localisée semblable à Visual cue duration must be greater than 0 !.
         /// </summary>
         internal static string Error_AmorceDurationInvalid {
             get {
@@ -520,7 +520,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Please fill out all at least the ID field..
+        ///   Recherche une chaîne localisée semblable à Please fill at least the ID field.
         /// </summary>
         internal static string Error_FillIdField {
             get {
@@ -910,9 +910,9 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Average response time.
         /// </summary>
-        internal static string Header_MeanReactionTime {
+        internal static string Header_MeanResponseTime {
             get {
-                return ResourceManager.GetString("Header_MeanReactionTime", resourceCulture);
+                return ResourceManager.GetString("Header_MeanResponseTime", resourceCulture);
             }
         }
         
@@ -1061,7 +1061,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Add prime.
+        ///   Recherche une chaîne localisée semblable à Add visual cue.
         /// </summary>
         internal static string Label_AddPrime {
             get {
@@ -1593,6 +1593,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Stroop Experiment.
+        /// </summary>
+        internal static string Title_ExperimentWindow {
+            get {
+                return ResourceManager.GetString("Title_ExperimentWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Export completed.
         /// </summary>
         internal static string Title_Export_Completed {
@@ -1661,6 +1670,15 @@ namespace StroopApp.Resources {
         internal static string Title_ParticipantManagement {
             get {
                 return ResourceManager.GetString("Title_ParticipantManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Participant Window.
+        /// </summary>
+        internal static string Title_ParticipantWindow {
+            get {
+                return ResourceManager.GetString("Title_ParticipantWindow", resourceCulture);
             }
         }
         

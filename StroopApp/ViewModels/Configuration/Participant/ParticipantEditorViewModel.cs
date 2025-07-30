@@ -3,6 +3,7 @@ using System.Windows.Input;
 
 using StroopApp.Core;
 using StroopApp.Models;
+using StroopApp.Resources;
 using StroopApp.Services.Participant;
 
 namespace StroopApp.ViewModels.Configuration.Participant
