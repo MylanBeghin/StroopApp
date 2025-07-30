@@ -115,7 +115,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Continue.
+        ///   Recherche une chaîne localisée semblable à Continue .
         /// </summary>
         internal static string Button_Continue {
             get {
