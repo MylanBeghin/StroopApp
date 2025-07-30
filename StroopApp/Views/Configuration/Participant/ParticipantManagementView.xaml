@@ -124,9 +124,6 @@
                             <GridViewColumn Header="{Binding Source={StaticResource Loc}, Path=[Field_Gender]}"
                                             DisplayMemberBinding="{Binding Gender}"
                                             Width="150" />
-                            <GridViewColumn Header="Résultats"
-                                            DisplayMemberBinding="{Binding Results}"
-                                            Width="80" />
                         </GridView>
                     </ListView.View>
                 </ListView>
