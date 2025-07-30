@@ -28,7 +28,7 @@ namespace StroopApp.Core
 
 			await dialog.ShowAsync();
 		}
-		public async Task<bool> ConfirmationDialog(string message)
+		public async Task<bool> ShowConfirmationDialog(string message)
 		{
 			var dlg = new ContentDialog
 			{

@@ -779,13 +779,15 @@
   <data name="Button_AdvancedSettings" xml:space="preserve">
     <value>Advanced settings</value>
   </data>
-  <data name="Button_Quit_Without_Export" xml:space="preserve">
+	<data name="Button_Quit_Without_Export" xml:space="preserve">
     <value>Quit application without export</value>
+	  </data>
   <data name="Label_StopBits" xml:space="preserve">
     <value>Stop bits</value>
   </data>
-  <data name="Label_Parity" xml:space="preserve">
+	  <data name="Label_Parity" xml:space="preserve">
     <value>Parity</value>
+	  </data>
   <data name="Error_FillIdField" xml:space="preserve">
     <value>Please fill at least the ID field</value>
   </data>
