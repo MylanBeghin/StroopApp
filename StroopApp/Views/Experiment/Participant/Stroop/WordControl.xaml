@@ -8,16 +8,9 @@
              Height="Auto" Width="Auto">
     <Grid>
         <TextBlock Text="{Binding Label}"
-               Foreground="{Binding Color}"
-               FontSize="78"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"/>
-        <Border Width="300"
-                Height="300"
-                Background="White"
-                CornerRadius="4"
-                VerticalAlignment="Bottom"
-                HorizontalAlignment="Right"
-                Margin="16" />
+                   Foreground="{Binding Color}"
+                   FontSize="78"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
     </Grid>
 </UserControl>
