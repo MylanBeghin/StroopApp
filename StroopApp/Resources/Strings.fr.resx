@@ -211,7 +211,6 @@
     <value>Switch (%)</value>
   </data>
   <data name="Tooltip_Switch" xml:space="preserve">
-    <value>Définit la fréquence de changement de forme d'indice visuel entre deux essais. Un switch correspond à un passage d’un carré à un rond, ou inversement. Exemple : 100 % = alternance à chaque essai, 0 % = toujours la même forme.</value>
     <value>Définit la fréquence de changement de forme d’indice visuel entre deux essais. Un switch correspond à un passage d’un carré à un rond, ou inversement. Exemple : 100 % = alternance à chaque essai, 0 % = toujours la même forme.</value>
   </data>
   <data name="Header_Hours" xml:space="preserve">
@@ -283,9 +282,6 @@
   <data name="Header_Accuracy" xml:space="preserve">
     <value>Précision</value>
   </data>
-  <data name="Header_MeanResponseTime" xml:space="preserve">
-    <value>Temps moyen de réponse</value>
-  </data>
   <data name="Header_StroopType" xml:space="preserve">
     <value>Type Stroop</value>
   </data>
@@ -298,20 +294,19 @@
   <data name="Header_FixationDuration" xml:space="preserve">
     <value>Durée de la croix de fixation (ms)</value>
   </data>
-  <data name="Header_PrimeDuration" xml:space="preserve">
-    <value>Durée d'indice visuel (ms)</value>
-  </data>
   <data name="Title_ExperimentWindow" xml:space="preserve">
     <value>Expérience Stroop</value>
   </data>
   <data name="Title_ParticipantWindow" xml:space="preserve">
     <value>Fenêtre Participant</value>
   </data>
+  <data name="Header_PrimeDuration" xml:space="preserve">
+    <value>Durée d'indice visuel (ms)</value>
+  </data>
   <data name="Title_ConfigPage" xml:space="preserve">
     <value>Configuration de l'expérience</value>
   </data>
   <data name="Error_AmorceDurationInvalid" xml:space="preserve">
-    <value>Le temps d'affichage de l'indice visuel doit être supérieur à 0 !</value>
     <value>La durée d'affichage de l'indice visuel doit être supérieure à 0 !</value>
   </data>
   <data name="Error_MaxResponseTimeInvalid" xml:space="preserve">
@@ -353,9 +348,6 @@
   </data>
   <data name="Description_ParticipantManagement" xml:space="preserve">
     <value>Sélectionnez un participant pour lancer l'expérience.</value>
-  </data>
-  <data name="Placeholder_Search" xml:space="preserve">
-    <value>Rechercher...</value>
   </data>
   <data name="Title_ParticipantEditorWindow" xml:space="preserve">
     <value>Modification du participant</value>
@@ -528,9 +520,6 @@
   <data name="Label_Parity" xml:space="preserve">
     <value>Parité</value>
   </data>
-  <data name="ConfigPage_Title" xml:space="preserve">
-    <value>Configuration de l'expérience</value>
-  </data>
   <data name="Column_NoResponse" xml:space="preserve">
     <value>Aucune réponse</value>
   </data>
@@ -540,27 +529,40 @@
   <data name="Check_AddPrime" xml:space="preserve">
     <value>Ajouter indice visuel</value>
   </data>
-  <data name="Dashboard_Title" xml:space="preserve">
-    <value>Tableau de bord</value>
-  </data>
-  <data name="Error_FillRequiredFieldsProperly" xml:space="preserve">
-    <value>Veuillez remplir correctement tous les champs obligatoires.
-</value>
-  </data>
   <data name="Button_Quit_Without_Export" xml:space="preserve">
     <value>Quitter l'application sans exporter</value>
   </data>
-  <data name="Header_MaxResponseTime" xml:space="preserve">
-    <value>Temps de réponse max (ms)</value>
-  </data>
-  <data name="Header_PrimeDuration" xml:space="preserve">
-    <value>Durée d'indice visuel (ms)</value>
+  <data name="Error_FillIdField" xml:space="preserve">
+    <value>Remplissez au moins le champ ID</value>
   </data>
   <data name="Header_MaxResponseTime" xml:space="preserve">
     <value>Temps de réponse max (ms)</value>
   </data>
-  <data name="Error_FillRequiredFieldsProperly" xml:space="preserve">
-    <value>Veuillez remplir correctement tous les champs obligatoires.
-</value>
+  <data name="Header_MeanResponseTime" xml:space="preserve">
+    <value>Temps moyen de réponse</value>
+  </data>
+  <data name="Placeholder_Search" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="Button_Export" xml:space="preserve">
+    <value>Exporter</value>
+  </data>
+  <data name="Label_PublicationPrefix" xml:space="preserve">
+    <value>Pour des publications associées à cette règle, voir Mangin et al.,</value>
+  </data>
+  <data name="Label_Year2021" xml:space="preserve">
+    <value>2021</value>
+  </data>
+  <data name="Label_Year2022" xml:space="preserve">
+    <value>2022</value>
+  </data>
+  <data name="Tooltip_CueSquareResponse" xml:space="preserve">
+    <value>Lorsque l’indice visuel est un carré, répondez en lisant le mot.</value>
+  </data>
+  <data name="Tooltip_CueCircleResponse" xml:space="preserve">
+    <value>Lorsque l’indice visuel est un cercle, répondez en indiquant la couleur du mot.</value>
+  </data>
+  <data name="Description_PreviewIntroduction" xml:space="preserve">
+    <value>Pour expliciter vos paramètres, un aperçu dynamique de la séquence des indices visuels se met à jour en temps réel en fonction de vos réglages.</value>
   </data>
 </root>

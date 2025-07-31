@@ -6,7 +6,7 @@
         xmlns:converters="clr-namespace:StroopApp.Converters"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}"
-        Title="Modification du profil"
+        Title="{Binding Source={StaticResource Loc}, Path=[Title_ProfileEditorWindow]}"
         MinWidth="685"
         Width="685"
         Height="700"
@@ -98,10 +98,10 @@
                                        Grid.Column="6"
                                        Text="{Binding Source={StaticResource Loc}, Path=[Header_MaxResponseTime]}" />
                             <!-- Valeurs et signes alignés uniquement sur la ligne des inputs -->
-                            <TextBox Grid.Row="2"
+                            <ui:NumberBox Grid.Row="2"
                                      Grid.Column="0"
                                      Text="{Binding Profile.WordDuration}"
-                                     Style="{StaticResource ModernReadOnlyTextBoxStyle}" />
+                                          Style="{StaticResource ModernReadOnlyNumberBoxStyle}"/>
                             <TextBlock Grid.Row="2"
                                        Grid.Column="1"
                                        VerticalAlignment="Center"
@@ -118,7 +118,8 @@
                                        VerticalAlignment="Center"
                                        Text=" + "
                                        HorizontalAlignment="Center"
-                                       FontSize="20" />
+                                       FontSize="20"
+                                       />
                             <ui:NumberBox Grid.Row="2"
                                           Grid.Column="4"
                                           Value="{Binding Profile.AmorceDuration, Mode=TwoWay}"
@@ -255,8 +256,8 @@
                             </Grid>
                             <ui:SimpleStackPanel Spacing="6">
                                 <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Field_WordCount]}" />
-                                <TextBox Text="{Binding Profile.WordCount, Mode=TwoWay}"
-                                         Style="{StaticResource ModernReadOnlyTextBoxStyle}" />
+                                <ui:NumberBox Text="{Binding Profile.WordCount, Mode=TwoWay}"
+                                              Style="{StaticResource ModernReadOnlyNumberBoxStyle}" />
                             </ui:SimpleStackPanel>
                         </ui:SimpleStackPanel>
                     </Border>
@@ -308,20 +309,20 @@
                                 </Grid.ColumnDefinitions>
                                 <ui:SimpleStackPanel Spacing="6">
                                     <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_Hours]}" />
-                                    <TextBox Text="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToHoursConverter}}"
-                                             Style="{StaticResource ModernReadOnlyTextBoxStyle}" />
+                                    <ui:NumberBox Text="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToHoursConverter}}"
+                                                  Style="{StaticResource ModernReadOnlyNumberBoxStyle}" />
                                 </ui:SimpleStackPanel>
                                 <ui:SimpleStackPanel Spacing="6"
                                                      Grid.Column="2">
                                     <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_Minutes]}" />
-                                    <TextBox Text="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToMinutesConverter}}"
-                                             Style="{StaticResource ModernReadOnlyTextBoxStyle}" />
+                                    <ui:NumberBox Text="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToMinutesConverter}}"
+                                                  Style="{StaticResource ModernReadOnlyNumberBoxStyle}" />
                                 </ui:SimpleStackPanel>
                                 <ui:SimpleStackPanel Spacing="6"
                                                      Grid.Column="4">
                                     <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_Seconds]}" />
-                                    <TextBox Text="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToSecondsConverter}}"
-                                             Style="{StaticResource ModernReadOnlyTextBoxStyle}" />
+                                    <ui:NumberBox Text="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToSecondsConverter}}"
+                                                  Style="{StaticResource ModernReadOnlyNumberBoxStyle}" />
                                 </ui:SimpleStackPanel>
                             </Grid>
                         </ui:SimpleStackPanel>

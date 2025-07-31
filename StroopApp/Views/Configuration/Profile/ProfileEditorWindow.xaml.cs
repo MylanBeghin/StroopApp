@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
+using System.Windows.Navigation;
 
 using StroopApp.ViewModels.Configuration.Profile;
 
@@ -44,3 +46,5 @@ namespace StroopApp.Views
 		}
 	}
 }
+
+

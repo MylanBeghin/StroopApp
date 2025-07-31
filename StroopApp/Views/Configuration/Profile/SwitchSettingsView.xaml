@@ -34,14 +34,40 @@
                     <!-- Rond (%) -->
                 </Grid.ColumnDefinitions>
                 <!-- Labels des pourcentages -->
-                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Label_SquarePercentage]}"
-                           HorizontalAlignment="Left"
-                           Grid.Row="0"
-                           Grid.Column="0" />
-                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Label_CirclePercentage]}"
-                           HorizontalAlignment="Left"
-                           Grid.Row="0"
-                           Grid.Column="4" />
+                <ui:SimpleStackPanel Orientation="Horizontal"
+                                     VerticalAlignment="Center"
+                                     Spacing="4"
+                                     ToolTip="{Binding Source={StaticResource Loc}, Path=[Tooltip_CueSquareResponse]}"
+                                     ToolTipService.Placement="Top"
+                                     ToolTipService.InitialShowDelay="100"
+                                     Margin="0,0,0,8">
+                    <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Label_SquarePercentage]}"
+                               HorizontalAlignment="Left" />
+                    <TextBlock Text=""
+                               FontFamily="Segoe MDL2 Assets"
+                               FontSize="14"
+                               Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"
+                               Margin="0,4,0,0" />
+                </ui:SimpleStackPanel>
+                <ui:SimpleStackPanel Orientation="Horizontal"
+                                     VerticalAlignment="Center"
+                                     Spacing="4"
+                                     ToolTip="{Binding Source={StaticResource Loc}, Path=[Tooltip_CueCircleResponse]}"
+                                     ToolTipService.Placement="Top"
+                                     ToolTipService.InitialShowDelay="100"
+                                     Margin="0,0,0,8"
+                                     Grid.Row="0"
+                                     Grid.Column="4">
+                    <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Label_CirclePercentage]}"
+                               HorizontalAlignment="Left"
+                               Grid.Row="0"
+                               Grid.Column="4" />
+                    <TextBlock Text=""
+                               FontFamily="Segoe MDL2 Assets"
+                               FontSize="14"
+                               Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"
+                               Margin="0,4,0,0" />
+                </ui:SimpleStackPanel>
                 <!-- NumberBox, symboles et slider -->
                 <ui:NumberBox Value="{Binding SquarePercent, Mode=TwoWay}"
                               Minimum="0"
@@ -68,11 +94,12 @@
                         Height="28"
                         VerticalAlignment="Center" />
                 <TextBlock Text="●"
-                           FontSize="22"
+                           FontSize="42"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            Grid.Row="1"
-                           Grid.Column="3" />
+                           Grid.Column="3"
+                           Padding="0,0,0,8"/>
                 <ui:NumberBox Value="{Binding CirclePercent, Mode=TwoWay}"
                               Minimum="0"
                               Maximum="100"
@@ -81,6 +108,17 @@
                               Grid.Column="4"
                               Margin="4,0,0,0" />
             </Grid>
+            <TextBlock FontSize="12">
+    <Run Text="{Binding Source={StaticResource Loc}, Path=[Label_PublicationPrefix], Mode=OneWay}" />
+    <Hyperlink NavigateUri="https://www.sciencedirect.com/science/article/pii/S1469029221001515"
+                RequestNavigate="Hyperlink_RequestNavigate">
+        <Run Text="{Binding Source={StaticResource Loc}, Path=[Label_Year2021], Mode=OneWay}" />
+    </Hyperlink>
+    <Run Text="," />
+    <Hyperlink NavigateUri="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2022.998393/full"
+                RequestNavigate="Hyperlink_RequestNavigate">
+        <Run Text="{Binding Source={StaticResource Loc}, Path=[Label_Year2022], Mode=OneWay}" />
+    </Hyperlink></TextBlock>
             <!-- Pourcentage de switch -->
             <Grid Margin="0,8,0,8">
                 <Grid.ColumnDefinitions>
@@ -102,11 +140,13 @@
                               SpinButtonPlacementMode="Inline"
                               Grid.Column="2" />
             </Grid>
-
-            <!-- Preview -->
-            <TextBox Text="{Binding SwitchPreview, Mode=OneWay}"
-                     Style="{StaticResource ModernReadOnlyTextBoxStyle}"
-                     ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Label_Overview]}" />
+            <ui:SimpleStackPanel Spacing="4">
+                <TextBox Text="{Binding SwitchPreview, Mode=OneWay}"
+                         Style="{StaticResource ModernReadOnlyTextBoxStyle}"
+                         ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Label_Overview]}"
+                         Margin="0"/>
+                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Description_PreviewIntroduction]}" FontSize="12" TextWrapping="Wrap" />
+            </ui:SimpleStackPanel>
         </ui:SimpleStackPanel>
     </Border>
 </UserControl>
