@@ -54,7 +54,7 @@ public class StroopViewModel : ViewModelBase
 
 	public void StartResponseTimer()
 	{
-		_responseTime.Restart(); // démarrage après rendu
+		_responseTime.Restart();
 		_wordTimer.Restart();
 		_inputTcs = new TaskCompletionSource<double>();
 	}

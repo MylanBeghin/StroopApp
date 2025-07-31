@@ -18,11 +18,16 @@ namespace StroopApp.XUnitTests.Services
 			Directory.CreateDirectory(path);
 			return path;
 		}
-
+		ExperimentSettings Settings = new ExperimentSettings
+		{
+			Participant = new Participant { Id = "42" },
+			ExperimentContext = new SharedExperimentData(),
+			CurrentProfile = new ExperimentProfile { IsAmorce = true }
+		};
 		private ExperimentSettings CreateMockSettings()
 		{
 			var participant = new Participant { Id = "42" };
-			var block = new Block(1, "dummy");
+			var block = new Block(Settings);
 			block.TrialRecords.Add(new StroopTrial
 			{
 				IsCongruent = true,
@@ -114,7 +119,7 @@ namespace StroopApp.XUnitTests.Services
 			// Arrange
 			var tempDir = CreateTempDirectory();
 			var settings = CreateMockSettings();
-			var block2 = new Block(2, "dummy2");
+			var block2 = new Block(Settings);
 			block2.TrialRecords.Add(new StroopTrial { IsCongruent = false, ExpectedAnswer = "A", GivenAnswer = "B", IsValidResponse = false, ReactionTime = 750, TrialNumber = 1, Amorce = AmorceType.Round });
 			block2.TrialRecords.Add(new StroopTrial { IsCongruent = true, ExpectedAnswer = "C", GivenAnswer = "C", IsValidResponse = true, ReactionTime = 300, TrialNumber = 2, Amorce = AmorceType.Square });
 			settings.ExperimentContext.Blocks.Add(block2);

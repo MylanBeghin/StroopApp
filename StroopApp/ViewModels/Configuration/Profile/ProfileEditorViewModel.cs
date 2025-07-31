@@ -108,9 +108,9 @@ namespace StroopApp.ViewModels.Configuration.Profile
 				return;
 			}
 
-			if (Profile.WordDuration <= 0 || Profile.TaskDuration % Profile.WordDuration != 0)
+			if (Profile.TaskDuration % Profile.WordDuration != 0)
 			{
-				ShowErrorDialog(Strings.Error_MaxResponseTimeInvalid);
+				ShowErrorDialog(Strings.Error_TrialDurationNotDividingTaskDuration);
 				return;
 			}
 

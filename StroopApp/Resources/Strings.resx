@@ -145,7 +145,7 @@
     <value>Trial duration must be positive and divide task duration.</value>
   </data>
   <data name="Error_GroupSizeInvalid" xml:space="preserve">
-    <value>Group size must be positive and divide the number of trials.</value>
+    <value>The averaging interval must be positive and divide the number of trials.</value>
   </data>
   <data name="Error_SelectParticipantToModify" xml:space="preserve">
     <value>Please select a participant to modify!</value>
@@ -238,7 +238,7 @@
     <value>Based on trial count</value>
   </data>
   <data name="Field_GroupSize" xml:space="preserve">
-    <value>Group size</value>
+    <value>Averaging interval</value>
   </data>
   <data name="Field_WordCount" xml:space="preserve">
     <value>Trials count</value>
@@ -259,7 +259,7 @@
     <value>Edit</value>
   </data>
   <data name="Button_Continue" xml:space="preserve">
-    <value>Continue </value>
+    <value>Continue witht the same participant</value>
   </data>
   <data name="Button_NewExperiment" xml:space="preserve">
     <value>New experiment</value>
@@ -276,14 +276,11 @@
   <data name="Header_Block" xml:space="preserve">
     <value>Block</value>
   </data>
-  <data name="Header_Trials" xml:space="preserve">
-    <value>Trials</value>
+  <data name="Header_TrialsPerBlock" xml:space="preserve">
+    <value>Number of trials per block </value>
   </data>
   <data name="Header_Accuracy" xml:space="preserve">
     <value>Accuracy</value>
-  </data>
-  <data name="Header_StroopType" xml:space="preserve">
-    <value>Stroop type</value>
   </data>
   <data name="Toggle_On" xml:space="preserve">
     <value>On</value>
@@ -386,7 +383,7 @@
     <value>Progress</value>
   </data>
   <data name="Title_ParticipantDetails" xml:space="preserve">
-    <value>Participant details</value>
+    <value>Participant information</value>
   </data>
   <data name="Title_ExperimentDetails" xml:space="preserve">
     <value>Experiment details</value>
@@ -461,7 +458,7 @@
     <value>Response time (ms)</value>
   </data>
   <data name="Label_CurrentParticipant" xml:space="preserve">
-    <value>Participant no. {0}</value>
+    <value>Participant ID : {0}</value>
   </data>
   <data name="Label_CurrentProfile" xml:space="preserve">
     <value>Task: {0}</value>
@@ -564,5 +561,44 @@
   </data>
   <data name="Description_PreviewIntroduction" xml:space="preserve">
     <value>To illustrate your parameters, a dynamic preview of the sequence of visual cues updates in real time based on your settings.</value>
+  </data>
+  <data name="Button_OpenExportFolder" xml:space="preserve">
+    <value>Open the results folder</value>
+  </data>
+  <data name="Error_ExportError" xml:space="preserve">
+    <value>Error during export</value>
+  </data>
+  <data name="Label_ExportInProgress" xml:space="preserve">
+    <value>Export in progress...</value>
+  </data>
+  <data name="Message_ExportSuccess" xml:space="preserve">
+    <value>Export successful!</value>
+  </data>
+  <data name="Label_ResultsSavedHere" xml:space="preserve">
+    <value>Results saved here</value>
+  </data>
+  <data name="Button_NewExport" xml:space="preserve">
+    <value>New export</value>
+  </data>
+  <data name="Button_Retry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="Button_ExitApplication" xml:space="preserve">
+    <value>Exit application</value>
+  </data>
+  <data name="Message_ConfirmExitWithoutExport" xml:space="preserve">
+    <value>Are you sure you want to exit the application without exporting the results? All non-exported data will be lost.</value>
+  </data>
+  <data name="Error_TrialDurationNotDividingTaskDuration" xml:space="preserve">
+    <value>Task duration must be divisible by trial duration.</value>
+  </data>
+  <data name="Header_ExperimentProfile" xml:space="preserve">
+    <value>Experiment profile</value>
+  </data>
+  <data name="Header_Trials" xml:space="preserve">
+    <value>Trials</value>
+  </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>Confirm</value>
   </data>
 </root>

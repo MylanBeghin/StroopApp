@@ -199,7 +199,7 @@ namespace StroopApp.Models
 
 		public void AddNewSerie(ExperimentSettings _settings)
 		{
-			CurrentBlock = new Block(_settings.Block, _settings.CurrentProfile.ProfileName);
+			CurrentBlock = new Block(_settings);
 			Blocks.Add(CurrentBlock);
 			var color = _palette[_colorIndex % _palette.Length];
 			var fillColor = color.WithAlpha(50);

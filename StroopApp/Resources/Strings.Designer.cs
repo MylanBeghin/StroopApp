@@ -106,6 +106,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Confirm.
+        /// </summary>
+        public static string Button_Confirm {
+            get {
+                return ResourceManager.GetString("Button_Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Connect.
         /// </summary>
         public static string Button_Connect {
@@ -115,7 +124,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Continue .
+        ///   Recherche une chaîne localisée semblable à Continue witht the same participant.
         /// </summary>
         public static string Button_Continue {
             get {
@@ -169,6 +178,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Exit application.
+        /// </summary>
+        public static string Button_ExitApplication {
+            get {
+                return ResourceManager.GetString("Button_ExitApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Export.
         /// </summary>
         public static string Button_Export {
@@ -205,11 +223,29 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à New export.
+        /// </summary>
+        public static string Button_NewExport {
+            get {
+                return ResourceManager.GetString("Button_NewExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à OK.
         /// </summary>
         public static string Button_OK {
             get {
                 return ResourceManager.GetString("Button_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Open the results folder.
+        /// </summary>
+        public static string Button_OpenExportFolder {
+            get {
+                return ResourceManager.GetString("Button_OpenExportFolder", resourceCulture);
             }
         }
         
@@ -237,6 +273,15 @@ namespace StroopApp.Resources {
         public static string Button_Refresh {
             get {
                 return ResourceManager.GetString("Button_Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Retry.
+        /// </summary>
+        public static string Button_Retry {
+            get {
+                return ResourceManager.GetString("Button_Retry", resourceCulture);
             }
         }
         
@@ -403,6 +448,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error during export.
+        /// </summary>
+        public static string Error_ExportError {
+            get {
+                return ResourceManager.GetString("Error_ExportError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Please fill at least the ID field.
         /// </summary>
         public static string Error_FillIdField {
@@ -412,7 +466,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Group size must be positive and divide the number of trials..
+        ///   Recherche une chaîne localisée semblable à The averaging interval must be positive and divide the number of trials..
         /// </summary>
         public static string Error_GroupSizeInvalid {
             get {
@@ -547,6 +601,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Task duration must be divisible by trial duration..
+        /// </summary>
+        public static string Error_TrialDurationNotDividingTaskDuration {
+            get {
+                return ResourceManager.GetString("Error_TrialDurationNotDividingTaskDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Trial duration must be positive and divide task duration..
         /// </summary>
         public static string Error_WordDurationInvalid {
@@ -574,7 +637,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Group size.
+        ///   Recherche une chaîne localisée semblable à Averaging interval.
         /// </summary>
         public static string Field_GroupSize {
             get {
@@ -660,6 +723,15 @@ namespace StroopApp.Resources {
         public static string Header_Congruence {
             get {
                 return ResourceManager.GetString("Header_Congruence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Experiment profile.
+        /// </summary>
+        public static string Header_ExperimentProfile {
+            get {
+                return ResourceManager.GetString("Header_ExperimentProfile", resourceCulture);
             }
         }
         
@@ -754,15 +826,6 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Stroop type.
-        /// </summary>
-        public static string Header_StroopType {
-            get {
-                return ResourceManager.GetString("Header_StroopType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Switch (%).
         /// </summary>
         public static string Header_Switch {
@@ -786,6 +849,15 @@ namespace StroopApp.Resources {
         public static string Header_Trials {
             get {
                 return ResourceManager.GetString("Header_Trials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Number of trials per block .
+        /// </summary>
+        public static string Header_TrialsPerBlock {
+            get {
+                return ResourceManager.GetString("Header_TrialsPerBlock", resourceCulture);
             }
         }
         
@@ -826,7 +898,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Participant no. {0}.
+        ///   Recherche une chaîne localisée semblable à Participant ID : {0}.
         /// </summary>
         public static string Label_CurrentParticipant {
             get {
@@ -885,6 +957,15 @@ namespace StroopApp.Resources {
         public static string Label_ExportFolderSelector_PathLabel {
             get {
                 return ResourceManager.GetString("Label_ExportFolderSelector_PathLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Export in progress....
+        /// </summary>
+        public static string Label_ExportInProgress {
+            get {
+                return ResourceManager.GetString("Label_ExportInProgress", resourceCulture);
             }
         }
         
@@ -1024,6 +1105,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Results saved here.
+        /// </summary>
+        public static string Label_ResultsSavedHere {
+            get {
+                return ResourceManager.GetString("Label_ResultsSavedHere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à List of ports.
         /// </summary>
         public static string Label_SerialPortsList {
@@ -1096,6 +1186,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to exit the application without exporting the results? All non-exported data will be lost..
+        /// </summary>
+        public static string Message_ConfirmExitWithoutExport {
+            get {
+                return ResourceManager.GetString("Message_ConfirmExitWithoutExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Do you really want to delete this participant? Their data will be archived..
         /// </summary>
         public static string Message_DeleteParticipantConfirmation {
@@ -1129,6 +1228,15 @@ namespace StroopApp.Resources {
         public static string Message_Export_Completed {
             get {
                 return ResourceManager.GetString("Message_Export_Completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Export successful!.
+        /// </summary>
+        public static string Message_ExportSuccess {
+            get {
+                return ResourceManager.GetString("Message_ExportSuccess", resourceCulture);
             }
         }
         
@@ -1268,7 +1376,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Participant details.
+        ///   Recherche une chaîne localisée semblable à Participant information.
         /// </summary>
         public static string Title_ParticipantDetails {
             get {

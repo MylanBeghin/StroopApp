@@ -145,7 +145,7 @@
     <value>La durée de l'essai doit être positive et la durée totale doit être divisible par la durée de la tâche.</value>
   </data>
   <data name="Error_GroupSizeInvalid" xml:space="preserve">
-    <value>La taille du groupe doit être positive et diviser le nombre d'essais.</value>
+    <value>L'intervalle de moyenne doit être positive et diviser le nombre d'essais.</value>
   </data>
   <data name="Error_SelectParticipantToModify" xml:space="preserve">
     <value>Veuillez sélectionner un participant à modifier !</value>
@@ -208,10 +208,10 @@
     <value>Définit la proportion d'essais congruents dans le bloc. Un essai est congruent lorsque sa signification correspond à sa couleur (ex. le mot Rouge écrit en rouge). Exemple : 25 % = 75 % d’incongruents, 25 % de congruents.</value>
   </data>
   <data name="Header_Switch" xml:space="preserve">
-    <value>Switch (%)</value>
+    <value>Alternance (%)</value>
   </data>
   <data name="Tooltip_Switch" xml:space="preserve">
-    <value>Définit la fréquence de changement de forme d’indice visuel entre deux essais. Un switch correspond à un passage d’un carré à un rond, ou inversement. Exemple : 100 % = alternance à chaque essai, 0 % = toujours la même forme.</value>
+    <value>Définit la fréquence d'alternance entre deux formes d'indice visuel différentes. Une seule alternance correspond au passage d’un carré à un rond, ou inversement. Exemple : 100 % = alternance à chaque essai, 0 % = toujours la même forme.</value>
   </data>
   <data name="Header_Hours" xml:space="preserve">
     <value>Heures</value>
@@ -238,7 +238,7 @@
     <value>En fonction du nombre d'essai</value>
   </data>
   <data name="Field_GroupSize" xml:space="preserve">
-    <value>Taille du groupe</value>
+    <value>Intervalle de moyenne</value>
   </data>
   <data name="Field_WordCount" xml:space="preserve">
     <value>Nombre d'essais</value>
@@ -259,7 +259,7 @@
     <value>Modifier</value>
   </data>
   <data name="Button_Continue" xml:space="preserve">
-    <value>Relancer</value>
+    <value>Continuer avec le même participant</value>
   </data>
   <data name="Button_NewExperiment" xml:space="preserve">
     <value>Nouvelle expérience</value>
@@ -276,14 +276,11 @@
   <data name="Header_Block" xml:space="preserve">
     <value>Bloc</value>
   </data>
-  <data name="Header_Trials" xml:space="preserve">
-    <value>Essais</value>
+  <data name="Header_TrialsPerBlock" xml:space="preserve">
+    <value>Nombre d'essais par bloc</value>
   </data>
   <data name="Header_Accuracy" xml:space="preserve">
     <value>Précision</value>
-  </data>
-  <data name="Header_StroopType" xml:space="preserve">
-    <value>Type Stroop</value>
   </data>
   <data name="Toggle_On" xml:space="preserve">
     <value>Activé</value>
@@ -301,7 +298,7 @@
     <value>Fenêtre Participant</value>
   </data>
   <data name="Header_PrimeDuration" xml:space="preserve">
-    <value>Durée d'indice visuel (ms)</value>
+    <value>Durée de l'indice visuel (ms)</value>
   </data>
   <data name="Title_ConfigPage" xml:space="preserve">
     <value>Configuration de l'expérience</value>
@@ -310,7 +307,7 @@
     <value>La durée d'affichage de l'indice visuel doit être supérieure à 0 !</value>
   </data>
   <data name="Error_MaxResponseTimeInvalid" xml:space="preserve">
-    <value>Le temps de réposnemaximum doit être positif.</value>
+    <value>Le temps de réponse maximum doit être positif.</value>
   </data>
   <data name="Title_Export_Completed" xml:space="preserve">
     <value>Export terminé</value>
@@ -386,7 +383,7 @@
     <value>Avancement</value>
   </data>
   <data name="Title_ParticipantDetails" xml:space="preserve">
-    <value>Détails du participant</value>
+    <value>Informations du participant</value>
   </data>
   <data name="Title_ExperimentDetails" xml:space="preserve">
     <value>Détails de l'expérience</value>
@@ -413,7 +410,7 @@
     <value>Suivi de l'expérience</value>
   </data>
   <data name="Button_OK" xml:space="preserve">
-    <value>OK</value>
+    <value>Ok</value>
   </data>
   <data name="Error_ParticipantIdAlreadyUsed" xml:space="preserve">
     <value>Cet identifiant est déjà utilisé pour un autre participant</value>
@@ -461,7 +458,7 @@
     <value>Temps de réponse (ms)</value>
   </data>
   <data name="Label_CurrentParticipant" xml:space="preserve">
-    <value>Participant n° {0}</value>
+    <value>ID du participant : {0}</value>
   </data>
   <data name="Label_CurrentProfile" xml:space="preserve">
     <value>Tâche : {0}</value>
@@ -564,5 +561,44 @@
   </data>
   <data name="Description_PreviewIntroduction" xml:space="preserve">
     <value>Pour expliciter vos paramètres, un aperçu dynamique de la séquence des indices visuels se met à jour en temps réel en fonction de vos réglages.</value>
+  </data>
+  <data name="Button_OpenExportFolder" xml:space="preserve">
+    <value>Ouvrir le dossier des résultats</value>
+  </data>
+  <data name="Error_ExportError" xml:space="preserve">
+    <value>Erreur lors de l’export</value>
+  </data>
+  <data name="Label_ExportInProgress" xml:space="preserve">
+    <value>Export en cours...</value>
+  </data>
+  <data name="Message_ExportSuccess" xml:space="preserve">
+    <value>Export réussi !</value>
+  </data>
+  <data name="Label_ResultsSavedHere" xml:space="preserve">
+    <value>Résultats enregistrés ici</value>
+  </data>
+  <data name="Button_NewExport" xml:space="preserve">
+    <value>Nouvel export</value>
+  </data>
+  <data name="Button_Retry" xml:space="preserve">
+    <value>Réessayer</value>
+  </data>
+  <data name="Button_ExitApplication" xml:space="preserve">
+    <value>Quitter l'application</value>
+  </data>
+  <data name="Message_ConfirmExitWithoutExport" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir quitter l'application sans exporter les résultats ? Toutes données non exportées seront perdues.</value>
+  </data>
+  <data name="Error_TrialDurationNotDividingTaskDuration" xml:space="preserve">
+    <value>La durée de la tâche doit être divisible par la durée d'un essai.</value>
+  </data>
+  <data name="Header_ExperimentProfile" xml:space="preserve">
+    <value>Profil d'expérience</value>
+  </data>
+  <data name="Header_Trials" xml:space="preserve">
+    <value>Essais</value>
+  </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>Confirmer</value>
   </data>
 </root>

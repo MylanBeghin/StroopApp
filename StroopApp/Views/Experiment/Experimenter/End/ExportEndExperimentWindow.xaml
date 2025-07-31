@@ -35,7 +35,7 @@
                                                              Height="64"
                                                              Width="64" />
                                             <TextBlock Margin="0,16,0,0"
-                                                       Text="Export en cours..." />
+                                                       Text="{Binding Source={StaticResource Loc}, Path=[Label_ExportInProgress]}" />
                                         </ui:SimpleStackPanel>
                                     </DataTemplate>
                                 </Setter.Value>
@@ -57,9 +57,11 @@
                                                                      Spacing="16">
                                                     <TextBlock FontWeight="Bold"
                                                                Foreground="Green"
-                                                               Text="Export réussi !" />
-                                                    <TextBlock Text="{Binding ExportPath, StringFormat='Résultats enregistrés ici : {0}'}"
-                                                               TextWrapping="Wrap" />
+                                                               Text="{Binding Source={StaticResource Loc}, Path=[Message_ExportSuccess]}" />
+                                                    <TextBlock TextWrapping="Wrap">
+   <Run Text="{Binding Source={StaticResource Loc}, Path=[Label_ResultsSavedHere], Mode=OneWay}" />
+   <Run Text=": " />
+   <Run Text="{Binding ExportPath}" /></TextBlock>
                                                     <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_OpenExportFolder]}"
                                                             Command="{Binding OpenAndSelectTodayExportFileCommand}" />
                                                 </ui:SimpleStackPanel>
@@ -68,12 +70,12 @@
                                                                  HorizontalAlignment="Center"
                                                                  Spacing="8"
                                                                  Margin="0,16,0,0">
-                                                <Button Content="Nouvel export"
+                                                <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_NewExport], Mode=OneWay}"
                                                         Command="{Binding ReExportCommand}"
                                                         Visibility="{Binding CanReExport}" />
-                                                <Button Content="Nouvelle expérience"
+                                                <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_NewExperiment]}"
                                                         Command="{Binding NewExperimentCommand}" />
-                                                <Button Content="Quitter l'application"
+                                                <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Quit]}"
                                                         Command="{Binding QuitCommand}" />
                                             </ui:SimpleStackPanel>
                                         </ui:SimpleStackPanel>
@@ -91,15 +93,15 @@
                                                              Spacing="16">
                                             <TextBlock FontWeight="Bold"
                                                        Foreground="Red"
-                                                       Text="Erreur lors de l’export" />
+                                                       Text="{Binding Source={StaticResource Loc}, Path=[Error_ExportError]}" />
                                             <TextBlock Text="{Binding ErrorMessage}"
                                                        TextWrapping="Wrap" />
                                             <ui:SimpleStackPanel Orientation="Horizontal"
                                                                  HorizontalAlignment="Center"
                                                                  Spacing="8">
-                                                <Button Content="Réessayer"
+                                                <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Retry], Mode=OneWay}"
                                                         Command="{Binding RetryCommand}" />
-                                                <Button Content="Quitter l'application"
+                                                <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_ExitApplication], Mode=OneWay}"
                                                         Command="{Binding QuitCommand}" />
                                             </ui:SimpleStackPanel>
                                         </ui:SimpleStackPanel>
@@ -115,9 +117,9 @@
                                         <ui:SimpleStackPanel Orientation="Horizontal"
                                                              HorizontalAlignment="Center"
                                                              Spacing="16">
-                                            <Button Content="Exporter"
+                                            <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Export], Mode=OneWay}"
                                                     Command="{Binding ExportCommand}" />
-                                            <Button Content="Annuler"
+                                            <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Cancel], Mode=OneWay}"
                                                     Command="{Binding CancelCommand}" />
                                         </ui:SimpleStackPanel>
                                     </DataTemplate>

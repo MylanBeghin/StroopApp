@@ -70,15 +70,17 @@
                             </Style>
                         </DataGrid.RowStyle>
                         <DataGrid.Columns>
+                            <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_ExperimentProfile]}"
+                                                Binding="{Binding BlockExperimentProfile}" />
                             <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_Block]}"
                                                 Binding="{Binding BlockNumber, StringFormat=Bloc {0}}" />
-                            <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_Trials]}"
-                                                Binding="{Binding TotalTrials}" />
+                            <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_TrialsPerBlock]}"
+                                                Binding="{Binding TrialsPerBlock}" />
                             <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_Accuracy]}"
-                                                Binding="{Binding Accuracy, StringFormat={}{0}%}" />
+                                                Binding="{Binding Accuracy, StringFormat={}{0:F2}%}" />
                             <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_MeanResponseTime]}"
-                                                Binding="{Binding ResponseTimeMean, StringFormat={}{0} ms}" />
-                            <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_StroopType]}"
+                                                Binding="{Binding ResponseTimeMean, StringFormat={}{0:F2} ms}" />
+                            <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_Congruence]}"
                                                 Binding="{Binding StroopType}" />
                         </DataGrid.Columns>
                     </DataGrid>

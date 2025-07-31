@@ -21,7 +21,7 @@ namespace StroopApp.Views.Experiment.Experimenter
 				Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
 				"StroopApp");
 			var ExportationService = new ExportationService(settings, configDir);
-			DataContext = new EndExperimentViewModel(settings, ExportationService, experimenterNavigationService, windowManager);
+			DataContext = new EndExperimentPageViewModel(settings, ExportationService, experimenterNavigationService, windowManager);
 			var GlobalGraph = new GlobalGraphView(settings);
 			MainGrid.Children.Add(GlobalGraph);
 			Grid.SetRow(GlobalGraph, 4);
