@@ -273,7 +273,7 @@
   <data name="Header_ParticipantId" xml:space="preserve">
     <value>Participant ID</value>
   </data>
-  <data name="Header_Block" xml:space="preserve">
+  <data name="Header_BlockNumber" xml:space="preserve">
     <value>Block</value>
   </data>
   <data name="Header_TrialsPerBlock" xml:space="preserve">
@@ -297,7 +297,7 @@
   <data name="Title_ParticipantWindow" xml:space="preserve">
     <value>Participant Window</value>
   </data>
-  <data name="Header_PrimeDuration" xml:space="preserve">
+  <data name="Header_VisualCueDuration" xml:space="preserve">
     <value>Visual cue duration (ms)</value>
   </data>
   <data name="Title_ConfigPage" xml:space="preserve">
@@ -600,5 +600,8 @@
   </data>
   <data name="Button_Confirm" xml:space="preserve">
     <value>Confirm</value>
+  </data>
+  <data name="Header_VisualCue" xml:space="preserve">
+    <value>Visual cue</value>
   </data>
 </root>

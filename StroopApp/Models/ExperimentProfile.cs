@@ -282,6 +282,21 @@ namespace StroopApp.Models
 				}
 			}
 		}
+		private string _instructionsLanguage;
+
+		public string InstructionsLanguage
+		{
+			get => _instructionsLanguage;
+			set
+			{
+				if (_instructionsLanguage != value)
+				{
+					_instructionsLanguage = value;
+					OnPropertyChanged();
+				}
+			}
+		}
+
 		public void UpdateDerivedValues()
 		{
 			WordDuration = MaxReactionTime + FixationDuration + AmorceDuration;

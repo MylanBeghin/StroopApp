@@ -711,9 +711,9 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Block.
         /// </summary>
-        public static string Header_Block {
+        public static string Header_BlockNumber {
             get {
-                return ResourceManager.GetString("Header_Block", resourceCulture);
+                return ResourceManager.GetString("Header_BlockNumber", resourceCulture);
             }
         }
         
@@ -790,15 +790,6 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Visual cue duration (ms).
-        /// </summary>
-        public static string Header_PrimeDuration {
-            get {
-                return ResourceManager.GetString("Header_PrimeDuration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Response time (ms).
         /// </summary>
         public static string Header_ResponseTime {
@@ -858,6 +849,24 @@ namespace StroopApp.Resources {
         public static string Header_TrialsPerBlock {
             get {
                 return ResourceManager.GetString("Header_TrialsPerBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Visual cue.
+        /// </summary>
+        public static string Header_VisualCue {
+            get {
+                return ResourceManager.GetString("Header_VisualCue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Visual cue duration (ms).
+        /// </summary>
+        public static string Header_VisualCueDuration {
+            get {
+                return ResourceManager.GetString("Header_VisualCueDuration", resourceCulture);
             }
         }
         

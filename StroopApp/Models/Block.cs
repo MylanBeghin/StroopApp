@@ -81,6 +81,17 @@ public class Block : ModelBase
 			OnPropertyChanged();
 		}
 	}
+	public string? _visualCue;
+
+	public string? VisualCue
+	{
+		get => _visualCue;
+		set
+		{
+			_visualCue = value;
+			OnPropertyChanged();
+		}
+	}
 	private readonly ExperimentSettings _settings;
 
 	public ObservableCollection<StroopTrial> TrialRecords { get; } = new();
@@ -92,7 +103,10 @@ public class Block : ModelBase
 		_blockNumber = settings.Block;
 		_congruencePercent = settings.CurrentProfile.CongruencePercent;
 		_switchPercent = settings.CurrentProfile.SwitchPercent;
-
+		if (settings.CurrentProfile.IsAmorce)
+			_visualCue = "✅";
+		else
+			_visualCue = "❎";
 	}
 
 	public void CalculateValues()

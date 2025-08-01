@@ -93,7 +93,7 @@
                                        Text="{Binding Source={StaticResource Loc}, Path=[Header_FixationDuration]}" />
                             <TextBlock Grid.Row="0"
                                        Grid.Column="4"
-                                       Text="{Binding Source={StaticResource Loc}, Path=[Header_PrimeDuration]}" />
+                                       Text="{Binding Source={StaticResource Loc}, Path=[Header_VisualCueDuration]}" />
                             <TextBlock Grid.Row="0"
                                        Grid.Column="6"
                                        Text="{Binding Source={StaticResource Loc}, Path=[Header_MaxResponseTime]}" />
