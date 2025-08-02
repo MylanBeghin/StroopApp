@@ -7,7 +7,7 @@
         xmlns:ui="http://schemas.modernwpf.com/2019"
         Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}"
         Title="{Binding Source={StaticResource Loc}, Path=[Title_ProfileEditorWindow]}"
-        MinWidth="685"
+        MinWidth="930"
         Width="685"
         Height="700"
         WindowStartupLocation="CenterScreen"
@@ -46,8 +46,21 @@
                         BorderThickness="0.5"
                         BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
                     <ui:SimpleStackPanel Spacing="12">
-                        <TextBox ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Field_ProfileName]}"
-                                 Text="{Binding Profile.ProfileName, Mode=TwoWay}" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.7*" />
+                                <ColumnDefinition Width="16" />
+                                <ColumnDefinition Width="0.3*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Field_ProfileName]}"
+                                     Text="{Binding Profile.ProfileName, Mode=TwoWay}" />
+                            <ComboBox ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Field_InstructionsLanguage]}"
+                                      ItemsSource ="{Binding Languages}"
+                                      SelectedItem="{Binding SelectedInstructionsLanguage, Mode=TwoWay}"
+                                      DisplayMemberPath="DisplayName"
+                                      Grid.Column="2"
+                                      HorizontalAlignment="Stretch"/>
+                        </Grid>
                         <Grid Margin="0,8,0,8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.7*" />
@@ -76,13 +89,13 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="0.25*" />
                                 <ColumnDefinition Width="16" />
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="0.25*" />
                                 <ColumnDefinition Width="16" />
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="0.25*" />
                                 <ColumnDefinition Width="16" />
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="0.25*" />
                             </Grid.ColumnDefinitions>
                             <!-- En-têtes des colonnes -->
                             <TextBlock Grid.Row="0"

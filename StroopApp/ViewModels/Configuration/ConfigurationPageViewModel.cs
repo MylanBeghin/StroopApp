@@ -4,6 +4,7 @@ using System.Windows.Input;
 using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Resources;
+using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.Configuration.Participant;
@@ -20,6 +21,7 @@ namespace StroopApp.ViewModels.Configuration
 		private readonly KeyMappingViewModel _keyMappingViewModel;
 		private readonly INavigationService _experimenterNavigationService;
 		private readonly IWindowManager _windowManager;
+		private readonly ILanguageService _languageService;
 		public ExperimentSettings _settings
 		{
 			get; set;

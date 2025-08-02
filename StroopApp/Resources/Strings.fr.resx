@@ -604,4 +604,82 @@
   <data name="Header_VisualCue" xml:space="preserve">
     <value>Indice visuel</value>
   </data>
+  <data name="Field_InstructionsLanguage" xml:space="preserve">
+    <value>Langue des instructions</value>
+  </data>
+  <data name="Word_RED" xml:space="preserve">
+    <value>ROUGE</value>
+  </data>
+  <data name="Page1_Intro" xml:space="preserve">
+    <value>Nous allons maintenant réaliser une tâche de Stroop.</value>
+  </data>
+  <data name="Page1_Display" xml:space="preserve">
+    <value>Une croix de fixation apparaîtra, suivie d’un mot de couleur.</value>
+  </data>
+  <data name="Page1_WordsList" xml:space="preserve">
+    <value>Les mots seront : ROUGE, VERT, BLEU, JAUNE.</value>
+  </data>
+  <data name="Page1_Example" xml:space="preserve">
+    <value>Par exemple :</value>
+  </data>
+  <data name="Page2_CueExplanation" xml:space="preserve">
+    <value>Une forme apparaîtra : un carré signifie que vous devez lire le mot, un cercle signifie que vous devez donner la couleur de l’encre.</value>
+  </data>
+  <data name="Page3_Questions" xml:space="preserve">
+    <value>Avez-vous des questions avant de commencer ?</value>
+  </data>
+  <data name="Case1_P1_Congruence" xml:space="preserve">
+    <value>Ces noms seront toujours écrits dans une couleur différente du sens du mot.</value>
+  </data>
+  <data name="Case1_P2_Instructions" xml:space="preserve">
+    <value>Appuyez sur la touche correspondant à la couleur de l’encre, le plus rapidement possible, avec le moins d’erreurs.</value>
+  </data>
+  <data name="Case1_P2_Example" xml:space="preserve">
+    <value>La bonne réponse serait "BLEU", car le mot est écrit en bleu.</value>
+  </data>
+  <data name="Case2_P1_Congruence" xml:space="preserve">
+    <value>&#x8;Ces noms seront toujours écrits dans la même couleur que le sens du mot.</value>
+  </data>
+  <data name="Case2_P2_Instructions" xml:space="preserve">
+    <value>Appuyez sur la touche correspondant à la couleur de l’encre, le plus rapidement possible, avec le moins d’erreurs.</value>
+  </data>
+  <data name="Case2_P2_Example" xml:space="preserve">
+    <value>La bonne réponse serait "ROUGE".</value>
+  </data>
+  <data name="Case3_P1_Congruence" xml:space="preserve">
+    <value>Parfois, ces mots seront congruents avec leur signification, parfois non.</value>
+  </data>
+  <data name="Case3_P2_Instructions" xml:space="preserve">
+    <value>Appuyez sur la touche correspondant à la couleur de l’encre, le plus rapidement possible, avec le moins d’erreurs.</value>
+  </data>
+  <data name="Case3_P2_Example" xml:space="preserve">
+    <value>La bonne réponse serait "BLEU", car le mot est écrit en bleu.</value>
+  </data>
+  <data name="Case4_P1_Congruence" xml:space="preserve">
+    <value>Ces noms seront toujours écrits dans une couleur différente du sens du mot, précédés d'une forme.</value>
+  </data>
+  <data name="Case4_P2_Instructions" xml:space="preserve">
+    <value>Suivez l’indice visuel : un cercle signifie couleur de l’encre, un carré signifie lire le mot.</value>
+  </data>
+  <data name="Case4_P2_Example" xml:space="preserve">
+    <value>La bonne réponse serait "BLEU", car le mot est écrit en bleu et précédé d’un cercle.</value>
+  </data>
+  <data name="Case5_P1_Congruence" xml:space="preserve">
+    <value>Ces noms seront toujours écrits dans la même couleur que le sens du mot, précédés d'une forme.</value>
+  </data>
+  <data name="Case5_P2_Instructions" xml:space="preserve">
+    <value>Suivez l’indice visuel : un cercle signifie couleur de l’encre, un carré signifie lire le mot.</value>
+  </data>
+  <data name="Case5_P2_Example" xml:space="preserve">
+    <value>La bonne réponse serait "ROUGE", car le mot correspond à l’encre et est précédé d’un carré.</value>
+  </data>
+  <data name="Case6_P1_Congruence" xml:space="preserve">
+    <value>Parfois les mots correspondront à leur couleur, parfois non, et chaque mot sera précédé d’une forme.</value>
+  </data>
+  <data name="Case6_P2_Instructions" xml:space="preserve">
+    <value>Suivez l’indice visuel : un cercle signifie couleur de l’encre, un carré signifie lire le mot.</value>
+  </data>
+  <data name="Case6_P2_Example" xml:space="preserve">
+    <value>La bonne réponse serait "BLEU", si la forme était un cercle et que le mot était écrit en bleu.</value>
+  </data>
 </root>

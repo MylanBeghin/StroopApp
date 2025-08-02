@@ -1,4 +1,5 @@
 ﻿using StroopApp.Core;
+using StroopApp.Services.Language;
 
 namespace StroopApp.Models
 {
@@ -33,6 +34,7 @@ namespace StroopApp.Models
 			_dominantPercent = 50;
 			_switchPercent = null;
 			UpdateDerivedValues();
+			InstructionsLanguage = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
 		}
 		private Guid _id;
 		public Guid Id
@@ -318,7 +320,7 @@ namespace StroopApp.Models
 		}
 		public ExperimentProfile CloneProfile()
 		{
-			return new ExperimentProfile
+			return new ExperimentProfile()
 			{
 				Id = this.Id,
 				ProfileName = this.ProfileName,
@@ -336,7 +338,8 @@ namespace StroopApp.Models
 				IsAmorce = this.IsAmorce,
 				DominantPercent = this.DominantPercent,
 				CongruencePercent = this.CongruencePercent,
-				SwitchPercent = this.SwitchPercent
+				SwitchPercent = this.SwitchPercent,
+				InstructionsLanguage = this.InstructionsLanguage
 			};
 		}
 	}

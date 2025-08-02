@@ -55,6 +55,25 @@ namespace StroopApp.ViewModels.Configuration.Profile
 		}
 
 		private readonly IProfileService _IprofileService;
+		public List<LanguageOption> Languages { get; } = new()
+{
+	new LanguageOption { Code = "fr", DisplayName = "Français" },
+	new LanguageOption { Code = "en", DisplayName = "English" }
+};
+
+		public LanguageOption SelectedInstructionsLanguage
+		{
+			get => Languages.FirstOrDefault(l => l.Code == Profile.InstructionsLanguage) ?? Languages[0];
+			set
+			{
+				if (Profile.InstructionsLanguage != value?.Code)
+				{
+					Profile.InstructionsLanguage = value?.Code ?? "fr";
+					OnPropertyChanged();
+				}
+			}
+		}
+
 
 		public ProfileEditorViewModel(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles, IProfileService profileService)
 		{

@@ -2,7 +2,6 @@
 using System.Windows;
 
 using StroopApp.Models;
-using StroopApp.Properties;
 using StroopApp.Services.Language;
 using StroopApp.Services.Window;
 using StroopApp.Views;

@@ -1,8 +1,11 @@
-﻿using System.Windows;
+﻿using System.Globalization;
+using System.Threading;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 using StroopApp.Core;
 using StroopApp.Models;
@@ -17,19 +20,12 @@ namespace StroopApp.ViewModels.Experiment.Participant
 		private readonly INavigationService _navigationService;
 		private int _currentPageIndex;
 		private const int TotalPages = 3;
-		public UIElement CurrentInstruction
-		{
-			get; private set;
-		}
-		public ICommand NextCommand
-		{
-			get;
-		}
+
+		public UIElement CurrentInstruction { get; private set; }
+		public ICommand NextCommand { get; }
 		public event EventHandler InstructionChanged;
-		public StroopPage StroopPage
-		{
-			get; set;
-		}
+		public StroopPage StroopPage { get; set; }
+
 		public InstructionsPageViewModel(ExperimentSettings settings, INavigationService navigationService)
 		{
 			_currentPageIndex = 0;
@@ -37,8 +33,8 @@ namespace StroopApp.ViewModels.Experiment.Participant
 			_navigationService = navigationService;
 			NextCommand = new RelayCommand(_ => NextPage());
 			CurrentInstruction = GenerateInstructionPage(_currentPageIndex);
-
 		}
+
 		private void NextPage()
 		{
 			_currentPageIndex++;
@@ -53,8 +49,24 @@ namespace StroopApp.ViewModels.Experiment.Participant
 				_navigationService.NavigateTo(() => StroopPage);
 			}
 		}
-		private UIElement GenerateInstructionPage(int index)
+
+		private UIElement GenerateInstructionPage(int page)
 		{
+			Thread.CurrentThread.CurrentUICulture = new CultureInfo(_settings.CurrentProfile.InstructionsLanguage ?? "en");
+			var loc = new LocalizedStrings();
+			var profile = _settings.CurrentProfile;
+			var congruence = profile.CongruencePercent;
+			bool hasCue = profile.IsAmorce;
+			string key = hasCue switch
+			{
+				false when congruence == 0 => "Case1",
+				false when congruence == 100 => "Case2",
+				false => "Case3",
+				true when congruence == 0 => "Case4",
+				true when congruence == 100 => "Case5",
+				true => "Case6",
+			};
+
 			var tb = new TextBlock
 			{
 				TextWrapping = TextWrapping.Wrap,
@@ -65,110 +77,122 @@ namespace StroopApp.ViewModels.Experiment.Participant
 				VerticalAlignment = VerticalAlignment.Center,
 				TextAlignment = TextAlignment.Center
 			};
-			if (_settings.CurrentProfile.IsAmorce)
+
+			switch (page)
 			{
-				switch (index)
+				case 0:
+				tb.Inlines.Add(new Run(loc["Page1_Intro"]) { FontWeight = FontWeights.Bold });
+				tb.Inlines.Add(new LineBreak());
+				tb.Inlines.Add(new LineBreak());
+				tb.Inlines.Add(new Run(loc["Page1_Display"]));
+				tb.Inlines.Add(new LineBreak());
+				tb.Inlines.Add(new LineBreak());
+				tb.Inlines.Add(new Run(loc["Page1_WordsList"]));
+				tb.Inlines.Add(new LineBreak());
+				tb.Inlines.Add(new LineBreak());
+				tb.Inlines.Add(new Run(loc[$"{key}_P1_Congruence"]));
+				tb.Inlines.Add(new LineBreak());
+				tb.Inlines.Add(new LineBreak());
+				tb.Inlines.Add(new Run(loc["Page1_Example"]));
+				tb.Inlines.Add(new LineBreak());
+				tb.Inlines.Add(new LineBreak());
+				var exampleColor = (key == "Case2" || key == "Case5") ? Brushes.Red : Brushes.Blue;
+				tb.Inlines.Add(new Run(loc["Word_RED"]) { Foreground = exampleColor, FontSize = 78 });
+				break;
+				case 1:
+				tb.Inlines.Add(new Run(loc[$"{key}_P2_Instructions"]));
+				tb.Inlines.Add(new LineBreak());
+				tb.Inlines.Add(new LineBreak());
+				if (hasCue)
 				{
-					case 0:
-					tb.Inlines.Add(new Run("Nous allons maintenant réaliser une première tâche mentale.\r\n\r\n"));
-					tb.Inlines.Add(new Run("A chaque essai, vous verrez apparaître une croix de fixation '+' au milieu de l'écran, suivie d'une amorce et d'un nom de couleur : 'ROUGE', 'VERT', 'BLEU', 'JAUNE'.\r\n\r\n"));
-					tb.Inlines.Add(new Run(_settings.CurrentProfile.CongruencePercent == 0
-						? "Ces noms seront toujours écrits dans la même couleur que le sens du mot.\r\n\r\n"
-						: "Ces noms seront toujours écrits dans une couleur différente du sens du mot.\r\n\r\n"));
-					tb.Inlines.Add(new Run("Par exemple :\r\n\r\n"));
-					tb.Inlines.Add(new Run("ROUGE")
-					{
-						Foreground = Brushes.Blue,
-						FontSize = 78,
-					});
-					break;
-					case 1:
-					tb.Inlines.Add(new Run("L'amorce, que vous verrez avant le nom, sera soit un carré, soit un cercle.\r\n\r\n"));
-					tb.Inlines.Add(new Run("Si vous avez vu un carré, vous devrez lire le mot.\r\n"));
-					tb.Inlines.Add(new Run("Si vous avez vu un cercle, vous devrez donner la couleur de l'encre.\r\n\r\n"));
-					tb.Inlines.Add(new Run("Par exemple :\r\n"));
-					var sp = new StackPanel
+					tb.Inlines.Add(new Run(loc["Page2_CueExplanation"]));
+					tb.Inlines.Add(new LineBreak());
+					tb.Inlines.Add(new LineBreak());
+
+					var panel = new StackPanel
 					{
 						Orientation = Orientation.Horizontal,
 						HorizontalAlignment = HorizontalAlignment.Center,
 						VerticalAlignment = VerticalAlignment.Center,
-						Margin = new Thickness(40)
 					};
-					var gridShape = new Grid
+
+					// Exemple 1 : carré/croix + mot en rouge
+					var squareExample = new StackPanel
 					{
-						Width = 200,
-						Height = 200,
-						Margin = new Thickness(0, 0, 80, 0)
-					};
-					var ellipse = new System.Windows.Shapes.Ellipse
-					{
-						Width = 200,
-						Height = 200,
-						Stroke = Brushes.White,
-						StrokeThickness = 6
-					};
-					gridShape.Children.Add(ellipse);
-					var crossGrid = new Grid
-					{
+						Orientation = Orientation.Horizontal,
 						HorizontalAlignment = HorizontalAlignment.Center,
 						VerticalAlignment = VerticalAlignment.Center
-					};
-					crossGrid.Children.Add(new System.Windows.Shapes.Rectangle { Width = 50, Height = 6, Fill = Brushes.White });
-					crossGrid.Children.Add(new System.Windows.Shapes.Rectangle { Width = 6, Height = 50, Fill = Brushes.White });
-					gridShape.Children.Add(crossGrid);
-					sp.Children.Add(gridShape);
-					sp.Children.Add(new TextBlock
-					{
-						Text = "ROUGE",
-						Foreground = Brushes.Blue,
-						VerticalAlignment = VerticalAlignment.Center,
-						Margin = new Thickness(10, 0, 0, 0),
-						FontSize = 78,
 
+					};
+
+					// Croisillon blanc centré
+					var crossGrid = new Grid
+					{
+						Width = 250,
+						Height = 250,
+						HorizontalAlignment = HorizontalAlignment.Center,
+						VerticalAlignment = VerticalAlignment.Center,
+					};
+
+					// Barre verticale
+					crossGrid.Children.Add(new Rectangle
+					{
+						Width = 6,
+						Height = 50,
+						Fill = Brushes.White,
+						HorizontalAlignment = HorizontalAlignment.Center,
+						VerticalAlignment = VerticalAlignment.Center
 					});
-					tb.Inlines.Add(new InlineUIContainer(sp));
-					break;
-					case 2:
-					tb.Inlines.Add(new Run("Avez-vous des questions avant de commencer ?"));
-					break;
-				}
-			}
-			else
-			{
-				switch (index)
-				{
-					case 0:
-					tb.Inlines.Add(new Run("Nous allons maintenant réaliser une première tâche mentale.\r\n\r\n"));
-					tb.Inlines.Add(new Run("A chaque essai, vous verrez apparaître une croix de fixation '+' au milieu de l'écran, suivie d'un nom de couleur : 'ROUGE', 'VERT', 'BLEU', 'JAUNE'.\r\n\r\n"));
-					switch (_settings.CurrentProfile.CongruencePercent)
+
+					// Barre horizontale
+					crossGrid.Children.Add(new Rectangle
 					{
-						case 100:
-						tb.Inlines.Add(new Run("Ces noms seront toujours écrits dans la même couleur que le sens du mot.\r\n\r\n"));
-						break;
-						case 0:
-						tb.Inlines.Add(new Run("Ces noms seront toujours écrits dans une couleur différente du sens du mot.\r\n\r\n"));
-						break;
-						case > 0 and < 100:
-						tb.Inlines.Add(new Run(
-							$"Dans cette tâche, {_settings.CurrentProfile.CongruencePercent}% des mots seront congruents (texte = couleur) " +
-							$"et {100 - _settings.CurrentProfile.CongruencePercent}% seront incongruents (texte ≠ couleur).\r\n\r\n"));
-						break;
-					}
-					tb.Inlines.Add(new Run("Par exemple :\r\n\r\n"));
-					tb.Inlines.Add(new Run("ROUGE")
+						Width = 50,
+						Height = 6,
+						Fill = Brushes.White,
+						HorizontalAlignment = HorizontalAlignment.Center,
+						VerticalAlignment = VerticalAlignment.Center
+					});
+					crossGrid.Children.Add(new Rectangle
 					{
-						Foreground = _settings.CurrentProfile.CongruencePercent == 100 ? Brushes.Red : Brushes.Blue,
+						Width = 150,
+						Height = 150,
+						Stroke = Brushes.White,
+						StrokeThickness = 6,
+						Fill = Brushes.Transparent,
+						HorizontalAlignment = HorizontalAlignment.Center,
+						VerticalAlignment = VerticalAlignment.Center
+					});
+
+					// Ajout de la forme dans le StackPanel
+					squareExample.Children.Add(crossGrid);
+
+					// Mot en dessous
+					squareExample.Children.Add(new TextBlock
+					{
+						Text = loc["Word_RED"],
+						Foreground = Brushes.Red,
 						FontSize = 78,
+						HorizontalAlignment = HorizontalAlignment.Center,
+						VerticalAlignment = VerticalAlignment.Center
 					});
-					break;
-					case 1:
-					tb.Inlines.Add(new Run("Vous devrez appuyer sur le bouton correspondant à la couleur de l'encre le plus rapidement possible."));
-					break;
-					case 2:
-					tb.Inlines.Add(new Run("Avez-vous des questions avant de commencer ?"));
-					break;
+
+					// Ajout à ton panel principal
+					panel.Children.Add(squareExample);
+
+
+					tb.Inlines.Add(new InlineUIContainer(panel) { BaselineAlignment = BaselineAlignment.Center });
+					tb.Inlines.Add(new LineBreak());
+					tb.Inlines.Add(new LineBreak());
+					tb.Inlines.Add(new Run(loc[$"{key}_P2_Example"]));
 				}
+
+				break;
+				case 2:
+				tb.Inlines.Add(new Run(loc["Page3_Questions"]));
+				break;
 			}
+
 			return tb;
 		}
 	}

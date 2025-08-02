@@ -6,7 +6,7 @@ namespace StroopApp.Services.Language
 {
 	public class LanguageService : ILanguageService
 	{
-		private const string ConfigFileName = "config.json";
+		private const string ConfigFileName = "language.json";
 
 		private readonly string _configPath;
 		private AppConfig _config;

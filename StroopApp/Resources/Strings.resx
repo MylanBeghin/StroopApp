@@ -259,7 +259,7 @@
     <value>Edit</value>
   </data>
   <data name="Button_Continue" xml:space="preserve">
-    <value>Continue witht the same participant</value>
+    <value>Continue with the same participant</value>
   </data>
   <data name="Button_NewExperiment" xml:space="preserve">
     <value>New experiment</value>
@@ -603,5 +603,83 @@
   </data>
   <data name="Header_VisualCue" xml:space="preserve">
     <value>Visual cue</value>
+  </data>
+  <data name="Field_InstructionsLanguage" xml:space="preserve">
+    <value>Instructions language</value>
+  </data>
+  <data name="Word_RED" xml:space="preserve">
+    <value>RED</value>
+  </data>
+  <data name="Page1_Intro" xml:space="preserve">
+    <value>We will now begin a Stroop task.</value>
+  </data>
+  <data name="Page1_Display" xml:space="preserve">
+    <value>A fixation cross will appear, followed by a color word.</value>
+  </data>
+  <data name="Page1_WordsList" xml:space="preserve">
+    <value>The words will be: RED, GREEN, BLUE, YELLOW.</value>
+  </data>
+  <data name="Page1_Example" xml:space="preserve">
+    <value>For example:</value>
+  </data>
+  <data name="Page2_CueExplanation" xml:space="preserve">
+    <value>A shape will appear: a square means you must read the word, a circle means you must name the ink color.</value>
+  </data>
+  <data name="Page3_Questions" xml:space="preserve">
+    <value>Do you have any questions before we begin?</value>
+  </data>
+  <data name="Case1_P1_Congruence" xml:space="preserve">
+    <value>The words will always be displayed in a different color than their meaning.</value>
+  </data>
+  <data name="Case1_P2_Instructions" xml:space="preserve">
+    <value>Press the key matching the ink color, as quickly and accurately as possible.</value>
+  </data>
+  <data name="Case1_P2_Example" xml:space="preserve">
+    <value>The correct answer would be "BLUE", as the word is written in blue.</value>
+  </data>
+  <data name="Case2_P1_Congruence" xml:space="preserve">
+    <value>The words will always be displayed in the same color as their meaning.</value>
+  </data>
+  <data name="Case2_P2_Instructions" xml:space="preserve">
+    <value>Press the key matching the ink color, as quickly and accurately as possible.</value>
+  </data>
+  <data name="Case2_P2_Example" xml:space="preserve">
+    <value>The correct answer would be "RED".</value>
+  </data>
+  <data name="Case3_P1_Congruence" xml:space="preserve">
+    <value>Sometimes the words will match their meaning, sometimes they won't.</value>
+  </data>
+  <data name="Case3_P2_Instructions" xml:space="preserve">
+    <value>Press the key matching the ink color, as quickly and accurately as possible.</value>
+  </data>
+  <data name="Case3_P2_Example" xml:space="preserve">
+    <value>The correct answer would be "BLUE", as the word is written in blue.</value>
+  </data>
+  <data name="Case4_P1_Congruence" xml:space="preserve">
+    <value>The words will always be displayed in a different color than their meaning, and preceded by a shape.</value>
+  </data>
+  <data name="Case4_P2_Instructions" xml:space="preserve">
+    <value>Follow the shape cue: circle means ink color, square means read the word.</value>
+  </data>
+  <data name="Case4_P2_Example" xml:space="preserve">
+    <value>The correct answer would be "BLUE", as the word is written in blue and preceded by a circle.</value>
+  </data>
+  <data name="Case5_P1_Congruence" xml:space="preserve">
+    <value>The words will always be displayed in the same color as their meaning, and preceded by a shape.</value>
+  </data>
+  <data name="Case5_P2_Instructions" xml:space="preserve">
+    <value>Follow the shape cue: circle means ink color, square means read the word.</value>
+  </data>
+  <data name="Case5_P2_Example" xml:space="preserve">
+    <value>The correct answer would be "RED", since the word matches the ink and is preceded by a square.</value>
+  </data>
+  <data name="Case6_P1_Congruence" xml:space="preserve">
+    <value>Sometimes the words will match their meaning, sometimes not, and each word will be preceded by a shape.</value>
+  </data>
+  <data name="Case6_P2_Instructions" xml:space="preserve">
+    <value>Follow the shape cue: circle means ink color, square means read the word.</value>
+  </data>
+  <data name="Case6_P2_Example" xml:space="preserve">
+    <value>The correct answer would be "BLUE", if the shape was a circle and the word was written in blue.</value>
   </data>
 </root>
