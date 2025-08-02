@@ -475,42 +475,6 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Blue.
-        /// </summary>
-        public static string Color_Blue {
-            get {
-                return ResourceManager.GetString("Color_Blue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Green.
-        /// </summary>
-        public static string Color_Green {
-            get {
-                return ResourceManager.GetString("Color_Green", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Red.
-        /// </summary>
-        public static string Color_Red {
-            get {
-                return ResourceManager.GetString("Color_Red", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Yellow.
-        /// </summary>
-        public static string Color_Yellow {
-            get {
-                return ResourceManager.GetString("Color_Yellow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à No response.
         /// </summary>
         public static string Column_NoResponse {
@@ -1745,11 +1709,38 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à BLUE.
+        /// </summary>
+        public static string Word_BLUE {
+            get {
+                return ResourceManager.GetString("Word_BLUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à GREEN.
+        /// </summary>
+        public static string Word_GREEN {
+            get {
+                return ResourceManager.GetString("Word_GREEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à RED.
         /// </summary>
         public static string Word_RED {
             get {
                 return ResourceManager.GetString("Word_RED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à YELLOW.
+        /// </summary>
+        public static string Word_YELLOW {
+            get {
+                return ResourceManager.GetString("Word_YELLOW", resourceCulture);
             }
         }
     }

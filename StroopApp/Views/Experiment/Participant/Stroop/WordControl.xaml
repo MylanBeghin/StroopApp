@@ -8,7 +8,7 @@
              Height="Auto" Width="Auto">
     <Grid>
         <TextBlock Text="{Binding Label}"
-                   Foreground="{Binding Color}"
+                   Foreground="{Binding ForegroundBrush}"
                    FontSize="78"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" />

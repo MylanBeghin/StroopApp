@@ -1,6 +1,7 @@
 ﻿// StroopViewModel.cs
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -86,7 +87,21 @@ public class StroopViewModel : ViewModelBase
 	private void GenerateTrials()
 	{
 		var wordColors = new[] { "Blue", "Red", "Green", "Yellow" };
-		var wordTexts = new[] { "Blue", "Red", "Green", "Yellow" };
+		var culture = new CultureInfo(Settings.CurrentProfile.InstructionsLanguage ?? "en");
+		Thread.CurrentThread.CurrentCulture = culture;
+		Thread.CurrentThread.CurrentUICulture = culture;
+
+
+		var loc = new LocalizedStrings();
+
+		var wordTexts = new[]
+		{
+	loc["Word_BLUE"],
+	loc["Word_RED"],
+	loc["Word_GREEN"],
+	loc["Word_YELLOW"]
+};
+		Debug.WriteLine("WORD_RED = " + loc["Word_RED"]);
 		int total = Settings.CurrentProfile.WordCount;
 
 		int congruentCount = total * Settings.CurrentProfile.CongruencePercent / 100;

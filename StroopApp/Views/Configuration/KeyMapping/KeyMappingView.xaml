@@ -62,7 +62,7 @@
                                  Margin="0,0,8,0" />
                         <Button Grid.Column="1"
                                 Command="{Binding OpenKeyMappingEditorCommand}"
-                                CommandParameter="{Binding Source={StaticResource Loc}, Path=[Color_Red]}"
+                                CommandParameter="Red"
                                 VerticalAlignment="Center"
                                 Content="{Binding Source={StaticResource Loc}, Path=[Button_Edit]}" />
                     </Grid>
@@ -95,7 +95,7 @@
                                  Margin="0,0,8,0" />
                         <Button Grid.Column="1"
                                 Command="{Binding OpenKeyMappingEditorCommand}"
-                                CommandParameter="{Binding Source={StaticResource Loc}, Path=[Color_Blue]}"
+                                CommandParameter="Blue"
                                 VerticalAlignment="Center"
                                 Content="{Binding Source={StaticResource Loc}, Path=[Button_Edit]}" />
                     </Grid>
@@ -128,7 +128,7 @@
                                  Margin="0,0,8,0" />
                         <Button Grid.Column="1"
                                 Command="{Binding OpenKeyMappingEditorCommand}"
-                                CommandParameter="{Binding Source={StaticResource Loc}, Path=[Color_Green]}"
+                                CommandParameter="Green"
                                 VerticalAlignment="Center"
                                 Content="{Binding Source={StaticResource Loc}, Path=[Button_Edit]}" />
                     </Grid>
@@ -161,7 +161,7 @@
                                  Margin="0,0,8,0" />
                         <Button Grid.Column="1"
                                 Command="{Binding OpenKeyMappingEditorCommand}"
-                                CommandParameter="{Binding Source={StaticResource Loc}, Path=[Color_Yellow]}"
+                                CommandParameter="Yellow"
                                 VerticalAlignment="Center"
                                 Content="{Binding Source={StaticResource Loc}, Path=[Button_Edit]}" />
                     </Grid>

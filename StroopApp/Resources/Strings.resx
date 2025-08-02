@@ -466,18 +466,6 @@
   <data name="Value_LiveAverage" xml:space="preserve">
     <value>{0:N0} ms</value>
   </data>
-  <data name="Color_Yellow" xml:space="preserve">
-    <value>Yellow</value>
-  </data>
-  <data name="Color_Blue" xml:space="preserve">
-    <value>Blue</value>
-  </data>
-  <data name="Color_Red" xml:space="preserve">
-    <value>Red</value>
-  </data>
-  <data name="Color_Green" xml:space="preserve">
-    <value>Green</value>
-  </data>
   <data name="Label_SquarePercentage" xml:space="preserve">
     <value>Square (%)</value>
   </data>
@@ -681,5 +669,14 @@
   </data>
   <data name="Case6_P2_Example" xml:space="preserve">
     <value>The correct answer would be "BLUE", if the shape was a circle and the word was written in blue.</value>
+  </data>
+  <data name="Word_BLUE" xml:space="preserve">
+    <value>BLUE</value>
+  </data>
+  <data name="Word_GREEN" xml:space="preserve">
+    <value>GREEN</value>
+  </data>
+  <data name="Word_YELLOW" xml:space="preserve">
+    <value>YELLOW</value>
   </data>
 </root>
