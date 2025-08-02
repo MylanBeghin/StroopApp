@@ -189,25 +189,20 @@ namespace StroopApp.Models
 		{
 			get; set;
 		}
-
 		public void DetermineExpectedAnswer()
 		{
 			if (IsAmorce)
 			{
-				ExpectedAnswer = (Amorce == AmorceType.Square) ? Stimulus.Text : Stimulus.Color;
+				ExpectedAnswer = (Amorce == AmorceType.Square) ? Stimulus.InternalText : Stimulus.Color;
 			}
 			else if (IsCongruent)
 			{
-				ExpectedAnswer = Stimulus.Text;
+				ExpectedAnswer = Stimulus.InternalText;
 			}
 			else
 			{
 				ExpectedAnswer = Stimulus.Color;
 			}
-		}
-		public override string ToString()
-		{
-			return "Stimulus : " + Stimulus + "\nType d'amorce :" + Amorce + "\nExpected answer : " + ExpectedAnswer;
 		}
 	}
 }

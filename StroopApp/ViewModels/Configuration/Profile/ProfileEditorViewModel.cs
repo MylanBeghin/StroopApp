@@ -61,14 +61,14 @@ namespace StroopApp.ViewModels.Configuration.Profile
 	new LanguageOption { Code = "en", DisplayName = "English" }
 };
 
-		public LanguageOption SelectedInstructionsLanguage
+		public LanguageOption SelectedTaskLanguage
 		{
-			get => Languages.FirstOrDefault(l => l.Code == Profile.InstructionsLanguage) ?? Languages[0];
+			get => Languages.FirstOrDefault(l => l.Code == Profile.TaskLanguage) ?? Languages[0];
 			set
 			{
-				if (Profile.InstructionsLanguage != value?.Code)
+				if (Profile.TaskLanguage != value?.Code)
 				{
-					Profile.InstructionsLanguage = value?.Code ?? "fr";
+					Profile.TaskLanguage = value?.Code ?? "fr";
 					OnPropertyChanged();
 				}
 			}

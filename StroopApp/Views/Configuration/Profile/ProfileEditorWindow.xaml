@@ -54,9 +54,9 @@
                             </Grid.ColumnDefinitions>
                             <TextBox ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Field_ProfileName]}"
                                      Text="{Binding Profile.ProfileName, Mode=TwoWay}" />
-                            <ComboBox ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Field_InstructionsLanguage]}"
+                            <ComboBox ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Field_TaskLanguage]}"
                                       ItemsSource ="{Binding Languages}"
-                                      SelectedItem="{Binding SelectedInstructionsLanguage, Mode=TwoWay}"
+                                      SelectedItem="{Binding SelectedTaskLanguage, Mode=TwoWay}"
                                       DisplayMemberPath="DisplayName"
                                       Grid.Column="2"
                                       HorizontalAlignment="Stretch"/>

@@ -790,15 +790,6 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Instructions language.
-        /// </summary>
-        public static string Field_InstructionsLanguage {
-            get {
-                return ResourceManager.GetString("Field_InstructionsLanguage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Profile name.
         /// </summary>
         public static string Field_ProfileName {
@@ -813,6 +804,15 @@ namespace StroopApp.Resources {
         public static string Field_Sex {
             get {
                 return ResourceManager.GetString("Field_Sex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Task language.
+        /// </summary>
+        public static string Field_TaskLanguage {
+            get {
+                return ResourceManager.GetString("Field_TaskLanguage", resourceCulture);
             }
         }
         

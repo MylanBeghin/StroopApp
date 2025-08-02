@@ -52,7 +52,7 @@ namespace StroopApp.ViewModels.Experiment.Participant
 
 		private UIElement GenerateInstructionPage(int page)
 		{
-			Thread.CurrentThread.CurrentUICulture = new CultureInfo(_settings.CurrentProfile.InstructionsLanguage ?? "en");
+			Thread.CurrentThread.CurrentUICulture = new CultureInfo(_settings.CurrentProfile.TaskLanguage ?? "en");
 			var loc = new LocalizedStrings();
 			var profile = _settings.CurrentProfile;
 			var congruence = profile.CongruencePercent;

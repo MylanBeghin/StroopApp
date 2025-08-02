@@ -592,8 +592,8 @@
   <data name="Header_VisualCue" xml:space="preserve">
     <value>Indice visuel</value>
   </data>
-  <data name="Field_InstructionsLanguage" xml:space="preserve">
-    <value>Langue des instructions</value>
+  <data name="Field_TaskLanguage" xml:space="preserve">
+    <value>Langue de la tâche</value>
   </data>
   <data name="Word_RED" xml:space="preserve">
     <value>ROUGE</value>

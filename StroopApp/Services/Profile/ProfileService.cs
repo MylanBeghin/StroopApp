@@ -70,7 +70,7 @@ namespace StroopApp.Services.Profile
 				existing.DominantPercent = profile.DominantPercent;
 				existing.CongruencePercent = profile.CongruencePercent;
 				existing.SwitchPercent = profile.SwitchPercent;
-				existing.InstructionsLanguage = profile.InstructionsLanguage;
+				existing.TaskLanguage = profile.TaskLanguage;
 				existing.UpdateDerivedValues();
 			}
 

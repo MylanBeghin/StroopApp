@@ -34,7 +34,7 @@ namespace StroopApp.Models
 			_dominantPercent = 50;
 			_switchPercent = null;
 			UpdateDerivedValues();
-			InstructionsLanguage = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
+			TaskLanguage = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
 		}
 		private Guid _id;
 		public Guid Id
@@ -284,16 +284,16 @@ namespace StroopApp.Models
 				}
 			}
 		}
-		private string _instructionsLanguage;
+		private string _taskLanguage;
 
-		public string InstructionsLanguage
+		public string TaskLanguage
 		{
-			get => _instructionsLanguage;
+			get => _taskLanguage;
 			set
 			{
-				if (_instructionsLanguage != value)
+				if (_taskLanguage != value)
 				{
-					_instructionsLanguage = value;
+					_taskLanguage = value;
 					OnPropertyChanged();
 				}
 			}
@@ -339,7 +339,7 @@ namespace StroopApp.Models
 				DominantPercent = this.DominantPercent,
 				CongruencePercent = this.CongruencePercent,
 				SwitchPercent = this.SwitchPercent,
-				InstructionsLanguage = this.InstructionsLanguage
+				TaskLanguage = this.TaskLanguage
 			};
 		}
 	}

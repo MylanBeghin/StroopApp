@@ -592,8 +592,8 @@
   <data name="Header_VisualCue" xml:space="preserve">
     <value>Visual cue</value>
   </data>
-  <data name="Field_InstructionsLanguage" xml:space="preserve">
-    <value>Instructions language</value>
+  <data name="Field_TaskLanguage" xml:space="preserve">
+    <value>Task language</value>
   </data>
   <data name="Word_RED" xml:space="preserve">
     <value>RED</value>
