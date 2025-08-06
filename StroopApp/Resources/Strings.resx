@@ -502,13 +502,13 @@
   <data name="Button_AdvancedSettings" xml:space="preserve">
     <value>Advanced settings</value>
   </data>
-	<data name="Button_Quit_Without_Export" xml:space="preserve">
+  <data name="Button_Quit_Without_Export" xml:space="preserve">
     <value>Quit application without export</value>
-	  </data>
+  </data>
   <data name="Label_StopBits" xml:space="preserve">
     <value>Stop bits</value>
   </data>
-	  <data name="Label_Parity" xml:space="preserve">
+  <data name="Label_Parity" xml:space="preserve">
     <value>Parity</value>
   </data>
   <data name="Column_NoResponse" xml:space="preserve">
@@ -519,9 +519,6 @@
   </data>
   <data name="Check_AddPrime" xml:space="preserve">
     <value>Add visual cue</value>
-  </data>
-  <data name="Button_Quit_Without_Export" xml:space="preserve">
-    <value>Quit application without export</value>
   </data>
   <data name="Error_FillIdField" xml:space="preserve">
     <value>Please fill at least the ID field</value>
@@ -656,7 +653,7 @@
     <value>Sometimes, these words will be written in the same ink color as their meaning. Other times, these words will be written in a different ink color than their meaning.</value>
   </data>
   <data name="Case6_P2_Instructions" xml:space="preserve">
-    <value>Disregard the shape, give the meaning of the word.</value>
+    <value>If the visual cue is a square, you should read the word. If the visual cue is a circle, you should name the color of the ink.</value>
   </data>
   <data name="Word_BLUE" xml:space="preserve">
     <value>BLUE</value>
