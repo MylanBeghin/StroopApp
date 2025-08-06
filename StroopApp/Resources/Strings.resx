@@ -237,7 +237,7 @@
   <data name="Radio_WordCount" xml:space="preserve">
     <value>Based on trial count</value>
   </data>
-  <data name="Field_GroupSize" xml:space="preserve">
+  <data name="Header_GroupSize" xml:space="preserve">
     <value>Averaging interval</value>
   </data>
   <data name="Field_WordCount" xml:space="preserve">
@@ -329,7 +329,7 @@
     <value>Delete confirmation</value>
   </data>
   <data name="Message_DeleteParticipantConfirmation" xml:space="preserve">
-    <value>Do you really want to delete this participant? Their data will be archived.</value>
+    <value>Do you really want to delete this participant ? Their data will be archived.</value>
   </data>
   <data name="Title_ExportFolderSelector" xml:space="preserve">
     <value>Results folder</value>
@@ -416,7 +416,7 @@
     <value>This identifier is already in use for another participant.</value>
   </data>
   <data name="Message_DeleteProfileConfirmation" xml:space="preserve">
-    <value>Do you really want to delete this profile?</value>
+    <value>Do you really want to delete this profile ?</value>
   </data>
   <data name="Label_Disconnected" xml:space="preserve">
     <value>Disconnected</value>
@@ -599,9 +599,9 @@
     <value>RED</value>
   </data>
   <data name="Page1_Intro" xml:space="preserve">
-    <value>We will now begin a Stroop task.</value>
+    <value>We will now begin a mental task.</value>
   </data>
-  <data name="Page1_Display" xml:space="preserve">
+  <data name="Page1_Display_NoCue" xml:space="preserve">
     <value>A fixation cross will appear, followed by a color word.</value>
   </data>
   <data name="Page1_WordsList" xml:space="preserve">
@@ -614,61 +614,43 @@
     <value>A shape will appear: a square means you must read the word, a circle means you must name the ink color.</value>
   </data>
   <data name="Page3_Questions" xml:space="preserve">
-    <value>Do you have any questions before we begin?</value>
+    <value>Do you have any questions before we begin ?</value>
   </data>
   <data name="Case1_P1_Congruence" xml:space="preserve">
-    <value>The words will always be displayed in a different color than their meaning.</value>
+    <value>These words will always be written with ink of a different color than the meaning of the word.</value>
   </data>
   <data name="Case1_P2_Instructions" xml:space="preserve">
-    <value>Press the key matching the ink color, as quickly and accurately as possible.</value>
-  </data>
-  <data name="Case1_P2_Example" xml:space="preserve">
-    <value>The correct answer would be "BLUE", as the word is written in blue.</value>
+    <value>Press the key corresponding to the color of the word's ink as quickly as possible, making the fewest mistakes.</value>
   </data>
   <data name="Case2_P1_Congruence" xml:space="preserve">
-    <value>The words will always be displayed in the same color as their meaning.</value>
+    <value>These words will always be written in ink of the same color as the meaning of the word.</value>
   </data>
   <data name="Case2_P2_Instructions" xml:space="preserve">
-    <value>Press the key matching the ink color, as quickly and accurately as possible.</value>
-  </data>
-  <data name="Case2_P2_Example" xml:space="preserve">
-    <value>The correct answer would be "RED".</value>
+    <value>Press the key corresponding to the color of the word's ink as quickly as possible, making the fewest mistakes.</value>
   </data>
   <data name="Case3_P1_Congruence" xml:space="preserve">
-    <value>Sometimes the words will match their meaning, sometimes they won't.</value>
+    <value>Sometimes, these words will be written in the same ink color as their meaning. Other times, these words will be written in a different ink color than their meaning.</value>
   </data>
   <data name="Case3_P2_Instructions" xml:space="preserve">
-    <value>Press the key matching the ink color, as quickly and accurately as possible.</value>
-  </data>
-  <data name="Case3_P2_Example" xml:space="preserve">
-    <value>The correct answer would be "BLUE", as the word is written in blue.</value>
+    <value>Press the key matching the ink color as quickly as possible, making the fewest mistakes.</value>
   </data>
   <data name="Case4_P1_Congruence" xml:space="preserve">
     <value>The words will always be displayed in a different color than their meaning, and preceded by a shape.</value>
   </data>
   <data name="Case4_P2_Instructions" xml:space="preserve">
-    <value>Follow the shape cue: circle means ink color, square means read the word.</value>
-  </data>
-  <data name="Case4_P2_Example" xml:space="preserve">
-    <value>The correct answer would be "BLUE", as the word is written in blue and preceded by a circle.</value>
+    <value>If the visual cue is a square, you should read the word. If the visual cue is a circle, you should name the color of the ink.</value>
   </data>
   <data name="Case5_P1_Congruence" xml:space="preserve">
-    <value>The words will always be displayed in the same color as their meaning, and preceded by a shape.</value>
+    <value>These words will always be written in ink of the same color as the meaning of the word.</value>
   </data>
   <data name="Case5_P2_Instructions" xml:space="preserve">
-    <value>Follow the shape cue: circle means ink color, square means read the word.</value>
-  </data>
-  <data name="Case5_P2_Example" xml:space="preserve">
-    <value>The correct answer would be "RED", since the word matches the ink and is preceded by a square.</value>
+    <value>Ignore the shape.</value>
   </data>
   <data name="Case6_P1_Congruence" xml:space="preserve">
-    <value>Sometimes the words will match their meaning, sometimes not, and each word will be preceded by a shape.</value>
+    <value>Sometimes, these words will be written in the same ink color as their meaning. Other times, these words will be written in a different ink color than their meaning.</value>
   </data>
   <data name="Case6_P2_Instructions" xml:space="preserve">
-    <value>Follow the shape cue: circle means ink color, square means read the word.</value>
-  </data>
-  <data name="Case6_P2_Example" xml:space="preserve">
-    <value>The correct answer would be "BLUE", if the shape was a circle and the word was written in blue.</value>
+    <value>Disregard the shape, give the meaning of the word.</value>
   </data>
   <data name="Word_BLUE" xml:space="preserve">
     <value>BLUE</value>
@@ -678,5 +660,20 @@
   </data>
   <data name="Word_YELLOW" xml:space="preserve">
     <value>YELLOW</value>
+  </data>
+  <data name="Tooltip_AveragingInterval" xml:space="preserve">
+    <value>Sets how many words are grouped to calculate an average response time. For example, a factor of 5 will show an average every 5 words.</value>
+  </data>
+  <data name="Page1_Display_WithCue" xml:space="preserve">
+    <value>A fixation cross surrounded by a shape will appear, followed by a colored word.</value>
+  </data>
+  <data name="Case4_P2_InstructionsWithCue" xml:space="preserve">
+    <value>Press the key corresponding to the instruction as quickly as possible, making the fewest mistakes.</value>
+  </data>
+  <data name="Case5_P2_InstructionsWithCue" xml:space="preserve">
+    <value>Press the key corresponding to the meaning of the word, as quickly as possible, making the fewest mistakes.</value>
+  </data>
+  <data name="Case6_P2_InstructionsWithCue" xml:space="preserve">
+    <value>Press the key corresponding to the instruction as quickly as possible, making the fewest mistakes.</value>
   </data>
 </root>

@@ -304,7 +304,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The words will always be displayed in a different color than their meaning..
+        ///   Recherche une chaîne localisée semblable à These words will always be written with ink of a different color than the meaning of the word..
         /// </summary>
         public static string Case1_P1_Congruence {
             get {
@@ -313,16 +313,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The correct answer would be &quot;BLUE&quot;, as the word is written in blue..
-        /// </summary>
-        public static string Case1_P2_Example {
-            get {
-                return ResourceManager.GetString("Case1_P2_Example", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Press the key matching the ink color, as quickly and accurately as possible..
+        ///   Recherche une chaîne localisée semblable à Press the key corresponding to the color of the word&apos;s ink as quickly as possible, making the fewest mistakes..
         /// </summary>
         public static string Case1_P2_Instructions {
             get {
@@ -331,7 +322,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The words will always be displayed in the same color as their meaning..
+        ///   Recherche une chaîne localisée semblable à These words will always be written in ink of the same color as the meaning of the word..
         /// </summary>
         public static string Case2_P1_Congruence {
             get {
@@ -340,16 +331,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The correct answer would be &quot;RED&quot;..
-        /// </summary>
-        public static string Case2_P2_Example {
-            get {
-                return ResourceManager.GetString("Case2_P2_Example", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Press the key matching the ink color, as quickly and accurately as possible..
+        ///   Recherche une chaîne localisée semblable à Press the key corresponding to the color of the word&apos;s ink as quickly as possible, making the fewest mistakes..
         /// </summary>
         public static string Case2_P2_Instructions {
             get {
@@ -358,7 +340,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Sometimes the words will match their meaning, sometimes they won&apos;t..
+        ///   Recherche une chaîne localisée semblable à Sometimes, these words will be written in the same ink color as their meaning. Other times, these words will be written in a different ink color than their meaning..
         /// </summary>
         public static string Case3_P1_Congruence {
             get {
@@ -367,16 +349,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The correct answer would be &quot;BLUE&quot;, as the word is written in blue..
-        /// </summary>
-        public static string Case3_P2_Example {
-            get {
-                return ResourceManager.GetString("Case3_P2_Example", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Press the key matching the ink color, as quickly and accurately as possible..
+        ///   Recherche une chaîne localisée semblable à Press the key matching the ink color as quickly as possible, making the fewest mistakes..
         /// </summary>
         public static string Case3_P2_Instructions {
             get {
@@ -394,16 +367,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The correct answer would be &quot;BLUE&quot;, as the word is written in blue and preceded by a circle..
-        /// </summary>
-        public static string Case4_P2_Example {
-            get {
-                return ResourceManager.GetString("Case4_P2_Example", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Follow the shape cue: circle means ink color, square means read the word..
+        ///   Recherche une chaîne localisée semblable à If the visual cue is a square, you should read the word. If the visual cue is a circle, you should name the color of the ink..
         /// </summary>
         public static string Case4_P2_Instructions {
             get {
@@ -412,7 +376,16 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The words will always be displayed in the same color as their meaning, and preceded by a shape..
+        ///   Recherche une chaîne localisée semblable à Press the key corresponding to the instruction as quickly as possible, making the fewest mistakes..
+        /// </summary>
+        public static string Case4_P2_InstructionsWithCue {
+            get {
+                return ResourceManager.GetString("Case4_P2_InstructionsWithCue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à These words will always be written in ink of the same color as the meaning of the word..
         /// </summary>
         public static string Case5_P1_Congruence {
             get {
@@ -421,16 +394,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The correct answer would be &quot;RED&quot;, since the word matches the ink and is preceded by a square..
-        /// </summary>
-        public static string Case5_P2_Example {
-            get {
-                return ResourceManager.GetString("Case5_P2_Example", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Follow the shape cue: circle means ink color, square means read the word..
+        ///   Recherche une chaîne localisée semblable à Ignore the shape..
         /// </summary>
         public static string Case5_P2_Instructions {
             get {
@@ -439,7 +403,16 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Sometimes the words will match their meaning, sometimes not, and each word will be preceded by a shape..
+        ///   Recherche une chaîne localisée semblable à Press the key corresponding to the meaning of the word, as quickly as possible, making the fewest mistakes..
+        /// </summary>
+        public static string Case5_P2_InstructionsWithCue {
+            get {
+                return ResourceManager.GetString("Case5_P2_InstructionsWithCue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sometimes, these words will be written in the same ink color as their meaning. Other times, these words will be written in a different ink color than their meaning..
         /// </summary>
         public static string Case6_P1_Congruence {
             get {
@@ -448,20 +421,20 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The correct answer would be &quot;BLUE&quot;, if the shape was a circle and the word was written in blue..
-        /// </summary>
-        public static string Case6_P2_Example {
-            get {
-                return ResourceManager.GetString("Case6_P2_Example", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Follow the shape cue: circle means ink color, square means read the word..
+        ///   Recherche une chaîne localisée semblable à Disregard the shape, give the meaning of the word..
         /// </summary>
         public static string Case6_P2_Instructions {
             get {
                 return ResourceManager.GetString("Case6_P2_Instructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Press the key corresponding to the instruction as quickly as possible, making the fewest mistakes..
+        /// </summary>
+        public static string Case6_P2_InstructionsWithCue {
+            get {
+                return ResourceManager.GetString("Case6_P2_InstructionsWithCue", resourceCulture);
             }
         }
         
@@ -763,15 +736,6 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Averaging interval.
-        /// </summary>
-        public static string Field_GroupSize {
-            get {
-                return ResourceManager.GetString("Field_GroupSize", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Height (cm).
         /// </summary>
         public static string Field_Height {
@@ -876,6 +840,15 @@ namespace StroopApp.Resources {
         public static string Header_FixationDuration {
             get {
                 return ResourceManager.GetString("Header_FixationDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Averaging interval.
+        /// </summary>
+        public static string Header_GroupSize {
+            get {
+                return ResourceManager.GetString("Header_GroupSize", resourceCulture);
             }
         }
         
@@ -1339,7 +1312,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Do you really want to delete this participant? Their data will be archived..
+        ///   Recherche une chaîne localisée semblable à Do you really want to delete this participant ? Their data will be archived..
         /// </summary>
         public static string Message_DeleteParticipantConfirmation {
             get {
@@ -1348,7 +1321,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Do you really want to delete this profile?.
+        ///   Recherche une chaîne localisée semblable à Do you really want to delete this profile ?.
         /// </summary>
         public static string Message_DeleteProfileConfirmation {
             get {
@@ -1396,9 +1369,18 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à A fixation cross will appear, followed by a color word..
         /// </summary>
-        public static string Page1_Display {
+        public static string Page1_Display_NoCue {
             get {
-                return ResourceManager.GetString("Page1_Display", resourceCulture);
+                return ResourceManager.GetString("Page1_Display_NoCue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à A fixation cross surrounded by a shape will appear, followed by a colored word..
+        /// </summary>
+        public static string Page1_Display_WithCue {
+            get {
+                return ResourceManager.GetString("Page1_Display_WithCue", resourceCulture);
             }
         }
         
@@ -1412,7 +1394,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à We will now begin a Stroop task..
+        ///   Recherche une chaîne localisée semblable à We will now begin a mental task..
         /// </summary>
         public static string Page1_Intro {
             get {
@@ -1439,7 +1421,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Do you have any questions before we begin?.
+        ///   Recherche une chaîne localisée semblable à Do you have any questions before we begin ?.
         /// </summary>
         public static string Page3_Questions {
             get {
@@ -1660,6 +1642,15 @@ namespace StroopApp.Resources {
         public static string Toggle_On {
             get {
                 return ResourceManager.GetString("Toggle_On", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sets how many words are grouped to calculate an average response time. For example, a factor of 5 will show an average every 5 words..
+        /// </summary>
+        public static string Tooltip_AveragingInterval {
+            get {
+                return ResourceManager.GetString("Tooltip_AveragingInterval", resourceCulture);
             }
         }
         

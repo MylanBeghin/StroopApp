@@ -237,7 +237,7 @@
   <data name="Radio_WordCount" xml:space="preserve">
     <value>En fonction du nombre d'essai</value>
   </data>
-  <data name="Field_GroupSize" xml:space="preserve">
+  <data name="Header_GroupSize" xml:space="preserve">
     <value>Intervalle de moyenne</value>
   </data>
   <data name="Field_WordCount" xml:space="preserve">
@@ -599,9 +599,9 @@
     <value>ROUGE</value>
   </data>
   <data name="Page1_Intro" xml:space="preserve">
-    <value>Nous allons maintenant réaliser une tâche de Stroop.</value>
+    <value>Nous allons maintenant réaliser une tâche mentale.</value>
   </data>
-  <data name="Page1_Display" xml:space="preserve">
+  <data name="Page1_Display_NoCue" xml:space="preserve">
     <value>Une croix de fixation apparaîtra, suivie d’un mot de couleur.</value>
   </data>
   <data name="Page1_WordsList" xml:space="preserve">
@@ -617,58 +617,40 @@
     <value>Avez-vous des questions avant de commencer ?</value>
   </data>
   <data name="Case1_P1_Congruence" xml:space="preserve">
-    <value>Ces noms seront toujours écrits dans une couleur différente du sens du mot.</value>
+    <value>Ces noms seront toujours écrits avec une encre d'une couleur différente du sens du mot.</value>
   </data>
   <data name="Case1_P2_Instructions" xml:space="preserve">
-    <value>Appuyez sur la touche correspondant à la couleur de l’encre, le plus rapidement possible, avec le moins d’erreurs.</value>
-  </data>
-  <data name="Case1_P2_Example" xml:space="preserve">
-    <value>La bonne réponse serait "BLEU", car le mot est écrit en bleu.</value>
+    <value>Appuyez sur la touche correspondant à la couleur de l'encre du mot, le plus rapidement possible, en faisant le moins d'erreurs.</value>
   </data>
   <data name="Case2_P1_Congruence" xml:space="preserve">
-    <value>&#x8;Ces noms seront toujours écrits dans la même couleur que le sens du mot.</value>
+    <value>&#x8;Ces noms seront toujours écrits dans une encre de la même couleur que le sens du mot.</value>
   </data>
   <data name="Case2_P2_Instructions" xml:space="preserve">
-    <value>Appuyez sur la touche correspondant à la couleur de l’encre, le plus rapidement possible, avec le moins d’erreurs.</value>
-  </data>
-  <data name="Case2_P2_Example" xml:space="preserve">
-    <value>La bonne réponse serait "ROUGE".</value>
+    <value>Appuyez sur la touche correspondant à la couleur de l'encre du mot, le plus rapidement possible, en faisant le moins d'erreurs.</value>
   </data>
   <data name="Case3_P1_Congruence" xml:space="preserve">
-    <value>Parfois, ces mots seront congruents avec leur signification, parfois non.</value>
+    <value>Parfois, ces mots seront écrits dans la même couleur d'encre que son sens. Parfois, ces mots seront écrits dans une couleur d'encre différente de son sens.</value>
   </data>
   <data name="Case3_P2_Instructions" xml:space="preserve">
-    <value>Appuyez sur la touche correspondant à la couleur de l’encre, le plus rapidement possible, avec le moins d’erreurs.</value>
-  </data>
-  <data name="Case3_P2_Example" xml:space="preserve">
-    <value>La bonne réponse serait "BLEU", car le mot est écrit en bleu.</value>
+    <value>Appuyez sur la touche correspondant à la couleur de l'encre, le plus rapidement possible, en faisant le moins d'erreurs.</value>
   </data>
   <data name="Case4_P1_Congruence" xml:space="preserve">
-    <value>Ces noms seront toujours écrits dans une couleur différente du sens du mot, précédés d'une forme.</value>
+    <value>Ces noms seront toujours écrits dans une encre d'une couleur différente du sens du mot.</value>
   </data>
   <data name="Case4_P2_Instructions" xml:space="preserve">
-    <value>Suivez l’indice visuel : un cercle signifie couleur de l’encre, un carré signifie lire le mot.</value>
-  </data>
-  <data name="Case4_P2_Example" xml:space="preserve">
-    <value>La bonne réponse serait "BLEU", car le mot est écrit en bleu et précédé d’un cercle.</value>
+    <value>Si l’indice visuel est un carré, vous devrez lire le mot. Si l’indice visuel est un cercle, vous devrez donner la couleur de l’encre.</value>
   </data>
   <data name="Case5_P1_Congruence" xml:space="preserve">
-    <value>Ces noms seront toujours écrits dans la même couleur que le sens du mot, précédés d'une forme.</value>
+    <value>Ces noms seront toujours écrits dans une encre de la même couleur que le sens du mot.</value>
   </data>
   <data name="Case5_P2_Instructions" xml:space="preserve">
-    <value>Suivez l’indice visuel : un cercle signifie couleur de l’encre, un carré signifie lire le mot.</value>
-  </data>
-  <data name="Case5_P2_Example" xml:space="preserve">
-    <value>La bonne réponse serait "ROUGE", car le mot correspond à l’encre et est précédé d’un carré.</value>
+    <value>Ne tenez pas compte de la forme,.</value>
   </data>
   <data name="Case6_P1_Congruence" xml:space="preserve">
-    <value>Parfois les mots correspondront à leur couleur, parfois non, et chaque mot sera précédé d’une forme.</value>
+    <value>Parfois, ces mots seront écrits dans la même couleur d'encre que son sens. Parfois, ces mots seront écrits dans une couleur d'encre différente de son sens.</value>
   </data>
   <data name="Case6_P2_Instructions" xml:space="preserve">
-    <value>Suivez l’indice visuel : un cercle signifie couleur de l’encre, un carré signifie lire le mot.</value>
-  </data>
-  <data name="Case6_P2_Example" xml:space="preserve">
-    <value>La bonne réponse serait "BLEU", si la forme était un cercle et que le mot était écrit en bleu.</value>
+    <value>Si l’indice visuel est un carré, vous devrez lire le mot. Si l’indice visuel est un cercle, vous devrez donner la couleur de l’encre.</value>
   </data>
   <data name="Word_BLUE" xml:space="preserve">
     <value>BLEU</value>
@@ -678,5 +660,20 @@
   </data>
   <data name="Word_YELLOW" xml:space="preserve">
     <value>JAUNE</value>
+  </data>
+  <data name="Tooltip_AveragingInterval" xml:space="preserve">
+    <value>Définit tous les combien de mots une moyenne des temps de réponse est calculée. Par exemple, un facteur de 5 affichera une moyenne tous les 5 mots. </value>
+  </data>
+  <data name="Page1_Display_WithCue" xml:space="preserve">
+    <value>Une croix de fixation entourée d’une forme apparaîtra, suivie d’un mot de couleur.</value>
+  </data>
+  <data name="Case4_P2_InstructionsWithCue" xml:space="preserve">
+    <value>Appuyez sur la touche correspondant aux instructions, le plus rapidement possible, en faisant le moins d'erreurs.</value>
+  </data>
+  <data name="Case5_P2_InstructionsWithCue" xml:space="preserve">
+    <value>Appuyez sur la touche correspondant au sens du mot, le plus rapidement possible, en faisant le moins d'erreurs.</value>
+  </data>
+  <data name="Case6_P2_InstructionsWithCue" xml:space="preserve">
+    <value>Appuyez sur la touche correspondant aux instructions, le plus rapidement possible, en faisant le moins d'erreurs.</value>
   </data>
 </root>

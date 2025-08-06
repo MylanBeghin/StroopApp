@@ -22,7 +22,12 @@ namespace StroopApp.Models
 		public ExperimentProfile()
 		{
 			_id = Guid.NewGuid();
-			_profileName = "Nouveau Profil";
+			_profileName = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName switch
+			{
+				"fr" => "Nouveau profil",
+				"en" => "New profile",
+				_ => "New profile"
+			};
 			_fixationDuration = 100;
 			_maxReactionTime = 400;
 			_amorceDuration = 0;

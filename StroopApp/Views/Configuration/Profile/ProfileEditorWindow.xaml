@@ -261,11 +261,26 @@
                                     <ColumnDefinition Width="12" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <ui:NumberBox Header="{Binding Source={StaticResource Loc}, Path=[Field_GroupSize]}"
-                                              Value="{Binding Profile.GroupSize, Mode=TwoWay}"
+                                <ui:NumberBox Value="{Binding Profile.GroupSize, Mode=TwoWay}"
                                               Minimum="1"
-                                              SpinButtonPlacementMode="Inline"
-                                              Grid.Column="0" />
+                                              Grid.Column="0"
+                                              SpinButtonPlacementMode="Inline">
+                                    <ui:ControlHelper.Header>
+                                        <ui:SimpleStackPanel Orientation="Horizontal"
+                                                             VerticalAlignment="Center"
+                                                             Spacing="4"
+                                                             ToolTip="{Binding Source={StaticResource Loc}, Path=[Tooltip_AveragingInterval]}"
+                                                             ToolTipService.Placement="Top"
+                                                             ToolTipService.InitialShowDelay="100">
+                                            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_GroupSize]}" />
+                                            <TextBlock Text=""
+                                                       FontFamily="Segoe MDL2 Assets"
+                                                       FontSize="14"
+                                                       Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"
+                                                       Margin="0,4,0,0" />
+                                        </ui:SimpleStackPanel>
+                                    </ui:ControlHelper.Header>
+                                </ui:NumberBox>
                             </Grid>
                             <ui:SimpleStackPanel Spacing="6">
                                 <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Field_WordCount]}" />
@@ -306,11 +321,26 @@
                                     <ColumnDefinition Width="12" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <ui:NumberBox Header="{Binding Source={StaticResource Loc}, Path=[Field_GroupSize]}"
-                                              Value="{Binding Profile.GroupSize, Mode=TwoWay}"
+                                <ui:NumberBox Value="{Binding Profile.GroupSize, Mode=TwoWay}"
                                               Minimum="1"
-                                              SpinButtonPlacementMode="Inline"
-                                              Grid.Column="0" />
+                                              Grid.Column="0"
+                                              SpinButtonPlacementMode="Inline">
+                                    <ui:ControlHelper.Header>
+                                        <ui:SimpleStackPanel Orientation="Horizontal"
+                                                             VerticalAlignment="Center"
+                                                             Spacing="4"
+                                                             ToolTip="{Binding Source={StaticResource Loc}, Path=[Tooltip_AveragingInterval]}"
+                                                             ToolTipService.Placement="Top"
+                                                             ToolTipService.InitialShowDelay="100">
+                                            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_GroupSize]}" />
+                                            <TextBlock Text=""
+                                                       FontFamily="Segoe MDL2 Assets"
+                                                       FontSize="14"
+                                                       Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"
+                                                       Margin="0,4,0,0" />
+                                        </ui:SimpleStackPanel>
+                                    </ui:ControlHelper.Header>
+                                </ui:NumberBox>
                             </Grid>
                             <Grid>
                                 <Grid.ColumnDefinitions>
