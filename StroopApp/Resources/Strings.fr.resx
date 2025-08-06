@@ -142,10 +142,10 @@
     <value>Un profil avec ce nom existe déjà. Veuillez choisir un autre nom.</value>
   </data>
   <data name="Error_WordDurationInvalid" xml:space="preserve">
-    <value>La durée du mot doit être positive et la durée totale doit être divisible par la durée du mot.</value>
+    <value>La durée de l'essai doit être positive et la durée totale doit être divisible par la durée de la tâche.</value>
   </data>
   <data name="Error_GroupSizeInvalid" xml:space="preserve">
-    <value>La taille du groupe doit être positive et diviser le nombre de mots.</value>
+    <value>L'intervalle de moyenne doit être positive et diviser le nombre d'essais.</value>
   </data>
   <data name="Error_SelectParticipantToModify" xml:space="preserve">
     <value>Veuillez sélectionner un participant à modifier !</value>
@@ -205,13 +205,13 @@
     <value>Congruence (%)</value>
   </data>
   <data name="Tooltip_Congruence" xml:space="preserve">
-    <value>Définit la proportion de mots congruents dans le bloc. Un mot est congruent lorsque sa signification correspond à sa couleur (ex. le mot Rouge écrit en rouge). Exemple : 25 % = 75 % d’incongruents, 25 % de congruents.</value>
+    <value>Définit la proportion d'essais congruents dans le bloc. Un essai est congruent lorsque sa signification correspond à sa couleur (ex. le mot Rouge écrit en rouge). Exemple : 25 % = 75 % d’incongruents, 25 % de congruents.</value>
   </data>
   <data name="Header_Switch" xml:space="preserve">
-    <value>Switch (%)</value>
+    <value>Alternance (%)</value>
   </data>
   <data name="Tooltip_Switch" xml:space="preserve">
-    <value>Définit la fréquence de changement de forme d’amorce entre deux essais. Un switch correspond à un passage d’un carré à un rond, ou inversement. Exemple : 100 % = alternance à chaque essai, 0 % = toujours la même forme.</value>
+    <value>Définit la fréquence d'alternance entre deux formes d'indice visuel différentes. Une seule alternance correspond au passage d’un carré à un rond, ou inversement. Exemple : 100 % = alternance à chaque essai, 0 % = toujours la même forme.</value>
   </data>
   <data name="Header_Hours" xml:space="preserve">
     <value>Heures</value>
@@ -222,11 +222,8 @@
   <data name="Header_Seconds" xml:space="preserve">
     <value>Secondes</value>
   </data>
-  <data name="Header_MaxResponseTime" xml:space="preserve">
-    <value>Temps de réponse max (ms)</value>
-  </data>
   <data name="Header_WordDuration" xml:space="preserve">
-    <value>Durée par mot (ms)</value>
+    <value>Durée par essai (ms)</value>
   </data>
   <data name="Field_ProfileName" xml:space="preserve">
     <value>Nom du profil</value>
@@ -238,13 +235,13 @@
     <value>En fonction de la durée de la tâche</value>
   </data>
   <data name="Radio_WordCount" xml:space="preserve">
-    <value>En fonction du nombre de mots</value>
+    <value>En fonction du nombre d'essai</value>
   </data>
-  <data name="Field_GroupSize" xml:space="preserve">
-    <value>Taille du groupe</value>
+  <data name="Header_GroupSize" xml:space="preserve">
+    <value>Intervalle de moyenne</value>
   </data>
   <data name="Field_WordCount" xml:space="preserve">
-    <value>Nombre de mots</value>
+    <value>Nombre d'essais</value>
   </data>
   <data name="Label_KeyRed" xml:space="preserve">
     <value>Touche associée à la couleur rouge :</value>
@@ -262,7 +259,7 @@
     <value>Modifier</value>
   </data>
   <data name="Button_Continue" xml:space="preserve">
-    <value>Relancer</value>
+    <value>Continuer avec le même participant</value>
   </data>
   <data name="Button_NewExperiment" xml:space="preserve">
     <value>Nouvelle expérience</value>
@@ -276,20 +273,14 @@
   <data name="Header_ParticipantId" xml:space="preserve">
     <value>ID du participant</value>
   </data>
-  <data name="Header_Block" xml:space="preserve">
+  <data name="Header_BlockNumber" xml:space="preserve">
     <value>Bloc</value>
   </data>
-  <data name="Header_Trials" xml:space="preserve">
-    <value>Essais</value>
+  <data name="Header_TrialsPerBlock" xml:space="preserve">
+    <value>Nombre d'essais par bloc</value>
   </data>
   <data name="Header_Accuracy" xml:space="preserve">
     <value>Précision</value>
-  </data>
-  <data name="Header_MeanResponseTime" xml:space="preserve">
-    <value>Temps moyen de réponse</value>
-  </data>
-  <data name="Header_StroopType" xml:space="preserve">
-    <value>Type Stroop</value>
   </data>
   <data name="Toggle_On" xml:space="preserve">
     <value>Activé</value>
@@ -298,10 +289,7 @@
     <value>Désactivé</value>
   </data>
   <data name="Header_FixationDuration" xml:space="preserve">
-    <value>Durée de fixation (ms)</value>
-  </data>
-  <data name="Header_PrimeDuration" xml:space="preserve">
-    <value>Durée d'amorce (ms)</value>
+    <value>Durée de la croix de fixation (ms)</value>
   </data>
   <data name="Title_ExperimentWindow" xml:space="preserve">
     <value>Expérience Stroop</value>
@@ -309,14 +297,17 @@
   <data name="Title_ParticipantWindow" xml:space="preserve">
     <value>Fenêtre Participant</value>
   </data>
+  <data name="Header_VisualCueDuration" xml:space="preserve">
+    <value>Durée de l'indice visuel (ms)</value>
+  </data>
   <data name="Title_ConfigPage" xml:space="preserve">
     <value>Configuration de l'expérience</value>
   </data>
   <data name="Error_AmorceDurationInvalid" xml:space="preserve">
-    <value>Le temps d'affichage de l'amorce doit être supérieur à 0 !</value>
+    <value>La durée d'affichage de l'indice visuel doit être supérieure à 0 !</value>
   </data>
   <data name="Error_MaxResponseTimeInvalid" xml:space="preserve">
-    <value>Le temps de réposnemaximum doit être positif.</value>
+    <value>Le temps de réponse maximum doit être positif.</value>
   </data>
   <data name="Title_Export_Completed" xml:space="preserve">
     <value>Export terminé</value>
@@ -326,7 +317,7 @@
 {0}</value>
   </data>
   <data name="Label_LiveAverage" xml:space="preserve">
-    <value>Moyenne pour les mots {0}-{1}</value>
+    <value>Moyenne pour les essais {0}-{1}</value>
   </data>
   <data name="Label_LiveAverageNoData" xml:space="preserve">
     <value>Aucune donnée valide</value>
@@ -355,9 +346,6 @@
   <data name="Description_ParticipantManagement" xml:space="preserve">
     <value>Sélectionnez un participant pour lancer l'expérience.</value>
   </data>
-  <data name="Placeholder_Search" xml:space="preserve">
-    <value>Rechercher...</value>
-  </data>
   <data name="Title_ParticipantEditorWindow" xml:space="preserve">
     <value>Modification du participant</value>
   </data>
@@ -374,7 +362,7 @@
     <value>Modification du profil</value>
   </data>
   <data name="Label_AddPrime" xml:space="preserve">
-    <value>Ajouter une amorce</value>
+    <value>Ajouter un indice visuel</value>
   </data>
   <data name="Title_KeyMapping" xml:space="preserve">
     <value>Choix des touches</value>
@@ -389,13 +377,13 @@
     <value>Sélectionner le dossier d’exportation pour vos résultats</value>
   </data>
   <data name="Title_Dashboard" xml:space="preserve">
-    <value>Tableau de bord de l'expérience en cours</value>
+    <value>Tableau de bord de l'expérience</value>
   </data>
   <data name="Title_Progress" xml:space="preserve">
-    <value>Avancement</value>
+    <value>Progession</value>
   </data>
   <data name="Title_ParticipantDetails" xml:space="preserve">
-    <value>Détails du participant</value>
+    <value>Informations du participant</value>
   </data>
   <data name="Title_ExperimentDetails" xml:space="preserve">
     <value>Détails de l'expérience</value>
@@ -422,11 +410,7 @@
     <value>Suivi de l'expérience</value>
   </data>
   <data name="Button_OK" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="Error_FillRequiredFieldsProperly" xml:space="preserve">
-    <value>Veuillez remplir correctement tous les champs obligatoires.
-</value>
+    <value>Ok</value>
   </data>
   <data name="Error_ParticipantIdAlreadyUsed" xml:space="preserve">
     <value>Cet identifiant est déjà utilisé pour un autre participant</value>
@@ -474,25 +458,13 @@
     <value>Temps de réponse (ms)</value>
   </data>
   <data name="Label_CurrentParticipant" xml:space="preserve">
-    <value>Participant n° {0}</value>
+    <value>ID du participant : {0}</value>
   </data>
   <data name="Label_CurrentProfile" xml:space="preserve">
     <value>Tâche : {0}</value>
   </data>
   <data name="Value_LiveAverage" xml:space="preserve">
     <value>{0:N0} ms</value>
-  </data>
-  <data name="Color_Yellow" xml:space="preserve">
-    <value>Jaune</value>
-  </data>
-  <data name="Color_Blue" xml:space="preserve">
-    <value>Bleu</value>
-  </data>
-  <data name="Color_Red" xml:space="preserve">
-    <value>Rouge</value>
-  </data>
-  <data name="Color_Green" xml:space="preserve">
-    <value>Vert</value>
   </data>
   <data name="Label_SquarePercentage" xml:space="preserve">
     <value>Carré (%)</value>
@@ -532,5 +504,176 @@
   </data>
   <data name="Label_Parity" xml:space="preserve">
     <value>Parité</value>
+  </data>
+  <data name="Column_NoResponse" xml:space="preserve">
+    <value>Aucune réponse</value>
+  </data>
+  <data name="Button_Modify" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="Check_AddPrime" xml:space="preserve">
+    <value>Ajouter indice visuel</value>
+  </data>
+  <data name="Button_Quit_Without_Export" xml:space="preserve">
+    <value>Quitter l'application sans exporter</value>
+  </data>
+  <data name="Error_FillIdField" xml:space="preserve">
+    <value>Remplissez au moins le champ ID</value>
+  </data>
+  <data name="Header_MaxResponseTime" xml:space="preserve">
+    <value>Temps de réponse max (ms)</value>
+  </data>
+  <data name="Header_MeanResponseTime" xml:space="preserve">
+    <value>Temps moyen de réponse</value>
+  </data>
+  <data name="Placeholder_Search" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="Button_Export" xml:space="preserve">
+    <value>Exporter</value>
+  </data>
+  <data name="Label_PublicationPrefix" xml:space="preserve">
+    <value>Pour des publications associées à cette règle, voir Mangin et al.,</value>
+  </data>
+  <data name="Label_Year2021" xml:space="preserve">
+    <value>2021</value>
+  </data>
+  <data name="Label_Year2022" xml:space="preserve">
+    <value>2022</value>
+  </data>
+  <data name="Tooltip_CueSquareResponse" xml:space="preserve">
+    <value>Lorsque l’indice visuel est un carré, répondez en lisant le mot.</value>
+  </data>
+  <data name="Tooltip_CueCircleResponse" xml:space="preserve">
+    <value>Lorsque l’indice visuel est un cercle, répondez en indiquant la couleur du mot.</value>
+  </data>
+  <data name="Description_PreviewIntroduction" xml:space="preserve">
+    <value>Pour expliciter vos paramètres, un aperçu dynamique de la séquence des indices visuels se met à jour en temps réel en fonction de vos réglages.</value>
+  </data>
+  <data name="Button_OpenExportFolder" xml:space="preserve">
+    <value>Ouvrir le dossier des résultats</value>
+  </data>
+  <data name="Error_ExportError" xml:space="preserve">
+    <value>Erreur lors de l’export</value>
+  </data>
+  <data name="Label_ExportInProgress" xml:space="preserve">
+    <value>Export en cours...</value>
+  </data>
+  <data name="Message_ExportSuccess" xml:space="preserve">
+    <value>Export réussi !</value>
+  </data>
+  <data name="Label_ResultsSavedHere" xml:space="preserve">
+    <value>Résultats enregistrés ici</value>
+  </data>
+  <data name="Button_NewExport" xml:space="preserve">
+    <value>Nouvel export</value>
+  </data>
+  <data name="Button_Retry" xml:space="preserve">
+    <value>Réessayer</value>
+  </data>
+  <data name="Button_ExitApplication" xml:space="preserve">
+    <value>Quitter l'application</value>
+  </data>
+  <data name="Message_ConfirmExitWithoutExport" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir quitter l'application sans exporter les résultats ? Toutes données non exportées seront perdues.</value>
+  </data>
+  <data name="Error_TrialDurationNotDividingTaskDuration" xml:space="preserve">
+    <value>La durée de la tâche doit être divisible par la durée d'un essai.</value>
+  </data>
+  <data name="Header_ExperimentProfile" xml:space="preserve">
+    <value>Profil d'expérience</value>
+  </data>
+  <data name="Header_Trials" xml:space="preserve">
+    <value>Essais</value>
+  </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>Confirmer</value>
+  </data>
+  <data name="Header_VisualCue" xml:space="preserve">
+    <value>Indice visuel</value>
+  </data>
+  <data name="Field_TaskLanguage" xml:space="preserve">
+    <value>Langue de la tâche</value>
+  </data>
+  <data name="Word_RED" xml:space="preserve">
+    <value>ROUGE</value>
+  </data>
+  <data name="Page1_Intro" xml:space="preserve">
+    <value>Nous allons maintenant réaliser une tâche mentale.</value>
+  </data>
+  <data name="Page1_Display_NoCue" xml:space="preserve">
+    <value>Une croix de fixation apparaîtra, suivie d’un mot de couleur.</value>
+  </data>
+  <data name="Page1_WordsList" xml:space="preserve">
+    <value>Les mots seront : ROUGE, VERT, BLEU, JAUNE.</value>
+  </data>
+  <data name="Page1_Example" xml:space="preserve">
+    <value>Par exemple :</value>
+  </data>
+  <data name="Page2_CueExplanation" xml:space="preserve">
+    <value>Une forme apparaîtra : un carré signifie que vous devez lire le mot, un cercle signifie que vous devez donner la couleur de l’encre.</value>
+  </data>
+  <data name="Page3_Questions" xml:space="preserve">
+    <value>Avez-vous des questions avant de commencer ?</value>
+  </data>
+  <data name="Case1_P1_Congruence" xml:space="preserve">
+    <value>Ces noms seront toujours écrits avec une encre d'une couleur différente du sens du mot.</value>
+  </data>
+  <data name="Case1_P2_Instructions" xml:space="preserve">
+    <value>Appuyez sur la touche correspondant à la couleur de l'encre du mot, le plus rapidement possible, en faisant le moins d'erreurs.</value>
+  </data>
+  <data name="Case2_P1_Congruence" xml:space="preserve">
+    <value>&#x8;Ces noms seront toujours écrits dans une encre de la même couleur que le sens du mot.</value>
+  </data>
+  <data name="Case2_P2_Instructions" xml:space="preserve">
+    <value>Appuyez sur la touche correspondant à la couleur de l'encre du mot, le plus rapidement possible, en faisant le moins d'erreurs.</value>
+  </data>
+  <data name="Case3_P1_Congruence" xml:space="preserve">
+    <value>Parfois, ces mots seront écrits dans la même couleur d'encre que son sens. Parfois, ces mots seront écrits dans une couleur d'encre différente de son sens.</value>
+  </data>
+  <data name="Case3_P2_Instructions" xml:space="preserve">
+    <value>Appuyez sur la touche correspondant à la couleur de l'encre, le plus rapidement possible, en faisant le moins d'erreurs.</value>
+  </data>
+  <data name="Case4_P1_Congruence" xml:space="preserve">
+    <value>Ces noms seront toujours écrits dans une encre d'une couleur différente du sens du mot.</value>
+  </data>
+  <data name="Case4_P2_Instructions" xml:space="preserve">
+    <value>Si l’indice visuel est un carré, vous devrez lire le mot. Si l’indice visuel est un cercle, vous devrez donner la couleur de l’encre.</value>
+  </data>
+  <data name="Case5_P1_Congruence" xml:space="preserve">
+    <value>Ces noms seront toujours écrits dans une encre de la même couleur que le sens du mot.</value>
+  </data>
+  <data name="Case5_P2_Instructions" xml:space="preserve">
+    <value>Ne tenez pas compte de la forme,.</value>
+  </data>
+  <data name="Case6_P1_Congruence" xml:space="preserve">
+    <value>Parfois, ces mots seront écrits dans la même couleur d'encre que son sens. Parfois, ces mots seront écrits dans une couleur d'encre différente de son sens.</value>
+  </data>
+  <data name="Case6_P2_Instructions" xml:space="preserve">
+    <value>Si l’indice visuel est un carré, vous devrez lire le mot. Si l’indice visuel est un cercle, vous devrez donner la couleur de l’encre.</value>
+  </data>
+  <data name="Word_BLUE" xml:space="preserve">
+    <value>BLEU</value>
+  </data>
+  <data name="Word_GREEN" xml:space="preserve">
+    <value>VERT</value>
+  </data>
+  <data name="Word_YELLOW" xml:space="preserve">
+    <value>JAUNE</value>
+  </data>
+  <data name="Tooltip_AveragingInterval" xml:space="preserve">
+    <value>Définit tous les combien de mots une moyenne des temps de réponse est calculée. Par exemple, un facteur de 5 affichera une moyenne tous les 5 mots. </value>
+  </data>
+  <data name="Page1_Display_WithCue" xml:space="preserve">
+    <value>Une croix de fixation entourée d’une forme apparaîtra, suivie d’un mot de couleur.</value>
+  </data>
+  <data name="Case4_P2_InstructionsWithCue" xml:space="preserve">
+    <value>Appuyez sur la touche correspondant aux instructions, le plus rapidement possible, en faisant le moins d'erreurs.</value>
+  </data>
+  <data name="Case5_P2_InstructionsWithCue" xml:space="preserve">
+    <value>Appuyez sur la touche correspondant au sens du mot, le plus rapidement possible, en faisant le moins d'erreurs.</value>
+  </data>
+  <data name="Case6_P2_InstructionsWithCue" xml:space="preserve">
+    <value>Appuyez sur la touche correspondant aux instructions, le plus rapidement possible, en faisant le moins d'erreurs.</value>
   </data>
 </root>

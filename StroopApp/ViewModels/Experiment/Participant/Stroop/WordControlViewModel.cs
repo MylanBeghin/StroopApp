@@ -1,56 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Media;
 
 using StroopApp.Core;
 
 namespace StroopApp.ViewModels.Experiment.Participant.Stroop
 {
+
+
 	public class WordControlViewModel : ViewModelBase
 	{
-		private string _label;
+		private string label;
 		public string Label
 		{
-			get => _label;
+			get => label;
 			set
 			{
-				_label = value;
-				OnPropertyChanged();
-			}
-		}
-		private string _color;
-		public string Color
-		{
-			get => _color;
-			set
-			{
-				_color = value;
+				label = value;
 				OnPropertyChanged();
 			}
 		}
 
+		private string color;
+		public string Color
+		{
+			get => color;
+			set
+			{
+				color = value;
+				OnPropertyChanged();
+				OnPropertyChanged(nameof(ForegroundBrush));
+			}
+		}
+
+		public Brush ForegroundBrush => color switch
+		{
+			"Red" or "Rouge" => Brushes.Red,
+			"Blue" or "Bleu" => Brushes.Blue,
+			"Green" or "Vert" => Brushes.Green,
+			"Yellow" or "Jaune" => Brushes.Yellow,
+			_ => Brushes.Black
+		};
+
 		public WordControlViewModel(string label, string color)
 		{
-			switch (label)
-			{
-				case "Blue":
-				Label = "Blue";
-				break;
-				case "Red":
-				Label = "Red";
-				break;
-				case "Green":
-				Label = "Green";
-				break;
-				case "Yellow":
-				Label = "Yellow";
-				break;
-			}
+			Label = label;
 			Color = color;
 		}
 	}
+
 }

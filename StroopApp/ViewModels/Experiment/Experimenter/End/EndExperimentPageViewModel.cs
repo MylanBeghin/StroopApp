@@ -21,7 +21,7 @@ using StroopApp.Views.Experiment.Experimenter.End;
 
 namespace StroopApp.ViewModels.Experiment.Experimenter.End
 {
-	public class EndExperimentViewModel : ViewModelBase
+	public class EndExperimentPageViewModel : ViewModelBase
 	{
 		public ExperimentSettings Settings
 		{
@@ -67,7 +67,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 				OnPropertyChanged();
 			}
 		}
-		public EndExperimentViewModel(ExperimentSettings settings,
+		public EndExperimentPageViewModel(ExperimentSettings settings,
 								  IExportationService exportationService,
 								  INavigationService experimenterNavigationService,
 								  IWindowManager windowManager)
@@ -147,7 +147,8 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 		}
 		private async void QuitWihtoutExport()
 		{
-			if (await ShowConfirmationDialog("Êtes-vous sûr de vouloir quitter l'application sans exporter les résultats ? Toutes données non exportées seront perdues"))
+
+			if (await ShowConfirmationDialog(Strings.Message_ConfirmExitWithoutExport))
 			{
 				Application.Current.Shutdown();
 			}

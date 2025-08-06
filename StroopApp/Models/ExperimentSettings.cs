@@ -1,4 +1,6 @@
-﻿using StroopApp.Core;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+
+using StroopApp.Core;
 namespace StroopApp.Models
 {
 	/// <summary>
@@ -83,6 +85,8 @@ namespace StroopApp.Models
 		{
 			ExperimentContext.Reset();
 			Block = 1;
+			ExperimentContext.IsBlockFinished = true;
+			ExperimentContext.IsParticipantSelectionEnabled = true;
 			OnPropertyChanged(string.Empty);
 		}
 		public ExperimentSettings()

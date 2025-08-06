@@ -16,13 +16,13 @@ public class Block : ModelBase
 		}
 	}
 
-	private int _totalTrials;
-	public int TotalTrials
+	private int _trialsPerBlock;
+	public int TrialsPerBlock
 	{
-		get => _totalTrials;
+		get => _trialsPerBlock;
 		set
 		{
-			_totalTrials = value;
+			_trialsPerBlock = value;
 			OnPropertyChanged();
 		}
 	}
@@ -48,22 +48,72 @@ public class Block : ModelBase
 			OnPropertyChanged();
 		}
 	}
+	private int? _congruencePercent;
+
+	public int? CongruencePercent
+	{
+		get => _congruencePercent;
+		set
+		{
+			_congruencePercent = value;
+			OnPropertyChanged();
+		}
+	}
+	private int? _switchPercent;
+
+	public int? SwitchPercent
+	{
+		get => _switchPercent;
+		set
+		{
+			_switchPercent = value;
+			OnPropertyChanged();
+		}
+	}
+	public string? _blockExperimentProfile;
+
+	public string? BlockExperimentProfile
+	{
+		get => _blockExperimentProfile;
+		set
+		{
+			_blockExperimentProfile = value;
+			OnPropertyChanged();
+		}
+	}
+	public string? _visualCue;
+
+	public string? VisualCue
+	{
+		get => _visualCue;
+		set
+		{
+			_visualCue = value;
+			OnPropertyChanged();
+		}
+	}
 	private readonly ExperimentSettings _settings;
 
-	public readonly string _profileName;
 	public ObservableCollection<StroopTrial> TrialRecords { get; } = new();
 	public ObservableCollection<double?> TrialTimes { get; } = new();
-	public Block(int blockNumber, string profileName)
+	public Block(ExperimentSettings settings)
 	{
-		BlockNumber = blockNumber;
-		_profileName = profileName;
+		_settings = settings;
+		_blockExperimentProfile = settings.CurrentProfile.ProfileName;
+		_blockNumber = settings.Block;
+		_congruencePercent = settings.CurrentProfile.CongruencePercent;
+		_switchPercent = settings.CurrentProfile.SwitchPercent;
+		if (settings.CurrentProfile.IsAmorce)
+			_visualCue = "✅";
+		else
+			_visualCue = "❎";
 	}
 
 	public void CalculateValues()
 	{
-		TotalTrials = TrialRecords.Count;
+		TrialsPerBlock = TrialRecords.Count;
 		Accuracy = TrialRecords.Any()
-					  ? TrialRecords.Count(t => t.IsValidResponse == true) / (double)TotalTrials * 100
+					  ? TrialRecords.Count(t => t.IsValidResponse == true) / (double)TrialsPerBlock * 100
 					  : 0;
 		ResponseTimeMean = TrialRecords
 									.Where(trial => trial.ReactionTime.HasValue && trial.Block == BlockNumber)

@@ -70,6 +70,7 @@ namespace StroopApp.Services.Profile
 				existing.DominantPercent = profile.DominantPercent;
 				existing.CongruencePercent = profile.CongruencePercent;
 				existing.SwitchPercent = profile.SwitchPercent;
+				existing.TaskLanguage = profile.TaskLanguage;
 				existing.UpdateDerivedValues();
 			}
 
@@ -102,7 +103,6 @@ namespace StroopApp.Services.Profile
 				}
 				catch (JsonException)
 				{
-					// Fallback pour les anciens fichiers qui pourraient contenir du texte brut
 					if (Guid.TryParse(text, out var id))
 						return id;
 				}

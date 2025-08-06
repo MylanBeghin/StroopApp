@@ -106,6 +106,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Confirm.
+        /// </summary>
+        public static string Button_Confirm {
+            get {
+                return ResourceManager.GetString("Button_Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Connect.
         /// </summary>
         public static string Button_Connect {
@@ -115,7 +124,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Continue .
+        ///   Recherche une chaîne localisée semblable à Continue with the same participant.
         /// </summary>
         public static string Button_Continue {
             get {
@@ -169,6 +178,24 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Exit application.
+        /// </summary>
+        public static string Button_ExitApplication {
+            get {
+                return ResourceManager.GetString("Button_ExitApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Export.
+        /// </summary>
+        public static string Button_Export {
+            get {
+                return ResourceManager.GetString("Button_Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Start Experiment.
         /// </summary>
         public static string Button_LaunchExperiment {
@@ -196,11 +223,29 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à New export.
+        /// </summary>
+        public static string Button_NewExport {
+            get {
+                return ResourceManager.GetString("Button_NewExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à OK.
         /// </summary>
         public static string Button_OK {
             get {
                 return ResourceManager.GetString("Button_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Open the results folder.
+        /// </summary>
+        public static string Button_OpenExportFolder {
+            get {
+                return ResourceManager.GetString("Button_OpenExportFolder", resourceCulture);
             }
         }
         
@@ -232,6 +277,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Retry.
+        /// </summary>
+        public static string Button_Retry {
+            get {
+                return ResourceManager.GetString("Button_Retry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Save.
         /// </summary>
         public static string Button_Save {
@@ -250,7 +304,142 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Add prime.
+        ///   Recherche une chaîne localisée semblable à These words will always be written with ink of a different color than the meaning of the word..
+        /// </summary>
+        public static string Case1_P1_Congruence {
+            get {
+                return ResourceManager.GetString("Case1_P1_Congruence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Press the key corresponding to the color of the word&apos;s ink as quickly as possible, making the fewest mistakes..
+        /// </summary>
+        public static string Case1_P2_Instructions {
+            get {
+                return ResourceManager.GetString("Case1_P2_Instructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à These words will always be written in ink of the same color as the meaning of the word..
+        /// </summary>
+        public static string Case2_P1_Congruence {
+            get {
+                return ResourceManager.GetString("Case2_P1_Congruence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Press the key corresponding to the color of the word&apos;s ink as quickly as possible, making the fewest mistakes..
+        /// </summary>
+        public static string Case2_P2_Instructions {
+            get {
+                return ResourceManager.GetString("Case2_P2_Instructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sometimes, these words will be written in the same ink color as their meaning. Other times, these words will be written in a different ink color than their meaning..
+        /// </summary>
+        public static string Case3_P1_Congruence {
+            get {
+                return ResourceManager.GetString("Case3_P1_Congruence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Press the key matching the ink color as quickly as possible, making the fewest mistakes..
+        /// </summary>
+        public static string Case3_P2_Instructions {
+            get {
+                return ResourceManager.GetString("Case3_P2_Instructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The words will always be displayed in a different color than their meaning, and preceded by a shape..
+        /// </summary>
+        public static string Case4_P1_Congruence {
+            get {
+                return ResourceManager.GetString("Case4_P1_Congruence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à If the visual cue is a square, you should read the word. If the visual cue is a circle, you should name the color of the ink..
+        /// </summary>
+        public static string Case4_P2_Instructions {
+            get {
+                return ResourceManager.GetString("Case4_P2_Instructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Press the key corresponding to the instruction as quickly as possible, making the fewest mistakes..
+        /// </summary>
+        public static string Case4_P2_InstructionsWithCue {
+            get {
+                return ResourceManager.GetString("Case4_P2_InstructionsWithCue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à These words will always be written in ink of the same color as the meaning of the word..
+        /// </summary>
+        public static string Case5_P1_Congruence {
+            get {
+                return ResourceManager.GetString("Case5_P1_Congruence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Ignore the shape..
+        /// </summary>
+        public static string Case5_P2_Instructions {
+            get {
+                return ResourceManager.GetString("Case5_P2_Instructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Press the key corresponding to the meaning of the word, as quickly as possible, making the fewest mistakes..
+        /// </summary>
+        public static string Case5_P2_InstructionsWithCue {
+            get {
+                return ResourceManager.GetString("Case5_P2_InstructionsWithCue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sometimes, these words will be written in the same ink color as their meaning. Other times, these words will be written in a different ink color than their meaning..
+        /// </summary>
+        public static string Case6_P1_Congruence {
+            get {
+                return ResourceManager.GetString("Case6_P1_Congruence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Disregard the shape, give the meaning of the word..
+        /// </summary>
+        public static string Case6_P2_Instructions {
+            get {
+                return ResourceManager.GetString("Case6_P2_Instructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Press the key corresponding to the instruction as quickly as possible, making the fewest mistakes..
+        /// </summary>
+        public static string Case6_P2_InstructionsWithCue {
+            get {
+                return ResourceManager.GetString("Case6_P2_InstructionsWithCue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add visual cue.
         /// </summary>
         public static string Check_AddPrime {
             get {
@@ -259,38 +448,11 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Blue.
+        ///   Recherche une chaîne localisée semblable à No response.
         /// </summary>
-        public static string Color_Blue {
+        public static string Column_NoResponse {
             get {
-                return ResourceManager.GetString("Color_Blue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Green.
-        /// </summary>
-        public static string Color_Green {
-            get {
-                return ResourceManager.GetString("Color_Green", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Red.
-        /// </summary>
-        public static string Color_Red {
-            get {
-                return ResourceManager.GetString("Color_Red", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Yellow.
-        /// </summary>
-        public static string Color_Yellow {
-            get {
-                return ResourceManager.GetString("Color_Yellow", resourceCulture);
+                return ResourceManager.GetString("Column_NoResponse", resourceCulture);
             }
         }
         
@@ -390,6 +552,15 @@ namespace StroopApp.Resources {
         public static string Description_ParticipantManagement {
             get {
                 return ResourceManager.GetString("Description_ParticipantManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à To illustrate your parameters, a dynamic preview of the sequence of visual cues updates in real time based on your settings..
+        /// </summary>
+        public static string Description_PreviewIntroduction {
+            get {
+                return ResourceManager.GetString("Description_PreviewIntroduction", resourceCulture);
             }
         }
         
@@ -511,6 +682,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error during export.
+        /// </summary>
+        public static string Error_ExportError {
+            get {
+                return ResourceManager.GetString("Error_ExportError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Please fill at least the ID field.
         /// </summary>
         public static string Error_FillIdField {
@@ -520,16 +700,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Please fill out all required fields correctly..
-        /// </summary>
-        public static string Error_FillRequiredFieldsProperly {
-            get {
-                return ResourceManager.GetString("Error_FillRequiredFieldsProperly", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Group size must be positive and divide the number of words..
+        ///   Recherche une chaîne localisée semblable à The averaging interval must be positive and divide the number of trials..
         /// </summary>
         public static string Error_GroupSizeInvalid {
             get {
@@ -682,7 +853,16 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Word duration must be positive and divide task duration..
+        ///   Recherche une chaîne localisée semblable à Task duration must be divisible by trial duration..
+        /// </summary>
+        public static string Error_TrialDurationNotDividingTaskDuration {
+            get {
+                return ResourceManager.GetString("Error_TrialDurationNotDividingTaskDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Trial duration must be positive and divide task duration..
         /// </summary>
         public static string Error_WordDurationInvalid {
             get {
@@ -782,15 +962,6 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Group size.
-        /// </summary>
-        public static string Field_GroupSize {
-            get {
-                return ResourceManager.GetString("Field_GroupSize", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Height (cm).
         /// </summary>
         public static string Field_Height {
@@ -827,6 +998,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Task language.
+        /// </summary>
+        public static string Field_TaskLanguage {
+            get {
+                return ResourceManager.GetString("Field_TaskLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Weight (kg).
         /// </summary>
         public static string Field_Weight {
@@ -836,7 +1016,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Word count.
+        ///   Recherche une chaîne localisée semblable à Trials count.
         /// </summary>
         public static string Field_WordCount {
             get {
@@ -865,9 +1045,9 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Block.
         /// </summary>
-        public static string Header_Block {
+        public static string Header_BlockNumber {
             get {
-                return ResourceManager.GetString("Header_Block", resourceCulture);
+                return ResourceManager.GetString("Header_BlockNumber", resourceCulture);
             }
         }
         
@@ -881,11 +1061,29 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Experiment profile.
+        /// </summary>
+        public static string Header_ExperimentProfile {
+            get {
+                return ResourceManager.GetString("Header_ExperimentProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Fixation duration (ms).
         /// </summary>
         public static string Header_FixationDuration {
             get {
                 return ResourceManager.GetString("Header_FixationDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Averaging interval.
+        /// </summary>
+        public static string Header_GroupSize {
+            get {
+                return ResourceManager.GetString("Header_GroupSize", resourceCulture);
             }
         }
         
@@ -971,15 +1169,6 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Stroop type.
-        /// </summary>
-        public static string Header_StroopType {
-            get {
-                return ResourceManager.GetString("Header_StroopType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Switch (%).
         /// </summary>
         public static string Header_Switch {
@@ -1007,56 +1196,38 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Word duration (ms).
+        ///   Recherche une chaîne localisée semblable à Number of trials per block .
+        /// </summary>
+        public static string Header_TrialsPerBlock {
+            get {
+                return ResourceManager.GetString("Header_TrialsPerBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Visual cue.
+        /// </summary>
+        public static string Header_VisualCue {
+            get {
+                return ResourceManager.GetString("Header_VisualCue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Visual cue duration (ms).
+        /// </summary>
+        public static string Header_VisualCueDuration {
+            get {
+                return ResourceManager.GetString("Header_VisualCueDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Trial duration (ms).
         /// </summary>
         public static string Header_WordDuration {
             get {
                 return ResourceManager.GetString("Header_WordDuration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Select the keys associated with the colors..
-        /// </summary>
-        public static string KeyMapping_Description {
-            get {
-                return ResourceManager.GetString("KeyMapping_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Edit mapping for {0}.
-        /// </summary>
-        public static string KeyMapping_DialogTitle {
-            get {
-                return ResourceManager.GetString("KeyMapping_DialogTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à This key is already used. Please choose another one..
-        /// </summary>
-        public static string KeyMapping_ErrorKeyUsed {
-            get {
-                return ResourceManager.GetString("KeyMapping_ErrorKeyUsed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Press a key to define the mapping. Press Esc to cancel..
-        /// </summary>
-        public static string KeyMapping_Prompt {
-            get {
-                return ResourceManager.GetString("KeyMapping_Prompt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Key mapping.
-        /// </summary>
-        public static string KeyMapping_Title {
-            get {
-                return ResourceManager.GetString("KeyMapping_Title", resourceCulture);
             }
         }
         
@@ -1079,7 +1250,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Label_Circle (%).
+        ///   Recherche une chaîne localisée semblable à Circle (%).
         /// </summary>
         public static string Label_CirclePercentage {
             get {
@@ -1088,7 +1259,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Participant no. {0}.
+        ///   Recherche une chaîne localisée semblable à Participant ID : {0}.
         /// </summary>
         public static string Label_CurrentParticipant {
             get {
@@ -1151,6 +1322,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Export in progress....
+        /// </summary>
+        public static string Label_ExportInProgress {
+            get {
+                return ResourceManager.GetString("Label_ExportInProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Key associated with the blue color:.
         /// </summary>
         public static string Label_KeyBlue {
@@ -1187,7 +1367,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Average for words {0}–{1}:.
+        ///   Recherche une chaîne localisée semblable à Average for trials {0}–{1}:.
         /// </summary>
         public static string Label_LiveAverage {
             get {
@@ -1241,6 +1421,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à For associated publication with this rule, see Mangin et al.,.
+        /// </summary>
+        public static string Label_PublicationPrefix {
+            get {
+                return ResourceManager.GetString("Label_PublicationPrefix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Correct.
         /// </summary>
         public static string Label_ResponseCorrect {
@@ -1273,6 +1462,15 @@ namespace StroopApp.Resources {
         public static string Label_ResponseValidityUnknown {
             get {
                 return ResourceManager.GetString("Label_ResponseValidityUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Results saved here.
+        /// </summary>
+        public static string Label_ResultsSavedHere {
+            get {
+                return ResourceManager.GetString("Label_ResultsSavedHere", resourceCulture);
             }
         }
         
@@ -1313,20 +1511,20 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Average for words {0}–{1}:.
+        ///   Recherche une chaîne localisée semblable à 2021.
         /// </summary>
-        public static string LiveAverage_Label {
+        public static string Label_Year2021 {
             get {
-                return ResourceManager.GetString("LiveAverage_Label", resourceCulture);
+                return ResourceManager.GetString("Label_Year2021", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à No valid data.
+        ///   Recherche une chaîne localisée semblable à 2022.
         /// </summary>
-        public static string LiveAverage_NoData {
+        public static string Label_Year2022 {
             get {
-                return ResourceManager.GetString("LiveAverage_NoData", resourceCulture);
+                return ResourceManager.GetString("Label_Year2022", resourceCulture);
             }
         }
         
@@ -1349,7 +1547,16 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Do you really want to delete this participant? Their data will be archived..
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to exit the application without exporting the results? All non-exported data will be lost..
+        /// </summary>
+        public static string Message_ConfirmExitWithoutExport {
+            get {
+                return ResourceManager.GetString("Message_ConfirmExitWithoutExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Do you really want to delete this participant ? Their data will be archived..
         /// </summary>
         public static string Message_DeleteParticipantConfirmation {
             get {
@@ -1358,7 +1565,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Do you really want to delete this profile?.
+        ///   Recherche une chaîne localisée semblable à Do you really want to delete this profile ?.
         /// </summary>
         public static string Message_DeleteProfileConfirmation {
             get {
@@ -1386,6 +1593,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Export successful!.
+        /// </summary>
+        public static string Message_ExportSuccess {
+            get {
+                return ResourceManager.GetString("Message_ExportSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Press a key to define the mapping. Press Esc to cancel..
         /// </summary>
         public static string Message_KeyMapping {
@@ -1395,52 +1611,70 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Participant details.
+        ///   Recherche une chaîne localisée semblable à A fixation cross will appear, followed by a color word..
         /// </summary>
-        public static string ParticipantDetails_Title {
+        public static string Page1_Display_NoCue {
             get {
-                return ResourceManager.GetString("ParticipantDetails_Title", resourceCulture);
+                return ResourceManager.GetString("Page1_Display_NoCue", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Edit participant.
+        ///   Recherche une chaîne localisée semblable à A fixation cross surrounded by a shape will appear, followed by a colored word..
         /// </summary>
-        public static string ParticipantEditorWindow_Title {
+        public static string Page1_Display_WithCue {
             get {
-                return ResourceManager.GetString("ParticipantEditorWindow_Title", resourceCulture);
+                return ResourceManager.GetString("Page1_Display_WithCue", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Select a participant to start the experiment..
+        ///   Recherche une chaîne localisée semblable à For example:.
         /// </summary>
-        public static string ParticipantManagement_Description {
+        public static string Page1_Example {
             get {
-                return ResourceManager.GetString("ParticipantManagement_Description", resourceCulture);
+                return ResourceManager.GetString("Page1_Example", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Select participant.
+        ///   Recherche une chaîne localisée semblable à We will now begin a mental task..
         /// </summary>
-        public static string ParticipantManagement_Title {
+        public static string Page1_Intro {
             get {
-                return ResourceManager.GetString("ParticipantManagement_Title", resourceCulture);
+                return ResourceManager.GetString("Page1_Intro", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Participant Window.
+        ///   Recherche une chaîne localisée semblable à The words will be: RED, GREEN, BLUE, YELLOW..
         /// </summary>
-        public static string ParticipantWindow_Title {
+        public static string Page1_WordsList {
             get {
-                return ResourceManager.GetString("ParticipantWindow_Title", resourceCulture);
+                return ResourceManager.GetString("Page1_WordsList", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Search....
+        ///   Recherche une chaîne localisée semblable à A shape will appear: a square means you must read the word, a circle means you must name the ink color..
+        /// </summary>
+        public static string Page2_CueExplanation {
+            get {
+                return ResourceManager.GetString("Page2_CueExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Do you have any questions before we begin ?.
+        /// </summary>
+        public static string Page3_Questions {
+            get {
+                return ResourceManager.GetString("Page3_Questions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Search.
         /// </summary>
         public static string Placeholder_Search {
             get {
@@ -1503,7 +1737,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Based on word count.
+        ///   Recherche une chaîne localisée semblable à Based on trial count.
         /// </summary>
         public static string Radio_WordCount {
             get {
@@ -1557,7 +1791,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Current experiment dashboard.
+        ///   Recherche une chaîne localisée semblable à Experiment dashboard.
         /// </summary>
         public static string Title_Dashboard {
             get {
@@ -1647,7 +1881,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Participant details.
+        ///   Recherche une chaîne localisée semblable à Participant information.
         /// </summary>
         public static string Title_ParticipantDetails {
             get {
@@ -1737,11 +1971,38 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Defines the proportion of congruent words in the block. A word is congruent when its meaning matches its color (e.g. the word Red written in red). Example: 25% = 75% incongruent, 25% congruent..
+        ///   Recherche une chaîne localisée semblable à Sets how many words are grouped to calculate an average response time. For example, a factor of 5 will show an average every 5 words..
+        /// </summary>
+        public static string Tooltip_AveragingInterval {
+            get {
+                return ResourceManager.GetString("Tooltip_AveragingInterval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Defines the proportion of congruent trials in the block. A trial is congruent when its meaning matches its color (e.g. the word Red written in red). Example: 25% = 75% incongruent, 25% congruent..
         /// </summary>
         public static string Tooltip_Congruence {
             get {
                 return ResourceManager.GetString("Tooltip_Congruence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à When the visual cue is a circle, respond by naming the color of the word..
+        /// </summary>
+        public static string Tooltip_CueCircleResponse {
+            get {
+                return ResourceManager.GetString("Tooltip_CueCircleResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à When the visual cue is a square, respond by reading the word..
+        /// </summary>
+        public static string Tooltip_CueSquareResponse {
+            get {
+                return ResourceManager.GetString("Tooltip_CueSquareResponse", resourceCulture);
             }
         }
         
@@ -1760,6 +2021,42 @@ namespace StroopApp.Resources {
         public static string Value_LiveAverage {
             get {
                 return ResourceManager.GetString("Value_LiveAverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à BLUE.
+        /// </summary>
+        public static string Word_BLUE {
+            get {
+                return ResourceManager.GetString("Word_BLUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à GREEN.
+        /// </summary>
+        public static string Word_GREEN {
+            get {
+                return ResourceManager.GetString("Word_GREEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à RED.
+        /// </summary>
+        public static string Word_RED {
+            get {
+                return ResourceManager.GetString("Word_RED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à YELLOW.
+        /// </summary>
+        public static string Word_YELLOW {
+            get {
+                return ResourceManager.GetString("Word_YELLOW", resourceCulture);
             }
         }
     }

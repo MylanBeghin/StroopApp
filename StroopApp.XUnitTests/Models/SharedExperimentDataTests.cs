@@ -1,11 +1,19 @@
 ﻿namespace StroopApp.XUnitTests.Models
 {
+	using DocumentFormat.OpenXml.Wordprocessing;
+
 	using StroopApp.Models;
 
 	using Xunit;
 
 	public class SharedExperimentDataTests
 	{
+		ExperimentSettings Settings = new ExperimentSettings
+		{
+			Participant = new Participant { Id = "42" },
+			ExperimentContext = new SharedExperimentData(),
+			CurrentProfile = new ExperimentProfile { IsAmorce = true }
+		};
 		[Fact]
 		public void Constructor_InitializesCollectionsAndDefaults()
 		{
@@ -30,7 +38,7 @@
 		{
 			// Arrange
 			var data = new SharedExperimentData();
-			var block = new Block(1, "test");
+			var block = new Block(Settings);
 
 			// Act
 			data.CurrentBlock = block;
@@ -138,11 +146,11 @@
 		{
 			// Arrange
 			var data = new SharedExperimentData();
-			data.Blocks.Add(new Block(1, "a"));
+			data.Blocks.Add(new Block(Settings));
 			data.BlockSeries.Add(null);
 			data.Sections.Add(null);
 			data.ReactionPoints.Add(null);
-			data.CurrentBlock = new Block(2, "b");
+			data.CurrentBlock = new Block(Settings);
 			data.IsBlockFinished = true;
 			data.NextAction = ExperimentAction.Quit;
 			data.currentBlockStart = 5;

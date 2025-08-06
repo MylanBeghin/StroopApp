@@ -55,6 +55,25 @@ namespace StroopApp.ViewModels.Configuration.Profile
 		}
 
 		private readonly IProfileService _IprofileService;
+		public List<LanguageOption> Languages { get; } = new()
+{
+	new LanguageOption { Code = "fr", DisplayName = "Français" },
+	new LanguageOption { Code = "en", DisplayName = "English" }
+};
+
+		public LanguageOption SelectedTaskLanguage
+		{
+			get => Languages.FirstOrDefault(l => l.Code == Profile.TaskLanguage) ?? Languages[0];
+			set
+			{
+				if (Profile.TaskLanguage != value?.Code)
+				{
+					Profile.TaskLanguage = value?.Code ?? "fr";
+					OnPropertyChanged();
+				}
+			}
+		}
+
 
 		public ProfileEditorViewModel(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles, IProfileService profileService)
 		{
@@ -108,9 +127,9 @@ namespace StroopApp.ViewModels.Configuration.Profile
 				return;
 			}
 
-			if (Profile.WordDuration <= 0 || Profile.TaskDuration % Profile.WordDuration != 0)
+			if (Profile.TaskDuration % Profile.WordDuration != 0)
 			{
-				ShowErrorDialog(Strings.Error_MaxResponseTimeInvalid);
+				ShowErrorDialog(Strings.Error_TrialDurationNotDividingTaskDuration);
 				return;
 			}
 

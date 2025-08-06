@@ -142,10 +142,10 @@
     <value>A profile with this name already exists. Choose another name.</value>
   </data>
   <data name="Error_WordDurationInvalid" xml:space="preserve">
-    <value>Word duration must be positive and divide task duration.</value>
+    <value>Trial duration must be positive and divide task duration.</value>
   </data>
   <data name="Error_GroupSizeInvalid" xml:space="preserve">
-    <value>Group size must be positive and divide the number of words.</value>
+    <value>The averaging interval must be positive and divide the number of trials.</value>
   </data>
   <data name="Error_SelectParticipantToModify" xml:space="preserve">
     <value>Please select a participant to modify!</value>
@@ -205,7 +205,7 @@
     <value>Congruence (%)</value>
   </data>
   <data name="Tooltip_Congruence" xml:space="preserve">
-    <value>Defines the proportion of congruent words in the block. A word is congruent when its meaning matches its color (e.g. the word Red written in red). Example: 25% = 75% incongruent, 25% congruent.</value>
+    <value>Defines the proportion of congruent trials in the block. A trial is congruent when its meaning matches its color (e.g. the word Red written in red). Example: 25% = 75% incongruent, 25% congruent.</value>
   </data>
   <data name="Header_Switch" xml:space="preserve">
     <value>Switch (%)</value>
@@ -223,7 +223,7 @@
     <value>Seconds</value>
   </data>
   <data name="Header_WordDuration" xml:space="preserve">
-    <value>Word duration (ms)</value>
+    <value>Trial duration (ms)</value>
   </data>
   <data name="Field_ProfileName" xml:space="preserve">
     <value>Profile name</value>
@@ -235,13 +235,13 @@
     <value>Based on task duration</value>
   </data>
   <data name="Radio_WordCount" xml:space="preserve">
-    <value>Based on word count</value>
+    <value>Based on trial count</value>
   </data>
-  <data name="Field_GroupSize" xml:space="preserve">
-    <value>Group size</value>
+  <data name="Header_GroupSize" xml:space="preserve">
+    <value>Averaging interval</value>
   </data>
   <data name="Field_WordCount" xml:space="preserve">
-    <value>Word count</value>
+    <value>Trials count</value>
   </data>
   <data name="Label_KeyRed" xml:space="preserve">
     <value>Key associated with the red color:</value>
@@ -259,7 +259,7 @@
     <value>Edit</value>
   </data>
   <data name="Button_Continue" xml:space="preserve">
-    <value>Continue </value>
+    <value>Continue with the same participant</value>
   </data>
   <data name="Button_NewExperiment" xml:space="preserve">
     <value>New experiment</value>
@@ -273,20 +273,14 @@
   <data name="Header_ParticipantId" xml:space="preserve">
     <value>Participant ID</value>
   </data>
-  <data name="Header_Block" xml:space="preserve">
+  <data name="Header_BlockNumber" xml:space="preserve">
     <value>Block</value>
   </data>
-  <data name="Header_Trials" xml:space="preserve">
-    <value>Trials</value>
+  <data name="Header_TrialsPerBlock" xml:space="preserve">
+    <value>Number of trials per block </value>
   </data>
   <data name="Header_Accuracy" xml:space="preserve">
     <value>Accuracy</value>
-  </data>
-  <data name="Header_MeanResponseTime" xml:space="preserve">
-    <value>Average response time</value>
-  </data>
-  <data name="Header_StroopType" xml:space="preserve">
-    <value>Stroop type</value>
   </data>
   <data name="Toggle_On" xml:space="preserve">
     <value>On</value>
@@ -306,6 +300,9 @@
   <data name="Title_ParticipantWindow" xml:space="preserve">
     <value>Participant Window</value>
   </data>
+  <data name="Header_VisualCueDuration" xml:space="preserve">
+    <value>Visual cue duration (ms)</value>
+  </data>
   <data name="Title_ConfigPage" xml:space="preserve">
     <value>Experiment Configuration</value>
   </data>
@@ -323,7 +320,7 @@
 {0}</value>
   </data>
   <data name="Label_LiveAverage" xml:space="preserve">
-    <value>Average for words {0}–{1}:</value>
+    <value>Average for trials {0}–{1}:</value>
   </data>
   <data name="Label_LiveAverageNoData" xml:space="preserve">
     <value>No valid data</value>
@@ -335,7 +332,7 @@
     <value>Delete confirmation</value>
   </data>
   <data name="Message_DeleteParticipantConfirmation" xml:space="preserve">
-    <value>Do you really want to delete this participant? Their data will be archived.</value>
+    <value>Do you really want to delete this participant ? Their data will be archived.</value>
   </data>
   <data name="Title_ExportFolderSelector" xml:space="preserve">
     <value>Results folder</value>
@@ -351,9 +348,6 @@
   </data>
   <data name="Description_ParticipantManagement" xml:space="preserve">
     <value>Select a participant to start the experiment.</value>
-  </data>
-  <data name="Placeholder_Search" xml:space="preserve">
-    <value>Search...</value>
   </data>
   <data name="Title_ParticipantEditorWindow" xml:space="preserve">
     <value>Edit participant</value>
@@ -386,13 +380,13 @@
     <value>Select the export folder for your results</value>
   </data>
   <data name="Title_Dashboard" xml:space="preserve">
-    <value>Current experiment dashboard</value>
+    <value>Experiment dashboard</value>
   </data>
   <data name="Title_Progress" xml:space="preserve">
     <value>Progress</value>
   </data>
   <data name="Title_ParticipantDetails" xml:space="preserve">
-    <value>Participant details</value>
+    <value>Participant information</value>
   </data>
   <data name="Title_ExperimentDetails" xml:space="preserve">
     <value>Experiment details</value>
@@ -425,7 +419,7 @@
     <value>This identifier is already in use for another participant.</value>
   </data>
   <data name="Message_DeleteProfileConfirmation" xml:space="preserve">
-    <value>Do you really want to delete this profile?</value>
+    <value>Do you really want to delete this profile ?</value>
   </data>
   <data name="Label_Disconnected" xml:space="preserve">
     <value>Disconnected</value>
@@ -467,290 +461,19 @@
     <value>Response time (ms)</value>
   </data>
   <data name="Label_CurrentParticipant" xml:space="preserve">
-    <value>Participant no. {0}</value>
+    <value>Participant ID : {0}</value>
   </data>
   <data name="Label_CurrentProfile" xml:space="preserve">
     <value>Task: {0}</value>
   </data>
   <data name="Value_LiveAverage" xml:space="preserve">
     <value>{0:N0} ms</value>
-  </data>
-  <data name="Color_Yellow" xml:space="preserve">
-    <value>Yellow</value>
-  </data>
-  <data name="Color_Blue" xml:space="preserve">
-    <value>Blue</value>
-  </data>
-  <data name="Color_Red" xml:space="preserve">
-    <value>Red</value>
-  </data>
-  <data name="Color_Green" xml:space="preserve">
-    <value>Green</value>
   </data>
   <data name="Label_SquarePercentage" xml:space="preserve">
     <value>Square (%)</value>
   </data>
   <data name="Label_CirclePercentage" xml:space="preserve">
     <value>Circle (%)</value>
-  </data>
-  <data name="Label_Overview" xml:space="preserve">
-    <value>Overview :</value>
-  </data>
-  <data name="Header_SerialPorts" xml:space="preserve">
-    <value>Serial ports</value>
-  </data>
-  <data name="Label_SerialPortsList" xml:space="preserve">
-    <value>List of ports</value>
-  </data>
-  <data name="Button_Refresh" xml:space="preserve">
-    <value>Refresh</value>
-  </data>
-  <data name="Label_ExchangeHistory" xml:space="preserve">
-    <value>Exchange history</value>
-  </data>
-  <data name="Button_Copy" xml:space="preserve">
-    <value>Copy</value>
-  </data>
-  <data name="Button_Clear" xml:space="preserve">
-    <value>Clear</value>
-  </data>
-  <data name="Button_Send" xml:space="preserve">
-    <value>Send</value>
-  </data>
-  <data name="Button_AdvancedSettings" xml:space="preserve">
-    <value>Advanced settings</value>
-  </data>
-  <data name="Label_StopBits" xml:space="preserve">
-    <value>Stop bits</value>
-  </data>
-  <data name="Label_Parity" xml:space="preserve">
-    <value>Parity</value>
-  </data>
-  <data name="ExperimentWindow_Title" xml:space="preserve">
-    <value>Stroop Experiment</value>
-  </data>
-  <data name="ParticipantWindow_Title" xml:space="preserve">
-    <value>Participant Window</value>
-  </data>
-  <data name="ConfigPage_Title" xml:space="preserve">
-    <value>Experiment Configuration</value>
-  </data>
-  <data name="Error_AmorceTimeInvalid" xml:space="preserve">
-    <value>Prime time must be greater than 0!</value>
-  </data>
-  <data name="Error_MaxReactionInvalid" xml:space="preserve">
-    <value>Maximum reaction time must be positive.</value>
-  </data>
-  <data name="Error_ParticipantFieldsInvalid" xml:space="preserve">
-    <value>Please fill in all required participant fields correctly.</value>
-  </data>
-  <data name="Export_Completed_Title" xml:space="preserve">
-    <value>Export completed</value>
-  </data>
-  <data name="Export_Completed_Message" xml:space="preserve">
-    <value>File saved:
-{0}</value>
-  </data>
-  <data name="EndExperiment_CurrentParticipant" xml:space="preserve">
-    <value>Participant no. {0}</value>
-  </data>
-  <data name="EndExperiment_CurrentProfile" xml:space="preserve">
-    <value>Task : {0}</value>
-  </data>
-  <data name="LiveAverage_Label" xml:space="preserve">
-    <value>Average for words {0}–{1}:</value>
-  </data>
-  <data name="LiveAverage_NoData" xml:space="preserve">
-    <value>No valid data</value>
-  </data>
-  <data name="Column_NoResponse" xml:space="preserve">
-    <value>No response</value>
-  </data>
-  <data name="DeleteConfirmation_Title" xml:space="preserve">
-    <value>Delete confirmation</value>
-  </data>
-  <data name="DeleteConfirmation_Message" xml:space="preserve">
-    <value>Do you really want to delete this participant? Their data will be archived.</value>
-  </data>
-  <data name="DeleteConfirmation_Primary" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="DeleteConfirmation_Close" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="ExportFolderSelector_Title" xml:space="preserve">
-    <value>Results folder selection</value>
-  </data>
-  <data name="ExportFolderSelector_Description" xml:space="preserve">
-    <value>Select the export folder for the results.</value>
-  </data>
-  <data name="ExportFolderSelector_PathLabel" xml:space="preserve">
-    <value>Results folder:</value>
-  </data>
-  <data name="ParticipantManagement_Title" xml:space="preserve">
-    <value>Select participant</value>
-  </data>
-  <data name="ParticipantManagement_Description" xml:space="preserve">
-    <value>Select a participant to start the experiment.</value>
-  </data>
-  <data name="Button_Modify" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="Search_Placeholder" xml:space="preserve">
-    <value>Search...</value>
-  </data>
-  <data name="ParticipantEditorWindow_Title" xml:space="preserve">
-    <value>Edit participant</value>
-  </data>
-  <data name="ProfileManagement_Title" xml:space="preserve">
-    <value>Select task profile</value>
-  </data>
-  <data name="ProfileManagement_Description" xml:space="preserve">
-    <value>Select the profile to configure your experiment.</value>
-  </data>
-  <data name="ProfileManagement_DetailsTitle" xml:space="preserve">
-    <value>Selected profile details</value>
-  </data>
-  <data name="Header_MaxReactionTime" xml:space="preserve">
-    <value>Max reaction time (ms)</value>
-  </data>
-  <data name="ProfileEditorWindow_Title" xml:space="preserve">
-    <value>Edit profile</value>
-  </data>
-  <data name="Check_AddPrime" xml:space="preserve">
-    <value>Add prime</value>
-  </data>
-  <data name="KeyMapping_Title" xml:space="preserve">
-    <value>Key mapping</value>
-  </data>
-  <data name="KeyMapping_Description" xml:space="preserve">
-    <value>Select the keys associated with the colors.</value>
-  </data>
-  <data name="KeyMapping_Prompt" xml:space="preserve">
-    <value>Press a key to define the mapping. Press Esc to cancel.</value>
-  </data>
-  <data name="KeyMapping_ErrorKeyUsed" xml:space="preserve">
-    <value>This key is already used. Please choose another one.</value>
-  </data>
-  <data name="KeyMapping_DialogTitle" xml:space="preserve">
-    <value>Edit mapping for {0}</value>
-  </data>
-  <data name="ExportFolderDialog_Description" xml:space="preserve">
-    <value>Select the export folder for your results</value>
-  </data>
-  <data name="Dashboard_Title" xml:space="preserve">
-    <value>Current experiment dashboard</value>
-  </data>
-  <data name="Progress_Title" xml:space="preserve">
-    <value>Progress</value>
-  </data>
-  <data name="ParticipantDetails_Title" xml:space="preserve">
-    <value>Participant details</value>
-  </data>
-  <data name="ExperimentDetails_Title" xml:space="preserve">
-    <value>Experiment details</value>
-  </data>
-  <data name="EndExperiment_BlockFinished" xml:space="preserve">
-    <value>Block completed</value>
-  </data>
-  <data name="EndExperiment_BlockSummary" xml:space="preserve">
-    <value>Block summary</value>
-  </data>
-  <data name="EndInstructions_Title" xml:space="preserve">
-    <value>End of experiment</value>
-  </data>
-  <data name="EndInstructions_Message" xml:space="preserve">
-    <value>Congratulations! You have completed the experiment.</value>
-  </data>
-  <data name="Reaction_None" xml:space="preserve">
-    <value>No response</value>
-  </data>
-  <data name="Reaction_Correct" xml:space="preserve">
-    <value>Correct</value>
-  </data>
-  <data name="Reaction_Incorrect" xml:space="preserve">
-    <value>Incorrect</value>
-  </data>
-  <data name="GraphsView_Title" xml:space="preserve">
-    <value>Experiment tracking</value>
-  </data>
-  <data name="Dialog_OK" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="Error_FillRequiredFieldsProperly" xml:space="preserve">
-    <value>Please fill out all required fields correctly.</value>
-  </data>
-  <data name="Error_ParticipantIdAlreadyUsed" xml:space="preserve">
-    <value>This identifier is already in use for another participant.</value>
-  </data>
-  <data name="Message_DeleteProfileConfirmation" xml:space="preserve">
-    <value>Do you really want to delete this profile?</value>
-  </data>
-  <data name="Label_Disconnected" xml:space="preserve">
-    <value>Disconnected</value>
-  </data>
-  <data name="Button_Connect" xml:space="preserve">
-    <value>Connect</value>
-  </data>
-  <data name="Error_NoPortSelected" xml:space="preserve">
-    <value>No port selected.</value>
-  </data>
-  <data name="Error_ConnectionError" xml:space="preserve">
-    <value>Error during connection: {0}</value>
-  </data>
-  <data name="Button_Disconnect" xml:space="preserve">
-    <value>Disconnect</value>
-  </data>
-  <data name="Label_PortConnected" xml:space="preserve">
-    <value>Connected to {0}</value>
-  </data>
-  <data name="Error_DisconnectionError" xml:space="preserve">
-    <value>Error during disconnection: {0}</value>
-  </data>
-  <data name="Message_KeyMapping" xml:space="preserve">
-    <value>Press a key to define the mapping. Press Esc to cancel.</value>
-  </data>
-  <data name="Error_KeyMappingKeyUsed" xml:space="preserve">
-    <value>This key is already used. Please choose another one.</value>
-  </data>
-  <data name="Label_TrialNumber" xml:space="preserve">
-    <value>Trial: {0}</value>
-  </data>
-  <data name="Label_ResponseTime" xml:space="preserve">
-    <value>Response time: {0:N0} ms</value>
-  </data>
-  <data name="Label_ResponseValidityUnknown" xml:space="preserve">
-    <value>Validity unknown</value>
-  </data>
-  <data name="Header_ResponseTime" xml:space="preserve">
-    <value>Response time (ms)</value>
-  </data>
-  <data name="Label_CurrentParticipant" xml:space="preserve">
-    <value>Participant no. {0}</value>
-  </data>
-  <data name="Label_CurrentProfile" xml:space="preserve">
-    <value>Task: {0}</value>
-  </data>
-  <data name="Value_LiveAverage" xml:space="preserve">
-    <value>{0:N0} ms</value>
-  </data>
-  <data name="Color_Yellow" xml:space="preserve">
-    <value>Yellow</value>
-  </data>
-  <data name="Color_Blue" xml:space="preserve">
-    <value>Blue</value>
-  </data>
-  <data name="Color_Red" xml:space="preserve">
-    <value>Red</value>
-  </data>
-  <data name="Color_Green" xml:space="preserve">
-    <value>Green</value>
-  </data>
-  <data name="Label_SquarePercentage" xml:space="preserve">
-    <value>Square (%)</value>
-  </data>
-  <data name="Label_CirclePercentage" xml:space="preserve">
-    <value>Label_Circle (%)</value>
   </data>
   <data name="Label_Overview" xml:space="preserve">
     <value>Overview :</value>
@@ -787,8 +510,176 @@
   </data>
 	  <data name="Label_Parity" xml:space="preserve">
     <value>Parity</value>
-	  </data>
+  </data>
+  <data name="Column_NoResponse" xml:space="preserve">
+    <value>No response</value>
+  </data>
+  <data name="Button_Modify" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Check_AddPrime" xml:space="preserve">
+    <value>Add visual cue</value>
+  </data>
+  <data name="Button_Quit_Without_Export" xml:space="preserve">
+    <value>Quit application without export</value>
+  </data>
   <data name="Error_FillIdField" xml:space="preserve">
     <value>Please fill at least the ID field</value>
+  </data>
+  <data name="Header_MaxResponseTime" xml:space="preserve">
+    <value>Max response time (ms)</value>
+  </data>
+  <data name="Header_MeanResponseTime" xml:space="preserve">
+    <value>Average response time</value>
+  </data>
+  <data name="Placeholder_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Button_Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Label_PublicationPrefix" xml:space="preserve">
+    <value>For associated publication with this rule, see Mangin et al.,</value>
+  </data>
+  <data name="Label_Year2021" xml:space="preserve">
+    <value>2021</value>
+  </data>
+  <data name="Label_Year2022" xml:space="preserve">
+    <value>2022</value>
+  </data>
+  <data name="Tooltip_CueSquareResponse" xml:space="preserve">
+    <value>When the visual cue is a square, respond by reading the word.</value>
+  </data>
+  <data name="Tooltip_CueCircleResponse" xml:space="preserve">
+    <value>When the visual cue is a circle, respond by naming the color of the word.</value>
+  </data>
+  <data name="Description_PreviewIntroduction" xml:space="preserve">
+    <value>To illustrate your parameters, a dynamic preview of the sequence of visual cues updates in real time based on your settings.</value>
+  </data>
+  <data name="Button_OpenExportFolder" xml:space="preserve">
+    <value>Open the results folder</value>
+  </data>
+  <data name="Error_ExportError" xml:space="preserve">
+    <value>Error during export</value>
+  </data>
+  <data name="Label_ExportInProgress" xml:space="preserve">
+    <value>Export in progress...</value>
+  </data>
+  <data name="Message_ExportSuccess" xml:space="preserve">
+    <value>Export successful!</value>
+  </data>
+  <data name="Label_ResultsSavedHere" xml:space="preserve">
+    <value>Results saved here</value>
+  </data>
+  <data name="Button_NewExport" xml:space="preserve">
+    <value>New export</value>
+  </data>
+  <data name="Button_Retry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="Button_ExitApplication" xml:space="preserve">
+    <value>Exit application</value>
+  </data>
+  <data name="Message_ConfirmExitWithoutExport" xml:space="preserve">
+    <value>Are you sure you want to exit the application without exporting the results? All non-exported data will be lost.</value>
+  </data>
+  <data name="Error_TrialDurationNotDividingTaskDuration" xml:space="preserve">
+    <value>Task duration must be divisible by trial duration.</value>
+  </data>
+  <data name="Header_ExperimentProfile" xml:space="preserve">
+    <value>Experiment profile</value>
+  </data>
+  <data name="Header_Trials" xml:space="preserve">
+    <value>Trials</value>
+  </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Header_VisualCue" xml:space="preserve">
+    <value>Visual cue</value>
+  </data>
+  <data name="Field_TaskLanguage" xml:space="preserve">
+    <value>Task language</value>
+  </data>
+  <data name="Word_RED" xml:space="preserve">
+    <value>RED</value>
+  </data>
+  <data name="Page1_Intro" xml:space="preserve">
+    <value>We will now begin a mental task.</value>
+  </data>
+  <data name="Page1_Display_NoCue" xml:space="preserve">
+    <value>A fixation cross will appear, followed by a color word.</value>
+  </data>
+  <data name="Page1_WordsList" xml:space="preserve">
+    <value>The words will be: RED, GREEN, BLUE, YELLOW.</value>
+  </data>
+  <data name="Page1_Example" xml:space="preserve">
+    <value>For example:</value>
+  </data>
+  <data name="Page2_CueExplanation" xml:space="preserve">
+    <value>A shape will appear: a square means you must read the word, a circle means you must name the ink color.</value>
+  </data>
+  <data name="Page3_Questions" xml:space="preserve">
+    <value>Do you have any questions before we begin ?</value>
+  </data>
+  <data name="Case1_P1_Congruence" xml:space="preserve">
+    <value>These words will always be written with ink of a different color than the meaning of the word.</value>
+  </data>
+  <data name="Case1_P2_Instructions" xml:space="preserve">
+    <value>Press the key corresponding to the color of the word's ink as quickly as possible, making the fewest mistakes.</value>
+  </data>
+  <data name="Case2_P1_Congruence" xml:space="preserve">
+    <value>These words will always be written in ink of the same color as the meaning of the word.</value>
+  </data>
+  <data name="Case2_P2_Instructions" xml:space="preserve">
+    <value>Press the key corresponding to the color of the word's ink as quickly as possible, making the fewest mistakes.</value>
+  </data>
+  <data name="Case3_P1_Congruence" xml:space="preserve">
+    <value>Sometimes, these words will be written in the same ink color as their meaning. Other times, these words will be written in a different ink color than their meaning.</value>
+  </data>
+  <data name="Case3_P2_Instructions" xml:space="preserve">
+    <value>Press the key matching the ink color as quickly as possible, making the fewest mistakes.</value>
+  </data>
+  <data name="Case4_P1_Congruence" xml:space="preserve">
+    <value>The words will always be displayed in a different color than their meaning, and preceded by a shape.</value>
+  </data>
+  <data name="Case4_P2_Instructions" xml:space="preserve">
+    <value>If the visual cue is a square, you should read the word. If the visual cue is a circle, you should name the color of the ink.</value>
+  </data>
+  <data name="Case5_P1_Congruence" xml:space="preserve">
+    <value>These words will always be written in ink of the same color as the meaning of the word.</value>
+  </data>
+  <data name="Case5_P2_Instructions" xml:space="preserve">
+    <value>Ignore the shape.</value>
+  </data>
+  <data name="Case6_P1_Congruence" xml:space="preserve">
+    <value>Sometimes, these words will be written in the same ink color as their meaning. Other times, these words will be written in a different ink color than their meaning.</value>
+  </data>
+  <data name="Case6_P2_Instructions" xml:space="preserve">
+    <value>Disregard the shape, give the meaning of the word.</value>
+  </data>
+  <data name="Word_BLUE" xml:space="preserve">
+    <value>BLUE</value>
+  </data>
+  <data name="Word_GREEN" xml:space="preserve">
+    <value>GREEN</value>
+  </data>
+  <data name="Word_YELLOW" xml:space="preserve">
+    <value>YELLOW</value>
+  </data>
+  <data name="Tooltip_AveragingInterval" xml:space="preserve">
+    <value>Sets how many words are grouped to calculate an average response time. For example, a factor of 5 will show an average every 5 words.</value>
+  </data>
+  <data name="Page1_Display_WithCue" xml:space="preserve">
+    <value>A fixation cross surrounded by a shape will appear, followed by a colored word.</value>
+  </data>
+  <data name="Case4_P2_InstructionsWithCue" xml:space="preserve">
+    <value>Press the key corresponding to the instruction as quickly as possible, making the fewest mistakes.</value>
+  </data>
+  <data name="Case5_P2_InstructionsWithCue" xml:space="preserve">
+    <value>Press the key corresponding to the meaning of the word, as quickly as possible, making the fewest mistakes.</value>
+  </data>
+  <data name="Case6_P2_InstructionsWithCue" xml:space="preserve">
+    <value>Press the key corresponding to the instruction as quickly as possible, making the fewest mistakes.</value>
   </data>
 </root>

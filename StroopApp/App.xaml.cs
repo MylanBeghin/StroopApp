@@ -2,6 +2,7 @@
 using System.Windows;
 
 using StroopApp.Models;
+using StroopApp.Services.Language;
 using StroopApp.Services.Window;
 using StroopApp.Views;
 
@@ -13,14 +14,14 @@ namespace StroopApp
 		{
 			get; private set;
 		}
+		public static ILanguageService LanguageService { get; private set; }
 		protected override void OnStartup(StartupEventArgs e)
 		{
-			Thread.CurrentThread.CurrentCulture = new CultureInfo("en");
-			Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");
+			LanguageService = new LanguageService();
 			base.OnStartup(e);
 			var settings = new ExperimentSettings();
 			WindowManager = new WindowManager();
-			var expWin = new ExperimentWindow(settings, WindowManager);
+			var expWin = new ExperimentWindow(settings, WindowManager, LanguageService);
 			expWin.Show();
 		}
 	}

@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using StroopApp.Models;
 using StroopApp.Services.Exportation;
 using StroopApp.Services.KeyMapping;
+using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Participants;
 using StroopApp.Services.Profile;

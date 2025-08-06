@@ -21,9 +21,9 @@ namespace StroopApp.Core
 		{
 			var dialog = new ContentDialog
 			{
-				Title = "Erreur",
+				Title = Strings.Error_Title,
 				Content = message,
-				CloseButtonText = "OK"
+				CloseButtonText = Strings.Button_OK
 			};
 
 			await dialog.ShowAsync();
@@ -34,7 +34,7 @@ namespace StroopApp.Core
 			{
 				Title = Strings.Title_DeleteConfirmation,
 				Content = message,
-				PrimaryButtonText = Strings.Button_Delete,
+				PrimaryButtonText = Strings.Button_Confirm,
 				CloseButtonText = Strings.Button_Cancel
 			};
 			return await dlg.ShowAsync() == ContentDialogResult.Primary;

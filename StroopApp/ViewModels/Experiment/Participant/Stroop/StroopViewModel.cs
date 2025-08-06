@@ -1,6 +1,7 @@
 ﻿// StroopViewModel.cs
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -54,7 +55,7 @@ public class StroopViewModel : ViewModelBase
 
 	public void StartResponseTimer()
 	{
-		_responseTime.Restart(); // démarrage après rendu
+		_responseTime.Restart();
 		_wordTimer.Restart();
 		_inputTcs = new TaskCompletionSource<double>();
 	}
@@ -86,25 +87,36 @@ public class StroopViewModel : ViewModelBase
 	private void GenerateTrials()
 	{
 		var wordColors = new[] { "Blue", "Red", "Green", "Yellow" };
-		var wordTexts = new[] { "Blue", "Red", "Green", "Yellow" };
-		int total = Settings.CurrentProfile.WordCount;
 
+		var culture = new CultureInfo(Settings.CurrentProfile.TaskLanguage ?? "en");
+		Thread.CurrentThread.CurrentCulture = culture;
+		Thread.CurrentThread.CurrentUICulture = culture;
+
+		var loc = new LocalizedStrings();
+
+		var wordTexts = new[]
+		{
+		loc["Word_BLUE"],
+		loc["Word_RED"],
+		loc["Word_GREEN"],
+		loc["Word_YELLOW"]
+	};
+
+		int total = Settings.CurrentProfile.WordCount;
 		int congruentCount = total * Settings.CurrentProfile.CongruencePercent / 100;
 		int incongruentCount = total - congruentCount;
+
 		var congruenceFlags = new List<bool>();
-		congruenceFlags.AddRange(Enumerable.Repeat(true, congruentCount));      // true = congruent
-		congruenceFlags.AddRange(Enumerable.Repeat(false, incongruentCount));   // false = incongruent
+		congruenceFlags.AddRange(Enumerable.Repeat(true, congruentCount));
+		congruenceFlags.AddRange(Enumerable.Repeat(false, incongruentCount));
 		congruenceFlags = congruenceFlags.OrderBy(_ => random.Next()).ToList();
 
 		List<AmorceType>? amorceSequence = null;
 		if (Settings.CurrentProfile.IsAmorce)
-		{
 			amorceSequence = GenerateAmorceSequence(total, Settings.CurrentProfile.DominantPercent);
-		}
 
 		for (int i = 0; i < total; i++)
 		{
-			int type = random.Next(0, 1);
 			var trial = new StroopTrial
 			{
 				TrialNumber = i + 1,
@@ -114,28 +126,30 @@ public class StroopViewModel : ViewModelBase
 				SwitchPercent = Settings.CurrentProfile.DominantPercent,
 				CongruencePercent = Settings.CurrentProfile.CongruencePercent,
 			};
+
 			bool isCongruent = congruenceFlags[i];
+
 			if (isCongruent)
 			{
-				int idx = random.Next(0, wordColors.Length);
-				trial.Stimulus = new Word(wordColors[idx], wordTexts[idx]);
+				int idx = random.Next(wordColors.Length);
+				trial.Stimulus = new Word(wordColors[idx], wordColors[idx], wordTexts[idx]);
 				trial.IsCongruent = true;
 			}
 			else
 			{
 				var indices = Enumerable.Range(0, wordColors.Length).OrderBy(_ => random.Next()).Take(2).ToArray();
-				trial.Stimulus = new Word(wordColors[indices[0]], wordTexts[indices[1]]);
+				trial.Stimulus = new Word(wordColors[indices[0]], wordColors[indices[1]], wordTexts[indices[1]]);
 				trial.IsCongruent = false;
 			}
 
 			if (amorceSequence != null)
-			{
 				trial.Amorce = amorceSequence[i];
-			}
+
 			trial.DetermineExpectedAnswer();
 			Settings.ExperimentContext.CurrentBlock.TrialRecords.Add(trial);
 		}
 	}
+
 
 	public async void StartTrials()
 	{
