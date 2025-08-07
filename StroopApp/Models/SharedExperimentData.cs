@@ -109,6 +109,18 @@ namespace StroopApp.Models
 				}
 			}
 		}
+
+		private bool _isTaskStopped = false;
+		public bool IsTaskStopped
+		{
+			get => _isTaskStopped;
+			set
+			{
+				_isTaskStopped = value;
+				OnPropertyChanged();
+			}
+		}
+
 		private bool _isParticipantSelectionEnabled = true;
 		public bool IsParticipantSelectionEnabled
 		{
@@ -237,6 +249,7 @@ namespace StroopApp.Models
 			BlockSeries.Clear();
 			Sections.Clear();
 			ReactionPoints.Clear();
+			IsTaskStopped = false;
 			_colorIndex = 0;
 			currentBlockStart = 1;
 			currentBlockEnd = 0;

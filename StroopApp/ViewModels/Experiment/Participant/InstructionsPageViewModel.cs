@@ -17,7 +17,7 @@ namespace StroopApp.ViewModels.Experiment.Participant
 	public class InstructionsPageViewModel : ViewModelBase
 	{
 		private readonly ExperimentSettings _settings;
-		private readonly INavigationService _navigationService;
+		private readonly INavigationService _participantWindowNavigationService;
 		private int _currentPageIndex;
 		private const int TotalPages = 3;
 
@@ -26,11 +26,11 @@ namespace StroopApp.ViewModels.Experiment.Participant
 		public event EventHandler InstructionChanged;
 		public StroopPage StroopPage { get; set; }
 
-		public InstructionsPageViewModel(ExperimentSettings settings, INavigationService navigationService)
+		public InstructionsPageViewModel(ExperimentSettings settings, INavigationService participantWindowNavigationService)
 		{
 			_currentPageIndex = 0;
 			_settings = settings;
-			_navigationService = navigationService;
+			_participantWindowNavigationService = participantWindowNavigationService;
 			NextCommand = new RelayCommand(_ => NextPage());
 			CurrentInstruction = GenerateInstructionPage(_currentPageIndex);
 		}
@@ -45,8 +45,8 @@ namespace StroopApp.ViewModels.Experiment.Participant
 			}
 			else
 			{
-				StroopPage = new StroopPage(_navigationService, _settings);
-				_navigationService.NavigateTo(() => StroopPage);
+				StroopPage = new StroopPage(_participantWindowNavigationService, _settings);
+				_participantWindowNavigationService.NavigateTo(() => StroopPage);
 			}
 		}
 

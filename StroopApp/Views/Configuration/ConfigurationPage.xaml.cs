@@ -8,6 +8,7 @@ using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Participants;
 using StroopApp.Services.Profile;
+using StroopApp.Services.Trial;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.Configuration;
 using StroopApp.ViewModels.Configuration.Participant;
@@ -32,6 +33,7 @@ namespace StroopApp.Views
 			var exportFolderStorageService = new ExportationService(settings, configDir);
 			var participantService = new ParticipantService(configDir, settings);
 			var keyMappingService = new KeyMappingService(configDir);
+			var trialGenerationService = new TrialGenerationService();
 
 			// Instanciation unique des ViewModels
 			var profileViewModel = new ProfileManagementViewModel(profileService);
@@ -40,7 +42,7 @@ namespace StroopApp.Views
 			var exportFolderSelectorViewModel = new ExportFolderSelectorViewModel(settings, exportFolderStorageService);
 
 			// Instanciation du ViewModel principal et liaison au DataContext
-			DataContext = new ConfigurationPageViewModel(settings, profileViewModel, participantViewModel, keyMappingViewModel, experimentNavigationService, windowManager);
+			DataContext = new ConfigurationPageViewModel(settings, profileViewModel, participantViewModel, keyMappingViewModel, experimentNavigationService, windowManager, trialGenerationService);
 
 			// Instanciation des vues en injectant les ViewModels partagés
 			var profileManagementView = new ProfileManagementView(profileViewModel);

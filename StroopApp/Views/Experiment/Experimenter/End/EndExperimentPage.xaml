@@ -194,6 +194,8 @@
                     Command="{Binding ContinueCommand}" />
             <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Export]}"
                     Command="{Binding ExportCommand}" />
+            <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_NewExperiment]}" 
+                    Command="{Binding NewExperimentCommand}"/>
             <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Quit_Without_Export]}"
                     Command="{Binding QuitWihtoutExportCommand}" />
         </ui:SimpleStackPanel>

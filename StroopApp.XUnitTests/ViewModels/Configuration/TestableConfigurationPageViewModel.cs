@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using StroopApp.Models;
 using StroopApp.Services.Navigation;
+using StroopApp.Services.Trial;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.Configuration;
 using StroopApp.ViewModels.Configuration.Participant;
@@ -23,8 +24,10 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 			ParticipantManagementViewModel participantViewModel,
 			KeyMappingViewModel keyMappingViewModel,
 			INavigationService experimenterNavigationService,
-			IWindowManager windowManager
-		) : base(settings, profileViewModel, participantViewModel, keyMappingViewModel, experimenterNavigationService, windowManager)
+			IWindowManager windowManager,
+			ITrialGenerationService trialGenerationService
+
+		) : base(settings, profileViewModel, participantViewModel, keyMappingViewModel, experimenterNavigationService, windowManager, trialGenerationService)
 		{ }
 
 		protected override void ShowErrorDialog(string message)

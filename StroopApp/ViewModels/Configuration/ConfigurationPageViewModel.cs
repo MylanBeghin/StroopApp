@@ -6,6 +6,7 @@ using StroopApp.Models;
 using StroopApp.Resources;
 using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
+using StroopApp.Services.Trial;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.Configuration.Participant;
 using StroopApp.ViewModels.Configuration.Profile;
@@ -22,6 +23,7 @@ namespace StroopApp.ViewModels.Configuration
 		private readonly INavigationService _experimenterNavigationService;
 		private readonly IWindowManager _windowManager;
 		private readonly ILanguageService _languageService;
+		private readonly ITrialGenerationService _trialGenerationService;
 		public ExperimentSettings _settings
 		{
 			get; set;
@@ -39,7 +41,7 @@ namespace StroopApp.ViewModels.Configuration
 								  ParticipantManagementViewModel participantViewModel,
 								  KeyMappingViewModel keyMappingViewModel,
 								  INavigationService experimenterNavigationService,
-								  IWindowManager windowManager
+								  IWindowManager windowManager, ITrialGenerationService trialGenerationService
 								  )
 		{
 			_profileViewModel = profileViewModel;
@@ -47,6 +49,7 @@ namespace StroopApp.ViewModels.Configuration
 			_keyMappingViewModel = keyMappingViewModel;
 			_experimenterNavigationService = experimenterNavigationService;
 			_windowManager = windowManager;
+			_trialGenerationService = trialGenerationService;
 			_settings = settings;
 			LaunchExperimentCommand = new RelayCommand(LaunchExperiment);
 			OpenAdvancedSettingsCommand = new RelayCommand(OpenAdvancedSettings);
@@ -70,10 +73,25 @@ namespace StroopApp.ViewModels.Configuration
 				ShowErrorDialog(Strings.Error_SelectParticipant);
 				return;
 			}
-
+			_settings.ExperimentContext.IsTaskStopped = false;
+			_settings.ExperimentContext.IsBlockFinished = false;
 			_settings.ExperimentContext.AddNewSerie(_settings);
-			_experimenterNavigationService.NavigateTo(() => new ExperimentDashBoardPage(_settings, _experimenterNavigationService, _windowManager));
-			_windowManager.ShowParticipantWindow(_settings);
+			try
+			{
+				var trials = _trialGenerationService.GenerateTrials(_settings);
+
+				foreach (var trial in trials)
+				{
+					_settings.ExperimentContext.CurrentBlock.TrialRecords.Add(trial);
+				}
+				_experimenterNavigationService.NavigateTo(() =>
+					new ExperimentDashBoardPage(_settings, _experimenterNavigationService, _windowManager));
+				_windowManager.ShowParticipantWindow(_settings);
+			}
+			catch (Exception ex)
+			{
+				ShowErrorDialog($"Error while generating trials : {ex.Message}");
+			}
 		}
 		private void OpenAdvancedSettings()
 		{

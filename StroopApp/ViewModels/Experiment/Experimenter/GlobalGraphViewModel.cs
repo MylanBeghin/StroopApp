@@ -32,9 +32,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.Graphs
 		{
 			Series = settings.ExperimentContext.BlockSeries;
 			Sections = settings.ExperimentContext.Sections;
-			var totalTrials = settings.ExperimentContext.Blocks.Sum(b => b.TrialRecords.Count()) + settings.CurrentProfile.WordCount;
-			if (settings.ExperimentContext.IsBlockFinished)
-				totalTrials -= settings.CurrentProfile.WordCount;
+			var totalTrials = settings.ExperimentContext.Blocks.Sum(b => b.TrialRecords.Count());
 			XAxes = new[]
 			{
 				new Axis

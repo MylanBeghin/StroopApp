@@ -499,6 +499,9 @@
   <data name="Button_AdvancedSettings" xml:space="preserve">
     <value>Paramètres avancés</value>
   </data>
+  <data name="Button_Quit_Without_Export" xml:space="preserve">
+    <value>Quitter l'application sans exporter</value>
+  </data>
   <data name="Label_StopBits" xml:space="preserve">
     <value>Stop bits</value>
   </data>
@@ -513,9 +516,6 @@
   </data>
   <data name="Check_AddPrime" xml:space="preserve">
     <value>Ajouter indice visuel</value>
-  </data>
-  <data name="Button_Quit_Without_Export" xml:space="preserve">
-    <value>Quitter l'application sans exporter</value>
   </data>
   <data name="Error_FillIdField" xml:space="preserve">
     <value>Remplissez au moins le champ ID</value>
@@ -675,5 +675,26 @@
   </data>
   <data name="Case6_P2_InstructionsWithCue" xml:space="preserve">
     <value>Appuyez sur la touche correspondant aux instructions, le plus rapidement possible, en faisant le moins d'erreurs.</value>
+  </data>
+  <data name="Button_StopTask" xml:space="preserve">
+    <value>Interrompre la tâche</value>
+  </data>
+  <data name="Tooltip_StopTask" xml:space="preserve">
+    <value>Arrêter l'expérience en cours et conserver les données partielles.</value>
+  </data>
+  <data name="Message_StopTask" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir interrompre la tâche en cours ? Les données partielles pourront être exportées.</value>
+  </data>
+  <data name="Title_ConfirmShutDown" xml:space="preserve">
+    <value>Confirmer la fermeture</value>
+  </data>
+  <data name="Title_ConfirmStopTask" xml:space="preserve">
+    <value>Confirmer l’interruption de la tâche</value>
+  </data>
+  <data name="Title_ConfirmNewExperiment" xml:space="preserve">
+    <value>Confirmer la nouvelle expérience</value>
+  </data>
+  <data name="Message_ConfirmNewExperiment" xml:space="preserve">
+    <value>Démarrer une nouvelle expérience entraînera la perte des données actuelles. Voulez-vous continuer ?</value>
   </data>
 </root>

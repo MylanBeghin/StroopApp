@@ -28,17 +28,16 @@ namespace StroopApp.Core
 
 			await dialog.ShowAsync();
 		}
-		public async Task<bool> ShowConfirmationDialog(string message)
+		public async Task<bool> ShowConfirmationDialog(string title, string message)
 		{
 			var dlg = new ContentDialog
 			{
-				Title = Strings.Title_DeleteConfirmation,
+				Title = title,
 				Content = message,
 				PrimaryButtonText = Strings.Button_Confirm,
 				CloseButtonText = Strings.Button_Cancel
 			};
 			return await dlg.ShowAsync() == ContentDialogResult.Primary;
 		}
-
 	}
 }

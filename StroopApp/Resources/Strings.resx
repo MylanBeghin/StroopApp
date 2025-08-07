@@ -679,4 +679,25 @@
   <data name="Case6_P2_InstructionsWithCue" xml:space="preserve">
     <value>Press the key corresponding to the instruction as quickly as possible, making the fewest mistakes.</value>
   </data>
+  <data name="Button_StopTask" xml:space="preserve">
+    <value>Interrupt the task</value>
+  </data>
+  <data name="Tooltip_StopTask" xml:space="preserve">
+    <value>Interrupt the running task and keep the partial data.</value>
+  </data>
+  <data name="Message_StopTask" xml:space="preserve">
+    <value>Are you sure you want to stop the current task? Partial data can be exported.</value>
+  </data>
+  <data name="Title_ConfirmShutDown" xml:space="preserve">
+    <value>Confirm shutdown</value>
+  </data>
+  <data name="Title_ConfirmStopTask" xml:space="preserve">
+    <value>Confirm task interruption</value>
+  </data>
+  <data name="Title_ConfirmNewExperiment" xml:space="preserve">
+    <value>Confirm new experiment</value>
+  </data>
+  <data name="Message_ConfirmNewExperiment" xml:space="preserve">
+    <value>Starting a new experiment will discard the current data. Do you want to continue ?</value>
+  </data>
 </root>

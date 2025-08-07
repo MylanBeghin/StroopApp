@@ -304,6 +304,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Interrupt the task.
+        /// </summary>
+        public static string Button_StopTask {
+            get {
+                return ResourceManager.GetString("Button_StopTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à These words will always be written with ink of a different color than the meaning of the word..
         /// </summary>
         public static string Case1_P1_Congruence {
@@ -1321,6 +1330,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Starting a new experiment will discard the current data. Do you want to continue ?.
+        /// </summary>
+        public static string Message_ConfirmNewExperiment {
+            get {
+                return ResourceManager.GetString("Message_ConfirmNewExperiment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Do you really want to delete this participant ? Their data will be archived..
         /// </summary>
         public static string Message_DeleteParticipantConfirmation {
@@ -1372,6 +1390,15 @@ namespace StroopApp.Resources {
         public static string Message_KeyMapping {
             get {
                 return ResourceManager.GetString("Message_KeyMapping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to stop the current task? Partial data can be exported..
+        /// </summary>
+        public static string Message_StopTask {
+            get {
+                return ResourceManager.GetString("Message_StopTask", resourceCulture);
             }
         }
         
@@ -1471,6 +1498,33 @@ namespace StroopApp.Resources {
         public static string Title_ConfigPage {
             get {
                 return ResourceManager.GetString("Title_ConfigPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Confirm new experiment.
+        /// </summary>
+        public static string Title_ConfirmNewExperiment {
+            get {
+                return ResourceManager.GetString("Title_ConfirmNewExperiment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Confirm shutdown.
+        /// </summary>
+        public static string Title_ConfirmShutDown {
+            get {
+                return ResourceManager.GetString("Title_ConfirmShutDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Confirm task interruption.
+        /// </summary>
+        public static string Title_ConfirmStopTask {
+            get {
+                return ResourceManager.GetString("Title_ConfirmStopTask", resourceCulture);
             }
         }
         
@@ -1687,6 +1741,15 @@ namespace StroopApp.Resources {
         public static string Tooltip_CueSquareResponse {
             get {
                 return ResourceManager.GetString("Tooltip_CueSquareResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Interrupt the running task and keep the partial data..
+        /// </summary>
+        public static string Tooltip_StopTask {
+            get {
+                return ResourceManager.GetString("Tooltip_StopTask", resourceCulture);
             }
         }
         
