@@ -1330,6 +1330,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Starting a new experiment will discard the current data. Do you want to continue ?.
+        /// </summary>
+        public static string Message_ConfirmNewExperiment {
+            get {
+                return ResourceManager.GetString("Message_ConfirmNewExperiment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Do you really want to delete this participant ? Their data will be archived..
         /// </summary>
         public static string Message_DeleteParticipantConfirmation {
@@ -1489,6 +1498,15 @@ namespace StroopApp.Resources {
         public static string Title_ConfigPage {
             get {
                 return ResourceManager.GetString("Title_ConfigPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Confirm new experiment.
+        /// </summary>
+        public static string Title_ConfirmNewExperiment {
+            get {
+                return ResourceManager.GetString("Title_ConfirmNewExperiment", resourceCulture);
             }
         }
         

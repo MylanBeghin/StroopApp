@@ -694,4 +694,10 @@
   <data name="Title_ConfirmStopTask" xml:space="preserve">
     <value>Confirm task interruption</value>
   </data>
+  <data name="Title_ConfirmNewExperiment" xml:space="preserve">
+    <value>Confirm new experiment</value>
+  </data>
+  <data name="Message_ConfirmNewExperiment" xml:space="preserve">
+    <value>Starting a new experiment will discard the current data. Do you want to continue ?</value>
+  </data>
 </root>

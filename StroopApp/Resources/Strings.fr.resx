@@ -691,4 +691,10 @@
   <data name="Title_ConfirmStopTask" xml:space="preserve">
     <value>Confirmer l’interruption de la tâche</value>
   </data>
+  <data name="Title_ConfirmNewExperiment" xml:space="preserve">
+    <value>Confirmer la nouvelle expérience</value>
+  </data>
+  <data name="Message_ConfirmNewExperiment" xml:space="preserve">
+    <value>Démarrer une nouvelle expérience entraînera la perte des données actuelles. Voulez-vous continuer ?</value>
+  </data>
 </root>

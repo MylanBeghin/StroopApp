@@ -39,6 +39,10 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 		{
 			get;
 		}
+		public ICommand NewExperimentCommand
+		{
+			get;
+		}
 		public ICommand ExportCommand
 		{
 			get;
@@ -77,6 +81,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 			_experimenterNavigationService = experimenterNavigationService;
 			_windowManager = windowManager;
 			ContinueCommand = new RelayCommand(Continue);
+			NewExperimentCommand = new RelayCommand(NewExperiment);
 			ExportCommand = new RelayCommand(Export);
 			QuitWihtoutExportCommand = new RelayCommand(QuitWihtoutExport);
 			Blocks = Settings.ExperimentContext.Blocks;
@@ -139,6 +144,18 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 			Settings.ExperimentContext.IsBlockFinished = false;
 			Settings.ExperimentContext.IsParticipantSelectionEnabled = false;
 			_experimenterNavigationService.NavigateTo(() => new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
+		}
+		private async void NewExperiment()
+		{
+			bool confirmed = await ShowConfirmationDialog(Strings.Title_ConfirmNewExperiment, Strings.Message_ConfirmNewExperiment);
+			if (confirmed)
+			{
+				Settings.Reset();
+				_windowManager.CloseParticipantWindow();
+				_experimenterNavigationService.NavigateTo(() =>
+				new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
+			}
+
 		}
 		private async void Export()
 		{

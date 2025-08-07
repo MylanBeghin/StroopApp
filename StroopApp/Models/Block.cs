@@ -111,11 +111,10 @@ public class Block : ModelBase
 
 	public void CalculateValues()
 	{
-		bool CountIsZero = TrialRecords.Count == 0;
-		TrialsPerBlock = CountIsZero ? TrialRecords.Count : _settings.CurrentProfile.WordCount;
-		Accuracy = TrialRecords.Any()
-					  ? TrialRecords.Count(t => t.IsValidResponse == true) / (double)TrialsPerBlock * 100
-					  : 0;
+		TrialsPerBlock = TrialRecords.Count;
+		Accuracy = TrialsPerBlock > 0
+		? TrialRecords.Count(t => t.IsValidResponse == true) / (double)TrialsPerBlock * 100
+		: 0;
 		ResponseTimeMean = TrialRecords
 									.Where(trial => trial.ReactionTime.HasValue && trial.Block == BlockNumber)
 									.Select(trial => trial.ReactionTime)
