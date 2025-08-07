@@ -70,7 +70,8 @@ namespace StroopApp.ViewModels.Configuration
 				ShowErrorDialog(Strings.Error_SelectParticipant);
 				return;
 			}
-
+			_settings.ExperimentContext.IsTaskStopped = false;
+			_settings.ExperimentContext.IsBlockFinished = false;
 			_settings.ExperimentContext.AddNewSerie(_settings);
 			_experimenterNavigationService.NavigateTo(() => new ExperimentDashBoardPage(_settings, _experimenterNavigationService, _windowManager));
 			_windowManager.ShowParticipantWindow(_settings);

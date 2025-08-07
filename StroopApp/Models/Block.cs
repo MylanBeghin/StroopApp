@@ -111,7 +111,8 @@ public class Block : ModelBase
 
 	public void CalculateValues()
 	{
-		TrialsPerBlock = TrialRecords.Count;
+		bool CountIsZero = TrialRecords.Count == 0;
+		TrialsPerBlock = CountIsZero ? TrialRecords.Count : _settings.CurrentProfile.WordCount;
 		Accuracy = TrialRecords.Any()
 					  ? TrialRecords.Count(t => t.IsValidResponse == true) / (double)TrialsPerBlock * 100
 					  : 0;

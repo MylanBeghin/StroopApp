@@ -148,7 +148,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 		private async void QuitWihtoutExport()
 		{
 
-			if (await ShowConfirmationDialog(Strings.Message_ConfirmExitWithoutExport))
+			if (await ShowConfirmationDialog(Strings.Title_ConfirmShutDown, Strings.Message_ConfirmExitWithoutExport))
 			{
 				Application.Current.Shutdown();
 			}
