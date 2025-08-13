@@ -1033,6 +1033,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Correct (%).
+        /// </summary>
+        public static string Label_CorrectPercentage {
+            get {
+                return ResourceManager.GetString("Label_CorrectPercentage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Participant ID : {0}.
         /// </summary>
         public static string Label_CurrentParticipant {
@@ -1159,6 +1168,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Mean.
+        /// </summary>
+        public static string Label_Mean {
+            get {
+                return ResourceManager.GetString("Label_Mean", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à No response.
         /// </summary>
         public static string Label_NoResponse {
@@ -1281,6 +1299,15 @@ namespace StroopApp.Resources {
         public static string Label_TrialNumber {
             get {
                 return ResourceManager.GetString("Label_TrialNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Trial range.
+        /// </summary>
+        public static string Label_TrialRange {
+            get {
+                return ResourceManager.GetString("Label_TrialRange", resourceCulture);
             }
         }
         
@@ -1615,6 +1642,15 @@ namespace StroopApp.Resources {
         public static string Title_KeyMappingDialog {
             get {
                 return ResourceManager.GetString("Title_KeyMappingDialog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Average times by interval.
+        /// </summary>
+        public static string Title_MeanByInterval {
+            get {
+                return ResourceManager.GetString("Title_MeanByInterval", resourceCulture);
             }
         }
         

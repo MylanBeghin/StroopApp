@@ -291,6 +291,9 @@
   <data name="Header_FixationDuration" xml:space="preserve">
     <value>Durée de la croix de fixation (ms)</value>
   </data>
+  <data name="Header_PrimeDuration" xml:space="preserve">
+    <value>Durée de l'indice visuel (ms)</value>
+  </data>
   <data name="Title_ExperimentWindow" xml:space="preserve">
     <value>Expérience Stroop</value>
   </data>
@@ -696,5 +699,17 @@
   </data>
   <data name="Message_ConfirmNewExperiment" xml:space="preserve">
     <value>Démarrer une nouvelle expérience entraînera la perte des données actuelles. Voulez-vous continuer ?</value>
+  </data>
+  <data name="Title_MeanByInterval" xml:space="preserve">
+    <value>Temps moyens par intervalle</value>
+  </data>
+  <data name="Label_Mean" xml:space="preserve">
+    <value>Moyenne</value>
+  </data>
+  <data name="Label_CorrectPercentage" xml:space="preserve">
+    <value>Correct (%)</value>
+  </data>
+  <data name="Label_TrialRange" xml:space="preserve">
+    <value>Plage d’essais</value>
   </data>
 </root>

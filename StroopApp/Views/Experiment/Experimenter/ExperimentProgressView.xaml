@@ -18,8 +18,8 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.2*" />
-            <ColumnDefinition Width="0.2*" />
-            <ColumnDefinition Width="0.6*" />
+            <ColumnDefinition Width="0.3*" />
+            <ColumnDefinition Width="0.5*" />
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0"
                 Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
