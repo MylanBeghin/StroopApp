@@ -96,12 +96,6 @@ namespace StroopApp.Services.Exportation
 			ws.Cell(1, 8).Value = "Temps de réaction";
 			ws.Cell(1, 9).Value = "Essai";
 			ws.Cell(1, 10).Value = "Type d'amorce";
-			ws.Cell(1, 11).Value = "DurationFixation_ClockMs";
-			ws.Cell(1, 12).Value = "DurationAmorce_ClockMs";
-			ws.Cell(1, 13).Value = "DurationWord_ClockMs";
-			ws.Cell(1, 14).Value = "FixationTimerDurationMs";
-			ws.Cell(1, 15).Value = "AmorceTimerDurationMs";
-			ws.Cell(1, 16).Value = "WordTimerDurationMs";
 
 			var row = 2;
 			foreach (var block in _settings.ExperimentContext.Blocks)

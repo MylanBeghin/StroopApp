@@ -191,12 +191,12 @@ namespace StroopApp.Models
 						{
 							// Orange (wrong answer)
 							var orange = new SKColor(255, 166, 0);      // #FFA600
-							// Violet (right answer)
-							var violet = new SKColor(91, 46, 255);      // #5B2EFF
+							// Purple (right answer)
+							var purple = new SKColor(91, 46, 255);      // #5B2EFF
 							if(model.IsValidResponse.Value)
 							{
-								p.Visual.Fill = new SolidColorPaint(violet);
-								p.Visual.Stroke = new SolidColorPaint(violet);
+								p.Visual.Fill = new SolidColorPaint(purple);
+								p.Visual.Stroke = new SolidColorPaint(purple);
 							}
 							else
 							{
