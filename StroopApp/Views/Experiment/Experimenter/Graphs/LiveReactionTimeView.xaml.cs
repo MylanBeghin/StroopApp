@@ -15,10 +15,5 @@ namespace StroopApp.Views.Experiment.Experimenter.Graphs
 			_settings = settings;
 			DataContext = new LiveReactionTimeViewModel(settings);
 		}
-
-		private void DataGrid_Selected(object sender, System.Windows.RoutedEventArgs e)
-		{
-
-		}
 	}
 }

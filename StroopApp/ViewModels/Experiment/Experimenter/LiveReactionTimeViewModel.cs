@@ -36,6 +36,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
 					}
 				};
 			}
+			RecomputeAllGroupsAfterGroupSizeChange();
 		}
 
 		private void ReactionPoints_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)

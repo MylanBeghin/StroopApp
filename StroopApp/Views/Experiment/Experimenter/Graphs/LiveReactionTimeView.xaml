@@ -26,29 +26,42 @@
                        Text="{Binding Source={StaticResource Loc}, Path=[Title_MeanByInterval]}"
                        Style="{DynamicResource TitleTextBlockStyle}"
                        Margin="0,0,0,8" />
-            <DataGrid ItemsSource="{Binding Source={StaticResource GroupedReactionPointsView}}"
-                      Background="{DynamicResource SystemControlBackgroundAltLowBrush}"
-                      HeadersVisibility="Column"
-                      IsReadOnly="True"
-                      AutoGenerateColumns="False"
-                      CanUserReorderColumns="False"
-                      CanUserResizeColumns="False"
-                      CanUserSortColumns="False"
-                      SelectionMode="Single"
-                      BorderThickness="0"
-                      GridLinesVisibility="None">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Label_TrialRange]}"
-                                        Binding="{Binding Range}"
-                                        Width="*" />
-                    <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Label_Mean]}"
-                                        Binding="{Binding AverageDisplay}"
-                                        Width="*" />
-                    <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Label_CorrectPercentage]}"
-                                        Binding="{Binding CorrectDisplay}"
-                                        Width="*" />
-                </DataGrid.Columns>
-            </DataGrid>
+            <Border Margin="0,12,0,0"
+                    Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+                    CornerRadius="8"
+                    Padding="8"
+                    BorderThickness="0.5"
+                    BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+                <DataGrid ItemsSource="{Binding Source={StaticResource GroupedReactionPointsView}}"
+                          Background="{DynamicResource SystemControlBackgroundAltLowBrush}"
+                          HeadersVisibility="Column"
+                          IsReadOnly="True"
+                          AutoGenerateColumns="False"
+                          CanUserReorderColumns="False"
+                          CanUserResizeColumns="False"
+                          CanUserSortColumns="False"
+                          SelectionMode="Single"
+                          BorderThickness="0"
+                          GridLinesVisibility="None">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="IsHitTestVisible"
+                                    Value="False" />
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Label_TrialRange]}"
+                                            Binding="{Binding Range}"
+                                            Width="*" />
+                        <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Label_Mean]}"
+                                            Binding="{Binding AverageDisplay}"
+                                            Width="*" />
+                        <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Label_CorrectPercentage]}"
+                                            Binding="{Binding CorrectDisplay}"
+                                            Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
         </DockPanel>
     </Border>
 </UserControl>

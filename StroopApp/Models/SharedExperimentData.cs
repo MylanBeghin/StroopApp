@@ -158,7 +158,7 @@ namespace StroopApp.Models
 			currentBlockStart = 1;
 		}
 
-		private void NewColumnSerie()
+		public void NewColumnSerie()
 		{
 			ColumnSerie =
 			new ObservableCollection<ISeries>

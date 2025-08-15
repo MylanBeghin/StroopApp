@@ -25,6 +25,11 @@ namespace StroopApp.Views.Experiment.Experimenter
 			var GlobalGraph = new GlobalGraphView(settings);
 			MainGrid.Children.Add(GlobalGraph);
 			Grid.SetRow(GlobalGraph, 4);
+			Grid.SetColumnSpan(GlobalGraph, 3);
+			var LiveReactionTimeView = new LiveReactionTimeView(settings);
+			MainGrid.Children.Add(LiveReactionTimeView);
+			Grid.SetRow(LiveReactionTimeView, 2);
+			Grid.SetColumn(LiveReactionTimeView, 2);
 		}
 	}
 }

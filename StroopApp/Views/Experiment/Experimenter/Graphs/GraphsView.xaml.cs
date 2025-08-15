@@ -21,7 +21,7 @@ namespace StroopApp.Views.Experiment.Experimenter.Graphs
 			Grid.SetColumn(ColumnGraphView, 0);
 			MainGrid.Children.Add(LiveReactionTimeView);
 			Grid.SetRow(LiveReactionTimeView, 4);
-			Grid.SetColumn(LiveReactionTimeView, 3);
+			Grid.SetColumn(LiveReactionTimeView, 2);
 		}
 	}
 }

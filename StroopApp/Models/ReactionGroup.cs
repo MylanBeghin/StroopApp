@@ -10,7 +10,8 @@ public class ReactionGroup : ModelBase
 
 	public string Range => $"{StartTrial} - {EndTrial}";
 	public string AverageDisplay => Average.HasValue ? $"{Average.Value:N0} ms" : "NA";
-	public string CorrectDisplay => $"{CorrectCount}/{TotalCount}";
+	private int CorrectDisplayValue => (int)System.Math.Round((double)CorrectCount / System.Math.Max(1, TotalCount) * 100);
+	public string CorrectDisplay => $"{CorrectDisplayValue} %";
 
 	public ReactionGroup(int start, int end, double? average, int correct, int total)
 	{
