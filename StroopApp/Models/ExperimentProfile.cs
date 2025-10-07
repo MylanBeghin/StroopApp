@@ -39,7 +39,8 @@ namespace StroopApp.Models
 			_dominantPercent = 50;
 			_switchPercent = null;
 			UpdateDerivedValues();
-			TaskLanguage = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
+			var currentCultureCode = Thread.CurrentThread.CurrentUICulture?.TwoLetterISOLanguageName;
+			TaskLanguage = string.IsNullOrWhiteSpace(currentCultureCode) ? "en" : currentCultureCode;
 		}
 		private Guid _id;
 		public Guid Id

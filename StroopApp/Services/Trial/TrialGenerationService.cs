@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 
-using StroopApp.Core;
 using StroopApp.Models;
+using StroopApp.Resources;
 
 namespace StroopApp.Services.Trial
 {
@@ -17,36 +17,40 @@ namespace StroopApp.Services.Trial
 			var trials = new List<StroopTrial>();
 			var wordColors = new[] { "Blue", "Red", "Green", "Yellow" };
 
-			// ✅ Configuration de la culture pour les mots localisés
-			var culture = new CultureInfo(settings.CurrentProfile.TaskLanguage ?? "en");
-			Thread.CurrentThread.CurrentCulture = culture;
-			Thread.CurrentThread.CurrentUICulture = culture;
+			var taskCultureCode = string.IsNullOrWhiteSpace(settings.CurrentProfile.TaskLanguage)
+								? Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName
+								: settings.CurrentProfile.TaskLanguage;
 
-			var loc = new LocalizedStrings();
+			var taskCulture = new CultureInfo(taskCultureCode);
+
+			string GetLocalizedWord(string resourceKey)
+			{
+				return Strings.ResourceManager.GetString(resourceKey, taskCulture)
+					   ?? Strings.ResourceManager.GetString(resourceKey, CultureInfo.CurrentUICulture)
+					   ?? resourceKey;
+			}
+
 			var wordTexts = new[]
 			{
-				loc["Word_BLUE"],
-				loc["Word_RED"],
-				loc["Word_GREEN"],
-				loc["Word_YELLOW"]
-			};
+								GetLocalizedWord("Word_BLUE"),
+								GetLocalizedWord("Word_RED"),
+								GetLocalizedWord("Word_GREEN"),
+								GetLocalizedWord("Word_YELLOW")
+						};
 
 			int total = settings.CurrentProfile.WordCount;
 			int congruentCount = total * settings.CurrentProfile.CongruencePercent / 100;
 			int incongruentCount = total - congruentCount;
 
-			// ✅ Génération des flags de congruence de manière aléatoire
 			var congruenceFlags = new List<bool>();
 			congruenceFlags.AddRange(Enumerable.Repeat(true, congruentCount));
 			congruenceFlags.AddRange(Enumerable.Repeat(false, incongruentCount));
 			congruenceFlags = congruenceFlags.OrderBy(_ => _random.Next()).ToList();
 
-			// ✅ Génération de la séquence d'amorces si nécessaire
 			List<AmorceType>? amorceSequence = null;
 			if (settings.CurrentProfile.IsAmorce)
 				amorceSequence = GenerateAmorceSequence(total, settings.CurrentProfile.DominantPercent);
 
-			// ✅ Génération des trials
 			for (int i = 0; i < total; i++)
 			{
 				var trial = new StroopTrial
@@ -63,14 +67,12 @@ namespace StroopApp.Services.Trial
 
 				if (isCongruent)
 				{
-					// Trial congruent : même couleur et même mot
 					int idx = _random.Next(wordColors.Length);
 					trial.Stimulus = new Word(wordColors[idx], wordColors[idx], wordTexts[idx]);
 					trial.IsCongruent = true;
 				}
 				else
 				{
-					// Trial incongruent : couleur différente du mot
 					var indices = Enumerable.Range(0, wordColors.Length)
 						.OrderBy(_ => _random.Next())
 						.Take(2)
@@ -79,11 +81,8 @@ namespace StroopApp.Services.Trial
 					trial.IsCongruent = false;
 				}
 
-				// ✅ Assigner l'amorce si nécessaire
 				if (amorceSequence != null)
 					trial.Amorce = amorceSequence[i];
-
-				// ✅ Déterminer la réponse attendue
 				trial.DetermineExpectedAnswer();
 
 				trials.Add(trial);
