@@ -332,7 +332,7 @@
     <value>Delete confirmation</value>
   </data>
   <data name="Message_DeleteParticipantConfirmation" xml:space="preserve">
-    <value>Do you really want to delete this participant ? Their data will be archived.</value>
+    <value>Do you really want to delete this participant? Their data will be archived.</value>
   </data>
   <data name="Title_ExportFolderSelector" xml:space="preserve">
     <value>Results folder</value>
@@ -419,7 +419,7 @@
     <value>This identifier is already in use for another participant.</value>
   </data>
   <data name="Message_DeleteProfileConfirmation" xml:space="preserve">
-    <value>Do you really want to delete this profile ?</value>
+    <value>Do you really want to delete this profile?</value>
   </data>
   <data name="Label_Disconnected" xml:space="preserve">
     <value>Disconnected</value>
@@ -614,10 +614,10 @@
     <value>For example:</value>
   </data>
   <data name="Page2_CueExplanation" xml:space="preserve">
-    <value>A shape will appear: a square means you must read the word, a circle means you must name the ink color.</value>
+    <value>A visual cue will appear: a square means you must read the word, a circle means you must name the ink color.</value>
   </data>
   <data name="Page3_Questions" xml:space="preserve">
-    <value>Do you have any questions before we begin ?</value>
+    <value>Do you have any questions before we begin?</value>
   </data>
   <data name="Case1_P1_Congruence" xml:space="preserve">
     <value>These words will always be written with ink of a different color than the meaning of the word.</value>
@@ -638,7 +638,7 @@
     <value>Press the key matching the ink color as quickly as possible, making the fewest mistakes.</value>
   </data>
   <data name="Case4_P1_Congruence" xml:space="preserve">
-    <value>The words will always be displayed in a different color than their meaning, and preceded by a shape.</value>
+    <value>The words will always be displayed in a different color than their meaning.</value>
   </data>
   <data name="Case4_P2_Instructions" xml:space="preserve">
     <value>If the visual cue is a square, you should read the word. If the visual cue is a circle, you should name the color of the ink.</value>
@@ -647,7 +647,7 @@
     <value>These words will always be written in ink of the same color as the meaning of the word.</value>
   </data>
   <data name="Case5_P2_Instructions" xml:space="preserve">
-    <value>Ignore the shape.</value>
+    <value>Ignore the visual cue.</value>
   </data>
   <data name="Case6_P1_Congruence" xml:space="preserve">
     <value>Sometimes, these words will be written in the same ink color as their meaning. Other times, these words will be written in a different ink color than their meaning.</value>
@@ -668,7 +668,7 @@
     <value>Sets how many words are grouped to calculate an average response time. For example, a factor of 5 will show an average every 5 words.</value>
   </data>
   <data name="Page1_Display_WithCue" xml:space="preserve">
-    <value>A fixation cross surrounded by a shape will appear, followed by a colored word.</value>
+    <value>A fixation cross surrounded by a visual cue will appear, followed by a colored word.</value>
   </data>
   <data name="Case4_P2_InstructionsWithCue" xml:space="preserve">
     <value>Press the key corresponding to the instruction as quickly as possible, making the fewest mistakes.</value>
@@ -698,7 +698,7 @@
     <value>Confirm new experiment</value>
   </data>
   <data name="Message_ConfirmNewExperiment" xml:space="preserve">
-    <value>Starting a new experiment will discard the current data. Do you want to continue ?</value>
+    <value>Starting a new experiment will discard the current data. Do you want to continue?</value>
   </data>
   <data name="Title_MeanByInterval" xml:space="preserve">
     <value>Average times by interval</value>

@@ -78,7 +78,7 @@ namespace StroopApp.Services.Exportation
 
 			var p = _settings.Participant;
 			var dateFolder = DateTime.Now.ToString("yyyy-MM-dd");
-			var partDir = Path.Combine(resultsDir, p.Id.ToString(), dateFolder); // dossier par participant + jour
+			var partDir = Path.Combine(resultsDir, p.Id.ToString(), dateFolder);
 			Directory.CreateDirectory(partDir);
 
 			var ts = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");

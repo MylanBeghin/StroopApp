@@ -383,7 +383,7 @@
     <value>Tableau de bord de l'expérience</value>
   </data>
   <data name="Title_Progress" xml:space="preserve">
-    <value>Progession</value>
+    <value>Progression</value>
   </data>
   <data name="Title_ParticipantDetails" xml:space="preserve">
     <value>Informations du participant</value>
@@ -614,7 +614,7 @@
     <value>Par exemple :</value>
   </data>
   <data name="Page2_CueExplanation" xml:space="preserve">
-    <value>Une forme apparaîtra : un carré signifie que vous devez lire le mot, un cercle signifie que vous devez donner la couleur de l’encre.</value>
+    <value>Un indice visuel apparaîtra : un carré signifie que vous devez lire le mot, un cercle signifie que vous devez donner la couleur de l’encre.</value>
   </data>
   <data name="Page3_Questions" xml:space="preserve">
     <value>Avez-vous des questions avant de commencer ?</value>
@@ -647,7 +647,7 @@
     <value>Ces noms seront toujours écrits dans une encre de la même couleur que le sens du mot.</value>
   </data>
   <data name="Case5_P2_Instructions" xml:space="preserve">
-    <value>Ne tenez pas compte de la forme,.</value>
+    <value>Ne tenez pas compte de l'indice visuel.</value>
   </data>
   <data name="Case6_P1_Congruence" xml:space="preserve">
     <value>Parfois, ces mots seront écrits dans la même couleur d'encre que son sens. Parfois, ces mots seront écrits dans une couleur d'encre différente de son sens.</value>
@@ -668,7 +668,7 @@
     <value>Définit tous les combien de mots une moyenne des temps de réponse est calculée. Par exemple, un facteur de 5 affichera une moyenne tous les 5 mots. </value>
   </data>
   <data name="Page1_Display_WithCue" xml:space="preserve">
-    <value>Une croix de fixation entourée d’une forme apparaîtra, suivie d’un mot de couleur.</value>
+    <value>Une croix de fixation entourée d’un indice visuel apparaîtra, suivie d’un mot de couleur.</value>
   </data>
   <data name="Case4_P2_InstructionsWithCue" xml:space="preserve">
     <value>Appuyez sur la touche correspondant aux instructions, le plus rapidement possible, en faisant le moins d'erreurs.</value>
