@@ -17,11 +17,6 @@ namespace StroopApp.Services.Trial
 			var trials = new List<StroopTrial>();
 			var wordColors = new[] { "Blue", "Red", "Green", "Yellow" };
 
-			// ✅ Configuration de la culture pour les mots localisés
-			var culture = new CultureInfo(settings.CurrentProfile.TaskLanguage ?? "en");
-			Thread.CurrentThread.CurrentCulture = culture;
-			Thread.CurrentThread.CurrentUICulture = culture;
-
 			var loc = new LocalizedStrings();
 			var wordTexts = new[]
 			{
