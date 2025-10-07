@@ -14,9 +14,15 @@
             <RowDefinition Height="12" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid Margin="12">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*" />
+            <ColumnDefinition Width="12" />
+            <ColumnDefinition Width="0.3*" />
+        </Grid.ColumnDefinitions>
+        <Grid Margin="12"
+              Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.8*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0"
@@ -41,7 +47,8 @@
                 Padding="16"
                 BorderThickness="0.5"
                 BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                Grid.Row="2">
+                Grid.Row="2"
+                Grid.Column="0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -63,14 +70,6 @@
                               IsReadOnly="True"
                               HeadersVisibility="Column"
                               AutoGenerateColumns="False">
-                        <!-- Style global pour toutes les cellules -->
-                        <DataGrid.CellStyle>
-                            <Style TargetType="DataGridCell"
-                                   BasedOn="{StaticResource {x:Type DataGridCell}}">
-                                <Setter Property="TextBlock.TextAlignment"
-                                        Value="Center" />
-                            </Style>
-                        </DataGrid.CellStyle>
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
                                 <Setter Property="IsHitTestVisible"
@@ -181,21 +180,25 @@
             </Grid>
         </Border>
         <Border Grid.Row="4"
+                Grid.ColumnSpan="3"
                 Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
                 CornerRadius="8"
                 Padding="16"
                 BorderThickness="0.5"
-                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"></Border>
+                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+            
+        </Border>
         <ui:SimpleStackPanel Orientation="Horizontal"
                              Spacing="16"
                              Grid.Row="6"
-                             HorizontalAlignment="Center">
+                             HorizontalAlignment="Center"
+                             Grid.ColumnSpan="3">
             <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Continue]}"
                     Command="{Binding ContinueCommand}" />
             <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Export]}"
                     Command="{Binding ExportCommand}" />
-            <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_NewExperiment]}" 
-                    Command="{Binding NewExperimentCommand}"/>
+            <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_NewExperiment]}"
+                    Command="{Binding NewExperimentCommand}" />
             <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Quit_Without_Export]}"
                     Command="{Binding QuitWihtoutExportCommand}" />
         </ui:SimpleStackPanel>

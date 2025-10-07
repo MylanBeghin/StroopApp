@@ -4,126 +4,64 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-             xmlns:ui="http://schemas.modernwpf.com/2019"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800">
     <UserControl.Resources>
-        <CollectionViewSource x:Key="ReactionPointsView"
-                              Source="{Binding ReactionPoints}">
+        <CollectionViewSource x:Key="GroupedReactionPointsView"
+                              Source="{Binding GroupAverages}">
             <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="TrialNumber"
+                <scm:SortDescription PropertyName="EndTrial"
                                      Direction="Descending" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
     </UserControl.Resources>
-
-    <Border Padding="8"
+    <Border Padding="12"
             Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
             BorderThickness="0.5"
             CornerRadius="8">
-        <Grid>
-            <Grid.RowDefinitions>
-                <!-- header auto, liste en étoile pour contraindre la hauteur -->
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <!-- affichage moyenne -->
-            <TextBox Grid.Row="0"
-                     Text="{Binding GroupAverageValue, Mode=OneWay}"
-                     ui:ControlHelper.Header="{Binding GroupAverageLabel}"
-                     Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-                     BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
-                     IsHitTestVisible="False"
-                     Padding="4"
-                     Margin="0,0,0,8" 
-                     />
-
-            <ListBox Grid.Row="1"
-                     ItemsSource="{Binding Source={StaticResource ReactionPointsView}}"
-                     HorizontalContentAlignment="Stretch"
-                     ScrollViewer.VerticalScrollBarVisibility="Auto"
-                     ScrollViewer.CanContentScroll="True"
-                     Background="White">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="HorizontalContentAlignment"
-                                Value="Stretch" />
-                        <Setter Property="Margin"
-                                Value="0" />
-                    </Style>
-                </ListBox.ItemContainerStyle>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*" />
-                                <ColumnDefinition Width="3*" />
-                                <ColumnDefinition Width="5*" />
-                            </Grid.ColumnDefinitions>
-
-                            <Border Grid.Column="0"
-                                    BorderBrush="{DynamicResource SystemControlForegroundBaseMediumBrush}"
-                                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-                                    BorderThickness="0.5"
-                                    CornerRadius="3,0,0,3">
-                                <TextBlock Text="{Binding TrialNumber}"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           Padding="8" />
-                            </Border>
-
-                            <Border Grid.Column="1"
-                                    BorderBrush="{DynamicResource SystemControlForegroundBaseMediumBrush}"
-                                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-                                    BorderThickness="0.5">
-                                <TextBlock Text="{Binding ReactionTime, StringFormat={}{0:N0} ms}"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           Padding="8"
-                                           />
-                            </Border>
-
-                            <Border Grid.Column="2"
-                                    BorderBrush="{DynamicResource SystemControlForegroundBaseMediumBrush}"
-                                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-                                    BorderThickness="0.5"
-                                    CornerRadius="0,3,3,0">
-                                <TextBlock HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           Padding="8">
-                                    <TextBlock.Style>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="Text"
-                                                    Value="{Binding Source={StaticResource Loc}, Path=[Label_NoResponse]}" />
-                                            <Setter Property="Foreground"
-                                                    Value="Black" />
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsValidResponse}"
-                                                             Value="True">
-                                                    <Setter Property="Text"
-                                                            Value="{Binding Source={StaticResource Loc}, Path=[Label_ResponseCorrect]}" />
-                                                    <Setter Property="Foreground"
-                                                            Value="#5B2EFF" />
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding IsValidResponse}"
-                                                             Value="False">
-                                                    <Setter Property="Text"
-                                                            Value="{Binding Source={StaticResource Loc}, Path=[Label_ResponseIncorrect]}" />
-                                                    <Setter Property="Foreground"
-                                                            Value="#FFA600" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-                            </Border>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Grid>
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top"
+                       Text="{Binding Source={StaticResource Loc}, Path=[Title_MeanByInterval]}"
+                       Style="{DynamicResource TitleTextBlockStyle}"
+                       Margin="0,0,0,8" />
+            <Border Margin="0,12,0,0"
+                    Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+                    CornerRadius="8"
+                    Padding="8"
+                    BorderThickness="0.5"
+                    BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+                <DataGrid ItemsSource="{Binding Source={StaticResource GroupedReactionPointsView}}"
+                          Background="{DynamicResource SystemControlBackgroundAltLowBrush}"
+                          HeadersVisibility="Column"
+                          IsReadOnly="True"
+                          AutoGenerateColumns="False"
+                          CanUserReorderColumns="False"
+                          CanUserResizeColumns="False"
+                          CanUserSortColumns="False"
+                          SelectionMode="Single"
+                          BorderThickness="0"
+                          GridLinesVisibility="None">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="IsHitTestVisible"
+                                    Value="False" />
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Label_TrialRange]}"
+                                            Binding="{Binding Range}"
+                                            Width="*" />
+                        <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Label_Mean]}"
+                                            Binding="{Binding AverageDisplay}"
+                                            Width="*" />
+                        <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Label_CorrectPercentage]}"
+                                            Binding="{Binding CorrectDisplay}"
+                                            Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+        </DockPanel>
     </Border>
 </UserControl>

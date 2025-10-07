@@ -367,7 +367,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The words will always be displayed in a different color than their meaning, and preceded by a shape..
+        ///   Recherche une chaîne localisée semblable à The words will always be displayed in a different color than their meaning..
         /// </summary>
         public static string Case4_P1_Congruence {
             get {
@@ -403,7 +403,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Ignore the shape..
+        ///   Recherche une chaîne localisée semblable à Ignore the visual cue..
         /// </summary>
         public static string Case5_P2_Instructions {
             get {
@@ -1033,6 +1033,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Correct (%).
+        /// </summary>
+        public static string Label_CorrectPercentage {
+            get {
+                return ResourceManager.GetString("Label_CorrectPercentage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Participant ID : {0}.
         /// </summary>
         public static string Label_CurrentParticipant {
@@ -1155,6 +1164,15 @@ namespace StroopApp.Resources {
         public static string Label_LiveAverageNoData {
             get {
                 return ResourceManager.GetString("Label_LiveAverageNoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Mean.
+        /// </summary>
+        public static string Label_Mean {
+            get {
+                return ResourceManager.GetString("Label_Mean", resourceCulture);
             }
         }
         
@@ -1285,6 +1303,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Trial range.
+        /// </summary>
+        public static string Label_TrialRange {
+            get {
+                return ResourceManager.GetString("Label_TrialRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à 2021.
         /// </summary>
         public static string Label_Year2021 {
@@ -1330,7 +1357,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Starting a new experiment will discard the current data. Do you want to continue ?.
+        ///   Recherche une chaîne localisée semblable à Starting a new experiment will discard the current data. Do you want to continue?.
         /// </summary>
         public static string Message_ConfirmNewExperiment {
             get {
@@ -1339,7 +1366,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Do you really want to delete this participant ? Their data will be archived..
+        ///   Recherche une chaîne localisée semblable à Do you really want to delete this participant? Their data will be archived..
         /// </summary>
         public static string Message_DeleteParticipantConfirmation {
             get {
@@ -1348,7 +1375,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Do you really want to delete this profile ?.
+        ///   Recherche une chaîne localisée semblable à Do you really want to delete this profile?.
         /// </summary>
         public static string Message_DeleteProfileConfirmation {
             get {
@@ -1412,7 +1439,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à A fixation cross surrounded by a shape will appear, followed by a colored word..
+        ///   Recherche une chaîne localisée semblable à A fixation cross surrounded by a visual cue will appear, followed by a colored word..
         /// </summary>
         public static string Page1_Display_WithCue {
             get {
@@ -1448,7 +1475,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à A shape will appear: a square means you must read the word, a circle means you must name the ink color..
+        ///   Recherche une chaîne localisée semblable à A visual cue will appear: a square means you must read the word, a circle means you must name the ink color..
         /// </summary>
         public static string Page2_CueExplanation {
             get {
@@ -1457,7 +1484,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Do you have any questions before we begin ?.
+        ///   Recherche une chaîne localisée semblable à Do you have any questions before we begin?.
         /// </summary>
         public static string Page3_Questions {
             get {
@@ -1615,6 +1642,15 @@ namespace StroopApp.Resources {
         public static string Title_KeyMappingDialog {
             get {
                 return ResourceManager.GetString("Title_KeyMappingDialog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Average times by interval.
+        /// </summary>
+        public static string Title_MeanByInterval {
+            get {
+                return ResourceManager.GetString("Title_MeanByInterval", resourceCulture);
             }
         }
         

@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 
+
 using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Resources;
@@ -75,6 +76,7 @@ namespace StroopApp.ViewModels.Configuration
 			}
 			_settings.ExperimentContext.IsTaskStopped = false;
 			_settings.ExperimentContext.IsBlockFinished = false;
+			_settings.ExperimentContext.NewColumnSerie();
 			_settings.ExperimentContext.AddNewSerie(_settings);
 			try
 			{

@@ -80,71 +80,75 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 			_exportationService = exportationService;
 			_experimenterNavigationService = experimenterNavigationService;
 			_windowManager = windowManager;
+
 			ContinueCommand = new RelayCommand(Continue);
 			NewExperimentCommand = new RelayCommand(NewExperiment);
 			ExportCommand = new RelayCommand(Export);
 			QuitWihtoutExportCommand = new RelayCommand(QuitWihtoutExport);
+
 			Blocks = Settings.ExperimentContext.Blocks;
 			CurrentParticipant = string.Format(Strings.Label_CurrentParticipant, Settings.Participant.Id);
 			CurrentProfile = string.Format(Strings.Label_CurrentProfile, Settings.CurrentProfile.ProfileName);
+
 			UpdateBlock();
 		}
 
 		private void UpdateBlock()
 		{
+			var pointsSnapshot = new ObservableCollection<ReactionTimePoint>(Settings.ExperimentContext.ReactionPoints);
 
-			Settings.ExperimentContext.ReactionPoints = new ObservableCollection<ReactionTimePoint>();
 			Settings.ExperimentContext.ColumnSerie = new ObservableCollection<ISeries>
 			{
 				new ColumnSeries<ReactionTimePoint>
 				{
-					Values = Settings.ExperimentContext.ReactionPoints,
+					Values = pointsSnapshot,
 					DataLabelsPosition = LiveChartsCore.Measure.DataLabelsPosition.Top,
 					DataLabelsSize = 16,
 					DataLabelsPaint = new SolidColorPaint(SKColors.Black),
 					DataLabelsFormatter = point =>
-				point.Coordinate.PrimaryValue.Equals(null)
-					? "Aucune réponse"
-					: point.Coordinate.PrimaryValue.ToString("N0"),
+						point.Coordinate.PrimaryValue.Equals(null)
+							? "Aucune réponse"
+							: point.Coordinate.PrimaryValue.ToString("N0"),
 					Mapping = (point, index) => new Coordinate(
-						point.TrialNumber-1,
-						point.ReactionTime != null
-							? point.ReactionTime.Value
-							: double.NaN
+						point.TrialNumber - 1,
+						point.ReactionTime != null ? point.ReactionTime.Value : double.NaN
 					)
-				}.OnPointCreated(p =>
-	{
-		if (p.Visual is null) return;
-		var model = p.Model;
-		if (model!= null && model.IsValidResponse.HasValue)
+				}
+				.OnPointCreated(p =>
+				{
+					if (p.Visual is null) return;
+					var model = p.Model;
+					if (model != null && model.IsValidResponse.HasValue)
+					{
+						var orange = new SKColor(255, 166, 0);      // #FFA600
+						var violet = new SKColor(91, 46, 255);      // #5B2EFF
+						if (model.IsValidResponse.Value)
 						{
-							// Orange (wrong answer)
-							var orange = new SKColor(255, 166, 0);      // #FFA600
-							// Violet (right answer)
-							var violet = new SKColor(91, 46, 255);      // #5B2EFF
-							if(model.IsValidResponse.Value)
-							{
-								p.Visual.Fill = new SolidColorPaint(violet);
-								p.Visual.Stroke = new SolidColorPaint(violet);
-							}
-							else
-							{
-								p.Visual.Fill = new SolidColorPaint(orange);
-								p.Visual.Stroke = new SolidColorPaint(orange);
-							}
+							p.Visual.Fill = new SolidColorPaint(violet);
+							p.Visual.Stroke = new SolidColorPaint(violet);
 						}
-			})
+						else
+						{
+							p.Visual.Fill = new SolidColorPaint(orange);
+							p.Visual.Stroke = new SolidColorPaint(orange);
+						}
+					}
+				})
 			};
-
 		}
 
 		private void Continue()
 		{
+			Settings.ExperimentContext.ReactionPoints.Clear();
+			Settings.ExperimentContext.NewColumnSerie();
 			Settings.Block++;
 			Settings.ExperimentContext.IsBlockFinished = false;
 			Settings.ExperimentContext.IsParticipantSelectionEnabled = false;
-			_experimenterNavigationService.NavigateTo(() => new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
+
+			_experimenterNavigationService.NavigateTo(() =>
+				new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
 		}
+
 		private async void NewExperiment()
 		{
 			bool confirmed = await ShowConfirmationDialog(Strings.Title_ConfirmNewExperiment, Strings.Message_ConfirmNewExperiment);
@@ -153,18 +157,18 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 				Settings.Reset();
 				_windowManager.CloseParticipantWindow();
 				_experimenterNavigationService.NavigateTo(() =>
-				new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
+					new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
 			}
-
 		}
+
 		private async void Export()
 		{
 			var exportEndExperimentWindow = new ExportEndExperimentWindow(Settings, _exportationService, _experimenterNavigationService, _windowManager);
 			exportEndExperimentWindow.ShowDialog();
 		}
+
 		private async void QuitWihtoutExport()
 		{
-
 			if (await ShowConfirmationDialog(Strings.Title_ConfirmShutDown, Strings.Message_ConfirmExitWithoutExport))
 			{
 				Application.Current.Shutdown();

@@ -1,9 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 
 using LiveChartsCore;
-using LiveChartsCore.Drawing;
 using LiveChartsCore.Kernel;
 using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+
+using SkiaSharp;
 
 using StroopApp.Models;
 using StroopApp.Resources;

@@ -1,44 +1,113 @@
 ﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Linq;
 
 using StroopApp.Core;
 using StroopApp.Models;
-using StroopApp.Resources;
 
 namespace StroopApp.ViewModels.Experiment.Experimenter
 {
 	internal class LiveReactionTimeViewModel : ViewModelBase
 	{
-		private ExperimentSettings _settings;
-		public ObservableCollection<ReactionTimePoint> ReactionPoints { get; set; }
+		private readonly ExperimentSettings _settings;
 
-		public string GroupAverageLabel { get; private set; }
-		public string GroupAverageValue { get; private set; }
+		public ObservableCollection<ReactionTimePoint> ReactionPoints { get; }
+		public ObservableCollection<ReactionGroup> GroupAverages { get; } = new();
+
+		private int _lastCompletedGroupIndex = 0;
+
+		public int GroupSize => _settings.CurrentProfile.GroupSize;
 
 		public LiveReactionTimeViewModel(ExperimentSettings settings)
 		{
 			_settings = settings;
 			ReactionPoints = _settings.ExperimentContext.ReactionPoints;
-			UpdateGroupAverage();
-			_settings.ExperimentContext.ReactionPoints.CollectionChanged += (_, __) => UpdateGroupAverage();
+
+			_settings.ExperimentContext.ReactionPoints.CollectionChanged += ReactionPoints_CollectionChanged;
+			if (_settings.CurrentProfile is INotifyPropertyChanged npc)
+			{
+				npc.PropertyChanged += (s, e) =>
+				{
+					if (e.PropertyName == nameof(ExperimentProfile.GroupSize))
+					{
+						OnPropertyChanged(nameof(GroupSize));
+						RecomputeAllGroupsAfterGroupSizeChange();
+					}
+				};
+			}
+			RecomputeAllGroupsAfterGroupSizeChange();
 		}
-		void UpdateGroupAverage()
+
+		private void ReactionPoints_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
 		{
+			if (e.Action == NotifyCollectionChangedAction.Add)
+			{
+				TryAddCompletedGroup();
+			}
+			else if (e.Action == NotifyCollectionChangedAction.Reset)
+			{
+				GroupAverages.Clear();
+				_lastCompletedGroupIndex = 0;
+			}
+		}
+
+		private void TryAddCompletedGroup()
+		{
+			if (_settings?.CurrentProfile == null)
+				return;
+
+			int groupSize = _settings.CurrentProfile.GroupSize;
+			if (groupSize <= 0)
+				groupSize = 1;
+
 			int total = ReactionPoints.Count;
-			int idx = (total - 1) / _settings.CurrentProfile.GroupSize;
-			int start = idx * _settings.CurrentProfile.GroupSize + 1;
-			int end = (idx + 1) * _settings.CurrentProfile.GroupSize;
-			var group = ReactionPoints
-				.Skip(start - 1).Take(end - start + 1)
+			if (total == 0)
+				return;
+			if (total % groupSize != 0)
+				return;
+
+			int currentGroupIndex = total / groupSize;
+			if (currentGroupIndex <= _lastCompletedGroupIndex)
+				return;
+
+			AddGroup(currentGroupIndex, groupSize);
+		}
+
+		private void AddGroup(int groupIndex, int groupSize)
+		{
+			int startTrial = (groupIndex - 1) * groupSize + 1;
+			int endTrial = groupIndex * groupSize;
+
+			var slice = ReactionPoints
+				.Skip(startTrial - 1)
+				.Take(groupSize)
+				.ToList();
+
+			var validTimes = slice
 				.Where(p => p.ReactionTime.HasValue && !double.IsNaN(p.ReactionTime.Value))
-				.Select(p => p.ReactionTime.Value);
-			GroupAverageLabel = string.Format(Strings.Label_LiveAverage, start, end);
+				.Select(p => p.ReactionTime!.Value)
+				.ToList();
 
-			GroupAverageValue = group.Any()
-	? string.Format(Strings.Value_LiveAverage, group.Average())
-	: Strings.Label_LiveAverageNoData;
+			double? average = validTimes.Count > 0 ? validTimes.Average() : (double?)null;
+			int correct = slice.Count(p => p.IsValidResponse == true);
 
-			OnPropertyChanged(nameof(GroupAverageLabel));
-			OnPropertyChanged(nameof(GroupAverageValue));
+			GroupAverages.Add(new ReactionGroup(startTrial, endTrial, average, correct, groupSize));
+			_lastCompletedGroupIndex = groupIndex;
+		}
+		private void RecomputeAllGroupsAfterGroupSizeChange()
+		{
+			GroupAverages.Clear();
+			_lastCompletedGroupIndex = 0;
+
+			int groupSize = GroupSize <= 0 ? 1 : GroupSize;
+			int total = ReactionPoints.Count;
+			if (total == 0)
+				return;
+
+			int fullGroupCount = total / groupSize;
+			for (int gi = 1; gi <= fullGroupCount; gi++)
+				AddGroup(gi, groupSize);
 		}
 	}
 }
