@@ -33,10 +33,6 @@ namespace StroopApp.ViewModels.Configuration
 		{
 			get;
 		}
-		public ICommand OpenAdvancedSettingsCommand
-		{
-			get;
-		}
 		public ConfigurationPageViewModel(ExperimentSettings settings,
 								  ProfileManagementViewModel profileViewModel,
 								  ParticipantManagementViewModel participantViewModel,
@@ -53,7 +49,6 @@ namespace StroopApp.ViewModels.Configuration
 			_trialGenerationService = trialGenerationService;
 			_settings = settings;
 			LaunchExperimentCommand = new RelayCommand(LaunchExperiment);
-			OpenAdvancedSettingsCommand = new RelayCommand(OpenAdvancedSettings);
 		}
 
 
@@ -94,12 +89,6 @@ namespace StroopApp.ViewModels.Configuration
 			{
 				ShowErrorDialog($"Error while generating trials : {ex.Message}");
 			}
-		}
-		private void OpenAdvancedSettings()
-		{
-			var window = new AdvancedSettingsWindow();
-			window.Owner = Application.Current.MainWindow;
-			window.ShowDialog();
 		}
 	}
 }
