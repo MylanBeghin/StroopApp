@@ -27,6 +27,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 		{
 			get;
 		}
+
 		public ObservableCollection<Block> Blocks
 		{
 			get;
@@ -48,6 +49,10 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 			get;
 		}
 		public ICommand QuitWihtoutExportCommand
+		{
+			get;
+		}
+		public ICommand QuitWithExportCommand
 		{
 			get;
 		}
@@ -85,6 +90,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 			NewExperimentCommand = new RelayCommand(NewExperiment);
 			ExportCommand = new RelayCommand(Export);
 			QuitWihtoutExportCommand = new RelayCommand(QuitWihtoutExport);
+			QuitWithExportCommand = new RelayCommand(QuitWithExport);
 
 			Blocks = Settings.ExperimentContext.Blocks;
 			CurrentParticipant = string.Format(Strings.Label_CurrentParticipant, Settings.Participant.Id);
@@ -170,6 +176,15 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 		private async void QuitWihtoutExport()
 		{
 			if (await ShowConfirmationDialog(Strings.Title_ConfirmShutDown, Strings.Message_ConfirmExitWithoutExport))
+			{
+				Application.Current.Shutdown();
+			}
+			return;
+		}
+
+		private async void QuitWithExport()
+		{
+			if (await ShowConfirmationDialog(Strings.Title_ConfirmShutDown, Strings.Message_ConfirmExitWithExport))
 			{
 				Application.Current.Shutdown();
 			}

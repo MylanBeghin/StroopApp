@@ -2,7 +2,12 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:ui="http://schemas.modernwpf.com/2019"
-      xmlns:models="clr-namespace:StroopApp.Models">
+      xmlns:models="clr-namespace:StroopApp.Models"
+      xmlns:converters="clr-namespace:StroopApp.Converters">
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <converters:BoolToVisibilityInvertedConverter x:Key="BoolToVisibilityInvertedConverter" />
+    </Page.Resources>
     <Grid x:Name="MainGrid"
           Margin="12">
         <Grid.RowDefinitions>
@@ -185,9 +190,7 @@
                 CornerRadius="8"
                 Padding="16"
                 BorderThickness="0.5"
-                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
-            
-        </Border>
+                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"></Border>
         <ui:SimpleStackPanel Orientation="Horizontal"
                              Spacing="16"
                              Grid.Row="6"
@@ -200,7 +203,13 @@
             <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_NewExperiment]}"
                     Command="{Binding NewExperimentCommand}" />
             <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Quit_Without_Export]}"
-                    Command="{Binding QuitWihtoutExportCommand}" />
+                    Command="{Binding QuitWihtoutExportCommand}"
+                    Visibility="{Binding Settings.ExperimentContext.HasUnsavedExports,
+Converter={StaticResource BoolToVisibilityConverter}}" />
+            <Button Content="{Binding Source={StaticResource Loc}, Path= [Button_Quit_With_Export]}"
+                    Command="{Binding QuitWithExportCommand}"
+                    Visibility="{Binding Settings.ExperimentContext.HasUnsavedExports,
+Converter={StaticResource BoolToVisibilityInvertedConverter}}" />
         </ui:SimpleStackPanel>
     </Grid>
 </Page>

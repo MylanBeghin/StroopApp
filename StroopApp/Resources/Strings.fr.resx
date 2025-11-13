@@ -712,4 +712,10 @@
   <data name="Label_TrialRange" xml:space="preserve">
     <value>Plage d’essais</value>
   </data>
+  <data name="Message_ConfirmExitWithExport" xml:space="preserve">
+    <value>Vos données ont été exportées avec succès. Voulez-vous vraiment quitter l'application ?</value>
+  </data>
+  <data name="Button_Quit_With_Export" xml:space="preserve">
+    <value>Quitter l'application</value>
+  </data>
 </root>

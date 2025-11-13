@@ -259,6 +259,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Quit the application.
+        /// </summary>
+        public static string Button_Quit_With_Export {
+            get {
+                return ResourceManager.GetString("Button_Quit_With_Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Quit application without export.
         /// </summary>
         public static string Button_Quit_Without_Export {
@@ -1344,6 +1353,15 @@ namespace StroopApp.Resources {
         public static string Menu_Languages {
             get {
                 return ResourceManager.GetString("Menu_Languages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Your data has been successfully exported. Are you sure you want to exit the application?.
+        /// </summary>
+        public static string Message_ConfirmExitWithExport {
+            get {
+                return ResourceManager.GetString("Message_ConfirmExitWithExport", resourceCulture);
             }
         }
         

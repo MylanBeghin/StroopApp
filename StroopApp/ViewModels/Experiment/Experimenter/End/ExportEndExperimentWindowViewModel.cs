@@ -136,6 +136,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 				await _exportationService.ExportDataAsync();
 				IsExporting = false;
 				ExportSuccess = true;
+				_settings.ExperimentContext.HasUnsavedExports = false;
 			}
 			catch (Exception ex)
 			{

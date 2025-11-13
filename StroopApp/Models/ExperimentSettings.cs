@@ -87,6 +87,7 @@ namespace StroopApp.Models
 			Block = 1;
 			ExperimentContext.IsBlockFinished = true;
 			ExperimentContext.IsParticipantSelectionEnabled = true;
+			ExperimentContext.HasUnsavedExports = true;
 			OnPropertyChanged(string.Empty);
 		}
 		public ExperimentSettings()
