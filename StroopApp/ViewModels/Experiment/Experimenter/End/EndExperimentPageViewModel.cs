@@ -150,6 +150,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 			Settings.Block++;
 			Settings.ExperimentContext.IsBlockFinished = false;
 			Settings.ExperimentContext.IsParticipantSelectionEnabled = false;
+			Settings.ExperimentContext.HasUnsavedExports = true;
 
 			_experimenterNavigationService.NavigateTo(() =>
 				new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
