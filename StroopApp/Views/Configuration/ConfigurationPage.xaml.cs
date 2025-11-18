@@ -22,7 +22,7 @@ namespace StroopApp.Views
 {
 	public partial class ConfigurationPage : Page
 	{
-		public ConfigurationPage(ExperimentSettings settings, INavigationService experimentNavigationService, IWindowManager windowManager)
+		public ConfigurationPage(ExperimentSettings settings, INavigationService experimentNavigationService, IWindowManager windowManager, ILanguageService languageService)
 		{
 			InitializeComponent();
 			var configDir = Path.Combine(
@@ -30,10 +30,10 @@ namespace StroopApp.Views
 				"StroopApp");
 			// Instanciation des services
 			var profileService = new ProfileService(configDir);
-			var exportFolderStorageService = new ExportationService(settings, configDir);
+			var exportFolderStorageService = new ExportationService(settings, languageService, configDir);
 			var participantService = new ParticipantService(configDir, settings);
 			var keyMappingService = new KeyMappingService(configDir);
-			var trialGenerationService = new TrialGenerationService();
+			var trialGenerationService = new TrialGenerationService(languageService);
 
 			// Instanciation unique des ViewModels
 			var profileViewModel = new ProfileManagementViewModel(profileService);
@@ -42,7 +42,7 @@ namespace StroopApp.Views
 			var exportFolderSelectorViewModel = new ExportFolderSelectorViewModel(settings, exportFolderStorageService);
 
 			// Instanciation du ViewModel principal et liaison au DataContext
-			DataContext = new ConfigurationPageViewModel(settings, profileViewModel, participantViewModel, keyMappingViewModel, experimentNavigationService, windowManager, trialGenerationService);
+			DataContext = new ConfigurationPageViewModel(settings, profileViewModel, participantViewModel, keyMappingViewModel, experimentNavigationService, windowManager, trialGenerationService, languageService);
 
 			// Instanciation des vues en injectant les ViewModels partagés
 			var profileManagementView = new ProfileManagementView(profileViewModel);

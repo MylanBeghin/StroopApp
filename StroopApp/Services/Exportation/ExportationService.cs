@@ -7,6 +7,7 @@ using ModernWpf.Controls;
 
 using StroopApp.Models;
 using StroopApp.Notifiers;
+using StroopApp.Services.Language;
 
 namespace StroopApp.Services.Exportation
 {
@@ -17,6 +18,7 @@ namespace StroopApp.Services.Exportation
 		private readonly string _exportFolderConfigFile;
 		private string _exportRootDirectory;
 		private readonly IUserNotifier _notifier;
+		private readonly ILanguageService _languageService;
 		public string ExportRootDirectory
 		{
 			get => _exportRootDirectory;
@@ -30,9 +32,10 @@ namespace StroopApp.Services.Exportation
 				}
 			}
 		}
-		public ExportationService(ExperimentSettings settings, string configDir, IUserNotifier notifier = null)
+		public ExportationService(ExperimentSettings settings, ILanguageService languageService, string configDir, IUserNotifier notifier = null)
 		{
 			_settings = settings;
+			_languageService = languageService;
 			_configDir = configDir;
 			Directory.CreateDirectory(configDir);
 			_exportFolderConfigFile = Path.Combine(_configDir, "exportFolder.json");
@@ -86,16 +89,16 @@ namespace StroopApp.Services.Exportation
 
 			using var wb = new XLWorkbook();
 			var ws = wb.Worksheets.Add("Export");
-			ws.Cell(1, 1).Value = "Numéro du participant";
-			ws.Cell(1, 2).Value = "Congruence";
-			ws.Cell(1, 3).Value = "Amorce ?";
-			ws.Cell(1, 4).Value = "Bloc";
-			ws.Cell(1, 5).Value = "Réponse attendue";
-			ws.Cell(1, 6).Value = "Réponse donnée";
-			ws.Cell(1, 7).Value = "Validité de la réponse";
-			ws.Cell(1, 8).Value = "Temps de réaction";
-			ws.Cell(1, 9).Value = "Essai";
-			ws.Cell(1, 10).Value = "Type d'amorce";
+			ws.Cell(1, 1).Value = _languageService.GetLocalizedString("Header_ParticipantId");
+			ws.Cell(1, 2).Value = _languageService.GetLocalizedString("Header_Congruence");
+			ws.Cell(1, 3).Value = _languageService.GetLocalizedString("Header_VisualCue");
+			ws.Cell(1, 4).Value = _languageService.GetLocalizedString("Header_BlockNumber");
+			ws.Cell(1, 5).Value = _languageService.GetLocalizedString("Header_Expected_Answer");
+			ws.Cell(1, 6).Value = _languageService.GetLocalizedString("Header_Given_Answer");
+			ws.Cell(1, 7).Value = _languageService.GetLocalizedString("Header_Response_Validity");
+			ws.Cell(1, 8).Value = _languageService.GetLocalizedString("Header_ResponseTime");
+			ws.Cell(1, 9).Value = _languageService.GetLocalizedString("Header_Trials");
+			ws.Cell(1, 10).Value = _languageService.GetLocalizedString("Header_Visual_Cue_Type");
 
 			var row = 2;
 			foreach (var block in _settings.ExperimentContext.Blocks)
@@ -110,16 +113,16 @@ namespace StroopApp.Services.Exportation
 
 					var validCell = ws.Cell(row, 7);
 					if (r.IsValidResponse.HasValue)
-						validCell.Value = r.IsValidResponse.Value;   // true ou false
+						validCell.Value = r.IsValidResponse.Value;
 					else
-						validCell.Clear();                           // pas de réponse => cellule vide
+						validCell.Clear();
 
 					ws.Cell(row, 8).Value = r.ReactionTime;
 					ws.Cell(row, 9).Value = r.TrialNumber;
 					ws.Cell(row, 10).Value = r.Amorce switch
 					{
-						AmorceType.Square => "Carré",
-						AmorceType.Round => "Cercle",
+						AmorceType.Square => _languageService.GetLocalizedString("Label_Square"),
+						AmorceType.Round => _languageService.GetLocalizedString("Label_Circle"),
 						_ => ""
 					};
 					row++;

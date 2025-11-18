@@ -3,6 +3,7 @@ using System.Windows.Controls;
 
 using StroopApp.Models;
 using StroopApp.Services.Exportation;
+using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.Configuration;
@@ -16,10 +17,10 @@ namespace StroopApp.Views.Experiment.Experimenter.End
 	/// </summary>
 	public partial class ExportEndExperimentWindow : Window
 	{
-		public ExportEndExperimentWindow(ExperimentSettings Settings, IExportationService exportationService, INavigationService experimenterNavigationService, IWindowManager windowManager)
+		public ExportEndExperimentWindow(ExperimentSettings Settings, IExportationService exportationService, INavigationService experimenterNavigationService, IWindowManager windowManager, ILanguageService languageService)
 		{
 			InitializeComponent();
-			DataContext = new ExportEndExperimentWindowViewModel(Settings, exportationService, this, experimenterNavigationService, windowManager);
+			DataContext = new ExportEndExperimentWindowViewModel(Settings, exportationService, this, experimenterNavigationService, windowManager, languageService);
 			var folderSelectorVM = new ExportFolderSelectorViewModel(Settings, exportationService);
 			var folderSelectorView = new ExportFolderSelectorView(folderSelectorVM);
 

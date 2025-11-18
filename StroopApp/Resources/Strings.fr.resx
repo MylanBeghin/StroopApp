@@ -201,7 +201,7 @@
   <data name="Button_Save" xml:space="preserve">
     <value>Enregistrer</value>
   </data>
-  <data name="Header_Congruence" xml:space="preserve">
+  <data name="Header_Congruence_Percent" xml:space="preserve">
     <value>Congruence (%)</value>
   </data>
   <data name="Tooltip_Congruence" xml:space="preserve">
@@ -211,7 +211,7 @@
     <value>Alternance (%)</value>
   </data>
   <data name="Tooltip_Switch" xml:space="preserve">
-    <value>Définit la fréquence d'alternance entre deux formes d'indice visuel différentes. Une seule alternance correspond au passage d’un carré à un rond, ou inversement. Exemple : 100 % = alternance à chaque essai, 0 % = toujours la même forme.</value>
+    <value>Définit la fréquence d'alternance entre deux formes d'indice visuel différentes. Une seule alternance correspond au passage d’un carré à un cercle, ou inversement. Exemple : 100 % = alternance à chaque essai, 0 % = toujours la même forme.</value>
   </data>
   <data name="Header_Hours" xml:space="preserve">
     <value>Heures</value>
@@ -473,7 +473,7 @@
     <value>Carré (%)</value>
   </data>
   <data name="Label_CirclePercentage" xml:space="preserve">
-    <value>Rond (%)</value>
+    <value>Cercle (%)</value>
   </data>
   <data name="Label_Overview" xml:space="preserve">
     <value>Aperçu :</value>
@@ -717,5 +717,26 @@
   </data>
   <data name="Button_Quit_With_Export" xml:space="preserve">
     <value>Quitter l'application</value>
+  </data>
+  <data name="Header_Congruence" xml:space="preserve">
+    <value>Congruence</value>
+  </data>
+  <data name="Header_Expected_Answer" xml:space="preserve">
+    <value>Réponse attendue</value>
+  </data>
+  <data name="Header_Given_Answer" xml:space="preserve">
+    <value>Réponse donnée</value>
+  </data>
+  <data name="Header_Response_Validity" xml:space="preserve">
+    <value>Validité de la réponse</value>
+  </data>
+  <data name="Header_Visual_Cue_Type" xml:space="preserve">
+    <value>Type d'indice visuel</value>
+  </data>
+  <data name="Label_Square" xml:space="preserve">
+    <value>Carré</value>
+  </data>
+  <data name="Label_Circle" xml:space="preserve">
+    <value>Cercle</value>
   </data>
 </root>

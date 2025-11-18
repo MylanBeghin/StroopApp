@@ -201,7 +201,7 @@
   <data name="Button_Save" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="Header_Congruence" xml:space="preserve">
+  <data name="Header_Congruence_Percent" xml:space="preserve">
     <value>Congruence (%)</value>
   </data>
   <data name="Tooltip_Congruence" xml:space="preserve">
@@ -717,5 +717,26 @@
   </data>
   <data name="Button_Quit_With_Export" xml:space="preserve">
     <value>Quit the application</value>
+  </data>
+  <data name="Header_Congruence" xml:space="preserve">
+    <value>Congruence</value>
+  </data>
+  <data name="Header_Expected_Answer" xml:space="preserve">
+    <value>Expected answer</value>
+  </data>
+  <data name="Header_Given_Answer" xml:space="preserve">
+    <value>Given answer</value>
+  </data>
+  <data name="Header_Response_Validity" xml:space="preserve">
+    <value>Response validity</value>
+  </data>
+  <data name="Header_Visual_Cue_Type" xml:space="preserve">
+    <value>Visual cue type</value>
+  </data>
+  <data name="Label_Square" xml:space="preserve">
+    <value>Square</value>
+  </data>
+  <data name="Label_Circle" xml:space="preserve">
+    <value>Circle</value>
   </data>
 </root>

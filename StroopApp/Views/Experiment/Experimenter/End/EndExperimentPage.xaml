@@ -135,7 +135,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_Congruence]}"
+                            <DataGridTextColumn Header="{Binding Source={StaticResource Loc}, Path=[Header_Congruence_Percent]}"
                                                 Binding="{Binding CongruencePercent}">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">

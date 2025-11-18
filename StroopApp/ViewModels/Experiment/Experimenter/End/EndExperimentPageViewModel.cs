@@ -14,6 +14,7 @@ using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Resources;
 using StroopApp.Services.Exportation;
+using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.Views;
@@ -35,7 +36,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 		private readonly IExportationService _exportationService;
 		private readonly INavigationService _experimenterNavigationService;
 		private readonly IWindowManager _windowManager;
-
+		private readonly ILanguageService _languageService;
 		public ICommand ContinueCommand
 		{
 			get;
@@ -79,12 +80,13 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 		public EndExperimentPageViewModel(ExperimentSettings settings,
 								  IExportationService exportationService,
 								  INavigationService experimenterNavigationService,
-								  IWindowManager windowManager)
+								  IWindowManager windowManager, ILanguageService languageService)
 		{
 			Settings = settings;
 			_exportationService = exportationService;
 			_experimenterNavigationService = experimenterNavigationService;
 			_windowManager = windowManager;
+			_languageService = languageService;
 
 			ContinueCommand = new RelayCommand(Continue);
 			NewExperimentCommand = new RelayCommand(NewExperiment);
@@ -153,7 +155,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 			Settings.ExperimentContext.HasUnsavedExports = true;
 
 			_experimenterNavigationService.NavigateTo(() =>
-				new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
+				new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager, _languageService));
 		}
 
 		private async void NewExperiment()
@@ -164,13 +166,13 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 				Settings.Reset();
 				_windowManager.CloseParticipantWindow();
 				_experimenterNavigationService.NavigateTo(() =>
-					new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
+					new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager, _languageService));
 			}
 		}
 
 		private async void Export()
 		{
-			var exportEndExperimentWindow = new ExportEndExperimentWindow(Settings, _exportationService, _experimenterNavigationService, _windowManager);
+			var exportEndExperimentWindow = new ExportEndExperimentWindow(Settings, _exportationService, _experimenterNavigationService, _windowManager, _languageService);
 			exportEndExperimentWindow.ShowDialog();
 		}
 

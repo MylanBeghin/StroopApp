@@ -3,6 +3,7 @@ using System.Windows.Controls;
 
 using StroopApp.Models;
 using StroopApp.Services.Exportation;
+using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.Experiment.Experimenter;
@@ -14,14 +15,14 @@ namespace StroopApp.Views.Experiment.Experimenter
 	public partial class EndExperimentPage : Page
 	{
 
-		public EndExperimentPage(ExperimentSettings settings, INavigationService experimenterNavigationService, IWindowManager windowManager)
+		public EndExperimentPage(ExperimentSettings settings, INavigationService experimenterNavigationService, IWindowManager windowManager, ILanguageService languageService)
 		{
 			InitializeComponent();
 			var configDir = Path.Combine(
 				Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
 				"StroopApp");
-			var ExportationService = new ExportationService(settings, configDir);
-			DataContext = new EndExperimentPageViewModel(settings, ExportationService, experimenterNavigationService, windowManager);
+			var ExportationService = new ExportationService(settings, languageService, configDir);
+			DataContext = new EndExperimentPageViewModel(settings, ExportationService, experimenterNavigationService, windowManager, languageService);
 			var GlobalGraph = new GlobalGraphView(settings);
 			MainGrid.Children.Add(GlobalGraph);
 			Grid.SetRow(GlobalGraph, 4);
