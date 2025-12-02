@@ -8,6 +8,7 @@ using StroopApp.Models;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Trial;
 using StroopApp.Services.Window;
+using StroopApp.Services.Language;
 using StroopApp.ViewModels.Configuration;
 using StroopApp.ViewModels.Configuration.Participant;
 using StroopApp.ViewModels.Configuration.Profile;
@@ -25,9 +26,10 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 			KeyMappingViewModel keyMappingViewModel,
 			INavigationService experimenterNavigationService,
 			IWindowManager windowManager,
-			ITrialGenerationService trialGenerationService
+			ITrialGenerationService trialGenerationService,
+			ILanguageService languageService
 
-		) : base(settings, profileViewModel, participantViewModel, keyMappingViewModel, experimenterNavigationService, windowManager, trialGenerationService)
+		) : base(settings, profileViewModel, participantViewModel, keyMappingViewModel, experimenterNavigationService, windowManager, trialGenerationService, languageService)
 		{ }
 
 		protected override void ShowErrorDialog(string message)

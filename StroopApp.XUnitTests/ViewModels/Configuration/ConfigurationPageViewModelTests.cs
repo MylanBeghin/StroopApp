@@ -22,8 +22,10 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 			var dummyWindowManager = new DummyWindowManager();
 			var dummyNavigationService = new DummyNavigationService();
 			var dummyTrialGenerationService = new DummyTrialGenerationService();
+			var dummyLanguageService = new DummyLanguageService();
 
-			var profileViewModel = new ProfileManagementViewModel(dummyProfileService);
+
+            var profileViewModel = new ProfileManagementViewModel(dummyProfileService);
 			var participantViewModel = new ParticipantManagementViewModel(dummyParticipantService, false);
 			var keyMappingViewModel = new KeyMappingViewModel(dummyKeyMappingService);
 
@@ -34,7 +36,8 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 				keyMappingViewModel,
 				dummyNavigationService,
 				dummyWindowManager,
-				dummyTrialGenerationService);
+				dummyTrialGenerationService,
+				dummyLanguageService);
 
 			var dummyProfile = new ExperimentProfile
 			{
@@ -70,8 +73,9 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 			var dummyWindowManager = new DummyWindowManager();
 			var dummyNavigationService = new DummyNavigationService();
 			var dummyTrialGenerationService = new DummyTrialGenerationService();
+			var dummyLanguageService = new DummyLanguageService();
 
-			var profileViewModel = new ProfileManagementViewModel(dummyProfileService);
+            var profileViewModel = new ProfileManagementViewModel(dummyProfileService);
 			// No CurrentProfile set intentionally
 
 			var participantViewModel = new ParticipantManagementViewModel(dummyParticipantService, false);
@@ -86,7 +90,8 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 				keyMappingViewModel,
 				dummyNavigationService,
 				dummyWindowManager,
-				dummyTrialGenerationService);
+				dummyTrialGenerationService, 
+				dummyLanguageService);
 
 			// Act
 			viewModel.LaunchExperimentCommand.Execute(null);
@@ -110,8 +115,9 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 			var dummyWindowManager = new DummyWindowManager();
 			var dummyNavigationService = new DummyNavigationService();
 			var dummyTrialGenerationService = new DummyTrialGenerationService();
+			var dummyLanguageService = new DummyLanguageService();
 
-			var profileViewModel = new ProfileManagementViewModel(dummyProfileService);
+            var profileViewModel = new ProfileManagementViewModel(dummyProfileService);
 			var dummyProfile = new ExperimentProfile { ProfileName = "TestProfile" };
 			profileViewModel.CurrentProfile = dummyProfile;
 
@@ -127,7 +133,8 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 				keyMappingViewModel,
 				dummyNavigationService,
 				dummyWindowManager,
-				dummyTrialGenerationService);
+				dummyTrialGenerationService, 
+				dummyLanguageService);
 
 			// Act
 			viewModel.LaunchExperimentCommand.Execute(null);
@@ -148,8 +155,9 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 			var dummyTrialGenerationService = new DummyTrialGenerationService();
 			var dummyWindowManager = new DummyWindowManager();
 			var dummyNavigationService = new DummyNavigationService();
+			var dummyLanguageService = new DummyLanguageService();
 
-			var profileViewModel = new ProfileManagementViewModel(new DummyProfileService());
+            var profileViewModel = new ProfileManagementViewModel(new DummyProfileService());
 			var participantViewModel = new ParticipantManagementViewModel(new DummyParticipantService(), false);
 			var keyMappingViewModel = new KeyMappingViewModel(new DummyKeyMappingService());
 
@@ -160,7 +168,8 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 				keyMappingViewModel,
 				dummyNavigationService,
 				dummyWindowManager,
-				dummyTrialGenerationService);
+				dummyTrialGenerationService, 
+				dummyLanguageService);
 
 			var profile = new ExperimentProfile
 			{
