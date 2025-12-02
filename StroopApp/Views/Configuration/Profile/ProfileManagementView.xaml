@@ -75,7 +75,7 @@
                                                  ToolTip="{Binding Source={StaticResource Loc}, Path=[Tooltip_Congruence]}"
                                                  ToolTipService.Placement="Top"
                                                  ToolTipService.InitialShowDelay="100">
-                                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_Congruence]}" />
+                                <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_Congruence_Percent]}" />
                                 <TextBlock Text=""
                                            FontFamily="Segoe MDL2 Assets"
                                            FontSize="14"

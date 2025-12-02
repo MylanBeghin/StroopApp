@@ -2,6 +2,8 @@
 using System.IO;
 using System.Text.Json;
 
+using StroopApp.Resources;
+
 namespace StroopApp.Services.Language
 {
 	public class LanguageService : ILanguageService
@@ -10,7 +12,7 @@ namespace StroopApp.Services.Language
 
 		private readonly string _configPath;
 		private AppConfig _config;
-
+		public string CurrentLanguageCode => _config.Language;
 		public LanguageService()
 		{
 			_configPath = Path.Combine(
@@ -21,8 +23,6 @@ namespace StroopApp.Services.Language
 			_config = LoadConfig();
 			ApplyCulture(_config.Language);
 		}
-
-		public string CurrentLanguageCode => _config.Language;
 
 		public void SetLanguage(string languageCode)
 		{
@@ -63,7 +63,23 @@ namespace StroopApp.Services.Language
 			var json = JsonSerializer.Serialize(_config, new JsonSerializerOptions { WriteIndented = true });
 			File.WriteAllText(_configPath, json);
 		}
+		public string GetLocalizedString(string resourceKey, string? cultureCode = null)
+		{
+			CultureInfo targetCulture;
 
+			if (string.IsNullOrWhiteSpace(cultureCode))
+			{
+				targetCulture = Thread.CurrentThread.CurrentUICulture;
+			}
+			else
+			{
+				targetCulture = new CultureInfo(cultureCode);
+			}
+
+			return Strings.ResourceManager.GetString(resourceKey, targetCulture)
+				   ?? Strings.ResourceManager.GetString(resourceKey, CultureInfo.CurrentUICulture)
+				   ?? resourceKey;
+		}
 		private class AppConfig
 		{
 			public string Language { get; set; } = "en";

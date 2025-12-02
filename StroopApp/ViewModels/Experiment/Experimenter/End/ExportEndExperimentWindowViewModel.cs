@@ -9,6 +9,7 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Services.Exportation;
+using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.Views;
@@ -22,6 +23,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 		private readonly Window _parentWindow;
 		private readonly INavigationService _navigationService;
 		private readonly IWindowManager _windowManager;
+		private readonly ILanguageService _languageService;
 
 		private bool _isExporting;
 		public bool IsExporting
@@ -76,13 +78,14 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 		public ICommand OpenAndSelectTodayExportFileCommand { get; }
 		public ICommand ReExportCommand { get; }
 
-		public ExportEndExperimentWindowViewModel(ExperimentSettings settings, IExportationService exportationService, Window parentWindow, INavigationService navigationService, IWindowManager windowManager)
+		public ExportEndExperimentWindowViewModel(ExperimentSettings settings, IExportationService exportationService, Window parentWindow, INavigationService navigationService, IWindowManager windowManager, ILanguageService languageService)
 		{
 			_settings = settings;
 			_exportationService = exportationService;
 			_parentWindow = parentWindow;
 			_navigationService = navigationService;
 			_windowManager = windowManager;
+			_languageService = languageService;
 
 			ExportPath = _exportationService.LoadExportFolderPath();
 			ExportCommand = new CommunityToolkit.Mvvm.Input.AsyncRelayCommand(ExportAsync, CanExport);
@@ -136,6 +139,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 				await _exportationService.ExportDataAsync();
 				IsExporting = false;
 				ExportSuccess = true;
+				_settings.ExperimentContext.HasUnsavedExports = false;
 			}
 			catch (Exception ex)
 			{
@@ -174,7 +178,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 			_settings.Reset();
 			_parentWindow.DialogResult = true;
 			_parentWindow.Close();
-			_navigationService.NavigateTo(() => new ConfigurationPage(_settings, _navigationService, _windowManager));
+			_navigationService.NavigateTo(() => new ConfigurationPage(_settings, _navigationService, _windowManager, _languageService));
 
 		}
 

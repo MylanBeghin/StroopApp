@@ -2,12 +2,19 @@
 
 using StroopApp.Models;
 using StroopApp.Resources;
+using StroopApp.Services.Language;
 
 namespace StroopApp.Services.Trial
 {
 	public class TrialGenerationService : ITrialGenerationService
 	{
 		private readonly Random _random = new Random();
+		private readonly ILanguageService _languageService;
+
+		public TrialGenerationService(ILanguageService languageService)
+		{
+			_languageService = languageService ?? throw new ArgumentNullException(nameof(languageService));
+		}
 
 		public List<StroopTrial> GenerateTrials(ExperimentSettings settings)
 		{
@@ -21,22 +28,16 @@ namespace StroopApp.Services.Trial
 								? Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName
 								: settings.CurrentProfile.TaskLanguage;
 
-			var taskCulture = new CultureInfo(taskCultureCode);
 
-			string GetLocalizedWord(string resourceKey)
-			{
-				return Strings.ResourceManager.GetString(resourceKey, taskCulture)
-					   ?? Strings.ResourceManager.GetString(resourceKey, CultureInfo.CurrentUICulture)
-					   ?? resourceKey;
-			}
+			var taskCulture = new CultureInfo(taskCultureCode);
 
 			var wordTexts = new[]
 			{
-								GetLocalizedWord("Word_BLUE"),
-								GetLocalizedWord("Word_RED"),
-								GetLocalizedWord("Word_GREEN"),
-								GetLocalizedWord("Word_YELLOW")
-						};
+				_languageService.GetLocalizedString("Word_BLUE", taskCultureCode),
+				_languageService.GetLocalizedString("Word_RED", taskCultureCode),
+				_languageService.GetLocalizedString("Word_GREEN", taskCultureCode),
+				_languageService.GetLocalizedString("Word_YELLOW", taskCultureCode)
+			};
 
 			int total = settings.CurrentProfile.WordCount;
 			int congruentCount = total * settings.CurrentProfile.CongruencePercent / 100;

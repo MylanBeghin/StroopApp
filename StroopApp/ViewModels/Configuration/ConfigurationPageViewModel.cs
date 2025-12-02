@@ -39,7 +39,7 @@ namespace StroopApp.ViewModels.Configuration
 								  KeyMappingViewModel keyMappingViewModel,
 								  INavigationService experimenterNavigationService,
 								  IWindowManager windowManager, ITrialGenerationService trialGenerationService
-								  )
+								  , ILanguageService languageService)
 		{
 			_profileViewModel = profileViewModel;
 			_participantViewModel = participantViewModel;
@@ -47,6 +47,7 @@ namespace StroopApp.ViewModels.Configuration
 			_experimenterNavigationService = experimenterNavigationService;
 			_windowManager = windowManager;
 			_trialGenerationService = trialGenerationService;
+			_languageService = languageService;
 			_settings = settings;
 			LaunchExperimentCommand = new RelayCommand(LaunchExperiment);
 		}
@@ -82,7 +83,7 @@ namespace StroopApp.ViewModels.Configuration
 					_settings.ExperimentContext.CurrentBlock.TrialRecords.Add(trial);
 				}
 				_experimenterNavigationService.NavigateTo(() =>
-					new ExperimentDashBoardPage(_settings, _experimenterNavigationService, _windowManager));
+					new ExperimentDashBoardPage(_settings, _experimenterNavigationService, _windowManager, _languageService));
 				_windowManager.ShowParticipantWindow(_settings);
 			}
 			catch (Exception ex)

@@ -117,7 +117,7 @@
                     <TextBox Grid.Column="0"
                              Text="{Binding settings.CurrentProfile.CongruencePercent}"
                              HorizontalAlignment="Stretch"
-                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Congruence]}"
+                             ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Congruence_Percent]}"
                              Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
                              BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
                              IsHitTestVisible="False"

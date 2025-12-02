@@ -259,6 +259,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Quit the application.
+        /// </summary>
+        public static string Button_Quit_With_Export {
+            get {
+                return ResourceManager.GetString("Button_Quit_With_Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Quit application without export.
         /// </summary>
         public static string Button_Quit_Without_Export {
@@ -826,11 +835,29 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Congruence (%).
+        ///   Recherche une chaîne localisée semblable à Congruence.
         /// </summary>
         public static string Header_Congruence {
             get {
                 return ResourceManager.GetString("Header_Congruence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Congruence (%).
+        /// </summary>
+        public static string Header_Congruence_Percent {
+            get {
+                return ResourceManager.GetString("Header_Congruence_Percent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Expected answer.
+        /// </summary>
+        public static string Header_Expected_Answer {
+            get {
+                return ResourceManager.GetString("Header_Expected_Answer", resourceCulture);
             }
         }
         
@@ -849,6 +876,15 @@ namespace StroopApp.Resources {
         public static string Header_FixationDuration {
             get {
                 return ResourceManager.GetString("Header_FixationDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Given answer.
+        /// </summary>
+        public static string Header_Given_Answer {
+            get {
+                return ResourceManager.GetString("Header_Given_Answer", resourceCulture);
             }
         }
         
@@ -916,6 +952,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Response validity.
+        /// </summary>
+        public static string Header_Response_Validity {
+            get {
+                return ResourceManager.GetString("Header_Response_Validity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Response time (ms).
         /// </summary>
         public static string Header_ResponseTime {
@@ -979,6 +1024,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Visual cue type.
+        /// </summary>
+        public static string Header_Visual_Cue_Type {
+            get {
+                return ResourceManager.GetString("Header_Visual_Cue_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Visual cue.
         /// </summary>
         public static string Header_VisualCue {
@@ -1020,6 +1074,15 @@ namespace StroopApp.Resources {
         public static string Label_CalculationMode {
             get {
                 return ResourceManager.GetString("Label_CalculationMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Circle.
+        /// </summary>
+        public static string Label_Circle {
+            get {
+                return ResourceManager.GetString("Label_Circle", resourceCulture);
             }
         }
         
@@ -1276,6 +1339,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Square.
+        /// </summary>
+        public static string Label_Square {
+            get {
+                return ResourceManager.GetString("Label_Square", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Square (%).
         /// </summary>
         public static string Label_SquarePercentage {
@@ -1344,6 +1416,15 @@ namespace StroopApp.Resources {
         public static string Menu_Languages {
             get {
                 return ResourceManager.GetString("Menu_Languages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Your data has been successfully exported. Are you sure you want to exit the application?.
+        /// </summary>
+        public static string Message_ConfirmExitWithExport {
+            get {
+                return ResourceManager.GetString("Message_ConfirmExitWithExport", resourceCulture);
             }
         }
         

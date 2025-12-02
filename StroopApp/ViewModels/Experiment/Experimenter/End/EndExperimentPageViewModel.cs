@@ -14,6 +14,7 @@ using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Resources;
 using StroopApp.Services.Exportation;
+using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.Views;
@@ -27,6 +28,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 		{
 			get;
 		}
+
 		public ObservableCollection<Block> Blocks
 		{
 			get;
@@ -34,7 +36,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 		private readonly IExportationService _exportationService;
 		private readonly INavigationService _experimenterNavigationService;
 		private readonly IWindowManager _windowManager;
-
+		private readonly ILanguageService _languageService;
 		public ICommand ContinueCommand
 		{
 			get;
@@ -48,6 +50,10 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 			get;
 		}
 		public ICommand QuitWihtoutExportCommand
+		{
+			get;
+		}
+		public ICommand QuitWithExportCommand
 		{
 			get;
 		}
@@ -74,17 +80,19 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 		public EndExperimentPageViewModel(ExperimentSettings settings,
 								  IExportationService exportationService,
 								  INavigationService experimenterNavigationService,
-								  IWindowManager windowManager)
+								  IWindowManager windowManager, ILanguageService languageService)
 		{
 			Settings = settings;
 			_exportationService = exportationService;
 			_experimenterNavigationService = experimenterNavigationService;
 			_windowManager = windowManager;
+			_languageService = languageService;
 
 			ContinueCommand = new RelayCommand(Continue);
 			NewExperimentCommand = new RelayCommand(NewExperiment);
 			ExportCommand = new RelayCommand(Export);
 			QuitWihtoutExportCommand = new RelayCommand(QuitWihtoutExport);
+			QuitWithExportCommand = new RelayCommand(QuitWithExport);
 
 			Blocks = Settings.ExperimentContext.Blocks;
 			CurrentParticipant = string.Format(Strings.Label_CurrentParticipant, Settings.Participant.Id);
@@ -144,9 +152,10 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 			Settings.Block++;
 			Settings.ExperimentContext.IsBlockFinished = false;
 			Settings.ExperimentContext.IsParticipantSelectionEnabled = false;
+			Settings.ExperimentContext.HasUnsavedExports = true;
 
 			_experimenterNavigationService.NavigateTo(() =>
-				new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
+				new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager, _languageService));
 		}
 
 		private async void NewExperiment()
@@ -157,19 +166,28 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 				Settings.Reset();
 				_windowManager.CloseParticipantWindow();
 				_experimenterNavigationService.NavigateTo(() =>
-					new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager));
+					new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager, _languageService));
 			}
 		}
 
 		private async void Export()
 		{
-			var exportEndExperimentWindow = new ExportEndExperimentWindow(Settings, _exportationService, _experimenterNavigationService, _windowManager);
+			var exportEndExperimentWindow = new ExportEndExperimentWindow(Settings, _exportationService, _experimenterNavigationService, _windowManager, _languageService);
 			exportEndExperimentWindow.ShowDialog();
 		}
 
 		private async void QuitWihtoutExport()
 		{
 			if (await ShowConfirmationDialog(Strings.Title_ConfirmShutDown, Strings.Message_ConfirmExitWithoutExport))
+			{
+				Application.Current.Shutdown();
+			}
+			return;
+		}
+
+		private async void QuitWithExport()
+		{
+			if (await ShowConfirmationDialog(Strings.Title_ConfirmShutDown, Strings.Message_ConfirmExitWithExport))
 			{
 				Application.Current.Shutdown();
 			}

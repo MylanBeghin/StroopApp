@@ -134,6 +134,19 @@ namespace StroopApp.Models
 				}
 			}
 		}
+
+		private bool _hasUnsavedExports = true;
+
+		public bool HasUnsavedExports
+		{
+			get => _hasUnsavedExports;
+			set
+			{
+				if (_hasUnsavedExports != value)
+					_hasUnsavedExports = value;
+				OnPropertyChanged();
+			}
+		}
 		ExperimentAction _nextAction;
 		public ExperimentAction NextAction
 		{
@@ -255,6 +268,7 @@ namespace StroopApp.Models
 			currentBlockEnd = 0;
 			CurrentBlock = null;
 			IsBlockFinished = false;
+			HasUnsavedExports = true;
 			NextAction = ExperimentAction.None;
 			NewColumnSerie();
 		}
