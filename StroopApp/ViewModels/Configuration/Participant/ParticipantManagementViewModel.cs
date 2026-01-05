@@ -15,14 +15,8 @@ namespace StroopApp.ViewModels.Configuration.Participant
 	public class ParticipantManagementViewModel : ViewModelBase
 	{
 		readonly IParticipantService _participantService;
-		public ObservableCollection<Models.Participant> Participants
-		{
-			get; set;
-		}
-		public ICollectionView ParticipantsView
-		{
-			get; set;
-		}
+		public ObservableCollection<Models.Participant> Participants { get; set; }
+		public ICollectionView ParticipantsView { get; set; }
 
 		private Models.Participant _selectedParticipant;
 		public Models.Participant SelectedParticipant
@@ -46,8 +40,8 @@ namespace StroopApp.ViewModels.Configuration.Participant
 				ParticipantsView.Refresh();
 			}
 		}
+		
 		private bool _isParticipantSelectionEnabled;
-
 		public bool IsParticipantSelectionEnabled
 		{
 			get => _isParticipantSelectionEnabled;
@@ -60,18 +54,11 @@ namespace StroopApp.ViewModels.Configuration.Participant
 				}
 			}
 		}
-		public ICommand CreateParticipantCommand
-		{
-			get;
-		}
-		public ICommand ModifyParticipantCommand
-		{
-			get;
-		}
-		public ICommand DeleteParticipantCommand
-		{
-			get;
-		}
+		
+		public ICommand CreateParticipantCommand { get; }
+		public ICommand ModifyParticipantCommand { get; }
+		public ICommand DeleteParticipantCommand { get; }
+		
 		public ParticipantManagementViewModel(IParticipantService participantService, bool isParticipantSelectionEnabled)
 		{
 			IsParticipantSelectionEnabled = isParticipantSelectionEnabled;
@@ -83,9 +70,9 @@ namespace StroopApp.ViewModels.Configuration.Participant
 			ParticipantsView = CollectionViewSource.GetDefaultView(Participants);
 			ParticipantsView.Filter = FilterParticipants;
 
-			CreateParticipantCommand = new RelayCommand(CreateParticipant);
-			ModifyParticipantCommand = new RelayCommand(ModifyParticipant);
-			DeleteParticipantCommand = new RelayCommand(async () => await DeleteParticipant());
+			CreateParticipantCommand = new RelayCommand(async _ => await CreateParticipantAsync());
+			ModifyParticipantCommand = new RelayCommand(async _ => await ModifyParticipantAsync());
+			DeleteParticipantCommand = new RelayCommand(async _ => await DeleteParticipantAsync());
 		}
 
 		bool FilterParticipants(object obj)
@@ -96,53 +83,72 @@ namespace StroopApp.ViewModels.Configuration.Participant
 			return p.Id.ToString().Contains(SearchText);
 		}
 
-		void CreateParticipant()
+		async Task CreateParticipantAsync()
 		{
-			var newP = new Models.Participant();
-			var vm = new ParticipantEditorViewModel(newP, Participants, _participantService);
-			var win = new ParticipantEditorWindow(vm);
-			win.ShowDialog();
-			if (win.DialogResult == true)
+			try
 			{
-
-				_participantService.AddParticipant(Participants, newP);
-				SelectedParticipant = newP;
+				var newP = new Models.Participant();
+				var vm = new ParticipantEditorViewModel(newP, Participants, _participantService);
+				var win = new ParticipantEditorWindow(vm);
+				win.ShowDialog();
+				if (win.DialogResult == true)
+				{
+					_participantService.AddParticipant(Participants, newP);
+					SelectedParticipant = newP;
+				}
+			}
+			catch (Exception ex)
+			{
+				await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
 			}
 		}
 
-		void ModifyParticipant()
+		async Task ModifyParticipantAsync()
 		{
-			if (SelectedParticipant == null)
+			try
 			{
-				ShowErrorDialog(Strings.Error_SelectParticipantToModify);
-				return;
+				if (SelectedParticipant == null)
+				{
+					await ShowErrorDialogAsync(Strings.Error_SelectParticipantToModify);
+					return;
+				}
+				var viewModel = new ParticipantEditorViewModel(SelectedParticipant, Participants, _participantService);
+				var participantWindow = new ParticipantEditorWindow(viewModel);
+				participantWindow.ShowDialog();
+				if (participantWindow.DialogResult == true)
+				{
+					_participantService.UpdateParticipantById(
+						SelectedParticipant.Id,
+						SelectedParticipant,
+						Participants);
+					OnPropertyChanged(nameof(SelectedParticipant));
+				}
 			}
-			var viewModel = new ParticipantEditorViewModel(SelectedParticipant, Participants, _participantService);
-			var participantWindow = new ParticipantEditorWindow(viewModel);
-			participantWindow.ShowDialog();
-			if (participantWindow.DialogResult == true)
+			catch (Exception ex)
 			{
-				_participantService.UpdateParticipantById(
-					SelectedParticipant.Id,
-					SelectedParticipant,
-					Participants);
-				OnPropertyChanged(nameof(SelectedParticipant));
+				await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
 			}
 		}
 
-		async Task DeleteParticipant()
+		async Task DeleteParticipantAsync()
 		{
-			if (SelectedParticipant == null)
+			try
 			{
-				ShowErrorDialog(Strings.Error_SelectParticipantToDelete);
-				return;
+				if (SelectedParticipant == null)
+				{
+					await ShowErrorDialogAsync(Strings.Error_SelectParticipantToDelete);
+					return;
+				}
+				if (await ShowConfirmationDialogAsync(Strings.Title_DeleteConfirmation, Strings.Message_DeleteParticipantConfirmation))
+				{
+					_participantService.DeleteParticipant(Participants, SelectedParticipant.Id);
+					SelectedParticipant = Participants.FirstOrDefault();
+				}
 			}
-			if (await ShowConfirmationDialog(Strings.Title_DeleteConfirmation, Strings.Message_DeleteParticipantConfirmation))
+			catch (Exception ex)
 			{
-				_participantService.DeleteParticipant(Participants, SelectedParticipant.Id);
-				SelectedParticipant = Participants.FirstOrDefault();
+				await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
 			}
-			return;
 		}
 	}
 }

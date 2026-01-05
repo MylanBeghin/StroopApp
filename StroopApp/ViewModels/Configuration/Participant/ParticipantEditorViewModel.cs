@@ -74,8 +74,8 @@ namespace StroopApp.ViewModels.Configuration.Participant
 			SexAssignedValues = (SexAssignedAtBirth[])Enum.GetValues(typeof(SexAssignedAtBirth));
 			GenderValues = (Gender[])Enum.GetValues(typeof(Gender));
 
-			SaveCommand = new RelayCommand(Save);
-			CancelCommand = new RelayCommand(Cancel);
+			SaveCommand = new RelayCommand(async _ => await SaveAsync());
+			CancelCommand = new RelayCommand(_ => Cancel());
 		}
 		private Models.Participant CloneParticipant(Models.Participant p)
 		{
@@ -90,21 +90,28 @@ namespace StroopApp.ViewModels.Configuration.Participant
 			};
 		}
 
-		private void Save()
+		private async Task SaveAsync()
 		{
-			if (string.IsNullOrWhiteSpace(Participant.Id))
+			try
 			{
-				ShowErrorDialog(Strings.Error_FillIdField);
-				return;
-			}
-			if (Participants.Any(p => p.Id == Participant.Id && p != Participant))
-			{
-				ShowErrorDialog(Strings.Error_ParticipantIdAlreadyUsed);
-				return;
-			}
+				if (string.IsNullOrWhiteSpace(Participant.Id))
+				{
+					await ShowErrorDialogAsync(Strings.Error_FillIdField);
+					return;
+				}
+				if (Participants.Any(p => p.Id == Participant.Id && p != Participant))
+				{
+					await ShowErrorDialogAsync(Strings.Error_ParticipantIdAlreadyUsed);
+					return;
+				}
 
-			DialogResult = true;
-			CloseAction?.Invoke();
+				DialogResult = true;
+				CloseAction?.Invoke();
+			}
+			catch (Exception ex)
+			{
+				await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
+			}
 		}
 
 		private void Cancel()

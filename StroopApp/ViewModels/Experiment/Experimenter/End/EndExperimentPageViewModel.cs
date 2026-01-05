@@ -24,39 +24,20 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 {
 	public class EndExperimentPageViewModel : ViewModelBase
 	{
-		public ExperimentSettings Settings
-		{
-			get;
-		}
-
-		public ObservableCollection<Block> Blocks
-		{
-			get;
-		}
+		public ExperimentSettings Settings { get; }
+		public ObservableCollection<Block> Blocks { get; }
+		
 		private readonly IExportationService _exportationService;
 		private readonly INavigationService _experimenterNavigationService;
 		private readonly IWindowManager _windowManager;
 		private readonly ILanguageService _languageService;
-		public ICommand ContinueCommand
-		{
-			get;
-		}
-		public ICommand NewExperimentCommand
-		{
-			get;
-		}
-		public ICommand ExportCommand
-		{
-			get;
-		}
-		public ICommand QuitWihtoutExportCommand
-		{
-			get;
-		}
-		public ICommand QuitWithExportCommand
-		{
-			get;
-		}
+		
+		public ICommand ContinueCommand { get; }
+		public ICommand NewExperimentCommand { get; }
+		public ICommand ExportCommand { get; }
+		public ICommand QuitWithoutExportCommand { get; }
+		public ICommand QuitWithExportCommand { get; }
+		
 		private string _currentParticipant;
 		public string CurrentParticipant
 		{
@@ -67,6 +48,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 				OnPropertyChanged();
 			}
 		}
+		
 		private string _currentProfile;
 		public string CurrentProfile
 		{
@@ -77,10 +59,12 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 				OnPropertyChanged();
 			}
 		}
+
 		public EndExperimentPageViewModel(ExperimentSettings settings,
 								  IExportationService exportationService,
 								  INavigationService experimenterNavigationService,
-								  IWindowManager windowManager, ILanguageService languageService)
+								  IWindowManager windowManager, 
+								  ILanguageService languageService)
 		{
 			Settings = settings;
 			_exportationService = exportationService;
@@ -88,11 +72,11 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 			_windowManager = windowManager;
 			_languageService = languageService;
 
-			ContinueCommand = new RelayCommand(Continue);
-			NewExperimentCommand = new RelayCommand(NewExperiment);
-			ExportCommand = new RelayCommand(Export);
-			QuitWihtoutExportCommand = new RelayCommand(QuitWihtoutExport);
-			QuitWithExportCommand = new RelayCommand(QuitWithExport);
+			ContinueCommand = new RelayCommand(_ => Continue());
+			NewExperimentCommand = new RelayCommand(async _ => await NewExperimentAsync());
+			ExportCommand = new RelayCommand(async _ => await ExportAsync());
+			QuitWithoutExportCommand = new RelayCommand(async _ => await QuitWithoutExportAsync());
+			QuitWithExportCommand = new RelayCommand(async _ => await QuitWithExportAsync());
 
 			Blocks = Settings.ExperimentContext.Blocks;
 			CurrentParticipant = string.Format(Strings.Label_CurrentParticipant, Settings.Participant.Id);
@@ -128,8 +112,8 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 					var model = p.Model;
 					if (model != null && model.IsValidResponse.HasValue)
 					{
-						var orange = new SKColor(255, 166, 0);      // #FFA600
-						var violet = new SKColor(91, 46, 255);      // #5B2EFF
+						var orange = new SKColor(255, 166, 0);
+						var violet = new SKColor(91, 46, 255);
 						if (model.IsValidResponse.Value)
 						{
 							p.Visual.Fill = new SolidColorPaint(violet);
@@ -147,51 +131,84 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 
 		private void Continue()
 		{
-			Settings.ExperimentContext.ReactionPoints.Clear();
-			Settings.ExperimentContext.NewColumnSerie();
-			Settings.Block++;
-			Settings.ExperimentContext.IsBlockFinished = false;
-			Settings.ExperimentContext.IsParticipantSelectionEnabled = false;
-			Settings.ExperimentContext.HasUnsavedExports = true;
-
-			_experimenterNavigationService.NavigateTo(() =>
-				new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager, _languageService));
-		}
-
-		private async void NewExperiment()
-		{
-			bool confirmed = await ShowConfirmationDialog(Strings.Title_ConfirmNewExperiment, Strings.Message_ConfirmNewExperiment);
-			if (confirmed)
+			try
 			{
-				Settings.Reset();
-				_windowManager.CloseParticipantWindow();
+				Settings.ExperimentContext.ReactionPoints.Clear();
+				Settings.ExperimentContext.NewColumnSerie();
+				Settings.Block++;
+				Settings.ExperimentContext.IsBlockFinished = false;
+				Settings.ExperimentContext.IsParticipantSelectionEnabled = false;
+				Settings.ExperimentContext.HasUnsavedExports = true;
+
 				_experimenterNavigationService.NavigateTo(() =>
 					new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager, _languageService));
 			}
-		}
-
-		private async void Export()
-		{
-			var exportEndExperimentWindow = new ExportEndExperimentWindow(Settings, _exportationService, _experimenterNavigationService, _windowManager, _languageService);
-			exportEndExperimentWindow.ShowDialog();
-		}
-
-		private async void QuitWihtoutExport()
-		{
-			if (await ShowConfirmationDialog(Strings.Title_ConfirmShutDown, Strings.Message_ConfirmExitWithoutExport))
+			catch (Exception ex)
 			{
-				Application.Current.Shutdown();
+				System.Diagnostics.Debug.WriteLine($"Error in Continue: {ex.Message}");
 			}
-			return;
 		}
 
-		private async void QuitWithExport()
+		private async Task NewExperimentAsync()
 		{
-			if (await ShowConfirmationDialog(Strings.Title_ConfirmShutDown, Strings.Message_ConfirmExitWithExport))
+			try
 			{
-				Application.Current.Shutdown();
+				bool confirmed = await ShowConfirmationDialogAsync(Strings.Title_ConfirmNewExperiment, Strings.Message_ConfirmNewExperiment);
+				if (confirmed)
+				{
+					Settings.Reset();
+					_windowManager.CloseParticipantWindow();
+					_experimenterNavigationService.NavigateTo(() =>
+						new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager, _languageService));
+				}
 			}
-			return;
+			catch (Exception ex)
+			{
+				await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
+			}
+		}
+
+		private async Task ExportAsync()
+		{
+			try
+			{
+				var exportEndExperimentWindow = new ExportEndExperimentWindow(Settings, _exportationService, _experimenterNavigationService, _windowManager, _languageService);
+				exportEndExperimentWindow.ShowDialog();
+			}
+			catch (Exception ex)
+			{
+				await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
+			}
+		}
+
+		private async Task QuitWithoutExportAsync()
+		{
+			try
+			{
+				if (await ShowConfirmationDialogAsync(Strings.Title_ConfirmShutDown, Strings.Message_ConfirmExitWithoutExport))
+				{
+					Application.Current.Shutdown();
+				}
+			}
+			catch (Exception ex)
+			{
+				await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
+			}
+		}
+
+		private async Task QuitWithExportAsync()
+		{
+			try
+			{
+				if (await ShowConfirmationDialogAsync(Strings.Title_ConfirmShutDown, Strings.Message_ConfirmExitWithExport))
+				{
+					Application.Current.Shutdown();
+				}
+			}
+			catch (Exception ex)
+			{
+				await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
+			}
 		}
 	}
 }
