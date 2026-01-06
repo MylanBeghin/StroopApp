@@ -14,10 +14,7 @@ namespace StroopApp.ViewModels.Configuration.Profile
 	public class ProfileManagementViewModel : ViewModelBase
 	{
 		private readonly IProfileService _profileService;
-		public ObservableCollection<ExperimentProfile> Profiles
-		{
-			get; set;
-		}
+		public ObservableCollection<ExperimentProfile> Profiles { get; set; }
 
 		private ExperimentProfile? _currentProfile;
 		public ExperimentProfile CurrentProfile
@@ -34,18 +31,10 @@ namespace StroopApp.ViewModels.Configuration.Profile
 				}
 			}
 		}
-		public ICommand CreateProfileCommand
-		{
-			get;
-		}
-		public ICommand ModifyProfileCommand
-		{
-			get;
-		}
-		public ICommand DeleteProfileCommand
-		{
-			get;
-		}
+		
+		public ICommand CreateProfileCommand { get; }
+		public ICommand ModifyProfileCommand { get; }
+		public ICommand DeleteProfileCommand { get; }
 
 		public ProfileManagementViewModel(IProfileService profileService)
 		{
@@ -56,69 +45,93 @@ namespace StroopApp.ViewModels.Configuration.Profile
 			if (lastId.HasValue)
 				CurrentProfile = Profiles.FirstOrDefault(p => p.Id == lastId.Value);
 
-			CreateProfileCommand = new RelayCommand(CreateProfile);
-			ModifyProfileCommand = new RelayCommand(ModifyProfile);
-			DeleteProfileCommand = new RelayCommand(DeleteProfile);
+			CreateProfileCommand = new RelayCommand(async _ => await CreateProfileAsync());
+			ModifyProfileCommand = new RelayCommand(async _ => await ModifyProfileAsync());
+			DeleteProfileCommand = new RelayCommand(async _ => await DeleteProfileAsync());
 		}
 
-		private void CreateProfile()
+		private async Task CreateProfileAsync()
 		{
-			var newProfile = new ExperimentProfile();
-			var viewModel = new ProfileEditorViewModel(newProfile, Profiles, _profileService);
-			var profileWindow = new ProfileEditorWindow(viewModel);
-			profileWindow.ShowDialog();
-			if (profileWindow.DialogResult == true)
+			try
 			{
-				var updatedProfiles = _profileService.UpsertProfile(newProfile);
-				Profiles.Clear();
-				foreach (var prof in updatedProfiles)
+				var newProfile = new ExperimentProfile();
+				var viewModel = new ProfileEditorViewModel(newProfile, Profiles, _profileService);
+				var profileWindow = new ProfileEditorWindow(viewModel);
+				profileWindow.ShowDialog();
+				
+				if (profileWindow.DialogResult == true)
 				{
-					Profiles.Add(prof);
+					var updatedProfiles = _profileService.UpsertProfile(newProfile);
+					Profiles.Clear();
+					foreach (var prof in updatedProfiles)
+					{
+						Profiles.Add(prof);
+					}
+					CurrentProfile = Profiles.FirstOrDefault(p => p.Id == newProfile.Id);
 				}
-				CurrentProfile = Profiles.FirstOrDefault(p => p.Id == newProfile.Id);
+			}
+			catch (Exception ex)
+			{
+				await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
 			}
 		}
 
-		private void ModifyProfile()
+		private async Task ModifyProfileAsync()
 		{
-			if (CurrentProfile == null)
+			try
 			{
-				ShowErrorDialog(Strings.Error_SelectProfileToModify);
-				return;
+				if (CurrentProfile == null)
+				{
+					await ShowErrorDialogAsync(Strings.Error_SelectProfileToModify);
+					return;
+				}
+				
+				var viewModel = new ProfileEditorViewModel(CurrentProfile, Profiles, _profileService);
+				var profileWindow = new ProfileEditorWindow(viewModel);
+				profileWindow.ShowDialog();
+				
+				if (profileWindow.DialogResult == true)
+				{
+					_profileService.UpsertProfile(viewModel.ModifiedProfile);
+					CurrentProfile = viewModel.ModifiedProfile;
+					OnPropertyChanged(nameof(CurrentProfile));
+				}
 			}
-			var viewModel = new ProfileEditorViewModel(CurrentProfile, Profiles, _profileService);
-			var profileWindow = new ProfileEditorWindow(viewModel);
-			profileWindow.ShowDialog();
-			if (profileWindow.DialogResult == true)
+			catch (Exception ex)
 			{
-				_profileService.UpsertProfile(
-					viewModel.ModifiedProfile);
-				CurrentProfile = viewModel.ModifiedProfile;
-				OnPropertyChanged(nameof(CurrentProfile));
+				await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
 			}
 		}
-		private async void DeleteProfile()
-		{
-			if (CurrentProfile == null)
-			{
-				ShowErrorDialog(Strings.Error_SelectProfileToDelete);
-				return;
-			}
-			if (await ShowConfirmationDialog(Strings.Title_DeleteConfirmation, Strings.Message_DeleteProfileConfirmation))
-			{
-				int currentIndex = Profiles.IndexOf(_currentProfile);
-				_profileService.DeleteProfile(_currentProfile, Profiles);
 
-				if (Profiles.Count > 0)
+		private async Task DeleteProfileAsync()
+		{
+			try
+			{
+				if (CurrentProfile == null)
 				{
-					CurrentProfile = Profiles[0];
+					await ShowErrorDialogAsync(Strings.Error_SelectProfileToDelete);
+					return;
 				}
-				else
+				
+				if (await ShowConfirmationDialogAsync(Strings.Title_DeleteConfirmation, Strings.Message_DeleteProfileConfirmation))
 				{
-					CurrentProfile = null;
+					int currentIndex = Profiles.IndexOf(_currentProfile);
+					_profileService.DeleteProfile(_currentProfile, Profiles);
+
+					if (Profiles.Count > 0)
+					{
+						CurrentProfile = Profiles[0];
+					}
+					else
+					{
+						CurrentProfile = null;
+					}
 				}
 			}
-			return;
+			catch (Exception ex)
+			{
+				await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
+			}
 		}
 	}
 }

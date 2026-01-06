@@ -24,42 +24,20 @@ namespace StroopApp.ViewModels.Configuration.Profile
 		}
 
 		public ExperimentProfile ModifiedProfile => Profile;
-
-		public ObservableCollection<ExperimentProfile> Profiles
-		{
-			get;
-		}
-
-		public bool? DialogResult
-		{
-			get; private set;
-		}
-
-		public Action? CloseAction
-		{
-			get; set;
-		}
-
-		public ICommand SaveCommand
-		{
-			get;
-		}
-
-		public ICommand CancelCommand
-		{
-			get;
-		}
-		public SwitchSettingsViewModel SwitchSettingsViewModel
-		{
-			get;
-		}
+		public ObservableCollection<ExperimentProfile> Profiles { get; }
+		public bool? DialogResult { get; private set; }
+		public Action? CloseAction { get; set; }
+		public ICommand SaveCommand { get; }
+		public ICommand CancelCommand { get; }
+		public SwitchSettingsViewModel SwitchSettingsViewModel { get; }
 
 		private readonly IProfileService _IprofileService;
+		
 		public List<LanguageOption> Languages { get; } = new()
-{
-	new LanguageOption { Code = "fr", DisplayName = "Français" },
-	new LanguageOption { Code = "en", DisplayName = "English" }
-};
+		{
+			new LanguageOption { Code = "fr", DisplayName = "Français" },
+			new LanguageOption { Code = "en", DisplayName = "English" }
+		};
 
 		public LanguageOption SelectedTaskLanguage
 		{
@@ -74,19 +52,17 @@ namespace StroopApp.ViewModels.Configuration.Profile
 			}
 		}
 
-
 		public ProfileEditorViewModel(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles, IProfileService profileService)
 		{
 			_IprofileService = profileService;
 			Profiles = profiles;
-
 			SwitchSettingsViewModel = new SwitchSettingsViewModel();
 
 			Profile = Profiles.Contains(profile) ? profile.CloneProfile() : profile;
 			Profile.UpdateDerivedValues();
 
-			SaveCommand = new RelayCommand(Save);
-			CancelCommand = new RelayCommand(Cancel);
+			SaveCommand = new RelayCommand(async _ => await SaveAsync());
+			CancelCommand = new RelayCommand(_ => Cancel());
 
 			Profile.PropertyChanged += Profile_PropertyChanged;
 		}
@@ -111,59 +87,65 @@ namespace StroopApp.ViewModels.Configuration.Profile
 			}
 		}
 
-
-
-		public void Save()
+		public async Task SaveAsync()
 		{
-			if (string.IsNullOrWhiteSpace(Profile.ProfileName))
+			try
 			{
-				ShowErrorDialog(Strings.Error_ProfileNameEmpty);
-				return;
-			}
+				if (string.IsNullOrWhiteSpace(Profile.ProfileName))
+				{
+					await ShowErrorDialogAsync(Strings.Error_ProfileNameEmpty);
+					return;
+				}
 
-			if (Profiles.Any(p => p.Id != Profile.Id && p.ProfileName == Profile.ProfileName))
-			{
-				ShowErrorDialog(Strings.Error_ProfileNameExists);
-				return;
-			}
+				if (Profiles.Any(p => p.Id != Profile.Id && p.ProfileName == Profile.ProfileName))
+				{
+					await ShowErrorDialogAsync(Strings.Error_ProfileNameExists);
+					return;
+				}
 
-			if (Profile.TaskDuration % Profile.WordDuration != 0)
-			{
-				ShowErrorDialog(Strings.Error_TrialDurationNotDividingTaskDuration);
-				return;
-			}
+				if (Profile.TaskDuration % Profile.WordDuration != 0)
+				{
+					await ShowErrorDialogAsync(Strings.Error_TrialDurationNotDividingTaskDuration);
+					return;
+				}
 
-			int wordNumber = Profile.TaskDuration / Profile.WordDuration;
-			if (Profile.GroupSize <= 0 || wordNumber % Profile.GroupSize != 0)
-			{
-				ShowErrorDialog(Strings.Error_GroupSizeInvalid);
-				return;
-			}
+				int wordNumber = Profile.TaskDuration / Profile.WordDuration;
+				if (Profile.GroupSize <= 0 || wordNumber % Profile.GroupSize != 0)
+				{
+					await ShowErrorDialogAsync(Strings.Error_GroupSizeInvalid);
+					return;
+				}
 
-			if (Profile.AmorceDuration == 0 && Profile.IsAmorce)
-			{
-				ShowErrorDialog(Strings.Error_AmorceDurationInvalid);
-				return;
-			}
+				if (Profile.AmorceDuration == 0 && Profile.IsAmorce)
+				{
+					await ShowErrorDialogAsync(Strings.Error_AmorceDurationInvalid);
+					return;
+				}
 
-			if (Profile.MaxReactionTime <= 0)
-			{
-				ShowErrorDialog(Strings.Error_MaxResponseTimeInvalid);
-				return;
+				if (Profile.MaxReactionTime <= 0)
+				{
+					await ShowErrorDialogAsync(Strings.Error_MaxResponseTimeInvalid);
+					return;
+				}
+				
+				var updatedProfiles = _IprofileService.UpsertProfile(Profile);
+				Profiles.Clear();
+				foreach (var prof in updatedProfiles)
+				{
+					Profiles.Add(prof);
+				}
+				var matchedProfile = Profiles.FirstOrDefault(p => p.Id == Profile.Id);
+				if (matchedProfile != null)
+				{
+					Profile = matchedProfile;
+				}
+				DialogResult = true;
+				CloseAction?.Invoke();
 			}
-			var updatedProfiles = _IprofileService.UpsertProfile(Profile);
-			Profiles.Clear();
-			foreach (var prof in updatedProfiles)
+			catch (Exception ex)
 			{
-				Profiles.Add(prof);
+				await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
 			}
-			var matchedProfile = Profiles.FirstOrDefault(p => p.Id == Profile.Id);
-			if (matchedProfile != null)
-			{
-				Profile = matchedProfile;
-			}
-			DialogResult = true;
-			CloseAction?.Invoke();
 		}
 
 		public void Cancel()

@@ -19,6 +19,7 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 	{
 		public bool ErrorDialogShown = false;
 		public string? LastErrorMessage = null;
+		
 		public TestableConfigurationPageViewModel(
 			ExperimentSettings settings,
 			ProfileManagementViewModel profileViewModel,
@@ -28,15 +29,14 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 			IWindowManager windowManager,
 			ITrialGenerationService trialGenerationService,
 			ILanguageService languageService
-
 		) : base(settings, profileViewModel, participantViewModel, keyMappingViewModel, experimenterNavigationService, windowManager, trialGenerationService, languageService)
 		{ }
 
-		protected override void ShowErrorDialog(string message)
+		protected override Task ShowErrorDialogAsync(string message)
 		{
 			ErrorDialogShown = true;
 			LastErrorMessage = message;
+			return Task.CompletedTask;
 		}
 	}
-
 }

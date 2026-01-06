@@ -1,8 +1,5 @@
 ﻿using System.Threading;
 using System.Windows.Input;
-using System.Windows.Navigation;
-
-using DocumentFormat.OpenXml.Wordprocessing;
 
 using StroopApp.Core;
 using StroopApp.Models;
@@ -11,7 +8,6 @@ using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.Views.Experiment.Experimenter;
-using StroopApp.Views.Experiment.Participant;
 
 namespace StroopApp.ViewModels.Experiment
 {
@@ -23,11 +19,12 @@ namespace StroopApp.ViewModels.Experiment
 		private readonly IWindowManager _windowManager;
 		private readonly ILanguageService _languageService;
 
-		public ICommand StopTaskCommand
-		{
-			get;
-		}
-		public ExperimentDashBoardPageViewModel(ExperimentSettings settings, INavigationService experimenterNavigationService, IWindowManager windowManager, ILanguageService languageService)
+		public ICommand StopTaskCommand { get; }
+
+		public ExperimentDashBoardPageViewModel(ExperimentSettings settings, 
+			INavigationService experimenterNavigationService, 
+			IWindowManager windowManager, 
+			ILanguageService languageService)
 		{
 			_settings = settings;
 			_experimentContext = settings.ExperimentContext;
@@ -44,21 +41,29 @@ namespace StroopApp.ViewModels.Experiment
 						() => new EndExperimentPage(_settings, _experimenterNavigationService, _windowManager, _languageService));
 				}
 			};
+			
 			StopTaskCommand = new RelayCommand(async _ => await StopTaskAsync());
 		}
-		async public Task StopTaskAsync()
-		{
-			bool confirmed = await ShowConfirmationDialog(Strings.Title_ConfirmStopTask, Strings.Message_StopTask);
-			if (confirmed)
-			{
-				_settings.ExperimentContext.IsTaskStopped = true;
-				if (_experimentContext.CurrentBlock != null)
-				{
-					_experimentContext.CurrentBlock.CalculateValues();
-					_experimentContext.CurrentTrial = null;
 
+		public async Task StopTaskAsync()
+		{
+			try
+			{
+				bool confirmed = await ShowConfirmationDialogAsync(Strings.Title_ConfirmStopTask, Strings.Message_StopTask);
+				if (confirmed)
+				{
+					_settings.ExperimentContext.IsTaskStopped = true;
+					if (_experimentContext.CurrentBlock != null)
+					{
+						_experimentContext.CurrentBlock.CalculateValues();
+						_experimentContext.CurrentTrial = null;
+					}
+					_experimentContext.IsBlockFinished = true;
 				}
-				_experimentContext.IsBlockFinished = true;
+			}
+			catch (Exception ex)
+			{
+				await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
 			}
 		}
 	}

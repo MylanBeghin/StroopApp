@@ -12,7 +12,7 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 	public class ConfigurationPageViewModelTests
 	{
 		[Fact]
-		public void LaunchExperiment_WithProfileAndParticipant_NavigatesAndOpensWindow()
+		public async Task LaunchExperiment_WithProfileAndParticipant_NavigatesAndOpensWindow()
 		{
 			// Arrange
 			var settings = new ExperimentSettings();
@@ -51,6 +51,7 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 
 			// Act
 			viewModel.LaunchExperimentCommand.Execute(null);
+			await Task.Delay(100); // Attendre la fin de l'exécution async
 
 			// Assert
 			Assert.True(dummyNavigationService.Navigated);
@@ -63,7 +64,7 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 		}
 
 		[Fact]
-		public void LaunchExperiment_WithoutProfile_ShowsErrorDialog()
+		public async Task LaunchExperiment_WithoutProfile_ShowsErrorDialog()
 		{
 			// Arrange
 			var settings = new ExperimentSettings();
@@ -95,6 +96,7 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 
 			// Act
 			viewModel.LaunchExperimentCommand.Execute(null);
+			await Task.Delay(100); // Attendre la fin de l'exécution async
 
 			// Assert
 			Assert.True(viewModel.ErrorDialogShown);
@@ -105,7 +107,7 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 		}
 
 		[Fact]
-		public void LaunchExperiment_WithoutParticipant_ShowsErrorDialog()
+		public async Task LaunchExperiment_WithoutParticipant_ShowsErrorDialog()
 		{
 			// Arrange
 			var settings = new ExperimentSettings();
@@ -122,7 +124,6 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 			profileViewModel.CurrentProfile = dummyProfile;
 
 			var participantViewModel = new ParticipantManagementViewModel(dummyParticipantService, false);
-			// No SelectedParticipant set intentionally
 
 			var keyMappingViewModel = new KeyMappingViewModel(dummyKeyMappingService);
 
@@ -138,6 +139,7 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 
 			// Act
 			viewModel.LaunchExperimentCommand.Execute(null);
+			await Task.Delay(100); // Attendre la fin de l'exécution async
 
 			// Assert
 			Assert.True(viewModel.ErrorDialogShown);
@@ -148,7 +150,7 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 		}
 
 		[Fact]
-		public void LaunchExperiment_WithValidSettings_GeneratesTrialsCorrectly()
+		public async Task LaunchExperiment_WithValidSettings_GeneratesTrialsCorrectly()
 		{
 			// Arrange
 			var settings = new ExperimentSettings();
@@ -181,6 +183,7 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 
 			// Act
 			viewModel.LaunchExperimentCommand.Execute(null);
+			await Task.Delay(100); // Attendre la fin de l'exécution async
 
 			// Assert
 			Assert.True(dummyTrialGenerationService.GenerateTrialsCalled);
