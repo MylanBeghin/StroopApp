@@ -2,6 +2,7 @@ using LiveChartsCore;
 using LiveChartsCore.Kernel;
 using LiveChartsCore.SkiaSharpView;
 using StroopApp.Models;
+using System.Collections.ObjectModel;
 using Xunit;
 
 namespace StroopApp.XUnitTests.Models
@@ -398,6 +399,86 @@ namespace StroopApp.XUnitTests.Models
 			public int CongruencePercent { get; set; } = 50;
 			public int? SwitchPercent { get; set; } = 50;
 			public bool IsAmorce { get; set; } = false;
+		}
+
+		// ========== Duplication: NewColumnSerie vs UpdateBlock Pattern ==========
+
+		[Fact]
+		public void NewColumnSerie_ValuesReferenceLiveCollection_ChangesPropagateToSeries()
+		{
+			// This characterizes that NewColumnSerie() binds to LIVE ReactionPoints.
+			// Changes to ReactionPoints are visible in the series.
+
+			// Arrange
+			var data = new SharedExperimentData();
+			data.NewColumnSerie();
+			var columnSeries = (ColumnSeries<ReactionTimePoint>)data.ColumnSerie.First();
+
+			// Act - Add point after series creation
+			data.ReactionPoints.Add(new ReactionTimePoint(1, 500, true));
+
+			// Assert
+			// Series Values should reference ReactionPoints, so change is visible
+			Assert.Same(data.ReactionPoints, columnSeries.Values);
+			Assert.Single(columnSeries.Values);
+		}
+
+		[Fact]
+		public void Snapshot_ValuesReferenceSnapshot_OriginalChangesDoNotPropagate()
+		{
+			// This characterizes the behavior seen in UpdateBlock():
+			// Creating a SNAPSHOT of ReactionPoints creates an independent copy.
+			// Changes to original do NOT propagate to snapshot.
+
+			// Arrange
+			var data = new SharedExperimentData();
+			data.ReactionPoints.Add(new ReactionTimePoint(1, 500, true));
+
+			// Create snapshot (simulates UpdateBlock behavior)
+			var pointsSnapshot = new ObservableCollection<ReactionTimePoint>(data.ReactionPoints);
+			var snapshotSeries = new ColumnSeries<ReactionTimePoint>
+			{
+				Values = pointsSnapshot
+			};
+
+			// Act - Add point to ORIGINAL after snapshot
+			data.ReactionPoints.Add(new ReactionTimePoint(2, 600, true));
+
+			// Assert
+			// Original has 2 points
+			Assert.Equal(2, data.ReactionPoints.Count);
+			// Snapshot still has 1 point (independent copy)
+			Assert.Single(snapshotSeries.Values);
+			// They are NOT the same reference
+			Assert.NotSame(data.ReactionPoints, snapshotSeries.Values);
+		}
+
+		[Fact]
+		public void Snapshot_CreatesIndependentCopy_NotLiveBound()
+		{
+			// This documents the EXACT difference between NewColumnSerie() and UpdateBlock().
+			// NewColumnSerie() ? live binding
+			// UpdateBlock() ? snapshot (frozen state)
+
+			// Arrange
+			var data = new SharedExperimentData();
+			data.ReactionPoints.Add(new ReactionTimePoint(1, 500, true));
+
+			// Create live binding (NewColumnSerie style)
+			data.NewColumnSerie();
+			var liveSeries = (ColumnSeries<ReactionTimePoint>)data.ColumnSerie.First();
+
+			// Create snapshot (UpdateBlock style)
+			var pointsSnapshot = new ObservableCollection<ReactionTimePoint>(data.ReactionPoints);
+
+			// Act - Modify original
+			data.ReactionPoints.Add(new ReactionTimePoint(2, 600, true));
+
+			// Assert
+			// Live series sees the change
+			Assert.Equal(2, liveSeries.Values.Count);
+			// Snapshot does NOT see the change
+			Assert.Single(pointsSnapshot);
 		}
 	}
 }
