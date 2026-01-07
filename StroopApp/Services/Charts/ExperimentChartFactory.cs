@@ -141,7 +141,11 @@ namespace StroopApp.Services.Charts
 				GeometrySize = 6,
 				GeometryStroke = new SolidColorPaint(SKColors.Black, 2),
 				GeometryFill = new SolidColorPaint(SKColors.White),
-				Mapping = (pt, idx) => new Coordinate(start + idx, pt.Value)
+				// ASSUMPTION:
+				// TrialTimes collection never contains null values in practice.
+				// This behavior is validated and frozen by Phase C1 characterization tests.
+				// The double? type is inherited from the data model, but runtime usage guarantees non-null.
+				Mapping = (pt, idx) => new Coordinate(start + idx, pt!.Value)
 			};
 		}
 
