@@ -32,8 +32,12 @@ namespace StroopApp
             LanguageService = new LanguageService();
             WindowManager = new WindowManager();
 
-            // Create settings (not injected yet - Phase D1 scope limited)
+            // Resolve ExperimentChartFactory from DI
+            var chartFactory = _serviceProvider.GetRequiredService<ExperimentChartFactory>();
+
+            // Create settings with injected factory
             var settings = new ExperimentSettings();
+            settings.ExperimentContext = new SharedExperimentData(chartFactory);
 
             var expWin = new ExperimentWindow(settings, WindowManager, LanguageService);
             expWin.Show();

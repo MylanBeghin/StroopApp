@@ -165,9 +165,22 @@ namespace StroopApp.Models
 
 		private readonly ExperimentChartFactory _chartFactory;
 
-		public SharedExperimentData()
+		/// <summary>
+		/// Parameterless constructor for backward compatibility.
+		/// Creates its own ExperimentChartFactory instance.
+		/// </summary>
+		public SharedExperimentData() : this(new ExperimentChartFactory())
 		{
-			_chartFactory = new ExperimentChartFactory();
+		}
+
+		/// <summary>
+		/// Constructor with dependency injection support.
+		/// Allows ExperimentChartFactory to be injected.
+		/// </summary>
+		/// <param name="chartFactory">Factory for creating LiveCharts graphics objects</param>
+		public SharedExperimentData(ExperimentChartFactory chartFactory)
+		{
+			_chartFactory = chartFactory ?? throw new ArgumentNullException(nameof(chartFactory));
 			Blocks = new ObservableCollection<Block>();
 			BlockSeries = new ObservableCollection<ISeries>();
 			Sections = new ObservableCollection<RectangularSection>();
