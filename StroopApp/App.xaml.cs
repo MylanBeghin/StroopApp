@@ -45,8 +45,17 @@ namespace StroopApp
 
         private void ConfigureServices(IServiceCollection services)
         {
-            // Phase D1: Register only ExperimentChartFactory
+            // Phase D1: ExperimentChartFactory for LiveCharts graphics creation
             services.AddSingleton<ExperimentChartFactory>();
+
+            // Phase D2.1: Core application services
+            // LanguageService: Singleton - manages global application culture and language state.
+            // Single instance ensures consistent language across all components.
+            services.AddSingleton<LanguageService>();
+
+            // WindowManager: Singleton - manages participant window lifecycle.
+            // Single instance required to track and control the unique participant window.
+            services.AddSingleton<IWindowManager, WindowManager>();
         }
     }
 }
