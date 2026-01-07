@@ -209,26 +209,14 @@ namespace StroopApp.Models
 			var count = config.WordCount;
 			var end = start + count - 1;
 			currentBlockEnd = end;
-			BlockSeries.Add(new LineSeries<double?>
-			{
-				Values = CurrentBlock.TrialTimes,
-				Stroke = new SolidColorPaint(SKColors.Black, 2),
-				Fill = new SolidColorPaint(SKColors.Black.WithAlpha(60)),
-				LineSmoothness = 0.4f,
-				GeometrySize = 6,
-				GeometryStroke = new SolidColorPaint(SKColors.Black, 2),
-				GeometryFill = new SolidColorPaint(SKColors.White),
-				Mapping = (pt, idx) => new Coordinate(start + idx, pt.Value)
-			});
-			Sections.Add(new RectangularSection
-			{
-				Xi = start,
-				Xj = end,
-				Fill = new SolidColorPaint(fillColor),
-				Label = $"Bloc n°{config.Block}",
-				LabelSize = 16,
-				LabelPaint = new SolidColorPaint(SKColors.Black)
-			});
+
+			// Delegate graphics creation to factory
+			var lineSeries = _chartFactory.CreateBlockLineSeries(CurrentBlock.TrialTimes, start);
+			BlockSeries.Add(lineSeries);
+
+			var section = _chartFactory.CreateBlockSection(start, end, config.Block, fillColor);
+			Sections.Add(section);
+
 			_colorIndex++;
 			currentBlockStart = end + 1;
 		}
