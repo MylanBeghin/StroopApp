@@ -6,83 +6,86 @@ namespace StroopApp.Models
 	/// <summary>
 	/// Holds the current configuration state for an experiment, including the selected participant,
 	/// preset profile, key mappings, shared context, and current block index.
+	/// Refactored to delegate responsibilities to specialized context objects.
 	/// </summary>
 
 	public class ExperimentSettings : ModelBase
 	{
-		private int block;
+		// Internal context objects (composition) - single source of truth
+		private readonly ExperimentConfiguration _configuration;
+		private readonly ParticipantContext _participantContext;
+		private readonly ExperimentRunState _runState;
 
 		public int Block
 		{
-			get => block;
+			get => _runState.Block;
 			set
 			{
-				if (value != block)
+				if (value != _runState.Block)
 				{
-					block = value;
+					_runState.Block = value;
 					OnPropertyChanged();
 				}
 
 			}
 		}
-		private Participant _participant;
+
 		public Participant Participant
 		{
-			get => _participant;
+			get => _participantContext.Participant;
 			set
 			{
-				_participant = value;
+				_participantContext.Participant = value;
 				OnPropertyChanged();
 			}
 		}
 
-		private ExperimentProfile _currentProfile;
 		public ExperimentProfile CurrentProfile
 		{
-			get => _currentProfile;
+			get => _configuration.Profile;
 			set
 			{
-				_currentProfile = value;
+				_configuration.Profile = value;
 				OnPropertyChanged();
 			}
 		}
 
-		private KeyMappings _keyMappings;
 		public KeyMappings KeyMappings
 		{
-			get => _keyMappings;
+			get => _configuration.KeyMappings;
 			set
 			{
-				_keyMappings = value;
+				_configuration.KeyMappings = value;
 				OnPropertyChanged();
 			}
 		}
-		private SharedExperimentData _experimentContext;
+
 		public SharedExperimentData ExperimentContext
 		{
-			get => _experimentContext;
+			get => _runState.ExperimentContext;
 			set
 			{
-				_experimentContext = value;
+				_runState.ExperimentContext = value;
 				OnPropertyChanged();
 			}
 		}
-		private string _exportFolderPath;
 
 		public string ExportFolderPath
 		{
-			get => _exportFolderPath;
+			get => _configuration.ExportFolderPath;
 			set
 			{
-				if (_exportFolderPath != value)
+				if (_configuration.ExportFolderPath != value)
 				{
-					_exportFolderPath = value;
+					_configuration.ExportFolderPath = value;
 					OnPropertyChanged(nameof(ExportFolderPath));
 				}
 			}
 		}
+
 		public void Reset()
 		{
+			// Preserve exact order of execution from characterization tests
 			ExperimentContext.Reset();
 			Block = 1;
 			ExperimentContext.IsBlockFinished = true;
@@ -90,13 +93,13 @@ namespace StroopApp.Models
 			ExperimentContext.HasUnsavedExports = true;
 			OnPropertyChanged(string.Empty);
 		}
+
 		public ExperimentSettings()
 		{
-			CurrentProfile = new ExperimentProfile();
-			KeyMappings = new KeyMappings();
-			ExperimentContext = new SharedExperimentData();
-			ExportFolderPath = "";
-			Block = 1;
+			// Initialize internal contexts - single source of truth
+			_configuration = new ExperimentConfiguration();
+			_participantContext = new ParticipantContext();
+			_runState = new ExperimentRunState();
 		}
 	}
 }

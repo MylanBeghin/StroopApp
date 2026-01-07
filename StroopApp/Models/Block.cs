@@ -96,14 +96,33 @@ public class Block : ModelBase
 
 	public ObservableCollection<StroopTrial> TrialRecords { get; } = new();
 	public ObservableCollection<double?> TrialTimes { get; } = new();
+
+	/// <summary>
+	/// Legacy constructor for backward compatibility.
+	/// </summary>
 	public Block(ExperimentSettings settings)
 	{
-		_settings = settings;
-		_blockExperimentProfile = settings.CurrentProfile.ProfileName;
-		_blockNumber = settings.Block;
-		_congruencePercent = settings.CurrentProfile.CongruencePercent;
-		_switchPercent = settings.CurrentProfile.SwitchPercent;
-		if (settings.CurrentProfile.IsAmorce)
+		var config = new ExperimentSettingsBlockConfigurationAdapter(settings);
+		InitializeFromConfiguration(config);
+		_settings = settings; // Keep for potential legacy usage
+	}
+
+	/// <summary>
+	/// Primary constructor accepting minimal configuration interface.
+	/// </summary>
+	public Block(IBlockConfiguration config)
+	{
+		InitializeFromConfiguration(config);
+		_settings = null; // Not needed with interface-based approach
+	}
+
+	private void InitializeFromConfiguration(IBlockConfiguration config)
+	{
+		_blockExperimentProfile = config.ProfileName;
+		_blockNumber = config.Block;
+		_congruencePercent = config.CongruencePercent;
+		_switchPercent = config.SwitchPercent;
+		if (config.IsAmorce)
 			_visualCue = "✅";
 		else
 			_visualCue = "❎";

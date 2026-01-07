@@ -13,6 +13,7 @@ using SkiaSharp;
 using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Resources;
+using StroopApp.Services.Charts;
 using StroopApp.Services.Exportation;
 using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
@@ -31,6 +32,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 		private readonly INavigationService _experimenterNavigationService;
 		private readonly IWindowManager _windowManager;
 		private readonly ILanguageService _languageService;
+		private readonly ExperimentChartFactory _chartFactory;
 		
 		public ICommand ContinueCommand { get; }
 		public ICommand NewExperimentCommand { get; }
@@ -71,6 +73,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 			_experimenterNavigationService = experimenterNavigationService;
 			_windowManager = windowManager;
 			_languageService = languageService;
+			_chartFactory = new ExperimentChartFactory();
 
 			ContinueCommand = new RelayCommand(_ => Continue());
 			NewExperimentCommand = new RelayCommand(async _ => await NewExperimentAsync());
@@ -88,45 +91,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 		private void UpdateBlock()
 		{
 			var pointsSnapshot = new ObservableCollection<ReactionTimePoint>(Settings.ExperimentContext.ReactionPoints);
-
-			Settings.ExperimentContext.ColumnSerie = new ObservableCollection<ISeries>
-			{
-				new ColumnSeries<ReactionTimePoint>
-				{
-					Values = pointsSnapshot,
-					DataLabelsPosition = LiveChartsCore.Measure.DataLabelsPosition.Top,
-					DataLabelsSize = 16,
-					DataLabelsPaint = new SolidColorPaint(SKColors.Black),
-					DataLabelsFormatter = point =>
-						point.Coordinate.PrimaryValue.Equals(null)
-							? "Aucune réponse"
-							: point.Coordinate.PrimaryValue.ToString("N0"),
-					Mapping = (point, index) => new Coordinate(
-						point.TrialNumber - 1,
-						point.ReactionTime != null ? point.ReactionTime.Value : double.NaN
-					)
-				}
-				.OnPointCreated(p =>
-				{
-					if (p.Visual is null) return;
-					var model = p.Model;
-					if (model != null && model.IsValidResponse.HasValue)
-					{
-						var orange = new SKColor(255, 166, 0);
-						var violet = new SKColor(91, 46, 255);
-						if (model.IsValidResponse.Value)
-						{
-							p.Visual.Fill = new SolidColorPaint(violet);
-							p.Visual.Stroke = new SolidColorPaint(violet);
-						}
-						else
-						{
-							p.Visual.Fill = new SolidColorPaint(orange);
-							p.Visual.Stroke = new SolidColorPaint(orange);
-						}
-					}
-				})
-			};
+			Settings.ExperimentContext.ColumnSerie = _chartFactory.CreateSnapshotColumnSerie(pointsSnapshot);
 		}
 
 		private void Continue()

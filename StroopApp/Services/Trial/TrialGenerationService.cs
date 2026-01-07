@@ -16,18 +16,34 @@ namespace StroopApp.Services.Trial
 			_languageService = languageService ?? throw new ArgumentNullException(nameof(languageService));
 		}
 
+		/// <summary>
+		/// Legacy method for backward compatibility.
+		/// Delegates to the interface-based overload via adapter.
+		/// </summary>
 		public List<StroopTrial> GenerateTrials(ExperimentSettings settings)
 		{
 			if (settings?.CurrentProfile == null)
 				throw new ArgumentException("Settings et CurrentProfile ne peuvent pas être null", nameof(settings));
 
+			var config = new ExperimentSettingsTrialConfigurationAdapter(settings);
+			return GenerateTrials(config);
+		}
+
+		/// <summary>
+		/// Generates trials based on minimal configuration interface.
+		/// This is the primary implementation.
+		/// </summary>
+		public List<StroopTrial> GenerateTrials(ITrialConfiguration config)
+		{
+			if (config == null)
+				throw new ArgumentNullException(nameof(config));
+
 			var trials = new List<StroopTrial>();
 			var wordColors = new[] { "Blue", "Red", "Green", "Yellow" };
 
-			var taskCultureCode = string.IsNullOrWhiteSpace(settings.CurrentProfile.TaskLanguage)
+			var taskCultureCode = string.IsNullOrWhiteSpace(config.TaskLanguage)
 								? Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName
-								: settings.CurrentProfile.TaskLanguage;
-
+								: config.TaskLanguage;
 
 			var taskCulture = new CultureInfo(taskCultureCode);
 
@@ -39,8 +55,8 @@ namespace StroopApp.Services.Trial
 				_languageService.GetLocalizedString("Word_YELLOW", taskCultureCode)
 			};
 
-			int total = settings.CurrentProfile.WordCount;
-			int congruentCount = total * settings.CurrentProfile.CongruencePercent / 100;
+			int total = config.WordCount;
+			int congruentCount = total * config.CongruencePercent / 100;
 			int incongruentCount = total - congruentCount;
 
 			var congruenceFlags = new List<bool>();
@@ -49,19 +65,19 @@ namespace StroopApp.Services.Trial
 			congruenceFlags = congruenceFlags.OrderBy(_ => _random.Next()).ToList();
 
 			List<AmorceType>? amorceSequence = null;
-			if (settings.CurrentProfile.IsAmorce)
-				amorceSequence = GenerateAmorceSequence(total, settings.CurrentProfile.DominantPercent);
+			if (config.IsAmorce)
+				amorceSequence = GenerateAmorceSequence(total, config.DominantPercent);
 
 			for (int i = 0; i < total; i++)
 			{
 				var trial = new StroopTrial
 				{
 					TrialNumber = i + 1,
-					Block = settings.Block,
-					ParticipantId = settings.Participant.Id,
-					IsAmorce = settings.CurrentProfile.IsAmorce,
-					SwitchPercent = settings.CurrentProfile.DominantPercent,
-					CongruencePercent = settings.CurrentProfile.CongruencePercent,
+					Block = config.Block,
+					ParticipantId = config.ParticipantId,
+					IsAmorce = config.IsAmorce,
+					SwitchPercent = config.DominantPercent,
+					CongruencePercent = config.CongruencePercent,
 				};
 
 				bool isCongruent = congruenceFlags[i];

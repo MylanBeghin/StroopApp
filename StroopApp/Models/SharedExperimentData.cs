@@ -10,6 +10,7 @@ using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 
 using StroopApp.Core;
+using StroopApp.Services.Charts;
 
 namespace StroopApp.Models
 {
@@ -161,8 +162,12 @@ namespace StroopApp.Models
 		private readonly SKColor[] _palette = { SKColors.CornflowerBlue, SKColors.OrangeRed, SKColors.MediumSeaGreen, SKColors.Goldenrod };
 
 		public int _colorIndex;
+
+		private readonly ExperimentChartFactory _chartFactory;
+
 		public SharedExperimentData()
 		{
+			_chartFactory = new ExperimentChartFactory();
 			Blocks = new ObservableCollection<Block>();
 			BlockSeries = new ObservableCollection<ISeries>();
 			Sections = new ObservableCollection<RectangularSection>();
@@ -173,86 +178,45 @@ namespace StroopApp.Models
 
 		public void NewColumnSerie()
 		{
-			ColumnSerie =
-			new ObservableCollection<ISeries>
-			{
-				new ColumnSeries<ReactionTimePoint>
-				{
-					Values = ReactionPoints,
-					DataLabelsPosition = LiveChartsCore.Measure.DataLabelsPosition.Top,
-					DataLabelsSize = 16,
-					DataLabelsPaint = new SolidColorPaint(SKColors.Black),
-					DataLabelsFormatter = point => point.Coordinate.SecondaryValue.Equals(double.NaN) ? "Aucune réponse" : point.Coordinate.PrimaryValue.ToString("N0"),
-					XToolTipLabelFormatter = point =>
-					{
-						var trial = (int)(point.Coordinate.SecondaryValue + 1);
-						return $"Essai n°{trial}";
-					},
-					YToolTipLabelFormatter = point =>
-					{
-						var value = point.Coordinate.PrimaryValue;
-						return double.IsNaN(value)
-							? "Pas de réponse"
-							: $"Temps de réponse : {value:0.#####} ms";
-					},
-					Mapping = (point, index) => new Coordinate( point.TrialNumber-1,point.ReactionTime != null ? point.ReactionTime.Value : double.NaN)
-				}.OnPointCreated(p =>
-						{
-						if (p.Visual is null) return;
-						var model = p.Model;
-						if (model!= null && model.IsValidResponse.HasValue)
-						{
-							// Orange (wrong answer)
-							var orange = new SKColor(255, 166, 0);      // #FFA600
-							// Purple (right answer)
-							var purple = new SKColor(91, 46, 255);      // #5B2EFF
-							if(model.IsValidResponse.Value)
-							{
-								p.Visual.Fill = new SolidColorPaint(purple);
-								p.Visual.Stroke = new SolidColorPaint(purple);
-							}
-							else
-							{
-								p.Visual.Fill = new SolidColorPaint(orange);
-								p.Visual.Stroke = new SolidColorPaint(orange);
-							}
-						}
-						}
-				)
-			};
+			ColumnSerie = _chartFactory.CreateLiveColumnSerie(ReactionPoints);
 		}
 
+		/// <summary>
+		/// Legacy method for backward compatibility.
+		/// Delegates to the interface-based overload via adapter.
+		/// </summary>
 		public void AddNewSerie(ExperimentSettings _settings)
 		{
-			CurrentBlock = new Block(_settings);
+			var config = new ExperimentSettingsBlockConfigurationAdapter(_settings);
+			AddNewSerie(config);
+		}
+
+		/// <summary>
+		/// Adds a new block serie based on minimal configuration interface.
+		/// This is the primary implementation.
+		/// </summary>
+		public void AddNewSerie(IBlockConfiguration config)
+		{
+			if (config == null)
+				throw new ArgumentNullException(nameof(config));
+
+			CurrentBlock = new Block(config);
 			Blocks.Add(CurrentBlock);
 			var color = _palette[_colorIndex % _palette.Length];
 			var fillColor = color.WithAlpha(50);
 
 			var start = currentBlockStart;
-			var count = _settings.CurrentProfile.WordCount;
+			var count = config.WordCount;
 			var end = start + count - 1;
 			currentBlockEnd = end;
-			BlockSeries.Add(new LineSeries<double?>
-			{
-				Values = CurrentBlock.TrialTimes,
-				Stroke = new SolidColorPaint(SKColors.Black, 2),
-				Fill = new SolidColorPaint(SKColors.Black.WithAlpha(60)),
-				LineSmoothness = 0.4f,
-				GeometrySize = 6,
-				GeometryStroke = new SolidColorPaint(SKColors.Black, 2),
-				GeometryFill = new SolidColorPaint(SKColors.White),
-				Mapping = (pt, idx) => new Coordinate(start + idx, pt.Value)
-			});
-			Sections.Add(new RectangularSection
-			{
-				Xi = start,
-				Xj = end,
-				Fill = new SolidColorPaint(fillColor),
-				Label = $"Bloc n°{_settings.Block}",
-				LabelSize = 16,
-				LabelPaint = new SolidColorPaint(SKColors.Black)
-			});
+
+			// Delegate graphics creation to factory
+			var lineSeries = _chartFactory.CreateBlockLineSeries(CurrentBlock.TrialTimes, start);
+			BlockSeries.Add(lineSeries);
+
+			var section = _chartFactory.CreateBlockSection(start, end, config.Block, fillColor);
+			Sections.Add(section);
+
 			_colorIndex++;
 			currentBlockStart = end + 1;
 		}
