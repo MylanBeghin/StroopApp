@@ -28,9 +28,9 @@ namespace StroopApp
             ConfigureServices(services);
             _serviceProvider = services.BuildServiceProvider();
 
-            // Initialize services (legacy pattern - to be migrated progressively)
-            LanguageService = new LanguageService();
-            WindowManager = new WindowManager();
+            // Resolve services from DI container
+            LanguageService = _serviceProvider.GetRequiredService<LanguageService>();
+            WindowManager = _serviceProvider.GetRequiredService<IWindowManager>();
 
             // Resolve ExperimentChartFactory from DI
             var chartFactory = _serviceProvider.GetRequiredService<ExperimentChartFactory>();
