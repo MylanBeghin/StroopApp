@@ -222,15 +222,32 @@ namespace StroopApp.Models
 			};
 		}
 
+		/// <summary>
+		/// Legacy method for backward compatibility.
+		/// Delegates to the interface-based overload via adapter.
+		/// </summary>
 		public void AddNewSerie(ExperimentSettings _settings)
 		{
-			CurrentBlock = new Block(_settings);
+			var config = new ExperimentSettingsBlockConfigurationAdapter(_settings);
+			AddNewSerie(config);
+		}
+
+		/// <summary>
+		/// Adds a new block serie based on minimal configuration interface.
+		/// This is the primary implementation.
+		/// </summary>
+		public void AddNewSerie(IBlockConfiguration config)
+		{
+			if (config == null)
+				throw new ArgumentNullException(nameof(config));
+
+			CurrentBlock = new Block(config);
 			Blocks.Add(CurrentBlock);
 			var color = _palette[_colorIndex % _palette.Length];
 			var fillColor = color.WithAlpha(50);
 
 			var start = currentBlockStart;
-			var count = _settings.CurrentProfile.WordCount;
+			var count = config.WordCount;
 			var end = start + count - 1;
 			currentBlockEnd = end;
 			BlockSeries.Add(new LineSeries<double?>
@@ -249,7 +266,7 @@ namespace StroopApp.Models
 				Xi = start,
 				Xj = end,
 				Fill = new SolidColorPaint(fillColor),
-				Label = $"Bloc n°{_settings.Block}",
+				Label = $"Bloc n°{config.Block}",
 				LabelSize = 16,
 				LabelPaint = new SolidColorPaint(SKColors.Black)
 			});
