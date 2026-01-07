@@ -74,6 +74,9 @@ namespace StroopApp.ViewModels.Configuration
 				_settings.ExperimentContext.NewColumnSerie();
 				_settings.ExperimentContext.AddNewSerie(_settings);
 				
+				if (_settings.ExperimentContext.CurrentBlock is null)
+					throw new InvalidOperationException("CurrentBlock was not initialized after AddNewSerie");
+				
 				var trials = _trialGenerationService.GenerateTrials(_settings);
 
 				foreach (var trial in trials)

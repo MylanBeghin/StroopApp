@@ -79,7 +79,11 @@ namespace StroopApp.ViewModels.Configuration.Participant
 		{
 			if (string.IsNullOrWhiteSpace(SearchText))
 				return true;
+			
 			var p = obj as Models.Participant;
+			if (p is null)
+				return false;
+			
 			return p.Id.ToString().Contains(SearchText);
 		}
 

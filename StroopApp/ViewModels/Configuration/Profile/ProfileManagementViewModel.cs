@@ -115,6 +115,9 @@ namespace StroopApp.ViewModels.Configuration.Profile
 				
 				if (await ShowConfirmationDialogAsync(Strings.Title_DeleteConfirmation, Strings.Message_DeleteProfileConfirmation))
 				{
+					if (_currentProfile is null)
+						return;
+					
 					int currentIndex = Profiles.IndexOf(_currentProfile);
 					_profileService.DeleteProfile(_currentProfile, Profiles);
 

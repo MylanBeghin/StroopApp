@@ -68,6 +68,9 @@ public class StroopViewModel : ViewModelBase
 	{
 		try
 		{
+			if (Settings.ExperimentContext.CurrentBlock is null)
+				throw new InvalidOperationException("CurrentBlock is not initialized");
+			
 			foreach (var trial in Settings.ExperimentContext.CurrentBlock.TrialRecords)
 			{
 				if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
@@ -186,6 +189,9 @@ public class StroopViewModel : ViewModelBase
 	}
 	public void EndBlock()
 	{
+		if (Settings.ExperimentContext.CurrentBlock is null)
+			return;
+		
 		Settings.ExperimentContext.CurrentBlock.CalculateValues();
 		Settings.ExperimentContext.CurrentTrial = null;
 		Settings.ExperimentContext.IsBlockFinished = true;
@@ -205,6 +211,9 @@ public class StroopViewModel : ViewModelBase
 		if (answer != null)
 		{
 			var trial = Settings.ExperimentContext.CurrentTrial;
+			if (trial is null)
+				return;
+			
 			trial.GivenAnswer = answer;
 			trial.IsValidResponse = string.Equals(trial.ExpectedAnswer, answer, StringComparison.OrdinalIgnoreCase);
 			_inputTcs.TrySetResult(_responseTime.Elapsed.TotalMilliseconds);
