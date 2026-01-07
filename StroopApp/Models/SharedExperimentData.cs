@@ -10,6 +10,7 @@ using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 
 using StroopApp.Core;
+using StroopApp.Services.Charts;
 
 namespace StroopApp.Models
 {
@@ -161,8 +162,12 @@ namespace StroopApp.Models
 		private readonly SKColor[] _palette = { SKColors.CornflowerBlue, SKColors.OrangeRed, SKColors.MediumSeaGreen, SKColors.Goldenrod };
 
 		public int _colorIndex;
+
+		private readonly ExperimentChartFactory _chartFactory;
+
 		public SharedExperimentData()
 		{
+			_chartFactory = new ExperimentChartFactory();
 			Blocks = new ObservableCollection<Block>();
 			BlockSeries = new ObservableCollection<ISeries>();
 			Sections = new ObservableCollection<RectangularSection>();
@@ -173,53 +178,7 @@ namespace StroopApp.Models
 
 		public void NewColumnSerie()
 		{
-			ColumnSerie =
-			new ObservableCollection<ISeries>
-			{
-				new ColumnSeries<ReactionTimePoint>
-				{
-					Values = ReactionPoints,
-					DataLabelsPosition = LiveChartsCore.Measure.DataLabelsPosition.Top,
-					DataLabelsSize = 16,
-					DataLabelsPaint = new SolidColorPaint(SKColors.Black),
-					DataLabelsFormatter = point => point.Coordinate.SecondaryValue.Equals(double.NaN) ? "Aucune réponse" : point.Coordinate.PrimaryValue.ToString("N0"),
-					XToolTipLabelFormatter = point =>
-					{
-						var trial = (int)(point.Coordinate.SecondaryValue + 1);
-						return $"Essai n°{trial}";
-					},
-					YToolTipLabelFormatter = point =>
-					{
-						var value = point.Coordinate.PrimaryValue;
-						return double.IsNaN(value)
-							? "Pas de réponse"
-							: $"Temps de réponse : {value:0.#####} ms";
-					},
-					Mapping = (point, index) => new Coordinate( point.TrialNumber-1,point.ReactionTime != null ? point.ReactionTime.Value : double.NaN)
-				}.OnPointCreated(p =>
-						{
-						if (p.Visual is null) return;
-						var model = p.Model;
-						if (model!= null && model.IsValidResponse.HasValue)
-						{
-							// Orange (wrong answer)
-							var orange = new SKColor(255, 166, 0);      // #FFA600
-							// Purple (right answer)
-							var purple = new SKColor(91, 46, 255);      // #5B2EFF
-							if(model.IsValidResponse.Value)
-							{
-								p.Visual.Fill = new SolidColorPaint(purple);
-								p.Visual.Stroke = new SolidColorPaint(purple);
-							}
-							else
-							{
-								p.Visual.Fill = new SolidColorPaint(orange);
-								p.Visual.Stroke = new SolidColorPaint(orange);
-							}
-						}
-						}
-				)
-			};
+			ColumnSerie = _chartFactory.CreateLiveColumnSerie(ReactionPoints);
 		}
 
 		/// <summary>
