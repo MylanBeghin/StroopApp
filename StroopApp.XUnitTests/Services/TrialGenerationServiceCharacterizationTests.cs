@@ -556,7 +556,7 @@ namespace StroopApp.XUnitTests.Services
 			// - CurrentProfile (WordCount, CongruencePercent, IsAmorce, DominantPercent)
 			// - Participant.Id
 			// - Block
-			Assert.Throws<ArgumentException>(() => service.GenerateTrials(null));
+			Assert.Throws<ArgumentException>(() => service.GenerateTrials((ExperimentSettings)null));
 		}
 
 		[Fact]
