@@ -52,6 +52,8 @@ namespace StroopApp.Core
                 return true;
             if (parameter == null && typeof(T).IsValueType)
                 return _canExecute(default);
+            if (parameter == null)
+                return _canExecute(default!);
             return _canExecute((T)parameter);
         }
 
@@ -59,6 +61,8 @@ namespace StroopApp.Core
         {
             if (parameter == null && typeof(T).IsValueType)
                 _execute(default);
+            else if (parameter == null)
+                _execute(default!);
             else
                 _execute((T)parameter);
         }

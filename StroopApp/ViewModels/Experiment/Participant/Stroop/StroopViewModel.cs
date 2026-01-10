@@ -16,7 +16,11 @@ using StroopApp.Views.Experiment.Participant.Stroop;
 
 public class StroopViewModel : ViewModelBase
 {
-	private ExperimentSettings _settings;
+	/// <summary>
+	/// Experiment settings provided via constructor.
+	/// Initialized before ViewModel usage.
+	/// </summary>
+	private ExperimentSettings _settings = null!;
 	public ExperimentSettings Settings
 	{
 		get => _settings;
@@ -27,7 +31,11 @@ public class StroopViewModel : ViewModelBase
 		}
 	}
 
-	private UserControl _currentControl;
+	/// <summary>
+	/// Current UI control displayed to participant.
+	/// Initialized during trial execution.
+	/// </summary>
+	private UserControl _currentControl = null!;
 	public UserControl CurrentControl
 	{
 		get => _currentControl;
@@ -38,12 +46,20 @@ public class StroopViewModel : ViewModelBase
 		}
 	}
 
-	private TaskCompletionSource<double> _inputTcs;
+	/// <summary>
+	/// Task completion source for participant input.
+	/// Initialized in StartResponseTimer() or StartTrials().
+	/// </summary>
+	private TaskCompletionSource<double> _inputTcs = null!;
 	private readonly Stopwatch _responseTime;
 	private readonly Stopwatch _wordTimer;
-	private readonly INavigationService _participantWindowNavigationService;
+	/// <summary>
+	/// Navigation service provided via constructor dependency injection.
+	/// Guaranteed non-null during ViewModel lifecycle.
+	/// </summary>
+	private readonly INavigationService _participantWindowNavigationService = null!;
 	private readonly Random random = new Random();
-	private CancellationTokenSource _cancellationTokenSource;
+	private CancellationTokenSource _cancellationTokenSource = null!;
 	private bool _isDisposed = false;
 
 	public StroopViewModel(ExperimentSettings settings, INavigationService participantWindowNavigationService)
@@ -68,6 +84,9 @@ public class StroopViewModel : ViewModelBase
 	{
 		try
 		{
+			if (Settings.ExperimentContext.CurrentBlock is null)
+				throw new InvalidOperationException("CurrentBlock is not initialized");
+			
 			foreach (var trial in Settings.ExperimentContext.CurrentBlock.TrialRecords)
 			{
 				if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
@@ -186,6 +205,9 @@ public class StroopViewModel : ViewModelBase
 	}
 	public void EndBlock()
 	{
+		if (Settings.ExperimentContext.CurrentBlock is null)
+			return;
+		
 		Settings.ExperimentContext.CurrentBlock.CalculateValues();
 		Settings.ExperimentContext.CurrentTrial = null;
 		Settings.ExperimentContext.IsBlockFinished = true;
@@ -205,6 +227,9 @@ public class StroopViewModel : ViewModelBase
 		if (answer != null)
 		{
 			var trial = Settings.ExperimentContext.CurrentTrial;
+			if (trial is null)
+				return;
+			
 			trial.GivenAnswer = answer;
 			trial.IsValidResponse = string.Equals(trial.ExpectedAnswer, answer, StringComparison.OrdinalIgnoreCase);
 			_inputTcs.TrySetResult(_responseTime.Elapsed.TotalMilliseconds);
