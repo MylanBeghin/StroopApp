@@ -5,10 +5,12 @@ namespace StroopApp.Services.Window
 {
 	public class WindowManager : IWindowManager
 	{
-		private ParticipantWindow _participantWindow;
+		private ParticipantWindow? _participantWindow;
 
 		public void ShowParticipantWindow(ExperimentSettings settings)
 		{
+			ArgumentNullException.ThrowIfNull(settings);
+			
 			if (_participantWindow == null)
 			{
 				_participantWindow = new ParticipantWindow(settings);

@@ -12,7 +12,7 @@ namespace StroopApp.Services.KeyMapping
 
 		public KeyMappingService(string configDir)
 		{
-			_configDir = configDir;
+			_configDir = configDir ?? throw new ArgumentNullException(nameof(configDir));
 			_keyMappingPath = Path.Combine(_configDir, "keymappings.json");
 		}
 		public async Task<KeyMappings> LoadKeyMappings()

@@ -32,11 +32,11 @@ namespace StroopApp.Services.Exportation
 				}
 			}
 		}
-		public ExportationService(ExperimentSettings settings, ILanguageService languageService, string configDir, IUserNotifier notifier = null)
+		public ExportationService(ExperimentSettings settings, ILanguageService languageService, string configDir, IUserNotifier? notifier = null)
 		{
-			_settings = settings;
-			_languageService = languageService;
-			_configDir = configDir;
+			_settings = settings ?? throw new ArgumentNullException(nameof(settings));
+			_languageService = languageService ?? throw new ArgumentNullException(nameof(languageService));
+			_configDir = configDir ?? throw new ArgumentNullException(nameof(configDir));
 			Directory.CreateDirectory(configDir);
 			_exportFolderConfigFile = Path.Combine(_configDir, "exportFolder.json");
 			_exportRootDirectory = LoadExportFolderPath();

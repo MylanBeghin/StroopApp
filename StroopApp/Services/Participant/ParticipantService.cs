@@ -18,7 +18,8 @@ namespace StroopApp.Services.Participants
 		// on récupère à la fois le configDir et les settings pour connaître ExportFolderPath
 		public ParticipantService(string configDir, ExperimentSettings settings)
 		{
-			_configDir = configDir;
+			_configDir = configDir ?? throw new ArgumentNullException(nameof(configDir));
+			ArgumentNullException.ThrowIfNull(settings);
 			_participantsPath = Path.Combine(_configDir, "participants.json");
 			_exportRootDirectory = settings.ExportFolderPath;
 		}

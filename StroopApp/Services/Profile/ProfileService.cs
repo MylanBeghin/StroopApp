@@ -14,7 +14,7 @@ namespace StroopApp.Services.Profile
 
 		public ProfileService(string configDir)
 		{
-			_configDir = configDir;
+			_configDir = configDir ?? throw new ArgumentNullException(nameof(configDir));
 			_profilesPath = Path.Combine(_configDir, "profiles.json");
 			_lastProfileFile = Path.Combine(_configDir, "lastProfile.json");
 		}
