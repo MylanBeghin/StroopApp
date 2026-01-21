@@ -1,18 +1,12 @@
-﻿using System;
+﻿using StroopApp.Core;
+using StroopApp.Models;
+using StroopApp.Services.Navigation;
+using StroopApp.Views.Experiment.Participant.Stroop;
 using System.Diagnostics;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
-
-using DocumentFormat.OpenXml.Wordprocessing;
-
-using StroopApp.Core;
-using StroopApp.Models;
-using StroopApp.Services.Navigation;
-using StroopApp.Views.Experiment.Participant;
-using StroopApp.Views.Experiment.Participant.Stroop;
 
 public class StroopViewModel : ViewModelBase
 {

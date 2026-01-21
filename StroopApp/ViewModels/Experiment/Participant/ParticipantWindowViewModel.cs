@@ -1,6 +1,4 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
-
-using StroopApp.Models;
+﻿using StroopApp.Models;
 using StroopApp.Services.Navigation;
 using StroopApp.Views.Experiment.Participant;
 

@@ -1,6 +1,4 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
-
-using StroopApp.Core;
+﻿using StroopApp.Core;
 namespace StroopApp.Models
 {
 	/// <summary>
