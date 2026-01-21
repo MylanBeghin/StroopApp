@@ -16,13 +16,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ClosedXML" Version="0.104.2" />
-		<PackageReference Include="coverlet.collector" Version="6.0.0" />
+		<PackageReference Include="ClosedXML" Version="0.105.0" />
+		<PackageReference Include="coverlet.collector" Version="6.0.4">
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		  <PrivateAssets>all</PrivateAssets>
+		</PackageReference>
 		<PackageReference Include="Extended.Wpf.Toolkit" Version="4.7.25104.5739" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
 		<PackageReference Include="Moq" Version="4.20.72" />
-		<PackageReference Include="xunit" Version="2.5.3" />
-		<PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
+		<PackageReference Include="xunit" Version="2.9.3" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		  <PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="System.Net.Http" Version="4.3.4" />
+		<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\StroopApp\StroopApp.csproj" />
