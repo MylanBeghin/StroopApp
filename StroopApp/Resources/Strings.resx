@@ -556,9 +556,6 @@
   <data name="Button_OpenExportFolder" xml:space="preserve">
     <value>Open the results folder</value>
   </data>
-  <data name="Error_ExportError" xml:space="preserve">
-    <value>Error during export</value>
-  </data>
   <data name="Label_ExportInProgress" xml:space="preserve">
     <value>Export in progress...</value>
   </data>
@@ -738,5 +735,17 @@
   </data>
   <data name="Label_Circle" xml:space="preserve">
     <value>Circle</value>
+  </data>
+  <data name="Error_ExportFailed" xml:space="preserve">
+    <value>Export failed : {0}</value>
+  </data>
+  <data name="Error_FileOrFolderNotFound" xml:space="preserve">
+    <value>The folder or file does not exist</value>
+  </data>
+  <data name="Error_OpeningFile" xml:space="preserve">
+    <value>Error opening file: {0}</value>
+  </data>
+  <data name="Error_CreatingNewExperiment" xml:space="preserve">
+    <value>Error creating new experiment: {0}</value>
   </data>
 </root>
