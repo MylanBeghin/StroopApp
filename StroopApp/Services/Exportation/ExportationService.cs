@@ -63,7 +63,7 @@ namespace StroopApp.Services.Exportation
         {
             var root = _settings.ExportFolderPath;
             if (string.IsNullOrWhiteSpace(root))
-                throw new InvalidOperationException("Aucun dossier d'export configuré.");
+                throw new InvalidOperationException("No export directory configured.");
 
             Directory.CreateDirectory(root);
             var resultsDir = Path.Combine(root, "Results");
