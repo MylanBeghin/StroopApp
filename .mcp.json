@@ -1,0 +1,11 @@
+{
+  "$schema": "https://github.com/modelcontextprotocol/servers/raw/main/schemas/mcp.schema.json",
+  "servers": {
+    "github": {
+      "url": "https://api.githubcopilot.com/mcp/",
+      "description": "GitHub integration for releases, issues, and PRs"
+    }
+  }
+}
+
+

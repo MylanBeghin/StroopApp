@@ -4,11 +4,10 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
-
 using StroopApp.Models;
 using StroopApp.Resources;
 
-namespace StroopApp.ViewModels.Experiment.Experimenter.Graphs
+namespace StroopApp.ViewModels.Experiment.Experimenter
 {
 	public partial class GlobalGraphViewModel : ObservableObject
 	{

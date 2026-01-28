@@ -6,7 +6,7 @@ using ModernWpf.Controls;
 using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Resources;
-using StroopApp.Services;
+using StroopApp.Services.Profile;
 using StroopApp.Views;
 
 namespace StroopApp.ViewModels.Configuration.Profile

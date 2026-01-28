@@ -1,8 +1,7 @@
 ﻿using System.Collections.ObjectModel;
-
 using StroopApp.Models;
 
-namespace StroopApp.Services
+namespace StroopApp.Services.Profile
 {
 	public interface IProfileService
 	{

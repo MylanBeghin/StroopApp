@@ -3,7 +3,7 @@ using StroopApp.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace StroopApp.ViewModels.Experiment
+namespace StroopApp.ViewModels.Experiment.Experimenter
 {
     public class ExperimentProgressViewModel : ViewModelBase
     {

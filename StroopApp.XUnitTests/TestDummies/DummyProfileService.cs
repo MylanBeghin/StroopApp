@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 
 using StroopApp.Models;
-using StroopApp.Services;
+using StroopApp.Services.Profile;
 
 namespace StroopApp.XUnitTests.TestDummies
 {

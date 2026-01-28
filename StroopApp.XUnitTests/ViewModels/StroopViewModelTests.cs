@@ -1,8 +1,7 @@
-﻿using StroopApp.Models;
-
+using StroopApp.Models;
 using Xunit;
 
-namespace StroopApp.XUnitTests.Models
+namespace StroopApp.XUnitTests.ViewModels
 {
 	public class ExperimentProfileBasicTests
 	{
@@ -14,7 +13,7 @@ namespace StroopApp.XUnitTests.Models
 
 			// Assert
 			Assert.Equal(50, profile.CongruencePercent);
-			Assert.Equal(null, profile.SwitchPercent);
+			Assert.Null(profile.SwitchPercent);
 			Assert.False(profile.IsAmorce);
 			Assert.Equal(100, profile.FixationDuration);
 			Assert.Equal(400, profile.MaxReactionTime);
@@ -24,3 +23,4 @@ namespace StroopApp.XUnitTests.Models
 		}
 	}
 }
+

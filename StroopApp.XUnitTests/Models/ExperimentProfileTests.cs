@@ -1,4 +1,4 @@
-﻿using StroopApp.Models;
+using StroopApp.Models;
 
 using Xunit;
 
@@ -65,7 +65,7 @@ namespace StroopApp.XUnitTests.Models
 			// Assert
 			Assert.False(profile.IsAmorce);
 			Assert.Equal(0, profile.AmorceDuration);
-			Assert.Equal(null, profile.SwitchPercent);
+			Assert.Null(profile.SwitchPercent);
 		}
 
 		[Fact]
@@ -92,3 +92,4 @@ namespace StroopApp.XUnitTests.Models
 		}
 	}
 }
+

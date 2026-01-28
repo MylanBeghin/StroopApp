@@ -1,11 +1,32 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.13.35818.85
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StroopApp", "StroopApp\StroopApp.csproj", "{159AA0A8-E265-4E89-B994-176FCCB44BBA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StroopApp.XUnitTests", "StroopApp.XUnitTests\StroopApp.XUnitTests.csproj", "{E3C4F684-41A4-4038-B101-FEAE598E95C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{07E0824D-E72E-44EF-86DA-0208DB302766}"
+	ProjectSection(SolutionItems) = preProject
+		StroopApp\CHANGELOG.md = StroopApp\CHANGELOG.md
+		CITATION.cff = CITATION.cff
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Paper", "Paper", "{697D8EDC-A376-4DBA-9CBB-24F55BC97B89}"
+	ProjectSection(SolutionItems) = preProject
+		paper\paper.bib = paper\paper.bib
+		paper\paper.md = paper\paper.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{EA085157-3A47-49A1-B513-480577488510}"
+	ProjectSection(SolutionItems) = preProject
+		docs\data-output.md = docs\data-output.md
+		docs\experiments.md = docs\experiments.md
+		docs\index.md = docs\index.md
+		docs\installation.md = docs\installation.md
+		docs\usage.md = docs\usage.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +45,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EA085157-3A47-49A1-B513-480577488510} = {07E0824D-E72E-44EF-86DA-0208DB302766}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0AADA30-BFB5-497E-9359-41EFA823BB35}

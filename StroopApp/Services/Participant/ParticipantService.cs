@@ -3,11 +3,9 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-
 using StroopApp.Models;
-using StroopApp.Services.Participant;
 
-namespace StroopApp.Services.Participants
+namespace StroopApp.Services.Participant
 {
 	public class ParticipantService : IParticipantService
 	{

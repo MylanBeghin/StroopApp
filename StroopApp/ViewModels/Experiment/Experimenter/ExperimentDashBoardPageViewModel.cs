@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Windows.Input;
-
 using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Resources;
@@ -9,7 +8,7 @@ using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.Views.Experiment.Experimenter;
 
-namespace StroopApp.ViewModels.Experiment
+namespace StroopApp.ViewModels.Experiment.Experimenter
 {
 	public class ExperimentDashBoardPageViewModel : ViewModelBase
 	{
