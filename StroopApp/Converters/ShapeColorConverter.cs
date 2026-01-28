@@ -6,15 +6,13 @@ namespace StroopApp.Converters
 {
 	public class ShapeColorConverter : IValueConverter
 	{
-		// Utilisé pour colorer la forme dominante dans le slider (■ ou ●)
-		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-		{
-			var dominantForm = value as string;
-			var targetForm = parameter as string;
+	public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+	{
+		var dominantForm = value as string;
+		var targetForm = parameter as string;
 
-			// Si la forme courante est la forme dominante, couleur bleue, sinon gris
-			if (dominantForm != null && targetForm != null)
-				return dominantForm == targetForm ? Brushes.DodgerBlue : Brushes.LightGray;
+		if (dominantForm != null && targetForm != null)
+			return dominantForm == targetForm ? Brushes.DodgerBlue : Brushes.LightGray;
 
 			return Brushes.LightGray;
 		}

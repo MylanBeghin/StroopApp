@@ -6,8 +6,8 @@
 	public class Word
 	{
 		public string Color { get; set; }           // ex: "Red"
-		public string Text { get; set; }            // ex: "ROUGE" (localisé)
-		public string InternalText { get; set; }    // ex: "Red" (non localisé)
+	public string Text { get; set; }
+	public string InternalText { get; set; }
 
 		public Word(string color, string internalText, string displayedText)
 		{

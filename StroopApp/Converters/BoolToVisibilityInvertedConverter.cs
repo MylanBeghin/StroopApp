@@ -5,7 +5,7 @@ using System.Windows.Data;
 namespace StroopApp.Converters
 {
 	/// <summary>
-	/// Convertit un booléen en Visibility (Visible si false, Collapsed si true) et inversement.
+	/// Converts a boolean to Visibility (Visible if false, Collapsed if true) and vice versa.
 	/// </summary>
 	public class BoolToVisibilityInvertedConverter : IValueConverter
 	{

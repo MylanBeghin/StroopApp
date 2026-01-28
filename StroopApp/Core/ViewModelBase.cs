@@ -19,9 +19,9 @@ namespace StroopApp.Core
 		protected void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-		/// <summary>
-		/// Affiche une boîte de dialogue d'erreur de manière asynchrone.
-		/// </summary>
+	/// <summary>
+	/// Displays an error message dialog asynchronously.
+	/// </summary>
 		protected virtual async Task ShowErrorDialogAsync(string message)
 		{
 			try
@@ -41,9 +41,9 @@ namespace StroopApp.Core
 			}
 		}
 
-		/// <summary>
-		/// Affiche une boîte de dialogue de confirmation de manière asynchrone.
-		/// </summary>
+	/// <summary>
+	/// Displays a confirmation dialog asynchronously.
+	/// </summary>
 		public virtual async Task<bool> ShowConfirmationDialogAsync(string title, string message)
 		{
 			try
