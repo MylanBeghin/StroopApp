@@ -1,4 +1,4 @@
-# Advanced Experiment Configuration
+ï»¿# Advanced Experiment Configuration
 
 This guide provides detailed information about configuring complex Stroop experiments in StroopApp.
 
@@ -72,7 +72,7 @@ Fixation: 100 ms
 **Measures**:
 - Response conflict: Incongruent - Congruent RT
 - Task conflict: Switch - Non-switch RT
-- Interaction: Conflict × Switch
+- Interaction: Conflict x Switch
 
 **Reference**: Mangin et al. (2021) - *Psychophysiology*, 58(12), e13936
 
@@ -118,7 +118,7 @@ Visual Cue Duration: 150 ms (brief)
 
 ## Parameter Interactions
 
-### Congruence × Visual Cues
+### Congruence x Visual Cues
 
 | Congruence | No Cues | With Cues (Square = Read) | With Cues (Circle = Color) |
 |------------|---------|----------------------------|---------------------------|
@@ -126,7 +126,7 @@ Visual Cue Duration: 150 ms (brief)
 | 50% Mixed | Balanced | Task-switch + conflict | Task-switch + conflict |
 | 100% Congruent | Facilitation | Read-congruent | Color-congruent |
 
-### Switch % × Trial Count
+### Switch % x Trial Count
 
 **Low switch % (0-25%)**: 
 - Blocked design
@@ -147,10 +147,10 @@ StroopApp enforces these constraints:
 **Rule**: When using **Task Duration** mode, trial duration must divide task duration evenly.
 
 **Valid**:
-- Task: 5 min (300,000 ms) ÷ Trial: 400 ms = 750 trials ?
+- Task: 5 min (300,000 ms) / Trial: 400 ms = 750 trials [OK]
 
 **Invalid**:
-- Task: 5 min (300,000 ms) ÷ Trial: 350 ms = 857.14 trials ?
+- Task: 5 min (300,000 ms) / Trial: 350 ms = 857.14 trials [ERROR]
 
 **Solution**: Adjust trial duration to a divisor of task duration.
 
@@ -159,10 +159,10 @@ StroopApp enforces these constraints:
 **Rule**: Averaging interval must divide total trial count evenly.
 
 **Valid**:
-- Trials: 100 ÷ Interval: 10 = 10 groups ?
+- Trials: 100 / Interval: 10 = 10 groups [OK]
 
 **Invalid**:
-- Trials: 100 ÷ Interval: 15 = 6.67 groups ?
+- Trials: 100 / Interval: 15 = 6.67 groups [ERROR]
 
 **Solution**: Choose divisors like 5, 10, 20, 25, 50
 
@@ -230,19 +230,19 @@ Before collecting real data:
 ## Tips for Specific Research Goals
 
 ### Goal: Measure pure interference
-? Use **0% congruence, no visual cues**
+Use **0% congruence, no visual cues**
 
 ### Goal: Study facilitation
-? Use **100% congruence** and compare to neutral baseline
+Use **100% congruence** and compare to neutral baseline
 
 ### Goal: Investigate task-switching
-? Enable **visual cues with varying switch %**
+Enable **visual cues with varying switch %**
 
 ### Goal: Practice effects
-? Use **multiple blocks** with identical configurations
+Use **multiple blocks** with identical configurations
 
 ### Goal: Individual differences
-? Use **balanced design (50% congruence)** for within-subject variability
+Use **balanced design (50% congruence)** for within-subject variability
 
 ## Next Steps
 

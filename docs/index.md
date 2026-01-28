@@ -41,14 +41,15 @@ StroopApp is a modern Windows desktop application for administering Stroop tasks
 
 - **Operating System**: Windows 7 or later (tested on Windows 7, 10, and 11)
 - **RAM**: 512 MB minimum, 1 GB recommended
-- **Disk Space**: 50 MB for application
+- **Disk Space**: 200 MB for application
 - **Display**: 1280x720 or higher resolution
 
 ## Getting Help
 
-- Check the [FAQ section](data-output.md#faq) for common questions
-- Report bugs via [GitHub Issues](https://github.com/MylanBeghin/StroopApp/issues)
-- Review the [CHANGELOG](../CHANGELOG.md) for version history
+- Check the [Usage Guide](usage.md) for step-by-step instructions and troubleshooting
+- Report bugs or request features via [GitHub Issues](https://github.com/MylanBeghin/StroopApp/issues)
+- Review the [CHANGELOG](../StroopApp/CHANGELOG.md) for version history
+- For any questions, feel free to contact: **mylan.bghn@gmail.com**
 
 ## Scientific Background
 

@@ -19,7 +19,7 @@ StroopApp is designed to be easy to install and run on Windows systems with mini
 - **OS**: Windows 7 or later (tested on Windows 7, 10, and 11)
 - **RAM**: 512 MB available memory
 - **CPU**: Any modern processor (2015+)
-- **Disk Space**: 50 MB for the application
+- **Disk Space**: 200 MB for the application
 - **Display**: 1280x720 resolution
 
 ### Recommended Requirements
@@ -71,7 +71,13 @@ dotnet run --project StroopApp/StroopApp.csproj --configuration Release
 
 **Build standalone executable:**
 
+```powershell
+# For PowerShell (single line)
+dotnet publish StroopApp/StroopApp.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
+```
+
 ```bash
+# For Bash/Git Bash (multi-line with backslashes)
 dotnet publish StroopApp/StroopApp.csproj \
   -c Release \
   -r win-x64 \
@@ -101,10 +107,10 @@ On first launch, StroopApp will:
 StroopApp stores configuration files in:
 ```
 %APPDATA%\StroopApp\
-??? language.json          # UI language preference
-??? exportFolder.json      # Results export path
-??? profiles.json          # Experiment profiles
-??? participants.json      # Participant database
+|-- language.json          # UI language preference
+|-- exportFolder.json      # Results export path
+|-- profiles.json          # Experiment profiles
+|-- participants.json      # Participant database
 ```
 
 ## Troubleshooting
@@ -115,7 +121,7 @@ StroopApp stores configuration files in:
 
 **Solutions:**
 1. Check Windows Defender or antivirus blocking the executable
-2. Right-click the file ? Properties ? Unblock
+2. Right-click the file, select Properties, then click Unblock
 3. Ensure Windows 10 version 1809 or later
 
 ### "Missing DLL" errors
@@ -159,4 +165,4 @@ To completely remove StroopApp:
 ## Next Steps
 
 - [Usage Guide](usage.md) - Learn how to use StroopApp
-- [Experiment Configuration](experiments.md) - Configure your first experiment
+- [Experiment Configuration](experiments.md) - Understand all experiment parameters and common profile templates

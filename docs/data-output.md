@@ -7,16 +7,20 @@ This guide explains the structure of exported data files from StroopApp.
 Results are saved to:
 ```
 [ExportFolder]/Results/[ParticipantID]/[Date]/
-  ??? StroopApp_[ParticipantID]_[BlockNumber]_[Timestamp].xlsx
+    [ParticipantID]_[Timestamp].xlsx
 ```
 
 **Example**:
 ```
-C:\StroopData\Results\P001\2025-01-27\
-  ??? StroopApp_P001_1_20250127_143522.xlsx
+C:\StroopData\Results\P001\2026-01-28\
+    P001_2026-01-28_14-35-22.xlsx
 ```
 
-## Excel File Structure\n\nEach Excel file contains **one sheet** with the following columns:\n\n**Note**: Column headers are displayed in the language selected in the application (English or French). The examples below show English headers.
+## Excel File Structure
+
+Each Excel file contains **one sheet** with the following columns.
+
+**Note**: Column headers are displayed in the language selected in the application (English or French). The examples below show English headers.
 
 | Column | Type | Description | Example |
 |--------|------|-------------|---------|
@@ -54,17 +58,17 @@ C:\StroopData\Results\P001\2025-01-27\
 - Based on task rules (cue type, congruence)
 
 **Examples**:
-- Square cue + word "RED" ? Expected: `"Red"` (read word)
-- Circle cue + word "RED" in blue ? Expected: `"Blue"` (name color)
+- Square cue + word "RED" = Expected: `"Red"` (read word)
+- Circle cue + word "RED" in blue = Expected: `"Blue"` (name color)
 
 ### GivenResponse
 - The key the participant actually pressed
-- Mapped to color name (e.g., "D" key ? "Red")
+- Mapped to color name (e.g., "D" key = "Red")
 - Empty if no response within timeout
 
 ### IsCorrect
 - `TRUE`: Expected = Given
-- `FALSE`: Expected ? Given or timeout
+- `FALSE`: Expected != Given or timeout
 
 ### ReactionTime
 - Time in milliseconds from word appearance to key press
@@ -76,8 +80,8 @@ C:\StroopData\Results\P001\2025-01-27\
 - `"Incongruent"`: Word meaning differs from ink color
 
 **Example**:
-- Word "RED" in red ink ? Congruent
-- Word "RED" in blue ink ? Incongruent
+- Word "RED" in red ink = Congruent
+- Word "RED" in blue ink = Incongruent
 
 ### VisualCueType
 - `"Square"`: Read-word task
@@ -239,7 +243,7 @@ When you delete a participant in StroopApp:
 2. **Weekly**: Backup entire export directory
 3. **Post-study**: Archive to cloud (OneDrive, Google Drive, institutional storage)
 
-## FAQ
+## Frequently Asked Questions
 
 ### Q: Can I edit the Excel file after export?
 
@@ -248,10 +252,6 @@ When you delete a participant in StroopApp:
 ### Q: How do I combine data from multiple participants?
 
 **A**: Use R, Python, or Excel Power Query to merge files. Ensure `ParticipantId` column distinguishes participants.
-
-### Q: Why are some ReactionTime values 0?
-
-**A**: The participant didn't respond within the timeout period. Check `GivenResponse` (empty) and `IsCorrect` (FALSE).
 
 ### Q: What if a participant presses the wrong key accidentally?
 
@@ -280,7 +280,7 @@ When you delete a participant in StroopApp:
 
 **Secondary (if visual cues used):**
 - Switch cost (Switch RT - Non-switch RT)
-- Task conflict � Response conflict interaction
+- Task conflict x Response conflict interaction
 - Switch cost reduction across blocks (practice effects)
 
 ## Next Steps

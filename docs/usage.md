@@ -2,28 +2,6 @@
 
 This guide walks you through the basic workflow of conducting a Stroop experiment with StroopApp.
 
-## Workflow Overview
-
-```
-1. Select Interface Language (optional)
-   ?
-2. Configure Export Folder
-   ?
-3. Create/Select Participant
-   ?
-4. Create/Select Experiment Profile
-   ?
-5. Configure Key Mappings
-   ?
-6. Launch Experiment
-   ?
-7. Participant Window Setup
-   ?
-8. Participant Completes Task
-   ?
-9. Export Results
-```
-
 ## Step-by-Step Guide
 
 ### 1. Select Interface Language (Optional)
@@ -39,7 +17,9 @@ Before configuring your experiment:
 **Note**: The selected language affects:
 - All UI text and menus
 - Column headers in exported Excel files
-- Auto-generated participant instructions
+
+**Important**: This setting changes the **software interface language only**. The language of participant instructions is controlled separately by the **Task Language** setting in the experiment profile (Step 4). By default, a new profile uses the current software language at the time of creation.
+
 
 ### 2. Configure Export Folder
 
@@ -50,7 +30,7 @@ On the configuration page:
 3. Select a folder where results will be saved
 4. The path is saved automatically
 
-**Recommended**: Create a dedicated folder like `C:\StroopApp_Data\`
+**Recommended**: Create a dedicated folder like `C:\Users\%USER_NAME%\Desktop\StroopData`
 
 ### 3. Participant Management
 
@@ -68,7 +48,7 @@ On the configuration page:
 2. Click on a participant to select them
 3. Click **Edit** to modify or **Delete** to remove
 
-**Note**: Deleting a participant archives their data in `[ExportFolder]/Archived/[ParticipantID]/`. Data is never permanently deleted.
+**Note**: Deleting a participant archives their data in `[ExportFolder]\Archived\[ParticipantID]\`. Data is never permanently deleted.
 
 ### 4. Experiment Profile Configuration
 
@@ -88,7 +68,7 @@ On the configuration page:
 - 100% = All congruent trials
 
 **Visual Cue (Optional):**
-- ? **Add visual cue**: Enable task-switching paradigm
+- **Add visual cue**: Enable task-switching paradigm
 - **Visual cue duration**: How long the cue is displayed (ms)
 - **Switch percentage**: How often the cue changes (0-100%)
   - 100% = Alternates every trial (~N-1 switches for N trials)
@@ -110,11 +90,11 @@ Map keyboard keys to color responses:
 2. Press the desired key on your keyboard
 3. Repeat for all four colors (Red, Blue, Green, Yellow)
 
-**Recommended mappings:**
-- Red: `D` (right hand)
-- Blue: `F` (right hand)
-- Green: `J` (left hand)
-- Yellow: `K` (left hand)
+**Example mappings:**
+
+Red: `D`, Blue: `F`, Green: `J`, Yellow: `K`
+
+Choose any keys that feel comfortable for your participants.
 
 ### 6. Launch the Experiment
 
@@ -131,27 +111,31 @@ Map keyboard keys to color responses:
 **To move it to a second screen:**
 
 **Method 1: Drag the invisible title bar**
-1. **Move your mouse to the very top edge** of the black participant window
+1. **Move your mouse to the very top center** of the black participant window (avoid the corners where invisible close/maximize buttons are located)
 2. **Click and hold** (even though you don't see a title bar, it exists)
 3. **Drag** the window to your second monitor
 4. **Drag to the top** of the screen to snap it to fullscreen
 
-**Method 2: Windows keyboard shortcut**
+**Method 2: Windows keyboard shortcuts**
 1. Click on the participant window to ensure it has focus
-2. Press `Win + Shift + Right Arrow` (or Left) to move between screens
+2. Press `Win + Up Arrow` to maximize the window
+3. Press `Win + Shift + Right Arrow` (or Left) to move it to the other screen
 
-**Important - Setting Keyboard Focus:**
-- **Click anywhere on the participant window** before starting
-- This ensures keyboard input (Space bar, color responses) is captured
-- Without focus, the instructions won't advance
+**Setting Keyboard Focus:**
+
+The participant window requires keyboard focus to capture inputs:
+- **Press Space bar** to advance through instruction pages (this also confirms focus)
+- **Mouse scrolling and movement** work without affecting focus
+- **Clicking on another window** (e.g., the experimenter window) will lose focus
+- If focus is lost, you may need to **restart the experiment** as some inputs may have been lost during that time
 
 **Auto-Generated Instructions:**
 
 The participant window displays **3 instruction pages** automatically:
 - Instructions adapt to your experiment configuration (with/without visual cues)
-- Available in **English or French** (based on language selection from Step 1)
+- Language is determined by the **Task Language** setting in the profile
 - Participant presses **Space bar** to advance through pages
-- **No need to manually explain the task** — the app provides standardized instructions
+- **No need to manually explain the task** - the app provides standardized instructions
 
 ### 8. During the Experiment
 
@@ -160,7 +144,6 @@ The participant window displays **3 instruction pages** automatically:
 2. (If enabled) Visual cue surrounds the cross (square or circle)
 3. Colored word appears
 4. Participant presses the corresponding color key
-5. (Optional) Feedback appears briefly
 
 **Experimenter Dashboard shows:**
 - Real-time reaction times (live graph)
@@ -177,22 +160,23 @@ The participant window displays **3 instruction pages** automatically:
 
 After the experiment completes:
 
-1. The **Export Window** appears automatically
-2. Verify the export folder path is correct
-3. Click **Export**
-4. Wait for confirmation message
-5. Click **Open Results Folder** to view the Excel file
+1. The **Export Window** appears automatically on the experimenter window
+2. A **thank you message** appears on the participant window
+3. Verify the export folder path is correct
+4. Click **Export**
+5. Wait for confirmation message
+6. Click **Open Results Folder** to view the Excel file
 
 **Export file location:**
 ```
-[ExportFolder]/Results/[ParticipantID]/[Date]/
-  ??? [ParticipantID]_[Timestamp].xlsx
+[ExportFolder]\Results\[ParticipantID]\[Date]\
+    [ParticipantID]_[Timestamp].xlsx
 ```
 
 **Example:**
 ```
 C:\StroopData\Results\P001\2026-01-28\
-  ??? P001_2026-01-28_14-35-22.xlsx
+    P001_2026-01-28_14-35-22.xlsx
 ```
 
 ## Common Workflows
@@ -224,34 +208,48 @@ C:\StroopData\Results\P001\2026-01-28\
    - "Profile A - Incongruent Only"
    - "Profile B - 50-50 Mix"
    - "Profile C - With Visual Cues"
+
+**Option 1: Cumulative export (all blocks in one file)**
 2. For each participant:
-   - Run experiment with Profile A ? Export
+   - Run experiment with Profile A
    - Click **Continue with same participant**
-   - Select Profile B ? Run ? Export
-   - Select Profile C ? Run ? Export
-   - Result: 3 separate Excel files (one per block/profile)
+   - Select Profile B, Run
+   - Click **Continue with same participant**
+   - Select Profile C, Run, then Export
+   - Result: 1 Excel file containing Block A, Block B, and Block C (cumulative data matching the summary graph)
+
+**Option 2: Separate exports (one file per condition)**
+2. For each participant:
+   - Run experiment with Profile A, then Export
+   - Click **New Experiment**
+   - Select same participant, Profile B, Run, then Export
+   - Click **New Experiment**
+   - Select same participant, Profile C, Run, then Export
+   - Result: 3 separate Excel files (one per condition)
+
+**Note**: The export always contains what is shown in the summary graph (all blocks from the current experiment session).
 
 ## Tips & Best Practices
 
 ### Before Data Collection
-- ? **Test the setup** with yourself or a colleague (use a "Test" profile with 10 trials)
-- ? **Verify key mappings** with the participant before starting
-- ? **Ensure a quiet, distraction-free environment**
-- ? **Check that the export folder is accessible and has write permissions**
-- ? **Position participant window** on the correct screen before starting
-- ? **Test keyboard focus** by pressing Space on the instruction page
+- [x] **Test the setup** with yourself or a colleague (use a "Test" profile with 10 trials)
+- [x] **Verify key mappings** with the participant before starting
+- [x] **Ensure a quiet, distraction-free environment**
+- [x] **Check that the export folder is accessible and has write permissions**
+- [x] **Position participant window** on the correct screen before starting
+- [x] **Test keyboard focus** by pressing Space on the instruction page
 
 ### During Data Collection
-- ? **Monitor the experimenter dashboard** for anomalies (e.g., all incorrect responses)
-- ? **Keep room lighting consistent** (affects color perception)
-- ? **Minimize interruptions** (close other applications, silence phones)
-- ? **Don't interact with the experimenter window** during the task (can distract participant)
+- [x] **Monitor the experimenter dashboard** for anomalies (e.g., all incorrect responses, multiple consecutive missed responses) to ensure the participant is still focused and not confused by the task. The graphs also help visualize the learning curve!
+- [x] **Keep room lighting consistent** (affects color perception)
+- [x] **Minimize interruptions** (close other applications, silence phones)
+- [x] **Don't interact with the experimenter window** during the task (can distract participant)
 
 ### After Data Collection
-- ? **Export immediately** after each session (don't close the app without exporting)
-- ? **Verify the Excel file opens correctly** in Excel/LibreOffice
-- ? **Backup data regularly** to external drive or cloud storage
-- ? **Archive completed studies** to prevent accidental overwrite
+- [x] **Export immediately** after each session (don't close the app without exporting)
+- [x] **Verify the Excel file opens correctly** in Excel/LibreOffice
+- [x] **Backup data regularly** to external drive or cloud storage
+- [x] **Archive completed studies** to prevent accidental overwrite
 
 ## Troubleshooting
 
@@ -294,5 +292,5 @@ C:\StroopData\Results\P001\2026-01-28\
 
 ## Next Steps
 
-- [Experiment Configuration Details](experiments.md)
-- [Understanding Data Output](data-output.md)
+- [Experiment Configuration](experiments.md) - Understand all experiment parameters and profile templates
+- [Data Output](data-output.md) - Learn about the Excel export format and data analysis
