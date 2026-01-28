@@ -2,8 +2,6 @@
 using System.Globalization;
 using System.Threading;
 
-using Xceed.Wpf.AvalonDock.Properties;
-
 namespace StroopApp.Core
 {
 	public class LocalizedStrings : INotifyPropertyChanged

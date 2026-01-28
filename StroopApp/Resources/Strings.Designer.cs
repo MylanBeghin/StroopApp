@@ -19,7 +19,7 @@ namespace StroopApp.Resources {
     // à l'aide d'un outil, tel que ResGen ou Visual Studio.
     // Pour ajouter ou supprimer un membre, modifiez votre fichier .ResX, puis réexécutez ResGen
     // avec l'option /str ou régénérez votre projet VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Strings {
@@ -547,6 +547,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error creating new experiment: {0}.
+        /// </summary>
+        public static string Error_CreatingNewExperiment {
+            get {
+                return ResourceManager.GetString("Error_CreatingNewExperiment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Error during disconnection: {0}.
         /// </summary>
         public static string Error_DisconnectionError {
@@ -565,11 +574,20 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Error during export.
+        ///   Recherche une chaîne localisée semblable à Export failed : {0}.
         /// </summary>
-        public static string Error_ExportError {
+        public static string Error_ExportFailed {
             get {
-                return ResourceManager.GetString("Error_ExportError", resourceCulture);
+                return ResourceManager.GetString("Error_ExportFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The folder or file does not exist.
+        /// </summary>
+        public static string Error_FileOrFolderNotFound {
+            get {
+                return ResourceManager.GetString("Error_FileOrFolderNotFound", resourceCulture);
             }
         }
         
@@ -624,6 +642,15 @@ namespace StroopApp.Resources {
         public static string Error_NoPortSelected {
             get {
                 return ResourceManager.GetString("Error_NoPortSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error opening file: {0}.
+        /// </summary>
+        public static string Error_OpeningFile {
+            get {
+                return ResourceManager.GetString("Error_OpeningFile", resourceCulture);
             }
         }
         
