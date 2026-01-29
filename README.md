@@ -49,7 +49,7 @@ The application is designed to be **no-code**, allowing researchers to configure
 
 Below is a short demonstration of **StroopApp** highlighting the experimenter-side interface and workflow.
 
-![StroopApp Demo](docs/images/demo.gif)
+![StroopApp Demo](StroopApp/Resources/Images/demo.gif)
 
 <details>
 <summary><strong>Screenshots (experimenter interface)</strong></summary>
