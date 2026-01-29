@@ -56,11 +56,11 @@ Below is a short demonstration of **StroopApp** highlighting the experimenter-si
 
 **Experiment configuration**  
 This screen allows the experimenter to define all experimental parameters, including congruency ratio, number of trials, task-switching rate, language, and export settings, through a no-code graphical interface.  
-![Experiment configuration](docs/images/configuration.png)
+![Experiment configuration](StroopApp/Resources/Images/ExperimenterWindow_Configuration.png)
 
 **Experiment monitoring (experimenter view)**  
 This window provides real-time monitoring of the running experiment, including current trial status and progression, allowing the experimenter to supervise the session without interfering with the participant’s task.  
-![Experiment monitoring](docs/images/experiment.png)
+![Experiment monitoring](StroopApp/Resources/Images/ExperimenterWindow_RunningExperiment.png)
 
 </details>
 
