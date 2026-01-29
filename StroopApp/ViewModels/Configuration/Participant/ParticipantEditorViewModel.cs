@@ -11,10 +11,6 @@ namespace StroopApp.ViewModels.Configuration.Participant
 	public class ParticipantEditorViewModel : ViewModelBase
 	{
 		private Models.Participant _participant;
-		/// <summary>
-		/// Participant utilisé pour l'édition dans la fenêtre.
-		/// Pour une modification, il s'agit d'une copie du participant original.
-		/// </summary>
 		public Models.Participant Participant
 		{
 			get => _participant;
@@ -27,17 +23,7 @@ namespace StroopApp.ViewModels.Configuration.Participant
 				}
 			}
 		}
-
-		/// <summary>
-		/// Référence au participant original (non cloné) en cas de modification.
-		/// Null si c'est une création de nouveau participant.
-		/// </summary>
 		public Models.Participant? OriginalParticipant { get; }
-
-		/// <summary>
-		/// Indique si on est en mode édition (true) ou création (false).
-		/// En mode édition, l'ID ne peut pas être modifié.
-		/// </summary>
 		public bool IsEditing => OriginalParticipant == null;
 
 		public ObservableCollection<Models.Participant> Participants
