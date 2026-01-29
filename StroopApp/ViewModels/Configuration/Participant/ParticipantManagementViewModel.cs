@@ -92,7 +92,7 @@ namespace StroopApp.ViewModels.Configuration.Participant
 			try
 			{
 				var newP = new Models.Participant();
-				var vm = new ParticipantEditorViewModel(newP, Participants, _participantService);
+				var vm = new ParticipantEditorViewModel(newP, Participants);
 				var win = new ParticipantEditorWindow(vm);
 				win.ShowDialog();
 				if (win.DialogResult == true)
@@ -116,14 +116,14 @@ namespace StroopApp.ViewModels.Configuration.Participant
 					await ShowErrorDialogAsync(Strings.Error_SelectParticipantToModify);
 					return;
 				}
-				var viewModel = new ParticipantEditorViewModel(SelectedParticipant, Participants, _participantService);
+				var viewModel = new ParticipantEditorViewModel(SelectedParticipant, Participants);
 				var participantWindow = new ParticipantEditorWindow(viewModel);
 				participantWindow.ShowDialog();
-				if (participantWindow.DialogResult == true)
+				if (participantWindow.DialogResult == true && viewModel.OriginalParticipant != null)
 				{
-					_participantService.UpdateParticipantById(
-						SelectedParticipant.Id,
-						SelectedParticipant,
+					_participantService.UpdateParticipant(
+						viewModel.OriginalParticipant,
+						viewModel.Participant,
 						Participants);
 					OnPropertyChanged(nameof(SelectedParticipant));
 				}

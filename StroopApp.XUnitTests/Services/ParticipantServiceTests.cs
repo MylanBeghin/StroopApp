@@ -1,8 +1,6 @@
-﻿using System.Collections.ObjectModel;
-
 using StroopApp.Models;
-using StroopApp.Services.Participants;
-
+using StroopApp.Services.Participant;
+using System.Collections.ObjectModel;
 using Xunit;
 
 namespace StroopApp.XUnitTests.Services
@@ -71,16 +69,17 @@ namespace StroopApp.XUnitTests.Services
 		}
 
 		[Fact]
-		public void UpdateParticipantById_Existing_UpdatesAndPersists()
+		public void UpdateParticipant_Existing_UpdatesAndPersists()
 		{
 			// Arrange
 			var dir = CreateTempDirectory();
 			var svc = new ParticipantService(dir, CreateMockSettings(dir));
-			var list = new ObservableCollection<Participant> { NewParticipant("p1", 20) };
+			var original = NewParticipant("p1", 20);
+			var list = new ObservableCollection<Participant> { original };
 			svc.SaveParticipants(list);
 
 			// Act
-			svc.UpdateParticipantById("p1", NewParticipant("p1", 35), list);
+			svc.UpdateParticipant(original, NewParticipant("p1", 35), list);
 
 			// Assert
 			var loaded = svc.LoadParticipants();
@@ -88,7 +87,7 @@ namespace StroopApp.XUnitTests.Services
 		}
 
 		[Fact]
-		public void UpdateParticipantById_NonExisting_NoChange()
+		public void UpdateParticipant_NullOriginal_NoChange()
 		{
 			// Arrange
 			var dir = CreateTempDirectory();
@@ -97,7 +96,7 @@ namespace StroopApp.XUnitTests.Services
 			svc.SaveParticipants(list);
 
 			// Act
-			svc.UpdateParticipantById("xxx", NewParticipant("xxx", 50), list);
+			svc.UpdateParticipant(null, NewParticipant("xxx", 50), list);
 
 			// Assert
 			var loaded = svc.LoadParticipants();

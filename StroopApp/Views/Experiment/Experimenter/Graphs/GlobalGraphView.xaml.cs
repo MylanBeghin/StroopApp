@@ -1,5 +1,5 @@
 ﻿using StroopApp.Models;
-using StroopApp.ViewModels.Experiment.Experimenter.Graphs;
+using StroopApp.ViewModels.Experiment.Experimenter;
 using System.Windows.Controls;
 
 namespace StroopApp.Views.Experiment.Experimenter.Graphs

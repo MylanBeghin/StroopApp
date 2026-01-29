@@ -7,7 +7,7 @@ namespace StroopApp.Services.Participant
 		ObservableCollection<Models.Participant> LoadParticipants();
 		void SaveParticipants(ObservableCollection<Models.Participant> participants);
 		void AddParticipant(ObservableCollection<Models.Participant> participants, Models.Participant participant);
-		void UpdateParticipantById(string id, Models.Participant modified, ObservableCollection<Models.Participant> list);
+		void UpdateParticipant(Models.Participant original, Models.Participant modified, ObservableCollection<Models.Participant> list);
 		void DeleteParticipant(ObservableCollection<Models.Participant> participants, string participantId);
 	}
 }

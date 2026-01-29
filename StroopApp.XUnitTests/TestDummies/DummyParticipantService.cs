@@ -14,7 +14,7 @@ namespace StroopApp.XUnitTests.TestDummies
 		public void AddParticipant(ObservableCollection<Participant> participants, Participant participant)
 		{
 		}
-		public void UpdateParticipantById(string id, Participant modified, ObservableCollection<Participant> list)
+		public void UpdateParticipant(Participant original, Participant modified, ObservableCollection<Participant> list)
 		{
 		}
 		public void DeleteParticipant(ObservableCollection<Participant> participants, string participantId)

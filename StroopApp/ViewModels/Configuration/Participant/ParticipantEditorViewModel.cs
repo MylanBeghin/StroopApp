@@ -30,8 +30,15 @@ namespace StroopApp.ViewModels.Configuration.Participant
 
 		/// <summary>
 		/// Référence au participant original (non cloné) en cas de modification.
+		/// Null si c'est une création de nouveau participant.
 		/// </summary>
-		private Models.Participant ModifiedParticipant => Participant;
+		public Models.Participant? OriginalParticipant { get; }
+
+		/// <summary>
+		/// Indique si on est en mode édition (true) ou création (false).
+		/// En mode édition, l'ID ne peut pas être modifié.
+		/// </summary>
+		public bool IsEditing => OriginalParticipant == null;
 
 		public ObservableCollection<Models.Participant> Participants
 		{
@@ -53,8 +60,6 @@ namespace StroopApp.ViewModels.Configuration.Participant
 		{
 			get;
 		}
-
-		private readonly IParticipantService _participantService;
 		public bool? DialogResult
 		{
 			get; private set;
@@ -64,12 +69,13 @@ namespace StroopApp.ViewModels.Configuration.Participant
 			get; set;
 		}
 
-		public ParticipantEditorViewModel(Models.Participant participant, ObservableCollection<Models.Participant> participants, IParticipantService participantService)
+		public ParticipantEditorViewModel(Models.Participant participant, ObservableCollection<Models.Participant> participants)
 		{
-			_participantService = participantService;
 			Participants = participants;
 
-			Participant = Participants.Contains(participant) ? CloneParticipant(participant) : participant;
+			var isExisting = Participants.Contains(participant);
+			OriginalParticipant = isExisting ? participant : null;
+			Participant = isExisting ? CloneParticipant(participant) : participant;
 
 			SexAssignedValues = (SexAssignedAtBirth[])Enum.GetValues(typeof(SexAssignedAtBirth));
 			GenderValues = (Gender[])Enum.GetValues(typeof(Gender));
@@ -99,13 +105,12 @@ namespace StroopApp.ViewModels.Configuration.Participant
 					await ShowErrorDialogAsync(Strings.Error_FillIdField);
 					return;
 				}
-				if (Participants.Any(p => p.Id == Participant.Id && p != Participant))
+				if (Participants.Any(p => p.Id == Participant.Id && p != OriginalParticipant))
 				{
 					await ShowErrorDialogAsync(Strings.Error_ParticipantIdAlreadyUsed);
 					return;
 				}
-
-				DialogResult = true;
+                DialogResult = true;
 				CloseAction?.Invoke();
 			}
 			catch (Exception ex)

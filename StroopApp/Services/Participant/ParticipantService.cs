@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using StroopApp.Models;
 
 namespace StroopApp.Services.Participant
@@ -12,6 +13,12 @@ namespace StroopApp.Services.Participant
 		private readonly string _configDir;
 		private readonly string _participantsPath;
 		private readonly string _exportRootDirectory;
+
+		private static readonly JsonSerializerOptions _jsonOptions = new()
+		{
+			WriteIndented = true,
+			NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
+		};
 
 		public ParticipantService(string configDir, ExperimentSettings settings)
 		{
@@ -27,14 +34,14 @@ namespace StroopApp.Services.Participant
 				return new ObservableCollection<Models.Participant>();
 
 			var json = File.ReadAllText(_participantsPath);
-			return JsonSerializer.Deserialize<ObservableCollection<Models.Participant>>(json)
+			return JsonSerializer.Deserialize<ObservableCollection<Models.Participant>>(json, _jsonOptions)
 				?? new ObservableCollection<Models.Participant>();
 		}
 
 		public void SaveParticipants(ObservableCollection<Models.Participant> participants)
 		{
 			Directory.CreateDirectory(_configDir);
-			var json = JsonSerializer.Serialize(participants, new JsonSerializerOptions { WriteIndented = true });
+			var json = JsonSerializer.Serialize(participants, _jsonOptions);
 			File.WriteAllText(_participantsPath, json);
 		}
 
@@ -44,12 +51,12 @@ namespace StroopApp.Services.Participant
 			SaveParticipants(participants);
 		}
 
-		public void UpdateParticipantById(string id, Models.Participant modified, ObservableCollection<Models.Participant> list)
+		public void UpdateParticipant(Models.Participant original, Models.Participant modified, ObservableCollection<Models.Participant> list)
 		{
-			var target = list.FirstOrDefault(p => p.Id == id);
-			if (target == null)
+			if (original == null || modified == null)
 				return;
-			target.CopyPropertiesFrom(modified);
+			
+			original.CopyPropertiesFrom(modified);
 			SaveParticipants(list);
 		}
 
@@ -58,8 +65,6 @@ namespace StroopApp.Services.Participant
 			var toRemove = participants.FirstOrDefault(x => x.Id == participantId);
 			if (toRemove == null)
 				return;
-
-			// 1) Retire et sauve le JSON
 			participants.Remove(toRemove);
 			SaveParticipants(participants);
 

@@ -6,7 +6,7 @@ using StroopApp.Services.Exportation;
 using StroopApp.Services.KeyMapping;
 using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
-using StroopApp.Services.Participants;
+using StroopApp.Services.Participant;
 using StroopApp.Services.Profile;
 using StroopApp.Services.Trial;
 using StroopApp.Services.Window;
