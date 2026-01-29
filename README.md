@@ -159,8 +159,8 @@ A `CITATION.cff` file is provided at the root of the repository for automated ci
 > Psychology of Sport and Exercise, 57, 102033.  
 > https://doi.org/10.1016/j.psychsport.2021.102033
 
-> Mangin, T., Audiffren, M., & André, N. (2022).  
-> *Differential effects of extended practice on the components of the Stroop task-switching cost.*  
+> Mangin, T., Audiffren, M., Lorcery, A., Mirabelli, F., Benraiss, A., & André, N. (2022).  
+> *A plausible link between the time-on-task effect and the sequential task effect.*  
 > Frontiers in Psychology, 13, 998393.  
 > https://doi.org/10.3389/fpsyg.2022.998393
 
