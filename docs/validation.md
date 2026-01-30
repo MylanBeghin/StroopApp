@@ -33,7 +33,7 @@ Upon detecting a luminance change above a fixed threshold, the Arduino waited **
 
 The photodiode was positioned directly over the visual marker to ensure identical detection conditions across trials and software tools.
 
-![Hardware-based validation setup](StroopApp/Resources/Images/hardware_validation_setup.png)
+![Hardware-based validation setup](../StroopApp/Resources/Images/hardware_validation_setup.png)
 
 *Hardware-based timing validation setup (photodiode and Arduino).*
 
