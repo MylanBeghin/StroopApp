@@ -197,7 +197,7 @@ It was carried out by a graduate engineering student from the **École Nationale
 ## Contact
 
 * **Authors**: Mylan Beghin, Benjamin Pageaux, Thomas Mangin
-* **Emails**: [mylan.bghn@gmail.com (Developer)](mailto:mylan.bghn@gmail.com), [thomas.mangin@umontreal.ca](PhD, Post-Doc Researcher)
+* **Emails**: [mylan.bghn@gmail.com](mailto:mylan.bghn@gmail.com) (Developer), [thomas.mangin@umontreal.ca](mailto:thomas.mangin@umontreal.ca) (PhD, Post-Doc Researcher)
 * **Issues**: [https://github.com/MylanBeghin/StroopApp/issues](https://github.com/MylanBeghin/StroopApp/issues)
 * **Repository**: [https://github.com/MylanBeghin/StroopApp](https://github.com/MylanBeghin/StroopApp)
 
