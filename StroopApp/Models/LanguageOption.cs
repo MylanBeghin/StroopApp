@@ -1,11 +1,10 @@
-﻿namespace StroopApp.Models
+﻿/// <summary>
+/// Represents a language option with its code and display name for UI selection.
+/// </summary>
+public class LanguageOption
 {
-	public class LanguageOption
-	{
-		public string Code { get; set; }       // "fr", "en"
-	public string DisplayName { get; set; }
+    public string Code { get; set; } = null!;
+    public string DisplayName { get; set; } = null!;
 
-		public override string ToString() => DisplayName;
-	}
-
+    public override string ToString() => DisplayName;
 }

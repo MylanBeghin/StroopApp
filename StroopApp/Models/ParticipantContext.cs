@@ -10,7 +10,7 @@ namespace StroopApp.Models
 		/// <summary>
 		/// Current participant in the experiment.
 		/// </summary>
-		public Participant Participant { get; set; }
+		public Participant? Participant { get; set; }
 
 		/// <summary>
 		/// Default constructor.

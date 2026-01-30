@@ -80,8 +80,10 @@ namespace StroopApp.Models
 				}
 			}
 		}
-
-		public void Reset()
+        /// <summary>
+        /// Resets the experiment to its initial state, clearing trials and enabling participant selection.
+        /// </summary>
+        public void Reset()
 		{
 			// Preserve exact order of execution from characterization tests
 			ExperimentContext.Reset();
