@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.2.11415.280 d18.0
+VisualStudioVersion = 18.2.11415.280
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StroopApp", "StroopApp\StroopApp.csproj", "{159AA0A8-E265-4E89-B994-176FCCB44BBA}"
 EndProject
@@ -26,6 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{EA085157-3
 		docs\index.md = docs\index.md
 		docs\installation.md = docs\installation.md
 		docs\usage.md = docs\usage.md
+		validation.md = validation.md
 	EndProjectSection
 EndProject
 Global
