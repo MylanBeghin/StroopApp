@@ -49,18 +49,18 @@ The application is designed to be **no-code**, allowing researchers to configure
 
 Below is a short demonstration of **StroopApp** highlighting the experimenter-side interface and workflow.
 
-![StroopApp Demo](docs/images/demo.gif)
+![StroopApp Demo](StroopApp/Resources/Images/demo.gif)
 
 <details>
 <summary><strong>Screenshots (experimenter interface)</strong></summary>
 
 **Experiment configuration**  
 This screen allows the experimenter to define all experimental parameters, including congruency ratio, number of trials, task-switching rate, language, and export settings, through a no-code graphical interface.  
-![Experiment configuration](docs/images/configuration.png)
+![Experiment configuration](StroopApp/Resources/Images/ExperimenterWindow_Configuration.png)
 
 **Experiment monitoring (experimenter view)**  
 This window provides real-time monitoring of the running experiment, including current trial status and progression, allowing the experimenter to supervise the session without interfering with the participant’s task.  
-![Experiment monitoring](docs/images/experiment.png)
+![Experiment monitoring](StroopApp/Resources/Images/ExperimenterWindow_RunningExperiment.png)
 
 </details>
 
@@ -159,8 +159,8 @@ A `CITATION.cff` file is provided at the root of the repository for automated ci
 > Psychology of Sport and Exercise, 57, 102033.  
 > https://doi.org/10.1016/j.psychsport.2021.102033
 
-> Mangin, T., Audiffren, M., & André, N. (2022).  
-> *Differential effects of extended practice on the components of the Stroop task-switching cost.*  
+> Mangin, T., Audiffren, M., Lorcery, A., Mirabelli, F., Benraiss, A., & André, N. (2022).  
+> *A plausible link between the time-on-task effect and the sequential task effect.*  
 > Frontiers in Psychology, 13, 998393.  
 > https://doi.org/10.3389/fpsyg.2022.998393
 
