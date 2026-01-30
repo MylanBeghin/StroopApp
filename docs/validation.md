@@ -16,7 +16,7 @@ For contextual comparison, StroopApp was evaluated alongside:
 
 Timing accuracy was assessed using a hardware-based setup independent of software clocks.
 
-Each stimulus was presented together with a **small white visual marker** displayed in the bottom-right corner of the screen. This marker produced a clear luminance transition, allowing unambiguous detection by a photodiode and avoiding ambiguities related to text rendering.
+Each stimulus was presented together with a **small white visual marker** displayed in the bottom-right corner of the screen. This marker produced a clear luminance transition, allowing unambiguous detection by a photoresistor and avoiding ambiguities related to text rendering.
 
 Presenting an additional visual marker is at least as demanding as presenting the stimulus alone. Measured precision therefore represents a **conservative estimate** of stimulus timing accuracy.
 
@@ -26,16 +26,16 @@ Presenting an additional visual marker is at least as demanding as presenting th
 
 Stimulus onset and response registration were measured using:
 
-- a **photodiode** detecting luminance changes,
-- a programmable **Arduino** microcontroller.
+- a **photoresistor** detecting luminance changes,
+- a programmable **Arduino** microcontroller (Leonardo).
 
 Upon detecting a luminance change above a fixed threshold, the Arduino waited **500 ms** before emitting a simulated keyboard response.
 
-The photodiode was positioned directly over the visual marker to ensure identical detection conditions across trials and software tools.
+The photoresistor was positioned directly over the visual marker to ensure identical detection conditions across trials and software tools.
 
 ![Hardware-based validation setup](../StroopApp/Resources/Images/hardware_validation_setup.png)
 
-*Hardware-based timing validation setup (photodiode and Arduino).*
+*Hardware-based timing validation setup (photoresistor and Arduino).*
 
 ---
 
@@ -58,7 +58,7 @@ The same protocol was implemented in all software tools:
 - **Trials**: 1000  
 - **Fixation duration**: 100 ms  
 - **Maximum stimulus duration**: 1000 ms  
-- **Simulated response delay**: ~500 ms after stimulus onset  
+- **Simulated response delay**: 500 ms after stimulus onset (Constant delay programmed within the Arduino microcontroller)  
 
 Early responses ensured that timing compensation at the trial level was exercised in all applications.
 
@@ -68,9 +68,9 @@ Early responses ensured that timing compensation at the trial level was exercise
 
 ### Hardware offset
 
-Mean response times across all conditions clustered around **540 ms**, indicating a constant offset of approximately **40 ms** introduced by the photodiode–Arduino circuit.
+Mean response times across all conditions clustered around **540 ms**, indicating a constant offset of approximately **40 ms** introduced by the photoresistor–Arduino-keyboard input circuit.
 
-This offset was identical across software tools, operating systems, and computers, and therefore does not affect comparative interpretation.
+This offset was similar across software tools, operating systems, and computers, and therefore does not affect comparative interpretation.
 
 ---
 
