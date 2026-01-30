@@ -7,226 +7,239 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
-
-public class StroopViewModel : ViewModelBase
+namespace StroopApp.ViewModels.Experiment.Participant.Stroop
 {
-	/// <summary>
-	/// Experiment settings provided via constructor.
-	/// Initialized before ViewModel usage.
-	/// </summary>
-	private ExperimentSettings _settings = null!;
-	public ExperimentSettings Settings
-	{
-		get => _settings;
-		set
-		{
-			_settings = value;
-			OnPropertyChanged();
-		}
-	}
+    /// <summary>
+    /// Manages Stroop test trial execution, timing, and participant input handling.
+    /// Orchestrates the trial sequence (fixation → cue → stimulus → response) with validated ±8ms timing precision.
+    /// </summary>
+    public class StroopViewModel : ViewModelBase
+    {
+        /// <summary>
+        /// Experiment settings provided via constructor.
+        /// Initialized before ViewModel usage.
+        /// </summary>
+        private ExperimentSettings _settings = null!;
+        public ExperimentSettings Settings
+        {
+            get => _settings;
+            set
+            {
+                _settings = value;
+                OnPropertyChanged();
+            }
+        }
 
-	/// <summary>
-	/// Current UI control displayed to participant.
-	/// Initialized during trial execution.
-	/// </summary>
-	private UserControl _currentControl = null!;
-	public UserControl CurrentControl
-	{
-		get => _currentControl;
-		set
-		{
-			_currentControl = value;
-			OnPropertyChanged();
-		}
-	}
+        /// <summary>
+        /// Current UI control displayed to participant.
+        /// Initialized during trial execution.
+        /// </summary>
+        private UserControl _currentControl = null!;
+        public UserControl CurrentControl
+        {
+            get => _currentControl;
+            set
+            {
+                _currentControl = value;
+                OnPropertyChanged();
+            }
+        }
 
-	/// <summary>
-	/// Task completion source for participant input.
-	/// Initialized in StartResponseTimer() or StartTrials().
-	/// </summary>
-	private TaskCompletionSource<double> _inputTcs = null!;
-	private readonly Stopwatch _responseTime;
-	private readonly Stopwatch _wordTimer;
-	/// <summary>
-	/// Navigation service provided via constructor dependency injection.
-	/// Guaranteed non-null during ViewModel lifecycle.
-	/// </summary>
-	private readonly INavigationService _participantWindowNavigationService = null!;
-	private readonly Random random = new Random();
-	private CancellationTokenSource _cancellationTokenSource = null!;
-	private bool _isDisposed = false;
+        /// <summary>
+        /// Task completion source for participant input.
+        /// Initialized in StartResponseTimer() or StartTrials().
+        /// </summary>
+        private TaskCompletionSource<double> _inputTcs = null!;
+        private readonly Stopwatch _responseTime;
+        private readonly Stopwatch _wordTimer;
+        /// <summary>
+        /// Navigation service provided via constructor dependency injection.
+        /// Guaranteed non-null during ViewModel lifecycle.
+        /// </summary>
+        private readonly INavigationService _participantWindowNavigationService = null!;
+        private CancellationTokenSource _cancellationTokenSource = null!;
+        private bool _isDisposed = false;
 
-	public StroopViewModel(ExperimentSettings settings, INavigationService participantWindowNavigationService)
-	{
-		Settings = settings;
-		_participantWindowNavigationService = participantWindowNavigationService;
-		_responseTime = new Stopwatch();
-		_wordTimer = new Stopwatch();
-		_cancellationTokenSource = new CancellationTokenSource();
+        public StroopViewModel(ExperimentSettings settings, INavigationService participantWindowNavigationService)
+        {
+            Settings = settings;
+            _participantWindowNavigationService = participantWindowNavigationService;
+            _responseTime = new Stopwatch();
+            _wordTimer = new Stopwatch();
+            _cancellationTokenSource = new CancellationTokenSource();
 
-		StartTrials();
-	}
+            StartTrials();
+        }
 
-	public void StartResponseTimer()
-	{
-		_responseTime.Restart();
-		_wordTimer.Restart();
-		_inputTcs = new TaskCompletionSource<double>();
-	}
+        public void StartResponseTimer()
+        {
+            _responseTime.Restart();
+            _wordTimer.Restart();
+            _inputTcs = new TaskCompletionSource<double>();
+        }
 
-	public async void StartTrials()
-	{
-		try
-		{
-			if (Settings.ExperimentContext.CurrentBlock is null)
-				throw new InvalidOperationException("CurrentBlock is not initialized");
-			
-			foreach (var trial in Settings.ExperimentContext.CurrentBlock.TrialRecords)
-			{
-				if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
-				{
-					HandleTaskStopped();
-					return;
-				}
-				Settings.ExperimentContext.CurrentTrial = trial;
+        /// <summary>
+        /// Executes the complete trial sequence for the current block.
+        /// Handles timing for fixation cross, visual cue (if enabled), stimulus presentation, and response collection.
+        /// Supports cancellation and stores reaction times with trial results.
+        /// </summary>
+        public async void StartTrials()
+        {
+            try
+            {
+                if (Settings.ExperimentContext.CurrentBlock is null)
+                    throw new InvalidOperationException("CurrentBlock is not initialized");
 
-				CurrentControl = new FixationCrossControl();
-				await Task.Delay(Settings.CurrentProfile.FixationDuration, _cancellationTokenSource.Token);
-				if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
-				{
-					HandleTaskStopped();
-					return;
-				}
-				if (Settings.CurrentProfile.IsAmorce)
-				{
-					CurrentControl = new AmorceControl(trial.Amorce);
-					await Task.Delay(Settings.CurrentProfile.AmorceDuration, _cancellationTokenSource.Token);
+                foreach (var trial in Settings.ExperimentContext.CurrentBlock.TrialRecords)
+                {
+                    if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
+                    {
+                        HandleTaskStopped();
+                        return;
+                    }
+                    Settings.ExperimentContext.CurrentTrial = trial;
 
-					if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
-					{
-						HandleTaskStopped();
-						return;
-					}
-				}
+                    CurrentControl = new FixationCrossControl();
+                    await Task.Delay(Settings.CurrentProfile.FixationDuration, _cancellationTokenSource.Token);
+                    if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
+                    {
+                        HandleTaskStopped();
+                        return;
+                    }
+                    if (Settings.CurrentProfile.IsAmorce)
+                    {
+                        CurrentControl = new AmorceControl(trial.VisualCue);
+                        await Task.Delay(Settings.CurrentProfile.AmorceDuration, _cancellationTokenSource.Token);
 
-				var wordControl = new WordControl(trial.Stimulus.Text, trial.Stimulus.Color);
-				CurrentControl = wordControl;
+                        if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
+                        {
+                            HandleTaskStopped();
+                            return;
+                        }
+                    }
 
-				await Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-				{
-					if (!_isDisposed)
-					{
-						_responseTime.Restart();
-						_wordTimer.Restart();
-						_inputTcs = new TaskCompletionSource<double>();
-					}
-				}), DispatcherPriority.Render);
+                    var wordControl = new WordControl(trial.Stimulus.Text, trial.Stimulus.Color);
+                    CurrentControl = wordControl;
 
-				if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
-				{
-					HandleTaskStopped();
-					return;
-				}
+                    await Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        if (!_isDisposed)
+                        {
+                            _responseTime.Restart();
+                            _wordTimer.Restart();
+                            _inputTcs = new TaskCompletionSource<double>();
+                        }
+                    }), DispatcherPriority.Render);
 
-				var delayTask = Task.Delay(Settings.CurrentProfile.MaxReactionTime, _cancellationTokenSource.Token);
-				var completed = await Task.WhenAny(_inputTcs.Task, delayTask);
+                    if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
+                    {
+                        HandleTaskStopped();
+                        return;
+                    }
 
-				if (completed == _inputTcs.Task && !_inputTcs.Task.IsCanceled)
-				{
-					_responseTime.Stop();
-					trial.ReactionTime = _inputTcs.Task.Result;
-					Settings.ExperimentContext.CurrentBlock.TrialTimes.Add(trial.ReactionTime);
-					Settings.ExperimentContext.ReactionPoints.Add(new ReactionTimePoint(trial.TrialNumber, trial.ReactionTime, trial.IsValidResponse));
-					CurrentControl = new FixationCrossControl();
-				}
-				else if (!delayTask.IsCanceled)
-				{
-					_responseTime.Stop();
-					_inputTcs.TrySetCanceled();
-					Settings.ExperimentContext.CurrentBlock.TrialTimes.Add(null);
-					Settings.ExperimentContext.ReactionPoints.Add(new ReactionTimePoint(trial.TrialNumber, double.NaN, null));
-				}
+                    var delayTask = Task.Delay(Settings.CurrentProfile.MaxReactionTime, _cancellationTokenSource.Token);
+                    var completed = await Task.WhenAny(_inputTcs.Task, delayTask);
 
-				if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
-				{
-					HandleTaskStopped();
-					return;
-				}
+                    if (completed == _inputTcs.Task && !_inputTcs.Task.IsCanceled)
+                    {
+                        _responseTime.Stop();
+                        trial.ReactionTime = _inputTcs.Task.Result;
+                        Settings.ExperimentContext.CurrentBlock.TrialTimes.Add(trial.ReactionTime);
+                        Settings.ExperimentContext.ReactionPoints.Add(new ReactionTimePoint(trial.TrialNumber, trial.ReactionTime, trial.IsValidResponse));
+                        CurrentControl = new FixationCrossControl();
+                    }
+                    else if (!delayTask.IsCanceled)
+                    {
+                        _responseTime.Stop();
+                        _inputTcs.TrySetCanceled();
+                        Settings.ExperimentContext.CurrentBlock.TrialTimes.Add(null);
+                        Settings.ExperimentContext.ReactionPoints.Add(new ReactionTimePoint(trial.TrialNumber, double.NaN, null));
+                    }
 
-				double remaining = Settings.CurrentProfile.MaxReactionTime - _wordTimer.Elapsed.TotalMilliseconds;
-				if (remaining > 0)
-					await Task.Delay((int)remaining, _cancellationTokenSource.Token);
+                    if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
+                    {
+                        HandleTaskStopped();
+                        return;
+                    }
 
-				_wordTimer.Stop();
-			}
+                    double remaining = Settings.CurrentProfile.MaxReactionTime - _wordTimer.Elapsed.TotalMilliseconds;
+                    if (remaining > 0)
+                        await Task.Delay((int)remaining, _cancellationTokenSource.Token);
 
-			EndBlock();
-		}
-		catch (OperationCanceledException)
-		{
-			// Stop
-			HandleTaskStopped();
-		}
-	}
-	public void StopTask()
-	{
-		Settings.ExperimentContext.IsTaskStopped = true;
-		_cancellationTokenSource?.Cancel();
-	}
+                    _wordTimer.Stop();
+                }
 
-	public void Dispose()
-	{
-		if (!_isDisposed)
-		{
-			_isDisposed = true;
-			StopTask();
-			_cancellationTokenSource?.Dispose();
-		}
-	}
-	private void HandleTaskStopped()
-	{
-		_responseTime.Stop();
-		_wordTimer.Stop();
-		_inputTcs?.TrySetCanceled();
+                EndBlock();
+            }
+            catch (OperationCanceledException)
+            {
+                HandleTaskStopped();
+            }
+        }
+        public void StopTask()
+        {
+            Settings.ExperimentContext.IsTaskStopped = true;
+            _cancellationTokenSource?.Cancel();
+        }
 
-		if (Settings.ExperimentContext.CurrentBlock != null)
-		{
-			Settings.ExperimentContext.CurrentBlock.CalculateValues();
-		}
+        public void Dispose()
+        {
+            if (!_isDisposed)
+            {
+                _isDisposed = true;
+                StopTask();
+                _cancellationTokenSource?.Dispose();
+            }
+        }
+        private void HandleTaskStopped()
+        {
+            _responseTime.Stop();
+            _wordTimer.Stop();
+            _inputTcs?.TrySetCanceled();
 
-		Settings.ExperimentContext.CurrentTrial = null;
-		Settings.ExperimentContext.IsBlockFinished = true;
-	}
-	public void EndBlock()
-	{
-		if (Settings.ExperimentContext.CurrentBlock is null)
-			return;
-		
-		Settings.ExperimentContext.CurrentBlock.CalculateValues();
-		Settings.ExperimentContext.CurrentTrial = null;
-		Settings.ExperimentContext.IsBlockFinished = true;
-	}
+            if (Settings.ExperimentContext.CurrentBlock != null)
+            {
+                Settings.ExperimentContext.CurrentBlock.CalculateValues();
+            }
 
-	public void ProcessInput(Key key)
-	{
-		if (_inputTcs == null || _inputTcs.Task.IsCompleted)
-			return;
+            Settings.ExperimentContext.CurrentTrial = null;
+            Settings.ExperimentContext.IsBlockFinished = true;
+        }
+        public void EndBlock()
+        {
+            if (Settings.ExperimentContext.CurrentBlock is null)
+                return;
 
-		string? answer = key == Settings.KeyMappings.Red.Key ? Settings.KeyMappings.Red.Color
-					   : key == Settings.KeyMappings.Blue.Key ? Settings.KeyMappings.Blue.Color
-					   : key == Settings.KeyMappings.Green.Key ? Settings.KeyMappings.Green.Color
-					   : key == Settings.KeyMappings.Yellow.Key ? Settings.KeyMappings.Yellow.Color
-					   : null;
+            Settings.ExperimentContext.CurrentBlock.CalculateValues();
+            Settings.ExperimentContext.CurrentTrial = null;
+            Settings.ExperimentContext.IsBlockFinished = true;
+        }
 
-		if (answer != null)
-		{
-			var trial = Settings.ExperimentContext.CurrentTrial;
-			if (trial is null)
-				return;
-			
-			trial.GivenAnswer = answer;
-			trial.IsValidResponse = string.Equals(trial.ExpectedAnswer, answer, StringComparison.OrdinalIgnoreCase);
-			_inputTcs.TrySetResult(_responseTime.Elapsed.TotalMilliseconds);
-		}
-	}
+        /// <summary>
+        /// Processes keyboard input and maps keys to color responses based on current key mappings.
+        /// Validates response correctness and records reaction time.
+        /// </summary>
+        public void ProcessInput(Key key)
+        {
+            if (_inputTcs == null || _inputTcs.Task.IsCompleted)
+                return;
+
+            string? answer = key == Settings.KeyMappings.Red.Key ? Settings.KeyMappings.Red.Color
+                           : key == Settings.KeyMappings.Blue.Key ? Settings.KeyMappings.Blue.Color
+                           : key == Settings.KeyMappings.Green.Key ? Settings.KeyMappings.Green.Color
+                           : key == Settings.KeyMappings.Yellow.Key ? Settings.KeyMappings.Yellow.Color
+                           : null;
+
+            if (answer != null)
+            {
+                var trial = Settings.ExperimentContext.CurrentTrial;
+                if (trial is null)
+                    return;
+
+                trial.GivenAnswer = answer;
+                trial.IsValidResponse = string.Equals(trial.ExpectedAnswer, answer, StringComparison.OrdinalIgnoreCase);
+                _inputTcs.TrySetResult(_responseTime.Elapsed.TotalMilliseconds);
+            }
+        }
+    }
 }

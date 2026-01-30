@@ -13,7 +13,11 @@ using System.Windows.Input;
 
 namespace StroopApp.ViewModels.Experiment.Experimenter.End
 {
-    internal class ExportEndExperimentWindowViewModel : ViewModelBase
+    /// <summary>
+    /// ViewModel for the export dialog window, managing export workflow states (exporting, success, error),
+    /// file opening, and post-export actions (new experiment, quit).
+    /// </summary>
+    public class ExportEndExperimentWindowViewModel : ViewModelBase
     {
         private readonly ExperimentSettings _settings;
         private readonly IExportationService _exportationService;
@@ -142,7 +146,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             {
                 IsExporting = false;
                 ExportError = true;
-                ErrorMessage = $"L’export a échoué.\n{ex.Message}";
+                ErrorMessage = $"{Strings.Error_ExportFailed}\n{ex.Message}"; ;
             }
         }
         private async Task OpenAndSelectTodayExportFileAsync()

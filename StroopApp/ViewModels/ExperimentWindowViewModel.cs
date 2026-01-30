@@ -10,7 +10,11 @@ using StroopApp.Views;
 
 namespace StroopApp.ViewModels
 {
-	public class ExperimentWindowViewModel : ViewModelBase
+    /// <summary>
+    /// Root ViewModel for the main experiment window.
+    /// Manages language selection and initial navigation to configuration page.
+    /// </summary>
+    public class ExperimentWindowViewModel : ViewModelBase
 	{
 		public bool IsEnglishSelected => Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName == "en";
 		public bool IsFrenchSelected => Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName == "fr";

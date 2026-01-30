@@ -1,113 +1,126 @@
-﻿using System.Collections.ObjectModel;
+﻿using StroopApp.Core;
+using StroopApp.Models;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
-
-using StroopApp.Core;
-using StroopApp.Models;
 
 namespace StroopApp.ViewModels.Experiment.Experimenter
 {
-	internal class LiveReactionTimeViewModel : ViewModelBase
-	{
-		private readonly ExperimentSettings _settings;
+    /// <summary>
+    /// ViewModel for live reaction time display with automatic grouping and average calculation.
+    /// Updates incrementally as new trials complete and recalculates when group size changes.
+    /// </summary>
+    public class LiveReactionTimeViewModel : ViewModelBase, IDisposable
+    {
+        private readonly ExperimentSettings _settings;
 
-		public ObservableCollection<ReactionTimePoint> ReactionPoints { get; }
-		public ObservableCollection<ReactionGroup> GroupAverages { get; } = new();
+        public ObservableCollection<ReactionTimePoint> ReactionPoints { get; }
+        public ObservableCollection<ReactionGroup> GroupAverages { get; } = new();
 
-		private int _lastCompletedGroupIndex = 0;
+        private int _lastCompletedGroupIndex = 0;
 
-		public int GroupSize => _settings.CurrentProfile.GroupSize;
+        public int GroupSize => _settings.CurrentProfile.GroupSize;
 
-		public LiveReactionTimeViewModel(ExperimentSettings settings)
-		{
-			_settings = settings;
-			ReactionPoints = _settings.ExperimentContext.ReactionPoints;
+        public LiveReactionTimeViewModel(ExperimentSettings settings)
+        {
+            _settings = settings;
+            ReactionPoints = _settings.ExperimentContext.ReactionPoints;
 
-			_settings.ExperimentContext.ReactionPoints.CollectionChanged += ReactionPoints_CollectionChanged;
-			if (_settings.CurrentProfile is INotifyPropertyChanged npc)
-			{
-				npc.PropertyChanged += (s, e) =>
-				{
-					if (e.PropertyName == nameof(ExperimentProfile.GroupSize))
-					{
-						OnPropertyChanged(nameof(GroupSize));
-						RecomputeAllGroupsAfterGroupSizeChange();
-					}
-				};
-			}
-			RecomputeAllGroupsAfterGroupSizeChange();
-		}
+            _settings.ExperimentContext.ReactionPoints.CollectionChanged += ReactionPoints_CollectionChanged;
+            if (_settings.CurrentProfile is INotifyPropertyChanged npc)
+            {
+                npc.PropertyChanged += OnProfilePropertyChanged;
+            }
 
-		private void ReactionPoints_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-		{
-			if (e.Action == NotifyCollectionChangedAction.Add)
-			{
-				TryAddCompletedGroup();
-			}
-			else if (e.Action == NotifyCollectionChangedAction.Reset)
-			{
-				GroupAverages.Clear();
-				_lastCompletedGroupIndex = 0;
-			}
-		}
+            RecomputeAllGroupsAfterGroupSizeChange();
+        }
 
-		private void TryAddCompletedGroup()
-		{
-			if (_settings?.CurrentProfile == null)
-				return;
+        private void ReactionPoints_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                TryAddCompletedGroup();
+            }
+            else if (e.Action == NotifyCollectionChangedAction.Reset)
+            {
+                GroupAverages.Clear();
+                _lastCompletedGroupIndex = 0;
+            }
+        }
 
-			int groupSize = _settings.CurrentProfile.GroupSize;
-			if (groupSize <= 0)
-				groupSize = 1;
+        private void TryAddCompletedGroup()
+        {
+            if (_settings?.CurrentProfile == null)
+                return;
 
-			int total = ReactionPoints.Count;
-			if (total == 0)
-				return;
-			if (total % groupSize != 0)
-				return;
+            int groupSize = _settings.CurrentProfile.GroupSize;
+            if (groupSize <= 0)
+                groupSize = 1;
 
-			int currentGroupIndex = total / groupSize;
-			if (currentGroupIndex <= _lastCompletedGroupIndex)
-				return;
+            int total = ReactionPoints.Count;
+            if (total == 0)
+                return;
+            if (total % groupSize != 0)
+                return;
 
-			AddGroup(currentGroupIndex, groupSize);
-		}
+            int currentGroupIndex = total / groupSize;
+            if (currentGroupIndex <= _lastCompletedGroupIndex)
+                return;
 
-		private void AddGroup(int groupIndex, int groupSize)
-		{
-			int startTrial = (groupIndex - 1) * groupSize + 1;
-			int endTrial = groupIndex * groupSize;
+            AddGroup(currentGroupIndex, groupSize);
+        }
 
-			var slice = ReactionPoints
-				.Skip(startTrial - 1)
-				.Take(groupSize)
-				.ToList();
+        private void AddGroup(int groupIndex, int groupSize)
+        {
+            int startTrial = (groupIndex - 1) * groupSize + 1;
+            int endTrial = groupIndex * groupSize;
 
-			var validTimes = slice
-				.Where(p => p.ReactionTime.HasValue && !double.IsNaN(p.ReactionTime.Value))
-				.Select(p => p.ReactionTime!.Value)
-				.ToList();
+            var slice = ReactionPoints
+                .Skip(startTrial - 1)
+                .Take(groupSize)
+                .ToList();
 
-			double? average = validTimes.Count > 0 ? validTimes.Average() : (double?)null;
-			int correct = slice.Count(p => p.IsValidResponse == true);
+            var validTimes = slice
+                .Where(p => p.ReactionTime.HasValue && !double.IsNaN(p.ReactionTime.Value))
+                .Select(p => p.ReactionTime!.Value)
+                .ToList();
 
-			GroupAverages.Add(new ReactionGroup(startTrial, endTrial, average, correct, groupSize));
-			_lastCompletedGroupIndex = groupIndex;
-		}
-		private void RecomputeAllGroupsAfterGroupSizeChange()
-		{
-			GroupAverages.Clear();
-			_lastCompletedGroupIndex = 0;
+            double? average = validTimes.Count > 0 ? validTimes.Average() : (double?)null;
+            int correct = slice.Count(p => p.IsValidResponse == true);
 
-			int groupSize = GroupSize <= 0 ? 1 : GroupSize;
-			int total = ReactionPoints.Count;
-			if (total == 0)
-				return;
+            GroupAverages.Add(new ReactionGroup(startTrial, endTrial, average, correct, groupSize));
+            _lastCompletedGroupIndex = groupIndex;
+        }
+        private void RecomputeAllGroupsAfterGroupSizeChange()
+        {
+            GroupAverages.Clear();
+            _lastCompletedGroupIndex = 0;
 
-			int fullGroupCount = total / groupSize;
-			for (int gi = 1; gi <= fullGroupCount; gi++)
-				AddGroup(gi, groupSize);
-		}
-	}
+            int groupSize = GroupSize <= 0 ? 1 : GroupSize;
+            int total = ReactionPoints.Count;
+            if (total == 0)
+                return;
+
+            int fullGroupCount = total / groupSize;
+            for (int gi = 1; gi <= fullGroupCount; gi++)
+                AddGroup(gi, groupSize);
+        }
+        private void OnProfilePropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ExperimentProfile.GroupSize))
+            {
+                OnPropertyChanged(nameof(GroupSize));
+                RecomputeAllGroupsAfterGroupSizeChange();
+            }
+        }
+        public void Dispose()
+        {
+            _settings.ExperimentContext.ReactionPoints.CollectionChanged -= ReactionPoints_CollectionChanged;
+
+            if (_settings.CurrentProfile is INotifyPropertyChanged npc)
+            {
+                npc.PropertyChanged -= OnProfilePropertyChanged;
+            }
+        }
+    }
 }

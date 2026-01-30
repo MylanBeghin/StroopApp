@@ -4,7 +4,11 @@ using StroopApp.Views.Experiment.Participant;
 
 namespace StroopApp.ViewModels.Experiment.Participant
 {
-	public class ParticipantWindowViewModel
+    /// <summary>
+    /// Manages navigation flow for the participant window during experiment execution.
+    /// Handles transitions between instruction pages and experiment completion.
+    /// </summary>
+    public class ParticipantWindowViewModel
 	{
 		private readonly ExperimentSettings _settings;
 		private readonly INavigationService _participantWindowNavigationService;
