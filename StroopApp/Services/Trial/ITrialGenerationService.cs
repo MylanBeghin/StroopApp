@@ -22,6 +22,6 @@ namespace StroopApp.Services.Trial
 	/// <param name="count">Number of cues to generate</param>
 	/// <param name="switchPercentage">Percentage of cue switches</param>
 	/// <returns>Sequence of cues</returns>
-	List<AmorceType> GenerateAmorceSequence(int count, int switchPercentage);
+	List<VisualCueType> GenerateAmorceSequence(int count, int switchPercentage);
 	}
 }

@@ -127,8 +127,8 @@ namespace StroopApp.Services.Exportation
                     ws.Cell(row, 9).Value = r.TrialNumber;
                     ws.Cell(row, 10).Value = r.VisualCue switch
                     {
-                        AmorceType.Square => _languageService.GetLocalizedString("Label_Square"),
-                        AmorceType.Round => _languageService.GetLocalizedString("Label_Circle"),
+                        VisualCueType.Square => _languageService.GetLocalizedString("Label_Square"),
+                        VisualCueType.Round => _languageService.GetLocalizedString("Label_Circle"),
                         _ => ""
                     };
                     row++;

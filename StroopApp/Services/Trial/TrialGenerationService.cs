@@ -67,7 +67,7 @@ namespace StroopApp.Services.Trial
 			congruenceFlags.AddRange(Enumerable.Repeat(false, incongruentCount));
 			congruenceFlags = congruenceFlags.OrderBy(_ => _random.Next()).ToList();
 
-			List<AmorceType>? amorceSequence = null;
+			List<VisualCueType>? amorceSequence = null;
 			if (config.IsAmorce)
 				amorceSequence = GenerateAmorceSequence(total, config.DominantPercent);
 
@@ -111,7 +111,7 @@ namespace StroopApp.Services.Trial
 			return trials;
 		}
 
-		public List<AmorceType> GenerateAmorceSequence(int count, int switchPercentage)
+		public List<VisualCueType> GenerateAmorceSequence(int count, int switchPercentage)
 		{
 			if (count <= 0)
 				throw new ArgumentException("Count of visual cues must be positive", nameof(count));
@@ -124,14 +124,14 @@ namespace StroopApp.Services.Trial
 			switches.AddRange(Enumerable.Repeat(false, noSwitchCount));
 			switches = switches.OrderBy(_ => _random.Next()).ToList();
 
-			var sequence = new List<AmorceType>();
-			var current = _random.Next(0, 2) == 0 ? AmorceType.Round : AmorceType.Square;
+			var sequence = new List<VisualCueType>();
+			var current = _random.Next(0, 2) == 0 ? VisualCueType.Round : VisualCueType.Square;
 			sequence.Add(current);
 
 			foreach (var isSwitch in switches)
 			{
 				if (isSwitch)
-					current = current == AmorceType.Round ? AmorceType.Square : AmorceType.Round;
+					current = current == VisualCueType.Round ? VisualCueType.Square : VisualCueType.Round;
 
 				sequence.Add(current);
 			}
