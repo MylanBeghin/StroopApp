@@ -20,14 +20,12 @@
             BorderThickness="0.5"
             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
         <Grid>
-            <!-- Graphique -->
             <lvc:CartesianChart x:Name="Chart"
                                 Series="{Binding ColumnSerie}"
                                 XAxes="{Binding XAxes}"
                                 YAxes="{Binding YAxes}"
                                 TooltipPosition="Bottom"
                                 LegendPosition="Hidden" />
-            <!-- Légende en haut à gauche -->
             <Border Background="#66000000"
                     CornerRadius="4"
                     Padding="6"

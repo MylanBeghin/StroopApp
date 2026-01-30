@@ -14,13 +14,13 @@ namespace StroopApp.Views
         public ExperimentDashBoardPage(ExperimentSettings settings, INavigationService experimenterNavigationService, IWindowManager windowManager, ILanguageService languageService)
         {
             InitializeComponent();
-            var ExperimentProfileView = new ExperimentProgressView(settings);
-            var GraphsView = new GraphsView(settings);
+            var experimentProfileView = new ExperimentProgressView(settings);
+            var graphsView = new GraphsView(settings);
             DataContext = new ExperimentDashBoardPageViewModel(settings, experimenterNavigationService, windowManager, languageService);
-            MainGrid.Children.Add(ExperimentProfileView);
-            Grid.SetRow(ExperimentProfileView, 1);
-            MainGrid.Children.Add(GraphsView);
-            Grid.SetRow(GraphsView, 3);
+            MainGrid.Children.Add(experimentProfileView);
+            Grid.SetRow(experimentProfileView, 1);
+            MainGrid.Children.Add(graphsView);
+            Grid.SetRow(graphsView, 3);
         }
     }
 }

@@ -12,9 +12,6 @@ using StroopApp.Views.Configuration;
 
 namespace StroopApp.Views.Experiment.Experimenter.End
 {
-	/// <summary>
-	/// Logique d'interaction pour ExportEndExperimentWindow.xaml
-	/// </summary>
 	public partial class ExportEndExperimentWindow : Window
 	{
 		public ExportEndExperimentWindow(ExperimentSettings Settings, IExportationService exportationService, INavigationService experimenterNavigationService, IWindowManager windowManager, ILanguageService languageService)
@@ -24,7 +21,6 @@ namespace StroopApp.Views.Experiment.Experimenter.End
 			var folderSelectorVM = new ExportFolderSelectorViewModel(Settings, exportationService);
 			var folderSelectorView = new ExportFolderSelectorView(folderSelectorVM);
 
-			// Ajoute la vue dans le Grid à la première ligne
 			EndGrid.Children.Add(folderSelectorView);
 			Grid.SetRow(folderSelectorView, 0);
 		}

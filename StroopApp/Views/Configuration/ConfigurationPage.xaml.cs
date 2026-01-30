@@ -28,30 +28,24 @@ namespace StroopApp.Views
 			var configDir = Path.Combine(
 				Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
 				"StroopApp");
-			// Instanciation des services
 			var profileService = new ProfileService(configDir);
 			var exportFolderStorageService = new ExportationService(settings, languageService, configDir);
 			var participantService = new ParticipantService(configDir, settings);
 			var keyMappingService = new KeyMappingService(configDir);
 			var trialGenerationService = new TrialGenerationService(languageService);
 
-			// Instanciation unique des ViewModels
 			var profileViewModel = new ProfileManagementViewModel(profileService);
 			var participantViewModel = new ParticipantManagementViewModel(participantService, settings.ExperimentContext.IsParticipantSelectionEnabled);
 			var keyMappingViewModel = new KeyMappingViewModel(keyMappingService);
 			var exportFolderSelectorViewModel = new ExportFolderSelectorViewModel(settings, exportFolderStorageService);
 
-			// Instanciation du ViewModel principal et liaison au DataContext
 			DataContext = new ConfigurationPageViewModel(settings, profileViewModel, participantViewModel, keyMappingViewModel, experimentNavigationService, windowManager, trialGenerationService, languageService);
 
-			// Instanciation des vues en injectant les ViewModels partagés
 			var profileManagementView = new ProfileManagementView(profileViewModel);
 			var participantManagementView = new ParticipantManagementView(participantViewModel);
 			var keyMappingView = new KeyMappingView(keyMappingViewModel);
 			var exportFolderView = new ExportFolderSelectorView(exportFolderSelectorViewModel);
 
-			// Ajout dynamique des vues dans le conteneur (ici MainGrid)
-			// Supposons que MainGrid possède déjà les lignes prévues dans le XAML
 			MainGrid.Children.Add(profileManagementView);
 			Grid.SetRow(profileManagementView, 1);
 			KeyMappingContainer.Children.Add(keyMappingView);

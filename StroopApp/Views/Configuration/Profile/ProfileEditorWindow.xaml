@@ -93,7 +93,6 @@
                                 <ColumnDefinition Width="16" />
                                 <ColumnDefinition Width="0.25*" />
                             </Grid.ColumnDefinitions>
-                            <!-- En-têtes des colonnes -->
                             <TextBlock Grid.Row="0"
                                        Grid.Column="0"
                                        Text="{Binding Source={StaticResource Loc}, Path=[Header_TrialDuration]}" />
@@ -106,7 +105,6 @@
                             <TextBlock Grid.Row="0"
                                        Grid.Column="6"
                                        Text="{Binding Source={StaticResource Loc}, Path=[Header_MaxResponseTime]}" />
-                            <!-- Valeurs et signes alignés uniquement sur la ligne des inputs -->
                             <ui:NumberBox Grid.Row="2"
                                      Grid.Column="0"
                                      Text="{Binding Profile.WordDuration}"
@@ -183,7 +181,6 @@
                                              Margin="0,0,-30,0" />
                         </Grid>
                     </Border>
-                    <!-- SwitchSettingsView affiché seulement si IsAmorce=true, DataContext dédié -->
                     <viewsProfile:SwitchSettingsView DataContext="{Binding SwitchSettingsViewModel}"
                                                      Visibility="{Binding DataContext.Profile.IsAmorce, ElementName=RootPanel, Converter={StaticResource BoolToVisibilityConverter}}" />
                 </ui:SimpleStackPanel>
@@ -203,7 +200,6 @@
                                          Converter={StaticResource CalculationModeToBooleanConverter},
                                          ConverterParameter=WordCount}" />
                     </ui:SimpleStackPanel>
-                    <!-- Section TaskDuration -->
                     <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
                             CornerRadius="8"
                             Padding="16"
@@ -285,7 +281,6 @@
                             </ui:SimpleStackPanel>
                         </ui:SimpleStackPanel>
                     </Border>
-                    <!-- Section WordCount -->
                     <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
                             CornerRadius="8"
                             Padding="16"

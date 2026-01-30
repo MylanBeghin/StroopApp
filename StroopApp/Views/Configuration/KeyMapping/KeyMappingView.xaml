@@ -20,11 +20,9 @@
             >
         <ui:SimpleStackPanel Spacing="10"
                              VerticalAlignment="Center">
-            <!-- Titre et description -->
             <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Title_KeyMapping]}"
                        Style="{StaticResource TitleTextBlockStyle}" />
             <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Description_KeyMapping]}" />
-            <!-- Grille à 4 colonnes pour les 4 couleurs -->
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -32,19 +30,16 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <!-- Rouge -->
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <!-- Header simple -->
                     <TextBlock Grid.Row="0"
                                Text="{Binding Source={StaticResource Loc}, Path=[Label_KeyRed]}"
                                Style="{DynamicResource BodyTextBlockStyle}"
                                HorizontalAlignment="Left"
                                Margin="0,0,0,4" />
-                    <!-- Contenu : TextBox et Bouton -->
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -67,7 +62,6 @@
                                 Content="{Binding Source={StaticResource Loc}, Path=[Button_Edit]}" />
                     </Grid>
                 </Grid>
-                <!-- Bleu -->
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -100,7 +94,6 @@
                                 Content="{Binding Source={StaticResource Loc}, Path=[Button_Edit]}" />
                     </Grid>
                 </Grid>
-                <!-- Vert -->
                 <Grid Grid.Column="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -133,7 +126,6 @@
                                 Content="{Binding Source={StaticResource Loc}, Path=[Button_Edit]}" />
                     </Grid>
                 </Grid>
-                <!-- Jaune -->
                 <Grid Grid.Column="3">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
