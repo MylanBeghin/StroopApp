@@ -30,7 +30,7 @@
 			Assert.NotNull(data.ReactionPoints);
 			Assert.Empty(data.ReactionPoints);
 			Assert.NotNull(data.ColumnSerie);
-			Assert.True(data.currentBlockStart == 1);
+			Assert.True(data.CurrentBlockStart == 1);
 		}
 
 		[Fact]
@@ -153,8 +153,8 @@
 			data.CurrentBlock = new Block(Settings);
 			data.IsBlockFinished = true;
 			data.NextAction = ExperimentAction.Quit;
-			data.currentBlockStart = 5;
-			data.currentBlockEnd = 10;
+			data.CurrentBlockStart = 5;
+			data.CurrentBlockEnd = 10;
 
 			// Act
 			data.Reset();
@@ -164,8 +164,8 @@
 			Assert.Empty(data.BlockSeries);
 			Assert.Empty(data.Sections);
 			Assert.Empty(data.ReactionPoints);
-			Assert.Equal(1, data.currentBlockStart);
-			Assert.Equal(0, data.currentBlockEnd);
+			Assert.Equal(1, data.CurrentBlockStart);
+			Assert.Equal(0, data.CurrentBlockEnd);
 			Assert.Null(data.CurrentBlock);
 			Assert.False(data.IsBlockFinished);
 			Assert.Equal(ExperimentAction.None, data.NextAction);

@@ -310,7 +310,7 @@ namespace StroopApp.XUnitTests.Services
 			// Assert
 			Assert.All(trials, trial =>
 			{
-				Assert.True(trial.Amorce == AmorceType.Round || trial.Amorce == AmorceType.Square);
+				Assert.True(trial.VisualCue == VisualCueType.Round || trial.VisualCue == VisualCueType.Square);
 			});
 		}
 

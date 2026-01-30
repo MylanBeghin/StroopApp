@@ -254,7 +254,7 @@ namespace StroopApp.XUnitTests.Models
 			// Arrange
 			var data = new SharedExperimentData();
 			var config = new TestBlockConfiguration { Block = 1, WordCount = 10 };
-			var expectedXi = data.currentBlockStart; // Value BEFORE call
+			var expectedXi = data.CurrentBlockStart; // Value BEFORE call
 
 			// Act
 			data.AddNewSerie(config);
@@ -267,12 +267,12 @@ namespace StroopApp.XUnitTests.Models
 		[Fact]
 		public void AddNewSerie_SectionXjEqualsCalculatedEnd()
 		{
-			// This characterizes Xj = currentBlockStart + WordCount - 1
+			// This characterizes Xj = CurrentBlockStart + WordCount - 1
 
 			// Arrange
 			var data = new SharedExperimentData();
 			var config = new TestBlockConfiguration { Block = 1, WordCount = 10 };
-			var expectedXj = data.currentBlockStart + config.WordCount - 1; // 1 + 10 - 1 = 10
+			var expectedXj = data.CurrentBlockStart + config.WordCount - 1; // 1 + 10 - 1 = 10
 
 			// Act
 			data.AddNewSerie(config);
@@ -296,7 +296,7 @@ namespace StroopApp.XUnitTests.Models
 
 			// Assert
 			var section = data.Sections.Last();
-			Assert.Equal("Bloc n°3", section.Label);
+			Assert.Equal("Block 3", section.Label);
 		}
 
 		// ========== AddNewSerie() - ColorIndex Tests ==========
@@ -307,13 +307,13 @@ namespace StroopApp.XUnitTests.Models
 			// Arrange
 			var data = new SharedExperimentData();
 			var config = new TestBlockConfiguration { Block = 1, WordCount = 10 };
-			var initialColorIndex = data._colorIndex;
+			var initialColorIndex = data.ColorIndex;
 
 			// Act
 			data.AddNewSerie(config);
 
 			// Assert
-			Assert.Equal(initialColorIndex + 1, data._colorIndex);
+			Assert.Equal(initialColorIndex + 1, data.ColorIndex);
 		}
 
 		[Fact]
@@ -335,7 +335,7 @@ namespace StroopApp.XUnitTests.Models
 			// Assert
 			// After 5 additions, colorIndex should be 5
 			// Color used for 5th block: palette[5 % 4] = palette[1] (second color)
-			Assert.Equal(5, data._colorIndex);
+			Assert.Equal(5, data.ColorIndex);
 		}
 
 		// ========== AddNewSerie() - LineSeries Mapping Lambda Tests ==========
@@ -348,7 +348,7 @@ namespace StroopApp.XUnitTests.Models
 			// Arrange
 			var data = new SharedExperimentData();
 			var config = new TestBlockConfiguration { Block = 1, WordCount = 10 };
-			var start = data.currentBlockStart; // 1
+			var start = data.CurrentBlockStart; // 1
 
 			// Act
 			data.AddNewSerie(config);

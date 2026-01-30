@@ -33,7 +33,7 @@ namespace StroopApp.XUnitTests.Services
                 IsValidResponse = true,
                 ReactionTime = 500,
                 TrialNumber = 1,
-                Amorce = AmorceType.Square
+                VisualCue = VisualCueType.Square
             });
             var ctx = new SharedExperimentData();
             ctx.Blocks.Add(block);
@@ -178,8 +178,8 @@ namespace StroopApp.XUnitTests.Services
             var tempDir = CreateTempDirectory();
             var settings = CreateMockSettings();
             var block2 = new Block(Settings);
-            block2.TrialRecords.Add(new StroopTrial { IsCongruent = false, ExpectedAnswer = "A", GivenAnswer = "B", IsValidResponse = false, ReactionTime = 750, TrialNumber = 1, Amorce = AmorceType.Round });
-            block2.TrialRecords.Add(new StroopTrial { IsCongruent = true, ExpectedAnswer = "C", GivenAnswer = "C", IsValidResponse = true, ReactionTime = 300, TrialNumber = 2, Amorce = AmorceType.Square });
+            block2.TrialRecords.Add(new StroopTrial { IsCongruent = false, ExpectedAnswer = "A", GivenAnswer = "B", IsValidResponse = false, ReactionTime = 750, TrialNumber = 1, VisualCue = VisualCueType.Round });
+            block2.TrialRecords.Add(new StroopTrial { IsCongruent = true, ExpectedAnswer = "C", GivenAnswer = "C", IsValidResponse = true, ReactionTime = 300, TrialNumber = 2, VisualCue = VisualCueType.Square });
             settings.ExperimentContext.Blocks.Add(block2);
             var languageService = CreateLanguageService();
             var service = new ExportationService(settings, languageService, tempDir)
