@@ -6,13 +6,20 @@ using StroopApp.Resources;
 
 namespace StroopApp.Services.Language
 {
-	public class LanguageService : ILanguageService
+    /// <summary>
+    /// Service for managing application language settings and retrieving localized strings.
+    /// Persists language preference in AppData.
+    /// </summary>
+    public class LanguageService : ILanguageService
 	{
 		private const string ConfigFileName = "language.json";
 
 		private readonly string _configPath;
 		private AppConfig _config;
-		public string CurrentLanguageCode => _config.Language;
+        /// <summary>
+        /// Gets the current language code (e.g., "en", "fr").
+        /// </summary>
+        public string CurrentLanguageCode => _config.Language;
 		public LanguageService()
 		{
 			_configPath = Path.Combine(
@@ -23,8 +30,10 @@ namespace StroopApp.Services.Language
 			_config = LoadConfig();
 			ApplyCulture(_config.Language);
 		}
-
-		public void SetLanguage(string languageCode)
+        /// <summary>
+        /// Sets the application language and persists the preference.
+        /// </summary>
+        public void SetLanguage(string languageCode)
 		{
 			if (string.IsNullOrWhiteSpace(languageCode))
 				return;
@@ -63,7 +72,11 @@ namespace StroopApp.Services.Language
 			var json = JsonSerializer.Serialize(_config, new JsonSerializerOptions { WriteIndented = true });
 			File.WriteAllText(_configPath, json);
 		}
-		public string GetLocalizedString(string resourceKey, string? cultureCode = null)
+        /// <summary>
+        /// Retrieves a localized string for the given resource key.
+        /// Falls back to current UI culture, then to the key itself if not found.
+        /// </summary>
+        public string GetLocalizedString(string resourceKey, string? cultureCode = null)
 		{
 			CultureInfo targetCulture;
 

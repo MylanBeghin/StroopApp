@@ -1,12 +1,20 @@
-﻿using StroopApp.Services.Navigation;
-using System;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace StroopApp.Services.Navigation
 {
+    /// <summary>
+    /// Defines contract for page navigation within the application.
+    /// </summary>
     public interface INavigationService
     {
-        void NavigateTo<T>(object? parameter = null) where T : System.Windows.Controls.Page;
+        /// <summary>
+        /// Navigates to a page of the specified type with optional parameter.
+        /// </summary>
+        void NavigateTo<T>(object? parameter = null) where T : Page;
+
+        /// <summary>
+        /// Navigates to a page created by the provided factory.
+        /// </summary>
         void NavigateTo(Func<Page> pageFactory);
     }
 

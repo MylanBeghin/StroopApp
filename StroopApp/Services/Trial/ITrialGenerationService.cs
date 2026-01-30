@@ -4,8 +4,11 @@ using StroopApp.Models;
 
 namespace StroopApp.Services.Trial
 {
-	public interface ITrialGenerationService
-	{
+    /// <summary>
+    /// Defines contract for generating Stroop trial sequences with optional visual cues.
+    /// </summary>
+    public interface ITrialGenerationService
+    {
 	/// <summary>
 	/// Generates a list of trials based on experiment parameters.
 	/// </summary>

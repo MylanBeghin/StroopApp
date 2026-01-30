@@ -1,11 +1,20 @@
 ﻿using StroopApp.Models;
-using StroopApp.Views;
 
 namespace StroopApp.Services.Window
 {
-	public interface IWindowManager
-	{
-		void ShowParticipantWindow(ExperimentSettings settings);
-		void CloseParticipantWindow();
-	}
+    /// <summary>
+    /// Defines contract for managing application windows.
+    /// </summary>
+    public interface IWindowManager
+    {
+        /// <summary>
+        /// Shows or activates the participant management window.
+        /// </summary>
+        void ShowParticipantWindow(ExperimentSettings settings);
+
+        /// <summary>
+        /// Closes the participant management window.
+        /// </summary>
+        void CloseParticipantWindow();
+    }
 }
