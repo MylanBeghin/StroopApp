@@ -33,7 +33,7 @@ Upon detecting a luminance change above a fixed threshold, the Arduino waited **
 
 The photodiode was positioned directly over the visual marker to ensure identical detection conditions across trials and software tools.
 
-![Hardware-based validation setup](images/hardware_validation_setup.jpg)
+![Hardware-based validation setup](images/hardware_validation_setup.png)
 
 *Hardware-based timing validation setup (photodiode and Arduino).*
 
@@ -95,8 +95,8 @@ Observed variability is consistent with half a refresh cycle on a 60 Hz display,
 
 ## Response time distributions
 
-![Response time distributions on Windows 7](images/validation_rt_distributions_win7.png)
-![Response time distributions on Windows 11](images/validation_rt_distributions_win11.png)
+![Response time distributions on Windows 7](images/validation_rt_distributions_win7_win11.png)
+
 
 Response time distributions across software tools under Windows 7 and Windows 11.
 
