@@ -9,8 +9,12 @@ using StroopApp.Services.Profile;
 
 namespace StroopApp.ViewModels.Configuration.Profile
 {
-	public class ProfileEditorViewModel : ViewModelBase
-	{
+    /// <summary>
+    /// ViewModel for creating or editing an experiment profile in a modal dialog.
+    /// Handles validation, derived value recalculation, and language selection.
+    /// </summary>
+    public class ProfileEditorViewModel : ViewModelBase
+    {
 		private ExperimentProfile _profile;
 
 		public ExperimentProfile Profile
@@ -31,7 +35,7 @@ namespace StroopApp.ViewModels.Configuration.Profile
 		public ICommand CancelCommand { get; }
 		public SwitchSettingsViewModel SwitchSettingsViewModel { get; }
 
-		private readonly IProfileService _IprofileService;
+		private readonly IProfileService _profileService;
 		
 		public List<LanguageOption> Languages { get; } = new()
 		{
@@ -54,7 +58,7 @@ namespace StroopApp.ViewModels.Configuration.Profile
 
 		public ProfileEditorViewModel(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles, IProfileService profileService)
 		{
-			_IprofileService = profileService;
+			_profileService = profileService;
 			Profiles = profiles;
 			SwitchSettingsViewModel = new SwitchSettingsViewModel();
 
@@ -128,7 +132,7 @@ namespace StroopApp.ViewModels.Configuration.Profile
 					return;
 				}
 				
-				var updatedProfiles = _IprofileService.UpsertProfile(Profile);
+				var updatedProfiles = _profileService.UpsertProfile(Profile);
 				Profiles.Clear();
 				foreach (var prof in updatedProfiles)
 				{
