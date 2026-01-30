@@ -5,11 +5,10 @@ namespace StroopApp.Converters
 {
 	public class BoolToStringConverter : IValueConverter
 	{
-		public string ConverterParameter
-		{
-			get; set;
-		} // Format: "Vrai|Faux"
-		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        /// <summary>
+        /// Converts a boolean to a string based on a parameter format "TrueValue|FalseValue".
+        /// </summary>
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			var param = (parameter as string)?.Split('|');
 			if (param == null || param.Length < 2)

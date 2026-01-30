@@ -5,7 +5,7 @@ namespace StroopApp.Converters
 {
     /// <summary>
     /// Converter associated with <see cref="ProfileManagementView"/>.
-    /// Divide the total duration (in ms) into minutes after subatracting the entier hours.
+    /// Divide the total duration (in ms) into minutes after subtracting the entire hours.
     /// </summary>
     public class MillisecondsToMinutesConverter : IValueConverter
     {

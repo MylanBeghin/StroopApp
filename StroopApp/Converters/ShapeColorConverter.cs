@@ -4,7 +4,10 @@ using System.Windows.Media;
 
 namespace StroopApp.Converters
 {
-	public class ShapeColorConverter : IValueConverter
+    /// <summary>
+    /// Converts a shape name to a color brush (DodgerBlue if matches parameter, LightGray otherwise).
+    /// </summary>
+    public class ShapeColorConverter : IValueConverter
 	{
 	public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 	{

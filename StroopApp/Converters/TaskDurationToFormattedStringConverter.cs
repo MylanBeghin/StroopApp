@@ -3,7 +3,10 @@ using System.Windows.Data;
 
 namespace StroopApp.Converters
 {
-	public class TaskDurationToFormattedStringConverter : IValueConverter
+    /// <summary>
+    /// Converts a task duration in milliseconds to a formatted string (e.g., "1h 23m 45s", "5m 12s", "30s").
+    /// </summary>
+    public class TaskDurationToFormattedStringConverter : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
