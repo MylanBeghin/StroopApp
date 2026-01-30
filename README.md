@@ -135,7 +135,7 @@ The documentation is organized around a central entry point that links all guide
 ### APA Style
 
 ```text
-Beghin, M. (2026). StroopApp (Version 1.0.0) [Computer software].
+Beghin, M., Pageaux, B., Mangin, T.  (2026). StroopApp (Version 1.0.0) [Computer software].
 https://github.com/MylanBeghin/StroopApp
 ```
 
@@ -143,7 +143,7 @@ https://github.com/MylanBeghin/StroopApp
 
 ```bibtex
 @software{beghin_stroopapp_2026,
-  author  = {Beghin, Mylan},
+  author  = {Beghin, Mylan, Pageaux, Benjamin, Mangin, Thomas},
   title   = {StroopApp},
   version = {1.0.0},
   year    = {2026},
@@ -196,8 +196,8 @@ It was carried out by a graduate engineering student from the **École Nationale
 
 ## Contact
 
-* **Author**: Mylan Beghin
-* **Email**: [mylan.bghn@gmail.com](mailto:mylan.bghn@gmail.com)
+* **Authors**: Mylan Beghin, Benjamin Pageaux, Thomas Mangin
+* **Emails**: [mylan.bghn@gmail.com (Developer)](mailto:mylan.bghn@gmail.com), [thomas.mangin@umontreal.ca](PhD, Post-Doc Researcher)
 * **Issues**: [https://github.com/MylanBeghin/StroopApp/issues](https://github.com/MylanBeghin/StroopApp/issues)
 * **Repository**: [https://github.com/MylanBeghin/StroopApp](https://github.com/MylanBeghin/StroopApp)
 
