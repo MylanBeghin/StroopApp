@@ -95,7 +95,7 @@ Observed variability is consistent with half a refresh cycle on a 60 Hz display,
 
 ## Response time distributions
 
-![Response time distributions on Windows 7](StroopApp/Resources/Images/validation_rt_distributions_win7_win11.png)
+![Response time distributions on Windows 7](../StroopApp/Resources/Images/validation_rt_distributions_win7_win11.png)
 
 
 Response time distributions across software tools under Windows 7 and Windows 11.
@@ -104,7 +104,7 @@ Response time distributions across software tools under Windows 7 and Windows 11
 
 ## Mean response times
 
-![Mean response times across applications and operating systems](StroopApp/Resources/Images/validation_rt_means.png)
+![Mean response times across applications and operating systems](../StroopApp/Resources/Images/validation_rt_means.png)
 
 Mean reaction times across software tools and operating systems.
 
