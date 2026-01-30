@@ -118,9 +118,10 @@ The documentation is organized around a central entry point that links all guide
 
 | Guide | Description |
 |------|------------|
-| [Documentation index](docs/index.md) | Entry point and global overview |
-| [Installation](docs/installation.md) | Setup and deployment |
+| [Documentation index](docs/index.md) | Documentation entry point |
+| [Installation](docs/installation.md) | Installation and system requirements |
 | [Usage](docs/usage.md) | Running an experiment |
+| [Validation](docs/validation.md) | Hardware-based timing validation |
 | [Experiment configuration](docs/experiments.md) | Detailed parameter configuration |
 | [Data output](docs/data-output.md) | Output format and variables |
 
