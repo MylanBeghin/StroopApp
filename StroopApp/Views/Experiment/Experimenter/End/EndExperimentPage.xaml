@@ -203,7 +203,7 @@
             <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_NewExperiment]}"
                     Command="{Binding NewExperimentCommand}" />
             <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_Quit_Without_Export]}"
-                    Command="{Binding QuitWihtoutExportCommand}"
+                    Command="{Binding QuitWithoutExportCommand}"
                     Visibility="{Binding Settings.ExperimentContext.HasUnsavedExports,
 Converter={StaticResource BoolToVisibilityConverter}}" />
             <Button Content="{Binding Source={StaticResource Loc}, Path= [Button_Quit_With_Export]}"

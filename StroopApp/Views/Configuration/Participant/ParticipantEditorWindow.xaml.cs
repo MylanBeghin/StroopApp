@@ -5,7 +5,6 @@ namespace StroopApp.Views.Participant
 {
     public partial class ParticipantEditorWindow : Window
     {
-        int rendercount = 0;
         public ParticipantEditorWindow(ParticipantEditorViewModel viewModel)
         {
 

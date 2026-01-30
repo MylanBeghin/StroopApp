@@ -13,7 +13,6 @@
         WindowStartupLocation="CenterScreen"
         ui:WindowHelper.UseModernWindowStyle="True">
     <Window.Resources>
-        <converters:StroopTypeToEnabledConverter x:Key="StroopTypeToEnabledConverter" />
         <converters:CalculationModeToBooleanConverter x:Key="CalculationModeToBooleanConverter" />
         <converters:MillisecondsToHoursConverter x:Key="MillisecondsToHoursConverter" />
         <converters:MillisecondsToMinutesConverter x:Key="MillisecondsToMinutesConverter" />

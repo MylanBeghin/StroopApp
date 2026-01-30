@@ -1,5 +1,4 @@
-﻿<!-- StroopPage.xaml -->
-<Page x:Class="StroopApp.Views.Experiment.Participant.StroopPage"
+﻿<Page x:Class="StroopApp.Views.Experiment.Participant.StroopPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:ui="http://schemas.modernwpf.com/2019"
