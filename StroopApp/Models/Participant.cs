@@ -38,7 +38,7 @@ namespace StroopApp.Models
                 if (value != _id)
                 {
                     _id = value;
-                    OnPropertyChanged(nameof(Id));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -51,7 +51,7 @@ namespace StroopApp.Models
                 if (value != _height)
                 {
                     _height = value;
-                    OnPropertyChanged(nameof(Height));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -64,7 +64,7 @@ namespace StroopApp.Models
                 if (value != _weight)
                 {
                     _weight = value;
-                    OnPropertyChanged(nameof(Weight));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -77,7 +77,7 @@ namespace StroopApp.Models
                 if (value != _age)
                 {
                     _age = value;
-                    OnPropertyChanged(nameof(Age));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -91,7 +91,7 @@ namespace StroopApp.Models
                 if (value != _sexAssigned)
                 {
                     _sexAssigned = value;
-                    OnPropertyChanged(nameof(SexAssigned));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -105,13 +105,12 @@ namespace StroopApp.Models
                 if (value != _gender)
                 {
                     _gender = value;
-                    OnPropertyChanged(nameof(Gender));
+                    OnPropertyChanged();
                 }
             }
         }
         public Participant()
         {
-            _id = string.Empty;
             SexAssigned = SexAssignedAtBirth.PreferNotToAnswer;
             Gender = Gender.PreferNotToAnswer;
         }

@@ -185,7 +185,7 @@ namespace StroopApp.Models
 				}
 			}
 		}
-		public AmorceType VisualCue
+		public VisualCueType VisualCue
 		{
 			get; set;
 		}
@@ -196,7 +196,7 @@ namespace StroopApp.Models
 		{
 			if (IsAmorce)
 			{
-				ExpectedAnswer = (VisualCue == AmorceType.Square) ? Stimulus.InternalText : Stimulus.Color;
+				ExpectedAnswer = (VisualCue == VisualCueType.Square) ? Stimulus.InternalText : Stimulus.Color;
 			}
 			else if (IsCongruent)
 			{

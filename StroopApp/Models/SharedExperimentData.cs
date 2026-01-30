@@ -59,8 +59,8 @@ namespace StroopApp.Models
         {
             get; set;
         }
-        private int _currentBlockStart;
-        private int _currentBlockEnd;
+        public int CurrentBlockStart;
+        public int CurrentBlockEnd;
 
         private StroopTrial? _currentTrial;
         public StroopTrial? CurrentTrial
@@ -155,7 +155,7 @@ namespace StroopApp.Models
 
         private readonly SKColor[] _palette = { SKColors.CornflowerBlue, SKColors.OrangeRed, SKColors.MediumSeaGreen, SKColors.Goldenrod };
 
-        private int _colorIndex;
+        public int ColorIndex;
 
         private readonly ExperimentChartFactory _chartFactory;
 
@@ -180,7 +180,7 @@ namespace StroopApp.Models
             Sections = new ObservableCollection<RectangularSection>();
             ReactionPoints = new ObservableCollection<ReactionTimePoint>();
             NewColumnSerie();
-            _currentBlockStart = 1;
+            CurrentBlockStart = 1;
         }
         /// <summary>
         /// Creates a new column series for displaying reaction times in the chart.
@@ -211,13 +211,13 @@ namespace StroopApp.Models
 
             CurrentBlock = new Block(config);
             Blocks.Add(CurrentBlock);
-            var color = _palette[_colorIndex % _palette.Length];
+            var color = _palette[ColorIndex % _palette.Length];
             var fillColor = color.WithAlpha(50);
 
-            var start = _currentBlockStart;
+            var start = CurrentBlockStart;
             var count = config.WordCount;
             var end = start + count - 1;
-            _currentBlockEnd = end;
+            CurrentBlockEnd = end;
 
             // Delegate graphics creation to factory
             var lineSeries = _chartFactory.CreateBlockLineSeries(CurrentBlock.TrialTimes, start);
@@ -226,8 +226,8 @@ namespace StroopApp.Models
             var section = _chartFactory.CreateBlockSection(start, end, config.Block, fillColor);
             Sections.Add(section);
 
-            _colorIndex++;
-            _currentBlockStart = end + 1;
+            ColorIndex++;
+            CurrentBlockStart = end + 1;
         }
         /// <summary>
         /// Resets all experiment data, clears collections, and reinitializes chart series.
@@ -239,9 +239,9 @@ namespace StroopApp.Models
             Sections.Clear();
             ReactionPoints.Clear();
             IsTaskStopped = false;
-            _colorIndex = 0;
-            _currentBlockStart = 1;
-            _currentBlockEnd = 0;
+            ColorIndex = 0;
+            CurrentBlockStart = 1;
+            CurrentBlockEnd = 0;
             CurrentBlock = null;
             IsBlockFinished = false;
             HasUnsavedExports = true;
