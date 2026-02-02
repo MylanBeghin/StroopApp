@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.0.0] – 2026-01-30
+## [1.0.0] – 2026-02-XX -TO BE COMPLETED
 
 ### Added
 - First stable public release of **StroopApp**.
@@ -42,7 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Planned Features
 
 #### Serial Port Communication for MRI/EEG Synchronization
-**Status**: Prototype UX created, awaiting needs analysis
+**Status**: Prototype created, awaiting needs analysis
 
 **Background**:  
 Initial development explored integration with MRI/EEG equipment via serial port triggers. The goal was to synchronize stimulus presentation (fixation cross, visual cues, colored words) with external recording devices.
@@ -74,7 +74,7 @@ Not included due to insufficient needs analysis and lack of testing infrastructu
 #### Multi-Screen Window Management
 - Choose which screen to open participant/experimenter windows
 - Remember window positions between sessions  
-- Easier window positioning (currently requires dragging invisible title bar)
+- Easier window positioning (currently requires dragging invisible title bar or Windows keyboard shortcuts)
 
 #### Customizable Instructions
 - Create custom instruction pages
