@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="StroopApp/Resources/Images/logo.jpg" alt="StroopApp Logo" width="300"/>
+
 # **StroopApp**
 ### *A Modern Desktop Application for Administering Stroop Tasks in Experimental Research*
 
@@ -193,6 +195,7 @@ I would like to thank:
 
 **Special Recognition:**
 - **Benjamin and Thomas** – This experience wouldn't have been possible without you. Thank you for your unwavering support, both professionally and personally, and for always being there whenever I needed guidance or help. Your mentorship made all the difference!
+- **Eloïse Coursier** – Thank you for generously creating the beautiful StroopApp logo!
 
 ---
 
