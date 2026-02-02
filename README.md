@@ -112,19 +112,7 @@ Detailed instructions are available in the documentation:
 
 ## 📚 Documentation
 
-The documentation is organized around a central entry point that links all guides and explains the overall workflow.
-
-- **Documentation index**: overview and navigation between guides
-
-| Guide | Description |
-|------|------------|
-| [Documentation index](docs/index.md) | Documentation entry point |
-| [Installation](docs/installation.md) | Installation and system requirements |
-| [Usage](docs/usage.md) | Running an experiment |
-| [Validation](docs/validation.md) | Hardware-based timing validation |
-| [Experiment configuration](docs/experiments.md) | Detailed parameter configuration |
-| [Data output](docs/data-output.md) | Output format and variables |
-
+Check documentation on the [Wiki tab](https://github.com/MylanBeghin/StroopApp/wiki)!
 
 ---
 
@@ -188,9 +176,23 @@ See the [LICENSE](LICENSE) file for full details.
 
 ## Acknowledgments
 
-This project was developed at the **Centre de Recherche de l’Institut Universitaire de Gériatrie de Montréal (CRIUGM)** as part of a six-month research internship.
+I developed this project during a six-month research internship at the **Centre de Recherche de l'Institut Universitaire de Gériatrie de Montréal (CRIUGM)** as a graduate engineering student from the **École Nationale Supérieure de Cognitique (ENSC), Bordeaux INP**.
 
-It was carried out by a graduate engineering student from the **École Nationale Supérieure de Cognitique (ENSC), Bordeaux INP**, with the support of academic and research teams.
+I would like to thank:
+- **CRIUGM** for welcoming me as an international intern and providing an exceptional research environment
+- **ENSC, Bordeaux INP** for the education and skills that prepared me to undertake this project
+
+### Special Thanks
+
+**Financial Support:**
+- **Prof. Benjamin Pageaux's Laboratory** (CRIUGM) for research scholarship
+- **Région Nouvelle-Aquitaine** for mobility grant
+
+**Research Team:**
+- **ELPN Lab team** – Thank you for the incredible welcome! Your constant support, positive energy, and warm atmosphere made this internship an unforgettable experience. Working alongside such a welcoming and collaborative team was truly inspiring! 🙏
+
+**Special Recognition:**
+- **Benjamin and Thomas** – This experience wouldn't have been possible without you. Thank you for your unwavering support, both professionally and personally, and for always being there whenever I needed guidance or help. Your mentorship made all the difference!
 
 ---
 
@@ -198,9 +200,6 @@ It was carried out by a graduate engineering student from the **École Nationale
 
 * **Authors**: Mylan Beghin, Benjamin Pageaux, Thomas Mangin
 * **Emails**: [mylan.bghn@gmail.com](mailto:mylan.bghn@gmail.com) (Developer), [thomas.mangin@umontreal.ca](mailto:thomas.mangin@umontreal.ca) (PhD, Post-Doc Researcher)
-* **Issues**: [https://github.com/MylanBeghin/StroopApp/issues](https://github.com/MylanBeghin/StroopApp/issues)
-* **Repository**: [https://github.com/MylanBeghin/StroopApp](https://github.com/MylanBeghin/StroopApp)
-
 ---
 
 <div align="center">
