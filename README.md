@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="StroopApp/Resources/Images/logo.jpg" alt="StroopApp Logo" width="300"/>
+
 # **StroopApp**
 ### *A Modern Desktop Application for Administering Stroop Tasks in Experimental Research*
 
@@ -10,7 +12,7 @@
 ![JOSS](https://img.shields.io/badge/JOSS-pending-yellow)
 
 [Quick Start](#-quick-start) ·
-[Documentation](#-documentation) ·
+[Documentation](https://github.com/MylanBeghin/StroopApp/wiki) ·
 [Download](https://github.com/MylanBeghin/StroopApp/releases) ·
 [Report Bug](https://github.com/MylanBeghin/StroopApp/issues) ·
 [How to Cite](#how-to-cite)
@@ -99,7 +101,7 @@ Two methods are available:
 * Windows keyboard shortcuts
 
 Detailed instructions are available in the documentation:
-[Participant window setup](https://github.com/MylanBeghin/StroopApp/blob/release/v1/docs/usage.md#7-participant-window-setup)
+[Participant window setup](https://github.com/MylanBeghin/StroopApp/wiki/Usage#7-participant-window-setup)
 
 ### System requirements
 
@@ -112,19 +114,7 @@ Detailed instructions are available in the documentation:
 
 ## 📚 Documentation
 
-The documentation is organized around a central entry point that links all guides and explains the overall workflow.
-
-- **Documentation index**: overview and navigation between guides
-
-| Guide | Description |
-|------|------------|
-| [Documentation index](docs/index.md) | Documentation entry point |
-| [Installation](docs/installation.md) | Installation and system requirements |
-| [Usage](docs/usage.md) | Running an experiment |
-| [Validation](docs/validation.md) | Hardware-based timing validation |
-| [Experiment configuration](docs/experiments.md) | Detailed parameter configuration |
-| [Data output](docs/data-output.md) | Output format and variables |
-
+Check documentation on the [Wiki tab](https://github.com/MylanBeghin/StroopApp/wiki)!
 
 ---
 
@@ -135,7 +125,7 @@ The documentation is organized around a central entry point that links all guide
 ### APA Style
 
 ```text
-Beghin, M. (2026). StroopApp (Version 1.0.0) [Computer software].
+Beghin, M., Pageaux, B., Mangin, T.  (2026). StroopApp (Version 1.0.0) [Computer software].
 https://github.com/MylanBeghin/StroopApp
 ```
 
@@ -143,7 +133,7 @@ https://github.com/MylanBeghin/StroopApp
 
 ```bibtex
 @software{beghin_stroopapp_2026,
-  author  = {Beghin, Mylan},
+  author  = {Beghin, Mylan, Pageaux, Benjamin, Mangin, Thomas},
   title   = {StroopApp},
   version = {1.0.0},
   year    = {2026},
@@ -188,19 +178,31 @@ See the [LICENSE](LICENSE) file for full details.
 
 ## Acknowledgments
 
-This project was developed at the **Centre de Recherche de l’Institut Universitaire de Gériatrie de Montréal (CRIUGM)** as part of a six-month research internship.
+I developed this project during a six-month research internship at the **Centre de Recherche de l'Institut Universitaire de Gériatrie de Montréal (CRIUGM)** as a graduate engineering student from the **École Nationale Supérieure de Cognitique (ENSC), Bordeaux INP**.
 
-It was carried out by a graduate engineering student from the **École Nationale Supérieure de Cognitique (ENSC), Bordeaux INP**, with the support of academic and research teams.
+I would like to thank:
+- **CRIUGM** for welcoming me as an international intern and providing an exceptional research environment
+- **ENSC, Bordeaux INP** for the education and skills that prepared me to undertake this project
+
+### Special Thanks
+
+**Financial Support:**
+- **Prof. Benjamin Pageaux's Laboratory** (CRIUGM) for research scholarship
+- **Région Nouvelle-Aquitaine** for mobility grant
+
+**Research Team:**
+- **ELPN Lab team** – Thank you for the incredible welcome! Your constant support, positive energy, and warm atmosphere made this internship an unforgettable experience. Working alongside such a welcoming and collaborative team was truly inspiring! 🙏
+
+**Special Recognition:**
+- **Benjamin and Thomas** – This experience wouldn't have been possible without you. Thank you for your unwavering support, both professionally and personally, and for always being there whenever I needed guidance or help. Your mentorship made all the difference!
+- **Eloïse Coursier** – Thank you for generously creating the beautiful StroopApp logo!
 
 ---
 
 ## Contact
 
-* **Author**: Mylan Beghin
-* **Email**: [mylan.bghn@gmail.com](mailto:mylan.bghn@gmail.com)
-* **Issues**: [https://github.com/MylanBeghin/StroopApp/issues](https://github.com/MylanBeghin/StroopApp/issues)
-* **Repository**: [https://github.com/MylanBeghin/StroopApp](https://github.com/MylanBeghin/StroopApp)
-
+* **Authors**: Mylan Beghin, Benjamin Pageaux, Thomas Mangin
+* **Emails**: [mylan.bghn@gmail.com](mailto:mylan.bghn@gmail.com) (Developer), [thomas.mangin@umontreal.ca](mailto:thomas.mangin@umontreal.ca) (PhD, Post-Doc Researcher)
 ---
 
 <div align="center">
