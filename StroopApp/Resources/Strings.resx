@@ -748,4 +748,7 @@
   <data name="Error_CreatingNewExperiment" xml:space="preserve">
     <value>Error creating new experiment: {0}</value>
   </data>
+  <data name="Header_ProfileName" xml:space="preserve">
+    <value>Profile name</value>
+  </data>
 </root>

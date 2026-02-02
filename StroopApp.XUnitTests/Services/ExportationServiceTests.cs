@@ -19,7 +19,7 @@ namespace StroopApp.XUnitTests.Services
         {
             Participant = new Participant { Id = "42" },
             ExperimentContext = new SharedExperimentData(),
-            CurrentProfile = new ExperimentProfile { IsAmorce = true }
+            CurrentProfile = new ExperimentProfile { IsAmorce = true, ProfileName = "TestProfile"}
         };
         private ExperimentSettings CreateMockSettings()
         {
@@ -37,7 +37,7 @@ namespace StroopApp.XUnitTests.Services
             });
             var ctx = new SharedExperimentData();
             ctx.Blocks.Add(block);
-            var profile = new ExperimentProfile { IsAmorce = true };
+            var profile = new ExperimentProfile { IsAmorce = true, ProfileName = "TestProfile" };
             return new ExperimentSettings
             {
                 Participant = participant,
@@ -55,6 +55,7 @@ namespace StroopApp.XUnitTests.Services
                 ["fr"] = new()
                 {
                     ["Header_ParticipantId"] = "ID du participant",
+                    ["Header_ProfileName"] = "Nom du profil",
                     ["Header_Congruence"] = "Congruence",
                     ["Header_VisualCue"] = "Indice visuel",
                     ["Header_BlockNumber"] = "Bloc",
@@ -63,13 +64,13 @@ namespace StroopApp.XUnitTests.Services
                     ["Header_Response_Validity"] = "Validité de la réponse",
                     ["Header_ResponseTime"] = "Temps de réponse",
                     ["Header_Trials"] = "Essais",
-                    ["Header_Visual_Cue_Type"] = "Type d'indice visuel",
                     ["Label_Square"] = "Carré",
                     ["Label_Circle"] = "Cercle"
                 },
                 ["en"] = new()
                 {
                     ["Header_ParticipantId"] = "Participant ID",
+                    ["Header_ProfileName"] = "Profile Name",
                     ["Header_Congruence"] = "Congruence",
                     ["Header_VisualCue"] = "Visual cue",
                     ["Header_BlockNumber"] = "Block",
@@ -78,7 +79,6 @@ namespace StroopApp.XUnitTests.Services
                     ["Header_Response_Validity"] = "Response validity",
                     ["Header_ResponseTime"] = "Response time",
                     ["Header_Trials"] = "Trials",
-                    ["Header_Visual_Cue_Type"] = "Visual cue type",
                     ["Label_Square"] = "Square",
                     ["Label_Circle"] = "Circle"
                 }
@@ -134,7 +134,7 @@ namespace StroopApp.XUnitTests.Services
             var ws = wb.Worksheet("Export");
             Assert.Equal(languageService.GetLocalizedString("Header_ParticipantId"), ws.Cell(1, 1).Value);
             Assert.Equal(settings.Participant.Id, ws.Cell(2, 1).Value);
-            Assert.Equal(languageService.GetLocalizedString("Label_Square"), ws.Cell(2, 10).Value);
+            Assert.Equal(languageService.GetLocalizedString("Label_Square"), ws.Cell(2, 6).Value);
         }
 
         [Fact]
@@ -194,8 +194,8 @@ namespace StroopApp.XUnitTests.Services
             using var wb = new XLWorkbook(filePath);
             var ws = wb.Worksheet("Export");
             Assert.Equal(4, ws.LastRowUsed().RowNumber());
-            Assert.False((bool)ws.Cell(3, 2).Value);
-            Assert.Equal(languageService.GetLocalizedString("Label_Circle"), ws.Cell(3, 10).Value);
+            Assert.False((bool)ws.Cell(3, 5).Value);
+            Assert.Equal(languageService.GetLocalizedString("Label_Circle"), ws.Cell(3, 6).Value);
         }
 
         [Fact]

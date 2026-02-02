@@ -979,6 +979,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Profile name.
+        /// </summary>
+        public static string Header_ProfileName {
+            get {
+                return ResourceManager.GetString("Header_ProfileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Response validity.
         /// </summary>
         public static string Header_Response_Validity {
