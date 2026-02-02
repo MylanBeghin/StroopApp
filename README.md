@@ -10,7 +10,7 @@
 ![JOSS](https://img.shields.io/badge/JOSS-pending-yellow)
 
 [Quick Start](#-quick-start) ·
-[Documentation](#-documentation) ·
+[Documentation](https://github.com/MylanBeghin/StroopApp/wiki) ·
 [Download](https://github.com/MylanBeghin/StroopApp/releases) ·
 [Report Bug](https://github.com/MylanBeghin/StroopApp/issues) ·
 [How to Cite](#how-to-cite)
@@ -99,7 +99,7 @@ Two methods are available:
 * Windows keyboard shortcuts
 
 Detailed instructions are available in the documentation:
-[Participant window setup](https://github.com/MylanBeghin/StroopApp/blob/release/v1/docs/usage.md#7-participant-window-setup)
+[Participant window setup](https://github.com/MylanBeghin/StroopApp/wiki/Usage#7-participant-window-setup)
 
 ### System requirements
 
