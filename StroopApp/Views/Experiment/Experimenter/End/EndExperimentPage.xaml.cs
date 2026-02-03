@@ -21,16 +21,16 @@ namespace StroopApp.Views.Experiment.Experimenter
 			var configDir = Path.Combine(
 				Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
 				"StroopApp");
-			var ExportationService = new ExportationService(settings, languageService, configDir);
-			DataContext = new EndExperimentPageViewModel(settings, ExportationService, experimenterNavigationService, windowManager, languageService);
-			var GlobalGraph = new GlobalGraphView(settings);
-			MainGrid.Children.Add(GlobalGraph);
-			Grid.SetRow(GlobalGraph, 4);
-			Grid.SetColumnSpan(GlobalGraph, 3);
-			var LiveReactionTimeView = new LiveReactionTimeView(settings);
-			MainGrid.Children.Add(LiveReactionTimeView);
-			Grid.SetRow(LiveReactionTimeView, 2);
-			Grid.SetColumn(LiveReactionTimeView, 2);
+			var exportationService = new ExportationService(settings, languageService, configDir);
+			DataContext = new EndExperimentPageViewModel(settings, exportationService, experimenterNavigationService, windowManager, languageService);
+			var globalGraph = new GlobalGraphView(settings);
+			MainGrid.Children.Add(globalGraph);
+			Grid.SetRow(globalGraph, 4);
+			Grid.SetColumnSpan(globalGraph, 3);
+			var liveReactionTimeView = new LiveReactionTimeView(settings);
+			MainGrid.Children.Add(liveReactionTimeView);
+			Grid.SetRow(liveReactionTimeView, 2);
+			Grid.SetColumn(liveReactionTimeView, 2);
 		}
 	}
 }

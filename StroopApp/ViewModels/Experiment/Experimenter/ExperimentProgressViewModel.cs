@@ -1,28 +1,36 @@
-﻿using StroopApp.Core;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using StroopApp.Core;
 using StroopApp.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace StroopApp.ViewModels.Experiment
+namespace StroopApp.ViewModels.Experiment.Experimenter
 {
-    public class ExperimentProgressViewModel : ViewModelBase
+    /// <summary>
+    /// ViewModel for tracking experiment progress, displaying completion percentage and current trial records.
+    /// Updates automatically when experiment context changes.
+    /// </summary>
+    public class ExperimentProgressViewModel : ViewModelBase, IDisposable
     {
-        public ExperimentSettings settings
+        public ExperimentSettings Settings
         {
             get;
         }
-        public int Progress => (settings.CurrentProfile.WordCount > 0) && (settings.ExperimentContext != null)
-    ? (int)(((double)settings.ExperimentContext.ReactionPoints.Count / settings.CurrentProfile.WordCount) * 100)
+        public int Progress => (Settings.CurrentProfile.WordCount > 0) && (Settings.ExperimentContext != null)
+    ? (int)(((double)Settings.ExperimentContext.ReactionPoints.Count / Settings.CurrentProfile.WordCount) * 100)
         : 0;
 
-        public ObservableCollection<StroopTrial> TrialRecords => settings.ExperimentContext?.Blocks[settings.Block].TrialRecords ?? new ObservableCollection<StroopTrial>();
+        public ObservableCollection<StroopTrial> TrialRecords =>
+    Settings.ExperimentContext?.Blocks.Count > Settings.Block
+        ? Settings.ExperimentContext.Blocks[Settings.Block].TrialRecords
+        : new ObservableCollection<StroopTrial>();
 
         public ExperimentProgressViewModel(ExperimentSettings settings)
         {
-            this.settings = settings;
-            if (this.settings.ExperimentContext != null)
+            this.Settings = settings;
+            if (this.Settings.ExperimentContext != null)
             {
-                this.settings.ExperimentContext.PropertyChanged += ExperimentContext_PropertyChanged;
+                this.Settings.ExperimentContext.PropertyChanged += ExperimentContext_PropertyChanged;
             }
         }
 
@@ -30,6 +38,13 @@ namespace StroopApp.ViewModels.Experiment
         {
             OnPropertyChanged(nameof(Progress));
             OnPropertyChanged(nameof(TrialRecords));
+        }
+        public void Dispose()
+        {
+            if (Settings.ExperimentContext != null)
+            {
+                Settings.ExperimentContext.PropertyChanged -= ExperimentContext_PropertyChanged;
+            }
         }
     }
 }

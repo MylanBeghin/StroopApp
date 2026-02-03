@@ -4,21 +4,24 @@ using StroopApp.Models;
 
 namespace StroopApp.Services.Trial
 {
-	public interface ITrialGenerationService
-	{
-		/// <summary>
-		/// Génère une liste de trials basée sur les paramètres d'expérience
-		/// </summary>
-		/// <param name="settings">Paramètres de l'expérience</param>
-		/// <returns>Liste des trials générés</returns>
-		List<StroopTrial> GenerateTrials(ExperimentSettings settings);
+    /// <summary>
+    /// Defines contract for generating Stroop trial sequences with optional visual cues.
+    /// </summary>
+    public interface ITrialGenerationService
+    {
+	/// <summary>
+	/// Generates a list of trials based on experiment parameters.
+	/// </summary>
+	/// <param name="settings">Experiment settings</param>
+	/// <returns>List of generated trials</returns>
+	List<StroopTrial> GenerateTrials(ExperimentSettings settings);
 
-		/// <summary>
-		/// Génère une séquence d'amorces (optionnel)
-		/// </summary>
-		/// <param name="count">Nombre d'amorces à générer</param>
-		/// <param name="switchPercentage">Pourcentage de changement d'amorce</param>
-		/// <returns>Séquence d'amorces</returns>
-		List<AmorceType> GenerateAmorceSequence(int count, int switchPercentage);
+	/// <summary>
+	/// Generates a sequence of visual cues (optional).
+	/// </summary>
+	/// <param name="count">Number of cues to generate</param>
+	/// <param name="switchPercentage">Percentage of cue switches</param>
+	/// <returns>Sequence of cues</returns>
+	List<VisualCueType> GenerateAmorceSequence(int count, int switchPercentage);
 	}
 }

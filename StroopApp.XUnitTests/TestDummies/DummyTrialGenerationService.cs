@@ -39,14 +39,14 @@ namespace StroopApp.XUnitTests.TestDummies
 			return trials;
 		}
 
-		public List<AmorceType> GenerateAmorceSequence(int count, int switchPercentage)
+		public List<VisualCueType> GenerateAmorceSequence(int count, int switchPercentage)
 		{
 			GenerateAmorceSequenceCalled = true;
 
-			var sequence = new List<AmorceType>();
+			var sequence = new List<VisualCueType>();
 			for (int i = 0; i < count; i++)
 			{
-				sequence.Add(i % 2 == 0 ? AmorceType.Square : AmorceType.Round);
+				sequence.Add(i % 2 == 0 ? VisualCueType.Square : VisualCueType.Round);
 			}
 
 			return sequence;

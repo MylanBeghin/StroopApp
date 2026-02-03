@@ -105,8 +105,8 @@ namespace StroopApp.XUnitTests.Models
 			// Act
 			context.AddNewSerie(settings);
 
-			// Assert - After first block (1-10), currentBlockStart is set to 11 for next block
-			Assert.Equal(11, context.currentBlockStart);
+			// Assert - After first block (1-10), _currentBlockStart is set to 11 for next block
+			Assert.Equal(11, context.CurrentBlockStart);
 		}
 
 		[Fact]
@@ -124,7 +124,7 @@ namespace StroopApp.XUnitTests.Models
 			context.AddNewSerie(settings);
 
 			// Assert - First block with 10 words ends at trial 10
-			Assert.Equal(10, context.currentBlockEnd);
+			Assert.Equal(10, context.CurrentBlockEnd);
 		}
 
 		[Fact]
@@ -143,8 +143,8 @@ namespace StroopApp.XUnitTests.Models
 			settings.Block = 2;
 			context.AddNewSerie(settings);
 
-			// Assert - After second block (11-20), currentBlockStart is set to 21 for next block
-			Assert.Equal(21, context.currentBlockStart);
+			// Assert - After second block (11-20), _currentBlockStart is set to 21 for next block
+			Assert.Equal(21, context.CurrentBlockStart);
 		}
 
 		[Fact]
@@ -188,7 +188,7 @@ namespace StroopApp.XUnitTests.Models
 			context.AddNewSerie(settings); // Block 2: trials 11-15
 
 			// Assert
-			Assert.Equal(15, context.currentBlockEnd);
+			Assert.Equal(15, context.CurrentBlockEnd);
 		}
 
 		[Fact]
@@ -201,13 +201,13 @@ namespace StroopApp.XUnitTests.Models
 				Block = 1,
 				CurrentProfile = new ExperimentProfile { WordCount = 10 }
 			};
-			var initialColorIndex = context._colorIndex;
+			var initialColorIndex = context.ColorIndex;
 
 			// Act
 			context.AddNewSerie(settings);
 
 			// Assert
-			Assert.Equal(initialColorIndex + 1, context._colorIndex);
+			Assert.Equal(initialColorIndex + 1, context.ColorIndex);
 		}
 
 		[Fact]
@@ -229,7 +229,7 @@ namespace StroopApp.XUnitTests.Models
 			}
 
 			// Assert
-			Assert.Equal(6, context._colorIndex);
+			Assert.Equal(6, context.ColorIndex);
 		}
 
 		[Fact]
@@ -372,7 +372,7 @@ namespace StroopApp.XUnitTests.Models
 
 			// Assert
 			var section = context.Sections[0];
-			Assert.Equal("Bloc n°2", section.Label);
+			Assert.Equal("Block 2", section.Label);
 		}
 
 		[Fact]

@@ -10,11 +10,10 @@ namespace StroopApp.Views.Configuration.Profile
 		{
 			InitializeComponent();
 		}
-		private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
-		{
-			// Ouvre le lien dans le navigateur par défaut
-			Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
-			e.Handled = true;
-		}
+	private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+	{
+		Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
+		e.Handled = true;
+	}
 	}
 }

@@ -2,7 +2,6 @@ namespace StroopApp.Services.Trial
 {
 	/// <summary>
 	/// Minimal interface for trial generation configuration.
-	/// Decouples TrialGenerationService from ExperimentSettings god object.
 	/// </summary>
 	public interface ITrialConfiguration
 	{

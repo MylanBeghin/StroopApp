@@ -4,34 +4,36 @@ using StroopApp.Core;
 
 namespace StroopApp.ViewModels.Experiment.Participant.Stroop
 {
-
-
-	public class WordControlViewModel : ViewModelBase
+    /// <summary>
+    /// ViewModel for displaying Stroop stimulus words with color mapping.
+    /// Supports bilingual color names (English/French) for localization.
+    /// </summary>
+    public class WordControlViewModel : ViewModelBase
 	{
-		private string label;
+		private string _label;
 		public string Label
 		{
-			get => label;
+			get => _label;
 			set
 			{
-				label = value;
+				_label = value;
 				OnPropertyChanged();
 			}
 		}
 
-		private string color;
+		private string _color;
 		public string Color
 		{
-			get => color;
+			get => _color;
 			set
 			{
-				color = value;
+				_color = value;
 				OnPropertyChanged();
 				OnPropertyChanged(nameof(ForegroundBrush));
 			}
 		}
 
-		public Brush ForegroundBrush => color switch
+		public Brush ForegroundBrush => _color switch
 		{
 			"Red" or "Rouge" => Brushes.Red,
 			"Blue" or "Bleu" => Brushes.Blue,

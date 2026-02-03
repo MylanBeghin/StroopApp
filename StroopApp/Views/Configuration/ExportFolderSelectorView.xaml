@@ -16,13 +16,11 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <!-- Header simple -->
                 <TextBlock Grid.Row="0"
                            Text="{Binding Source={StaticResource Loc}, Path=[Label_ExportFolderSelector_PathLabel]}"
                            Style="{DynamicResource BodyTextBlockStyle}"
                            HorizontalAlignment="Left"
                            Margin="0,0,0,4" />
-                <!-- Contenu : TextBox et Bouton -->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />

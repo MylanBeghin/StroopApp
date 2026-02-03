@@ -10,19 +10,15 @@ using StroopApp.Models;
 namespace StroopApp.Services.Charts
 {
 	/// <summary>
-	/// Factory responsible for creating LiveCharts graphics objects.
-	/// Extracted from SharedExperimentData to isolate LiveCharts logic.
-	/// This is a mechanical extraction - behavior is preserved EXACTLY as it was.
+	/// Factory for creating LiveCharts visualization objects for experiments.
 	/// </summary>
 	public class ExperimentChartFactory
 	{
 		/// <summary>
-		/// Creates a live-bound column series for reaction time points.
-		/// CRITICAL: Values references the live collection (not a copy).
-		/// This is the exact behavior extracted from SharedExperimentData.NewColumnSerie().
+		/// Creates a column series bound to a live collection of reaction time points.
 		/// </summary>
-		/// <param name="reactionPoints">Live collection to bind to (modifications propagate to chart)</param>
-		/// <returns>ObservableCollection containing exactly 1 ColumnSeries</returns>
+		/// <param name="reactionPoints">Live collection to bind to (modifications propagate to chart).</param>
+		/// <returns>Observable collection containing a single column series.</returns>
 		public ObservableCollection<ISeries> CreateLiveColumnSerie(ObservableCollection<ReactionTimePoint> reactionPoints)
 		{
 			return new ObservableCollection<ISeries>
@@ -33,18 +29,20 @@ namespace StroopApp.Services.Charts
 					DataLabelsPosition = LiveChartsCore.Measure.DataLabelsPosition.Top,
 					DataLabelsSize = 16,
 					DataLabelsPaint = new SolidColorPaint(SKColors.Black),
-					DataLabelsFormatter = point => point.Coordinate.SecondaryValue.Equals(double.NaN) ? "Aucune réponse" : point.Coordinate.PrimaryValue.ToString("N0"),
+					DataLabelsFormatter = point => point.Coordinate.SecondaryValue.Equals(double.NaN) 
+						? "No response" 
+						: point.Coordinate.PrimaryValue.ToString("N0"),
 					XToolTipLabelFormatter = point =>
 					{
 						var trial = (int)(point.Coordinate.SecondaryValue + 1);
-						return $"Essai n°{trial}";
+						return $"Trial {trial}";
 					},
 					YToolTipLabelFormatter = point =>
 					{
 						var value = point.Coordinate.PrimaryValue;
 						return double.IsNaN(value)
-							? "Pas de réponse"
-							: $"Temps de réponse : {value:0.#####} ms";
+							? "No response"
+							: $"Response time : {value:0.#####} ms";
 					},
 					Mapping = (point, index) => new Coordinate(point.TrialNumber - 1, point.ReactionTime != null ? point.ReactionTime.Value : double.NaN)
 				}.OnPointCreated(p =>
@@ -73,15 +71,12 @@ namespace StroopApp.Services.Charts
 		}
 
 		/// <summary>
-		/// Creates a snapshot column series for reaction time points.
-		/// CRITICAL: Values references a COPY of the data (not live).
-		/// This is the exact behavior used in EndExperimentPageViewModel.UpdateBlock().
+		/// Creates a column series from a snapshot of reaction time points.
 		/// </summary>
-		/// <param name="snapshot">Snapshot collection (isolated from original)</param>
-		/// <returns>ObservableCollection containing exactly 1 ColumnSeries</returns>
+		/// <param name="snapshot">Snapshot collection (isolated from original data).</param>
+		/// <returns>Observable collection containing a single column series.</returns>
 		public ObservableCollection<ISeries> CreateSnapshotColumnSerie(ObservableCollection<ReactionTimePoint> snapshot)
 		{
-			// EXACT same logic as CreateLiveColumnSerie, but different usage intent (snapshot vs live)
 			return new ObservableCollection<ISeries>
 			{
 				new ColumnSeries<ReactionTimePoint>
@@ -91,8 +86,8 @@ namespace StroopApp.Services.Charts
 					DataLabelsSize = 16,
 					DataLabelsPaint = new SolidColorPaint(SKColors.Black),
 					DataLabelsFormatter = point =>
-						point.Coordinate.PrimaryValue.Equals(null)
-							? "Aucune réponse"
+						point.Coordinate.PrimaryValue.Equals(Double.NaN)
+							? "No response"
 							: point.Coordinate.PrimaryValue.ToString("N0"),
 					Mapping = (point, index) => new Coordinate(
 						point.TrialNumber - 1,
@@ -123,13 +118,11 @@ namespace StroopApp.Services.Charts
 		}
 
 		/// <summary>
-		/// Creates a LineSeries for a block's trial times.
-		/// This is the exact behavior extracted from SharedExperimentData.AddNewSerie().
-		/// CRITICAL: Mapping uses pt.Value (assumes non-null values).
+		/// Creates a line series for a block's reaction times.
 		/// </summary>
-		/// <param name="trialTimes">Live collection of trial times from CurrentBlock</param>
-		/// <param name="start">Start index for X mapping (currentBlockStart value)</param>
-		/// <returns>LineSeries configured exactly as in original code</returns>
+		/// <param name="trialTimes">Collection of trial times from the current block.</param>
+		/// <param name="start">Start index for X-axis mapping.</param>
+		/// <returns>Configured line series.</returns>
 		public LineSeries<double?> CreateBlockLineSeries(ObservableCollection<double?> trialTimes, int start)
 		{
 			return new LineSeries<double?>
@@ -141,23 +134,19 @@ namespace StroopApp.Services.Charts
 				GeometrySize = 6,
 				GeometryStroke = new SolidColorPaint(SKColors.Black, 2),
 				GeometryFill = new SolidColorPaint(SKColors.White),
-				// ASSUMPTION:
-				// TrialTimes collection never contains null values in practice.
-				// This behavior is validated and frozen by Phase C1 characterization tests.
-				// The double? type is inherited from the data model, but runtime usage guarantees non-null.
+				// Collection typed as double? but runtime usage ensures non-null values
 				Mapping = (pt, idx) => new Coordinate(start + idx, pt!.Value)
 			};
 		}
 
 		/// <summary>
-		/// Creates a RectangularSection for a block range.
-		/// This is the exact behavior extracted from SharedExperimentData.AddNewSerie().
+		/// Creates a rectangular section representing a block's trial range on the chart.
 		/// </summary>
-		/// <param name="xi">Start trial index</param>
-		/// <param name="xj">End trial index</param>
-		/// <param name="blockNumber">Block number for label</param>
-		/// <param name="fillColor">Fill color with alpha (from palette)</param>
-		/// <returns>RectangularSection configured exactly as in original code</returns>
+		/// <param name="xi">Start trial index.</param>
+		/// <param name="xj">End trial index.</param>
+		/// <param name="blockNumber">Block number for label.</param>
+		/// <param name="fillColor">Fill color with alpha channel.</param>
+		/// <returns>Configured rectangular section.</returns>
 		public RectangularSection CreateBlockSection(int xi, int xj, int blockNumber, SKColor fillColor)
 		{
 			return new RectangularSection
@@ -165,7 +154,7 @@ namespace StroopApp.Services.Charts
 				Xi = xi,
 				Xj = xj,
 				Fill = new SolidColorPaint(fillColor),
-				Label = $"Bloc n°{blockNumber}",
+				Label = $"Block {blockNumber}",
 				LabelSize = 16,
 				LabelPaint = new SolidColorPaint(SKColors.Black)
 			};

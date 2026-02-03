@@ -1,32 +1,39 @@
-﻿using StroopApp.Services.Navigation;
-using System;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
-public class NavigationService : INavigationService
+namespace StroopApp.Services.Navigation
 {
-    private readonly Frame _frame;
-
-    public NavigationService(Frame frame)
+    /// <summary>
+    /// Service for WPF Frame-based navigation between pages.
+    /// </summary>
+    public class NavigationService : INavigationService
     {
-        _frame = frame ?? throw new ArgumentNullException(nameof(frame));
-    }
+        private readonly Frame _frame;
 
-    public void NavigateTo<T>(object? parameter = null) where T : Page
-{
-    // Si le paramètre est fourni, on injecte également le service de navigation (this) en premier argument.
-    var page = parameter != null
-        ? (Page?)Activator.CreateInstance(typeof(T), this, parameter)
-        : (Page?)Activator.CreateInstance(typeof(T), this);
-    
-    if (page == null)
-        throw new InvalidOperationException($"Failed to create instance of {typeof(T).Name}");
-    
-    _frame.Navigate(page);
-}
+        public NavigationService(Frame frame)
+        {
+            _frame = frame ?? throw new ArgumentNullException(nameof(frame));
+        }
+        /// <summary>
+        /// Navigates to a page of type T, passing the navigation service and optional parameter to its constructor.
+        /// </summary>
+        public void NavigateTo<T>(object? parameter = null) where T : Page
+        {
+            var page = parameter != null
+                ? (Page?)Activator.CreateInstance(typeof(T), this, parameter)
+                : (Page?)Activator.CreateInstance(typeof(T), this);
 
-    public void NavigateTo(Func<Page> pageFactory)
-    {
-        var page = pageFactory();
-        _frame.Navigate(page);
+            if (page == null)
+                throw new InvalidOperationException($"Failed to create instance of {typeof(T).Name}");
+
+            _frame.Navigate(page);
+        }
+        /// <summary>
+        /// Navigates to a page created by the provided factory function.
+        /// </summary>
+        public void NavigateTo(Func<Page> pageFactory)
+        {
+            var page = pageFactory();
+            _frame.Navigate(page);
+        }
     }
 }

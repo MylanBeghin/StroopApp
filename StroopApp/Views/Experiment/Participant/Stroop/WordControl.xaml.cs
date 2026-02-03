@@ -1,7 +1,5 @@
 ﻿using StroopApp.ViewModels.Experiment.Participant.Stroop;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace StroopApp.Views.Experiment.Participant.Stroop
 {

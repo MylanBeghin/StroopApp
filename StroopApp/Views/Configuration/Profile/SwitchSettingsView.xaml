@@ -15,7 +15,6 @@
             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
         <ui:SimpleStackPanel Orientation="Vertical"
                              Spacing="8">
-            <!-- Ligne Carré (%) | ■ | Slider | ● | Rond (%) -->
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -23,17 +22,11 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
-                    <!-- Carre (%) -->
                     <ColumnDefinition Width="28" />
-                    <!-- Icone Carre -->
                     <ColumnDefinition Width="*" />
-                    <!-- Slider -->
                     <ColumnDefinition Width="28" />
-                    <!-- Icone Rond -->
                     <ColumnDefinition Width="Auto" />
-                    <!-- Rond (%) -->
                 </Grid.ColumnDefinitions>
-                <!-- Labels des pourcentages -->
                 <ui:SimpleStackPanel Orientation="Horizontal"
                                      VerticalAlignment="Center"
                                      Spacing="4"
@@ -68,7 +61,6 @@
                                Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"
                                Margin="0,4,0,0" />
                 </ui:SimpleStackPanel>
-                <!-- NumberBox, symboles et slider -->
                 <ui:NumberBox Value="{Binding SquarePercent, Mode=TwoWay}"
                               Minimum="0"
                               Maximum="100"
@@ -119,7 +111,6 @@
                 RequestNavigate="Hyperlink_RequestNavigate">
         <Run Text="{Binding Source={StaticResource Loc}, Path=[Label_Year2022], Mode=OneWay}" />
     </Hyperlink></TextBlock>
-            <!-- Pourcentage de switch -->
             <Grid Margin="0,8,0,8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.7*" />

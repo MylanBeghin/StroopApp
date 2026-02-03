@@ -5,7 +5,10 @@ using StroopApp.Models;
 
 namespace StroopApp.Services.KeyMapping
 {
-	public class KeyMappingService : IKeyMappingService
+    /// <summary>
+    /// Service for loading and saving key mapping configuration from/to JSON files.
+    /// </summary>
+    public class KeyMappingService : IKeyMappingService
 	{
 		private readonly string _configDir;
 		private readonly string _keyMappingPath;
@@ -15,7 +18,10 @@ namespace StroopApp.Services.KeyMapping
 			_configDir = configDir ?? throw new ArgumentNullException(nameof(configDir));
 			_keyMappingPath = Path.Combine(_configDir, "keymappings.json");
 		}
-		public async Task<KeyMappings> LoadKeyMappings()
+        /// <summary>
+        /// Loads key mappings from configuration file, or returns default mappings if not found.
+        /// </summary>
+        public async Task<KeyMappings> LoadKeyMappings()
 		{
 			if (!File.Exists(_keyMappingPath))
 				return new KeyMappings();
@@ -24,7 +30,10 @@ namespace StroopApp.Services.KeyMapping
 			return JsonSerializer.Deserialize<KeyMappings>(json)
 				   ?? new KeyMappings();
 		}
-		public async Task SaveKeyMappings(KeyMappings keyMappings)
+        /// <summary>
+        /// Saves key mappings to configuration file.
+        /// </summary>
+        public async Task SaveKeyMappings(KeyMappings keyMappings)
 		{
 			Directory.CreateDirectory(_configDir);
 			var json = JsonSerializer.Serialize(keyMappings, new JsonSerializerOptions { WriteIndented = true });

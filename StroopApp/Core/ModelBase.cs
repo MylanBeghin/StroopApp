@@ -5,7 +5,7 @@ namespace StroopApp.Core
 {
     /// <summary>
     /// Base class for all Models, implementing <see cref="INotifyPropertyChanged"/>.
-    /// Provides a method for property change notifications and a utility method to show error dialogs.
+    /// Provides a method for property change notifications.
     /// </summary>
 
     public class ModelBase : INotifyPropertyChanged

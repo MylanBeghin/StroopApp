@@ -6,8 +6,11 @@ using StroopApp.Services.Language;
 
 namespace StroopApp.Services.Trial
 {
-	public class TrialGenerationService : ITrialGenerationService
-	{
+    /// <summary>
+    /// Service for generating randomized Stroop trial sequences with localized stimuli and optional visual cues.
+    /// </summary>
+    public class TrialGenerationService : ITrialGenerationService
+    {
 		private readonly Random _random = new Random();
 		private readonly ILanguageService _languageService;
 
@@ -23,7 +26,7 @@ namespace StroopApp.Services.Trial
 		public List<StroopTrial> GenerateTrials(ExperimentSettings settings)
 		{
 			if (settings?.CurrentProfile == null)
-				throw new ArgumentException("Settings et CurrentProfile ne peuvent pas être null", nameof(settings));
+				throw new ArgumentException("Settings and  CurrentProfile cannot be null", nameof(settings));
 
 			var config = new ExperimentSettingsTrialConfigurationAdapter(settings);
 			return GenerateTrials(config);
@@ -64,7 +67,7 @@ namespace StroopApp.Services.Trial
 			congruenceFlags.AddRange(Enumerable.Repeat(false, incongruentCount));
 			congruenceFlags = congruenceFlags.OrderBy(_ => _random.Next()).ToList();
 
-			List<AmorceType>? amorceSequence = null;
+			List<VisualCueType>? amorceSequence = null;
 			if (config.IsAmorce)
 				amorceSequence = GenerateAmorceSequence(total, config.DominantPercent);
 
@@ -99,7 +102,7 @@ namespace StroopApp.Services.Trial
 				}
 
 				if (amorceSequence != null)
-					trial.Amorce = amorceSequence[i];
+					trial.VisualCue = amorceSequence[i];
 				trial.DetermineExpectedAnswer();
 
 				trials.Add(trial);
@@ -108,10 +111,10 @@ namespace StroopApp.Services.Trial
 			return trials;
 		}
 
-		public List<AmorceType> GenerateAmorceSequence(int count, int switchPercentage)
+		public List<VisualCueType> GenerateAmorceSequence(int count, int switchPercentage)
 		{
 			if (count <= 0)
-				throw new ArgumentException("Le nombre d'amorces doit être positif", nameof(count));
+				throw new ArgumentException("Count of visual cues must be positive", nameof(count));
 
 			int switchCount = (count - 1) * switchPercentage / 100;
 			int noSwitchCount = (count - 1) - switchCount;
@@ -121,14 +124,14 @@ namespace StroopApp.Services.Trial
 			switches.AddRange(Enumerable.Repeat(false, noSwitchCount));
 			switches = switches.OrderBy(_ => _random.Next()).ToList();
 
-			var sequence = new List<AmorceType>();
-			var current = _random.Next(0, 2) == 0 ? AmorceType.Round : AmorceType.Square;
+			var sequence = new List<VisualCueType>();
+			var current = _random.Next(0, 2) == 0 ? VisualCueType.Round : VisualCueType.Square;
 			sequence.Add(current);
 
 			foreach (var isSwitch in switches)
 			{
 				if (isSwitch)
-					current = current == AmorceType.Round ? AmorceType.Square : AmorceType.Round;
+					current = current == VisualCueType.Round ? VisualCueType.Square : VisualCueType.Round;
 
 				sequence.Add(current);
 			}

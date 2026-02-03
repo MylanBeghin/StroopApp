@@ -524,9 +524,9 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 				return trials;
 			}
 
-			public List<AmorceType> GenerateAmorceSequence(int count, int switchPercentage)
+			public List<VisualCueType> GenerateAmorceSequence(int count, int switchPercentage)
 			{
-				return new List<AmorceType>();
+				return new List<VisualCueType>();
 			}
 		}
 	}

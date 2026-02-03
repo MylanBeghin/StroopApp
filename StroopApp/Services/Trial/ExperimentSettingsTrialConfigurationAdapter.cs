@@ -1,38 +1,39 @@
+using StroopApp.Models;
+
 namespace StroopApp.Services.Trial
 {
-	using StroopApp.Models;
 
-	/// <summary>
-	/// Adapter that projects ExperimentSettings to ITrialConfiguration.
-	/// This is a temporary bridge to decouple TrialGenerationService from the god object.
-	/// </summary>
-	public class ExperimentSettingsTrialConfigurationAdapter : ITrialConfiguration
-	{
-		private readonly ExperimentSettings _settings;
+    /// <summary>
+    /// Adapter that projects ExperimentSettings to ITrialConfiguration.
+    /// This is a temporary bridge to decouple TrialGenerationService from the god object.
+    /// </summary>
+    public class ExperimentSettingsTrialConfigurationAdapter : ITrialConfiguration
+    {
+        private readonly ExperimentSettings _settings;
 
-		public ExperimentSettingsTrialConfigurationAdapter(ExperimentSettings settings)
-		{
-			_settings = settings ?? throw new ArgumentNullException(nameof(settings));
-			
-			if (_settings.CurrentProfile == null)
-				throw new ArgumentException("CurrentProfile cannot be null", nameof(settings));
-			
-			if (_settings.Participant == null)
-				throw new ArgumentException("Participant cannot be null", nameof(settings));
-		}
+        public ExperimentSettingsTrialConfigurationAdapter(ExperimentSettings settings)
+        {
+            _settings = settings ?? throw new ArgumentNullException(nameof(settings));
 
-		public int Block => _settings.Block;
+            if (_settings.CurrentProfile == null)
+                throw new ArgumentException("CurrentProfile cannot be null", nameof(settings));
 
-		public string ParticipantId => _settings.Participant.Id;
+            if (_settings.Participant == null)
+                throw new ArgumentException("Participant cannot be null", nameof(settings));
+        }
 
-		public int WordCount => _settings.CurrentProfile.WordCount;
+        public int Block => _settings.Block;
 
-		public int CongruencePercent => _settings.CurrentProfile.CongruencePercent;
+        public string ParticipantId => _settings.Participant.Id;
 
-		public int DominantPercent => _settings.CurrentProfile.DominantPercent;
+        public int WordCount => _settings.CurrentProfile.WordCount;
 
-		public bool IsAmorce => _settings.CurrentProfile.IsAmorce;
+        public int CongruencePercent => _settings.CurrentProfile.CongruencePercent;
 
-		public string TaskLanguage => _settings.CurrentProfile.TaskLanguage;
-	}
+        public int DominantPercent => _settings.CurrentProfile.DominantPercent;
+
+        public bool IsAmorce => _settings.CurrentProfile.IsAmorce;
+
+        public string TaskLanguage => _settings.CurrentProfile.TaskLanguage;
+    }
 }

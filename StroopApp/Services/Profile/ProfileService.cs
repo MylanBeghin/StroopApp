@@ -6,7 +6,10 @@ using StroopApp.Models;
 
 namespace StroopApp.Services.Profile
 {
-	public class ProfileService : IProfileService
+    /// <summary>
+    /// Service for managing experiment profile persistence (CRUD operations) and last selected profile tracking.
+    /// </summary>
+    public class ProfileService : IProfileService
 	{
 		private readonly string _configDir;
 		private readonly string _profilesPath;
@@ -19,7 +22,10 @@ namespace StroopApp.Services.Profile
 			_lastProfileFile = Path.Combine(_configDir, "lastProfile.json");
 		}
 
-		public ObservableCollection<ExperimentProfile> LoadProfiles()
+        /// <summary>
+        /// Loads all experiment profiles from JSON configuration file.
+        /// </summary>
+        public ObservableCollection<ExperimentProfile> LoadProfiles()
 		{
 			if (!File.Exists(_profilesPath))
 				return new ObservableCollection<ExperimentProfile>();
@@ -29,14 +35,20 @@ namespace StroopApp.Services.Profile
 				   ?? new ObservableCollection<ExperimentProfile>();
 		}
 
-		public void SaveProfiles(ObservableCollection<ExperimentProfile> profiles)
+        /// <summary>
+        /// Saves all experiment profiles to JSON configuration file.
+        /// </summary>
+        public void SaveProfiles(ObservableCollection<ExperimentProfile> profiles)
 		{
 			Directory.CreateDirectory(_configDir);
 			var json = JsonSerializer.Serialize(profiles, new JsonSerializerOptions { WriteIndented = true });
 			File.WriteAllText(_profilesPath, json);
 		}
 
-		public ObservableCollection<ExperimentProfile> UpsertProfile(ExperimentProfile profile)
+        /// <summary>
+        /// Inserts a new profile or updates an existing one by ID, then returns the refreshed collection.
+        /// </summary>
+        public ObservableCollection<ExperimentProfile> UpsertProfile(ExperimentProfile profile)
 		{
 
 			var allProfiles = LoadProfiles();
@@ -81,7 +93,10 @@ namespace StroopApp.Services.Profile
 			return LoadProfiles();
 		}
 
-		public void DeleteProfile(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles)
+        /// <summary>
+        /// Deletes a profile from the collection and persists changes.
+        /// </summary>
+        public void DeleteProfile(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles)
 		{
 			if (profiles.Contains(profile))
 			{
@@ -90,7 +105,10 @@ namespace StroopApp.Services.Profile
 			}
 		}
 
-		public Guid? LoadLastSelectedProfile()
+        /// <summary>
+        /// Loads the last selected profile ID from configuration, or null if not found.
+        /// </summary>
+        public Guid? LoadLastSelectedProfile()
 		{
 			if (File.Exists(_lastProfileFile))
 			{
@@ -110,7 +128,10 @@ namespace StroopApp.Services.Profile
 			return null;
 		}
 
-		public void SaveLastSelectedProfile(ExperimentProfile profile)
+        /// <summary>
+        /// Saves the currently selected profile ID to configuration.
+        /// </summary>
+        public void SaveLastSelectedProfile(ExperimentProfile profile)
 		{
 			Directory.CreateDirectory(_configDir);
 			var json = JsonSerializer.Serialize(profile.Id, new JsonSerializerOptions { WriteIndented = true });

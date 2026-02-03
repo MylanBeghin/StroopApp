@@ -9,19 +9,19 @@ namespace StroopApp.Views.Experiment.Experimenter.Graphs
 		public GraphsView(ExperimentSettings settings)
 		{
 			InitializeComponent();
-			var ColumnGraphView = new ColumnGraphView(settings);
-			var GlobalGraphView = new GlobalGraphView(settings);
-			var LiveReactionTimeView = new LiveReactionTimeView(settings);
-			MainGrid.Children.Add(GlobalGraphView);
-			Grid.SetRow(GlobalGraphView, 2);
-			Grid.SetColumnSpan(GlobalGraphView, 3);
-			Grid.SetColumn(GlobalGraphView, 0);
-			MainGrid.Children.Add(ColumnGraphView);
-			Grid.SetRow(ColumnGraphView, 4);
-			Grid.SetColumn(ColumnGraphView, 0);
-			MainGrid.Children.Add(LiveReactionTimeView);
-			Grid.SetRow(LiveReactionTimeView, 4);
-			Grid.SetColumn(LiveReactionTimeView, 2);
+			var columnGraphView = new ColumnGraphView(settings);
+			var globalGraphView = new GlobalGraphView(settings);
+			var liveReactionTimeView = new LiveReactionTimeView(settings);
+			MainGrid.Children.Add(globalGraphView);
+			Grid.SetRow(globalGraphView, 2);
+			Grid.SetColumnSpan(globalGraphView, 3);
+			Grid.SetColumn(globalGraphView, 0);
+			MainGrid.Children.Add(columnGraphView);
+			Grid.SetRow(columnGraphView, 4);
+			Grid.SetColumn(columnGraphView, 0);
+			MainGrid.Children.Add(liveReactionTimeView);
+			Grid.SetRow(liveReactionTimeView, 4);
+			Grid.SetColumn(liveReactionTimeView, 2);
 		}
 	}
 }

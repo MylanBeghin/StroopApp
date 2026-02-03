@@ -1,0 +1,59 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "StroopApp: A WPF Application for Administering Stroop Tasks"
+version: 1.0.0
+date-released: 2025-01-27
+authors:
+  - family-names: Beghin
+    given-names: Mylan
+repository-code: "https://github.com/MylanBeghin/StroopApp"
+url: "https://github.com/MylanBeghin/StroopApp"
+abstract: |
+  StroopApp is an open-source WPF application designed for administering 
+  Stroop tasks in experimental psychology research. It implements the visual 
+  cue paradigm described in Mangin et al. (2021, 2022), supporting configurable 
+  task parameters, real-time visualization, and multi-language interfaces.
+keywords:
+  - Stroop task
+  - experimental psychology
+  - cognitive research
+  - visual cues
+  - reaction time
+  - WPF
+  - .NET
+license: MIT
+references:
+  - type: article
+    authors:
+      - family-names: Mangin
+        given-names: Thomas
+      - family-names: Rogalski
+        given-names: A.
+      - family-names: Bernardin
+        given-names: D.
+      - family-names: Hoffmann
+        given-names: D.
+      - family-names: Giraudet
+        given-names: G.
+    title: "The Stroop matching task presents conflict at both the response and task levels: An event-related potential and electromyography study"
+    journal: "Psychophysiology"
+    volume: 58
+    issue: 12
+    year: 2021
+    doi: "10.1111/psyp.13936"
+    url: "https://www.sciencedirect.com/science/article/pii/S1469029221001515"
+  - type: article
+    authors:
+      - family-names: Mangin
+        given-names: Thomas
+      - family-names: Audiffren
+        given-names: M.
+      - family-names: André
+        given-names: N.
+    title: "Differential effects of extended practice on the components of the Stroop task-switching cost"
+    journal: "Frontiers in Psychology"
+    volume: 13
+    year: 2022
+    doi: "10.3389/fpsyg.2022.998393"
+    url: "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2022.998393/full"

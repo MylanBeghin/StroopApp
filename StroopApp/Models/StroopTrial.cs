@@ -8,8 +8,8 @@ namespace StroopApp.Models
 	/// </summary>
 	public class StroopTrial : ModelBase
 	{
-		private string _participantId;
-		public string ParticipantId
+        private string _participantId = null!;
+        public string ParticipantId
 		{
 			get => _participantId;
 			set
@@ -103,8 +103,8 @@ namespace StroopApp.Models
 				}
 			}
 		}
-		private Word _stimulus;
-		public Word Stimulus
+        private Word _stimulus = null!;
+        public Word Stimulus
 		{
 			get => _stimulus;
 			set
@@ -117,8 +117,8 @@ namespace StroopApp.Models
 			}
 		}
 
-		private string _expectedAnswer;
-		public string ExpectedAnswer
+        private string _expectedAnswer = null!;
+        public string ExpectedAnswer
 		{
 			get => _expectedAnswer;
 			set
@@ -131,8 +131,8 @@ namespace StroopApp.Models
 			}
 		}
 
-		private string _givenAnswer;
-		public string GivenAnswer
+        private string _givenAnswer = null!;
+        public string GivenAnswer
 		{
 			get => _givenAnswer;
 			set
@@ -185,15 +185,18 @@ namespace StroopApp.Models
 				}
 			}
 		}
-		public AmorceType Amorce
+		public VisualCueType VisualCue
 		{
 			get; set;
 		}
-		public void DetermineExpectedAnswer()
+        /// <summary>
+        /// Calculates the expected answer based on trial type (Amorce, Congruent, or Incongruent).
+        /// </summary>
+        public void DetermineExpectedAnswer()
 		{
 			if (IsAmorce)
 			{
-				ExpectedAnswer = (Amorce == AmorceType.Square) ? Stimulus.InternalText : Stimulus.Color;
+				ExpectedAnswer = (VisualCue == VisualCueType.Square) ? Stimulus.InternalText : Stimulus.Color;
 			}
 			else if (IsCongruent)
 			{
