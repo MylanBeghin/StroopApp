@@ -36,7 +36,7 @@ Thank you for considering contributing to **StroopApp**. Your contributions help
 
 ### **5. Translating the Interface**
 - StroopApp supports English and French. To add or improve translations:
-  - Edit the resource files in [/Resources/Languages/](https://github.com/MylanBeghin/StroopApp/blob/release/v1/StroopApp/Resources/).
+  - Edit the resource files in [/Resources](StroopApp/Resources).
   - Open a PR with your updates.
 
 ---
