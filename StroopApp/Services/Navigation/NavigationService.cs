@@ -4,34 +4,53 @@ namespace StroopApp.Services.Navigation
 {
     /// <summary>
     /// Service for WPF Frame-based navigation between pages.
+    /// Uses IPageFactory for DI-based page resolution.
     /// </summary>
     public class NavigationService : INavigationService
     {
-        private readonly Frame _frame;
+        private readonly IPageFactory _pageFactory;
 
-        public NavigationService(Frame frame)
+        private Frame? _frame;
+        /// <summary>
+        /// Initializes NavigationService with a page factory for DI resolution.
+        /// The Frame must be set via <see cref="SetFrame"/> before navigation.
+        /// </summary>
+        /// <param name="pageFactory">Factory for creating pages with injected dependencies.</param>
+        public NavigationService(IPageFactory pageFactory)
+        {
+            _pageFactory = pageFactory ?? throw new ArgumentNullException(nameof(pageFactory));
+        }
+
+        /// <summary>
+        /// Sets the WPF Frame used for navigation. Must be called before any NavigateTo calls.
+        /// </summary>
+        /// <param name="frame">The WPF Frame control to navigate within.</param>
+        public void SetFrame(Frame frame)
         {
             _frame = frame ?? throw new ArgumentNullException(nameof(frame));
         }
+
         /// <summary>
-        /// Navigates to a page of type T, passing the navigation service and optional parameter to its constructor.
+        /// Navigates to a page of type T, resolved from the DI container via IPageFactory.
         /// </summary>
         public void NavigateTo<T>(object? parameter = null) where T : Page
         {
-            var page = parameter != null
-                ? (Page?)Activator.CreateInstance(typeof(T), this, parameter)
-                : (Page?)Activator.CreateInstance(typeof(T), this);
+            if (_frame == null)
+                throw new InvalidOperationException("Frame has not been set. Call SetFrame() before navigating.");
 
-            if (page == null)
-                throw new InvalidOperationException($"Failed to create instance of {typeof(T).Name}");
-
+            var page = _pageFactory.CreatePage<T>();
             _frame.Navigate(page);
         }
+
         /// <summary>
         /// Navigates to a page created by the provided factory function.
+        /// Kept for backward compatibility during migration.
         /// </summary>
         public void NavigateTo(Func<Page> pageFactory)
         {
+            if (_frame == null)
+                throw new InvalidOperationException("Frame has not been set. Call SetFrame() before navigating.");
+
             var page = pageFactory();
             _frame.Navigate(page);
         }
