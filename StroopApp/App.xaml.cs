@@ -4,15 +4,11 @@ using StroopApp.Services.Charts;
 using StroopApp.Services.Exportation;
 using StroopApp.Services.KeyMapping;
 using StroopApp.Services.Language;
-using StroopApp.Services.Navigation;
 using StroopApp.Services.Navigation.PageFactory;
 using StroopApp.Services.Participant;
 using StroopApp.Services.Profile;
 using StroopApp.Services.Trial;
 using StroopApp.Services.Window;
-using StroopApp.ViewModels.Configuration;
-using StroopApp.ViewModels.Configuration.Participant;
-using StroopApp.ViewModels.Configuration.Profile;
 using StroopApp.Views;
 using StroopApp.Views.Experiment.Experimenter;
 using System.IO;
@@ -42,9 +38,9 @@ namespace StroopApp
             WindowManager = ServiceProvider.GetRequiredService<IWindowManager>();
 
             var settings = ServiceProvider.GetRequiredService<ExperimentSettings>();
+            var pageFactory = ServiceProvider.GetRequiredService<IPageFactory>();
 
-            var navigationService = ServiceProvider.GetRequiredService<INavigationService>();
-            var expWin = new ExperimentWindow(settings, navigationService, WindowManager, LanguageService);
+            var expWin = new ExperimentWindow(settings, pageFactory, WindowManager, LanguageService);
             expWin.Show();
         }
 
@@ -74,21 +70,8 @@ namespace StroopApp
             services.AddSingleton<IProfileService, ProfileService>();
             services.AddSingleton<IParticipantService, ParticipantService>();
             services.AddSingleton<IKeyMappingService, KeyMappingService>();
-            services.AddSingleton<IExportationService>(sp =>
-                new ExportationService(
-                    sp.GetRequiredService<ExperimentSettings>(),
-                    sp.GetRequiredService<ILanguageService>(),
-                    configDir));
-            services.AddTransient<ITrialGenerationService>(sp =>
-                new TrialGenerationService(sp.GetRequiredService<ILanguageService>()));
-
-            services.AddTransient<ProfileManagementViewModel>();
-            services.AddTransient<ParticipantManagementViewModel>(sp =>
-                new ParticipantManagementViewModel(
-                    sp.GetRequiredService<IParticipantService>(),
-                    sp.GetRequiredService<ExperimentSettings>().ExperimentContext.IsParticipantSelectionEnabled));
-            services.AddTransient<KeyMappingViewModel>();
-            services.AddTransient<ExportFolderSelectorViewModel>();
+            services.AddSingleton<IExportationService, ExportationService>();
+            services.AddTransient<ITrialGenerationService, TrialGenerationService>();
 
             services.AddTransient<ConfigurationPage>();
             services.AddTransient<EndExperimentPage>();

@@ -18,14 +18,24 @@ using System.Windows.Controls;
 
 namespace StroopApp.Views
 {
-    public partial class ConfigurationPage : Page
+    public partial class ConfigurationPage : Page, INavigationAware
     {
-        /// <summary>
-        /// Initializes ConfigurationPage with all dependencies injected via DI container.
-        /// </summary>
+        private readonly ExperimentSettings _settings;
+        private readonly IWindowManager _windowManager;
+        private readonly ILanguageService _languageService;
+        private readonly IProfileService _profileService;
+        private readonly IParticipantService _participantService;
+        private readonly IKeyMappingService _keyMappingService;
+        private readonly IExportationService _exportationService;
+        private readonly ITrialGenerationService _trialGenerationService;
+
+        public INavigationService NavigationService
+        {
+            set => Initialize(value);
+        }
+
         public ConfigurationPage(
             ExperimentSettings settings,
-            INavigationService experimentNavigationService,
             IWindowManager windowManager,
             ILanguageService languageService,
             IProfileService profileService,
@@ -35,13 +45,24 @@ namespace StroopApp.Views
             ITrialGenerationService trialGenerationService)
         {
             InitializeComponent();
+            _settings = settings;
+            _windowManager = windowManager;
+            _languageService = languageService;
+            _profileService = profileService;
+            _participantService = participantService;
+            _keyMappingService = keyMappingService;
+            _exportationService = exportationService;
+            _trialGenerationService = trialGenerationService;
+        }
 
-            var profileViewModel = new ProfileManagementViewModel(profileService);
-            var participantViewModel = new ParticipantManagementViewModel(participantService, settings.ExperimentContext.IsParticipantSelectionEnabled);
-            var keyMappingViewModel = new KeyMappingViewModel(keyMappingService);
-            var exportFolderSelectorViewModel = new ExportFolderSelectorViewModel(settings, exportationService);
+        private void Initialize(INavigationService navigationService)
+        {
+            var profileViewModel = new ProfileManagementViewModel(_profileService);
+            var participantViewModel = new ParticipantManagementViewModel(_participantService, _settings.ExperimentContext.IsParticipantSelectionEnabled);
+            var keyMappingViewModel = new KeyMappingViewModel(_keyMappingService);
+            var exportFolderSelectorViewModel = new ExportFolderSelectorViewModel(_settings, _exportationService);
 
-            DataContext = new ConfigurationPageViewModel(settings, profileViewModel, participantViewModel, keyMappingViewModel, experimentNavigationService, windowManager, trialGenerationService, languageService);
+            DataContext = new ConfigurationPageViewModel(_settings, profileViewModel, participantViewModel, keyMappingViewModel, navigationService, _windowManager, _trialGenerationService, _languageService);
 
             var profileManagementView = new ProfileManagementView(profileViewModel);
             var participantManagementView = new ParticipantManagementView(participantViewModel);

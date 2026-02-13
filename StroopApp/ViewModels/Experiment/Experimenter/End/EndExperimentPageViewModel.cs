@@ -3,7 +3,6 @@ using StroopApp.Models;
 using StroopApp.Resources;
 using StroopApp.Services.Charts;
 using StroopApp.Services.Exportation;
-using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.Views;
@@ -26,7 +25,6 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
         private readonly IExportationService _exportationService;
         private readonly INavigationService _experimenterNavigationService;
         private readonly IWindowManager _windowManager;
-        private readonly ILanguageService _languageService;
         private readonly ExperimentChartFactory _chartFactory;
 
         public ICommand ContinueCommand { get; }
@@ -60,14 +58,12 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
         public EndExperimentPageViewModel(ExperimentSettings settings,
                                   IExportationService exportationService,
                                   INavigationService experimenterNavigationService,
-                                  IWindowManager windowManager,
-                                  ILanguageService languageService)
+                                  IWindowManager windowManager)
         {
             Settings = settings;
             _exportationService = exportationService;
             _experimenterNavigationService = experimenterNavigationService;
             _windowManager = windowManager;
-            _languageService = languageService;
             _chartFactory = new ExperimentChartFactory();
 
             ContinueCommand = new RelayCommand(_ => Continue());
@@ -117,8 +113,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
                 {
                     Settings.Reset();
                     _windowManager.CloseParticipantWindow();
-                    _experimenterNavigationService.NavigateTo(() =>
-                        new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager, _languageService));
+                    _experimenterNavigationService.NavigateTo<ConfigurationPage>();
                 }
             }
             catch (Exception ex)
@@ -131,7 +126,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
         {
             try
             {
-                var exportEndExperimentWindow = new ExportEndExperimentWindow(Settings, _exportationService, _experimenterNavigationService, _windowManager, _languageService);
+                var exportEndExperimentWindow = new ExportEndExperimentWindow(Settings, _exportationService, _experimenterNavigationService);
                 exportEndExperimentWindow.ShowDialog();
             }
             catch (Exception ex)

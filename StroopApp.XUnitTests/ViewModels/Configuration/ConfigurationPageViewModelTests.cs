@@ -468,8 +468,6 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 				languageService);
 		}
 
-		// ========== TEST HELPERS ==========
-
 		private class CountingNavigationService : INavigationService
 		{
 			public int NavigationCount { get; private set; }
@@ -482,6 +480,10 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 			public void NavigateTo<T>(object parameter = null) where T : System.Windows.Controls.Page
 			{
 				NavigationCount++;
+			}
+
+			public void SetFrame(System.Windows.Controls.Frame frame)
+			{
 			}
 		}
 

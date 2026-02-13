@@ -32,6 +32,7 @@ namespace StroopApp.Services.Navigation.PageFactory
 
         /// <summary>
         /// Navigates to a page of type T, resolved from the DI container via IPageFactory.
+        /// If the page implements INavigationAware, injects this NavigationService automatically.
         /// </summary>
         public void NavigateTo<T>(object? parameter = null) where T : Page
         {
@@ -39,6 +40,10 @@ namespace StroopApp.Services.Navigation.PageFactory
                 throw new InvalidOperationException("Frame has not been set. Call SetFrame() before navigating.");
 
             var page = _pageFactory.CreatePage<T>();
+
+            if (page is INavigationAware aware)
+                aware.NavigationService = this;
+
             _frame.Navigate(page);
         }
 
