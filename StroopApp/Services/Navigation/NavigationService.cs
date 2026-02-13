@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace StroopApp.Services.Navigation
+namespace StroopApp.Services.Navigation.PageFactory
 {
     /// <summary>
     /// Service for WPF Frame-based navigation between pages.

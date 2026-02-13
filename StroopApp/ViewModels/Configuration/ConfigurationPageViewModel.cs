@@ -84,8 +84,8 @@ namespace StroopApp.ViewModels.Configuration
                     _settings.ExperimentContext.CurrentBlock.TrialRecords.Add(trial);
                 }
 
-                _experimenterNavigationService.NavigateTo(() =>
-                    new ExperimentDashBoardPage(_settings, _experimenterNavigationService, _windowManager, _languageService));
+                _experimenterNavigationService.NavigateTo<ExperimentDashBoardPage>();
+
                 _windowManager.ShowParticipantWindow(_settings);
             }
             catch (Exception ex)

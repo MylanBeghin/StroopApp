@@ -13,9 +13,9 @@ namespace StroopApp.Services.KeyMapping
 		private readonly string _configDir;
 		private readonly string _keyMappingPath;
 
-		public KeyMappingService(string configDir)
+		public KeyMappingService(AppConfiguration configDir)
 		{
-			_configDir = configDir ?? throw new ArgumentNullException(nameof(configDir));
+			_configDir = configDir.ConfigDirectory ?? throw new ArgumentNullException(nameof(configDir));
 			_keyMappingPath = Path.Combine(_configDir, "keymappings.json");
 		}
         /// <summary>

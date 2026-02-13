@@ -26,8 +26,8 @@ namespace StroopApp.ViewModels
 		public ExperimentWindowViewModel(ExperimentSettings settings, INavigationService experimentNavigationService, IWindowManager windowManager, ILanguageService languageService)
 		{
 			_languageService = languageService;
-			experimentNavigationService.NavigateTo(() => new ConfigurationPage(settings, experimentNavigationService, windowManager, languageService));
-			ChangeLanguageCommand = new RelayCommand<string>(ChangeLanguage);
+            experimentNavigationService.NavigateTo<ConfigurationPage>();
+            ChangeLanguageCommand = new RelayCommand<string>(ChangeLanguage);
 		}
 		private void ChangeLanguage(string lang)
 		{

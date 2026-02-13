@@ -100,8 +100,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
                 Settings.ExperimentContext.IsParticipantSelectionEnabled = false;
                 Settings.ExperimentContext.HasUnsavedExports = true;
 
-                _experimenterNavigationService.NavigateTo(() =>
-                    new ConfigurationPage(Settings, _experimenterNavigationService, _windowManager, _languageService));
+                _experimenterNavigationService.NavigateTo<ConfigurationPage>();
             }
             catch (Exception ex)
             {

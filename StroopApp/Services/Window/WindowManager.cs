@@ -1,4 +1,5 @@
 ﻿using StroopApp.Models;
+using StroopApp.Services.Navigation.PageFactory;
 using StroopApp.Views;
 
 namespace StroopApp.Services.Window
@@ -10,6 +11,12 @@ namespace StroopApp.Services.Window
     public class WindowManager : IWindowManager
     {
         private ParticipantWindow? _participantWindow;
+        private readonly IPageFactory _pageFactory;
+
+        public WindowManager(IPageFactory pageFactory)
+        {
+            _pageFactory = pageFactory;
+        }
 
         /// <summary>
         /// Shows or activates the participant management window.
@@ -21,7 +28,7 @@ namespace StroopApp.Services.Window
 
             if (_participantWindow == null)
             {
-                _participantWindow = new ParticipantWindow(settings);
+                _participantWindow = new ParticipantWindow(settings, _pageFactory);
                 _participantWindow.Closed += (_, _) => _participantWindow = null;
                 _participantWindow.Show();
             }

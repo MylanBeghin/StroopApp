@@ -44,8 +44,8 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
             if (e.PropertyName == nameof(_experimentContext.IsBlockFinished)
                 && _experimentContext.IsBlockFinished)
             {
-                _experimenterNavigationService.NavigateTo(
-                    () => new EndExperimentPage(_settings, _experimenterNavigationService, _windowManager, _languageService));
+                _experimenterNavigationService.NavigateTo<EndExperimentPage>();
+
             }
         }
         public async Task StopTaskAsync()

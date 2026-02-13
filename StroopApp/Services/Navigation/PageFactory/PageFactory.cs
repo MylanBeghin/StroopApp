@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Windows.Controls;
 
-namespace StroopApp.Services.Navigation
+namespace StroopApp.Services.Navigation.PageFactory
 {
     /// <summary>
     /// Resolves WPF pages from the DI container, ensuring all constructor dependencies are injected.
