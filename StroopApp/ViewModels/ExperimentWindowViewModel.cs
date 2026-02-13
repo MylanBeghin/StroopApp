@@ -2,7 +2,6 @@
 using System.Windows.Input;
 
 using StroopApp.Core;
-using StroopApp.Models;
 using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
 using StroopApp.Views;
@@ -22,7 +21,7 @@ namespace StroopApp.ViewModels
 		{
 			get;
 		}
-		public ExperimentWindowViewModel(ExperimentSettings settings, INavigationService experimentNavigationService, ILanguageService languageService)
+		public ExperimentWindowViewModel(INavigationService experimentNavigationService, ILanguageService languageService)
 		{
 			_languageService = languageService;
 			experimentNavigationService.NavigateTo<ConfigurationPage>();

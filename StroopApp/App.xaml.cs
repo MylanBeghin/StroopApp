@@ -25,7 +25,6 @@ namespace StroopApp
 
         public static IWindowManager WindowManager { get; private set; } = null!;
         public static ILanguageService LanguageService { get; private set; } = null!;
-
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -37,10 +36,9 @@ namespace StroopApp
             LanguageService = ServiceProvider.GetRequiredService<ILanguageService>();
             WindowManager = ServiceProvider.GetRequiredService<IWindowManager>();
 
-            var settings = ServiceProvider.GetRequiredService<ExperimentSettings>();
             var pageFactory = ServiceProvider.GetRequiredService<IPageFactory>();
 
-            var expWin = new ExperimentWindow(settings, pageFactory, WindowManager, LanguageService);
+            var expWin = new ExperimentWindow(pageFactory, LanguageService);
             expWin.Show();
         }
 

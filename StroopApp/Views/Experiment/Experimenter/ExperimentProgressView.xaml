@@ -64,7 +64,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0"
-                             Text="{Binding Settings.Participant.Id}"
+                             Text="{Binding Settings.Participant.Id, Mode=OneTime}"
                              HorizontalAlignment="Stretch"
                              ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_ParticipantId]}"
                              Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
@@ -104,7 +104,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0"
-                             Text="{Binding Settings.CurrentProfile.CongruencePercent}"
+                             Text="{Binding Settings.CurrentProfile.CongruencePercent, Mode=OneTime}"
                              HorizontalAlignment="Stretch"
                              ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Congruence_Percent]}"
                              Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
@@ -113,7 +113,7 @@
                              Padding="4"
                              Margin="4" />
                     <TextBox Grid.Column="1"
-                             Text="{Binding Settings.CurrentProfile.SwitchPercent}"
+                             Text="{Binding Settings.CurrentProfile.SwitchPercent, Mode=OneTime}"
                              HorizontalAlignment="Stretch"
                              ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Switch]}"
                              Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
@@ -121,10 +121,10 @@
                              IsHitTestVisible="False"
                              Padding="4"
                              Margin="4"
-                             Visibility="{Binding Settings.CurrentProfile.IsAmorce,
-                              Converter={StaticResource BoolToVisibilityConverter}}" />
+                             Visibility="{Binding Settings.CurrentProfile.IsAmorce, Mode=OneTime,
+                               Converter={StaticResource BoolToVisibilityConverter}}" />
                     <TextBox Grid.Column="2"
-                             Text="{Binding Settings.CurrentProfile.Hours}"
+                             Text="{Binding Settings.CurrentProfile.Hours, Mode=OneTime}"
                              IsReadOnly="True"
                              HorizontalAlignment="Center"
                              ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Hours]}"
@@ -134,7 +134,7 @@
                              Margin="4"
                              IsHitTestVisible="False" />
                     <TextBox Grid.Column="3"
-                             Text="{Binding Settings.CurrentProfile.Minutes}"
+                             Text="{Binding Settings.CurrentProfile.Minutes, Mode=OneTime}"
                              IsReadOnly="True"
                              HorizontalAlignment="Center"
                              ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Minutes]}"
@@ -144,7 +144,7 @@
                              Margin="4"
                              IsHitTestVisible="False" />
                     <TextBox Grid.Column="4"
-                             Text="{Binding Settings.CurrentProfile.Seconds}"
+                             Text="{Binding Settings.CurrentProfile.Seconds, Mode=OneTime}"
                              IsReadOnly="True"
                              HorizontalAlignment="Center"
                              ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_Seconds]}"
@@ -154,7 +154,7 @@
                              Margin="4"
                              IsHitTestVisible="False" />
                     <TextBox Grid.Column="5"
-                             Text="{Binding Settings.CurrentProfile.MaxReactionTime}"
+                             Text="{Binding Settings.CurrentProfile.MaxReactionTime, Mode=OneTime}"
                              IsReadOnly="True"
                              HorizontalAlignment="Stretch"
                              ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_MaxResponseTime]}"
@@ -164,7 +164,7 @@
                              Margin="4"
                              IsHitTestVisible="False" />
                     <TextBox Grid.Column="6"
-                             Text="{Binding Settings.CurrentProfile.WordDuration}"
+                             Text="{Binding Settings.CurrentProfile.WordDuration, Mode=OneTime}"
                              IsReadOnly="True"
                              HorizontalAlignment="Stretch"
                              ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Header_WordDuration]}"
