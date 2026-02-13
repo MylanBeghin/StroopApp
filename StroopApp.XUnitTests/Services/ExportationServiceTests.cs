@@ -118,7 +118,8 @@ namespace StroopApp.XUnitTests.Services
             var tempDir = CreateTempDirectory();
             var settings = CreateMockSettings();
             var languageService = CreateLanguageService();
-            var service = new ExportationService(settings, languageService, tempDir)
+            var config = new AppConfiguration { ConfigDirectory = tempDir };
+            var service = new ExportationService(settings, languageService, config)
             {
                 ExportRootDirectory = tempDir
             };
@@ -145,7 +146,8 @@ namespace StroopApp.XUnitTests.Services
             var configDir = Path.Combine(tempDir, "Config");
             Directory.CreateDirectory(configDir);
             var settings = CreateMockSettings();
-            var service = new ExportationService(settings, CreateLanguageService(), configDir);
+            var config = new AppConfiguration { ConfigDirectory = configDir };
+            var service = new ExportationService(settings, CreateLanguageService(), config);
 
             // Act
             var custom = @"C:\Dossier\Test";
@@ -162,7 +164,9 @@ namespace StroopApp.XUnitTests.Services
         public async Task ExportDataAsync_EmptyRoot_Throws()
         {
             // Arrange
-            var service = new ExportationService(CreateMockSettings(), CreateLanguageService(), CreateTempDirectory())
+            var tempDir = CreateTempDirectory();
+            var config = new AppConfiguration { ConfigDirectory = tempDir };
+            var service = new ExportationService(CreateMockSettings(), CreateLanguageService(), config)
             {
                 ExportRootDirectory = ""
             };
@@ -182,7 +186,8 @@ namespace StroopApp.XUnitTests.Services
             block2.TrialRecords.Add(new StroopTrial { IsCongruent = true, ExpectedAnswer = "C", GivenAnswer = "C", IsValidResponse = true, ReactionTime = 300, TrialNumber = 2, VisualCue = VisualCueType.Square });
             settings.ExperimentContext.Blocks.Add(block2);
             var languageService = CreateLanguageService();
-            var service = new ExportationService(settings, languageService, tempDir)
+            var config = new AppConfiguration { ConfigDirectory = tempDir };
+            var service = new ExportationService(settings, languageService, config)
             {
                 ExportRootDirectory = tempDir
             };
@@ -203,7 +208,8 @@ namespace StroopApp.XUnitTests.Services
         {
             // Arrange
             var tempDir = CreateTempDirectory();
-            var service = new ExportationService(CreateMockSettings(), CreateLanguageService(), tempDir)
+            var config = new AppConfiguration { ConfigDirectory = tempDir };
+            var service = new ExportationService(CreateMockSettings(), CreateLanguageService(), config)
             {
                 ExportRootDirectory = tempDir
             };
@@ -221,7 +227,8 @@ namespace StroopApp.XUnitTests.Services
         {
             // Arrange
             var tempDir = CreateTempDirectory();
-            var service = new ExportationService(CreateMockSettings(), CreateLanguageService(), tempDir)
+            var config = new AppConfiguration { ConfigDirectory = tempDir };
+            var service = new ExportationService(CreateMockSettings(), CreateLanguageService(), config)
             {
                 ExportRootDirectory = tempDir
             };
@@ -245,7 +252,8 @@ namespace StroopApp.XUnitTests.Services
             var frExportDir = Path.Combine(tempDir, "ExportFr");
             var frLanguageService = CreateLanguageService("fr");
             var frSettings = CreateMockSettings();
-            var frService = new ExportationService(frSettings, frLanguageService, frConfigDir)
+            var frConfig = new AppConfiguration { ConfigDirectory = frConfigDir };
+            var frService = new ExportationService(frSettings, frLanguageService, frConfig)
             {
                 ExportRootDirectory = frExportDir
             };
@@ -254,7 +262,8 @@ namespace StroopApp.XUnitTests.Services
             var enExportDir = Path.Combine(tempDir, "ExportEn");
             var enLanguageService = CreateLanguageService("en");
             var enSettings = CreateMockSettings();
-            var enService = new ExportationService(enSettings, enLanguageService, enConfigDir)
+            var enConfig = new AppConfiguration { ConfigDirectory = enConfigDir };
+            var enService = new ExportationService(enSettings, enLanguageService, enConfig)
             {
                 ExportRootDirectory = enExportDir
             };

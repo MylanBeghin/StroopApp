@@ -29,7 +29,8 @@ namespace StroopApp.XUnitTests.Services
 		public void LoadParticipants_NoFile_ReturnsEmpty()
 		{
 			// Arrange & Act
-			var svc = new ParticipantService(CreateTempDirectory(), CreateMockSettings(CreateTempDirectory()));
+			var config = new AppConfiguration { ConfigDirectory = CreateTempDirectory() };
+			var svc = new ParticipantService(config, CreateMockSettings(CreateTempDirectory()));
 			var list = svc.LoadParticipants();
 
 			// Assert
@@ -41,7 +42,8 @@ namespace StroopApp.XUnitTests.Services
 		{
 			// Arrange
 			var dir = CreateTempDirectory();
-			var svc = new ParticipantService(dir, CreateMockSettings(dir));
+			var config = new AppConfiguration { ConfigDirectory = dir };
+			var svc = new ParticipantService(config, CreateMockSettings(dir));
 			var list = new ObservableCollection<Participant> { NewParticipant("p1"), NewParticipant("p2") };
 
 			// Act
@@ -57,7 +59,8 @@ namespace StroopApp.XUnitTests.Services
 		{
 			// Arrange
 			var dir = CreateTempDirectory();
-			var svc = new ParticipantService(dir, CreateMockSettings(dir));
+			var config = new AppConfiguration { ConfigDirectory = dir };
+			var svc = new ParticipantService(config, CreateMockSettings(dir));
 			var list = new ObservableCollection<Participant>();
 
 			// Act
@@ -73,7 +76,8 @@ namespace StroopApp.XUnitTests.Services
 		{
 			// Arrange
 			var dir = CreateTempDirectory();
-			var svc = new ParticipantService(dir, CreateMockSettings(dir));
+			var config = new AppConfiguration { ConfigDirectory = dir };
+			var svc = new ParticipantService(config, CreateMockSettings(dir));
 			var original = NewParticipant("p1", 20);
 			var list = new ObservableCollection<Participant> { original };
 			svc.SaveParticipants(list);
@@ -91,7 +95,8 @@ namespace StroopApp.XUnitTests.Services
 		{
 			// Arrange
 			var dir = CreateTempDirectory();
-			var svc = new ParticipantService(dir, CreateMockSettings(dir));
+			var config = new AppConfiguration { ConfigDirectory = dir };
+			var svc = new ParticipantService(config, CreateMockSettings(dir));
 			var list = new ObservableCollection<Participant> { NewParticipant("p1", 20) };
 			svc.SaveParticipants(list);
 
@@ -109,7 +114,8 @@ namespace StroopApp.XUnitTests.Services
 		{
 			// Arrange
 			var dir = CreateTempDirectory();
-			var svc = new ParticipantService(dir, CreateMockSettings(dir));
+			var config = new AppConfiguration { ConfigDirectory = dir };
+			var svc = new ParticipantService(config, CreateMockSettings(dir));
 			var list = new ObservableCollection<Participant> { NewParticipant("p1") };
 			svc.SaveParticipants(list);
 			var results = Path.Combine(dir, "Results", "p1");
@@ -130,7 +136,8 @@ namespace StroopApp.XUnitTests.Services
 		{
 			// Arrange
 			var dir = CreateTempDirectory();
-			var svc = new ParticipantService(dir, CreateMockSettings(dir));
+			var config = new AppConfiguration { ConfigDirectory = dir };
+			var svc = new ParticipantService(config, CreateMockSettings(dir));
 			var list = new ObservableCollection<Participant> { NewParticipant("p2") };
 			svc.SaveParticipants(list);
 

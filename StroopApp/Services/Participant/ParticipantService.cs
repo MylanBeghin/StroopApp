@@ -22,9 +22,9 @@ namespace StroopApp.Services.Participant
             NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
         };
 
-        public ParticipantService(string configDir, ExperimentSettings settings)
+        public ParticipantService(AppConfiguration configDir, ExperimentSettings settings)
         {
-            _configDir = configDir ?? throw new ArgumentNullException(nameof(configDir));
+            _configDir = configDir.ConfigDirectory ?? throw new ArgumentNullException(nameof(configDir));
             ArgumentNullException.ThrowIfNull(settings);
             _participantsPath = Path.Combine(_configDir, "participants.json");
             _exportRootDirectory = settings.ExportFolderPath;

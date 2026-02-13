@@ -1,61 +1,79 @@
-﻿using StroopApp.Models;
+﻿using Microsoft.Extensions.DependencyInjection;
+using StroopApp.Models;
 using StroopApp.Services.Charts;
+using StroopApp.Services.Exportation;
+using StroopApp.Services.KeyMapping;
 using StroopApp.Services.Language;
+using StroopApp.Services.Navigation.PageFactory;
+using StroopApp.Services.Participant;
+using StroopApp.Services.Profile;
+using StroopApp.Services.Trial;
 using StroopApp.Services.Window;
 using StroopApp.Views;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+using StroopApp.Views.Experiment.Experimenter;
+using System.IO;
 using System.Windows;
 
 namespace StroopApp
 {
     public partial class App : Application
     {
-        private IServiceProvider _serviceProvider;
+        /// <summary>
+        /// Global service provider for the application's DI container.
+        /// </summary>
+        public static IServiceProvider ServiceProvider { get; private set; } = null!;
 
-        public static IWindowManager WindowManager
-        {
-            get; private set;
-        }
-        public static ILanguageService LanguageService { get; private set; }
-
+        public static IWindowManager WindowManager { get; private set; } = null!;
+        public static ILanguageService LanguageService { get; private set; } = null!;
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            // Configure DI container
             var services = new ServiceCollection();
             ConfigureServices(services);
-            _serviceProvider = services.BuildServiceProvider();
+            ServiceProvider = services.BuildServiceProvider();
 
-            // Resolve services from DI container
-            LanguageService = _serviceProvider.GetRequiredService<LanguageService>();
-            WindowManager = _serviceProvider.GetRequiredService<IWindowManager>();
+            LanguageService = ServiceProvider.GetRequiredService<ILanguageService>();
+            WindowManager = ServiceProvider.GetRequiredService<IWindowManager>();
 
-            // Resolve ExperimentChartFactory from DI
-            var chartFactory = _serviceProvider.GetRequiredService<ExperimentChartFactory>();
+            var pageFactory = ServiceProvider.GetRequiredService<IPageFactory>();
 
-            // Create settings with injected factory
-            var settings = new ExperimentSettings();
-            settings.ExperimentContext = new SharedExperimentData(chartFactory);
-
-            var expWin = new ExperimentWindow(settings, WindowManager, LanguageService);
+            var expWin = new ExperimentWindow(pageFactory, LanguageService);
             expWin.Show();
         }
 
         private void ConfigureServices(IServiceCollection services)
         {
-            // Phase D1: ExperimentChartFactory for LiveCharts graphics creation
+            var configDir = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "StroopApp");
+
+            services.AddSingleton(new AppConfiguration { ConfigDirectory = configDir });
+
             services.AddSingleton<ExperimentChartFactory>();
 
-            // Phase D2.1: Core application services
-            // LanguageService: Singleton - manages global application culture and language state.
-            // Single instance ensures consistent language across all components.
-            services.AddSingleton<LanguageService>();
-
-            // WindowManager: Singleton - manages participant window lifecycle.
-            // Single instance required to track and control the unique participant window.
+            services.AddSingleton<ILanguageService, LanguageService>();
             services.AddSingleton<IWindowManager, WindowManager>();
+
+            services.AddSingleton<ExperimentSettings>(sp =>
+            {
+                var chartFactory = sp.GetRequiredService<ExperimentChartFactory>();
+                var settings = new ExperimentSettings();
+                settings.ExperimentContext = new SharedExperimentData(chartFactory);
+                return settings;
+            });
+
+            services.AddSingleton<IPageFactory, PageFactory>();
+
+            services.AddSingleton<IProfileService, ProfileService>();
+            services.AddSingleton<IParticipantService, ParticipantService>();
+            services.AddSingleton<IKeyMappingService, KeyMappingService>();
+            services.AddSingleton<IExportationService, ExportationService>();
+            services.AddTransient<ITrialGenerationService, TrialGenerationService>();
+
+            services.AddTransient<ConfigurationPage>();
+            services.AddTransient<EndExperimentPage>();
+            services.AddTransient<ExperimentDashBoardPage>();
         }
     }
 }

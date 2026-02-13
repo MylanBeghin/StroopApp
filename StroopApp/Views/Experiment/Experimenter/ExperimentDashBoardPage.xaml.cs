@@ -9,14 +9,30 @@ using System.Windows.Controls;
 
 namespace StroopApp.Views
 {
-    public partial class ExperimentDashBoardPage : Page
+    public partial class ExperimentDashBoardPage : Page, INavigationAware
     {
-        public ExperimentDashBoardPage(ExperimentSettings settings, INavigationService experimenterNavigationService, IWindowManager windowManager, ILanguageService languageService)
+        private readonly ExperimentSettings _settings;
+        private readonly IWindowManager _windowManager;
+        private readonly ILanguageService _languageService;
+
+        public INavigationService NavigationService
+        {
+            set => Initialize(value);
+        }
+
+        public ExperimentDashBoardPage(ExperimentSettings settings, IWindowManager windowManager, ILanguageService languageService)
         {
             InitializeComponent();
-            var experimentProfileView = new ExperimentProgressView(settings);
-            var graphsView = new GraphsView(settings);
-            DataContext = new ExperimentDashBoardPageViewModel(settings, experimenterNavigationService, windowManager, languageService);
+            _settings = settings;
+            _windowManager = windowManager;
+            _languageService = languageService;
+        }
+
+        private void Initialize(INavigationService navigationService)
+        {
+            var experimentProfileView = new ExperimentProgressView(_settings);
+            var graphsView = new GraphsView(_settings);
+            DataContext = new ExperimentDashBoardPageViewModel(_settings, navigationService, _windowManager, _languageService);
             MainGrid.Children.Add(experimentProfileView);
             Grid.SetRow(experimentProfileView, 1);
             MainGrid.Children.Add(graphsView);

@@ -4,8 +4,7 @@
       xmlns:ui="http://schemas.modernwpf.com/2019"
       xmlns:viewsProfile="clr-namespace:StroopApp.Views.Profile"
       xmlns:viewsKeyMapping="clr-namespace:StroopApp.Views.KeyMapping"
-      xmlns:viewsParticipant="clr-namespace:StroopApp.Views.Participant"
-      Title="Configuration de l'expérience">
+      xmlns:viewsParticipant="clr-namespace:StroopApp.Views.Participant">
     <Grid x:Name="MainGrid"
           Margin="12">
         <Grid.RowDefinitions>

@@ -39,11 +39,11 @@
                                  HorizontalAlignment="Right"
                                  VerticalAlignment="Center"
                                  Spacing="10">
-                <TextBlock Text="{Binding CurrentProfile}"
+                <TextBlock Text="{Binding CurrentProfile, Mode=OneTime}"
                            Style="{DynamicResource TitleTextBlockStyle}" />
                 <TextBlock Text=" - "
                            Style="{DynamicResource TitleTextBlockStyle}" />
-                <TextBlock Text="{Binding CurrentParticipant}"
+                <TextBlock Text="{Binding CurrentParticipant, Mode=OneTime}"
                            Style="{DynamicResource TitleTextBlockStyle}" />
             </ui:SimpleStackPanel>
         </Grid>

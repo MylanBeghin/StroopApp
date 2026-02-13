@@ -2,9 +2,7 @@ using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Resources;
 using StroopApp.Services.Exportation;
-using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
-using StroopApp.Services.Window;
 using StroopApp.Views;
 using System.Diagnostics;
 using System.IO;
@@ -23,8 +21,6 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
         private readonly IExportationService _exportationService;
         private readonly Window _parentWindow;
         private readonly INavigationService _navigationService;
-        private readonly IWindowManager _windowManager;
-        private readonly ILanguageService _languageService;
 
         private bool _isExporting;
         public bool IsExporting
@@ -79,14 +75,12 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
         public ICommand OpenAndSelectTodayExportFileCommand { get; }
         public ICommand ReExportCommand { get; }
 
-        public ExportEndExperimentWindowViewModel(ExperimentSettings settings, IExportationService exportationService, Window parentWindow, INavigationService navigationService, IWindowManager windowManager, ILanguageService languageService)
+        public ExportEndExperimentWindowViewModel(ExperimentSettings settings, IExportationService exportationService, Window parentWindow, INavigationService navigationService)
         {
             _settings = settings;
             _exportationService = exportationService;
             _parentWindow = parentWindow;
             _navigationService = navigationService;
-            _windowManager = windowManager;
-            _languageService = languageService;
 
             ExportPath = _exportationService.LoadExportFolderPath();
             ExportCommand = new CommunityToolkit.Mvvm.Input.AsyncRelayCommand(ExportAsync, CanExport);
@@ -188,7 +182,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
                 _settings.Reset();
                 _parentWindow.DialogResult = true;
                 _parentWindow.Close();
-                _navigationService.NavigateTo(() => new ConfigurationPage(_settings, _navigationService, _windowManager, _languageService));
+                _navigationService.NavigateTo<ConfigurationPage>();
             }
             catch (Exception ex)
             {

@@ -2,19 +2,17 @@
 using System.Windows.Input;
 
 using StroopApp.Core;
-using StroopApp.Models;
 using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
-using StroopApp.Services.Window;
 using StroopApp.Views;
 
 namespace StroopApp.ViewModels
 {
-    /// <summary>
-    /// Root ViewModel for the main experiment window.
-    /// Manages language selection and initial navigation to configuration page.
-    /// </summary>
-    public class ExperimentWindowViewModel : ViewModelBase
+	/// <summary>
+	/// Root ViewModel for the main experiment window.
+	/// Manages language selection and initial navigation to configuration page.
+	/// </summary>
+	public class ExperimentWindowViewModel : ViewModelBase
 	{
 		public bool IsEnglishSelected => Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName == "en";
 		public bool IsFrenchSelected => Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName == "fr";
@@ -23,10 +21,10 @@ namespace StroopApp.ViewModels
 		{
 			get;
 		}
-		public ExperimentWindowViewModel(ExperimentSettings settings, INavigationService experimentNavigationService, IWindowManager windowManager, ILanguageService languageService)
+		public ExperimentWindowViewModel(INavigationService experimentNavigationService, ILanguageService languageService)
 		{
 			_languageService = languageService;
-			experimentNavigationService.NavigateTo(() => new ConfigurationPage(settings, experimentNavigationService, windowManager, languageService));
+			experimentNavigationService.NavigateTo<ConfigurationPage>();
 			ChangeLanguageCommand = new RelayCommand<string>(ChangeLanguage);
 		}
 		private void ChangeLanguage(string lang)

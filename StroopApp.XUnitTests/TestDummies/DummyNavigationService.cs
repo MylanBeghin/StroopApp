@@ -16,5 +16,8 @@ namespace StroopApp.XUnitTests.TestDummies
 		{
 			Navigated = true;
 		}
+		void INavigationService.SetFrame(Frame frame)
+		{
+		}
 	}
 }

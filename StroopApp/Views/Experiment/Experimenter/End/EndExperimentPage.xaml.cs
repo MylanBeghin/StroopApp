@@ -1,33 +1,41 @@
-﻿using System.IO;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 using StroopApp.Models;
 using StroopApp.Services.Exportation;
-using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
-using StroopApp.ViewModels.Experiment.Experimenter;
 using StroopApp.ViewModels.Experiment.Experimenter.End;
 using StroopApp.Views.Experiment.Experimenter.Graphs;
 
 namespace StroopApp.Views.Experiment.Experimenter
 {
-	public partial class EndExperimentPage : Page
+	public partial class EndExperimentPage : Page, INavigationAware
 	{
+		private readonly ExperimentSettings _settings;
+		private readonly IExportationService _exportationService;
+		private readonly IWindowManager _windowManager;
 
-		public EndExperimentPage(ExperimentSettings settings, INavigationService experimenterNavigationService, IWindowManager windowManager, ILanguageService languageService)
+		public INavigationService NavigationService
+		{
+			set => Initialize(value);
+		}
+
+		public EndExperimentPage(ExperimentSettings settings, IExportationService exportationService, IWindowManager windowManager)
 		{
 			InitializeComponent();
-			var configDir = Path.Combine(
-				Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-				"StroopApp");
-			var exportationService = new ExportationService(settings, languageService, configDir);
-			DataContext = new EndExperimentPageViewModel(settings, exportationService, experimenterNavigationService, windowManager, languageService);
-			var globalGraph = new GlobalGraphView(settings);
+			_settings = settings;
+			_exportationService = exportationService;
+			_windowManager = windowManager;
+		}
+
+		private void Initialize(INavigationService navigationService)
+		{
+			DataContext = new EndExperimentPageViewModel(_settings, _exportationService, navigationService, _windowManager);
+			var globalGraph = new GlobalGraphView(_settings);
 			MainGrid.Children.Add(globalGraph);
 			Grid.SetRow(globalGraph, 4);
 			Grid.SetColumnSpan(globalGraph, 3);
-			var liveReactionTimeView = new LiveReactionTimeView(settings);
+			var liveReactionTimeView = new LiveReactionTimeView(_settings);
 			MainGrid.Children.Add(liveReactionTimeView);
 			Grid.SetRow(liveReactionTimeView, 2);
 			Grid.SetColumn(liveReactionTimeView, 2);
