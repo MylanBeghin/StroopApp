@@ -1,4 +1,5 @@
-﻿using StroopApp.Core;
+﻿using CommunityToolkit.Mvvm.Input;
+using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Resources;
 using StroopApp.Services.Language;
@@ -7,8 +8,8 @@ using StroopApp.Services.Trial;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.Configuration.Participant;
 using StroopApp.ViewModels.Configuration.Profile;
+using StroopApp.ViewModels.State;
 using StroopApp.Views;
-using System.Windows.Input;
 
 namespace StroopApp.ViewModels.Configuration
 {
@@ -16,7 +17,7 @@ namespace StroopApp.ViewModels.Configuration
     /// ViewModel for the main configuration page, coordinating profile, participant, and key mapping selection.
     /// Handles experiment launch with validation and initialization of trial sequences.
     /// </summary>
-    public class ConfigurationPageViewModel : ViewModelBase
+    public partial class ConfigurationPageViewModel : ViewModelBase
     {
         private readonly ProfileManagementViewModel _profileViewModel;
         private readonly ParticipantManagementViewModel _participantViewModel;
@@ -26,10 +27,9 @@ namespace StroopApp.ViewModels.Configuration
         private readonly ILanguageService _languageService;
         private readonly ITrialGenerationService _trialGenerationService;
 
-        private ExperimentSettings _settings;
-        public ICommand LaunchExperimentCommand { get; }
+        private readonly ExperimentSettingsViewModel _settings;
 
-        public ConfigurationPageViewModel(ExperimentSettings settings,
+        public ConfigurationPageViewModel(ExperimentSettingsViewModel settings,
                                   ProfileManagementViewModel profileViewModel,
                                   ParticipantManagementViewModel participantViewModel,
                                   KeyMappingViewModel keyMappingViewModel,
@@ -46,9 +46,9 @@ namespace StroopApp.ViewModels.Configuration
             _trialGenerationService = trialGenerationService;
             _languageService = languageService;
             _settings = settings;
-            LaunchExperimentCommand = new RelayCommand(async _ => await LaunchExperimentAsync());
         }
 
+        [RelayCommand]
         private async Task LaunchExperimentAsync()
         {
             try

@@ -1,6 +1,8 @@
-﻿using StroopApp.Core;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Services.Navigation;
+using StroopApp.ViewModels.State;
 using StroopApp.Views.Experiment.Participant.Stroop;
 using System.Diagnostics;
 using System.Windows;
@@ -13,37 +15,23 @@ namespace StroopApp.ViewModels.Experiment.Participant.Stroop
     /// Manages Stroop test trial execution, timing, and participant input handling.
     /// Orchestrates the trial sequence (fixation → cue → stimulus → response) with validated ±8ms timing precision.
     /// </summary>
-    public class StroopViewModel : ViewModelBase
+    public partial class StroopViewModel : ViewModelBase, IDisposable
     {
         /// <summary>
         /// Experiment settings provided via constructor.
         /// Initialized before ViewModel usage.
         /// </summary>
-        private ExperimentSettings _settings = null!;
-        public ExperimentSettings Settings
+        public ExperimentSettingsViewModel Settings
         {
-            get => _settings;
-            set
-            {
-                _settings = value;
-                OnPropertyChanged();
-            }
+            get; set;
         }
 
         /// <summary>
         /// Current UI control displayed to participant.
         /// Initialized during trial execution.
         /// </summary>
+        [ObservableProperty]
         private UserControl _currentControl = null!;
-        public UserControl CurrentControl
-        {
-            get => _currentControl;
-            set
-            {
-                _currentControl = value;
-                OnPropertyChanged();
-            }
-        }
 
         /// <summary>
         /// Task completion source for participant input.
@@ -60,7 +48,7 @@ namespace StroopApp.ViewModels.Experiment.Participant.Stroop
         private CancellationTokenSource _cancellationTokenSource = null!;
         private bool _isDisposed = false;
 
-        public StroopViewModel(ExperimentSettings settings, INavigationService participantWindowNavigationService)
+        public StroopViewModel(ExperimentSettingsViewModel settings, INavigationService participantWindowNavigationService)
         {
             Settings = settings;
             _participantWindowNavigationService = participantWindowNavigationService;
@@ -106,10 +94,10 @@ namespace StroopApp.ViewModels.Experiment.Participant.Stroop
                         HandleTaskStopped();
                         return;
                     }
-                    if (Settings.CurrentProfile.IsAmorce)
+                    if (Settings.CurrentProfile.HasVisualCue)
                     {
-                        CurrentControl = new AmorceControl(trial.VisualCue);
-                        await Task.Delay(Settings.CurrentProfile.AmorceDuration, _cancellationTokenSource.Token);
+                        CurrentControl = new VisualCueControl(trial.VisualCue);
+                        await Task.Delay(Settings.CurrentProfile.VisualCueDuration, _cancellationTokenSource.Token);
 
                         if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
                         {

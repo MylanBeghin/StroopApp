@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+using StroopApp.ViewModels.State;
 using StroopApp.Models;
 using StroopApp.Services.Trial;
 
@@ -8,10 +9,10 @@ namespace StroopApp.XUnitTests.TestDummies
 	public class DummyTrialGenerationService : ITrialGenerationService
 	{
 		public bool GenerateTrialsCalled { get; private set; }
-		public bool GenerateAmorceSequenceCalled { get; private set; }
+		public bool GenerateVisualCueSequenceCalled { get; private set; }
 		public int LastTrialCount { get; private set; }
 
-		public List<StroopTrial> GenerateTrials(ExperimentSettings settings)
+		public List<StroopTrial> GenerateTrials(ExperimentSettingsViewModel settings)
 		{
 			GenerateTrialsCalled = true;
 
@@ -22,7 +23,6 @@ namespace StroopApp.XUnitTests.TestDummies
 			int trialCount = settings.CurrentProfile.WordCount;
 			LastTrialCount = trialCount;
 
-			// Générer des trials de test simples
 			for (int i = 0; i < trialCount; i++)
 			{
 				trials.Add(new StroopTrial
@@ -30,7 +30,7 @@ namespace StroopApp.XUnitTests.TestDummies
 					TrialNumber = i + 1,
 					Block = settings.Block,
 					ParticipantId = settings.Participant?.Id ?? "TestParticipant",
-					IsCongruent = i % 2 == 0, // Alternance congruent/incongruent
+					IsCongruent = i % 2 == 0,
 					ExpectedAnswer = "TestAnswer",
 					Stimulus = new Word("Red", "Red", "RED")
 				});
@@ -39,9 +39,9 @@ namespace StroopApp.XUnitTests.TestDummies
 			return trials;
 		}
 
-		public List<VisualCueType> GenerateAmorceSequence(int count, int switchPercentage)
+		public List<VisualCueType> GenerateVisualCueSequence(int count, int switchPercentage)
 		{
-			GenerateAmorceSequenceCalled = true;
+			GenerateVisualCueSequenceCalled = true;
 
 			var sequence = new List<VisualCueType>();
 			for (int i = 0; i < count; i++)

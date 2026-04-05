@@ -14,10 +14,10 @@ namespace StroopApp.XUnitTests.ViewModels
 			// Assert
 			Assert.Equal(50, profile.CongruencePercent);
 			Assert.Null(profile.SwitchPercent);
-			Assert.False(profile.IsAmorce);
+			Assert.False(profile.HasVisualCue);
 			Assert.Equal(100, profile.FixationDuration);
 			Assert.Equal(400, profile.MaxReactionTime);
-			Assert.Equal(0, profile.AmorceDuration);
+			Assert.Equal(0, profile.VisualCueDuration);
 			Assert.Equal(CalculationMode.WordCount, profile.CalculationMode);
 			Assert.Equal(10, profile.WordCount);
 		}

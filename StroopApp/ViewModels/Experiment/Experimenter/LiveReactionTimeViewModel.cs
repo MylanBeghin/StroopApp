@@ -1,5 +1,6 @@
 ﻿using StroopApp.Core;
 using StroopApp.Models;
+using StroopApp.ViewModels.State;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -12,7 +13,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
     /// </summary>
     public class LiveReactionTimeViewModel : ViewModelBase, IDisposable
     {
-        private readonly ExperimentSettings _settings;
+        private readonly ExperimentSettingsViewModel _settings;
 
         public ObservableCollection<ReactionTimePoint> ReactionPoints { get; }
         public ObservableCollection<ReactionGroup> GroupAverages { get; } = new();
@@ -21,7 +22,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
 
         public int GroupSize => _settings.CurrentProfile.GroupSize;
 
-        public LiveReactionTimeViewModel(ExperimentSettings settings)
+        public LiveReactionTimeViewModel(ExperimentSettingsViewModel settings)
         {
             _settings = settings;
             ReactionPoints = _settings.ExperimentContext.ReactionPoints;

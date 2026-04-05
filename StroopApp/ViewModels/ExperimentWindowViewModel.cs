@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using System.Windows.Input;
+﻿using CommunityToolkit.Mvvm.Input;
+using System.Windows;
 
 using StroopApp.Core;
 using StroopApp.Services.Language;
@@ -12,21 +12,19 @@ namespace StroopApp.ViewModels
 	/// Root ViewModel for the main experiment window.
 	/// Manages language selection and initial navigation to configuration page.
 	/// </summary>
-	public class ExperimentWindowViewModel : ViewModelBase
+  public partial class ExperimentWindowViewModel : ViewModelBase
 	{
 		public bool IsEnglishSelected => Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName == "en";
 		public bool IsFrenchSelected => Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName == "fr";
 		private readonly ILanguageService _languageService;
-		public ICommand ChangeLanguageCommand
-		{
-			get;
-		}
+
 		public ExperimentWindowViewModel(INavigationService experimentNavigationService, ILanguageService languageService)
 		{
 			_languageService = languageService;
 			experimentNavigationService.NavigateTo<ConfigurationPage>();
-			ChangeLanguageCommand = new RelayCommand<string>(ChangeLanguage);
 		}
+
+		[RelayCommand]
 		private void ChangeLanguage(string lang)
 		{
 			if (Application.Current.Resources["Loc"] is LocalizedStrings loc)

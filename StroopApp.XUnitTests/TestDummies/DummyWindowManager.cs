@@ -1,14 +1,14 @@
-﻿using StroopApp.Models;
-using StroopApp.Services.Window;
+﻿using StroopApp.Services.Window;
+using StroopApp.ViewModels.State;
 
 namespace StroopApp.XUnitTests.TestDummies
 {
-	public class DummyWindowManager : IWindowManager
-	{
-		public bool ShowCalled;
-		public void ShowParticipantWindow(ExperimentSettings settings) => ShowCalled = true;
-		public void CloseParticipantWindow()
-		{
-		}
-	}
+    public class DummyWindowManager : IWindowManager
+    {
+        public bool ShowCalled;
+        public void ShowParticipantWindow(ExperimentSettingsViewModel settings) => ShowCalled = true;
+        public void CloseParticipantWindow()
+        {
+        }
+    }
 }

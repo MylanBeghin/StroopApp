@@ -1,8 +1,8 @@
-﻿using ModernWpf.Controls;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using ModernWpf.Controls;
 using StroopApp.Resources;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 
 namespace StroopApp.Core
 {
@@ -10,13 +10,8 @@ namespace StroopApp.Core
     /// Base class for all ViewModels, implementing <see cref="INotifyPropertyChanged"/>.
     /// Provides a method for property change notifications and a utility method to show error dialogs.
     /// </summary>
-    public class ViewModelBase : INotifyPropertyChanged
+    public class ViewModelBase : ObservableObject
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
         /// <summary>
         /// Displays an error message dialog asynchronously.
         /// </summary>

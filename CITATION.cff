@@ -2,11 +2,15 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 type: software
 title: "StroopApp: A WPF Application for Administering Stroop Tasks"
-version: 1.0.0
-date-released: 2025-01-27
+version: 1.1.0
+date-released: 2026-04-05
 authors:
   - family-names: Beghin
     given-names: Mylan
+  - family-names: Mangin
+    given-names: Thomas
+  - family-names: Pageaux
+    given-names: Benjamin
 repository-code: "https://github.com/MylanBeghin/StroopApp"
 url: "https://github.com/MylanBeghin/StroopApp"
 abstract: |
@@ -49,7 +53,7 @@ references:
         given-names: Thomas
       - family-names: Audiffren
         given-names: M.
-      - family-names: André
+      - family-names: AndrÃ©
         given-names: N.
     title: "Differential effects of extended practice on the components of the Stroop task-switching cost"
     journal: "Frontiers in Psychology"

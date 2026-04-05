@@ -1,19 +1,20 @@
-﻿using System.Windows.Controls;
-
-using StroopApp.Models;
+﻿using StroopApp.Models;
 using StroopApp.ViewModels.Experiment.Experimenter;
+using StroopApp.ViewModels.State;
+using System.Windows.Controls;
 
 namespace StroopApp.Views.Experiment.Experimenter.Graphs
 {
 	public partial class LiveReactionTimeView : UserControl
 	{
-		private readonly ExperimentSettings _settings;
+		private readonly ExperimentSettingsViewModel _settings;
 
-		public LiveReactionTimeView(ExperimentSettings settings)
+		public LiveReactionTimeView(ExperimentSettingsViewModel settings)
 		{
 			InitializeComponent();
 			_settings = settings;
 			DataContext = new LiveReactionTimeViewModel(settings);
-		}
+            Unloaded += (s, e) => (DataContext as IDisposable)?.Dispose();
+        }
 	}
 }

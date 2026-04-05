@@ -306,7 +306,7 @@
   <data name="Title_ConfigPage" xml:space="preserve">
     <value>Configuration de l'expérience</value>
   </data>
-  <data name="Error_AmorceDurationInvalid" xml:space="preserve">
+  <data name="Error_VisualCueDurationInvalid" xml:space="preserve">
     <value>La durée d'affichage de l'indice visuel doit être supérieure à 0 !</value>
   </data>
   <data name="Error_MaxResponseTimeInvalid" xml:space="preserve">

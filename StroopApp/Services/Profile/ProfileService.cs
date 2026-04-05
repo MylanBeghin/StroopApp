@@ -17,8 +17,10 @@ namespace StroopApp.Services.Profile
 
 		public ProfileService(AppConfiguration configDir)
 		{
-			_configDir = configDir.ConfigDirectory ?? throw new ArgumentNullException(nameof(configDir));
-			_profilesPath = Path.Combine(_configDir, "profiles.json");
+            ArgumentNullException.ThrowIfNull(configDir);
+            ArgumentNullException.ThrowIfNull(configDir.ConfigDirectory);
+			_configDir = configDir.ConfigDirectory;
+            _profilesPath = Path.Combine(_configDir, "profiles.json");
 			_lastProfileFile = Path.Combine(_configDir, "lastProfile.json");
 		}
 
@@ -39,21 +41,26 @@ namespace StroopApp.Services.Profile
         /// Saves all experiment profiles to JSON configuration file.
         /// </summary>
         public void SaveProfiles(ObservableCollection<ExperimentProfile> profiles)
-		{
-			Directory.CreateDirectory(_configDir);
-			var json = JsonSerializer.Serialize(profiles, new JsonSerializerOptions { WriteIndented = true });
-			File.WriteAllText(_profilesPath, json);
-		}
+        {
+			ArgumentNullException.ThrowIfNull(profiles);
+
+            if (!string.IsNullOrWhiteSpace(_configDir))
+            {
+                Directory.CreateDirectory(_configDir);
+            }
+
+            var json = JsonSerializer.Serialize(profiles, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(_profilesPath, json);
+        }
 
         /// <summary>
         /// Inserts a new profile or updates an existing one by ID, then returns the refreshed collection.
         /// </summary>
         public ObservableCollection<ExperimentProfile> UpsertProfile(ExperimentProfile profile)
 		{
+            ArgumentNullException.ThrowIfNull(profile);
 
-			var allProfiles = LoadProfiles();
-
-
+            var allProfiles = LoadProfiles();
 			var existing = allProfiles.FirstOrDefault(p => p.Id == profile.Id);
 
 
@@ -72,8 +79,8 @@ namespace StroopApp.Services.Profile
 				existing.Seconds = profile.Seconds;
 				existing.WordDuration = profile.WordDuration;
 				existing.FixationDuration = profile.FixationDuration;
-				existing.AmorceDuration = profile.AmorceDuration;
-				existing.IsAmorce = profile.IsAmorce;
+				existing.VisualCueDuration = profile.VisualCueDuration;
+				existing.HasVisualCue = profile.HasVisualCue;
 				existing.GroupSize = profile.GroupSize;
 				existing.TaskDuration = profile.TaskDuration;
 				existing.WordCount = profile.WordCount;
@@ -86,10 +93,7 @@ namespace StroopApp.Services.Profile
 				existing.UpdateDerivedValues();
 			}
 
-
 			SaveProfiles(allProfiles);
-
-
 			return LoadProfiles();
 		}
 
@@ -98,7 +102,9 @@ namespace StroopApp.Services.Profile
         /// </summary>
         public void DeleteProfile(ExperimentProfile profile, ObservableCollection<ExperimentProfile> profiles)
 		{
-			if (profiles.Contains(profile))
+            ArgumentNullException.ThrowIfNull(profiles);
+            if (profile == null) return;
+            if (profiles.Contains(profile))
 			{
 				profiles.Remove(profile);
 				SaveProfiles(profiles);
@@ -132,10 +138,16 @@ namespace StroopApp.Services.Profile
         /// Saves the currently selected profile ID to configuration.
         /// </summary>
         public void SaveLastSelectedProfile(ExperimentProfile profile)
-		{
-			Directory.CreateDirectory(_configDir);
-			var json = JsonSerializer.Serialize(profile.Id, new JsonSerializerOptions { WriteIndented = true });
-			File.WriteAllText(_lastProfileFile, json);
-		}
-	}
+        {
+			ArgumentNullException.ThrowIfNull(profile);
+
+            if (!string.IsNullOrWhiteSpace(_configDir))
+            {
+                Directory.CreateDirectory(_configDir);	
+            }
+
+            var json = JsonSerializer.Serialize(profile.Id, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(_lastProfileFile, json);
+        }
+    }
 }

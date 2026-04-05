@@ -10,6 +10,7 @@ using StroopApp.Services.Window;
 using StroopApp.ViewModels.Configuration;
 using StroopApp.ViewModels.Configuration.Participant;
 using StroopApp.ViewModels.Configuration.Profile;
+using StroopApp.ViewModels.State;
 using StroopApp.Views.Configuration;
 using StroopApp.Views.KeyMapping;
 using StroopApp.Views.Participant;
@@ -20,7 +21,7 @@ namespace StroopApp.Views
 {
     public partial class ConfigurationPage : Page, INavigationAware
     {
-        private readonly ExperimentSettings _settings;
+        private readonly ExperimentSettingsViewModel _settings;
         private readonly IWindowManager _windowManager;
         private readonly ILanguageService _languageService;
         private readonly IProfileService _profileService;
@@ -35,7 +36,7 @@ namespace StroopApp.Views
         }
 
         public ConfigurationPage(
-            ExperimentSettings settings,
+            ExperimentSettingsViewModel settings,
             IWindowManager windowManager,
             ILanguageService languageService,
             IProfileService profileService,

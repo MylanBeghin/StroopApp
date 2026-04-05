@@ -1,5 +1,4 @@
-﻿using StroopApp.Core;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace StroopApp.Models
 {
@@ -7,34 +6,10 @@ namespace StroopApp.Models
     /// Represents a key binding associated with a specific color used in the experiment.
     /// </summary>
 
-    public class KeyMapping : ModelBase
+    public class KeyMapping
     {
-        private string _color;
-        public string Color
-        {
-            get => _color;
-            set
-            {
-                if (_color != value)
-                {
-                    _color = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        private Key _key;
-        public Key Key
-        {
-            get => _key;
-            set
-            {
-                if (_key != value)
-                {
-                    _key = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        public string Color { get; set; }
+        public Key Key { get; set; }
         /// <summary>
         /// Initializes a new key mapping for the specified color and key.
         /// </summary>

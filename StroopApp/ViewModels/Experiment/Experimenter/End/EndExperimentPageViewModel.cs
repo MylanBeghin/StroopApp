@@ -1,15 +1,17 @@
-﻿using StroopApp.Core;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Resources;
 using StroopApp.Services.Charts;
 using StroopApp.Services.Exportation;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
+using StroopApp.ViewModels.State;
 using StroopApp.Views;
 using StroopApp.Views.Experiment.Experimenter.End;
 using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Input;
 
 namespace StroopApp.ViewModels.Experiment.Experimenter.End
 {
@@ -17,9 +19,9 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
     /// ViewModel for the end-of-experiment page, handling continuation to next block, 
     /// starting new experiments, data export, and application shutdown with confirmations.
     /// </summary>
-    public class EndExperimentPageViewModel : ViewModelBase
+    public partial class EndExperimentPageViewModel : ViewModelBase
     {
-        public ExperimentSettings Settings { get; }
+        public ExperimentSettingsViewModel Settings { get; }
         public ObservableCollection<Block> Blocks { get; }
 
         private readonly IExportationService _exportationService;
@@ -27,35 +29,13 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
         private readonly IWindowManager _windowManager;
         private readonly ExperimentChartFactory _chartFactory;
 
-        public ICommand ContinueCommand { get; }
-        public ICommand NewExperimentCommand { get; }
-        public ICommand ExportCommand { get; }
-        public ICommand QuitWithoutExportCommand { get; }
-        public ICommand QuitWithExportCommand { get; }
+        [ObservableProperty]
+        private string _currentParticipant = string.Empty;
 
-        private string _currentParticipant;
-        public string CurrentParticipant
-        {
-            get => _currentParticipant;
-            set
-            {
-                _currentParticipant = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        private string _currentProfile = string.Empty;
 
-        private string _currentProfile;
-        public string CurrentProfile
-        {
-            get => _currentProfile;
-            set
-            {
-                _currentProfile = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public EndExperimentPageViewModel(ExperimentSettings settings,
+        public EndExperimentPageViewModel(ExperimentSettingsViewModel settings,
                                   IExportationService exportationService,
                                   INavigationService experimenterNavigationService,
                                   IWindowManager windowManager)
@@ -65,12 +45,6 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             _experimenterNavigationService = experimenterNavigationService;
             _windowManager = windowManager;
             _chartFactory = new ExperimentChartFactory();
-
-            ContinueCommand = new RelayCommand(_ => Continue());
-            NewExperimentCommand = new RelayCommand(async _ => await NewExperimentAsync());
-            ExportCommand = new RelayCommand(async _ => await ExportAsync());
-            QuitWithoutExportCommand = new RelayCommand(async _ => await QuitWithoutExportAsync());
-            QuitWithExportCommand = new RelayCommand(async _ => await QuitWithExportAsync());
 
             Blocks = Settings.ExperimentContext.Blocks;
             CurrentParticipant = string.Format(Strings.Label_CurrentParticipant, Settings.Participant.Id);
@@ -85,6 +59,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             Settings.ExperimentContext.ColumnSerie = _chartFactory.CreateSnapshotColumnSerie(pointsSnapshot);
         }
 
+        [RelayCommand]
         private void Continue()
         {
             try
@@ -104,7 +79,8 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             }
         }
 
-        private async Task NewExperimentAsync()
+        [RelayCommand]
+        private async Task NewExperiment()
         {
             try
             {
@@ -122,7 +98,8 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             }
         }
 
-        private async Task ExportAsync()
+        [RelayCommand]
+        private async Task Export()
         {
             try
             {
@@ -135,7 +112,8 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             }
         }
 
-        private async Task QuitWithoutExportAsync()
+        [RelayCommand]
+        private async Task QuitWithoutExport()
         {
             try
             {
@@ -150,7 +128,8 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             }
         }
 
-        private async Task QuitWithExportAsync()
+        [RelayCommand]
+        private async Task QuitWithExport()
         {
             try
             {

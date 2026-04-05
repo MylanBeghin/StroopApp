@@ -2,12 +2,12 @@
 using System.Windows.Controls;
 namespace StroopApp.Views.Experiment.Participant.Stroop
 {
-    public partial class AmorceControl : UserControl
+    public partial class VisualCueControl : UserControl
     {
-        public AmorceControl(VisualCueType amorce)
+        public VisualCueControl(VisualCueType visualCue)
         {
             InitializeComponent();
-            DataContext = new VisualCueControlViewModel(amorce);
+            DataContext = new VisualCueControlViewModel(visualCue);
         }
     }
 }

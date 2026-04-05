@@ -1,8 +1,8 @@
-﻿using System.Globalization;
-
-using StroopApp.Models;
+﻿using StroopApp.Models;
 using StroopApp.Resources;
 using StroopApp.Services.Language;
+using StroopApp.ViewModels.State;
+using System.Globalization;
 
 namespace StroopApp.Services.Trial
 {
@@ -23,7 +23,7 @@ namespace StroopApp.Services.Trial
 		/// Legacy method for backward compatibility.
 		/// Delegates to the interface-based overload via adapter.
 		/// </summary>
-		public List<StroopTrial> GenerateTrials(ExperimentSettings settings)
+		public List<StroopTrial> GenerateTrials(ExperimentSettingsViewModel settings)
 		{
 			if (settings?.CurrentProfile == null)
 				throw new ArgumentException("Settings and  CurrentProfile cannot be null", nameof(settings));
@@ -67,9 +67,9 @@ namespace StroopApp.Services.Trial
 			congruenceFlags.AddRange(Enumerable.Repeat(false, incongruentCount));
 			congruenceFlags = congruenceFlags.OrderBy(_ => _random.Next()).ToList();
 
-			List<VisualCueType>? amorceSequence = null;
-			if (config.IsAmorce)
-				amorceSequence = GenerateAmorceSequence(total, config.DominantPercent);
+			List<VisualCueType>? visualCueSequence = null;
+			if (config.HasVisualCue)
+				visualCueSequence = GenerateVisualCueSequence(total, config.DominantPercent);
 
 			for (int i = 0; i < total; i++)
 			{
@@ -78,7 +78,7 @@ namespace StroopApp.Services.Trial
 					TrialNumber = i + 1,
 					Block = config.Block,
 					ParticipantId = config.ParticipantId,
-					IsAmorce = config.IsAmorce,
+					HasVIsualCue = config.HasVisualCue,
 					SwitchPercent = config.DominantPercent,
 					CongruencePercent = config.CongruencePercent,
 				};
@@ -101,8 +101,8 @@ namespace StroopApp.Services.Trial
 					trial.IsCongruent = false;
 				}
 
-				if (amorceSequence != null)
-					trial.VisualCue = amorceSequence[i];
+				if (visualCueSequence != null)
+					trial.VisualCue = visualCueSequence[i];
 				trial.DetermineExpectedAnswer();
 
 				trials.Add(trial);
@@ -111,7 +111,7 @@ namespace StroopApp.Services.Trial
 			return trials;
 		}
 
-		public List<VisualCueType> GenerateAmorceSequence(int count, int switchPercentage)
+		public List<VisualCueType> GenerateVisualCueSequence(int count, int switchPercentage)
 		{
 			if (count <= 0)
 				throw new ArgumentException("Count of visual cues must be positive", nameof(count));

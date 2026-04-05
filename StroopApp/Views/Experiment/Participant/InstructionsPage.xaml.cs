@@ -1,18 +1,19 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Documents;
-using StroopApp.Models;
+﻿using StroopApp.Models;
 using StroopApp.Services.Navigation;
 using StroopApp.ViewModels.Experiment.Participant;
+using StroopApp.ViewModels.State;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace StroopApp.Views.Experiment.Participant
 {
     public partial class InstructionsPage : Page
     {
         private readonly InstructionsPageViewModel _viewModel;
-        public InstructionsPage(ExperimentSettings settings, INavigationService participantWindowNavigationService)
+        public InstructionsPage(ExperimentSettingsViewModel settings, INavigationService participantWindowNavigationService)
         {
             InitializeComponent();
             _viewModel = new InstructionsPageViewModel(settings, participantWindowNavigationService);

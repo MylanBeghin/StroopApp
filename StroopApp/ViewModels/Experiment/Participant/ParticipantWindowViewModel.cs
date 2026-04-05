@@ -1,45 +1,37 @@
-﻿using StroopApp.Models;
-using StroopApp.Services.Navigation;
+﻿using StroopApp.Services.Navigation;
+using StroopApp.ViewModels.State;
 using StroopApp.Views.Experiment.Participant;
+using System.ComponentModel;
 
 namespace StroopApp.ViewModels.Experiment.Participant
 {
-    /// <summary>
-    /// Manages navigation flow for the participant window during experiment execution.
-    /// Handles transitions between instruction pages and experiment completion.
-    /// </summary>
-    public class ParticipantWindowViewModel
-	{
-		private readonly ExperimentSettings _settings;
-		private readonly INavigationService _participantWindowNavigationService;
+    public class ParticipantWindowViewModel : IDisposable
+    {
+        private readonly ExperimentSettingsViewModel _settings;
+        private readonly INavigationService _participantWindowNavigationService;
 
-		public ParticipantWindowViewModel(ExperimentSettings settings, INavigationService participantWindowNavigationService)
-		{
-			_settings = settings;
-			_participantWindowNavigationService = participantWindowNavigationService;
+        public ParticipantWindowViewModel(ExperimentSettingsViewModel settings, INavigationService participantWindowNavigationService)
+        {
+            _settings = settings;
+            _participantWindowNavigationService = participantWindowNavigationService;
 
+            _settings.ExperimentContext.PropertyChanged += ExperimentContext_PropertyChanged;
 
-			_settings.ExperimentContext.PropertyChanged += ExperimentContext_PropertyChanged;
+            _participantWindowNavigationService.NavigateTo(() => new InstructionsPage(_settings, _participantWindowNavigationService));
+        }
 
+        private void ExperimentContext_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(_settings.ExperimentContext.IsBlockFinished)
+                && _settings.ExperimentContext.IsBlockFinished)
+            {
+                _participantWindowNavigationService.NavigateTo(() => new EndInstructionsPage());
+            }
+        }
 
-			participantWindowNavigationService.NavigateTo(() => new InstructionsPage(settings, participantWindowNavigationService));
-		}
-
-		private void ExperimentContext_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-		{
-
-			if (e.PropertyName == nameof(_settings.ExperimentContext.IsBlockFinished)
-				&& _settings.ExperimentContext.IsBlockFinished)
-			{
-				_participantWindowNavigationService.NavigateTo(() => new EndInstructionsPage());
-			}
-		}
-		public void Dispose()
-		{
-			if (_settings?.ExperimentContext != null)
-			{
-				_settings.ExperimentContext.PropertyChanged -= ExperimentContext_PropertyChanged;
-			}
-		}
-	}
+        public void Dispose()
+        {
+            _settings.ExperimentContext.PropertyChanged -= ExperimentContext_PropertyChanged;
+        }
+    }
 }
