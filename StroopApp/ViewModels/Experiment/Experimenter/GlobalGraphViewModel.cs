@@ -3,6 +3,7 @@ using LiveChartsCore.SkiaSharpView;
 using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Resources;
+using StroopApp.ViewModels.State;
 using System.Collections.ObjectModel;
 
 namespace StroopApp.ViewModels.Experiment.Experimenter
@@ -29,7 +30,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
         {
             get;
         }
-        public GlobalGraphViewModel(ExperimentSettings settings)
+        public GlobalGraphViewModel(ExperimentSettingsViewModel settings)
         {
             Series = settings.ExperimentContext.BlockSeries;
             Sections = settings.ExperimentContext.Sections;
@@ -48,12 +49,11 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
         };
 
             double maxRt = settings.ExperimentContext.Blocks
-    .SelectMany(b => b.TrialRecords)
-    .Where(t => t.ReactionTime.HasValue)
-    // ASSUMPTION: HasValue filter guarantees ReactionTime is not null
-    .Select(t => t.ReactionTime!.Value)
-    .DefaultIfEmpty(0)
-    .Max();
+                .SelectMany(b => b.TrialRecords)
+                .Where(t => t.ReactionTime.HasValue)
+                .Select(t => t.ReactionTime!.Value)
+                .DefaultIfEmpty(0)
+                .Max();
             YAxes = new[]
                 {
                 new Axis {

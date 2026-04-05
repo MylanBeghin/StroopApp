@@ -3,6 +3,7 @@ using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.Experiment.Experimenter;
+using StroopApp.ViewModels.State;
 using StroopApp.Views.Experiment.Experimenter;
 using StroopApp.Views.Experiment.Experimenter.Graphs;
 using System.Windows.Controls;
@@ -11,7 +12,7 @@ namespace StroopApp.Views
 {
     public partial class ExperimentDashBoardPage : Page, INavigationAware
     {
-        private readonly ExperimentSettings _settings;
+        private readonly ExperimentSettingsViewModel _settings;
         private readonly IWindowManager _windowManager;
         private readonly ILanguageService _languageService;
 
@@ -20,12 +21,13 @@ namespace StroopApp.Views
             set => Initialize(value);
         }
 
-        public ExperimentDashBoardPage(ExperimentSettings settings, IWindowManager windowManager, ILanguageService languageService)
+        public ExperimentDashBoardPage(ExperimentSettingsViewModel settings, IWindowManager windowManager, ILanguageService languageService)
         {
             InitializeComponent();
             _settings = settings;
             _windowManager = windowManager;
             _languageService = languageService;
+            Unloaded += (s, e) => (DataContext as IDisposable)?.Dispose();
         }
 
         private void Initialize(INavigationService navigationService)

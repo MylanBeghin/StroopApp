@@ -3,6 +3,7 @@ using LiveChartsCore.Kernel;
 using LiveChartsCore.SkiaSharpView;
 using StroopApp.Models;
 using StroopApp.Resources;
+using StroopApp.ViewModels.State;
 using System.Collections.ObjectModel;
 
 namespace StroopApp.ViewModels.Experiment.Experimenter
@@ -51,7 +52,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
 
 
 
-        public ColumnGraphViewModel(ExperimentSettings settings)
+        public ColumnGraphViewModel(ExperimentSettingsViewModel settings)
         {
             ColumnSerie = settings.ExperimentContext.ColumnSerie;
             XAxes = new[]
@@ -90,7 +91,6 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
                 }
                 ;
             };
-
         }
     }
 }

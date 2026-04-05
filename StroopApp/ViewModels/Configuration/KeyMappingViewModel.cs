@@ -1,4 +1,6 @@
-﻿using ModernWpf.Controls;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using ModernWpf.Controls;
 using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Resources;
@@ -15,34 +17,20 @@ namespace StroopApp.ViewModels.Configuration
     /// ViewModel for managing keyboard key mappings for color responses.
     /// Handles key assignment with validation to prevent duplicate mappings.
     /// </summary>
-    public class KeyMappingViewModel : ViewModelBase
+    public partial class KeyMappingViewModel : ViewModelBase
     {
         private readonly IKeyMappingService _keyMappingService;
-        public KeyMappings Mappings { get; set; }
 
-        private KeyMapping _editingMapping;
-        public KeyMapping EditingMapping
-        {
-            get => _editingMapping;
-            set
-            {
-                _editingMapping = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        private KeyMappings _mappings = new();
 
-        public ICommand EditMappingCommand { get; }
-        public ICommand KeyPressedCommand { get; }
-        public ICommand OpenKeyMappingEditorCommand { get; }
+        [ObservableProperty]
+        private KeyMapping? _editingMapping;
 
         public KeyMappingViewModel(IKeyMappingService keyMappingService)
         {
             _keyMappingService = keyMappingService;
             _ = LoadMappingsAsync();
-
-            EditMappingCommand = new RelayCommand<string>(StartEditing);
-            KeyPressedCommand = new RelayCommand<Key>(OnKeyPressed);
-            OpenKeyMappingEditorCommand = new RelayCommand<string>(async color => await OpenKeyMappingEditorAsync(color));
         }
 
         private async Task LoadMappingsAsync()
@@ -50,7 +38,6 @@ namespace StroopApp.ViewModels.Configuration
             try
             {
                 Mappings = await _keyMappingService.LoadKeyMappings();
-                OnPropertyChanged(nameof(Mappings));
             }
             catch (Exception ex)
             {
@@ -58,28 +45,25 @@ namespace StroopApp.ViewModels.Configuration
             }
         }
 
-        private void StartEditing(string color)
+        private void RefreshMappingsBindings()
         {
-            switch (color)
-            {
-                case "Red":
-                    EditingMapping = Mappings.Red;
-                    break;
-                case "Blue":
-                    EditingMapping = Mappings.Blue;
-                    break;
-                case "Green":
-                    EditingMapping = Mappings.Green;
-                    break;
-                case "Yellow":
-                    EditingMapping = Mappings.Yellow;
-                    break;
-                default:
-                    EditingMapping = null;
-                    break;
-            }
+            OnPropertyChanged(nameof(Mappings));
         }
 
+        [RelayCommand]
+        private void StartEditing(string color)
+        {
+            EditingMapping = color switch
+            {
+                "Red" => Mappings.Red,
+                "Blue" => Mappings.Blue,
+                "Green" => Mappings.Green,
+                "Yellow" => Mappings.Yellow,
+                _ => null
+            };
+        }
+
+        [RelayCommand]
         private async Task OpenKeyMappingEditorAsync(string color)
         {
             try
@@ -175,9 +159,10 @@ namespace StroopApp.ViewModels.Configuration
                             dialog.Focus();
                             e.Handled = true;
                         }
-                        else
+                        else if (EditingMapping != null)
                         {
                             EditingMapping.Key = e.Key;
+                            RefreshMappingsBindings();
                             await _keyMappingService.SaveKeyMappings(Mappings);
                             dialog.Hide();
                             e.Handled = true;
@@ -195,19 +180,21 @@ namespace StroopApp.ViewModels.Configuration
             }
         }
 
+        [RelayCommand]
         private void OnKeyPressed(Key key)
         {
-            if (EditingMapping != null)
-            {
-                if (key == Key.Escape)
-                {
-                    EditingMapping = null;
-                    return;
-                }
+            if (EditingMapping == null)
+                return;
 
-                EditingMapping.Key = key;
+            if (key == Key.Escape)
+            {
                 EditingMapping = null;
+                return;
             }
+
+            EditingMapping.Key = key;
+            RefreshMappingsBindings();
+            EditingMapping = null;
         }
     }
 }

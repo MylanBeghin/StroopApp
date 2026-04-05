@@ -1,44 +1,32 @@
-﻿using StroopApp.Core;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using StroopApp.Core;
 using System.Collections.ObjectModel;
 using System.Text;
+
 namespace StroopApp.ViewModels.Configuration.Profile
 {
     /// <summary>
-    /// ViewModel for configuring visual cue (amorce) switching behavior and dominant form distribution.
+    /// ViewModel for configuring visual cue switching behavior and dominant form distribution.
     /// Provides a live preview of the generated sequence with symbols (● for circle, ■ for square).
     /// </summary>
-    public class SwitchSettingsViewModel : ViewModelBase
+    public partial class SwitchSettingsViewModel : ViewModelBase
     {
-
-
+        [ObservableProperty]
         private int? _switchPercent;
-        public int? SwitchPercent
-        {
-            get => _switchPercent;
-            set
-            {
-                if (_switchPercent != value)
-                {
-                    _switchPercent = value;
-                    OnPropertyChanged(nameof(SwitchPercent));
-                    OnPropertyChanged(nameof(SwitchPreview));
-                }
-            }
-        }
+
+        [ObservableProperty]
         private string _dominantForm = "Circle";
-        public string DominantForm
+
+        partial void OnSwitchPercentChanged(int? value)
         {
-            get => _dominantForm;
-            set
-            {
-                if (_dominantForm != value)
-                {
-                    _dominantForm = value;
-                    OnPropertyChanged(nameof(DominantForm));
-                    OnPropertyChanged(nameof(SwitchPreview));
-                }
-            }
+            OnPropertyChanged(nameof(SwitchPreview));
         }
+
+        partial void OnDominantFormChanged(string value)
+        {
+            OnPropertyChanged(nameof(SwitchPreview));
+        }
+
         private int _dominantPercent = 50; // 0 = 100% circle, 100 = 100% square
         public int DominantPercent
         {

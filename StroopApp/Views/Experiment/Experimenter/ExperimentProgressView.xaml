@@ -121,7 +121,7 @@
                              IsHitTestVisible="False"
                              Padding="4"
                              Margin="4"
-                             Visibility="{Binding Settings.CurrentProfile.IsAmorce, Mode=OneTime,
+                             Visibility="{Binding Settings.CurrentProfile.HasVisualCue, Mode=OneTime,
                                Converter={StaticResource BoolToVisibilityConverter}}" />
                     <TextBox Grid.Column="2"
                              Text="{Binding Settings.CurrentProfile.Hours, Mode=OneTime}"

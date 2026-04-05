@@ -1,46 +1,53 @@
-﻿using System.Diagnostics;
+﻿using StroopApp.ViewModels.Configuration.Profile;
+using System.ComponentModel;
 using System.Windows;
-using System.Windows.Navigation;
-
-using StroopApp.ViewModels.Configuration.Profile;
 
 namespace StroopApp.Views
 {
-	public partial class ProfileEditorWindow : Window
-	{
-		public ProfileEditorWindow(ProfileEditorViewModel viewModel)
-		{
-			InitializeComponent();
-			DataContext = viewModel;
+    public partial class ProfileEditorWindow : Window
+    {
+        public ProfileEditorWindow(ProfileEditorViewModel viewModel)
+        {
+            InitializeComponent();
+            DataContext = viewModel;
 
-			var switchVM = viewModel.SwitchSettingsViewModel;
+            var switchVM = viewModel.SwitchSettingsViewModel;
 
-			switchVM.DominantPercent = viewModel.Profile.DominantPercent;
-			switchVM.SwitchPercent = viewModel.Profile.SwitchPercent;
+            switchVM.DominantPercent = viewModel.DominantPercent;
+            switchVM.SwitchPercent = viewModel.SwitchPercent;
 
-			switchVM.PropertyChanged += (s, e) =>
-			{
-				if (e.PropertyName == nameof(switchVM.DominantPercent))
-					viewModel.Profile.DominantPercent = switchVM.DominantPercent;
-				if (e.PropertyName == nameof(switchVM.SwitchPercent))
-					viewModel.Profile.SwitchPercent = switchVM.SwitchPercent;
-			};
+            PropertyChangedEventHandler switchChangedHandler = (s, e) =>
+            {
+                if (e.PropertyName == nameof(switchVM.DominantPercent))
+                    viewModel.DominantPercent = switchVM.DominantPercent;
 
-			viewModel.Profile.PropertyChanged += (s, e) =>
-			{
-				if (e.PropertyName == nameof(viewModel.Profile.DominantPercent))
-					switchVM.DominantPercent = viewModel.Profile.DominantPercent;
-				if (e.PropertyName == nameof(viewModel.Profile.SwitchPercent))
-					switchVM.SwitchPercent = viewModel.Profile.SwitchPercent;
-			};
+                if (e.PropertyName == nameof(switchVM.SwitchPercent))
+                    viewModel.SwitchPercent = switchVM.SwitchPercent;
+            };
 
-			viewModel.CloseAction = () =>
-			{
-				DialogResult = viewModel.DialogResult;
-				Close();
-			};
-		}
-	}
+            PropertyChangedEventHandler editorChangedHandler = (s, e) =>
+            {
+                if (e.PropertyName == nameof(viewModel.DominantPercent))
+                    switchVM.DominantPercent = viewModel.DominantPercent;
+
+                if (e.PropertyName == nameof(viewModel.SwitchPercent))
+                    switchVM.SwitchPercent = viewModel.SwitchPercent;
+            };
+
+            switchVM.PropertyChanged += switchChangedHandler;
+            viewModel.PropertyChanged += editorChangedHandler;
+
+            Closed += (_, _) =>
+            {
+                switchVM.PropertyChanged -= switchChangedHandler;
+                viewModel.PropertyChanged -= editorChangedHandler;
+            };
+
+            viewModel.CloseAction = () =>
+            {
+                DialogResult = viewModel.DialogResult;
+                Close();
+            };
+        }
+    }
 }
-
-

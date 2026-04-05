@@ -1,12 +1,12 @@
-﻿using StroopApp.Core;
-using StroopApp.Models;
+﻿using CommunityToolkit.Mvvm.Input;
+using StroopApp.Core;
 using StroopApp.Resources;
 using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
+using StroopApp.ViewModels.State;
 using StroopApp.Views.Experiment.Experimenter;
 using System.ComponentModel;
-using System.Windows.Input;
 
 namespace StroopApp.ViewModels.Experiment.Experimenter
 {
@@ -14,64 +14,65 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
     /// ViewModel for the experiment dashboard, monitoring block completion and handling manual task termination.
     /// Automatically navigates to end page when block finishes.
     /// </summary>
-    public class ExperimentDashBoardPageViewModel : ViewModelBase, IDisposable
+    public partial class ExperimentDashBoardPageViewModel : ViewModelBase, IDisposable
     {
-        private readonly ExperimentSettings _settings;
+        private readonly ExperimentSettingsViewModel _settings;
         private readonly INavigationService _experimenterNavigationService;
-        private readonly SharedExperimentData _experimentContext;
-        private readonly IWindowManager _windowManager;
-        private readonly ILanguageService _languageService;
+        private bool _hasNavigatedToEndPage;
 
-        public ICommand StopTaskCommand { get; }
-
-        public ExperimentDashBoardPageViewModel(ExperimentSettings settings,
-    INavigationService experimenterNavigationService,
-    IWindowManager windowManager,
-    ILanguageService languageService)
+        public ExperimentDashBoardPageViewModel(
+            ExperimentSettingsViewModel settings,
+            INavigationService experimenterNavigationService,
+            IWindowManager windowManager,
+            ILanguageService languageService)
         {
             _settings = settings;
-            _experimentContext = settings.ExperimentContext;
             _experimenterNavigationService = experimenterNavigationService;
-            _windowManager = windowManager;
-            _languageService = languageService;
 
-            _experimentContext.PropertyChanged += OnExperimentContextPropertyChanged;
-
-            StopTaskCommand = new RelayCommand(async _ => await StopTaskAsync());
+            _settings.ExperimentContext.PropertyChanged += OnExperimentContextPropertyChanged;
         }
+
         private void OnExperimentContextPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(_experimentContext.IsBlockFinished)
-                && _experimentContext.IsBlockFinished)
-            {
-                _experimenterNavigationService.NavigateTo<EndExperimentPage>();
+            if (_hasNavigatedToEndPage)
+                return;
 
+            if (e.PropertyName == nameof(_settings.ExperimentContext.IsBlockFinished)
+                && _settings.ExperimentContext.IsBlockFinished)
+            {
+                _hasNavigatedToEndPage = true;
+                _experimenterNavigationService.NavigateTo<EndExperimentPage>();
             }
         }
+
+        [RelayCommand]
         public async Task StopTaskAsync()
         {
             try
             {
                 bool confirmed = await ShowConfirmationDialogAsync(Strings.Title_ConfirmStopTask, Strings.Message_StopTask);
-                if (confirmed)
+                if (!confirmed)
+                    return;
+
+                _settings.ExperimentContext.IsTaskStopped = true;
+
+                if (_settings.ExperimentContext.CurrentBlock != null)
                 {
-                    _settings.ExperimentContext.IsTaskStopped = true;
-                    if (_experimentContext.CurrentBlock != null)
-                    {
-                        _experimentContext.CurrentBlock.CalculateValues();
-                        _experimentContext.CurrentTrial = null;
-                    }
-                    _experimentContext.IsBlockFinished = true;
+                    _settings.ExperimentContext.CurrentBlock.CalculateValues();
+                    _settings.ExperimentContext.CurrentTrial = null;
                 }
+
+                _settings.ExperimentContext.IsBlockFinished = true;
             }
             catch (Exception ex)
             {
                 await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
             }
         }
+
         public void Dispose()
         {
-            _experimentContext.PropertyChanged -= OnExperimentContextPropertyChanged;
+            _settings.ExperimentContext.PropertyChanged -= OnExperimentContextPropertyChanged;
         }
     }
 }

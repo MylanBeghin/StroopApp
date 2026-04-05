@@ -3,13 +3,8 @@
     /// <summary>
     /// Defines contract for experiment data exportation to Excel files.
     /// </summary>
-    public interface IExportationService : IDisposable
+    public interface IExportationService
     {
-        /// <summary>
-        /// Handles changes to the export folder path property.
-        /// </summary>
-        void OnProfileExportPathChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e);
-
         /// <summary>
         /// Loads the export folder path from configuration.
         /// </summary>
@@ -25,9 +20,5 @@
         /// </summary>
         /// <returns>Full path to the generated file.</returns>
         Task<string> ExportDataAsync();
-
-        /// <summary>
-        /// Releases resources and unsubscribes from events.
-        /// </summary>
     }
 }

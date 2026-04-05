@@ -27,13 +27,13 @@ namespace StroopApp.Models
 		int CongruencePercent { get; }
 
 		/// <summary>
-		/// Percentage for amorce switching (nullable if not applicable).
+		/// Percentage for visual cue switching (nullable if not applicable).
 		/// </summary>
 		int? SwitchPercent { get; }
 
 		/// <summary>
-		/// Whether visual cue (amorce) is enabled.
+		/// Whether visual cue is enabled.
 		/// </summary>
-		bool IsAmorce { get; }
+		bool hasVisualCue { get; }
 	}
 }

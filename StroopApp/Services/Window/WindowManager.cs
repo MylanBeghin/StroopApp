@@ -1,5 +1,6 @@
 ﻿using StroopApp.Models;
 using StroopApp.Services.Navigation.PageFactory;
+using StroopApp.ViewModels.State;
 using StroopApp.Views;
 
 namespace StroopApp.Services.Window
@@ -22,7 +23,7 @@ namespace StroopApp.Services.Window
         /// Shows or activates the participant management window.
         /// Creates a new instance if none exists, otherwise resets and activates the existing one.
         /// </summary>
-        public void ShowParticipantWindow(ExperimentSettings settings)
+        public void ShowParticipantWindow(ExperimentSettingsViewModel settings)
         {
             ArgumentNullException.ThrowIfNull(settings);
 

@@ -2,17 +2,18 @@
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Navigation.PageFactory;
 using StroopApp.ViewModels.Experiment.Participant;
+using StroopApp.ViewModels.State;
 using System.Windows;
 
 namespace StroopApp.Views
 {
     public partial class ParticipantWindow : Window
     {
-        private readonly ExperimentSettings _settings;
+        private readonly ExperimentSettingsViewModel _settings;
         private readonly INavigationService _participantNavigationService;
         private readonly IPageFactory _pageFactory;
 
-        public ParticipantWindow(ExperimentSettings settings, IPageFactory pageFactory)
+        public ParticipantWindow(ExperimentSettingsViewModel settings, IPageFactory pageFactory)
         {
             InitializeComponent();
             _settings = settings;

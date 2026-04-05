@@ -1,9 +1,9 @@
-﻿using Ookii.Dialogs.Wpf;
+﻿using CommunityToolkit.Mvvm.Input;
+using Ookii.Dialogs.Wpf;
 using StroopApp.Core;
-using StroopApp.Models;
 using StroopApp.Resources;
 using StroopApp.Services.Exportation;
-using System.Windows.Input;
+using StroopApp.ViewModels.State;
 
 namespace StroopApp.ViewModels.Configuration
 {
@@ -11,37 +11,31 @@ namespace StroopApp.ViewModels.Configuration
     /// ViewModel for selecting and managing the experiment data export folder path.
     /// Provides folder browsing dialog and persists the selected path via IExportationService.
     /// </summary>
-    public class ExportFolderSelectorViewModel : ViewModelBase
+    public partial class ExportFolderSelectorViewModel : ViewModelBase
     {
         private readonly IExportationService _exportationService;
-        public ExperimentSettings Settings
-        {
-            get;
-        }
-        public ICommand BrowseCommand
-        {
-            get;
-        }
+        public ExperimentSettingsViewModel Settings { get; }
 
-        public ExportFolderSelectorViewModel(ExperimentSettings settings, IExportationService exportationService)
+        public ExportFolderSelectorViewModel(ExperimentSettingsViewModel settings, IExportationService exportationService)
         {
             Settings = settings;
             _exportationService = exportationService;
             Settings.ExportFolderPath = _exportationService.LoadExportFolderPath();
+        }
 
-            BrowseCommand = new RelayCommand(() =>
+        [RelayCommand]
+        private void Browse()
+        {
+            var dlg = new VistaFolderBrowserDialog
             {
-                var dlg = new VistaFolderBrowserDialog
-                {
-                    Description = Strings.Description_ExportFolderDialog,
-                    SelectedPath = Settings.ExportFolderPath
-                };
-                if (dlg.ShowDialog() == true)
-                {
-                    Settings.ExportFolderPath = dlg.SelectedPath;
-                    _exportationService.SaveExportFolderPath(dlg.SelectedPath);
-                }
-            });
+                Description = Strings.Description_ExportFolderDialog,
+                SelectedPath = Settings.ExportFolderPath
+            };
+            if (dlg.ShowDialog() == true)
+            {
+                Settings.ExportFolderPath = dlg.SelectedPath;
+                _exportationService.SaveExportFolderPath(dlg.SelectedPath);
+            }
         }
     }
 }

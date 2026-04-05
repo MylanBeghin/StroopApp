@@ -1,211 +1,43 @@
-﻿using StroopApp.Core;
-
-namespace StroopApp.Models
+﻿namespace StroopApp.Models
 {
-	/// <summary>
-	/// Represents a single trial in a Stroop task, containing stimulus data, participant responses,
-	/// reaction time, and trial metadata such as block and trial number.
-	/// </summary>
-	public class StroopTrial : ModelBase
-	{
-        private string _participantId = null!;
-        public string ParticipantId
-		{
-			get => _participantId;
-			set
-			{
-				if (_participantId != value)
-				{
-					_participantId = value;
-					OnPropertyChanged();
-				}
-			}
-		}
-		private bool _isCongruent;
+    /// <summary>
+    /// Represents a single trial in a Stroop task, containing stimulus data, participant responses,
+    /// reaction time, and trial metadata such as block and trial number.
+    /// </summary>
+    public class StroopTrial
+    {
+        public string ParticipantId { get; set; } = string.Empty;
+        public bool IsCongruent { get; set; }
+        public bool HasVIsualCue { get; set; }
+        public int? SwitchPercent { get; set; }
+        public int CongruencePercent { get; set; }
+        public int DominancePercent { get; set; }
+        public int Block { get; set; }
+        public Word Stimulus { get; set; } = null!;
+        public string ExpectedAnswer { get; set; } = string.Empty;
+        public string GivenAnswer { get; set; } = string.Empty;
+        public bool? IsValidResponse { get; set; }
+        public double? ReactionTime { get; set; }
+        public int TrialNumber { get; set; }
+        public VisualCueType VisualCue { get; set; }
 
-		public bool IsCongruent
-		{
-			get => _isCongruent;
-			set
-			{
-				if (_isCongruent != value)
-				{
-					_isCongruent = value;
-					OnPropertyChanged();
-				}
-			}
-		}
-
-		private bool _isAmorce;
-
-		public bool IsAmorce
-		{
-			get => _isAmorce;
-			set
-			{
-				if (_isAmorce != value)
-				{
-					_isAmorce = value;
-					OnPropertyChanged();
-				}
-			}
-		}
-		private int? _switchPercent;
-		public int? SwitchPercent
-		{
-			get => _switchPercent;
-			set
-			{
-				if (_switchPercent != value)
-				{
-					_switchPercent = value;
-					OnPropertyChanged();
-				}
-			}
-		}
-		private int _congruencePercent;
-		public int CongruencePercent
-		{
-			get => _congruencePercent;
-			set
-			{
-				if (_congruencePercent != value)
-				{
-					_congruencePercent = value;
-					OnPropertyChanged();
-				}
-			}
-		}
-		private int _dominancePercent;
-
-		public int DominancePercent
-		{
-			get => _dominancePercent;
-			set
-			{
-				if (_dominancePercent != value)
-				{
-					_dominancePercent = value;
-					OnPropertyChanged();
-				}
-			}
-		}
-		private int _block;
-		public int Block
-		{
-			get => _block;
-			set
-			{
-				if (_block != value)
-				{
-					_block = value;
-					OnPropertyChanged();
-				}
-			}
-		}
-        private Word _stimulus = null!;
-        public Word Stimulus
-		{
-			get => _stimulus;
-			set
-			{
-				if (_stimulus != value)
-				{
-					_stimulus = value;
-					OnPropertyChanged();
-				}
-			}
-		}
-
-        private string _expectedAnswer = null!;
-        public string ExpectedAnswer
-		{
-			get => _expectedAnswer;
-			set
-			{
-				if (_expectedAnswer != value)
-				{
-					_expectedAnswer = value;
-					OnPropertyChanged();
-				}
-			}
-		}
-
-        private string _givenAnswer = null!;
-        public string GivenAnswer
-		{
-			get => _givenAnswer;
-			set
-			{
-				if (_givenAnswer != value)
-				{
-					_givenAnswer = value;
-					OnPropertyChanged();
-				}
-			}
-		}
-
-		private bool? _isValidResponse;
-		public bool? IsValidResponse
-		{
-			get => _isValidResponse;
-			set
-			{
-				if (_isValidResponse != value)
-				{
-					_isValidResponse = value;
-					OnPropertyChanged();
-				}
-			}
-		}
-
-		private double? _reactionTime;
-		public double? ReactionTime
-		{
-			get => _reactionTime;
-			set
-			{
-				if (_reactionTime != value)
-				{
-					_reactionTime = value;
-					OnPropertyChanged();
-				}
-			}
-		}
-		private int _trialNumber;
-		public int TrialNumber
-		{
-			get => _trialNumber;
-			set
-			{
-				if (_trialNumber != value)
-				{
-					_trialNumber = value;
-					OnPropertyChanged();
-				}
-			}
-		}
-		public VisualCueType VisualCue
-		{
-			get; set;
-		}
         /// <summary>
-        /// Calculates the expected answer based on trial type (Amorce, Congruent, or Incongruent).
+        /// Calculates the expected answer based on trial type (VisualCue, Congruent, or Incongruent).
         /// </summary>
         public void DetermineExpectedAnswer()
-		{
-			if (IsAmorce)
-			{
-				ExpectedAnswer = (VisualCue == VisualCueType.Square) ? Stimulus.InternalText : Stimulus.Color;
-			}
-			else if (IsCongruent)
-			{
-				ExpectedAnswer = Stimulus.InternalText;
-			}
-			else
-			{
-				ExpectedAnswer = Stimulus.Color;
-			}
-		}
-	}
+        {
+            if (HasVIsualCue)
+            {
+                ExpectedAnswer = (VisualCue == VisualCueType.Square) ? Stimulus.InternalText : Stimulus.Color;
+            }
+            else if (IsCongruent)
+            {
+                ExpectedAnswer = Stimulus.InternalText;
+            }
+            else
+            {
+                ExpectedAnswer = Stimulus.Color;
+            }
+        }
+    }
 }

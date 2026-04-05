@@ -1,13 +1,15 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Resources;
 using StroopApp.Services.Exportation;
 using StroopApp.Services.Navigation;
+using StroopApp.ViewModels.State;
 using StroopApp.Views;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using System.Windows.Input;
 
 namespace StroopApp.ViewModels.Experiment.Experimenter.End
 {
@@ -15,93 +17,56 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
     /// ViewModel for the export dialog window, managing export workflow states (exporting, success, error),
     /// file opening, and post-export actions (new experiment, quit).
     /// </summary>
-    public class ExportEndExperimentWindowViewModel : ViewModelBase
+    public partial class ExportEndExperimentWindowViewModel : ViewModelBase
     {
-        private readonly ExperimentSettings _settings;
+        private readonly ExperimentSettingsViewModel _settings;
         private readonly IExportationService _exportationService;
-        private readonly Window _parentWindow;
+        private readonly Action _closeWindow;
+        private readonly Action<bool?> _setDialogResult;
         private readonly INavigationService _navigationService;
 
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(DefaultView))]
+        [NotifyPropertyChangedFor(nameof(CanReExport))]
         private bool _isExporting;
-        public bool IsExporting
-        {
-            get => _isExporting;
-            set { _isExporting = value; OnPropertyChanged(); OnPropertyChanged(nameof(DefaultView)); }
-        }
 
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(DefaultView))]
+        [NotifyPropertyChangedFor(nameof(CanReExport))]
         private bool _exportSuccess;
-        public bool ExportSuccess
-        {
-            get => _exportSuccess;
-            set { _exportSuccess = value; OnPropertyChanged(); OnPropertyChanged(nameof(DefaultView)); }
-        }
 
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(DefaultView))]
+        [NotifyPropertyChangedFor(nameof(CanReExport))]
         private bool _exportError;
-        public bool ExportError
-        {
-            get => _exportError;
-            set { _exportError = value; OnPropertyChanged(); OnPropertyChanged(nameof(DefaultView)); }
-        }
 
         public bool DefaultView => !IsExporting && !ExportSuccess && !ExportError;
 
-        private string _exportPath;
-        public string ExportPath
-        {
-            get => _exportPath;
-            set
-            {
-                if (_exportPath != value)
-                {
-                    _exportPath = value;
-                    OnPropertyChanged(nameof(ExportPath));
-                    ResetState();
-                }
-            }
-        }
+        public Visibility CanReExport => ExportSuccess ? Visibility.Visible : Visibility.Collapsed;
 
-        private string _errorMessage;
-        public string ErrorMessage
-        {
-            get => _errorMessage;
-            set { _errorMessage = value; OnPropertyChanged(); }
-        }
+        [ObservableProperty]
+        private string _exportPath = string.Empty;
 
-        public ICommand ExportCommand { get; }
-        public ICommand CancelCommand { get; }
-        public ICommand RetryCommand { get; }
-        public ICommand NewExperimentCommand { get; }
-        public ICommand QuitCommand { get; }
-        public ICommand OpenAndSelectTodayExportFileCommand { get; }
-        public ICommand ReExportCommand { get; }
+        [ObservableProperty]
+        private string _errorMessage = string.Empty;
 
-        public ExportEndExperimentWindowViewModel(ExperimentSettings settings, IExportationService exportationService, Window parentWindow, INavigationService navigationService)
+        public ExportEndExperimentWindowViewModel(ExperimentSettingsViewModel settings, IExportationService exportationService, Action closeWindow, Action<bool?> setDialogResult, INavigationService navigationService)
         {
             _settings = settings;
             _exportationService = exportationService;
-            _parentWindow = parentWindow;
+            _closeWindow = closeWindow;
+            _setDialogResult = setDialogResult;
             _navigationService = navigationService;
 
             ExportPath = _exportationService.LoadExportFolderPath();
-            ExportCommand = new CommunityToolkit.Mvvm.Input.AsyncRelayCommand(ExportAsync, CanExport);
-            CancelCommand = new RelayCommand(_ => CancelExport());
-            RetryCommand = new CommunityToolkit.Mvvm.Input.AsyncRelayCommand(ExportAsync, CanExport);
-            OpenAndSelectTodayExportFileCommand = new RelayCommand(async _ => await OpenAndSelectTodayExportFileAsync());
-            NewExperimentCommand = new RelayCommand(async _ => await NewExperimentAsync());
-            QuitCommand = new RelayCommand(async _ => await QuitAsync());
-            ReExportCommand = new RelayCommand(_ => ReExport());
-
-            _settings.PropertyChanged += (s, e) =>
-            {
-                if (e.PropertyName == nameof(_settings.ExportFolderPath))
-                {
-                    OnPropertyChanged(nameof(ExportPath));
-                    ExportPath = _exportationService.LoadExportFolderPath();
-                    ResetState();
-                }
-            };
-
             ResetState();
+        }
+
+        partial void OnExportPathChanged(string value)
+        {
+            ResetState();
+            ExportCommand.NotifyCanExecuteChanged();
+            RetryCommand.NotifyCanExecuteChanged();
         }
 
         private void ResetState()
@@ -111,27 +76,22 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             ExportError = false;
             ErrorMessage = string.Empty;
         }
-        private void CancelExport()
-        {
-            IsExporting = false;
-            _parentWindow.Close();
-
-        }
-        private void ReExport()
-        {
-            ResetState();
-        }
 
         private bool CanExport() => !string.IsNullOrWhiteSpace(ExportPath) && !IsExporting;
 
+        [RelayCommand(CanExecute = nameof(CanExport))]
         private async Task ExportAsync()
         {
             ResetState();
             IsExporting = true;
+
             try
             {
-                _exportationService.LoadExportFolderPath();
+                _settings.ExportFolderPath = ExportPath;
+                _exportationService.SaveExportFolderPath(ExportPath);
+
                 await _exportationService.ExportDataAsync();
+
                 IsExporting = false;
                 ExportSuccess = true;
                 _settings.ExperimentContext.HasUnsavedExports = false;
@@ -140,9 +100,35 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             {
                 IsExporting = false;
                 ExportError = true;
-                ErrorMessage = $"{Strings.Error_ExportFailed}\n{ex.Message}"; ;
+                ErrorMessage = $"{Strings.Error_ExportFailed}\n{ex.Message}";
+            }
+            finally
+            {
+                ExportCommand.NotifyCanExecuteChanged();
+                RetryCommand.NotifyCanExecuteChanged();
             }
         }
+
+        [RelayCommand]
+        private void Cancel()
+        {
+            IsExporting = false;
+            _closeWindow();
+        }
+
+        [RelayCommand(CanExecute = nameof(CanExport))]
+        private async Task RetryAsync()
+        {
+            await ExportAsync();
+        }
+
+        [RelayCommand]
+        private void ReExport()
+        {
+            ResetState();
+        }
+
+        [RelayCommand]
         private async Task OpenAndSelectTodayExportFileAsync()
         {
             try
@@ -175,13 +161,14 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             }
         }
 
+        [RelayCommand]
         private async Task NewExperimentAsync()
         {
             try
             {
                 _settings.Reset();
-                _parentWindow.DialogResult = true;
-                _parentWindow.Close();
+                _setDialogResult(true);
+                _closeWindow();
                 _navigationService.NavigateTo<ConfigurationPage>();
             }
             catch (Exception ex)
@@ -190,6 +177,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             }
         }
 
+        [RelayCommand]
         private async Task QuitAsync()
         {
             try

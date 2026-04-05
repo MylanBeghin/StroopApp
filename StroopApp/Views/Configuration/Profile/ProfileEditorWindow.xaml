@@ -50,7 +50,7 @@
                                 <ColumnDefinition Width="0.3*" />
                             </Grid.ColumnDefinitions>
                             <TextBox ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Field_ProfileName]}"
-                                     Text="{Binding Profile.ProfileName, Mode=TwoWay}" />
+                                     Text="{Binding ProfileName, Mode=TwoWay}" />
                             <ComboBox ui:ControlHelper.Header="{Binding Source={StaticResource Loc}, Path=[Field_TaskLanguage]}"
                                       ItemsSource ="{Binding Languages}"
                                       SelectedItem="{Binding SelectedTaskLanguage, Mode=TwoWay}"
@@ -69,10 +69,10 @@
                                     Maximum="100"
                                     LargeChange="5"
                                     SmallChange="1"
-                                    Value="{Binding Profile.CongruencePercent, Mode=TwoWay}"
+                                    Value="{Binding CongruencePercent, Mode=TwoWay}"
                                     Grid.Column="0" />
                             <ui:NumberBox Header=" "
-                                          Value="{Binding Profile.CongruencePercent, Mode=TwoWay}"
+                                          Value="{Binding CongruencePercent, Mode=TwoWay}"
                                           Minimum="0"
                                           Maximum="100"
                                           SpinButtonPlacementMode="Inline"
@@ -107,7 +107,7 @@
                                        Text="{Binding Source={StaticResource Loc}, Path=[Header_MaxResponseTime]}" />
                             <ui:NumberBox Grid.Row="2"
                                      Grid.Column="0"
-                                     Text="{Binding Profile.WordDuration}"
+                                     Text="{Binding WordDuration}"
                                           Style="{StaticResource ModernReadOnlyNumberBoxStyle}"/>
                             <TextBlock Grid.Row="2"
                                        Grid.Column="1"
@@ -117,7 +117,7 @@
                                        FontSize="20" />
                             <ui:NumberBox Grid.Row="2"
                                           Grid.Column="2"
-                                          Value="{Binding Profile.FixationDuration, Mode=TwoWay}"
+                                          Value="{Binding FixationDuration, Mode=TwoWay}"
                                           Minimum="1"
                                           SpinButtonPlacementMode="Inline" />
                             <TextBlock Grid.Row="2"
@@ -129,9 +129,9 @@
                                        />
                             <ui:NumberBox Grid.Row="2"
                                           Grid.Column="4"
-                                          Value="{Binding Profile.AmorceDuration, Mode=TwoWay}"
+                                          Value="{Binding VisualCueDuration, Mode=TwoWay}"
                                           Minimum="0"
-                                          IsEnabled="{Binding Profile.IsAmorce}"
+                                          IsEnabled="{Binding HasVisualCue}"
                                           SpinButtonPlacementMode="Inline" />
                             <TextBlock Grid.Row="2"
                                        Grid.Column="5"
@@ -141,7 +141,7 @@
                                        Text=" + " />
                             <ui:NumberBox Grid.Row="2"
                                           Grid.Column="6"
-                                          Value="{Binding Profile.MaxReactionTime, Mode=TwoWay}"
+                                          Value="{Binding MaxReactionTime, Mode=TwoWay}"
                                           Minimum="1"
                                           SpinButtonPlacementMode="Inline" />
                         </Grid>
@@ -157,7 +157,7 @@
                                 <Setter Property="CornerRadius"
                                         Value="8" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Profile.IsAmorce}"
+                                    <DataTrigger Binding="{Binding HasVisualCue}"
                                                  Value="True">
                                         <Setter Property="CornerRadius"
                                                 Value="8,8,0,0" />
@@ -172,7 +172,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Label_AddPrime] }"
                                        VerticalAlignment="Center" />
-                            <ui:ToggleSwitch IsOn="{Binding Profile.IsAmorce, Mode=TwoWay}"
+                            <ui:ToggleSwitch IsOn="{Binding HasVisualCue, Mode=TwoWay}"
                                              OnContent="{Binding Source={StaticResource Loc}, Path=[Toggle_On]}"
                                              OffContent="{Binding Source={StaticResource Loc}, Path=[Toggle_Off]}"
                                              VerticalAlignment="Center"
@@ -182,7 +182,7 @@
                         </Grid>
                     </Border>
                     <viewsProfile:SwitchSettingsView DataContext="{Binding SwitchSettingsViewModel}"
-                                                     Visibility="{Binding DataContext.Profile.IsAmorce, ElementName=RootPanel, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                                     Visibility="{Binding DataContext.HasVisualCue, ElementName=RootPanel, Converter={StaticResource BoolToVisibilityConverter}}" />
                 </ui:SimpleStackPanel>
                 <ui:SimpleStackPanel Spacing="16">
                     <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Label_CalculationMode]}"
@@ -191,12 +191,12 @@
                                          Spacing="12">
                         <RadioButton Content="{Binding Source={StaticResource Loc}, Path=[Radio_TaskDuration]}"
                                      GroupName="CalculationModeGroup"
-                                     IsChecked="{Binding Profile.CalculationMode,
+                                     IsChecked="{Binding CalculationMode,
                                          Converter={StaticResource CalculationModeToBooleanConverter},
                                          ConverterParameter=TaskDuration}" />
                         <RadioButton Content="{Binding Source={StaticResource Loc}, Path=[Radio_WordCount]}"
                                      GroupName="CalculationModeGroup"
-                                     IsChecked="{Binding Profile.CalculationMode,
+                                     IsChecked="{Binding CalculationMode,
                                          Converter={StaticResource CalculationModeToBooleanConverter},
                                          ConverterParameter=WordCount}" />
                     </ui:SimpleStackPanel>
@@ -210,7 +210,7 @@
                                 <Setter Property="Visibility"
                                         Value="Collapsed" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Profile.CalculationMode}"
+                                    <DataTrigger Binding="{Binding CalculationMode}"
                                                  Value="TaskDuration">
                                         <Setter Property="Visibility"
                                                 Value="Visible" />
@@ -228,18 +228,18 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <ui:NumberBox Header="{Binding Source={StaticResource Loc}, Path=[Header_Hours]}"
-                                              Value="{Binding Profile.Hours, Mode=TwoWay}"
+                                              Value="{Binding Hours, Mode=TwoWay}"
                                               Minimum="0"
                                               SpinButtonPlacementMode="Inline"
                                               Grid.Column="0" />
                                 <ui:NumberBox Header="{Binding Source={StaticResource Loc}, Path=[Header_Minutes]}"
-                                              Value="{Binding Profile.Minutes, Mode=TwoWay}"
+                                              Value="{Binding Minutes, Mode=TwoWay}"
                                               Minimum="0"
                                               Maximum="59"
                                               SpinButtonPlacementMode="Inline"
                                               Grid.Column="2" />
                                 <ui:NumberBox Header="{Binding Source={StaticResource Loc}, Path=[Header_Seconds]}"
-                                              Value="{Binding Profile.Seconds, Mode=TwoWay}"
+                                              Value="{Binding Seconds, Mode=TwoWay}"
                                               Minimum="0"
                                               Maximum="59"
                                               SpinButtonPlacementMode="Inline"
@@ -253,7 +253,7 @@
                                     <ColumnDefinition Width="12" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <ui:NumberBox Value="{Binding Profile.GroupSize, Mode=TwoWay}"
+                                <ui:NumberBox Value="{Binding GroupSize, Mode=TwoWay}"
                                               Minimum="1"
                                               Grid.Column="0"
                                               SpinButtonPlacementMode="Inline">
@@ -276,7 +276,7 @@
                             </Grid>
                             <ui:SimpleStackPanel Spacing="6">
                                 <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Field_WordCount]}" />
-                                <ui:NumberBox Text="{Binding Profile.WordCount, Mode=TwoWay}"
+                                <ui:NumberBox Text="{Binding WordCount, Mode=TwoWay}"
                                               Style="{StaticResource ModernReadOnlyNumberBoxStyle}" />
                             </ui:SimpleStackPanel>
                         </ui:SimpleStackPanel>
@@ -291,7 +291,7 @@
                                 <Setter Property="Visibility"
                                         Value="Collapsed" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Profile.CalculationMode}"
+                                    <DataTrigger Binding="{Binding CalculationMode}"
                                                  Value="WordCount">
                                         <Setter Property="Visibility"
                                                 Value="Visible" />
@@ -301,7 +301,7 @@
                         </Border.Style>
                         <ui:SimpleStackPanel Spacing="12">
                             <ui:NumberBox Header="{Binding Source={StaticResource Loc}, Path=[Field_WordCount]}"
-                                          Value="{Binding Profile.WordCount, Mode=TwoWay}"
+                                          Value="{Binding WordCount, Mode=TwoWay}"
                                           Minimum="1"
                                           SpinButtonPlacementMode="Inline" />
                             <Grid>
@@ -312,7 +312,7 @@
                                     <ColumnDefinition Width="12" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <ui:NumberBox Value="{Binding Profile.GroupSize, Mode=TwoWay}"
+                                <ui:NumberBox Value="{Binding GroupSize, Mode=TwoWay}"
                                               Minimum="1"
                                               Grid.Column="0"
                                               SpinButtonPlacementMode="Inline">
@@ -343,19 +343,19 @@
                                 </Grid.ColumnDefinitions>
                                 <ui:SimpleStackPanel Spacing="6">
                                     <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_Hours]}" />
-                                    <ui:NumberBox Text="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToHoursConverter}}"
+                                    <ui:NumberBox Text="{Binding TaskDuration, Converter={StaticResource MillisecondsToHoursConverter}}"
                                                   Style="{StaticResource ModernReadOnlyNumberBoxStyle}" />
                                 </ui:SimpleStackPanel>
                                 <ui:SimpleStackPanel Spacing="6"
                                                      Grid.Column="2">
                                     <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_Minutes]}" />
-                                    <ui:NumberBox Text="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToMinutesConverter}}"
+                                    <ui:NumberBox Text="{Binding TaskDuration, Converter={StaticResource MillisecondsToMinutesConverter}}"
                                                   Style="{StaticResource ModernReadOnlyNumberBoxStyle}" />
                                 </ui:SimpleStackPanel>
                                 <ui:SimpleStackPanel Spacing="6"
                                                      Grid.Column="4">
                                     <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_Seconds]}" />
-                                    <ui:NumberBox Text="{Binding Profile.TaskDuration, Converter={StaticResource MillisecondsToSecondsConverter}}"
+                                    <ui:NumberBox Text="{Binding TaskDuration, Converter={StaticResource MillisecondsToSecondsConverter}}"
                                                   Style="{StaticResource ModernReadOnlyNumberBoxStyle}" />
                                 </ui:SimpleStackPanel>
                             </Grid>

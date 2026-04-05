@@ -9,6 +9,7 @@ using StroopApp.Services.Participant;
 using StroopApp.Services.Profile;
 using StroopApp.Services.Trial;
 using StroopApp.Services.Window;
+using StroopApp.ViewModels.State;
 using StroopApp.Views;
 using StroopApp.Views.Experiment.Experimenter;
 using System.IO;
@@ -21,10 +22,9 @@ namespace StroopApp
         /// <summary>
         /// Global service provider for the application's DI container.
         /// </summary>
-        public static IServiceProvider ServiceProvider { get; private set; } = null!;
-
-        public static IWindowManager WindowManager { get; private set; } = null!;
-        public static ILanguageService LanguageService { get; private set; } = null!;
+        internal static IServiceProvider ServiceProvider { get; private set; } = null!;
+        internal static IWindowManager WindowManager { get; private set; } = null!;
+        internal static ILanguageService LanguageService { get; private set; } = null!;
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -57,11 +57,15 @@ namespace StroopApp
 
             services.AddSingleton<ExperimentSettings>(sp =>
             {
-                var chartFactory = sp.GetRequiredService<ExperimentChartFactory>();
-                var settings = new ExperimentSettings();
-                settings.ExperimentContext = new SharedExperimentData(chartFactory);
+                var settings = new ExperimentSettings
+                {
+                    ExperimentContext = new SharedExperimentData()
+                };
                 return settings;
             });
+
+            services.AddSingleton<ExperimentSettingsViewModel>(sp =>
+                new ExperimentSettingsViewModel(sp.GetRequiredService<ExperimentSettings>()));
 
             services.AddSingleton<IPageFactory, PageFactory>();
 

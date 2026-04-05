@@ -1,16 +1,9 @@
 ﻿using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
-using SkiaSharp;
-using StroopApp.Core;
-using StroopApp.Services.Charts;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 
 namespace StroopApp.Models
 {
-    /// <summary>
-    /// Defines the next action to take after a block ends: Restart, Start new experiment, or Quit.
-    /// </summary>
     public enum ExperimentAction
     {
         None,
@@ -18,235 +11,55 @@ namespace StroopApp.Models
         NewExperiment,
         Quit
     }
-    /// <summary>
-    /// Centralized data container used during the experiment to store trials, reaction times, and chart series.
-    /// Also tracks current trial and experiment flow control state.
-    /// </summary>
-    public class SharedExperimentData : ModelBase
+
+    public class SharedExperimentData
     {
+        public ObservableCollection<Block> Blocks { get; }
+        public ObservableCollection<ISeries> BlockSeries { get; }
+        public ObservableCollection<ISeries>? ColumnSerie { get; set; }
+        public ObservableCollection<ReactionTimePoint> ReactionPoints { get; set; }
+        public ObservableCollection<RectangularSection> Sections { get; set; }
 
-        public ObservableCollection<Block> Blocks
+        public Block? CurrentBlock { get; set; }
+        public StroopTrial? CurrentTrial { get; set; }
+
+        public int CurrentBlockStart { get; set; }
+        public int CurrentBlockEnd { get; set; }
+        public bool IsBlockFinished { get; set; } = false;
+        public bool IsTaskStopped { get; set; } = false;
+        public bool IsParticipantSelectionEnabled { get; set; } = true;
+        public bool HasUnsavedExports { get; set; } = true;
+        public ExperimentAction NextAction { get; set; } = ExperimentAction.None;
+
+        public int ColorIndex { get; set; }
+
+        public SharedExperimentData()
         {
-            get;
-        }
-        public ObservableCollection<ISeries> BlockSeries
-        {
-            get;
-        }
-
-        private Block? _currentBlock;
-        public Block? CurrentBlock
-        {
-            get => _currentBlock;
-            set
-            {
-                if (_currentBlock != value)
-                {
-                    _currentBlock = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        public ObservableCollection<ISeries>? ColumnSerie
-        {
-            get; set;
-        }
-        public ObservableCollection<ReactionTimePoint> ReactionPoints
-        {
-            get; set;
-        }
-        public ObservableCollection<RectangularSection> Sections
-        {
-            get; set;
-        }
-        public int CurrentBlockStart;
-        public int CurrentBlockEnd;
-
-        private StroopTrial? _currentTrial;
-        public StroopTrial? CurrentTrial
-        {
-            get => _currentTrial;
-            set
-            {
-                if (_currentTrial != null)
-                    _currentTrial.PropertyChanged -= CurrentTrial_PropertyChanged;
-
-                _currentTrial = value;
-
-                OnPropertyChanged(nameof(CurrentTrial));
-
-                if (_currentTrial != null)
-                {
-                    _currentTrial.PropertyChanged -= CurrentTrial_PropertyChanged;
-                    _currentTrial.PropertyChanged += CurrentTrial_PropertyChanged;
-                }
-            }
-        }
-        private void CurrentTrial_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(StroopTrial.TrialNumber))
-            {
-                OnPropertyChanged(nameof(CurrentTrial));
-
-            }
-        }
-
-        private bool _isBlockFinished = false;
-        public bool IsBlockFinished
-        {
-            get => _isBlockFinished;
-            set
-            {
-                if (_isBlockFinished != value)
-                {
-                    _isBlockFinished = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private bool _isTaskStopped = false;
-        public bool IsTaskStopped
-        {
-            get => _isTaskStopped;
-            set
-            {
-                _isTaskStopped = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private bool _isParticipantSelectionEnabled = true;
-        public bool IsParticipantSelectionEnabled
-        {
-            get => _isParticipantSelectionEnabled;
-            set
-            {
-                if (_isParticipantSelectionEnabled != value)
-                {
-                    _isParticipantSelectionEnabled = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private bool _hasUnsavedExports = true;
-
-        public bool HasUnsavedExports
-        {
-            get => _hasUnsavedExports;
-            set
-            {
-                if (_hasUnsavedExports != value)
-                    _hasUnsavedExports = value;
-                OnPropertyChanged();
-            }
-        }
-        ExperimentAction _nextAction;
-        public ExperimentAction NextAction
-        {
-            get => _nextAction;
-            set
-            {
-                _nextAction = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private readonly SKColor[] _palette = { SKColors.CornflowerBlue, SKColors.OrangeRed, SKColors.MediumSeaGreen, SKColors.Goldenrod };
-
-        public int ColorIndex;
-
-        private readonly ExperimentChartFactory _chartFactory;
-
-        /// <summary>
-        /// Parameterless constructor for backward compatibility.
-        /// Creates its own ExperimentChartFactory instance.
-        /// </summary>
-        public SharedExperimentData() : this(new ExperimentChartFactory())
-        {
-        }
-
-        /// <summary>
-        /// Constructor with dependency injection support.
-        /// Allows ExperimentChartFactory to be injected.
-        /// </summary>
-        /// <param name="chartFactory">Factory for creating LiveCharts graphics objects</param>
-        public SharedExperimentData(ExperimentChartFactory chartFactory)
-        {
-            _chartFactory = chartFactory ?? throw new ArgumentNullException(nameof(chartFactory));
             Blocks = new ObservableCollection<Block>();
             BlockSeries = new ObservableCollection<ISeries>();
             Sections = new ObservableCollection<RectangularSection>();
             ReactionPoints = new ObservableCollection<ReactionTimePoint>();
-            NewColumnSerie();
+            ColumnSerie = new ObservableCollection<ISeries>();
             CurrentBlockStart = 1;
         }
-        /// <summary>
-        /// Creates a new column series for displaying reaction times in the chart.
-        /// </summary>
-        public void NewColumnSerie()
-        {
-            ColumnSerie = _chartFactory.CreateLiveColumnSerie(ReactionPoints);
-        }
 
-        /// <summary>
-        /// Legacy method for backward compatibility.
-        /// Delegates to the interface-based overload via adapter.
-        /// </summary>
-        public void AddNewSerie(ExperimentSettings _settings)
-        {
-            var config = new ExperimentSettingsBlockConfigurationAdapter(_settings);
-            AddNewSerie(config);
-        }
-
-        /// <summary>
-        /// Adds a new block serie based on minimal configuration interface.
-        /// This is the primary implementation.
-        /// </summary>
-        public void AddNewSerie(IBlockConfiguration config)
-        {
-            if (config == null)
-                throw new ArgumentNullException(nameof(config));
-
-            CurrentBlock = new Block(config);
-            Blocks.Add(CurrentBlock);
-            var color = _palette[ColorIndex % _palette.Length];
-            var fillColor = color.WithAlpha(50);
-
-            var start = CurrentBlockStart;
-            var count = config.WordCount;
-            var end = start + count - 1;
-            CurrentBlockEnd = end;
-
-            // Delegate graphics creation to factory
-            var lineSeries = _chartFactory.CreateBlockLineSeries(CurrentBlock.TrialTimes, start);
-            BlockSeries.Add(lineSeries);
-
-            var section = _chartFactory.CreateBlockSection(start, end, config.Block, fillColor);
-            Sections.Add(section);
-
-            ColorIndex++;
-            CurrentBlockStart = end + 1;
-        }
-        /// <summary>
-        /// Resets all experiment data, clears collections, and reinitializes chart series.
-        /// </summary>
         public virtual void Reset()
         {
             Blocks.Clear();
             BlockSeries.Clear();
             Sections.Clear();
             ReactionPoints.Clear();
+            ColumnSerie?.Clear();
+
             IsTaskStopped = false;
             ColorIndex = 0;
             CurrentBlockStart = 1;
             CurrentBlockEnd = 0;
+            CurrentTrial = null;
             CurrentBlock = null;
             IsBlockFinished = false;
             HasUnsavedExports = true;
             NextAction = ExperimentAction.None;
-            NewColumnSerie();
         }
     }
 }

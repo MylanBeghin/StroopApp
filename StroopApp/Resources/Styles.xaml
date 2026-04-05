@@ -42,7 +42,6 @@
                 <Setter Property="BorderThickness"
                         Value="0" />
             </Trigger>
-            <!-- Verrouille bordure au focus clavier -->
             <Trigger Property="IsKeyboardFocused"
                      Value="True">
                 <Setter Property="Background"

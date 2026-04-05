@@ -1,4 +1,5 @@
 ﻿using StroopApp.Models;
+using StroopApp.ViewModels.State;
 
 namespace StroopApp.Services.Window
 {
@@ -10,7 +11,7 @@ namespace StroopApp.Services.Window
         /// <summary>
         /// Shows or activates the participant management window.
         /// </summary>
-        void ShowParticipantWindow(ExperimentSettings settings);
+        void ShowParticipantWindow(ExperimentSettingsViewModel settings);
 
         /// <summary>
         /// Closes the participant management window.

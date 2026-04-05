@@ -306,7 +306,7 @@
   <data name="Title_ConfigPage" xml:space="preserve">
     <value>Experiment Configuration</value>
   </data>
-  <data name="Error_AmorceDurationInvalid" xml:space="preserve">
+  <data name="Error_VisualCueDurationInvalid" xml:space="preserve">
     <value>Visual cue duration must be greater than 0 !</value>
   </data>
   <data name="Error_MaxResponseTimeInvalid" xml:space="preserve">

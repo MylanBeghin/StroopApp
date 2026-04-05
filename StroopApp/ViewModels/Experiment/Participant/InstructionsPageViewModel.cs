@@ -1,12 +1,13 @@
-﻿using StroopApp.Core;
-using StroopApp.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using StroopApp.Core;
 using StroopApp.Services.Navigation;
+using StroopApp.ViewModels.State;
 using StroopApp.Views.Experiment.Participant;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -16,33 +17,36 @@ namespace StroopApp.ViewModels.Experiment.Participant
     /// Manages multilingual instruction pages displayed before Stroop test execution.
     /// Generates dynamic instructions based on experiment configuration (congruence, visual cues).
     /// </summary>
-    public class InstructionsPageViewModel : ViewModelBase
+    public partial class InstructionsPageViewModel : ViewModelBase
     {
-        private readonly ExperimentSettings _settings;
+        private readonly ExperimentSettingsViewModel _settings;
         private readonly INavigationService _participantWindowNavigationService;
-        private int _currentPageIndex;
         private const int TotalPages = 3;
 
-        public UIElement CurrentInstruction { get; private set; }
-        public ICommand NextCommand { get; }
-        public event EventHandler InstructionChanged;
-        public StroopPage StroopPage { get; set; }
+        [ObservableProperty]
+        private int _currentPageIndex;
 
-        public InstructionsPageViewModel(ExperimentSettings settings, INavigationService participantWindowNavigationService)
+        public UIElement CurrentInstruction { get; private set; } = null!;
+
+        public event EventHandler? InstructionChanged;
+
+        public StroopPage? StroopPage { get; private set; }
+
+        public InstructionsPageViewModel(ExperimentSettingsViewModel settings, INavigationService participantWindowNavigationService)
         {
-            _currentPageIndex = 0;
+            CurrentPageIndex = 0;
             _settings = settings;
             _participantWindowNavigationService = participantWindowNavigationService;
-            NextCommand = new RelayCommand(_ => NextPage());
-            CurrentInstruction = GenerateInstructionPage(_currentPageIndex);
+            CurrentInstruction = GenerateInstructionPage(CurrentPageIndex);
         }
 
-        private void NextPage()
+        [RelayCommand]
+        private void Next()
         {
-            _currentPageIndex++;
-            if (_currentPageIndex < TotalPages)
+            CurrentPageIndex++;
+            if (CurrentPageIndex < TotalPages)
             {
-                CurrentInstruction = GenerateInstructionPage(_currentPageIndex);
+                CurrentInstruction = GenerateInstructionPage(CurrentPageIndex);
                 InstructionChanged?.Invoke(this, EventArgs.Empty);
             }
             else
@@ -68,7 +72,7 @@ namespace StroopApp.ViewModels.Experiment.Participant
                 var loc = new LocalizedStrings();
                 var profile = _settings.CurrentProfile;
                 var congruence = profile.CongruencePercent;
-                bool hasCue = profile.IsAmorce;
+                bool hasCue = profile.HasVisualCue;
                 string key = hasCue switch
                 {
                     false when congruence == 0 => "Case1",

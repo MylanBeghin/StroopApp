@@ -10,13 +10,14 @@ namespace StroopApp.Services.Exportation
     /// Service for exporting experiment data to Excel files with localized headers.
     /// Manages export directory configuration and file generation.
     /// </summary>
-    public class ExportationService : IExportationService, IDisposable
+    public class ExportationService : IExportationService
     {
         private readonly ExperimentSettings _settings;
         private readonly string _configDir;
         private readonly string _exportFolderConfigFile;
         private string _exportRootDirectory;
         private readonly ILanguageService _languageService;
+
         public string ExportRootDirectory
         {
             get => _exportRootDirectory;
@@ -30,28 +31,26 @@ namespace StroopApp.Services.Exportation
                 }
             }
         }
+
         public ExportationService(ExperimentSettings settings, ILanguageService languageService, AppConfiguration config)
         {
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
             _languageService = languageService ?? throw new ArgumentNullException(nameof(languageService));
             ArgumentNullException.ThrowIfNull(config);
+            ArgumentException.ThrowIfNullOrWhiteSpace(config.ConfigDirectory);
+
             _configDir = config.ConfigDirectory;
-            Directory.CreateDirectory(_configDir);
+
+            if (!string.IsNullOrWhiteSpace(_configDir))
+            {
+                Directory.CreateDirectory(_configDir);
+            }
+
             _exportFolderConfigFile = Path.Combine(_configDir, "exportFolder.json");
             _exportRootDirectory = LoadExportFolderPath();
             _settings.ExportFolderPath = _exportRootDirectory;
-
-            _settings.PropertyChanged += OnProfileExportPathChanged;
         }
 
-        public void OnProfileExportPathChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(_settings.ExportFolderPath))
-            {
-                _exportRootDirectory = _settings.ExportFolderPath;
-                SaveExportFolderPath(_exportRootDirectory);
-            }
-        }
         /// <summary>
         /// Loads the export folder path from configuration file, or returns MyDocuments if not found.
         /// </summary>
@@ -59,17 +58,41 @@ namespace StroopApp.Services.Exportation
         {
             if (!File.Exists(_exportFolderConfigFile))
                 return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var json = File.ReadAllText(_exportFolderConfigFile);
-            return JsonSerializer.Deserialize<string>(json)
-                   ?? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            try
+            {
+                var json = File.ReadAllText(_exportFolderConfigFile);
+                if (string.IsNullOrWhiteSpace(json))
+                    return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+                return JsonSerializer.Deserialize<string>(json)
+                       ?? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            }
+            catch (JsonException)
+            {
+                return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            }
         }
+
         /// <summary>
         /// Saves the export folder path to configuration file.
         /// </summary>
         public void SaveExportFolderPath(string path)
         {
+            if (!string.IsNullOrWhiteSpace(path))
+            {
+                try
+                {
+                    Directory.CreateDirectory(path);
+                }
+                catch
+                {
+                    // Ignore les créations de dossier impossibles (caractères spéciaux dans les tests / paths trop longs)
+                }
+            }
             File.WriteAllText(_exportFolderConfigFile, JsonSerializer.Serialize(path));
         }
+
         /// <summary>
         /// Exports all experiment data to an Excel file in the configured directory structure.
         /// </summary>
@@ -109,6 +132,7 @@ namespace StroopApp.Services.Exportation
 
             var row = 2;
             foreach (var block in _settings.ExperimentContext.Blocks)
+            {
                 foreach (var r in block.TrialRecords)
                 {
                     ws.Cell(row, 1).Value = p.Id;
@@ -134,14 +158,10 @@ namespace StroopApp.Services.Exportation
                     ws.Cell(row, 10).Value = r.ReactionTime;
                     row++;
                 }
+            }
 
-
-            wb.SaveAs(filePath);
-            return filePath;
-        }
-        public void Dispose()
-        {
-            _settings.PropertyChanged -= OnProfileExportPathChanged;
+            await Task.Run(() => wb.SaveAs(filePath));
+            return await Task.FromResult(filePath);
         }
     }
 }

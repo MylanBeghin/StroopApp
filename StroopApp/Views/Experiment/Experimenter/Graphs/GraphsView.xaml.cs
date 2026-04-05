@@ -1,12 +1,12 @@
-﻿using System.Windows.Controls;
-
-using StroopApp.Models;
+﻿using StroopApp.Models;
+using StroopApp.ViewModels.State;
+using System.Windows.Controls;
 
 namespace StroopApp.Views.Experiment.Experimenter.Graphs
 {
 	public partial class GraphsView : UserControl
 	{
-		public GraphsView(ExperimentSettings settings)
+		public GraphsView(ExperimentSettingsViewModel settings)
 		{
 			InitializeComponent();
 			var columnGraphView = new ColumnGraphView(settings);

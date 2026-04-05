@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="StroopApp.Views.Experiment.Participant.Stroop.AmorceControl"
+﻿<UserControl x:Class="StroopApp.Views.Experiment.Participant.Stroop.VisualCueControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:StroopApp.Views.Experiment.Participant.Stroop"
@@ -30,10 +30,10 @@
                 <Style TargetType="ContentControl">
                     <Setter Property="ContentTemplate" Value="{StaticResource SquareTemplate}"/>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Amorce}" Value="Square">
+                        <DataTrigger Binding="{Binding VisualCue}" Value="Square">
                             <Setter Property="ContentTemplate" Value="{StaticResource SquareTemplate}"/>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Amorce}" Value="Round">
+                        <DataTrigger Binding="{Binding VisualCue}" Value="Round">
                             <Setter Property="ContentTemplate" Value="{StaticResource CircleTemplate}"/>
                         </DataTrigger>
                     </Style.Triggers>

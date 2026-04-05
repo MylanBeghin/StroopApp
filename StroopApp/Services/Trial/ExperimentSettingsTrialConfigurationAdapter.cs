@@ -1,4 +1,4 @@
-using StroopApp.Models;
+using StroopApp.ViewModels.State;
 
 namespace StroopApp.Services.Trial
 {
@@ -9,9 +9,9 @@ namespace StroopApp.Services.Trial
     /// </summary>
     public class ExperimentSettingsTrialConfigurationAdapter : ITrialConfiguration
     {
-        private readonly ExperimentSettings _settings;
+        private readonly ExperimentSettingsViewModel _settings;
 
-        public ExperimentSettingsTrialConfigurationAdapter(ExperimentSettings settings)
+        public ExperimentSettingsTrialConfigurationAdapter(ExperimentSettingsViewModel settings)
         {
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
 
@@ -32,7 +32,7 @@ namespace StroopApp.Services.Trial
 
         public int DominantPercent => _settings.CurrentProfile.DominantPercent;
 
-        public bool IsAmorce => _settings.CurrentProfile.IsAmorce;
+        public bool HasVisualCue => _settings.CurrentProfile.HasVisualCue;
 
         public string TaskLanguage => _settings.CurrentProfile.TaskLanguage;
     }

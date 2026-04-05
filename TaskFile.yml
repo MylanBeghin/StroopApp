@@ -1,0 +1,41 @@
+version: '3'
+
+vars:
+  SOLUTION: StroopApp.sln
+  CONFIGURATION: Debug
+
+tasks:
+  clean:
+    desc: Clean all build outputs
+    cmds:
+      - dotnet clean {{.SOLUTION}} --configuration {{.CONFIGURATION}}
+
+  restore:
+    desc: Restore NuGet dependencies
+    cmds:
+      - dotnet restore {{.SOLUTION}}
+
+  build:
+    desc: Build the solution (no restore)
+    cmds:
+      - dotnet build {{.SOLUTION}} --configuration {{.CONFIGURATION}} --no-restore
+
+  test:
+    desc: Run all unit tests (no build)
+    cmds:
+      - dotnet test {{.SOLUTION}} --configuration {{.CONFIGURATION}} --no-build --verbosity normal
+
+  rebuild:
+    desc: Clean → restore → build
+    cmds:
+      - task: clean
+      - task: restore
+      - task: build
+
+  ci:
+    desc: Full CI pipeline — clean, restore, build, test
+    cmds:
+      - task: clean
+      - task: restore
+      - task: build
+      - task: test

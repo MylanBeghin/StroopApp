@@ -1,131 +1,35 @@
-﻿using StroopApp.Core;
+﻿using StroopApp.ViewModels.State;
 using System.Collections.ObjectModel;
 namespace StroopApp.Models
 {
     /// <summary>
     /// Represents a block of trials in a Stroop experiment, containing trial records and calculated statistics.
     /// </summary>
-    public class Block : ModelBase
+    public class Block
     {
-        private int _blockNumber;
-        public int BlockNumber
-        {
-            get => _blockNumber;
-            set
-            {
-                _blockNumber = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private int _trialsPerBlock;
-        public int TrialsPerBlock
-        {
-            get => _trialsPerBlock;
-            set
-            {
-                _trialsPerBlock = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private double _accuracy;
-        public double Accuracy
-        {
-            get => _accuracy;
-            set
-            {
-                _accuracy = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private double? _responseTimeMean;
-        public double? ResponseTimeMean
-        {
-            get => _responseTimeMean;
-            set
-            {
-                _responseTimeMean = value;
-                OnPropertyChanged();
-            }
-        }
-        private int? _congruencePercent;
-
-        public int? CongruencePercent
-        {
-            get => _congruencePercent;
-            set
-            {
-                _congruencePercent = value;
-                OnPropertyChanged();
-            }
-        }
-        private int? _switchPercent;
-
-        public int? SwitchPercent
-        {
-            get => _switchPercent;
-            set
-            {
-                _switchPercent = value;
-                OnPropertyChanged();
-            }
-        }
-        private string? _blockExperimentProfile;
-
-        public string? BlockExperimentProfile
-        {
-            get => _blockExperimentProfile;
-            set
-            {
-                _blockExperimentProfile = value;
-                OnPropertyChanged();
-            }
-        }
-        private string? _visualCue;
-
-        public string? VisualCue
-        {
-            get => _visualCue;
-            set
-            {
-                _visualCue = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public ObservableCollection<StroopTrial> TrialRecords { get; } = new();
+        public int BlockNumber { get; set; }
+        public int TrialsPerBlock { get; set; }
+        public double Accuracy { get; set; }
+        public double? ResponseTimeMean { get; set; }
+        public int? CongruencePercent { get; set; }
+        public int? SwitchPercent { get; set; }
+        public string? BlockExperimentProfile { get; set; }
+        public string? VisualCue { get; set; }
+        public ObservableCollection<StroopTrial?> TrialRecords { get; } = new();
         public ObservableCollection<double?> TrialTimes { get; } = new();
 
         /// <summary>
         /// Legacy constructor for backward compatibility.
         /// </summary>
-        public Block(ExperimentSettings settings)
+        public Block(string profileName, int blockNumber, int? congruencePercent, int? switchPercent, bool hasVisualCue)
         {
-            var config = new ExperimentSettingsBlockConfigurationAdapter(settings);
-            InitializeFromConfiguration(config);
+            BlockExperimentProfile = profileName;
+            BlockNumber = blockNumber;
+            CongruencePercent = congruencePercent;
+            SwitchPercent = switchPercent;
+            VisualCue = hasVisualCue ? "✅" : "❎";
         }
 
-        /// <summary>
-        /// Primary constructor accepting minimal configuration interface.
-        /// </summary>
-        public Block(IBlockConfiguration config)
-        {
-            InitializeFromConfiguration(config);
-        }
-
-        private void InitializeFromConfiguration(IBlockConfiguration config)
-        {
-            _blockExperimentProfile = config.ProfileName;
-            _blockNumber = config.Block;
-            _congruencePercent = config.CongruencePercent;
-            _switchPercent = config.SwitchPercent;
-            if (config.IsAmorce)
-                _visualCue = "✅";
-            else
-                _visualCue = "❎";
-        }
         /// <summary>
         /// Calculates block statistics including trial count, accuracy percentage, and mean response time.
         /// </summary>

@@ -26,14 +26,14 @@ namespace StroopApp.Services.Trial
 		int CongruencePercent { get; }
 
 		/// <summary>
-		/// Percentage for dominant amorce type (used as SwitchPercent).
+		/// Percentage for dominant visual cue type (used as SwitchPercent).
 		/// </summary>
 		int DominantPercent { get; }
 
 		/// <summary>
-		/// Whether visual cue (amorce) is enabled.
+		/// Whether visual cue is enabled.
 		/// </summary>
-		bool IsAmorce { get; }
+		bool HasVisualCue { get; }
 
 		/// <summary>
 		/// Language code for task stimuli (e.g., "en", "fr").

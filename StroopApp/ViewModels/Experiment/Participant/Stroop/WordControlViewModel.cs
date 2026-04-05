@@ -1,39 +1,28 @@
-﻿using System.Windows.Media;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Windows.Media;
 
 using StroopApp.Core;
 
 namespace StroopApp.ViewModels.Experiment.Participant.Stroop
 {
-    /// <summary>
-    /// ViewModel for displaying Stroop stimulus words with color mapping.
-    /// Supports bilingual color names (English/French) for localization.
-    /// </summary>
-    public class WordControlViewModel : ViewModelBase
+	/// <summary>
+	/// ViewModel for displaying Stroop stimulus words with color mapping.
+	/// Supports bilingual color names (English/French) for localization.
+	/// </summary>
+	public partial class WordControlViewModel : ViewModelBase
 	{
+	  [ObservableProperty]
 		private string _label;
-		public string Label
-		{
-			get => _label;
-			set
-			{
-				_label = value;
-				OnPropertyChanged();
-			}
-		}
 
+	  [ObservableProperty]
 		private string _color;
-		public string Color
+
+		partial void OnColorChanged(string value)
 		{
-			get => _color;
-			set
-			{
-				_color = value;
-				OnPropertyChanged();
-				OnPropertyChanged(nameof(ForegroundBrush));
-			}
+			OnPropertyChanged(nameof(ForegroundBrush));
 		}
 
-		public Brush ForegroundBrush => _color switch
+		public Brush ForegroundBrush => Color switch
 		{
 			"Red" or "Rouge" => Brushes.Red,
 			"Blue" or "Bleu" => Brushes.Blue,
