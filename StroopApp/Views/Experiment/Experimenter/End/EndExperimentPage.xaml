@@ -184,13 +184,18 @@
                 </Border>
             </Grid>
         </Border>
-        <Border Grid.Row="4"
-                Grid.ColumnSpan="3"
-                Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
+        <Border Background="{DynamicResource SystemControlBackgroundAltMediumBrush}"
                 CornerRadius="8"
                 Padding="16"
                 BorderThickness="0.5"
-                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"></Border>
+                BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}"
+                Grid.Row="2"
+                Grid.Column="2">
+            <ContentControl Content="{Binding LiveReactionTimeViewModel}" />
+        </Border>
+        <ContentControl Grid.Row="4"
+                        Grid.ColumnSpan="3"
+                        Content="{Binding GlobalGraphViewModel}" />
         <ui:SimpleStackPanel Orientation="Horizontal"
                              Spacing="16"
                              Grid.Row="6"

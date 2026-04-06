@@ -1,14 +1,12 @@
-﻿using StroopApp.ViewModels.Configuration.Participant;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace StroopApp.Views.Participant
 {
     public partial class ParticipantManagementView : UserControl
     {
-        public ParticipantManagementView(ParticipantManagementViewModel viewModel)
+        public ParticipantManagementView()
         {
             InitializeComponent();
-            DataContext = viewModel;
         }
     }
 }

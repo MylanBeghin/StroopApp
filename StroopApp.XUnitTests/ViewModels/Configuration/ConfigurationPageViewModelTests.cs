@@ -35,11 +35,15 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 
 			var keyMappingViewModel = new KeyMappingViewModel(dummyKeyMappingService);
 
+			var dummyExportationService = new DummyExportationService();
+			var exportFolderSelectorViewModel = new ExportFolderSelectorViewModel(settings, dummyExportationService);
+
 			var viewModel = new TestableConfigurationPageViewModel(
 				settings,
 				profileViewModel,
 				participantViewModel,
 				keyMappingViewModel,
+				exportFolderSelectorViewModel,
 				dummyNavigationService,
 				dummyWindowManager,
 				dummyTrialGenerationService, 
@@ -79,11 +83,15 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 
 			var keyMappingViewModel = new KeyMappingViewModel(dummyKeyMappingService);
 
+			var dummyExportationService = new DummyExportationService();
+			var exportFolderSelectorViewModel = new ExportFolderSelectorViewModel(settings, dummyExportationService);
+
 			var viewModel = new TestableConfigurationPageViewModel(
 				settings,
 				profileViewModel,
 				participantViewModel,
 				keyMappingViewModel,
+				exportFolderSelectorViewModel,
 				dummyNavigationService,
 				dummyWindowManager,
 				dummyTrialGenerationService, 

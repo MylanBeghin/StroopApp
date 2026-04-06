@@ -19,9 +19,11 @@ namespace StroopApp.ViewModels.Configuration
     /// </summary>
     public partial class ConfigurationPageViewModel : ViewModelBase
     {
-        private readonly ProfileManagementViewModel _profileViewModel;
-        private readonly ParticipantManagementViewModel _participantViewModel;
-        private readonly KeyMappingViewModel _keyMappingViewModel;
+        public ProfileManagementViewModel ProfileViewModel { get; }
+        public ParticipantManagementViewModel ParticipantViewModel { get; }
+        public KeyMappingViewModel KeyMappingViewModel { get; }
+        public ExportFolderSelectorViewModel ExportFolderSelectorViewModel { get; }
+
         private readonly INavigationService _experimenterNavigationService;
         private readonly IWindowManager _windowManager;
         private readonly ILanguageService _languageService;
@@ -33,14 +35,16 @@ namespace StroopApp.ViewModels.Configuration
                                   ProfileManagementViewModel profileViewModel,
                                   ParticipantManagementViewModel participantViewModel,
                                   KeyMappingViewModel keyMappingViewModel,
+                                  ExportFolderSelectorViewModel exportFolderSelectorViewModel,
                                   INavigationService experimenterNavigationService,
                                   IWindowManager windowManager,
                                   ITrialGenerationService trialGenerationService,
                                   ILanguageService languageService)
         {
-            _profileViewModel = profileViewModel;
-            _participantViewModel = participantViewModel;
-            _keyMappingViewModel = keyMappingViewModel;
+            ProfileViewModel = profileViewModel;
+            ParticipantViewModel = participantViewModel;
+            KeyMappingViewModel = keyMappingViewModel;
+            ExportFolderSelectorViewModel = exportFolderSelectorViewModel;
             _experimenterNavigationService = experimenterNavigationService;
             _windowManager = windowManager;
             _trialGenerationService = trialGenerationService;
@@ -53,9 +57,9 @@ namespace StroopApp.ViewModels.Configuration
         {
             try
             {
-                _settings.CurrentProfile = _profileViewModel.CurrentProfile;
-                _settings.Participant = _participantViewModel.SelectedParticipant;
-                _settings.KeyMappings = _keyMappingViewModel.Mappings;
+                _settings.CurrentProfile = ProfileViewModel.CurrentProfile;
+                _settings.Participant = ParticipantViewModel.SelectedParticipant;
+                _settings.KeyMappings = KeyMappingViewModel.Mappings;
 
                 if (_settings.CurrentProfile == null)
                 {

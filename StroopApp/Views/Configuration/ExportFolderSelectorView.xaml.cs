@@ -1,14 +1,12 @@
-﻿using StroopApp.ViewModels.Configuration;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace StroopApp.Views.Configuration
 {
     public partial class ExportFolderSelectorView : UserControl
     {
-        public ExportFolderSelectorView(ExportFolderSelectorViewModel viewModel)
+        public ExportFolderSelectorView()
         {
             InitializeComponent();
-            DataContext = viewModel;
         }
     }
 }

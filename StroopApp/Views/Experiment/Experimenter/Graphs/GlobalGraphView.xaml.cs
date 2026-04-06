@@ -1,17 +1,12 @@
-﻿using StroopApp.Models;
-using StroopApp.ViewModels.Experiment.Experimenter;
-using StroopApp.ViewModels.State;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace StroopApp.Views.Experiment.Experimenter.Graphs
 {
     public partial class GlobalGraphView : UserControl
     {
-        public GlobalGraphView(ExperimentSettingsViewModel settings)
+        public GlobalGraphView()
         {
             InitializeComponent();
-            DataContext = new GlobalGraphViewModel(settings);
         }
     }
 }
-

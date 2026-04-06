@@ -11,13 +11,14 @@
         WindowStartupLocation="CenterScreen"
         ui:WindowHelper.UseModernWindowStyle="True"
         Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}">
-    <Grid x:Name="EndGrid"
-          Margin="16">
+    <Grid Margin="16">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="12" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <ContentControl Grid.Row="0"
+                        Content="{Binding ExportFolderSelectorViewModel}" />
         <ContentControl Grid.Row="2"
                         Content="{Binding}">
             <ContentControl.Style>

@@ -19,11 +19,12 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
             ProfileManagementViewModel profileViewModel,
             ParticipantManagementViewModel participantViewModel,
             KeyMappingViewModel keyMappingViewModel,
+            ExportFolderSelectorViewModel exportFolderSelectorViewModel,
             INavigationService experimenterNavigationService,
             IWindowManager windowManager,
             ITrialGenerationService trialGenerationService,
             ILanguageService languageService
-        ) : base(settings, profileViewModel, participantViewModel, keyMappingViewModel, experimenterNavigationService, windowManager, trialGenerationService, languageService)
+        ) : base(settings, profileViewModel, participantViewModel, keyMappingViewModel, exportFolderSelectorViewModel, experimenterNavigationService, windowManager, trialGenerationService, languageService)
         { }
 
         protected override Task ShowErrorDialogAsync(string message)

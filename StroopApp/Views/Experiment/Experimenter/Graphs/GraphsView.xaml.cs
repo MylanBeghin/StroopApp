@@ -1,27 +1,12 @@
-﻿using StroopApp.Models;
-using StroopApp.ViewModels.State;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace StroopApp.Views.Experiment.Experimenter.Graphs
 {
 	public partial class GraphsView : UserControl
 	{
-		public GraphsView(ExperimentSettingsViewModel settings)
+		public GraphsView()
 		{
 			InitializeComponent();
-			var columnGraphView = new ColumnGraphView(settings);
-			var globalGraphView = new GlobalGraphView(settings);
-			var liveReactionTimeView = new LiveReactionTimeView(settings);
-			MainGrid.Children.Add(globalGraphView);
-			Grid.SetRow(globalGraphView, 2);
-			Grid.SetColumnSpan(globalGraphView, 3);
-			Grid.SetColumn(globalGraphView, 0);
-			MainGrid.Children.Add(columnGraphView);
-			Grid.SetRow(columnGraphView, 4);
-			Grid.SetColumn(columnGraphView, 0);
-			MainGrid.Children.Add(liveReactionTimeView);
-			Grid.SetRow(liveReactionTimeView, 4);
-			Grid.SetColumn(liveReactionTimeView, 2);
 		}
 	}
 }

@@ -13,8 +13,7 @@
             Padding="16"
             BorderThickness="0.5"
             BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
-        <Grid x:Name="MainGrid"
-              Margin="0">
+        <Grid Margin="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.8*" />
                 <ColumnDefinition Width="8" />
@@ -30,6 +29,16 @@
             <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Title_GraphsView]}"
                        Style="{DynamicResource TitleTextBlockStyle}"
                        Grid.Row="0" />
+            <ContentControl Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Content="{Binding GlobalGraphViewModel}" />
+            <ContentControl Grid.Row="4"
+                            Grid.Column="0"
+                            Content="{Binding ColumnGraphViewModel}" />
+            <ContentControl Grid.Row="4"
+                            Grid.Column="2"
+                            Content="{Binding LiveReactionTimeViewModel}" />
         </Grid>
     </Border>
 </UserControl>

@@ -3,7 +3,6 @@ using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.Experiment.Experimenter.End;
 using StroopApp.ViewModels.State;
-using StroopApp.Views.Experiment.Experimenter.Graphs;
 using System.Windows.Controls;
 
 namespace StroopApp.Views.Experiment.Experimenter
@@ -25,19 +24,12 @@ namespace StroopApp.Views.Experiment.Experimenter
             _settings = settings;
             _exportationService = exportationService;
             _windowManager = windowManager;
+            Unloaded += (s, e) => (DataContext as IDisposable)?.Dispose();
         }
 
         private void Initialize(INavigationService navigationService)
         {
             DataContext = new EndExperimentPageViewModel(_settings, _exportationService, navigationService, _windowManager);
-            var globalGraph = new GlobalGraphView(_settings);
-            MainGrid.Children.Add(globalGraph);
-            Grid.SetRow(globalGraph, 4);
-            Grid.SetColumnSpan(globalGraph, 3);
-            var liveReactionTimeView = new LiveReactionTimeView(_settings);
-            MainGrid.Children.Add(liveReactionTimeView);
-            Grid.SetRow(liveReactionTimeView, 2);
-            Grid.SetColumn(liveReactionTimeView, 2);
         }
     }
 }

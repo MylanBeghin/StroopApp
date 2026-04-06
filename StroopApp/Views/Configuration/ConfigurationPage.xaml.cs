@@ -1,5 +1,4 @@
-﻿using StroopApp.Models;
-using StroopApp.Services.Exportation;
+﻿using StroopApp.Services.Exportation;
 using StroopApp.Services.KeyMapping;
 using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
@@ -11,10 +10,6 @@ using StroopApp.ViewModels.Configuration;
 using StroopApp.ViewModels.Configuration.Participant;
 using StroopApp.ViewModels.Configuration.Profile;
 using StroopApp.ViewModels.State;
-using StroopApp.Views.Configuration;
-using StroopApp.Views.KeyMapping;
-using StroopApp.Views.Participant;
-using StroopApp.Views.Profile;
 using System.Windows.Controls;
 
 namespace StroopApp.Views
@@ -63,21 +58,16 @@ namespace StroopApp.Views
             var keyMappingViewModel = new KeyMappingViewModel(_keyMappingService);
             var exportFolderSelectorViewModel = new ExportFolderSelectorViewModel(_settings, _exportationService);
 
-            DataContext = new ConfigurationPageViewModel(_settings, profileViewModel, participantViewModel, keyMappingViewModel, navigationService, _windowManager, _trialGenerationService, _languageService);
-
-            var profileManagementView = new ProfileManagementView(profileViewModel);
-            var participantManagementView = new ParticipantManagementView(participantViewModel);
-            var keyMappingView = new KeyMappingView(keyMappingViewModel);
-            var exportFolderView = new ExportFolderSelectorView(exportFolderSelectorViewModel);
-
-            MainGrid.Children.Add(profileManagementView);
-            Grid.SetRow(profileManagementView, 1);
-            KeyMappingContainer.Children.Add(keyMappingView);
-            Grid.SetColumn(keyMappingView, 0);
-            KeyMappingContainer.Children.Add(exportFolderView);
-            Grid.SetColumn(exportFolderView, 2);
-            MainGrid.Children.Add(participantManagementView);
-            Grid.SetRow(participantManagementView, 5);
+            DataContext = new ConfigurationPageViewModel(
+                _settings,
+                profileViewModel,
+                participantViewModel,
+                keyMappingViewModel,
+                exportFolderSelectorViewModel,
+                navigationService,
+                _windowManager,
+                _trialGenerationService,
+                _languageService);
         }
     }
 }

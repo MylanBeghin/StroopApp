@@ -6,6 +6,6 @@
       KeyDown="StroopPage_KeyDown"
       Title="Stroop">
     <Grid>
-        <ContentControl Content="{Binding CurrentControl}" />
+        <ContentControl Content="{Binding CurrentStepViewModel}" />
     </Grid>
 </Page>

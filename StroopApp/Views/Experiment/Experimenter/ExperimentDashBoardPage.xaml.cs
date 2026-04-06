@@ -1,11 +1,8 @@
-﻿using StroopApp.Models;
-using StroopApp.Services.Language;
+﻿using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.Experiment.Experimenter;
 using StroopApp.ViewModels.State;
-using StroopApp.Views.Experiment.Experimenter;
-using StroopApp.Views.Experiment.Experimenter.Graphs;
 using System.Windows.Controls;
 
 namespace StroopApp.Views
@@ -32,13 +29,7 @@ namespace StroopApp.Views
 
         private void Initialize(INavigationService navigationService)
         {
-            var experimentProfileView = new ExperimentProgressView(_settings);
-            var graphsView = new GraphsView(_settings);
             DataContext = new ExperimentDashBoardPageViewModel(_settings, navigationService, _windowManager, _languageService);
-            MainGrid.Children.Add(experimentProfileView);
-            Grid.SetRow(experimentProfileView, 1);
-            MainGrid.Children.Add(graphsView);
-            Grid.SetRow(graphsView, 3);
         }
     }
 }
