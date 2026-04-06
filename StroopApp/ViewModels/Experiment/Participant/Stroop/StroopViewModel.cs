@@ -3,10 +3,8 @@ using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Services.Navigation;
 using StroopApp.ViewModels.State;
-using StroopApp.Views.Experiment.Participant.Stroop;
 using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 namespace StroopApp.ViewModels.Experiment.Participant.Stroop
@@ -27,11 +25,12 @@ namespace StroopApp.ViewModels.Experiment.Participant.Stroop
         }
 
         /// <summary>
-        /// Current UI control displayed to participant.
+        /// Current step ViewModel displayed to the participant.
+        /// Its type determines which DataTemplate is rendered.
         /// Initialized during trial execution.
         /// </summary>
         [ObservableProperty]
-        private UserControl _currentControl = null!;
+        private object? _currentStepViewModel;
 
         /// <summary>
         /// Task completion source for participant input.
@@ -87,7 +86,7 @@ namespace StroopApp.ViewModels.Experiment.Participant.Stroop
                     }
                     Settings.ExperimentContext.CurrentTrial = trial;
 
-                    CurrentControl = new FixationCrossControl();
+                    CurrentStepViewModel = new FixationCrossViewModel();
                     await Task.Delay(Settings.CurrentProfile.FixationDuration, _cancellationTokenSource.Token);
                     if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
                     {
@@ -96,7 +95,7 @@ namespace StroopApp.ViewModels.Experiment.Participant.Stroop
                     }
                     if (Settings.CurrentProfile.HasVisualCue)
                     {
-                        CurrentControl = new VisualCueControl(trial.VisualCue);
+                        CurrentStepViewModel = new VisualCueControlViewModel(trial.VisualCue);
                         await Task.Delay(Settings.CurrentProfile.VisualCueDuration, _cancellationTokenSource.Token);
 
                         if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
@@ -106,8 +105,8 @@ namespace StroopApp.ViewModels.Experiment.Participant.Stroop
                         }
                     }
 
-                    var wordControl = new WordControl(trial.Stimulus.Text, trial.Stimulus.Color);
-                    CurrentControl = wordControl;
+                    var wordViewModel = new WordControlViewModel(trial.Stimulus.Text, trial.Stimulus.Color);
+                    CurrentStepViewModel = wordViewModel;
 
                     await Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                     {
@@ -134,7 +133,7 @@ namespace StroopApp.ViewModels.Experiment.Participant.Stroop
                         trial.ReactionTime = _inputTcs.Task.Result;
                         Settings.ExperimentContext.CurrentBlock.TrialTimes.Add(trial.ReactionTime);
                         Settings.ExperimentContext.ReactionPoints.Add(new ReactionTimePoint(trial.TrialNumber, trial.ReactionTime, trial.IsValidResponse));
-                        CurrentControl = new FixationCrossControl();
+                        CurrentStepViewModel = new FixationCrossViewModel();
                     }
                     else if (!delayTask.IsCanceled)
                     {

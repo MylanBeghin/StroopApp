@@ -20,6 +20,9 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
         private readonly INavigationService _experimenterNavigationService;
         private bool _hasNavigatedToEndPage;
 
+        public ExperimentProgressViewModel ExperimentProgressViewModel { get; }
+        public GraphsViewModel GraphsViewModel { get; }
+
         public ExperimentDashBoardPageViewModel(
             ExperimentSettingsViewModel settings,
             INavigationService experimenterNavigationService,
@@ -28,6 +31,9 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
         {
             _settings = settings;
             _experimenterNavigationService = experimenterNavigationService;
+
+            ExperimentProgressViewModel = new ExperimentProgressViewModel(settings);
+            GraphsViewModel = new GraphsViewModel(settings);
 
             _settings.ExperimentContext.PropertyChanged += OnExperimentContextPropertyChanged;
         }
@@ -73,6 +79,8 @@ namespace StroopApp.ViewModels.Experiment.Experimenter
         public void Dispose()
         {
             _settings.ExperimentContext.PropertyChanged -= OnExperimentContextPropertyChanged;
+            ExperimentProgressViewModel.Dispose();
+            GraphsViewModel.Dispose();
         }
     }
 }

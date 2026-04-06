@@ -8,6 +8,7 @@ using StroopApp.Services.Exportation;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.State;
+using StroopApp.ViewModels.Experiment.Experimenter;
 using StroopApp.Views;
 using StroopApp.Views.Experiment.Experimenter.End;
 using System.Collections.ObjectModel;
@@ -19,10 +20,12 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
     /// ViewModel for the end-of-experiment page, handling continuation to next block, 
     /// starting new experiments, data export, and application shutdown with confirmations.
     /// </summary>
-    public partial class EndExperimentPageViewModel : ViewModelBase
+    public partial class EndExperimentPageViewModel : ViewModelBase, IDisposable
     {
         public ExperimentSettingsViewModel Settings { get; }
         public ObservableCollection<Block> Blocks { get; }
+        public GlobalGraphViewModel GlobalGraphViewModel { get; }
+        public LiveReactionTimeViewModel LiveReactionTimeViewModel { get; }
 
         private readonly IExportationService _exportationService;
         private readonly INavigationService _experimenterNavigationService;
@@ -47,6 +50,8 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             _chartFactory = new ExperimentChartFactory();
 
             Blocks = Settings.ExperimentContext.Blocks;
+            GlobalGraphViewModel = new GlobalGraphViewModel(settings);
+            LiveReactionTimeViewModel = new LiveReactionTimeViewModel(settings);
             CurrentParticipant = string.Format(Strings.Label_CurrentParticipant, Settings.Participant.Id);
             CurrentProfile = string.Format(Strings.Label_CurrentProfile, Settings.CurrentProfile.ProfileName);
 
@@ -60,7 +65,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
         }
 
         [RelayCommand]
-        private void Continue()
+        private async Task Continue()
         {
             try
             {
@@ -75,7 +80,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error in Continue: {ex.Message}");
+                await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
             }
         }
 
@@ -142,6 +147,10 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             {
                 await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
             }
+        }
+        public void Dispose()
+        {
+            LiveReactionTimeViewModel.Dispose();
         }
     }
 }

@@ -11,6 +11,7 @@
                                    AccentColor="CornflowerBlue" />
                 <ui:XamlControlsResources />
                 <ResourceDictionary Source="Resources/styles.xaml" />
+                <ResourceDictionary Source="Resources/DataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <loc:LocalizedStrings x:Key="Loc" />
         </ResourceDictionary>

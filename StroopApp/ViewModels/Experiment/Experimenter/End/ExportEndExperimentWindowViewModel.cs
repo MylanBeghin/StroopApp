@@ -6,6 +6,7 @@ using StroopApp.Resources;
 using StroopApp.Services.Exportation;
 using StroopApp.Services.Navigation;
 using StroopApp.ViewModels.State;
+using StroopApp.ViewModels.Configuration;
 using StroopApp.Views;
 using System.Diagnostics;
 using System.IO;
@@ -50,6 +51,8 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
         [ObservableProperty]
         private string _errorMessage = string.Empty;
 
+        public ExportFolderSelectorViewModel ExportFolderSelectorViewModel { get; }
+
         public ExportEndExperimentWindowViewModel(ExperimentSettingsViewModel settings, IExportationService exportationService, Action closeWindow, Action<bool?> setDialogResult, INavigationService navigationService)
         {
             _settings = settings;
@@ -58,8 +61,14 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             _setDialogResult = setDialogResult;
             _navigationService = navigationService;
 
+            ExportFolderSelectorViewModel = new ExportFolderSelectorViewModel(settings, exportationService);
             ExportPath = _exportationService.LoadExportFolderPath();
             ResetState();
+            _settings.PropertyChanged += (_, e) =>
+            {
+                if (e.PropertyName == nameof(ExperimentSettingsViewModel.ExportFolderPath))
+                    ExportPath = _settings.ExportFolderPath;
+            };
         }
 
         partial void OnExportPathChanged(string value)
@@ -87,9 +96,6 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
 
             try
             {
-                _settings.ExportFolderPath = ExportPath;
-                _exportationService.SaveExportFolderPath(ExportPath);
-
                 await _exportationService.ExportDataAsync();
 
                 IsExporting = false;

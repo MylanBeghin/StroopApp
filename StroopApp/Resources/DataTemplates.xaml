@@ -1,0 +1,76 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:stroopVm="clr-namespace:StroopApp.ViewModels.Experiment.Participant.Stroop"
+                    xmlns:stroopViews="clr-namespace:StroopApp.Views.Experiment.Participant.Stroop"
+                    xmlns:configVmProfile="clr-namespace:StroopApp.ViewModels.Configuration.Profile"
+                    xmlns:configVmParticipant="clr-namespace:StroopApp.ViewModels.Configuration.Participant"
+                    xmlns:configVm="clr-namespace:StroopApp.ViewModels.Configuration"
+                    xmlns:profileViews="clr-namespace:StroopApp.Views.Profile"
+                    xmlns:participantViews="clr-namespace:StroopApp.Views.Participant"
+                    xmlns:keyMappingViews="clr-namespace:StroopApp.Views.KeyMapping"
+                    xmlns:configViews="clr-namespace:StroopApp.Views.Configuration"
+                    xmlns:experimenterVm="clr-namespace:StroopApp.ViewModels.Experiment.Experimenter"
+                    xmlns:experimenterViews="clr-namespace:StroopApp.Views.Experiment.Experimenter"
+                    xmlns:graphViews="clr-namespace:StroopApp.Views.Experiment.Experimenter.Graphs">
+
+    <!-- FixationCrossViewModel -->
+    <DataTemplate DataType="{x:Type stroopVm:FixationCrossViewModel}">
+        <stroopViews:FixationCrossControl />
+    </DataTemplate>
+
+    <!-- WordControlViewModel-->
+    <DataTemplate DataType="{x:Type stroopVm:WordControlViewModel}">
+        <stroopViews:WordControl />
+    </DataTemplate>
+
+    <!-- VisualCueControlViewModel -->
+    <DataTemplate DataType="{x:Type stroopVm:VisualCueControlViewModel}">
+        <stroopViews:VisualCueControl />
+    </DataTemplate>
+
+    <!-- ProfileManagementViewModel -->
+    <DataTemplate DataType="{x:Type configVmProfile:ProfileManagementViewModel}">
+        <profileViews:ProfileManagementView />
+    </DataTemplate>
+
+    <!-- ParticipantManagementViewModel -->
+    <DataTemplate DataType="{x:Type configVmParticipant:ParticipantManagementViewModel}">
+        <participantViews:ParticipantManagementView />
+    </DataTemplate>
+
+    <!-- KeyMappingViewModel -->
+    <DataTemplate DataType="{x:Type configVm:KeyMappingViewModel}">
+        <keyMappingViews:KeyMappingView />
+    </DataTemplate>
+
+    <!-- ExportFolderSelectorViewModel -->
+    <DataTemplate DataType="{x:Type configVm:ExportFolderSelectorViewModel}">
+        <configViews:ExportFolderSelectorView />
+    </DataTemplate>
+
+    <!-- ExperimentProgressViewModel -->
+    <DataTemplate DataType="{x:Type experimenterVm:ExperimentProgressViewModel}">
+        <experimenterViews:ExperimentProgressView />
+    </DataTemplate>
+
+    <!-- GraphsViewModel -->
+    <DataTemplate DataType="{x:Type experimenterVm:GraphsViewModel}">
+        <graphViews:GraphsView />
+    </DataTemplate>
+
+    <!-- ColumnGraphViewModel -->
+    <DataTemplate DataType="{x:Type experimenterVm:ColumnGraphViewModel}">
+        <graphViews:ColumnGraphView />
+    </DataTemplate>
+
+    <!-- GlobalGraphViewModel -->
+    <DataTemplate DataType="{x:Type experimenterVm:GlobalGraphViewModel}">
+        <graphViews:GlobalGraphView />
+    </DataTemplate>
+
+    <!-- LiveReactionTimeViewModel -->
+    <DataTemplate DataType="{x:Type experimenterVm:LiveReactionTimeViewModel}">
+        <graphViews:LiveReactionTimeView />
+    </DataTemplate>
+
+</ResourceDictionary>
