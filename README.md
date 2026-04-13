@@ -5,7 +5,7 @@
 # **StroopApp**
 ### *A Modern Desktop Application for Administering Stroop Tasks in Experimental Research*
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/MylanBeghin/StroopApp/releases/tag/v1.0.0)
+[![Version](https://img.shields.io/badge/version-1.1.0-blue)](https://github.com/MylanBeghin/StroopApp/releases/tag/v1.1.0)
 [![License](https://img.shields.io/badge/license-MIT-green)](https://github.com/MylanBeghin/StroopApp/blob/master/LICENSE)
 [![.NET](https://img.shields.io/badge/.NET-8.0-purple)](https://dotnet.microsoft.com/download/dotnet/8.0)
 [![JOSS](https://img.shields.io/badge/JOSS-writing-yellow)](https://joss.theoj.org/)
@@ -124,7 +124,7 @@ Check documentation on the [Wiki tab](https://github.com/MylanBeghin/StroopApp/w
 ### APA Style
 
 ```text
-Beghin, M., Pageaux, B., Mangin, T.  (2026). StroopApp (Version 1.0.0) [Computer software].
+Beghin, M., Pageaux, B., Mangin, T.  (2026). StroopApp (Version 1.1.0) [Computer software].
 https://github.com/MylanBeghin/StroopApp
 ```
 
@@ -134,7 +134,7 @@ https://github.com/MylanBeghin/StroopApp
 @software{beghin_stroopapp_2026,
   author  = {Beghin, Mylan, Pageaux, Benjamin, Mangin, Thomas},
   title   = {StroopApp},
-  version = {1.0.0},
+  version = {1.1.0},
   year    = {2026},
   url     = {https://github.com/MylanBeghin/StroopApp}
 }
@@ -144,7 +144,7 @@ A `CITATION.cff` file is provided at the root of the repository for automated ci
 
 ### Scientific background
 
-> Mangin, T., André, N., Benraiss, A., Pageaux, B., & Audiffren, M. (2021).  
+> Mangin, T., André, N., Benraiss, A., Pageaux, B., & Audiffren, M. (202).  
 > *No ego-depletion effect without a good control task.*  
 > Psychology of Sport and Exercise, 57, 102033.  
 > https://doi.org/10.1016/j.psychsport.2021.102033
