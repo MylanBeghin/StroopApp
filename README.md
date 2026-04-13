@@ -144,7 +144,7 @@ A `CITATION.cff` file is provided at the root of the repository for automated ci
 
 ### Scientific background
 
-> Mangin, T., André, N., Benraiss, A., Pageaux, B., & Audiffren, M. (202).  
+> Mangin, T., André, N., Benraiss, A., Pageaux, B., & Audiffren, M. (2021).  
 > *No ego-depletion effect without a good control task.*  
 > Psychology of Sport and Exercise, 57, 102033.  
 > https://doi.org/10.1016/j.psychsport.2021.102033
