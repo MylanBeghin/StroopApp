@@ -3,7 +3,7 @@ message: "If you use this software, please cite it as below."
 type: software
 title: "StroopApp: A WPF Application for Administering Stroop Tasks"
 version: 1.1.0
-date-released: 2026-04-05
+date-released: 2026-04-06
 authors:
   - family-names: Beghin
     given-names: Mylan
