@@ -1,63 +1,78 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 type: software
-title: "StroopApp: A WPF Application for Administering Stroop Tasks"
+title: "StroopApp: an open-source Stroop application for researchers and clinicians"
 version: 1.1.0
-date-released: 2026-04-05
+date-released: 2026-04-06
 authors:
   - family-names: Beghin
     given-names: Mylan
-  - family-names: Mangin
-    given-names: Thomas
+    orcid: "https://orcid.org/0009-0009-8290-6263"
+    affiliation: "École de kinésiologie et des sciences de l'activité physique (EKSAP), Université de Montréal; CRIUGM"
   - family-names: Pageaux
     given-names: Benjamin
+    orcid: "https://orcid.org/0000-0001-9302-5183"
+    affiliation: "École de kinésiologie et des sciences de l'activité physique (EKSAP), Université de Montréal; CRIUGM; CIRCA"
+  - family-names: Mangin
+    given-names: Thomas
+    orcid: "https://orcid.org/0000-0002-3393-7946"
+    affiliation: "École de kinésiologie et des sciences de l'activité physique (EKSAP), Université de Montréal; CRIUGM"
 repository-code: "https://github.com/MylanBeghin/StroopApp"
 url: "https://github.com/MylanBeghin/StroopApp"
 abstract: |
-  StroopApp is an open-source WPF application designed for administering 
-  Stroop tasks in experimental psychology research. It implements the visual 
-  cue paradigm described in Mangin et al. (2021, 2022), supporting configurable 
-  task parameters, real-time visualization, and multi-language interfaces.
+  StroopApp is an open-source WPF application designed for administering
+  Stroop tasks in experimental psychology and clinical research. It implements
+  the visual cue task-switching paradigm described in Mangin et al. (2021, 2022),
+  supporting configurable task parameters, real-time performance monitoring,
+  and automated data export, with no installation or programming knowledge required.
 keywords:
   - Stroop task
   - experimental psychology
-  - cognitive research
+  - cognitive assessment
+  - cognitive fatigue
+  - inhibitory control
   - visual cues
   - reaction time
   - WPF
   - .NET
+  - open-source
 license: MIT
 references:
   - type: article
     authors:
       - family-names: Mangin
         given-names: Thomas
-      - family-names: Rogalski
-        given-names: A.
-      - family-names: Bernardin
-        given-names: D.
-      - family-names: Hoffmann
-        given-names: D.
-      - family-names: Giraudet
-        given-names: G.
-    title: "The Stroop matching task presents conflict at both the response and task levels: An event-related potential and electromyography study"
-    journal: "Psychophysiology"
-    volume: 58
-    issue: 12
+      - family-names: André
+        given-names: Nathalie
+      - family-names: Benraiss
+        given-names: Abdelrhani
+      - family-names: Pageaux
+        given-names: Benjamin
+      - family-names: Audiffren
+        given-names: Michel
+    title: "No ego-depletion effect without a good control task"
+    journal: "Psychology of Sport and Exercise"
+    volume: 57
     year: 2021
-    doi: "10.1111/psyp.13936"
-    url: "https://www.sciencedirect.com/science/article/pii/S1469029221001515"
+    doi: "10.1016/j.psychsport.2021.102033"
+    url: "https://doi.org/10.1016/j.psychsport.2021.102033"
   - type: article
     authors:
       - family-names: Mangin
         given-names: Thomas
       - family-names: Audiffren
-        given-names: M.
+        given-names: Michel
+      - family-names: Lorcery
+        given-names: Alison
+      - family-names: Mirabelli
+        given-names: Francesco
+      - family-names: Benraiss
+        given-names: Abdelrhani
       - family-names: André
-        given-names: N.
-    title: "Differential effects of extended practice on the components of the Stroop task-switching cost"
+        given-names: Nathalie
+    title: "A plausible link between the time-on-task effect and the sequential task effect"
     journal: "Frontiers in Psychology"
     volume: 13
     year: 2022
     doi: "10.3389/fpsyg.2022.998393"
-    url: "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2022.998393/full"
+    url: "https://doi.org/10.3389/fpsyg.2022.998393"

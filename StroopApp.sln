@@ -7,12 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StroopApp", "StroopApp\Stro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StroopApp.XUnitTests", "StroopApp.XUnitTests\StroopApp.XUnitTests.csproj", "{E3C4F684-41A4-4038-B101-FEAE598E95C2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Paper", "Paper", "{697D8EDC-A376-4DBA-9CBB-24F55BC97B89}"
-	ProjectSection(SolutionItems) = preProject
-		paper\paper.bib = paper\paper.bib
-		paper\paper.md = paper\paper.md
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{51AB7568-BD76-41B5-9B06-B01A693C4D68}"
 	ProjectSection(SolutionItems) = preProject
 		TaskFile.yml = TaskFile.yml
