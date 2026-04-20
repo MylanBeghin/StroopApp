@@ -4,6 +4,7 @@ type: software
 title: "StroopApp: an open-source Stroop application for researchers and clinicians"
 version: 1.1.0-joss
 date-released: 2026-04-20
+orcid: https://orcid.org/0009-0009-8290-6263
 authors:
   - family-names: Beghin
     given-names: Mylan
