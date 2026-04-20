@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 type: software
 title: "StroopApp: an open-source Stroop application for researchers and clinicians"
-version: 1.1.0
-date-released: 2026-04-06
+version: 1.1.0-joss
+date-released: 2026-04-20
 authors:
   - family-names: Beghin
     given-names: Mylan
