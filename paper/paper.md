@@ -26,7 +26,7 @@ affiliations:
   - index: 2
     name: Centre de recherche de l'Institut universitaire de gériatrie de Montréal (CRIUGM), Montreal, Canada
   - index: 3
-    name: Centre interdisciplinaire de recherche sur le cerveau (CIRCA), Montreal, Canada
+    name: Centre Interdisciplinaire de Recherche sur le Cerveau et l'Apprentissage (CIRCA), Montreal, Canada
 date: 16 April 2026
 bibliography: paper.bib
 ---
@@ -99,10 +99,10 @@ All decisions regarding the software's development direction were made during me
 
 **CRediT Author Statement:**
 
+**Mylan Beghin**: Software, Validation, Investigation, Project Administration, Funding acquisition, Writing - Original Draft, Visualization.
+
 **Benjamin Pageaux**: Conceptualization, Supervision, Funding acquisition, Writing - Review & Editing.
 
 **Thomas Mangin**: Conceptualization, Methodology, Formal Analysis, Investigation, Supervision, Writing - Original Draft, Writing - Review & Editing.
-
-**Mylan Beghin**: Software, Validation, Investigation, Project Administration, Funding acquisition, Writing - Original Draft, Visualization.
 
 # References
