@@ -3,8 +3,11 @@ message: "If you use this software, please cite it as below."
 type: software
 title: "StroopApp: an open-source Stroop application for researchers and clinicians"
 version: 1.1.0-joss
-date-released: 2026-04-20
-orcid: https://orcid.org/0009-0009-8290-6263
+date-released: 2026-04-05
+doi: 10.5281/zenodo.19663197
+url: "https://doi.org/10.5281/zenodo.19663197"
+repository-code: "https://github.com/MylanBeghin/StroopApp"
+license: MIT
 authors:
   - family-names: Beghin
     given-names: Mylan
@@ -18,26 +21,16 @@ authors:
     given-names: Thomas
     orcid: "https://orcid.org/0000-0002-3393-7946"
     affiliation: "École de kinésiologie et des sciences de l'activité physique (EKSAP), Université de Montréal; CRIUGM"
-repository-code: "https://github.com/MylanBeghin/StroopApp"
-url: "https://github.com/MylanBeghin/StroopApp"
 abstract: |
-  StroopApp is an open-source WPF application designed for administering
-  Stroop tasks in experimental psychology and clinical research. It implements
-  the visual cue task-switching paradigm described in Mangin et al. (2021, 2022),
-  supporting configurable task parameters, real-time performance monitoring,
-  and automated data export, with no installation or programming knowledge required.
+  StroopApp is an open-source WPF application designed for administering Stroop tasks in experimental psychology research. It implements the visual cue paradigm described in Mangin et al. (2021, 2022), supporting configurable task parameters, real-time visualization, and multi-language interfaces.
 keywords:
   - Stroop task
   - experimental psychology
-  - cognitive assessment
-  - cognitive fatigue
-  - inhibitory control
+  - cognitive research
   - visual cues
   - reaction time
   - WPF
   - .NET
-  - open-source
-license: MIT
 references:
   - type: article
     authors:
@@ -56,7 +49,7 @@ references:
     volume: 57
     year: 2021
     doi: "10.1016/j.psychsport.2021.102033"
-    url: "https://doi.org/10.1016/j.psychsport.2021.102033"
+    url: https://www.sciencedirect.com/science/article/pii/S1469029221001515
   - type: article
     authors:
       - family-names: Mangin
@@ -76,4 +69,4 @@ references:
     volume: 13
     year: 2022
     doi: "10.3389/fpsyg.2022.998393"
-    url: "https://doi.org/10.3389/fpsyg.2022.998393"
+    url: "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2022.998393"
