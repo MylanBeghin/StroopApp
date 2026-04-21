@@ -11,13 +11,16 @@ license: MIT
 authors:
   - family-names: Beghin
     given-names: Mylan
-    orcid: 0009-0009-8290-6263
+    orcid: "https://orcid.org/0009-0009-8290-6263"
+    affiliation: "École de kinésiologie et des sciences de l'activité physique (EKSAP), Université de Montréal; CRIUGM"
   - family-names: Pageaux
     given-names: Benjamin
-    orcid: 0000-0001-9302-5183
+    orcid: "https://orcid.org/0000-0001-9302-5183"
+    affiliation: "École de kinésiologie et des sciences de l'activité physique (EKSAP), Université de Montréal; CRIUGM; CIRCA"
   - family-names: Mangin
     given-names: Thomas
-    orcid: 0000-0002-3393-7946
+    orcid: "https://orcid.org/0000-0002-3393-7946"
+    affiliation: "École de kinésiologie et des sciences de l'activité physique (EKSAP), Université de Montréal; CRIUGM"
 abstract: |
   StroopApp is an open-source WPF application designed for administering Stroop tasks in experimental psychology research. It implements the visual cue paradigm described in Mangin et al. (2021, 2022), supporting configurable task parameters, real-time visualization, and multi-language interfaces.
 keywords:
