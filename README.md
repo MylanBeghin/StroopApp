@@ -131,7 +131,7 @@ Zenodo. https://doi.org/10.5281/zenodo.19663197
 ### BibTeX
 
 ```bibtex
-@software{beghin_stroopapp_2026,
+@software{Beghin:2026,
   author  = {Beghin, Mylan and Pageaux, Benjamin and Mangin, Thomas},
   title   = {StroopApp: an open-source Stroop application for researchers and clinicians},
   version = {1.1.0-joss},
