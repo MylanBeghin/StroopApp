@@ -124,8 +124,8 @@ Check documentation on the [Wiki tab](https://github.com/MylanBeghin/StroopApp/w
 ### APA Style
 
 ```text
-Beghin, M., Pageaux, B., & Mangin, T. (2026). StroopApp (Version 1.1.0) [Computer software].
-https://github.com/MylanBeghin/StroopApp
+Beghin, M., Pageaux, B., & Mangin, T. (2026). StroopApp: an open-source Stroop application for researchers and clinicians (v1.1.0-joss) [Computer software].
+Zenodo. https://doi.org/10.5281/zenodo.19663197
 ```
 
 ### BibTeX
@@ -133,10 +133,11 @@ https://github.com/MylanBeghin/StroopApp
 ```bibtex
 @software{beghin_stroopapp_2026,
   author  = {Beghin, Mylan and Pageaux, Benjamin and Mangin, Thomas},
-  title   = {StroopApp},
-  version = {1.1.0},
+  title   = {StroopApp: an open-source Stroop application for researchers and clinicians},
+  version = {1.1.0-joss},
   year    = {2026},
-  url     = {https://github.com/MylanBeghin/StroopApp}
+  doi     = {10.5281/zenodo.19663197}
+  url     = {https://doi.org/10.5281/zenodo.19663197}
 }
 ```
 
