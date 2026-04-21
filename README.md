@@ -5,7 +5,7 @@
 # **StroopApp**
 ### *A Modern Desktop Application for Administering Stroop Tasks in Experimental Research*
 
-[![Version](https://img.shields.io/badge/version-1.1.0-blue)](https://github.com/MylanBeghin/StroopApp/releases/tag/v1.1.0)
+[![Version](https://img.shields.io/badge/version-v1.1.0-blue)](https://github.com/MylanBeghin/StroopApp/releases/tag/v1.1.0)
 [![License](https://img.shields.io/badge/license-MIT-green)](https://github.com/MylanBeghin/StroopApp/blob/master/LICENSE)
 [![.NET](https://img.shields.io/badge/.NET-8.0-purple)](https://dotnet.microsoft.com/download/dotnet/8.0)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19663197.svg)]((https://doi.org/10.5281/zenodo.19663197))
