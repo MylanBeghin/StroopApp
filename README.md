@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green)](https://github.com/MylanBeghin/StroopApp/blob/master/LICENSE)
 [![.NET](https://img.shields.io/badge/.NET-8.0-purple)](https://dotnet.microsoft.com/download/dotnet/8.0)
 [![JOSS](https://img.shields.io/badge/JOSS-submitting-green)](https://joss.theoj.org/)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19663198.svg)](https://doi.org/10.5281/zenodo.19663198)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19663198.svg)](https://doi.org/10.5281/zenodo.19663197)
 
 [Quick Start](#-quick-start) ·
 [Documentation](https://github.com/MylanBeghin/StroopApp/wiki) ·
