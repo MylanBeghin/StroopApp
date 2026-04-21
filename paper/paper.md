@@ -27,7 +27,7 @@ affiliations:
     name: Centre de recherche de l'Institut universitaire de gériatrie de Montréal (CRIUGM), Montreal, Canada
   - index: 3
     name: Centre Interdisciplinaire de Recherche sur le Cerveau et l'Apprentissage (CIRCA), Montreal, Canada
-date: 16 April 2026
+date: 21 April 2026
 bibliography: paper.bib
 ---
 
