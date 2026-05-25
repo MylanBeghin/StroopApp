@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using StroopApp.Core.Services;
 using StroopApp.Models;
 using StroopApp.Services.Charts;
 using StroopApp.Services.Exportation;
 using StroopApp.Services.KeyMapping;
 using StroopApp.Services.Language;
+using StroopApp.Services.Navigation;
 using StroopApp.Services.Navigation.PageFactory;
 using StroopApp.Services.Participant;
 using StroopApp.Services.Profile;
@@ -69,6 +71,9 @@ namespace StroopApp
 
             services.AddSingleton<IPageFactory, PageFactory>();
 
+            services.AddSingleton<IParticipantNavigationService, ParticipantNavigationService>();
+            services.AddSingleton<ISequenceManager, SequenceManager>();
+
             services.AddSingleton<IProfileService, ProfileService>();
             services.AddSingleton<IParticipantService, ParticipantService>();
             services.AddSingleton<IKeyMappingService, KeyMappingService>();
@@ -78,6 +83,8 @@ namespace StroopApp
             services.AddTransient<ConfigurationPage>();
             services.AddTransient<EndExperimentPage>();
             services.AddTransient<ExperimentDashBoardPage>();
+
+            services.AddSingleton<ParticipantWindow>();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using StroopApp.Models;
-using StroopApp.Services.Navigation.PageFactory;
+using StroopApp.Services.Navigation;
 using StroopApp.ViewModels.State;
 using StroopApp.Views;
 
@@ -12,11 +12,11 @@ namespace StroopApp.Services.Window
     public class WindowManager : IWindowManager
     {
         private ParticipantWindow? _participantWindow;
-        private readonly IPageFactory _pageFactory;
+        private readonly IParticipantNavigationService _participantNavigationService;
 
-        public WindowManager(IPageFactory pageFactory)
+        public WindowManager(IParticipantNavigationService participantNavigationService)
         {
-            _pageFactory = pageFactory;
+            _participantNavigationService = participantNavigationService;
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace StroopApp.Services.Window
 
             if (_participantWindow == null)
             {
-                _participantWindow = new ParticipantWindow(settings, _pageFactory);
+                _participantWindow = new ParticipantWindow(settings, _participantNavigationService);
                 _participantWindow.Closed += (_, _) => _participantWindow = null;
                 _participantWindow.Show();
             }
@@ -37,7 +37,6 @@ namespace StroopApp.Services.Window
             {
                 _participantWindow.Reset();
                 _participantWindow.Activate();
-
             }
         }
 

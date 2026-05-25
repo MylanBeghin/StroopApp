@@ -1,6 +1,5 @@
 ﻿using StroopApp.Models;
 using StroopApp.Services.Navigation;
-using StroopApp.Services.Navigation.PageFactory;
 using StroopApp.ViewModels.Experiment.Participant;
 using StroopApp.ViewModels.State;
 using System.Windows;
@@ -10,17 +9,14 @@ namespace StroopApp.Views
     public partial class ParticipantWindow : Window
     {
         private readonly ExperimentSettingsViewModel _settings;
-        private readonly INavigationService _participantNavigationService;
-        private readonly IPageFactory _pageFactory;
+        private readonly IParticipantNavigationService _participantNavigationService;
 
-        public ParticipantWindow(ExperimentSettingsViewModel settings, IPageFactory pageFactory)
+        public ParticipantWindow(ExperimentSettingsViewModel settings, IParticipantNavigationService participantNavigationService)
         {
             InitializeComponent();
             _settings = settings;
-            _pageFactory = pageFactory;
-            var navigationService = new NavigationService(pageFactory);
-            navigationService.SetFrame(ParticipantFrame);
-            _participantNavigationService = navigationService;
+            _participantNavigationService = participantNavigationService;
+            _participantNavigationService.SetFrame(ParticipantFrame);
             DataContext = new ParticipantWindowViewModel(settings, _participantNavigationService);
         }
 
