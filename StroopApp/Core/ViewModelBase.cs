@@ -1,13 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using ModernWpf.Controls;
 using StroopApp.Resources;
-using System.ComponentModel;
 using System.Diagnostics;
 
 namespace StroopApp.Core
 {
     /// <summary>
-    /// Base class for all ViewModels, implementing <see cref="INotifyPropertyChanged"/>.
+    /// Base class for all ViewModels.
     /// Provides a method for property change notifications and a utility method to show error dialogs.
     /// </summary>
     public class ViewModelBase : ObservableObject

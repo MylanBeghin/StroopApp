@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using StroopApp.Core;
-using StroopApp.Models;
 using StroopApp.Resources;
 using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
