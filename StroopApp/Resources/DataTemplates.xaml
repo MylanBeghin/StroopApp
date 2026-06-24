@@ -2,6 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:stroopVm="clr-namespace:StroopApp.ViewModels.Experiment.Participant.Stroop"
                     xmlns:stroopViews="clr-namespace:StroopApp.Views.Experiment.Participant.Stroop"
+                    xmlns:protocolViews="clr-namespace:StroopApp.Views.Configuration.ProtocolConfiguration"
+                    xmlns:protocolVm="clr-namespace:StroopApp.ViewModels.Configuration.ProtocolConfiguration"
                     xmlns:configVmProfile="clr-namespace:StroopApp.ViewModels.Configuration.Profile"
                     xmlns:configVmParticipant="clr-namespace:StroopApp.ViewModels.Configuration.Participant"
                     xmlns:configVm="clr-namespace:StroopApp.ViewModels.Configuration"
@@ -71,6 +73,26 @@
     <!-- LiveReactionTimeViewModel -->
     <DataTemplate DataType="{x:Type experimenterVm:LiveReactionTimeViewModel}">
         <graphViews:LiveReactionTimeView />
+    </DataTemplate>
+    
+    <!--InstructionStepViewModel-->
+    <DataTemplate DataType="{x:Type protocolVm:InstructionStepViewModel}">
+        <protocolViews:InstructionStepView />
+    </DataTemplate>
+    
+    <!--TaskStepViewModel-->
+    <DataTemplate DataType="{x:Type protocolVm:TaskStepViewModel}">
+        <protocolViews:TaskStepView/>
+    </DataTemplate>
+    
+    <!--ProtocolConfigurationViewModel-->
+    <DataTemplate DataType="{x:Type protocolVm:SimonProtocolConfigurationViewModel}">
+        <protocolViews:SimonProtocolConfigurationView/>
+    </DataTemplate>
+    
+    <!--SimonConfigurationPageViewModel-->
+    <DataTemplate DataType="{x:Type configVm:SimonConfigurationPageViewModel}">
+        <configViews:SimonConfigurationPage/>
     </DataTemplate>
 
 </ResourceDictionary>
