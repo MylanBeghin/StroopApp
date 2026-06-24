@@ -13,16 +13,16 @@ using System.Windows.Media.Animation;
 
 namespace StroopApp.ViewModels.Configuration
 {
-    public partial class SimonKeyMappingViewModel : KeyMappingViewModelBase
+    public partial class SimonResponseMappingViewModel : KeyMappingViewModelBase
     {
 
         [ObservableProperty]
-        private SimonKeyMappings _mappings = new();
+        private SimonResponseMappings _mappings = new();
 
         [ObservableProperty]
-        private SimonKeyMapping? _editingMapping;
+        private SimonResponseMapping? _editingMapping;
 
-        public SimonKeyMappingViewModel(IKeyMappingService keyMappingService) : base(keyMappingService) 
+        public SimonResponseMappingViewModel(IKeyMappingService keyMappingService) : base(keyMappingService) 
         {
             _ = LoadAsync();
         }

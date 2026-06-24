@@ -11,7 +11,9 @@ using StroopApp.Services.Trial;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.State;
 using StroopApp.Views;
+using StroopApp.Views.Configuration;
 using StroopApp.Views.Experiment.Experimenter;
+using StroopApp.Views.Home;
 using System.IO;
 using System.Windows;
 
@@ -38,6 +40,7 @@ namespace StroopApp
 
             var pageFactory = ServiceProvider.GetRequiredService<IPageFactory>();
 
+            //var expWin = new ExperimentWindow(pageFactory, LanguageService);
             var expWin = new ExperimentWindow(pageFactory, LanguageService);
             expWin.Show();
         }
@@ -74,8 +77,11 @@ namespace StroopApp
             services.AddSingleton<IKeyMappingService, KeyMappingService>();
             services.AddSingleton<IExportationService, ExportationService>();
             services.AddTransient<ITrialGenerationService, TrialGenerationService>();
+            services.AddTransient<ISimonTrialGenerationService, SimonTrialGenerationService>();
 
+            services.AddTransient<HomePage>();
             services.AddTransient<ConfigurationPage>();
+            services.AddTransient<SimonConfigurationPage>();
             services.AddTransient<EndExperimentPage>();
             services.AddTransient<ExperimentDashBoardPage>();
         }

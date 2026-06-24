@@ -757,4 +757,7 @@
   <data name="Label_KeyRight" xml:space="preserve">
     <value>Key associated with right</value>
   </data>
+  <data name="Title_SimonConfigurationPage" xml:space="preserve">
+    <value>Simon Task</value>
+  </data>
 </root>

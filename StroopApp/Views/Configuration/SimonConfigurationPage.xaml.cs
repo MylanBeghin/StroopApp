@@ -1,5 +1,14 @@
-﻿using StroopApp.Services.Navigation;
+﻿using StroopApp.Services.Exportation;
+using StroopApp.Services.KeyMapping;
+using StroopApp.Services.Navigation;
+using StroopApp.Services.Participant;
+using StroopApp.Services.Profile;
+using StroopApp.Services.Trial;
+using StroopApp.Services.Window;
 using StroopApp.ViewModels.Configuration;
+using StroopApp.ViewModels.Configuration.Participant;
+using StroopApp.ViewModels.Configuration.Profile;
+using StroopApp.ViewModels.State;
 using System.Windows.Controls;
 
 namespace StroopApp.Views.Configuration
@@ -9,19 +18,57 @@ namespace StroopApp.Views.Configuration
     /// </summary>
     public partial class SimonConfigurationPage : Page, INavigationAware
     {
-        
-        public INavigationService NavigationService
+        private readonly ExperimentSettingsViewModel _settings;
+        private readonly IWindowManager _windowManager;
+        private readonly IProfileService _profileService;
+        private readonly IParticipantService _participantService;
+        private readonly IKeyMappingService _keyMappingService;
+        private readonly IExportationService _exportationService;
+        private readonly ITrialGenerationService _trialGenerationService;
+
+        public new INavigationService NavigationService
         {
             set => Initialize(value);
         }
-        public SimonConfigurationPage()
+        public SimonConfigurationPage(
+            ExperimentSettingsViewModel settings,
+            IWindowManager windowManager,
+            IProfileService profileService,
+            IParticipantService participantService,
+            IKeyMappingService keyMappingService,
+            IExportationService exportationService,
+            ISimonTrialGenerationService trialGenerationService)
         {
             InitializeComponent();
+            _settings = settings;
+            _windowManager = windowManager;
+            _profileService = profileService;
+            _participantService = participantService;
+            _keyMappingService = keyMappingService;
+            _exportationService = exportationService;
+            _trialGenerationService = trialGenerationService;
         }
 
         private void Initialize(INavigationService navigationService)
         {
-            DataContext = new SimonConfigurationPageViewModel(navigationService);
+            var profileViewModel = new ProfileManagementViewModel(_profileService);
+            var participantViewModel = new ParticipantManagementViewModel(
+                _participantService,
+                _settings.ExperimentContext.IsParticipantSelectionEnabled);
+            var simonKeyMappingViewModel = new SimonResponseMappingViewModel(_keyMappingService);
+            var exportFolderSelectorViewModel = new ExportFolderSelectorViewModel(
+                _settings, _exportationService);
+
+            DataContext = new SimonConfigurationPageViewModel(
+                _settings,
+                profileViewModel,
+                participantViewModel,
+                simonKeyMappingViewModel,
+                exportFolderSelectorViewModel,
+                navigationService,
+                _windowManager,
+                _trialGenerationService
+                );
         }
 
     }

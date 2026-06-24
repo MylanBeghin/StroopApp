@@ -757,4 +757,7 @@
   <data name="Label_KeyRight" xml:space="preserve">
     <value>Touche associée à droite :</value>
   </data>
+  <data name="Title_SimonConfigurationPage" xml:space="preserve">
+    <value>Tâche de Simon</value>
+  </data>
 </root>

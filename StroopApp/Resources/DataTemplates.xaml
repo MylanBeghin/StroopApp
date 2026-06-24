@@ -2,6 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:stroopVm="clr-namespace:StroopApp.ViewModels.Experiment.Participant.Stroop"
                     xmlns:stroopViews="clr-namespace:StroopApp.Views.Experiment.Participant.Stroop"
+                    xmlns:simonVm="clr-namespace:StroopApp.ViewModels.Experiment.Participant.Simon"
+                    xmlns:simonViews="clr-namespace:StroopApp.Views.Experiment.Participant.Simon"
                     xmlns:configVmProfile="clr-namespace:StroopApp.ViewModels.Configuration.Profile"
                     xmlns:configVmParticipant="clr-namespace:StroopApp.ViewModels.Configuration.Participant"
                     xmlns:configVm="clr-namespace:StroopApp.ViewModels.Configuration"
@@ -43,10 +45,10 @@
     <DataTemplate DataType="{x:Type configVm:KeyMappingViewModel}">
         <keyMappingViews:KeyMappingView />
     </DataTemplate>
-    
-    <!-- KeyMappingViewModel -->
-    <DataTemplate DataType="{x:Type configVm:SimonKeyMappingViewModel}">
-        <keyMappingViews:SimonKeyMappingView />
+
+    <!-- SimonResponseMappingViewModel -->
+    <DataTemplate DataType="{x:Type configVm:SimonResponseMappingViewModel}">
+        <keyMappingViews:SimonResponseMappingView />
     </DataTemplate>
 
     <!-- ExportFolderSelectorViewModel -->
@@ -79,9 +81,9 @@
         <graphViews:LiveReactionTimeView />
     </DataTemplate>
 
-    <!--SimonConfigurationPageViewModel-->
-    <DataTemplate DataType="{x:Type configVm:SimonConfigurationPageViewModel}">
-        <configViews:SimonConfigurationPage/>
+    <!-- SimonStimulusViewModel -->
+    <DataTemplate DataType="{x:Type simonVm:SimonStimulusViewModel}">
+        <simonViews:SimonStimulusControl />
     </DataTemplate>
 
 </ResourceDictionary>
