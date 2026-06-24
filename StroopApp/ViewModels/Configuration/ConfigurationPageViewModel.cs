@@ -58,7 +58,7 @@ namespace StroopApp.ViewModels.Configuration
             {
                 _settings.CurrentProfile = ProfileViewModel.CurrentProfile;
                 _settings.Participant = ParticipantViewModel.SelectedParticipant;
-                _settings.KeyMappings = KeyMappingViewModel.Mappings;
+                _settings.KeyMappings.Stroop = KeyMappingViewModel.Mappings;
 
                 if (_settings.CurrentProfile == null)
                 {

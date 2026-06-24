@@ -2,9 +2,9 @@
 
 namespace StroopApp.Views.Configuration.KeyMapping
 {
-    public partial class KeyMappingView : UserControl
+    public partial class SimonKeyMappingView : UserControl
     {
-        public KeyMappingView()
+        public SimonKeyMappingView()
         {
             InitializeComponent();
         }

@@ -2,14 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:stroopVm="clr-namespace:StroopApp.ViewModels.Experiment.Participant.Stroop"
                     xmlns:stroopViews="clr-namespace:StroopApp.Views.Experiment.Participant.Stroop"
-                    xmlns:protocolViews="clr-namespace:StroopApp.Views.Configuration.ProtocolConfiguration"
-                    xmlns:protocolVm="clr-namespace:StroopApp.ViewModels.Configuration.ProtocolConfiguration"
                     xmlns:configVmProfile="clr-namespace:StroopApp.ViewModels.Configuration.Profile"
                     xmlns:configVmParticipant="clr-namespace:StroopApp.ViewModels.Configuration.Participant"
                     xmlns:configVm="clr-namespace:StroopApp.ViewModels.Configuration"
                     xmlns:profileViews="clr-namespace:StroopApp.Views.Profile"
                     xmlns:participantViews="clr-namespace:StroopApp.Views.Participant"
-                    xmlns:keyMappingViews="clr-namespace:StroopApp.Views.KeyMapping"
+                    xmlns:keyMappingVm="clr-namespace:StroopApp.ViewModels.Configuration"
+                    xmlns:keyMappingViews="clr-namespace:StroopApp.Views.Configuration.KeyMapping"
                     xmlns:configViews="clr-namespace:StroopApp.Views.Configuration"
                     xmlns:experimenterVm="clr-namespace:StroopApp.ViewModels.Experiment.Experimenter"
                     xmlns:experimenterViews="clr-namespace:StroopApp.Views.Experiment.Experimenter"
@@ -43,6 +42,11 @@
     <!-- KeyMappingViewModel -->
     <DataTemplate DataType="{x:Type configVm:KeyMappingViewModel}">
         <keyMappingViews:KeyMappingView />
+    </DataTemplate>
+    
+    <!-- KeyMappingViewModel -->
+    <DataTemplate DataType="{x:Type configVm:SimonKeyMappingViewModel}">
+        <keyMappingViews:SimonKeyMappingView />
     </DataTemplate>
 
     <!-- ExportFolderSelectorViewModel -->

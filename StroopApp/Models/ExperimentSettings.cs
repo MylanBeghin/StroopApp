@@ -30,7 +30,7 @@
             set => _configuration.Profile = value;
         }
 
-        public KeyMappings KeyMappings
+        public ExperimentKeyMappings KeyMappings
         {
             get => _configuration.KeyMappings;
             set => _configuration.KeyMappings = value;

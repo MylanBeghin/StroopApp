@@ -15,7 +15,7 @@ namespace StroopApp.Models
 		/// <summary>
 		/// Key mappings for color responses.
 		/// </summary>
-		public KeyMappings KeyMappings { get; set; }
+		public ExperimentKeyMappings KeyMappings { get; set; }
 
 		/// <summary>
 		/// Folder path where experiment results will be exported.
@@ -28,7 +28,7 @@ namespace StroopApp.Models
 		public ExperimentConfiguration()
 		{
 			Profile = new ExperimentProfile();
-			KeyMappings = new KeyMappings();
+			KeyMappings = new ExperimentKeyMappings();
 			ExportFolderPath = "";
 		}
 	}

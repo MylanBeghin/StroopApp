@@ -751,4 +751,10 @@
   <data name="Header_ProfileName" xml:space="preserve">
     <value>Nom du profil</value>
   </data>
+  <data name="Label_KeyLeft" xml:space="preserve">
+    <value>Touche associée à gauche :</value>
+  </data>
+  <data name="Label_KeyRight" xml:space="preserve">
+    <value>Touche associée à droite :</value>
+  </data>
 </root>

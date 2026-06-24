@@ -155,7 +155,7 @@ namespace StroopApp.ViewModels.State.UnitTests
             viewModel.Block = 42;
             viewModel.Participant = new Participant { Id = "P123" };
             viewModel.CurrentProfile = new ExperimentProfile { ProfileName = "Profile1" };
-            viewModel.KeyMappings = new KeyMappings();
+            viewModel.KeyMappings = new ExperimentKeyMappings();
             viewModel.ExportFolderPath = "C:\\Modified";
 
             // Act
@@ -206,7 +206,7 @@ namespace StroopApp.ViewModels.State.UnitTests
             // Arrange
             var participant = new Participant { Id = "P001" };
             var profile = new ExperimentProfile { ProfileName = "TestProfile" };
-            var keyMappings = new KeyMappings();
+            var keyMappings = new ExperimentKeyMappings();
             var exportPath = "C:\\TestPath\\Export";
             var blockValue = 5;
 

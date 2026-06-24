@@ -211,10 +211,10 @@ namespace StroopApp.ViewModels.Experiment.Participant.Stroop
             if (_inputTcs == null || _inputTcs.Task.IsCompleted)
                 return;
 
-            string? answer = key == Settings.KeyMappings.Red.Key ? Settings.KeyMappings.Red.Color
-                           : key == Settings.KeyMappings.Blue.Key ? Settings.KeyMappings.Blue.Color
-                           : key == Settings.KeyMappings.Green.Key ? Settings.KeyMappings.Green.Color
-                           : key == Settings.KeyMappings.Yellow.Key ? Settings.KeyMappings.Yellow.Color
+            string? answer = key == Settings.KeyMappings.Stroop.Red.Key ? Settings.KeyMappings.Stroop.Red.Color
+                           : key == Settings.KeyMappings.Stroop.Blue.Key ? Settings.KeyMappings.Stroop.Blue.Color
+                           : key == Settings.KeyMappings.Stroop.Green.Key ? Settings.KeyMappings.Stroop.Green.Color
+                           : key == Settings.KeyMappings.Stroop.Yellow.Key ? Settings.KeyMappings.Stroop. Yellow.Color
                            : null;
 
             if (answer != null)

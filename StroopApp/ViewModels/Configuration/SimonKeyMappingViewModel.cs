@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using ModernWpf.Controls;
 using StroopApp.Models;
+using StroopApp.Models.Simon;
 using StroopApp.Resources;
 using StroopApp.Services.KeyMapping;
 using System.Windows;
@@ -12,57 +13,46 @@ using System.Windows.Media.Animation;
 
 namespace StroopApp.ViewModels.Configuration
 {
-    /// <summary>
-    /// ViewModel for managing keyboard key mappings for color responses.
-    /// Handles key assignment with validation to prevent duplicate mappings.
-    /// </summary>
-    public partial class KeyMappingViewModel : KeyMappingViewModelBase
+    public partial class SimonKeyMappingViewModel : KeyMappingViewModelBase
     {
 
         [ObservableProperty]
-        private KeyMappings _mappings = new();
+        private SimonKeyMappings _mappings = new();
 
         [ObservableProperty]
-        private KeyMapping? _editingMapping;
+        private SimonKeyMapping? _editingMapping;
 
-        public KeyMappingViewModel(IKeyMappingService keyMappingService) :base (keyMappingService) 
+        public SimonKeyMappingViewModel(IKeyMappingService keyMappingService) : base(keyMappingService) 
         {
             _ = LoadAsync();
         }
 
         protected override void ApplyLoaderMappings(ExperimentKeyMappings fullKeyMappings)
         {
-            Mappings = fullKeyMappings.Stroop;
-        }
-        protected override void PersistMappings(ExperimentKeyMappings fullKeyMappings)
-        {
-            fullKeyMappings.Stroop = Mappings;
+            Mappings = fullKeyMappings.Simon;
         }
 
+        protected override void PersistMappings(ExperimentKeyMappings fullKeyMappings)
+        {
+            _fullKeyMappings.Simon = Mappings;
+        }
         private void RefreshMappingsBindings()
         {
             OnPropertyChanged(nameof(Mappings));
         }
 
         [RelayCommand]
-        private void StartEditing(string color)
-        {
-            EditingMapping = color switch
-            {
-                "Red" => Mappings.Red,
-                "Blue" => Mappings.Blue,
-                "Green" => Mappings.Green,
-                "Yellow" => Mappings.Yellow,
-                _ => null
-            };
-        }
-
-        [RelayCommand]
-        private async Task OpenKeyMappingEditorAsync(string color)
+        private async Task OpenKeyMappingEditorAsync(string direction)
         {
             try
             {
-                StartEditing(color);
+                EditingMapping = direction switch
+                {
+                    "Left" => Mappings.Left,
+                    "Right" => Mappings.Right,
+                    _ => null
+
+                };
 
                 string originalMessage = Strings.Message_KeyMapping;
                 var originalText = new TextBlock
@@ -103,7 +93,7 @@ namespace StroopApp.ViewModels.Configuration
 
                 var dialog = new ContentDialog
                 {
-                    Title = string.Format(Strings.Title_KeyMappingDialog, color),
+                    Title = string.Format(Strings.Title_KeyMappingDialog, direction),
                     Content = grid,
                     PrimaryButtonText = string.Empty,
                     SecondaryButtonText = string.Empty
@@ -119,13 +109,8 @@ namespace StroopApp.ViewModels.Configuration
                     }
                     else
                     {
-                        bool keyAlreadyUsed =
-                            Mappings.Red.Key == e.Key && EditingMapping != Mappings.Red ||
-                            Mappings.Blue.Key == e.Key && EditingMapping != Mappings.Blue ||
-                            Mappings.Green.Key == e.Key && EditingMapping != Mappings.Green ||
-                            Mappings.Yellow.Key == e.Key && EditingMapping != Mappings.Yellow;
 
-                        if (keyAlreadyUsed)
+                        if (KeyAlreadyUsed(e))
                         {
                             var fadeIn = new DoubleAnimation
                             {
@@ -149,29 +134,33 @@ namespace StroopApp.ViewModels.Configuration
                             Storyboard.SetTarget(fadeOut, errorPanel);
                             Storyboard.SetTargetProperty(fadeOut, new PropertyPath("Opacity"));
                             sb.Begin();
-
                             dialog.Focus();
                             e.Handled = true;
                         }
                         else if (EditingMapping != null)
                         {
                             EditingMapping.Key = e.Key;
-                            RefreshMappingsBindings();
+                            OnPropertyChanged(nameof(Mappings));
                             await SaveAsync();
                             dialog.Hide();
                             e.Handled = true;
                         }
                     }
                 };
-
                 dialog.Loaded += (s, e) => dialog.Focus();
-
                 await dialog.ShowAsync();
+
             }
             catch (Exception ex)
             {
                 await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
             }
+        }
+
+        private bool KeyAlreadyUsed(KeyEventArgs e)
+        {
+            return Mappings.Left.Key == e.Key && EditingMapping != Mappings.Left ||
+                    Mappings.Right.Key == e.Key && EditingMapping != Mappings.Right;
         }
 
         [RelayCommand]
@@ -180,7 +169,7 @@ namespace StroopApp.ViewModels.Configuration
             if (EditingMapping == null)
                 return;
 
-            if (key == Key.Escape)
+            if(key==Key.Escape)
             {
                 EditingMapping = null;
                 return;
@@ -190,5 +179,7 @@ namespace StroopApp.ViewModels.Configuration
             RefreshMappingsBindings();
             EditingMapping = null;
         }
+
+
     }
 }
