@@ -105,7 +105,6 @@ namespace StroopApp.ViewModels.Experiment.Participant.Simon
                         Settings.ExperimentContext.CurrentBlock.TrialTimes.Add(trial.ReactionTime);
                         Settings.ExperimentContext.ReactionPoints.Add(new ReactionTimePoint(trial.TrialNumber, double.NaN, null));
                     }
-
                     if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
                     {
                         HandleTaskStopped();

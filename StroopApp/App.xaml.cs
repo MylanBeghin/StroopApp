@@ -76,10 +76,13 @@ namespace StroopApp
             services.AddSingleton<IProfileService, ProfileService>();
             services.AddSingleton<IParticipantService, ParticipantService>();
             services.AddSingleton<IKeyMappingService, KeyMappingService>();
+            services.AddSingleton<TrialExportFormatter,StroopTrialExportFormatter>();
+            services.AddSingleton<TrialExportFormatter,SimonTrialExportFormatter>();
             services.AddSingleton<IExportationService, ExportationService>();
             services.AddTransient<ITrialGenerationService, TrialGenerationService>();
             services.AddTransient<ISimonTrialGenerationService, SimonTrialGenerationService>();
             services.AddSingleton<IExperimentSessionService, ExperimentSessionService>();
+            
 
             services.AddTransient<HomePage>();
             services.AddTransient<ConfigurationPage>();

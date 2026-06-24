@@ -6,8 +6,9 @@ using StroopApp.Resources;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Profile;
 using StroopApp.Views;
-using StroopApp.Views.Configuration;
+using StroopApp.Views.Configuration.Profile;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace StroopApp.ViewModels.Configuration.Profile
 {
@@ -18,8 +19,6 @@ namespace StroopApp.ViewModels.Configuration.Profile
     public partial class ProfileManagementViewModel : ViewModelBase
     {
         private readonly IProfileService _profileService;
-        private readonly INavigationService _navigationService
-            ;
 
         public ObservableCollection<ExperimentProfile> Profiles { get; }
 
@@ -33,10 +32,9 @@ namespace StroopApp.ViewModels.Configuration.Profile
                 _profileService.SaveLastSelectedProfile(value);
         }
 
-        public ProfileManagementViewModel(IProfileService profileService, INavigationService navigationService,TaskType taskType)
+        public ProfileManagementViewModel(IProfileService profileService, TaskType taskType)
         {
             _profileService = profileService;
-            _navigationService = navigationService;
             _taskType = taskType;
             var allProfiles = _profileService.LoadProfiles();
             Profiles = new ObservableCollection<ExperimentProfile>(
@@ -51,20 +49,15 @@ namespace StroopApp.ViewModels.Configuration.Profile
         {
             try
             {
-                var newProfile = new ExperimentProfile();
-                newProfile.TaskType = _taskType;
-                var viewModel = new ProfileEditorViewModel(newProfile, Profiles, _profileService);
-                var profileWindow = new ProfileEditorWindow(viewModel);
-                profileWindow.ShowDialog();
+                var newProfile = new ExperimentProfile { TaskType = _taskType };
+                var viewModel = OpenProfileEditor(newProfile);
 
-                if (profileWindow.DialogResult == true)
+                if (viewModel is not null)
                 {
-                    var updatedProfiles = _profileService.UpsertProfile(newProfile);
+                    var updatedProfiles = _profileService.UpsertProfile(viewModel.ModifiedProfile);
                     Profiles.Clear();
                     foreach (var prof in updatedProfiles.Where(p => p.TaskType == _taskType))
-                    {
                         Profiles.Add(prof);
-                    }
                     CurrentProfile = Profiles.FirstOrDefault(p => p.Id == newProfile.Id);
                 }
             }
@@ -84,16 +77,13 @@ namespace StroopApp.ViewModels.Configuration.Profile
                     await ShowErrorDialogAsync(Strings.Error_SelectProfileToModify);
                     return;
                 }
-
-                var viewModel = new ProfileEditorViewModel(CurrentProfile, Profiles, _profileService);
-                var profileWindow = new ProfileEditorWindow(viewModel);
-                profileWindow.ShowDialog();
-
-                if (profileWindow.DialogResult == true)
+                var viewModel = OpenProfileEditor(CurrentProfile);
+                if (viewModel is not null)
                 {
                     _profileService.UpsertProfile(viewModel.ModifiedProfile);
                     CurrentProfile = viewModel.ModifiedProfile;
                 }
+
             }
             catch (Exception ex)
             {
@@ -126,6 +116,27 @@ namespace StroopApp.ViewModels.Configuration.Profile
             {
                 await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
             }
+        }
+
+        private ProfileEditorViewModelBase? OpenProfileEditor(ExperimentProfile profile)
+        {
+            ProfileEditorViewModelBase vm;
+            Window win;
+            if (_taskType == TaskType.Stroop)
+            {
+                vm = new StroopProfileEditorViewModel(profile, Profiles, _profileService);
+                win = new StroopProfileEditorWindow((StroopProfileEditorViewModel)vm);
+            }
+            else if (_taskType == TaskType.Simon)
+            {
+                vm = new SimonProfileEditorViewModel(profile, Profiles, _profileService);
+                win = new SimonProfileEditorWindow((SimonProfileEditorViewModel)vm);
+            }
+            else
+                return null;
+
+            win.ShowDialog();
+            return win.DialogResult == true ? vm : null;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using StroopApp.Models;
+using StroopApp.Models;
 using StroopApp.Services.Exportation;
 using StroopApp.Services.KeyMapping;
 using StroopApp.Services.Navigation;
@@ -56,7 +56,7 @@ namespace StroopApp.Views.Configuration
 
         private void Initialize(INavigationService navigationService)
         {
-            var profileViewModel = new ProfileManagementViewModel(_profileService, navigationService, TaskType.Simon);
+            var profileViewModel = new ProfileManagementViewModel(_profileService, TaskType.Simon);
             var participantViewModel = new ParticipantManagementViewModel(
                 _participantService,
                 _settings.ExperimentContext.IsParticipantSelectionEnabled);

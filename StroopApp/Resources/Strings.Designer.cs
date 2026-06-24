@@ -1024,6 +1024,24 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Color.
+        /// </summary>
+        public static string Header_StimulusColor {
+            get {
+                return ResourceManager.GetString("Header_StimulusColor", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Position.
+        /// </summary>
+        public static string Header_StimulusPosition {
+            get {
+                return ResourceManager.GetString("Header_StimulusPosition", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Switch (%).
         /// </summary>
         public static string Header_Switch {
@@ -1472,7 +1490,7 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Menu_Home", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Languages.
         /// </summary>
@@ -1572,7 +1590,7 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Message_Leave_Experiment", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Are you sure you want to stop the current task? Partial data can be exported..
         /// </summary>
@@ -1680,7 +1698,8 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Simon_CircleCase_Instruction", resourceCulture);
             }
         }
-        
+
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à A fixation cross will appear, followed by a color circle..
         /// </summary>
@@ -1689,7 +1708,8 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Simon_Page1_Display", resourceCulture);
             }
         }
-        
+
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à You will have to press the RIGHT or LEFT key, depending on the COLOR of the circle..
         /// </summary>
@@ -1698,7 +1718,8 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Simon_Page1_Display2", resourceCulture);
             }
         }
-        
+
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à We will now begin a mental task..
         /// </summary>
@@ -1707,7 +1728,8 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Simon_Page1_Intro", resourceCulture);
             }
         }
-        
+
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à LEFT key : {0}.
         /// </summary>
@@ -1716,7 +1738,8 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Simon_Page1_LeftKey", resourceCulture);
             }
         }
-        
+
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à RIGHT key : {0}.
         /// </summary>
@@ -1725,7 +1748,8 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Simon_Page1_RightKey", resourceCulture);
             }
         }
-        
+
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Press the key corresponding to the COLOR of the circle, as fast as possible..
         /// </summary>
@@ -1734,7 +1758,8 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Simon_Page2_Instructions", resourceCulture);
             }
         }
-        
+
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Experiment Configuration.
         /// </summary>
@@ -1959,7 +1984,7 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Title_StroopConfigurationPage", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Off.
         /// </summary>

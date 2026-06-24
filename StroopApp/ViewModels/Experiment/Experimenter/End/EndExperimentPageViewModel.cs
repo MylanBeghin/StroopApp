@@ -6,16 +6,15 @@ using StroopApp.Resources;
 using StroopApp.Services.Charts;
 using StroopApp.Services.Exportation;
 using StroopApp.Services.Navigation;
+using StroopApp.Services.Session;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.State;
-using StroopApp.ViewModels.Experiment.Experimenter;
 using StroopApp.Views;
+using StroopApp.Views.Configuration;
 using StroopApp.Views.Experiment.Experimenter.End;
+using StroopApp.Views.Home;
 using System.Collections.ObjectModel;
 using System.Windows;
-using StroopApp.Views.Configuration;
-using StroopApp.Services.Session;
-using StroopApp.Views.Home;
 
 namespace StroopApp.ViewModels.Experiment.Experimenter.End
 {
@@ -76,10 +75,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             try
             {
                 _sessionService.PrepareNextBlock();
-                if(Settings.CurrentProfile.TaskType==TaskType.Stroop)
-                    _experimenterNavigationService.NavigateTo<ConfigurationPage>();
-                else if (Settings.CurrentProfile.TaskType == TaskType.Simon)
-                    _experimenterNavigationService.NavigateTo<SimonConfigurationPage>();
+                NavigateToConfigurationPage();
             }
             catch (Exception ex)
             {
@@ -96,16 +92,13 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
                 if (confirmed)
                 {
                     _sessionService.ResetForNewExperiment();
+
                     if(Settings.CurrentProfile.TaskType == TaskType.Stroop)
-                    {
                         _windowManager.CloseParticipantWindow();
-                        _experimenterNavigationService.NavigateTo<ConfigurationPage>();
-                    }
                     else if (Settings.CurrentProfile.TaskType == TaskType.Simon)
-                    {
                         _windowManager.CloseSimonParticipantWindow();
-                        _experimenterNavigationService.NavigateTo<SimonConfigurationPage>();
-                    }
+
+                    NavigateToConfigurationPage();
                 }
             }
             catch (Exception ex)
@@ -167,6 +160,14 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
         public void Dispose()
         {
             LiveReactionTimeViewModel.Dispose();
+        }
+
+        private void NavigateToConfigurationPage()
+        {
+            if (Settings.CurrentProfile.TaskType == TaskType.Stroop)
+                _experimenterNavigationService.NavigateTo<ConfigurationPage>();
+            else if (Settings.CurrentProfile.TaskType == TaskType.Simon)
+                _experimenterNavigationService.NavigateTo<SimonConfigurationPage>();
         }
     }
 }

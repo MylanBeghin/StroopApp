@@ -35,7 +35,7 @@ namespace StroopApp.Services.Window
             {
                 _participantWindow = new ParticipantWindow(settings, _pageFactory,
                     (s, nav) => new ParticipantWindowViewModel(s, nav,
-                    () => new InstructionsPage(new StroopInstructionsViewModel(s, nav, () => new StroopPage(s,nav)))));
+                    () => new InstructionsPage(new StroopInstructionsViewModel(s, nav, () => new StroopPage(s, nav)))));
                 _participantWindow.Closed += (_, _) => _participantWindow = null;
                 _participantWindow.Show();
             }
@@ -55,7 +55,7 @@ namespace StroopApp.Services.Window
             {
                 _simonParticipantWindow = new ParticipantWindow(settings, _pageFactory,
                     (s, nav) => new ParticipantWindowViewModel(s, nav,
-                    () => new InstructionsPage(new SimonInstructionsViewModel(s,nav,()=> new SimonPage(s,nav)))));
+                    () => new InstructionsPage(new SimonInstructionsViewModel(s, nav, () => new SimonPage(s, nav)))));
                 _simonParticipantWindow.Closed += (_, _) => _simonParticipantWindow = null;
                 _simonParticipantWindow.Show();
             }

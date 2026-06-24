@@ -25,7 +25,7 @@ namespace StroopApp.ViewModels.Configuration
         [ObservableProperty]
         private KeyMapping? _editingMapping;
 
-        public KeyMappingViewModel(IKeyMappingService keyMappingService) :base (keyMappingService) 
+        public KeyMappingViewModel(IKeyMappingService keyMappingService) :base (keyMappingService)
         {
             _ = LoadAsync();
         }

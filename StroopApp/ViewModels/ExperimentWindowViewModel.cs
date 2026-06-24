@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+
 using StroopApp.Core;
 using StroopApp.Resources;
 using StroopApp.Services.Language;
@@ -65,8 +66,9 @@ namespace StroopApp.ViewModels
                 await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
             }
         }
-			
-		
+
+
+
 		private bool CanReturnHomePage() => _navigationService.CurrentPageType != typeof(HomePage);
 
 	}

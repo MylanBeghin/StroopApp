@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Office2010.Word;
-using StroopApp.Core;
+﻿using StroopApp.Core;
 using StroopApp.Services.Navigation;
 using StroopApp.ViewModels.State;
 using System.Globalization;

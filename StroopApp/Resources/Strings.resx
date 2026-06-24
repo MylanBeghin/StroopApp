@@ -790,4 +790,10 @@
   <data name="Simon_Page1_Display2" xml:space="preserve">
     <value>You will have to press the RIGHT or LEFT key, depending on the COLOR of the circle.</value>
   </data>
+  <data name="Header_StimulusPosition" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="Header_StimulusColor" xml:space="preserve">
+    <value>Color</value>
+  </data>
 </root>

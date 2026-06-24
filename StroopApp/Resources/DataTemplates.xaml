@@ -8,7 +8,7 @@
                     xmlns:configVmParticipant="clr-namespace:StroopApp.ViewModels.Configuration.Participant"
                     xmlns:configVm="clr-namespace:StroopApp.ViewModels.Configuration"
                     xmlns:profileViews="clr-namespace:StroopApp.Views.Profile"
-                    xmlns:participantViews="clr-namespace:StroopApp.Views.Participant"
+                    xmlns:participantViews="clr-namespace:StroopApp.Views.Configuration.Participant"
                     xmlns:keyMappingVm="clr-namespace:StroopApp.ViewModels.Configuration"
                     xmlns:keyMappingViews="clr-namespace:StroopApp.Views.Configuration.KeyMapping"
                     xmlns:configViews="clr-namespace:StroopApp.Views.Configuration"
@@ -79,6 +79,11 @@
     <!-- LiveReactionTimeViewModel -->
     <DataTemplate DataType="{x:Type experimenterVm:LiveReactionTimeViewModel}">
         <graphViews:LiveReactionTimeView />
+    </DataTemplate>
+
+    <!--SimonConfigurationPageViewModel-->
+    <DataTemplate DataType="{x:Type configVm:SimonConfigurationPageViewModel}">
+        <configViews:SimonConfigurationPage/>
     </DataTemplate>
 
     <!-- SimonStimulusViewModel -->

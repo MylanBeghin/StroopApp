@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Input;
 using StroopApp.Core;
 using StroopApp.Resources;
 using StroopApp.Services.Navigation;
@@ -75,7 +75,7 @@ namespace StroopApp.ViewModels.Configuration
                 await ShowErrorDialogAsync($"{Strings.Error_Title}: {ex.Message}");
             }
         }
-        
+
         private string? ValidateRequiredSelection()
         {
             if (ProfileViewModel.CurrentProfile == null) return Strings.Error_SelectProfile;

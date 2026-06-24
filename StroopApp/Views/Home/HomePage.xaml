@@ -31,7 +31,8 @@
             <TextBlock Text="StroopApp" Style="{DynamicResource HeaderTextBlockStyle}"/>
             <TextBlock Text="Création de protocoles expérimentaux - ELPN Lab" FontSize="24" FontWeight="Light"/>
         </ui:SimpleStackPanel>
-        
+
+
         <!--FreshStart-->
         <Border Background="White" CornerRadius="8" Padding="8" Margin="0 8" Grid.Row="2" Grid.Column="1" BorderThickness="1" BorderBrush="LightGray" >
             <ui:SimpleStackPanel Spacing="8" Margin="8" VerticalAlignment="Center">

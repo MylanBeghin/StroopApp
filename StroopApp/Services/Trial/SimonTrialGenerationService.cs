@@ -1,4 +1,4 @@
-﻿using StroopApp.Models;
+using StroopApp.Models;
 using StroopApp.Models.Simon;
 using StroopApp.ViewModels.State;
 

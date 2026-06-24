@@ -59,7 +59,7 @@ namespace StroopApp.Views
 
         private void Initialize(INavigationService navigationService)
         {
-            var profileViewModel = new ProfileManagementViewModel(_profileService,navigationService,TaskType.Stroop);
+            var profileViewModel = new ProfileManagementViewModel(_profileService, TaskType.Stroop);
             var participantViewModel = new ParticipantManagementViewModel(_participantService, _settings.ExperimentContext.IsParticipantSelectionEnabled);
             var keyMappingViewModel = new KeyMappingViewModel(_keyMappingService);
             var exportFolderSelectorViewModel = new ExportFolderSelectorViewModel(_settings, _exportationService);

@@ -28,7 +28,7 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 			var dummyTrialGenerationService = new DummyTrialGenerationService();
 			var dummyLanguageService = new DummyLanguageService();
 
-            var profileViewModel = new ProfileManagementViewModel(dummyProfileService,dummyNavigationService,TaskType.Stroop);
+            var profileViewModel = new ProfileManagementViewModel(dummyProfileService,TaskType.Stroop);
 			// No CurrentProfile set intentionally
 
 			var participantViewModel = new ParticipantManagementViewModel(dummyParticipantService, false);
@@ -78,7 +78,7 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 			var dummyTrialGenerationService = new DummyTrialGenerationService();
 			var dummyLanguageService = new DummyLanguageService();
 
-            var profileViewModel = new ProfileManagementViewModel(dummyProfileService, dummyNavigationService, TaskType.Stroop);
+            var profileViewModel = new ProfileManagementViewModel(dummyProfileService, TaskType.Stroop);
 			var dummyProfile = new ExperimentProfile { ProfileName = "TestProfile" };
 			profileViewModel.CurrentProfile = dummyProfile;
 
