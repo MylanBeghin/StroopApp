@@ -21,7 +21,7 @@ namespace StroopApp.Models
         public ObservableCollection<RectangularSection> Sections { get; set; }
 
         public Block? CurrentBlock { get; set; }
-        public StroopTrial? CurrentTrial { get; set; }
+        public ITrial? CurrentTrial { get; set; }
 
         public int CurrentBlockStart { get; set; }
         public int CurrentBlockEnd { get; set; }

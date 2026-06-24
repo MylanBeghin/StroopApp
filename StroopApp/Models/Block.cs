@@ -15,7 +15,7 @@ namespace StroopApp.Models
         public int? SwitchPercent { get; set; }
         public string? BlockExperimentProfile { get; set; }
         public string? VisualCue { get; set; }
-        public ObservableCollection<StroopTrial?> TrialRecords { get; } = new();
+        public ObservableCollection<ITrial?> TrialRecords { get; } = new();
         public ObservableCollection<double?> TrialTimes { get; } = new();
 
         /// <summary>

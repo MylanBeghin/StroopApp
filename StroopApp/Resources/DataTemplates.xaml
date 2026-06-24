@@ -74,22 +74,7 @@
     <DataTemplate DataType="{x:Type experimenterVm:LiveReactionTimeViewModel}">
         <graphViews:LiveReactionTimeView />
     </DataTemplate>
-    
-    <!--InstructionStepViewModel-->
-    <DataTemplate DataType="{x:Type protocolVm:InstructionStepViewModel}">
-        <protocolViews:InstructionStepView />
-    </DataTemplate>
-    
-    <!--TaskStepViewModel-->
-    <DataTemplate DataType="{x:Type protocolVm:TaskStepViewModel}">
-        <protocolViews:TaskStepView/>
-    </DataTemplate>
-    
-    <!--ProtocolConfigurationViewModel-->
-    <DataTemplate DataType="{x:Type protocolVm:SimonProtocolConfigurationViewModel}">
-        <protocolViews:SimonProtocolConfigurationView/>
-    </DataTemplate>
-    
+
     <!--SimonConfigurationPageViewModel-->
     <DataTemplate DataType="{x:Type configVm:SimonConfigurationPageViewModel}">
         <configViews:SimonConfigurationPage/>

@@ -135,19 +135,20 @@ namespace StroopApp.Services.Exportation
             {
                 foreach (var r in block.TrialRecords)
                 {
+                    StroopTrial trial = (StroopTrial)r;
                     ws.Cell(row, 1).Value = p.Id;
                     ws.Cell(row, 2).Value = _settings.CurrentProfile.ProfileName;
                     ws.Cell(row, 3).Value = block.BlockNumber;
-                    ws.Cell(row, 4).Value = r.TrialNumber;
-                    ws.Cell(row, 5).Value = r.IsCongruent;
-                    ws.Cell(row, 6).Value = r.VisualCue switch
+                    ws.Cell(row, 4).Value = trial.TrialNumber;
+                    ws.Cell(row, 5).Value = trial.IsCongruent;
+                    ws.Cell(row, 6).Value = trial.VisualCue switch
                     {
                         VisualCueType.Square => _languageService.GetLocalizedString("Label_Square"),
                         VisualCueType.Round => _languageService.GetLocalizedString("Label_Circle"),
                         _ => ""
                     };
-                    ws.Cell(row, 7).Value = r.ExpectedAnswer;
-                    ws.Cell(row, 8).Value = r.GivenAnswer;
+                    ws.Cell(row, 7).Value = trial.ExpectedAnswer;
+                    ws.Cell(row, 8).Value = trial.GivenAnswer;
 
                     var validCell = ws.Cell(row, 9);
                     if (r.IsValidResponse.HasValue)

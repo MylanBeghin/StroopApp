@@ -77,7 +77,7 @@ namespace StroopApp.ViewModels.Experiment.Participant.Stroop
                 if (Settings.ExperimentContext.CurrentBlock is null)
                     throw new InvalidOperationException("CurrentBlock is not initialized");
 
-                foreach (var trial in Settings.ExperimentContext.CurrentBlock.TrialRecords)
+                foreach (StroopTrial trial in Settings.ExperimentContext.CurrentBlock.TrialRecords)
                 {
                     if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
                     {
@@ -219,7 +219,7 @@ namespace StroopApp.ViewModels.Experiment.Participant.Stroop
 
             if (answer != null)
             {
-                var trial = Settings.ExperimentContext.CurrentTrial;
+                var trial = Settings.ExperimentContext.CurrentTrial as StroopTrial;
                 if (trial is null)
                     return;
 
