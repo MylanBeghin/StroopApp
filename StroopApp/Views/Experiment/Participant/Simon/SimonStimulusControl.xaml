@@ -10,12 +10,12 @@
     <UserControl.Resources>
         <conv:StimulusPositionToGridColumnConverter x:Key="PositionToGridColumnConverter" />
     </UserControl.Resources>
-    <Grid Background="Black">
+    <Grid Background="Black" Width="600">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Ellipse Width="120" Height="120"
+        <Ellipse Width="100" Height="100"
                  Fill="{Binding ForegroundBrush}"
                  Grid.Column="{Binding Position, Converter={StaticResource PositionToGridColumnConverter}}"
                  HorizontalAlignment="Center"

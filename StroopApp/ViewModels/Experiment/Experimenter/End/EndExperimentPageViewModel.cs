@@ -15,6 +15,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using StroopApp.Views.Configuration;
 using StroopApp.Services.Session;
+using StroopApp.Views.Home;
 
 namespace StroopApp.ViewModels.Experiment.Experimenter.End
 {
@@ -95,8 +96,16 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
                 if (confirmed)
                 {
                     _sessionService.ResetForNewExperiment();
-                    _windowManager.CloseParticipantWindow();
-                    _experimenterNavigationService.NavigateTo<ConfigurationPage>();
+                    if(Settings.CurrentProfile.TaskType == TaskType.Stroop)
+                    {
+                        _windowManager.CloseParticipantWindow();
+                        _experimenterNavigationService.NavigateTo<ConfigurationPage>();
+                    }
+                    else if (Settings.CurrentProfile.TaskType == TaskType.Simon)
+                    {
+                        _windowManager.CloseSimonParticipantWindow();
+                        _experimenterNavigationService.NavigateTo<SimonConfigurationPage>();
+                    }
                 }
             }
             catch (Exception ex)
@@ -126,7 +135,12 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             {
                 if (await ShowConfirmationDialogAsync(Strings.Title_ConfirmShutDown, Strings.Message_ConfirmExitWithoutExport))
                 {
-                    Application.Current.Shutdown();
+                    _sessionService.ResetForNewExperiment();
+                    if (Settings.CurrentProfile.TaskType == TaskType.Stroop)
+                        _windowManager.CloseParticipantWindow();
+                    else if (Settings.CurrentProfile.TaskType == TaskType.Simon)
+                        _windowManager.CloseSimonParticipantWindow();
+                    _experimenterNavigationService.NavigateTo<HomePage>();
                 }
             }
             catch (Exception ex)

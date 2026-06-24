@@ -268,7 +268,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Quit application without export.
+        ///   Recherche une chaîne localisée semblable à Quit the experiment without export.
         /// </summary>
         public static string Button_Quit_Without_Export {
             get {
@@ -1492,7 +1492,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Are you sure you want to exit the application without exporting the results? All non-exported data will be lost..
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to exit the experiment without exporting the results? All non-exported data will be lost..
         /// </summary>
         public static string Message_ConfirmExitWithoutExport {
             get {
@@ -1669,6 +1669,69 @@ namespace StroopApp.Resources {
         public static string Radio_WordCount {
             get {
                 return ResourceManager.GetString("Radio_WordCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à If you see a circle with this color : .
+        /// </summary>
+        public static string Simon_CircleCase_Instruction {
+            get {
+                return ResourceManager.GetString("Simon_CircleCase_Instruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à A fixation cross will appear, followed by a color circle..
+        /// </summary>
+        public static string Simon_Page1_Display {
+            get {
+                return ResourceManager.GetString("Simon_Page1_Display", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à You will have to press the RIGHT or LEFT key, depending on the COLOR of the circle..
+        /// </summary>
+        public static string Simon_Page1_Display2 {
+            get {
+                return ResourceManager.GetString("Simon_Page1_Display2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à We will now begin a mental task..
+        /// </summary>
+        public static string Simon_Page1_Intro {
+            get {
+                return ResourceManager.GetString("Simon_Page1_Intro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à LEFT key : {0}.
+        /// </summary>
+        public static string Simon_Page1_LeftKey {
+            get {
+                return ResourceManager.GetString("Simon_Page1_LeftKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à RIGHT key : {0}.
+        /// </summary>
+        public static string Simon_Page1_RightKey {
+            get {
+                return ResourceManager.GetString("Simon_Page1_RightKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Press the key corresponding to the COLOR of the circle, as fast as possible..
+        /// </summary>
+        public static string Simon_Page2_Instructions {
+            get {
+                return ResourceManager.GetString("Simon_Page2_Instructions", resourceCulture);
             }
         }
         

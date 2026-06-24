@@ -1,5 +1,6 @@
 ﻿using StroopApp.Services.Navigation.PageFactory;
 using StroopApp.ViewModels.Experiment.Participant;
+using StroopApp.ViewModels.Experiment.Participant.Instructions;
 using StroopApp.ViewModels.State;
 using StroopApp.Views;
 using StroopApp.Views.Experiment.Participant;
@@ -18,7 +19,7 @@ namespace StroopApp.Services.Window
         private readonly IPageFactory _pageFactory;
 
         public WindowManager(IPageFactory pageFactory)
-        {   
+        {
             _pageFactory = pageFactory;
         }
 
@@ -33,8 +34,8 @@ namespace StroopApp.Services.Window
             if (_participantWindow == null)
             {
                 _participantWindow = new ParticipantWindow(settings, _pageFactory,
-                    (s,nav) => new ParticipantWindowViewModel(s,nav,
-                    ()=> new InstructionsPage(s,nav)));
+                    (s, nav) => new ParticipantWindowViewModel(s, nav,
+                    () => new InstructionsPage(new StroopInstructionsViewModel(s, nav, () => new StroopPage(s,nav)))));
                 _participantWindow.Closed += (_, _) => _participantWindow = null;
                 _participantWindow.Show();
             }
@@ -54,7 +55,7 @@ namespace StroopApp.Services.Window
             {
                 _simonParticipantWindow = new ParticipantWindow(settings, _pageFactory,
                     (s, nav) => new ParticipantWindowViewModel(s, nav,
-                    () => new SimonPage(s,nav)));
+                    () => new InstructionsPage(new SimonInstructionsViewModel(s,nav,()=> new SimonPage(s,nav)))));
                 _simonParticipantWindow.Closed += (_, _) => _simonParticipantWindow = null;
                 _simonParticipantWindow.Show();
             }
@@ -62,7 +63,8 @@ namespace StroopApp.Services.Window
             {
                 _simonParticipantWindow.Reset();
                 _simonParticipantWindow.Activate();
-            };
+            }
+            ;
         }
 
         /// <summary>
@@ -75,9 +77,9 @@ namespace StroopApp.Services.Window
         }
 
         public void CloseSimonParticipantWindow()
-{
-    _simonParticipantWindow?.Close();
-    _simonParticipantWindow = null;
-}
+        {
+            _simonParticipantWindow?.Close();
+            _simonParticipantWindow = null;
+        }
     }
 }

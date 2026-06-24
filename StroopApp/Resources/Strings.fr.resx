@@ -503,7 +503,7 @@
     <value>Paramètres avancés</value>
   </data>
   <data name="Button_Quit_Without_Export" xml:space="preserve">
-    <value>Quitter l'application sans exporter</value>
+    <value>Quitter l'expérience sans exporter</value>
   </data>
   <data name="Label_StopBits" xml:space="preserve">
     <value>Stop bits</value>
@@ -575,7 +575,7 @@
     <value>Quitter l'application</value>
   </data>
   <data name="Message_ConfirmExitWithoutExport" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir quitter l'application sans exporter les résultats ? Toutes données non exportées seront perdues.</value>
+    <value>Êtes-vous sûr de vouloir quitter l'expérience sans exporter les résultats ? Toutes données non exportées seront perdues.</value>
   </data>
   <data name="Error_TrialDurationNotDividingTaskDuration" xml:space="preserve">
     <value>La durée de la tâche doit être divisible par la durée d'un essai.</value>
@@ -599,6 +599,9 @@
     <value>ROUGE</value>
   </data>
   <data name="Page1_Intro" xml:space="preserve">
+    <value>Nous allons maintenant réaliser une tâche mentale.</value>
+  </data>
+  <data name="Simon_Page1_Intro" xml:space="preserve">
     <value>Nous allons maintenant réaliser une tâche mentale.</value>
   </data>
   <data name="Page1_Display_NoCue" xml:space="preserve">
@@ -768,5 +771,23 @@
   </data>
   <data name="Title_StroopConfigurationPage" xml:space="preserve">
     <value>Tâche de Stroop</value>
+  </data>
+  <data name="Simon_Page1_Display" xml:space="preserve">
+    <value>Une croix de fixation apparaîtra, suivie d'un cercle coloré.</value>
+  </data>
+  <data name="Simon_Page1_LeftKey" xml:space="preserve">
+    <value>Touche GAUCHE : {0}</value>
+  </data>
+  <data name="Simon_Page1_RightKey" xml:space="preserve">
+    <value>Touche DROITE : {0}</value>
+  </data>
+  <data name="Simon_Page2_Instructions" xml:space="preserve">
+    <value>Appuyez sur la touche correspondant à la bonne direction selon la COULEUR du cercle, le plus vite possible.</value>
+  </data>
+  <data name="Simon_CircleCase_Instruction" xml:space="preserve">
+    <value>Si vous voyez un cercle de cette couleur</value>
+  </data>
+  <data name="Simon_Page1_Display2" xml:space="preserve">
+    <value>Vous devrez presser soit la touche GAUCHE, soit la touche DROITE selon la COULEUR du cercle.</value>
   </data>
 </root>

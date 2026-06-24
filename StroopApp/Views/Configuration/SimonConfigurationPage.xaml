@@ -21,14 +21,19 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="12" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="12"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="1"
                    Text="{Binding Source={StaticResource Loc}, Path=[Title_SimonConfigurationPage]}"
                    Style="{DynamicResource HeaderTextBlockStyle}"
                    HorizontalAlignment="Left"
                    Margin="0,0,0,12" />
-            <ContentControl Grid.Row="1" 
+            <ContentControl Grid.Row="1" Grid.Column="1"
                         Content="{Binding ProfileViewModel}"/>
-            <Grid Grid.Row="3">
+            <Grid Grid.Row="3" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.7*"/>
                     <ColumnDefinition Width="12"/>
@@ -39,9 +44,9 @@
                 <ContentControl Grid.Column="2"
                                 Content="{Binding ExportFolderSelectorViewModel}" />
             </Grid>
-            <ContentControl Grid.Row="5"
+            <ContentControl Grid.Row="5" Grid.Column="1"
                             Content="{Binding ParticipantViewModel}"/>
-            <ui:SimpleStackPanel Grid.Row="7" HorizontalAlignment="Center" >
+            <ui:SimpleStackPanel Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" >
                 <Button Content="{Binding Source={StaticResource Loc}, Path=[Button_LaunchExperiment]}"
                         Style="{DynamicResource AccentButtonStyle}"
                         Command="{Binding LaunchExperimentCommand}" />

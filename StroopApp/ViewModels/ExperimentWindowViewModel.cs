@@ -49,13 +49,15 @@ namespace StroopApp.ViewModels
 		{
             try
             {
-                if (_navigationService.IsCurrentPage<ExperimentDashBoardPage>() || _navigationService.IsCurrentPage<EndExperimentPage>())
-                {
-					bool confirmed = await ShowConfirmationDialogAsync(Strings.Title_ConfirmStopTask, Strings.Message_StopTask);
-					if (!confirmed)
-						return;
-                }
+				bool confirmed = true;
+                if (_navigationService.IsCurrentPage<ExperimentDashBoardPage>())
+					confirmed = await ShowConfirmationDialogAsync(Strings.Title_ConfirmStopTask, Strings.Message_StopTask);
+				if(_navigationService.IsCurrentPage<EndExperimentPage>())
+					confirmed = await ShowConfirmationDialogAsync(Strings.Title_ConfirmShutDown, Strings.Message_ConfirmExitWithoutExport);
+                if (!confirmed)
+                    return;
                 _navigationService.NavigateTo<HomePage>();
+
 
             }
             catch (Exception ex)

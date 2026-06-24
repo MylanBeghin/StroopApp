@@ -503,7 +503,7 @@
     <value>Advanced settings</value>
   </data>
   <data name="Button_Quit_Without_Export" xml:space="preserve">
-    <value>Quit application without export</value>
+    <value>Quit the experiment without export</value>
   </data>
   <data name="Label_StopBits" xml:space="preserve">
     <value>Stop bits</value>
@@ -575,7 +575,7 @@
     <value>Exit application</value>
   </data>
   <data name="Message_ConfirmExitWithoutExport" xml:space="preserve">
-    <value>Are you sure you want to exit the application without exporting the results? All non-exported data will be lost.</value>
+    <value>Are you sure you want to exit the experiment without exporting the results? All non-exported data will be lost.</value>
   </data>
   <data name="Error_TrialDurationNotDividingTaskDuration" xml:space="preserve">
     <value>Task duration must be divisible by trial duration.</value>
@@ -599,6 +599,9 @@
     <value>RED</value>
   </data>
   <data name="Page1_Intro" xml:space="preserve">
+    <value>We will now begin a mental task.</value>
+  </data>
+  <data name="Simon_Page1_Intro" xml:space="preserve">
     <value>We will now begin a mental task.</value>
   </data>
   <data name="Page1_Display_NoCue" xml:space="preserve">
@@ -768,5 +771,23 @@
   </data>
   <data name="Title_StroopConfigurationPage" xml:space="preserve">
     <value>Stroop Task</value>
+  </data>
+  <data name="Simon_Page1_Display" xml:space="preserve">
+    <value>A fixation cross will appear, followed by a color circle.</value>
+  </data>
+  <data name="Simon_Page1_LeftKey" xml:space="preserve">
+    <value>LEFT key : {0}</value>
+  </data>
+  <data name="Simon_Page1_RightKey" xml:space="preserve">
+    <value>RIGHT key : {0}</value>
+  </data>
+  <data name="Simon_Page2_Instructions" xml:space="preserve">
+    <value>Press the key corresponding to the COLOR of the circle, as fast as possible.</value>
+  </data>
+  <data name="Simon_CircleCase_Instruction" xml:space="preserve">
+    <value>If you see a circle with this color : </value>
+  </data>
+  <data name="Simon_Page1_Display2" xml:space="preserve">
+    <value>You will have to press the RIGHT or LEFT key, depending on the COLOR of the circle.</value>
   </data>
 </root>
