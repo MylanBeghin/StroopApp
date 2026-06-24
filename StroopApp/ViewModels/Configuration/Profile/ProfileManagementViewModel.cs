@@ -3,8 +3,10 @@ using CommunityToolkit.Mvvm.Input;
 using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Resources;
+using StroopApp.Services.Navigation;
 using StroopApp.Services.Profile;
 using StroopApp.Views;
+using StroopApp.Views.Configuration;
 using System.Collections.ObjectModel;
 
 namespace StroopApp.ViewModels.Configuration.Profile
@@ -16,11 +18,14 @@ namespace StroopApp.ViewModels.Configuration.Profile
     public partial class ProfileManagementViewModel : ViewModelBase
     {
         private readonly IProfileService _profileService;
+        private readonly INavigationService _navigationService
+            ;
 
         public ObservableCollection<ExperimentProfile> Profiles { get; }
 
         [ObservableProperty]
         private ExperimentProfile? _currentProfile;
+        private TaskType _taskType;
 
         partial void OnCurrentProfileChanged(ExperimentProfile? value)
         {
@@ -28,11 +33,14 @@ namespace StroopApp.ViewModels.Configuration.Profile
                 _profileService.SaveLastSelectedProfile(value);
         }
 
-        public ProfileManagementViewModel(IProfileService profileService)
+        public ProfileManagementViewModel(IProfileService profileService, INavigationService navigationService,TaskType taskType)
         {
             _profileService = profileService;
-            Profiles = _profileService.LoadProfiles();
-
+            _navigationService = navigationService;
+            _taskType = taskType;
+            var allProfiles = _profileService.LoadProfiles();
+            Profiles = new ObservableCollection<ExperimentProfile>(
+                allProfiles.Where(p => p.TaskType == _taskType));
             var lastId = _profileService.LoadLastSelectedProfile();
             if (lastId.HasValue)
                 CurrentProfile = Profiles.FirstOrDefault(p => p.Id == lastId.Value);
@@ -44,6 +52,7 @@ namespace StroopApp.ViewModels.Configuration.Profile
             try
             {
                 var newProfile = new ExperimentProfile();
+                newProfile.TaskType = _taskType;
                 var viewModel = new ProfileEditorViewModel(newProfile, Profiles, _profileService);
                 var profileWindow = new ProfileEditorWindow(viewModel);
                 profileWindow.ShowDialog();
@@ -52,7 +61,7 @@ namespace StroopApp.ViewModels.Configuration.Profile
                 {
                     var updatedProfiles = _profileService.UpsertProfile(newProfile);
                     Profiles.Clear();
-                    foreach (var prof in updatedProfiles)
+                    foreach (var prof in updatedProfiles.Where(p => p.TaskType == _taskType))
                     {
                         Profiles.Add(prof);
                     }

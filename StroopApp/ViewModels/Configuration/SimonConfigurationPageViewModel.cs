@@ -2,6 +2,7 @@
 using StroopApp.Core;
 using StroopApp.Resources;
 using StroopApp.Services.Navigation;
+using StroopApp.Services.Session;
 using StroopApp.Services.Trial;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.Configuration.Participant;
@@ -23,6 +24,7 @@ namespace StroopApp.ViewModels.Configuration
         private readonly INavigationService _experimenterNavigationService;
         private readonly IWindowManager _windowManager;
         private readonly ITrialGenerationService _trialGenerationService;
+        private readonly IExperimentSessionService _sessionService;
         private readonly ExperimentSettingsViewModel _settings;
 
 
@@ -34,7 +36,8 @@ namespace StroopApp.ViewModels.Configuration
             ExportFolderSelectorViewModel exportFolderSelectorViewModel,
             INavigationService experimenterNavigationService,
             IWindowManager windowManager,
-            ITrialGenerationService trialGenerationService
+            ITrialGenerationService trialGenerationService,
+            IExperimentSessionService sessionService
             )
         {
             _settings = settings;
@@ -45,6 +48,7 @@ namespace StroopApp.ViewModels.Configuration
             _experimenterNavigationService = experimenterNavigationService;
             _windowManager = windowManager;
             _trialGenerationService = trialGenerationService;
+            _sessionService = sessionService;
         }
 
         [RelayCommand]
@@ -63,9 +67,7 @@ namespace StroopApp.ViewModels.Configuration
                 _settings.Participant = ParticipantViewModel.SelectedParticipant;
                 _settings.KeyMappings.Simon = SimonKeyMappingViewModel.Mappings;
 
-
-                PrepareContext();
-                PrepareTrials();
+                _sessionService.StartBlock(_trialGenerationService);
                 ShowExperimentWindow();
             }
             catch(Exception ex)
@@ -79,25 +81,6 @@ namespace StroopApp.ViewModels.Configuration
             if (ProfileViewModel.CurrentProfile == null) return Strings.Error_SelectProfile;
             if (ParticipantViewModel.SelectedParticipant == null) return Strings.Error_SelectParticipant;
             return null;
-        }
-
-        private void PrepareContext()
-        {
-            _settings.ExperimentContext.IsTaskStopped = false;
-            _settings.ExperimentContext.IsBlockFinished = false;
-            _settings.ExperimentContext.NewColumnSerie();
-            _settings.ExperimentContext.AddNewSerie(_settings);
-        }
-
-        private void PrepareTrials()
-        {
-            if (_settings.ExperimentContext.CurrentBlock is null)
-                throw new InvalidOperationException("CurrentBlock was not initialized after AddNewSerie");
-
-            var trials = _trialGenerationService.GenerateTrials(_settings);
-            foreach (var trial in trials)
-                _settings.ExperimentContext.CurrentBlock.TrialRecords.Add(trial);
-           
         }
 
         private void ShowExperimentWindow()

@@ -37,7 +37,7 @@
                 <ContentControl Grid.Column="0"
                                 Content="{Binding SimonKeyMappingViewModel}" />
                 <ContentControl Grid.Column="2"
-                                Content="{Binding ExportFolderSeletorViewModel}" />
+                                Content="{Binding ExportFolderSelectorViewModel}" />
             </Grid>
             <ContentControl Grid.Row="5"
                             Content="{Binding ParticipantViewModel}"/>

@@ -760,4 +760,13 @@
   <data name="Title_SimonConfigurationPage" xml:space="preserve">
     <value>Simon Task</value>
   </data>
+  <data name="Menu_Home" xml:space="preserve">
+    <value>Return to home page</value>
+  </data>
+  <data name="Message_Leave_Experiment" xml:space="preserve">
+    <value>Are you sure you want to leave the experiment ? No data will be saved or exported</value>
+  </data>
+  <data name="Title_StroopConfigurationPage" xml:space="preserve">
+    <value>Stroop Task</value>
+  </data>
 </root>

@@ -1,8 +1,10 @@
-﻿using StroopApp.Services.Exportation;
+﻿using StroopApp.Models;
+using StroopApp.Services.Exportation;
 using StroopApp.Services.KeyMapping;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Participant;
 using StroopApp.Services.Profile;
+using StroopApp.Services.Session;
 using StroopApp.Services.Trial;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.Configuration;
@@ -25,6 +27,7 @@ namespace StroopApp.Views.Configuration
         private readonly IKeyMappingService _keyMappingService;
         private readonly IExportationService _exportationService;
         private readonly ITrialGenerationService _trialGenerationService;
+        private readonly IExperimentSessionService _sessionService;
 
         public new INavigationService NavigationService
         {
@@ -37,7 +40,8 @@ namespace StroopApp.Views.Configuration
             IParticipantService participantService,
             IKeyMappingService keyMappingService,
             IExportationService exportationService,
-            ISimonTrialGenerationService trialGenerationService)
+            ISimonTrialGenerationService trialGenerationService,
+            IExperimentSessionService sessionService)
         {
             InitializeComponent();
             _settings = settings;
@@ -47,11 +51,12 @@ namespace StroopApp.Views.Configuration
             _keyMappingService = keyMappingService;
             _exportationService = exportationService;
             _trialGenerationService = trialGenerationService;
+            _sessionService = sessionService;
         }
 
         private void Initialize(INavigationService navigationService)
         {
-            var profileViewModel = new ProfileManagementViewModel(_profileService);
+            var profileViewModel = new ProfileManagementViewModel(_profileService, navigationService, TaskType.Simon);
             var participantViewModel = new ParticipantManagementViewModel(
                 _participantService,
                 _settings.ExperimentContext.IsParticipantSelectionEnabled);
@@ -67,7 +72,8 @@ namespace StroopApp.Views.Configuration
                 exportFolderSelectorViewModel,
                 navigationService,
                 _windowManager,
-                _trialGenerationService
+                _trialGenerationService,
+                _sessionService
                 );
         }
 

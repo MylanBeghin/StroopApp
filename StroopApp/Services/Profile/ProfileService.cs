@@ -74,6 +74,7 @@ namespace StroopApp.Services.Profile
 			{
 
 				existing.ProfileName = profile.ProfileName;
+				existing.TaskType = profile.TaskType;
 				existing.Hours = profile.Hours;
 				existing.Minutes = profile.Minutes;
 				existing.Seconds = profile.Seconds;

@@ -7,7 +7,7 @@ namespace StroopApp.Views.Home
     public partial class HomePage : Page, INavigationAware
     {
 
-        public INavigationService NavigationService
+        public new INavigationService NavigationService
         {
             set => Initialize(value);
         }

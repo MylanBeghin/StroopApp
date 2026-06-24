@@ -35,6 +35,7 @@
 
         public Guid Id { get; set; }
         public string ProfileName { get; set; }
+        public TaskType TaskType { get; set; }
         public int Hours { get; set; }
         public int Minutes { get; set; }
         public int Seconds { get; set; }
@@ -78,6 +79,7 @@
             {
                 Id = this.Id,
                 ProfileName = this.ProfileName,
+                TaskType = this.TaskType,
                 CalculationMode = this.CalculationMode,
                 Hours = this.Hours,
                 Minutes = this.Minutes,

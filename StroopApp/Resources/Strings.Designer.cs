@@ -1465,6 +1465,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Return to home page.
+        /// </summary>
+        public static string Menu_Home {
+            get {
+                return ResourceManager.GetString("Menu_Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Languages.
         /// </summary>
         public static string Menu_Languages {
@@ -1552,6 +1561,15 @@ namespace StroopApp.Resources {
         public static string Message_KeyMapping {
             get {
                 return ResourceManager.GetString("Message_KeyMapping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to leave the experiment ? No data will be saved or exported.
+        /// </summary>
+        public static string Message_Leave_Experiment {
+            get {
+                return ResourceManager.GetString("Message_Leave_Experiment", resourceCulture);
             }
         }
         
@@ -1867,6 +1885,15 @@ namespace StroopApp.Resources {
         public static string Title_SimonConfigurationPage {
             get {
                 return ResourceManager.GetString("Title_SimonConfigurationPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Stroop Task.
+        /// </summary>
+        public static string Title_StroopConfigurationPage {
+            get {
+                return ResourceManager.GetString("Title_StroopConfigurationPage", resourceCulture);
             }
         }
         

@@ -13,6 +13,8 @@ using StroopApp.Views;
 using StroopApp.Views.Experiment.Experimenter.End;
 using System.Collections.ObjectModel;
 using System.Windows;
+using StroopApp.Views.Configuration;
+using StroopApp.Services.Session;
 
 namespace StroopApp.ViewModels.Experiment.Experimenter.End
 {
@@ -31,6 +33,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
         private readonly INavigationService _experimenterNavigationService;
         private readonly IWindowManager _windowManager;
         private readonly ExperimentChartFactory _chartFactory;
+        private readonly IExperimentSessionService _sessionService;
 
         [ObservableProperty]
         private string _currentParticipant = string.Empty;
@@ -41,13 +44,15 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
         public EndExperimentPageViewModel(ExperimentSettingsViewModel settings,
                                   IExportationService exportationService,
                                   INavigationService experimenterNavigationService,
-                                  IWindowManager windowManager)
+                                  IWindowManager windowManager,
+                                  IExperimentSessionService sessionService)
         {
             Settings = settings;
             _exportationService = exportationService;
             _experimenterNavigationService = experimenterNavigationService;
             _windowManager = windowManager;
             _chartFactory = new ExperimentChartFactory();
+            _sessionService = sessionService;
 
             Blocks = Settings.ExperimentContext.Blocks;
             GlobalGraphViewModel = new GlobalGraphViewModel(settings);
@@ -69,14 +74,11 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
         {
             try
             {
-                Settings.ExperimentContext.ReactionPoints.Clear();
-                Settings.ExperimentContext.NewColumnSerie();
-                Settings.Block++;
-                Settings.ExperimentContext.IsBlockFinished = false;
-                Settings.ExperimentContext.IsParticipantSelectionEnabled = false;
-                Settings.ExperimentContext.HasUnsavedExports = true;
-
-                _experimenterNavigationService.NavigateTo<ConfigurationPage>();
+                _sessionService.PrepareNextBlock();
+                if(Settings.CurrentProfile.TaskType==TaskType.Stroop)
+                    _experimenterNavigationService.NavigateTo<ConfigurationPage>();
+                else if (Settings.CurrentProfile.TaskType == TaskType.Simon)
+                    _experimenterNavigationService.NavigateTo<SimonConfigurationPage>();
             }
             catch (Exception ex)
             {
@@ -92,7 +94,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
                 bool confirmed = await ShowConfirmationDialogAsync(Strings.Title_ConfirmNewExperiment, Strings.Message_ConfirmNewExperiment);
                 if (confirmed)
                 {
-                    Settings.Reset();
+                    _sessionService.ResetForNewExperiment();
                     _windowManager.CloseParticipantWindow();
                     _experimenterNavigationService.NavigateTo<ConfigurationPage>();
                 }
