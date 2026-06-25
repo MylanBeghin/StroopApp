@@ -763,6 +763,9 @@
   <data name="Title_SimonConfigurationPage" xml:space="preserve">
     <value>Tâche de Simon</value>
   </data>
+  <data name="Button_SimonTask" xml:space="preserve">
+    <value>Tâche de Simon</value>
+  </data>
   <data name="Menu_Home" xml:space="preserve">
     <value>Revenir à l'accueil</value>
   </data>
@@ -770,6 +773,9 @@
     <value>Êtes-vous sûr de vouloir quitter l'expérience ? Aucune donnée ne pourra être sauvegardée ni exportée.</value>
   </data>
   <data name="Title_StroopConfigurationPage" xml:space="preserve">
+    <value>Tâche de Stroop</value>
+  </data>
+  <data name="Button_StroopTask" xml:space="preserve">
     <value>Tâche de Stroop</value>
   </data>
   <data name="Simon_Page1_Display" xml:space="preserve">
@@ -795,5 +801,11 @@
   </data>
   <data name="Header_StimulusColor" xml:space="preserve">
     <value>Couleur</value>
+  </data>
+  <data name="App_Subtitle" xml:space="preserve">
+    <value>Création de protocoles expérimentaux - ELPN Lab</value>
+  </data>
+  <data name="Title_RapidLaunch" xml:space="preserve">
+    <value>Lancement Rapide</value>
   </data>
 </root>

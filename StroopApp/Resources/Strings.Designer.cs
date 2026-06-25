@@ -61,6 +61,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Design of experimental protocols - ELPN Lab.
+        /// </summary>
+        public static string App_Subtitle {
+            get {
+                return ResourceManager.GetString("App_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à StroopApp.
         /// </summary>
         public static string App_Title {
@@ -313,11 +322,29 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Simon Task.
+        /// </summary>
+        public static string Button_SimonTask {
+            get {
+                return ResourceManager.GetString("Button_SimonTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Interrupt the task.
         /// </summary>
         public static string Button_StopTask {
             get {
                 return ResourceManager.GetString("Button_StopTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Stroop Task.
+        /// </summary>
+        public static string Button_StroopTask {
+            get {
+                return ResourceManager.GetString("Button_StroopTask", resourceCulture);
             }
         }
         
@@ -1031,7 +1058,7 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Header_StimulusColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Position.
         /// </summary>
@@ -1040,7 +1067,7 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Header_StimulusPosition", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Switch (%).
         /// </summary>
@@ -1490,7 +1517,7 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Menu_Home", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Languages.
         /// </summary>
@@ -1590,7 +1617,7 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Message_Leave_Experiment", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Are you sure you want to stop the current task? Partial data can be exported..
         /// </summary>
@@ -1698,8 +1725,7 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Simon_CircleCase_Instruction", resourceCulture);
             }
         }
-
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à A fixation cross will appear, followed by a color circle..
         /// </summary>
@@ -1708,8 +1734,7 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Simon_Page1_Display", resourceCulture);
             }
         }
-
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à You will have to press the RIGHT or LEFT key, depending on the COLOR of the circle..
         /// </summary>
@@ -1718,8 +1743,7 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Simon_Page1_Display2", resourceCulture);
             }
         }
-
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à We will now begin a mental task..
         /// </summary>
@@ -1728,8 +1752,7 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Simon_Page1_Intro", resourceCulture);
             }
         }
-
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à LEFT key : {0}.
         /// </summary>
@@ -1738,8 +1761,7 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Simon_Page1_LeftKey", resourceCulture);
             }
         }
-
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à RIGHT key : {0}.
         /// </summary>
@@ -1748,8 +1770,7 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Simon_Page1_RightKey", resourceCulture);
             }
         }
-
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Press the key corresponding to the COLOR of the circle, as fast as possible..
         /// </summary>
@@ -1758,8 +1779,7 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Simon_Page2_Instructions", resourceCulture);
             }
         }
-
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Experiment Configuration.
         /// </summary>
@@ -1968,6 +1988,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Rapid Launch.
+        /// </summary>
+        public static string Title_RapidLaunch {
+            get {
+                return ResourceManager.GetString("Title_RapidLaunch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Simon Task.
         /// </summary>
         public static string Title_SimonConfigurationPage {
@@ -1984,7 +2013,7 @@ namespace StroopApp.Resources {
                 return ResourceManager.GetString("Title_StroopConfigurationPage", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Off.
         /// </summary>
