@@ -68,23 +68,23 @@ namespace StroopApp.ViewModels.Experiment.Participant.Instructions
                         break;
 
                     case 1:
-                        tb.Inlines.Add(new Run(loc["Simon_CircleCase_Instruction"]));
+                        tb.Inlines.Add(new Run(loc["Simon_Circle_Instruction"]));
                         tb.Inlines.Add(new LineBreak()); tb.Inlines.Add(new LineBreak());
 
                         tb.Inlines.Add(CreateEllipse(simon.Left.Color));
                         tb.Inlines.Add(new LineBreak()); tb.Inlines.Add(new LineBreak());
 
-                        tb.Inlines.Add(new Run($"Cliquez sur la touche GAUCHE (touche {simon.Left.Key})"));
+                        tb.Inlines.Add(new Run(loc["Simon_LeftKey_Instruction"] + $" {simon.Left.Key})"));
                         break;
 
                     case 2:
-                        tb.Inlines.Add(new Run("Si vous voyez un cercle de cette couleur"));
+                        tb.Inlines.Add(new Run(loc["Simon_Circle_Instruction"]));
                         tb.Inlines.Add(new LineBreak()); tb.Inlines.Add(new LineBreak());
 
                         tb.Inlines.Add(CreateEllipse(simon.Right.Color));
                         tb.Inlines.Add(new LineBreak()); tb.Inlines.Add(new LineBreak());
-
-                        tb.Inlines.Add(new Run($"Cliquez sur la touche DROITE (touche {simon.Right.Key})"));
+                        
+                        tb.Inlines.Add(new Run(loc["Simon_RightKey_Instruction"] + $" {simon.Right.Key})"));
                         break;
                     
                     case 3:

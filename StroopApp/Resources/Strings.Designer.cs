@@ -1720,9 +1720,18 @@ namespace StroopApp.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à If you see a circle with this color : .
         /// </summary>
-        public static string Simon_CircleCase_Instruction {
+        public static string Simon_Circle_Instruction {
             get {
-                return ResourceManager.GetString("Simon_CircleCase_Instruction", resourceCulture);
+                return ResourceManager.GetString("Simon_Circle_Instruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Click on the LEFT key (key .
+        /// </summary>
+        public static string Simon_LeftKey_Instruction {
+            get {
+                return ResourceManager.GetString("Simon_LeftKey_Instruction", resourceCulture);
             }
         }
         
@@ -1777,6 +1786,15 @@ namespace StroopApp.Resources {
         public static string Simon_Page2_Instructions {
             get {
                 return ResourceManager.GetString("Simon_Page2_Instructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Click on the RIGHT key (key .
+        /// </summary>
+        public static string Simon_RightKey_Instruction {
+            get {
+                return ResourceManager.GetString("Simon_RightKey_Instruction", resourceCulture);
             }
         }
         

@@ -39,7 +39,7 @@
                 <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Title_RapidLaunch]}" FontSize="24" FontWeight="Light" />
                 <ui:SimpleStackPanel Orientation="Horizontal" Spacing="8" >
                     <Button x:Name="btnLaunchStroop" Content="{Binding Source={StaticResource Loc}, Path=[Button_StroopTask]}" VerticalAlignment="Bottom" Command="{Binding NavigateToStroopCommand}"/>
-                    <Button x:Name="btnLaunchSimon" Content="{Binding Source={StaticResource Loc}, Path=[Button_StroopTask]}" VerticalAlignment="Bottom" Command="{Binding NavigateToSimonCommand}"/>
+                    <Button x:Name="btnLaunchSimon" Content="{Binding Source={StaticResource Loc}, Path=[Button_SimonTask]}" VerticalAlignment="Bottom" Command="{Binding NavigateToSimonCommand}"/>
                 </ui:SimpleStackPanel>
             </ui:SimpleStackPanel>
         </Border>

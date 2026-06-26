@@ -790,8 +790,14 @@
   <data name="Simon_Page2_Instructions" xml:space="preserve">
     <value>Appuyez sur la touche correspondant à la bonne direction selon la COULEUR du cercle, le plus vite possible.</value>
   </data>
-  <data name="Simon_CircleCase_Instruction" xml:space="preserve">
+  <data name="Simon_Circle_Instruction" xml:space="preserve">
     <value>Si vous voyez un cercle de cette couleur</value>
+  </data>
+  <data name="Simon_LeftKey_Instruction" xml:space="preserve">
+    <value>Cliquez sur la touche GAUCHE (touche </value>
+  </data>
+  <data name="Simon_RightKey_Instruction" xml:space="preserve">
+    <value>Cliquez sur la touche DROITE (touche </value>
   </data>
   <data name="Simon_Page1_Display2" xml:space="preserve">
     <value>Vous devrez presser soit la touche GAUCHE, soit la touche DROITE selon la COULEUR du cercle.</value>
