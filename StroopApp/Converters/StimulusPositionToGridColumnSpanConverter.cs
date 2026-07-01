@@ -4,12 +4,14 @@ using System.Windows.Data;
 
 namespace StroopApp.Converters
 {
-    public class StimulusPositionToGridColumnConverter : IValueConverter
+    public class StimulusPositionToGridColumnSpanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            => value is StimulusPosition.Left or StimulusPosition.Center ? 0 : 1;
+        => value is StimulusPosition.Center ? 2 : 1;
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => throw new NotSupportedException();
-            
+        {
+            throw new NotImplementedException();
+        }
     }
 }

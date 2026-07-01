@@ -814,4 +814,10 @@
   <data name="Title_RapidLaunch" xml:space="preserve">
     <value>Lancement Rapide</value>
   </data>
+  <data name="SimonStimulusPositionMode_Center" xml:space="preserve">
+    <value>Centre</value>
+  </data>
+  <data name="SimonStimulusPositionMode_LeftRight" xml:space="preserve">
+    <value>Gauche / Droite</value>
+  </data>
 </root>

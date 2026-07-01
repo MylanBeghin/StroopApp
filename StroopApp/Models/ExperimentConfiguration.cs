@@ -10,7 +10,7 @@ namespace StroopApp.Models
 		/// <summary>
 		/// Experiment profile containing durations, timings, and task parameters.
 		/// </summary>
-		public ExperimentProfile Profile { get; set; }
+		public ExperimentProfile? Profile { get; set; }
 
 		/// <summary>
 		/// Key mappings for color responses.
@@ -27,7 +27,6 @@ namespace StroopApp.Models
 		/// </summary>
 		public ExperimentConfiguration()
 		{
-			Profile = new ExperimentProfile();
 			KeyMappings = new ExperimentKeyMappings();
 			ExportFolderPath = "";
 		}

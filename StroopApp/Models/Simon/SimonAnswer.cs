@@ -2,6 +2,7 @@
 {
     public enum SimonAnswer
     {
+        None,
         Left,
         Right,
     }

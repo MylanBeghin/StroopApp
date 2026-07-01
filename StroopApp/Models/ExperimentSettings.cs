@@ -24,7 +24,7 @@
             set => _participantContext.Participant = value;
         }
 
-        public ExperimentProfile CurrentProfile
+        public ExperimentProfile? CurrentProfile
         {
             get => _configuration.Profile;
             set => _configuration.Profile = value;

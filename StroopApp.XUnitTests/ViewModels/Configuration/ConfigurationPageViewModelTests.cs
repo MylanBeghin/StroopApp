@@ -79,7 +79,7 @@ namespace StroopApp.XUnitTests.ViewModels.Configuration
 			var dummyLanguageService = new DummyLanguageService();
 
             var profileViewModel = new ProfileManagementViewModel(dummyProfileService, TaskType.Stroop);
-			var dummyProfile = new ExperimentProfile { ProfileName = "TestProfile" };
+			var dummyProfile = new StroopProfile { ProfileName = "TestProfile" };
 			profileViewModel.CurrentProfile = dummyProfile;
 
 			var participantViewModel = new ParticipantManagementViewModel(dummyParticipantService, false);

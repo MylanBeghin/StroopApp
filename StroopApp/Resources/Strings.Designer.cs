@@ -1799,6 +1799,24 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Center.
+        /// </summary>
+        public static string SimonStimulusPositionMode_Center {
+            get {
+                return ResourceManager.GetString("SimonStimulusPositionMode_Center", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Left / Right.
+        /// </summary>
+        public static string SimonStimulusPositionMode_LeftRight {
+            get {
+                return ResourceManager.GetString("SimonStimulusPositionMode_LeftRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Experiment Configuration.
         /// </summary>
         public static string Title_ConfigPage {

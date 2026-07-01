@@ -1,8 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using StroopApp.Models;
+using StroopApp.Models.Simon;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
-
-using StroopApp.Models;
 
 namespace StroopApp.Services.Profile
 {
@@ -33,8 +33,22 @@ namespace StroopApp.Services.Profile
 				return new ObservableCollection<ExperimentProfile>();
 
 			var json = File.ReadAllText(_profilesPath);
-			return JsonSerializer.Deserialize<ObservableCollection<ExperimentProfile>>(json)
-				   ?? new ObservableCollection<ExperimentProfile>();
+            var doc = JsonDocument.Parse(json);
+			var profiles = new ObservableCollection<ExperimentProfile>();
+
+			foreach (var element in doc.RootElement.EnumerateArray())
+			{
+				var taskType = (TaskType)element.GetProperty("TaskType").GetInt32();
+				var raw = element.GetRawText();
+				
+				ExperimentProfile profile = taskType switch
+				{
+					TaskType.Stroop => JsonSerializer.Deserialize<StroopProfile>(raw)!,
+					_ => JsonSerializer.Deserialize<SimonProfile>(raw)!,
+				};
+				profiles.Add(profile);
+			}
+			return profiles;
 		}
 
         /// <summary>
@@ -49,7 +63,9 @@ namespace StroopApp.Services.Profile
                 Directory.CreateDirectory(_configDir);
             }
 
-            var json = JsonSerializer.Serialize(profiles, new JsonSerializerOptions { WriteIndented = true });
+			var elements = profiles.Select(p => JsonSerializer.SerializeToElement(p, p.GetType()));
+
+            var json = JsonSerializer.Serialize(elements, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(_profilesPath, json);
         }
 
@@ -72,25 +88,7 @@ namespace StroopApp.Services.Profile
 			}
 			else
 			{
-
-				existing.ProfileName = profile.ProfileName;
-				existing.TaskType = profile.TaskType;
-				existing.Hours = profile.Hours;
-				existing.Minutes = profile.Minutes;
-				existing.Seconds = profile.Seconds;
-				existing.WordDuration = profile.WordDuration;
-				existing.FixationDuration = profile.FixationDuration;
-				existing.VisualCueDuration = profile.VisualCueDuration;
-				existing.HasVisualCue = profile.HasVisualCue;
-				existing.GroupSize = profile.GroupSize;
-				existing.TaskDuration = profile.TaskDuration;
-				existing.WordCount = profile.WordCount;
-				existing.MaxReactionTime = profile.MaxReactionTime;
-				existing.CalculationMode = profile.CalculationMode;
-				existing.DominantPercent = profile.DominantPercent;
-				existing.CongruencePercent = profile.CongruencePercent;
-				existing.SwitchPercent = profile.SwitchPercent;
-				existing.TaskLanguage = profile.TaskLanguage;
+				existing.UpdateFrom(profile);
 				existing.UpdateDerivedValues();
 			}
 

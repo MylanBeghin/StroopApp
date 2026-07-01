@@ -12,14 +12,35 @@
                  Color="#c4c4c4"
                  Opacity="1" />
     </Window.Resources>
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ScrollViewer>
-            <ui:SimpleStackPanel Margin="16,16,16,64" Spacing="16">
+            <ui:SimpleStackPanel Margin="16,16,16,64" Spacing="16" >
                 <local:ProfileEditorHeaderView/>
+                <Border CornerRadius="4" BorderBrush="Gray" BorderThickness="1">
+                    <Grid  Height="80" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="12"/>
+                            <ColumnDefinition Width="0.6*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="12"/>
+                        </Grid.ColumnDefinitions>
+                        <ui:SimpleStackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="Position du stimulus" FontSize="16"/>
+                            <TextBlock Text="Choisissez l’endroit où le stimulus peut apparaître (centre vs gauche/droite)" FontSize="12"/>
+                        </ui:SimpleStackPanel>
+                        <ComboBox VerticalAlignment="Center" Width="180"
+                                  ItemsSource ="{Binding StimulusPositionModes}"
+                                  SelectedItem="{Binding SelectedStimulusPositionMode, Mode=TwoWay}"
+                                  DisplayMemberPath="DisplayName"
+                                  Grid.Column="3"
+                                  HorizontalAlignment="Stretch"/>
+                    </Grid>
+                </Border>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />

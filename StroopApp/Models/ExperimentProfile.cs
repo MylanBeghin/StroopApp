@@ -1,4 +1,6 @@
-﻿namespace StroopApp.Models
+﻿using DocumentFormat.OpenXml.Bibliography;
+
+namespace StroopApp.Models
 {
     public enum CalculationMode
     {
@@ -6,7 +8,7 @@
         WordCount
     }
 
-    public class ExperimentProfile
+    public abstract class ExperimentProfile
     {
         public ExperimentProfile()
         {
@@ -53,6 +55,28 @@
         public int? SwitchPercent { get; set; }
         public string TaskLanguage { get; set; }
 
+        public virtual void UpdateFrom(ExperimentProfile profile)
+        {
+            ProfileName = profile.ProfileName;
+            TaskType = profile.TaskType;
+            Hours = profile.Hours;
+            Minutes = profile.Minutes;
+            Seconds = profile.Seconds;
+            WordDuration = profile.WordDuration;
+            FixationDuration = profile.FixationDuration;
+            VisualCueDuration = profile.VisualCueDuration;
+            HasVisualCue = profile.HasVisualCue;
+            GroupSize = profile.GroupSize;
+            TaskDuration = profile.TaskDuration;
+            WordCount = profile.WordCount;
+            MaxReactionTime = profile.MaxReactionTime;
+            CalculationMode = profile.CalculationMode;
+            DominantPercent = profile.DominantPercent;
+            CongruencePercent = profile.CongruencePercent;
+            SwitchPercent = profile.SwitchPercent;
+            TaskLanguage = profile.TaskLanguage;
+        }
+
         public void UpdateDerivedValues()
         {
             WordDuration = MaxReactionTime + FixationDuration + VisualCueDuration;
@@ -73,30 +97,6 @@
             }
         }
 
-        public ExperimentProfile CloneProfile()
-        {
-            return new ExperimentProfile()
-            {
-                Id = this.Id,
-                ProfileName = this.ProfileName,
-                TaskType = this.TaskType,
-                CalculationMode = this.CalculationMode,
-                Hours = this.Hours,
-                Minutes = this.Minutes,
-                Seconds = this.Seconds,
-                TaskDuration = this.TaskDuration,
-                WordDuration = this.WordDuration,
-                MaxReactionTime = this.MaxReactionTime,
-                GroupSize = this.GroupSize,
-                VisualCueDuration = this.VisualCueDuration,
-                FixationDuration = this.FixationDuration,
-                WordCount = this.WordCount,
-                HasVisualCue = this.HasVisualCue,
-                DominantPercent = this.DominantPercent,
-                CongruencePercent = this.CongruencePercent,
-                SwitchPercent = this.SwitchPercent,
-                TaskLanguage = this.TaskLanguage
-            };
-        }
+        public abstract ExperimentProfile CloneProfile();
     }
 }

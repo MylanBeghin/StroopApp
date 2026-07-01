@@ -12,7 +12,6 @@
             // Arrange & Act
             var settings = new ExperimentSettings();
             // Assert
-            Assert.NotNull(settings.CurrentProfile);
             Assert.NotNull(settings.KeyMappings);
             Assert.NotNull(settings.ExperimentContext);
             Assert.Equal("", settings.ExportFolderPath);
@@ -47,7 +46,7 @@
         {
             // Arrange
             var settings = new ExperimentSettings();
-            var profile = new ExperimentProfile();
+            var profile = new StroopProfile();
             // Act
             settings.CurrentProfile = profile;
             // Assert
@@ -210,7 +209,7 @@
         public void Reset_DoesNotModifyCurrentProfile()
         {
             // Arrange
-            var profile = new ExperimentProfile
+            var profile = new StroopProfile
             {
                 ProfileName = "TestProfile"
             };

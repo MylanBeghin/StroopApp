@@ -16,16 +16,12 @@ namespace StroopApp.Services.Trial
             if (settings?.Participant is null)
                 throw new ArgumentException("Participant cannot be null", nameof(settings));
 
+            SimonProfile profile = (SimonProfile)settings.CurrentProfile;
             var simon = settings.KeyMappings.Simon;
-            int total = settings.CurrentProfile.WordCount;
-            int congruentCount = total * settings.CurrentProfile.CongruencePercent / 100;
+            int total = profile.WordCount;
+            int congruentCount = total * profile.CongruencePercent / 100;
 
-            List<bool> congruenceFlags =
-                Enumerable.Repeat(true, congruentCount)
-                .Concat(
-                    Enumerable.Repeat(false, total - congruentCount))
-                .OrderBy(_ => _random.Next())
-                .ToList();
+            List<bool> congruenceFlags = GenerateCongruenceFlags(total, congruentCount, profile.StimulusPositionMode);
 
             var trials = new List<ITrial>();
 
@@ -33,25 +29,18 @@ namespace StroopApp.Services.Trial
             {
                 bool isCongruent = congruenceFlags[i];
 
-                SimonAnswer answer = _random.Next(2) == 0
-                    ? SimonAnswer.Left
-                    : SimonAnswer.Right;
+                SimonAnswer answer = _random.Next(2) == 0 ? SimonAnswer.Left : SimonAnswer.Right;
 
-                string color = answer == SimonAnswer.Left
-                    ? simon.Left.Color
-                    : simon.Right.Color;
+                string color = answer == SimonAnswer.Left ? simon.Left.Color : simon.Right.Color;
 
-                StimulusPosition position = isCongruent
-                    ? (answer == SimonAnswer.Left ? StimulusPosition.Left : StimulusPosition.Right)
-                    : (answer == SimonAnswer.Left ? StimulusPosition.Right : StimulusPosition.Left);
-
+                StimulusPosition position = ComputePosition(answer, isCongruent, profile.StimulusPositionMode);
 
                 trials.Add(new SimonTrial
                 {
                     TrialNumber = i + 1,
                     Block = settings.Block,
                     ParticipantId = settings.Participant.Id,
-                    CongruencePercent = settings.CurrentProfile.CongruencePercent,
+                    CongruencePercent = profile.CongruencePercent,
                     IsCongruent = isCongruent,
                     ExpectedAnswer = answer,
                     Stimulus = new SimonStimulus(color, position, string.Empty)
@@ -59,6 +48,24 @@ namespace StroopApp.Services.Trial
 
             }
             return trials;
+        }
+
+        private List<bool> GenerateCongruenceFlags(int totalStimulusCount,int congruentCount, SimonStimulusPositionMode mode )
+        {
+            return mode == SimonStimulusPositionMode.Center ?
+                [.. Enumerable.Repeat(true, totalStimulusCount)] :
+                Enumerable.Repeat(true, congruentCount)
+                .Concat(
+                    Enumerable.Repeat(false, totalStimulusCount - congruentCount))
+                .OrderBy(_ => _random.Next())
+                .ToList();
+        }
+        private StimulusPosition ComputePosition(SimonAnswer answer,bool isCongruent, SimonStimulusPositionMode mode)
+        {
+            return mode == SimonStimulusPositionMode.Center ?
+                    StimulusPosition.Center : isCongruent
+                    ? (answer == SimonAnswer.Left ? StimulusPosition.Left : StimulusPosition.Right)
+                    : (answer == SimonAnswer.Left ? StimulusPosition.Right : StimulusPosition.Left);
         }
     }
 }

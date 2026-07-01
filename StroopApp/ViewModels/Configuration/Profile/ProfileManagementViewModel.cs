@@ -2,10 +2,9 @@
 using CommunityToolkit.Mvvm.Input;
 using StroopApp.Core;
 using StroopApp.Models;
+using StroopApp.Models.Simon;
 using StroopApp.Resources;
-using StroopApp.Services.Navigation;
 using StroopApp.Services.Profile;
-using StroopApp.Views;
 using StroopApp.Views.Configuration.Profile;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -49,7 +48,13 @@ namespace StroopApp.ViewModels.Configuration.Profile
         {
             try
             {
-                var newProfile = new ExperimentProfile { TaskType = _taskType };
+                ExperimentProfile newProfile = _taskType switch
+                {
+                    TaskType.Stroop => new StroopProfile { TaskType = _taskType },
+                    TaskType.Simon => new SimonProfile { TaskType = _taskType },
+                    _ => throw new ArgumentOutOfRangeException(nameof(_taskType))
+                };
+
                 var viewModel = OpenProfileEditor(newProfile);
 
                 if (viewModel is not null)
@@ -120,23 +125,19 @@ namespace StroopApp.ViewModels.Configuration.Profile
 
         private ProfileEditorViewModelBase? OpenProfileEditor(ExperimentProfile profile)
         {
-            ProfileEditorViewModelBase vm;
-            Window win;
-            if (_taskType == TaskType.Stroop)
+            ProfileEditorViewModelBase viewModel = _taskType switch
             {
-                vm = new StroopProfileEditorViewModel(profile, Profiles, _profileService);
-                win = new StroopProfileEditorWindow((StroopProfileEditorViewModel)vm);
-            }
-            else if (_taskType == TaskType.Simon)
+                TaskType.Simon => new SimonProfileEditorViewModel((SimonProfile)profile, Profiles, _profileService),
+                _ => new StroopProfileEditorViewModel(profile, Profiles, _profileService),
+            };
+            Window win = viewModel switch
             {
-                vm = new SimonProfileEditorViewModel(profile, Profiles, _profileService);
-                win = new SimonProfileEditorWindow((SimonProfileEditorViewModel)vm);
-            }
-            else
-                return null;
-
+                StroopProfileEditorViewModel vm => new StroopProfileEditorWindow(vm),
+                SimonProfileEditorViewModel vm => new SimonProfileEditorWindow(vm),
+                _ => throw new InvalidOperationException("Invalid ViewModel"),
+            };
             win.ShowDialog();
-            return win.DialogResult == true ? vm : null;
+            return win.DialogResult == true ? viewModel : null;
         }
     }
 }

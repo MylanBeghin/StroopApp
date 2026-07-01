@@ -565,7 +565,7 @@ namespace StroopApp.ViewModels.State.UnitTests
             var model = new SharedExperimentData();
             var viewModel = new SharedExperimentDataViewModel(model);
 
-            var profile = new ExperimentProfile
+            var profile = new StroopProfile
             {
                 WordCount = 10,
                 ProfileName = "TestProfile",
@@ -607,7 +607,7 @@ namespace StroopApp.ViewModels.State.UnitTests
             var model = new SharedExperimentData();
             var viewModel = new SharedExperimentDataViewModel(model);
 
-            var profile = new ExperimentProfile
+            var profile = new StroopProfile
             {
                 WordCount = 15,
                 ProfileName = "TestProfile",

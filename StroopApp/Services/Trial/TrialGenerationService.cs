@@ -1,5 +1,4 @@
 ﻿using StroopApp.Models;
-using StroopApp.Resources;
 using StroopApp.Services.Language;
 using StroopApp.ViewModels.State;
 using System.Globalization;
