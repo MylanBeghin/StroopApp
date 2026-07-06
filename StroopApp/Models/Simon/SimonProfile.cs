@@ -7,6 +7,7 @@ namespace StroopApp.Models.Simon
         public SimonStimulusPositionMode StimulusPositionMode { get; set; }
         public SimonProfile() : base()
         {
+            TaskType = TaskType.Simon;
             StimulusPositionMode = SimonStimulusPositionMode.LeftRight;
         }
 

@@ -4,6 +4,7 @@
     {
         public StroopProfile() : base()
         {
+            TaskType = TaskType.Stroop;
         }
 
         public override StroopProfile CloneProfile()

@@ -113,7 +113,8 @@ namespace StroopApp.ViewModels.Configuration.Profile
                     if (profileToDelete is null)
                         return;
 
-                    _profileService.DeleteProfile(profileToDelete, Profiles);
+                    _profileService.DeleteProfile(profileToDelete);
+                    Profiles.Remove(profileToDelete);
                     CurrentProfile = Profiles.Count > 0 ? Profiles[0] : null;
                 }
             }

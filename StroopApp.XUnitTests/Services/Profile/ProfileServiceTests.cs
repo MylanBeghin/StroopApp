@@ -1,12 +1,13 @@
-﻿using System;
+﻿using StroopApp.Models;
+using StroopApp.Models.Simon;
+using StroopApp.Services.Profile;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-
-using StroopApp.Models;
-using StroopApp.Services.Profile;
 using Xunit;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace StroopApp.Services.Profile.UnitTests
 {
@@ -650,6 +651,46 @@ namespace StroopApp.Services.Profile.UnitTests
             Assert.Equal(16000, savedProfile.TaskDuration);
         }
 
+
+        /// <summary>
+        /// Adds a profile in a service and verify in a new one that the file has been written in disk
+        /// Input : StroopProfile and a double service
+        /// Expect : Profile persisted in the disk with properties
+        /// </summary>
+        [Fact]
+        public void UpsertProfile_NewProfile_PersistsToDisk()
+        {
+            // Arrange
+            var tempDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+            var config = new AppConfiguration { ConfigDirectory = tempDir };
+            var service1 = new ProfileService(config);
+            var profile = new StroopProfile
+            {
+                Id = Guid.NewGuid(),
+                ProfileName = "Test Profile",
+            };
+            var expectedPath = Path.Combine(tempDir, "profiles.json");
+
+            try
+            {
+                // Act
+                service1.UpsertProfile(profile);
+                var service2 = new ProfileService(config);
+                var loadedProfiles = service2.LoadProfiles();
+
+                // Assert
+                Assert.Contains(loadedProfiles, p => p.Id == profile.Id);
+            }
+            finally
+            {
+                // Cleanup
+                if (Directory.Exists(tempDir))
+                {
+                    Directory.Delete(tempDir, true);
+                }
+            }
+        }
+
         /// <summary>
         /// Tests that UpsertProfile handles all CalculationMode enum values correctly.
         /// Input: Profiles with different CalculationMode values.
@@ -679,6 +720,8 @@ namespace StroopApp.Services.Profile.UnitTests
             Assert.NotNull(result);
             Assert.Equal(mode, result.First().CalculationMode);
         }
+
+
 
         /// <summary>
         /// Tests that SaveProfiles throws ArgumentNullException when profiles parameter is null.
@@ -978,26 +1021,20 @@ namespace StroopApp.Services.Profile.UnitTests
                 Id = Guid.NewGuid(),
                 ProfileName = "Other Profile"
             };
-            var profiles = new ObservableCollection<ExperimentProfile> { profileToDelete, otherProfile };
+            service.SaveProfiles([profileToDelete, otherProfile]);
+            // var profiles = new ObservableCollection<ExperimentProfile> { profileToDelete, otherProfile };
             var profilesPath = Path.Combine(tempDir, "profiles.json");
 
             try
             {
                 // Act
-                service.DeleteProfile(profileToDelete, profiles);
+                service.DeleteProfile(profileToDelete);
 
                 // Assert
-                Assert.Single(profiles);
-                Assert.DoesNotContain(profileToDelete, profiles);
-                Assert.Contains(otherProfile, profiles);
-
-                // Verify SaveProfiles was called by checking file content
-                Assert.True(File.Exists(profilesPath));
-                var content = File.ReadAllText(profilesPath);
-                var deserializedProfiles = JsonSerializer.Deserialize<ObservableCollection<StroopProfile>>(content);
-                Assert.NotNull(deserializedProfiles);
-                Assert.Single(deserializedProfiles);
-                Assert.Equal(otherProfile.Id, deserializedProfiles[0].Id);
+                var profiles = service.LoadProfiles();
+                Assert.DoesNotContain(profiles, p => p.Id == profileToDelete.Id);
+                Assert.Contains(profiles, p => p.Id == otherProfile.Id);
+                
             }
             finally
             {
@@ -1031,20 +1068,21 @@ namespace StroopApp.Services.Profile.UnitTests
                 Id = Guid.NewGuid(),
                 ProfileName = "Non-Existent Profile"
             };
-            var profiles = new ObservableCollection<ExperimentProfile> { existingProfile };
+            service.SaveProfiles([existingProfile]);
+
+            // var profiles = new ObservableCollection<ExperimentProfile> { existingProfile };
             var profilesPath = Path.Combine(tempDir, "profiles.json");
 
             try
             {
                 // Act
-                service.DeleteProfile(nonExistentProfile, profiles);
+                service.DeleteProfile(nonExistentProfile);
 
                 // Assert
+                var profiles = service.LoadProfiles();
                 Assert.Single(profiles);
-                Assert.Contains(existingProfile, profiles);
-
-                // Verify SaveProfiles was not called (file should not exist)
-                Assert.False(File.Exists(profilesPath));
+                Assert.Contains(profiles, p => p.Id == existingProfile.Id);
+                Assert.DoesNotContain(profiles, p => p.Id == nonExistentProfile.Id); 
             }
             finally
             {
@@ -1073,52 +1111,19 @@ namespace StroopApp.Services.Profile.UnitTests
                 Id = Guid.NewGuid(),
                 ProfileName = "Test Profile"
             };
-            var profiles = new ObservableCollection<ExperimentProfile>();
+            // var profiles = new ObservableCollection<ExperimentProfile>();
             var profilesPath = Path.Combine(tempDir, "profiles.json");
 
             try
             {
                 // Act
-                service.DeleteProfile(profile, profiles);
+                service.DeleteProfile(profile);
 
                 // Assert
-                Assert.Empty(profiles);
+                Assert.Empty(service.LoadProfiles());
 
                 // Verify SaveProfiles was not called (file should not exist)
                 Assert.False(File.Exists(profilesPath));
-            }
-            finally
-            {
-                // Cleanup
-                if (Directory.Exists(tempDir))
-                {
-                    Directory.Delete(tempDir, true);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Tests that DeleteProfile throws ArgumentNullException when profiles collection is null.
-        /// Input: Null profiles collection.
-        /// Expected: ArgumentNullException is thrown.
-        /// </summary>
-        [Fact]
-        public void DeleteProfile_NullProfilesCollection_ThrowsArgumentNullException()
-        {
-            // Arrange
-            var tempDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-            var config = new AppConfiguration { ConfigDirectory = tempDir };
-            var service = new ProfileService(config);
-            var profile = new StroopProfile
-            {
-                Id = Guid.NewGuid(),
-                ProfileName = "Test Profile"
-            };
-
-            try
-            {
-                // Act & Assert
-                Assert.Throws<ArgumentNullException>(() => service.DeleteProfile(profile, null!));
             }
             finally
             {
@@ -1147,20 +1152,17 @@ namespace StroopApp.Services.Profile.UnitTests
                 Id = Guid.NewGuid(),
                 ProfileName = "Existing Profile"
             };
-            var profiles = new ObservableCollection<ExperimentProfile> { existingProfile };
+            service.SaveProfiles([existingProfile]);
             var profilesPath = Path.Combine(tempDir, "profiles.json");
 
             try
             {
                 // Act
-                service.DeleteProfile(null!, profiles);
+                service.DeleteProfile(null!);
 
                 // Assert
-                Assert.Single(profiles);
-                Assert.Contains(existingProfile, profiles);
-
-                // Verify SaveProfiles was not called
-                Assert.False(File.Exists(profilesPath));
+                var profiles = service.LoadProfiles();
+                Assert.Contains(profiles, p=>p.Id == existingProfile.Id);
             }
             finally
             {
@@ -1199,19 +1201,21 @@ namespace StroopApp.Services.Profile.UnitTests
                 Id = Guid.NewGuid(),
                 ProfileName = "Profile 3"
             };
-            var profiles = new ObservableCollection<ExperimentProfile> { profile1, profile2, profile3 };
+            service.SaveProfiles([profile1, profile2, profile3]);
+            // var profiles = new ObservableCollection<ExperimentProfile> { profile1, profile2, profile3 };
             var profilesPath = Path.Combine(tempDir, "profiles.json");
 
             try
             {
                 // Act
-                service.DeleteProfile(profile2, profiles);
+                service.DeleteProfile(profile2);
 
                 // Assert
+                var profiles = service.LoadProfiles();
                 Assert.Equal(2, profiles.Count);
-                Assert.Contains(profile1, profiles);
-                Assert.DoesNotContain(profile2, profiles);
-                Assert.Contains(profile3, profiles);
+                Assert.Contains(profiles, p => p.Id == profile1.Id);
+                Assert.DoesNotContain(profiles, p => p.Id == profile2.Id);
+                Assert.Contains(profiles, p=> p.Id == profile3.Id);
 
                 // Verify SaveProfiles was called by checking file content
                 Assert.True(File.Exists(profilesPath));
@@ -1247,15 +1251,17 @@ namespace StroopApp.Services.Profile.UnitTests
                 Id = Guid.NewGuid(),
                 ProfileName = "Only Profile"
             };
-            var profiles = new ObservableCollection<ExperimentProfile> { profile };
+            service.SaveProfiles([profile]);
+            // var profiles = new ObservableCollection<ExperimentProfile> { profile };
             var profilesPath = Path.Combine(tempDir, "profiles.json");
 
             try
             {
                 // Act
-                service.DeleteProfile(profile, profiles);
+                service.DeleteProfile(profile);
 
                 // Assert
+                var profiles = service.LoadProfiles();
                 Assert.Empty(profiles);
 
                 // Verify SaveProfiles was called with empty collection
@@ -1274,6 +1280,56 @@ namespace StroopApp.Services.Profile.UnitTests
                 }
             }
         }
+
+        /// <summary>
+        /// Ensures that the deletion of one TaskType profile does not erases the other types.
+        /// Input : Collection with one StroopProfile and one SimonProfile, the StroopProfile is deleted
+        /// Expected : StroopProfile removed, SimonProfile preserved 
+        /// </summary>
+        [Fact]
+        public void DeleteProfile_StroopProfile_DoesNotRemoveSimonProfile()
+        {
+            // Arrange
+            var tempDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+            var config = new AppConfiguration { ConfigDirectory = tempDir };
+            var service = new ProfileService(config);
+            var profile1 = new StroopProfile
+            {
+                Id = Guid.NewGuid(),
+                ProfileName = "Only Profile"
+            };
+            var profile2 = new SimonProfile
+            {
+                Id = Guid.NewGuid(),
+                ProfileName = "Only Profile"
+            };
+            service.SaveProfiles([profile1, profile2]);
+            // var profiles = new ObservableCollection<ExperimentProfile> { profile };
+            var profilesPath = Path.Combine(tempDir, "profiles.json");
+
+
+            try
+            {
+                // Act
+                service.DeleteProfile(profile1);
+
+                // Assert
+                var profiles = service.LoadProfiles();
+                Assert.DoesNotContain(profiles, p => p.Id == profile1.Id);
+                Assert.Contains(profiles, p => p.Id == profile2.Id);
+                Assert.IsType<SimonProfile>(profiles.Single(p => p.Id == profile2.Id));
+            }
+            finally
+            {
+                // Cleanup
+                if (Directory.Exists(tempDir))
+                {
+                    Directory.Delete(tempDir, true);
+                }
+            }
+        }
+
+
 
         /// <summary>
         /// Tests that LoadLastSelectedProfile returns null when the lastProfile.json file does not exist.

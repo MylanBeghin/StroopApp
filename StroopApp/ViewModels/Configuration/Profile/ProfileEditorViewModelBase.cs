@@ -220,10 +220,11 @@ namespace StroopApp.ViewModels.Configuration.Profile
         private void LoadUpdatedProfiles() 
         {
             var updatedProfiles = _profileService.UpsertProfile(Profile);
+            var taskSpecificProfiles = updatedProfiles.Where(p => p.TaskType == Profile.TaskType);
             Profiles.Clear();
-            foreach (var prof in updatedProfiles)
+            foreach (var profile in taskSpecificProfiles)
             {
-                Profiles.Add(prof);
+                Profiles.Add(profile);
             }
         }
 
