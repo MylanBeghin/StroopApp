@@ -5,5 +5,7 @@
         None,
         Left,
         Right,
+        NoGo,
+        Go
     }
 }

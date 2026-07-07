@@ -755,7 +755,7 @@
     <value>Profile name</value>
   </data>
   <data name="Label_KeyLeft" xml:space="preserve">
-    <value>Key associated with left:</value>
+    <value>Key associated with left (or Go):</value>
   </data>
   <data name="Label_KeyRight" xml:space="preserve">
     <value>Key associated with right</value>
@@ -794,13 +794,22 @@
     <value>If you see a circle with this color : </value>
   </data>
   <data name="Simon_LeftKey_Instruction" xml:space="preserve">
-    <value>Click on the LEFT key (key </value>
+    <value>Click on the LEFT key ({0} key)</value>
+  </data>
+  <data name="Simon_GoKey_Instruction" xml:space="preserve">
+    <value>Click on the key ({0} key) </value>
+  </data>
+  <data name="Simon_NoGoKey_Instruction" xml:space="preserve">
+    <value>Don't click on any key.</value>
   </data>
   <data name="Simon_RightKey_Instruction" xml:space="preserve">
-    <value>Click on the RIGHT key (key </value>
+    <value>Click on the RIGHT key ({0} key)</value>
   </data>
   <data name="Simon_Page1_Display2" xml:space="preserve">
     <value>You will have to press the RIGHT or LEFT key, depending on the COLOR of the circle.</value>
+  </data>
+  <data name="Simon_Page1_Display3" xml:space="preserve">
+    <value>You will have to press the key or not, depending on the COLOR of the circle.</value>
   </data>
   <data name="Header_StimulusPosition" xml:space="preserve">
     <value>Position</value>
@@ -819,5 +828,23 @@
   </data>
   <data name="SimonStimulusPositionMode_LeftRight" xml:space="preserve">
     <value>Left / Right</value>
+  </data>
+  <data name="SimonAnswerMode_LeftRight" xml:space="preserve">
+    <value>Two Keys</value>
+  </data>
+  <data name="SimonAnswerMode_GoNoGo" xml:space="preserve">
+    <value>One Key</value>
+  </data>
+  <data name="Header_SimonStimulusPositionMode" xml:space="preserve">
+    <value>Stimulus position</value>
+  </data>
+  <data name="Description_SimonAnswerMode" xml:space="preserve">
+    <value>Choose between a two keys (left/right) or one key (go/no-go) mode</value>
+  </data>
+  <data name="Header_SimonAnswerMode" xml:space="preserve">
+    <value>Answer mode</value>
+  </data>
+  <data name="Description_SimonStimulusPositionMode" xml:space="preserve">
+    <value>Choose the location where the stimulus can appear (center vs. left/right)</value>
   </data>
 </root>

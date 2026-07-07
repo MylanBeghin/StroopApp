@@ -1,14 +1,14 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
-
-namespace StroopApp.Models.Simon
+﻿namespace StroopApp.Models.Simon
 {
     public class SimonProfile : ExperimentProfile
     {
         public SimonStimulusPositionMode StimulusPositionMode { get; set; }
+        public SimonAnswerMode AnswerMode { get; set; }
         public SimonProfile() : base()
         {
             TaskType = TaskType.Simon;
             StimulusPositionMode = SimonStimulusPositionMode.LeftRight;
+            AnswerMode = SimonAnswerMode.LeftRight;
         }
 
         public override void UpdateFrom(ExperimentProfile profile)
@@ -17,6 +17,7 @@ namespace StroopApp.Models.Simon
             if (profile is SimonProfile simonProfile)
             {
                 StimulusPositionMode = simonProfile.StimulusPositionMode;
+                AnswerMode = simonProfile.AnswerMode;
             }
         }
         public override SimonProfile CloneProfile()
@@ -43,6 +44,7 @@ namespace StroopApp.Models.Simon
                 SwitchPercent = this.SwitchPercent,
                 TaskLanguage = this.TaskLanguage,
                 StimulusPositionMode = this.StimulusPositionMode,
+                AnswerMode = this.AnswerMode,
             };
         }
     }

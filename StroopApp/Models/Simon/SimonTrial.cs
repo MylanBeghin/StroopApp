@@ -18,20 +18,5 @@
         public bool? IsValidResponse { get; set; }
         public double? ReactionTime { get; set; }
         public int TrialNumber { get; set; }
-
-        /// <summary>
-        /// Calculates the expected answer based on trial type (Congruent or Incongruent).
-        /// </summary>
-        public void DetermineExpectedAnswer()
-        {
-            if (IsCongruent)
-            {
-                ExpectedAnswer = Stimulus.Position == StimulusPosition.Left ? SimonAnswer.Left : SimonAnswer.Right;
-            }
-            else
-            {
-                ExpectedAnswer = Stimulus.Position == StimulusPosition.Left ? SimonAnswer.Right : SimonAnswer.Left;
-            }
-        }
     }
 }

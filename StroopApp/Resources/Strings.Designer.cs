@@ -556,6 +556,24 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Choose between a two keys (left/right) or one key (go/no-go) mode.
+        /// </summary>
+        public static string Description_SimonAnswerMode {
+            get {
+                return ResourceManager.GetString("Description_SimonAnswerMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Choose the location where the stimulus can appear (center vs. left/right).
+        /// </summary>
+        public static string Description_SimonStimulusPositionMode {
+            get {
+                return ResourceManager.GetString("Description_SimonStimulusPositionMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Error during connection: {0}.
         /// </summary>
         public static string Error_ConnectionError {
@@ -781,7 +799,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Trial duration must be positive and divide task duration..
+        ///   Recherche une chaîne localisée semblable à G.
         /// </summary>
         public static string Error_WordDurationInvalid {
             get {
@@ -1051,6 +1069,24 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Answer mode.
+        /// </summary>
+        public static string Header_SimonAnswerMode {
+            get {
+                return ResourceManager.GetString("Header_SimonAnswerMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Stimulus position.
+        /// </summary>
+        public static string Header_SimonStimulusPositionMode {
+            get {
+                return ResourceManager.GetString("Header_SimonStimulusPositionMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Color.
         /// </summary>
         public static string Header_StimulusColor {
@@ -1276,7 +1312,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Key associated with left:.
+        ///   Recherche une chaîne localisée semblable à Key associated with left (or Go):.
         /// </summary>
         public static string Label_KeyLeft {
             get {
@@ -1727,11 +1763,29 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Click on the LEFT key (key .
+        ///   Recherche une chaîne localisée semblable à Click on the key ({0} key) .
+        /// </summary>
+        public static string Simon_GoKey_Instruction {
+            get {
+                return ResourceManager.GetString("Simon_GoKey_Instruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Click on the LEFT key ({0} key).
         /// </summary>
         public static string Simon_LeftKey_Instruction {
             get {
                 return ResourceManager.GetString("Simon_LeftKey_Instruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Don&apos;t click on any key..
+        /// </summary>
+        public static string Simon_NoGoKey_Instruction {
+            get {
+                return ResourceManager.GetString("Simon_NoGoKey_Instruction", resourceCulture);
             }
         }
         
@@ -1750,6 +1804,15 @@ namespace StroopApp.Resources {
         public static string Simon_Page1_Display2 {
             get {
                 return ResourceManager.GetString("Simon_Page1_Display2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à You will have to press the key or not, depending on the COLOR of the circle..
+        /// </summary>
+        public static string Simon_Page1_Display3 {
+            get {
+                return ResourceManager.GetString("Simon_Page1_Display3", resourceCulture);
             }
         }
         
@@ -1790,11 +1853,29 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Click on the RIGHT key (key .
+        ///   Recherche une chaîne localisée semblable à Click on the RIGHT key ({0} key).
         /// </summary>
         public static string Simon_RightKey_Instruction {
             get {
                 return ResourceManager.GetString("Simon_RightKey_Instruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à One Key.
+        /// </summary>
+        public static string SimonAnswerMode_GoNoGo {
+            get {
+                return ResourceManager.GetString("SimonAnswerMode_GoNoGo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Two Keys.
+        /// </summary>
+        public static string SimonAnswerMode_LeftRight {
+            get {
+                return ResourceManager.GetString("SimonAnswerMode_LeftRight", resourceCulture);
             }
         }
         

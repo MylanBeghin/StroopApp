@@ -30,8 +30,8 @@
                             <ColumnDefinition Width="12"/>
                         </Grid.ColumnDefinitions>
                         <ui:SimpleStackPanel Grid.Column="1" VerticalAlignment="Center">
-                            <TextBlock Text="Position du stimulus" FontSize="16"/>
-                            <TextBlock Text="Choisissez l’endroit où le stimulus peut apparaître (centre vs gauche/droite)" FontSize="12"/>
+                            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_SimonStimulusPositionMode]}" FontSize="16"/>
+                            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Description_SimonStimulusPositionMode]}" FontSize="12"/>
                         </ui:SimpleStackPanel>
                         <ComboBox VerticalAlignment="Center" Width="180"
                                   ItemsSource ="{Binding StimulusPositionModes}"
@@ -41,6 +41,29 @@
                                   HorizontalAlignment="Stretch"/>
                     </Grid>
                 </Border>
+
+                <Border CornerRadius="4" BorderBrush="Gray" BorderThickness="1">
+                    <Grid  Height="80" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="12"/>
+                            <ColumnDefinition Width="0.6*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="12"/>
+                        </Grid.ColumnDefinitions>
+                        <ui:SimpleStackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Header_SimonAnswerMode]}" FontSize="16"/>
+                            <TextBlock Text="{Binding Source={StaticResource Loc}, Path=[Description_SimonAnswerMode]}" FontSize="12"/>
+                        </ui:SimpleStackPanel>
+                        <ComboBox VerticalAlignment="Center" Width="180"
+                  ItemsSource ="{Binding AnswerModes}"
+                  SelectedItem="{Binding SelectedAnswerMode, Mode=TwoWay}"
+                  DisplayMemberPath="DisplayName"
+                  Grid.Column="3"
+                  HorizontalAlignment="Stretch"/>
+                    </Grid>
+                </Border>
+
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />

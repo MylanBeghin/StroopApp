@@ -93,6 +93,7 @@ namespace StroopApp.ViewModels.Experiment.Participant.Simon
                     {
                         _responseTime.Stop();
                         trial.ReactionTime = _inputTcs.Task.Result;
+                        EvaluateTrial(trial);
                         Settings.ExperimentContext.CurrentBlock.TrialTimes.Add(trial.ReactionTime);
                         Settings.ExperimentContext.ReactionPoints.Add(new ReactionTimePoint(trial.TrialNumber, trial.ReactionTime, trial.IsValidResponse));
                         CurrentStepViewModel = new FixationCrossViewModel();
@@ -102,8 +103,19 @@ namespace StroopApp.ViewModels.Experiment.Participant.Simon
                     {
                         _responseTime.Stop();
                         _inputTcs.TrySetCanceled();
-                        Settings.ExperimentContext.CurrentBlock.TrialTimes.Add(trial.ReactionTime);
-                        Settings.ExperimentContext.ReactionPoints.Add(new ReactionTimePoint(trial.TrialNumber, double.NaN, null));
+
+                        if (trial.ExpectedAnswer == SimonAnswer.NoGo)
+                        {
+                            trial.GivenAnswer = SimonAnswer.NoGo;
+                            EvaluateTrial(trial);
+                            Settings.ExperimentContext.CurrentBlock.TrialTimes.Add(trial.ReactionTime);
+                            Settings.ExperimentContext.ReactionPoints.Add(new ReactionTimePoint(trial.TrialNumber, double.NaN, true));
+                        }
+                        else
+                        {
+                            Settings.ExperimentContext.CurrentBlock.TrialTimes.Add(trial.ReactionTime);
+                            Settings.ExperimentContext.ReactionPoints.Add(new ReactionTimePoint(trial.TrialNumber, double.NaN, null));
+                        }
                     }
                     if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
                     {
@@ -131,10 +143,7 @@ namespace StroopApp.ViewModels.Experiment.Participant.Simon
             if (_inputTcs == null || _inputTcs.Task.IsCompleted)
                 return;
 
-            SimonAnswer? answer =
-                key == Settings.KeyMappings.Simon.Left.Key ? SimonAnswer.Left :
-                key == Settings.KeyMappings.Simon.Right.Key ? SimonAnswer.Right :
-                null;
+            SimonAnswer? answer = MapKeyToAnswer(key);
 
             if (answer is SimonAnswer simonAnswer)
             {
@@ -142,9 +151,24 @@ namespace StroopApp.ViewModels.Experiment.Participant.Simon
                 if (trial is null)
                     return;
                 trial.GivenAnswer = simonAnswer;
-                trial.IsValidResponse = trial.ExpectedAnswer == simonAnswer;
                 _inputTcs.TrySetResult(_responseTime.Elapsed.TotalMilliseconds);
             }
+        }
+
+        private SimonAnswer? MapKeyToAnswer(Key key)
+        {
+            var simonMappings = Settings.KeyMappings.Simon; 
+            return Settings.CurrentProfile is SimonProfile { AnswerMode: SimonAnswerMode.GoNoGo }
+                ? (key == simonMappings.Left.Key ? SimonAnswer.Go : null) :
+                key == simonMappings.Left.Key ? SimonAnswer.Left :
+                key == simonMappings.Right.Key ? SimonAnswer.Right :
+                null;
+        }
+
+        private void EvaluateTrial(SimonTrial trial)
+        {
+            trial.IsValidResponse = trial.GivenAnswer == SimonAnswer.None 
+                ? null : trial.ExpectedAnswer == trial.GivenAnswer;
         }
 
         public void StopTask()

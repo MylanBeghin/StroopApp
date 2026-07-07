@@ -17,7 +17,7 @@ namespace StroopApp.Services.Trial
                 throw new ArgumentException("Participant cannot be null", nameof(settings));
 
             SimonProfile profile = (SimonProfile)settings.CurrentProfile;
-            var simon = settings.KeyMappings.Simon;
+            var responseMappings = settings.KeyMappings.Simon;
             int total = profile.WordCount;
             int congruentCount = total * profile.CongruencePercent / 100;
 
@@ -29,11 +29,9 @@ namespace StroopApp.Services.Trial
             {
                 bool isCongruent = congruenceFlags[i];
 
-                SimonAnswer answer = _random.Next(2) == 0 ? SimonAnswer.Left : SimonAnswer.Right;
-
-                string color = answer == SimonAnswer.Left ? simon.Left.Color : simon.Right.Color;
-
-                StimulusPosition position = ComputePosition(answer, isCongruent, profile.StimulusPositionMode);
+                SimonAnswer answer = ComputeAnswer(profile.AnswerMode, _random.Next(2));
+                string color = ComputeColor(answer, responseMappings);
+                StimulusPosition position = ComputePosition(answer, isCongruent, profile.AnswerMode, profile.StimulusPositionMode);
 
                 trials.Add(new SimonTrial
                 {
@@ -60,12 +58,32 @@ namespace StroopApp.Services.Trial
                 .OrderBy(_ => _random.Next())
                 .ToList();
         }
-        private StimulusPosition ComputePosition(SimonAnswer answer,bool isCongruent, SimonStimulusPositionMode mode)
+        private StimulusPosition ComputePosition(SimonAnswer answer,bool isCongruent, SimonAnswerMode answerMode, SimonStimulusPositionMode positionMode)
         {
-            return mode == SimonStimulusPositionMode.Center ?
-                    StimulusPosition.Center : isCongruent
+            if (positionMode == SimonStimulusPositionMode.Center)
+                return StimulusPosition.Center;
+
+            if(answerMode == SimonAnswerMode.GoNoGo)
+                return _random.Next(2) == 0 ? StimulusPosition.Left : StimulusPosition.Right;
+            
+            return isCongruent
                     ? (answer == SimonAnswer.Left ? StimulusPosition.Left : StimulusPosition.Right)
                     : (answer == SimonAnswer.Left ? StimulusPosition.Right : StimulusPosition.Left);
+        }
+        private SimonAnswer ComputeAnswer(SimonAnswerMode answerMode, int draw)
+        {
+            return (answerMode, draw) switch
+            {
+                (SimonAnswerMode.GoNoGo, 0) => SimonAnswer.Go,
+                (SimonAnswerMode.GoNoGo, 1) => SimonAnswer.NoGo,
+                (SimonAnswerMode.LeftRight, 0) => SimonAnswer.Left,
+                (SimonAnswerMode.LeftRight, 1) => SimonAnswer.Right,
+                _ => throw new NotImplementedException(),
+            };
+        }
+        private string ComputeColor(SimonAnswer answer, SimonResponseMappings simon)
+        {
+            return answer is SimonAnswer.Left or SimonAnswer.Go ? simon.Left.Color : simon.Right.Color;
         }
     }
 }
