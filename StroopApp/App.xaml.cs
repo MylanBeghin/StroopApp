@@ -38,11 +38,10 @@ namespace StroopApp
 
             LanguageService = ServiceProvider.GetRequiredService<ILanguageService>();
             WindowManager = ServiceProvider.GetRequiredService<IWindowManager>();
-
+            var sessionService = ServiceProvider.GetRequiredService<IExperimentSessionService>();
             var pageFactory = ServiceProvider.GetRequiredService<IPageFactory>();
 
-            //var expWin = new ExperimentWindow(pageFactory, LanguageService);
-            var expWin = new ExperimentWindow(pageFactory, LanguageService);
+            var expWin = new ExperimentWindow(pageFactory, LanguageService, sessionService);
             expWin.Show();
         }
 
