@@ -10,17 +10,28 @@
     <UserControl.Resources>
         <conv:StimulusPositionToGridColumnConverter x:Key="PositionToGridColumnConverter" />
         <conv:StimulusPositionToGridColumnSpanConverter x:Key="PositionToGridColumnSpanConverter" />
+        <conv:SimonShapeToGeometryConverter x:Key="SimonShapeToGeometryConverter" />
     </UserControl.Resources>
     <Grid Background="Black" Width="600">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Ellipse Width="100" Height="100"
-                 Fill="{Binding ForegroundBrush}"
-                 Grid.Column="{Binding Position, Converter={StaticResource PositionToGridColumnConverter}}"
-                 Grid.ColumnSpan="{Binding Position, Converter={StaticResource PositionToGridColumnSpanConverter}}"
-                 HorizontalAlignment="Center"
-                 VerticalAlignment="Center" />
+        <!--Path for the stimulus-->
+        <Path Width="100" Height="100" Stretch="Uniform"
+              Fill="{Binding ForegroundBrush}"
+              Grid.Column="{Binding Position, Converter={StaticResource PositionToGridColumnConverter}}"
+              Grid.ColumnSpan="{Binding Position, Converter={StaticResource PositionToGridColumnSpanConverter}}"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Data="{Binding Shape, Converter={StaticResource SimonShapeToGeometryConverter}}"/>
+        <!--Path for the outline shape if there is one-->
+        <Path Width="180" Height="180" Stroke="White" Stretch="Uniform"
+              Fill="Transparent" StrokeThickness="6"
+              Grid.Column="{Binding Position, Converter={StaticResource PositionToGridColumnConverter}}"
+              Grid.ColumnSpan="{Binding Position, Converter={StaticResource PositionToGridColumnSpanConverter}}"
+              HorizontalAlignment="Center" VerticalAlignment="Center"
+              Data="{Binding AroundShape, Converter={StaticResource SimonShapeToGeometryConverter}}"/>
+
     </Grid>
 </UserControl>

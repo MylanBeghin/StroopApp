@@ -51,6 +51,8 @@ namespace StroopApp.ViewModels.Experiment.Participant.Simon
                     throw new InvalidOperationException("CurrentBlock is not initialized");
                 }
 
+                var profile = (SimonProfile)Settings.CurrentProfile;
+
                 foreach (SimonTrial trial in Settings.ExperimentContext.CurrentBlock.TrialRecords)
                 {
                     if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
@@ -69,7 +71,21 @@ namespace StroopApp.ViewModels.Experiment.Participant.Simon
                         return;
                     }
 
-                    CurrentStepViewModel = new SimonStimulusViewModel(trial.Stimulus.Position, trial.Stimulus.Color);
+                    var cueShape = trial.IsReversedMapping ? profile.ReversedShape : profile.StandardShape;
+                    if (profile.ReversalCuePresentation == ReversalCuePresentation.Before)
+                    {
+                        CurrentStepViewModel = new SimonPrimeViewModel(cueShape);
+                        await Task.Delay(Settings.CurrentProfile.VisualCueDuration, _cancellationTokenSource.Token);
+
+                        if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
+                        {
+                            HandleTaskStopped();
+                            return;
+                        }
+                    }
+
+                    CurrentStepViewModel = new SimonStimulusViewModel(trial.Stimulus.Position, trial.Stimulus.Color,trial.Stimulus.Shape
+                        , profile.ReversalCuePresentation == ReversalCuePresentation.Around ? cueShape : null);
 
                     await Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                     {

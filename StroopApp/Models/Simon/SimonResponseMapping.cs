@@ -2,17 +2,10 @@
 
 namespace StroopApp.Models.Simon
 {
-    public class SimonResponseMapping
+    public class SimonResponseMapping(SimonAnswer answer, Key key)
     {
-        public SimonAnswer Answer { get; set; }
-        public Key Key { get; set; }
-        public string Color { get; set; }
-        public SimonResponseMapping (SimonAnswer answer, Key key, string color){
-            Answer = answer;
-            Key = key;
-            Color = color;
-        } 
-        
+        public SimonAnswer Answer { get; set; } = answer;
+        public Key Key { get; set; } = key;
     }
 }
 

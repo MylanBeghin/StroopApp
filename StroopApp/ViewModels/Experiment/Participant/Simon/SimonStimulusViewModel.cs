@@ -11,12 +11,14 @@ namespace StroopApp.ViewModels.Experiment.Participant.Simon
         private StimulusPosition _position;
 
         [ObservableProperty]
+        private SimonStimulusShape _shape;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(ForegroundBrush))]
         private string _color = "";
 
-        partial void OnColorChanged(string value)
-        {
-            OnPropertyChanged(nameof(ForegroundBrush));
-        }
+        [ObservableProperty]
+        private SimonStimulusShape? _aroundShape = null;
 
         public Brush ForegroundBrush
         {
@@ -33,10 +35,14 @@ namespace StroopApp.ViewModels.Experiment.Participant.Simon
             }
         }
 
-        public SimonStimulusViewModel(StimulusPosition position, string color)
+        public SimonStimulusViewModel(StimulusPosition position, string color, 
+                                      SimonStimulusShape shape,
+                                      SimonStimulusShape? aroundShape=null)
         {
             Position = position;
             Color = color;
+            Shape = shape;
+            AroundShape = aroundShape;
         }
     }
 }

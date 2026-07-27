@@ -17,21 +17,24 @@ namespace StroopApp.Services.Trial
                 throw new ArgumentException("Participant cannot be null", nameof(settings));
 
             SimonProfile profile = (SimonProfile)settings.CurrentProfile;
-            var responseMappings = settings.KeyMappings.Simon;
             int total = profile.WordCount;
             int congruentCount = total * profile.CongruencePercent / 100;
+            int reversedMappingCount = profile.ReversalCuePresentation == ReversalCuePresentation.None ? 0 : total * profile.ReversedMappingPercent / 100;
 
             List<bool> congruenceFlags = GenerateCongruenceFlags(total, congruentCount, profile.StimulusPositionMode);
+            List<bool> reversedFlags = GenerateReversedMappingFlags(total, reversedMappingCount);
 
             var trials = new List<ITrial>();
 
             for (int i = 0; i < total; i++)
             {
-                bool isCongruent = congruenceFlags[i];
+                bool isAnswerCongruent = congruenceFlags[i];
+                bool isReversed = reversedFlags[i];
 
-                SimonAnswer answer = ComputeAnswer(profile.AnswerMode, _random.Next(2));
-                string color = ComputeColor(answer, responseMappings);
-                StimulusPosition position = ComputePosition(answer, isCongruent, profile.AnswerMode, profile.StimulusPositionMode);
+                SimonAnswer answer = ComputeAnswer(profile.AnswerMode, isReversed);
+                string color = ComputeColor(answer, isReversed, profile);
+                StimulusPosition position = ComputePosition(answer, isAnswerCongruent, profile.AnswerMode, profile.StimulusPositionMode);
+                SimonStimulusShape shape = ComputeShape(answer, isReversed, profile);
 
                 trials.Add(new SimonTrial
                 {
@@ -39,9 +42,12 @@ namespace StroopApp.Services.Trial
                     Block = settings.Block,
                     ParticipantId = settings.Participant.Id,
                     CongruencePercent = profile.CongruencePercent,
-                    IsCongruent = isCongruent,
+                    ReversedMappingPercent = profile.ReversalCuePresentation == ReversalCuePresentation.None ? (int?)null : profile.ReversedMappingPercent,
+                    IsAnswerCongruent = isAnswerCongruent,
+                    IsSpatialCongruent = profile.StimulusPositionMode is not SimonStimulusPositionMode.Center && (isAnswerCongruent ^ isReversed),
+                    IsReversedMapping = isReversed,
                     ExpectedAnswer = answer,
-                    Stimulus = new SimonStimulus(color, position, string.Empty)
+                    Stimulus = new SimonStimulus(color, position, shape)
                 });
 
             }
@@ -51,39 +57,83 @@ namespace StroopApp.Services.Trial
         private List<bool> GenerateCongruenceFlags(int totalStimulusCount,int congruentCount, SimonStimulusPositionMode mode )
         {
             return mode == SimonStimulusPositionMode.Center ?
-                [.. Enumerable.Repeat(true, totalStimulusCount)] :
-                Enumerable.Repeat(true, congruentCount)
+                [.. Enumerable.Repeat(false, totalStimulusCount)] :
+                [.. Enumerable.Repeat(true, congruentCount)
                 .Concat(
                     Enumerable.Repeat(false, totalStimulusCount - congruentCount))
-                .OrderBy(_ => _random.Next())
-                .ToList();
+                .OrderBy(_ => _random.Next())];
         }
-        private StimulusPosition ComputePosition(SimonAnswer answer,bool isCongruent, SimonAnswerMode answerMode, SimonStimulusPositionMode positionMode)
-        {
-            if (positionMode == SimonStimulusPositionMode.Center)
-                return StimulusPosition.Center;
 
-            if(answerMode == SimonAnswerMode.GoNoGo)
-                return _random.Next(2) == 0 ? StimulusPosition.Left : StimulusPosition.Right;
-            
-            return isCongruent
-                    ? (answer == SimonAnswer.Left ? StimulusPosition.Left : StimulusPosition.Right)
-                    : (answer == SimonAnswer.Left ? StimulusPosition.Right : StimulusPosition.Left);
-        }
-        private SimonAnswer ComputeAnswer(SimonAnswerMode answerMode, int draw)
+        private List<bool> GenerateReversedMappingFlags(int totalStimulusCount,int reversedCount)
         {
+            return [.. Enumerable.Repeat(true, reversedCount)
+                .Concat(
+                Enumerable.Repeat(false, totalStimulusCount - reversedCount))
+                .OrderBy(_=>_random.Next())];
+        }
+        private SimonAnswer ComputeAnswer(SimonAnswerMode answerMode, bool isReversed)
+        {
+            int draw = _random.Next(2);
+            draw = isReversed ? 1 - draw : draw;
             return (answerMode, draw) switch
             {
                 (SimonAnswerMode.GoNoGo, 0) => SimonAnswer.Go,
                 (SimonAnswerMode.GoNoGo, 1) => SimonAnswer.NoGo,
                 (SimonAnswerMode.LeftRight, 0) => SimonAnswer.Left,
                 (SimonAnswerMode.LeftRight, 1) => SimonAnswer.Right,
+
                 _ => throw new NotImplementedException(),
             };
         }
-        private string ComputeColor(SimonAnswer answer, SimonResponseMappings simon)
+        private StimulusPosition ComputePosition(SimonAnswer expectedAnswer,bool isCongruent, SimonAnswerMode answerMode, SimonStimulusPositionMode positionMode)
         {
-            return answer is SimonAnswer.Left or SimonAnswer.Go ? simon.Left.Color : simon.Right.Color;
+            if (positionMode == SimonStimulusPositionMode.Center)
+                return StimulusPosition.Center;
+
+            if(answerMode == SimonAnswerMode.GoNoGo)
+                return _random.Next(2) == 0 ? StimulusPosition.Left : StimulusPosition.Right;
+
+            return expectedAnswer == SimonAnswer.Left ? 
+                (isCongruent  ? StimulusPosition.Left : StimulusPosition.Right) : 
+                (isCongruent  ? StimulusPosition.Right : StimulusPosition.Left);
+        }
+        private string ComputeColor(SimonAnswer expectedAnswer, bool isReversed, SimonProfile profile)
+        {
+
+            if (profile.StimulusMode is SimonStimulusMode.Color)
+            {
+                return isReversed ?
+                    (expectedAnswer is SimonAnswer.Left or SimonAnswer.Go ? profile.RightColor : profile.LeftColor) :
+                    (expectedAnswer is SimonAnswer.Left or SimonAnswer.Go ? profile.LeftColor : profile.RightColor);
+            }
+            if (profile.ReversalCuePresentation is ReversalCuePresentation.Integrated)
+            {
+                    return isReversed ? profile.ReversedColor : profile.StandardColor;
+            }
+            else
+                return profile.BaseColor;
+        }
+        private SimonStimulusShape ComputeShape(SimonAnswer expectedAnswer, bool isReversed, SimonProfile profile)
+        {
+            if (profile.StimulusMode is SimonStimulusMode.Shape)
+            {
+                return isReversed ?
+                        (expectedAnswer is SimonAnswer.Left or SimonAnswer.Go ? profile.RightShape : profile.LeftShape) :
+                        (expectedAnswer is SimonAnswer.Left or SimonAnswer.Go ? profile.LeftShape : profile.RightShape);
+            }
+            else if (profile.StimulusMode is SimonStimulusMode.Arrow)
+            {
+                return isReversed ?
+                        (expectedAnswer is SimonAnswer.Left or SimonAnswer.Go ? SimonStimulusShape.RightArrow : SimonStimulusShape.LeftArrow) :
+                        (expectedAnswer is SimonAnswer.Left or SimonAnswer.Go ? SimonStimulusShape.LeftArrow : SimonStimulusShape.RightArrow);
+            }
+            else if (profile.ReversalCuePresentation is ReversalCuePresentation.Integrated)
+            {
+                return isReversed ? profile.ReversedShape : profile.StandardShape;
+            }
+            else
+                return profile.BaseShape;   
+
         }
     }
 }
