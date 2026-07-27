@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
+using StroopApp.ViewModels.Experiment.Participant.Common;
 namespace StroopApp.ViewModels.Experiment.Participant.Stroop
 {
     /// <summary>

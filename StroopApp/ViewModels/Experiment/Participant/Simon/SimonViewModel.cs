@@ -3,7 +3,7 @@ using StroopApp.Core;
 using StroopApp.Models;
 using StroopApp.Models.Simon;
 using StroopApp.Services.Navigation;
-using StroopApp.ViewModels.Experiment.Participant.Stroop;
+using StroopApp.ViewModels.Experiment.Participant.Common;
 using StroopApp.ViewModels.State;
 using System.Diagnostics;
 using System.Windows;
