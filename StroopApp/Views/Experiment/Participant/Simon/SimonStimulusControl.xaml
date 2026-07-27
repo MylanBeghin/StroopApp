@@ -12,8 +12,9 @@
         <conv:StimulusPositionToGridColumnSpanConverter x:Key="PositionToGridColumnSpanConverter" />
         <conv:SimonShapeToGeometryConverter x:Key="SimonShapeToGeometryConverter" />
     </UserControl.Resources>
-    <Grid Background="Black" Width="600">
+    <Grid Background="Black" >
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>

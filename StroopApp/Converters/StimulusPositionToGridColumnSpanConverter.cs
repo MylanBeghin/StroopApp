@@ -7,7 +7,7 @@ namespace StroopApp.Converters
     public class StimulusPositionToGridColumnSpanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        => value is StimulusPosition.Center ? 2 : 1;
+        => value is StimulusPosition.Center ? 3 : 1;
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
