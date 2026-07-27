@@ -4,6 +4,7 @@ using StroopApp.Core;
 using StroopApp.Resources;
 using StroopApp.Services.Language;
 using StroopApp.Services.Navigation;
+using StroopApp.Services.Session;
 using StroopApp.Views;
 using StroopApp.Views.Experiment.Experimenter;
 using StroopApp.Views.Home;
@@ -22,8 +23,8 @@ namespace StroopApp.ViewModels
 		public bool IsNotOnHomePage => _navigationService.CurrentPageType != typeof(HomePage);
 		private readonly ILanguageService _languageService;
 		private readonly INavigationService _navigationService;
-
-		public ExperimentWindowViewModel(INavigationService experimentNavigationService, ILanguageService languageService)
+		private readonly IExperimentSessionService _sessionService;
+		public ExperimentWindowViewModel(INavigationService experimentNavigationService, ILanguageService languageService, IExperimentSessionService experimentSessionService)
 		{
 			_languageService = languageService;
 			experimentNavigationService.NavigateTo<HomePage>();
@@ -31,6 +32,7 @@ namespace StroopApp.ViewModels
 			_navigationService = experimentNavigationService;
 			_navigationService.Navigated += _ => ReturnHomePageCommand.NotifyCanExecuteChanged();
 			_navigationService.Navigated += _ => OnPropertyChanged(nameof(IsNotOnHomePage));
+			_sessionService = experimentSessionService;
 		}
 
 		[RelayCommand]
@@ -57,6 +59,7 @@ namespace StroopApp.ViewModels
 					confirmed = await ShowConfirmationDialogAsync(Strings.Title_ConfirmShutDown, Strings.Message_ConfirmExitWithoutExport);
                 if (!confirmed)
                     return;
+                _sessionService.ResetForNewExperiment();
                 _navigationService.NavigateTo<HomePage>();
 
 
