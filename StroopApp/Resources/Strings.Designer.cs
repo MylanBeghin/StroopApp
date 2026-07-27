@@ -502,6 +502,24 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à In Integrated mode, change the color via the sandard and opposite color controls.
+        /// </summary>
+        public static string Description_DisabledBaseColor {
+            get {
+                return ResourceManager.GetString("Description_DisabledBaseColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à In Integrated mode, change the shape via the sandard and opposite shape controls.
+        /// </summary>
+        public static string Description_DisabledBaseShape {
+            get {
+                return ResourceManager.GetString("Description_DisabledBaseShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Select the export folder for your results.
         /// </summary>
         public static string Description_ExportFolderDialog {
@@ -556,11 +574,29 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Choose between a two keys (left/right) or one key (go/no-go) mode.
+        ///   Recherche une chaîne localisée semblable à Choose between a one key (go/no-go) or a two keys (left/right) mode.
         /// </summary>
         public static string Description_SimonAnswerMode {
             get {
                 return ResourceManager.GetString("Description_SimonAnswerMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add a reversed rule vith a shape (before/around) or an internal stimulus feature..
+        /// </summary>
+        public static string Description_SimonReversedMapping {
+            get {
+                return ResourceManager.GetString("Description_SimonReversedMapping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select the stimulus mode (colors / shapes / arrows).
+        /// </summary>
+        public static string Description_SimonStimulusMode {
+            get {
+                return ResourceManager.GetString("Description_SimonStimulusMode", resourceCulture);
             }
         }
         
@@ -799,7 +835,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à G.
+        ///   Recherche une chaîne localisée semblable à Trial duration must be positive and divide task duration..
         /// </summary>
         public static string Error_WordDurationInvalid {
             get {
@@ -898,6 +934,33 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Congruence (%).
+        /// </summary>
+        public static string Header_AnswerCongruence_Percent1 {
+            get {
+                return ResourceManager.GetString("Header_AnswerCongruence_Percent1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Stimulus Color.
+        /// </summary>
+        public static string Header_BaseColor {
+            get {
+                return ResourceManager.GetString("Header_BaseColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Stimulus Shape.
+        /// </summary>
+        public static string Header_BaseShape {
+            get {
+                return ResourceManager.GetString("Header_BaseShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Block.
         /// </summary>
         public static string Header_BlockNumber {
@@ -916,7 +979,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Congruence (%).
+        ///   Recherche une chaîne localisée semblable à Answer Congruence (%).
         /// </summary>
         public static string Header_Congruence_Percent {
             get {
@@ -975,6 +1038,33 @@ namespace StroopApp.Resources {
         public static string Header_Hours {
             get {
                 return ResourceManager.GetString("Header_Hours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Answer Congruence.
+        /// </summary>
+        public static string Header_IsAnswerCongruent {
+            get {
+                return ResourceManager.GetString("Header_IsAnswerCongruent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Is Reversed.
+        /// </summary>
+        public static string Header_IsReversedMapping {
+            get {
+                return ResourceManager.GetString("Header_IsReversedMapping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Spatial Congruence.
+        /// </summary>
+        public static string Header_IsSpatialCongruent {
+            get {
+                return ResourceManager.GetString("Header_IsSpatialCongruent", resourceCulture);
             }
         }
         
@@ -1051,6 +1141,15 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Reversed Trials (%).
+        /// </summary>
+        public static string Header_ReversedMappingPercent {
+            get {
+                return ResourceManager.GetString("Header_ReversedMappingPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Seconds.
         /// </summary>
         public static string Header_Seconds {
@@ -1078,6 +1177,96 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Left Color.
+        /// </summary>
+        public static string Header_SimonLeftColor {
+            get {
+                return ResourceManager.GetString("Header_SimonLeftColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Left Shape.
+        /// </summary>
+        public static string Header_SimonLeftShape {
+            get {
+                return ResourceManager.GetString("Header_SimonLeftShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Reversed Color.
+        /// </summary>
+        public static string Header_SimonReversedColor {
+            get {
+                return ResourceManager.GetString("Header_SimonReversedColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Reversed mapping.
+        /// </summary>
+        public static string Header_SimonReversedMapping {
+            get {
+                return ResourceManager.GetString("Header_SimonReversedMapping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Reversed Shape.
+        /// </summary>
+        public static string Header_SimonReversedShape {
+            get {
+                return ResourceManager.GetString("Header_SimonReversedShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Right Color.
+        /// </summary>
+        public static string Header_SimonRightColor {
+            get {
+                return ResourceManager.GetString("Header_SimonRightColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Right Shape.
+        /// </summary>
+        public static string Header_SimonRightShape {
+            get {
+                return ResourceManager.GetString("Header_SimonRightShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Standard Color.
+        /// </summary>
+        public static string Header_SimonStandardColor {
+            get {
+                return ResourceManager.GetString("Header_SimonStandardColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Standard Shape.
+        /// </summary>
+        public static string Header_SimonStandardShape {
+            get {
+                return ResourceManager.GetString("Header_SimonStandardShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à StimulusType.
+        /// </summary>
+        public static string Header_SimonStimulusMode {
+            get {
+                return ResourceManager.GetString("Header_SimonStimulusMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Stimulus position.
         /// </summary>
         public static string Header_SimonStimulusPositionMode {
@@ -1101,6 +1290,24 @@ namespace StroopApp.Resources {
         public static string Header_StimulusPosition {
             get {
                 return ResourceManager.GetString("Header_StimulusPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Stimulus Shape.
+        /// </summary>
+        public static string Header_StimulusShape {
+            get {
+                return ResourceManager.GetString("Header_StimulusShape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Stimulus Shape.
+        /// </summary>
+        public static string Header_StimulusShape1 {
+            get {
+                return ResourceManager.GetString("Header_StimulusShape1", resourceCulture);
             }
         }
         
@@ -1754,11 +1961,20 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à If you see a circle with this color : .
+        ///   Recherche une chaîne localisée semblable à Reversed Trials (%).
         /// </summary>
-        public static string Simon_Circle_Instruction {
+        public static string ReversedMappingPercent {
             get {
-                return ResourceManager.GetString("Simon_Circle_Instruction", resourceCulture);
+                return ResourceManager.GetString("ReversedMappingPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à A fixation cross will appear at the center of the screen. You will have to fix it while it is visible..
+        /// </summary>
+        public static string Simon_FixationCrossPage_1 {
+            get {
+                return ResourceManager.GetString("Simon_FixationCrossPage_1", resourceCulture);
             }
         }
         
@@ -1853,11 +2069,164 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à arrow.
+        /// </summary>
+        public static string Simon_PrimePage_Arrow {
+            get {
+                return ResourceManager.GetString("Simon_PrimePage_Arrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à While the arrow displays, you will also see another shape placed around..
+        /// </summary>
+        public static string Simon_PrimePage_ArrowAround {
+            get {
+                return ResourceManager.GetString("Simon_PrimePage_ArrowAround", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Before the arrow displays, you will see another shape around the fixation cross..
+        /// </summary>
+        public static string Simon_PrimePage_ArrowBefore {
+            get {
+                return ResourceManager.GetString("Simon_PrimePage_ArrowBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à While the arrow displays, you will also have to pay attention to the color..
+        /// </summary>
+        public static string Simon_PrimePage_ArrowIntegrated {
+            get {
+                return ResourceManager.GetString("Simon_PrimePage_ArrowIntegrated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à color.
+        /// </summary>
+        public static string Simon_PrimePage_Color {
+            get {
+                return ResourceManager.GetString("Simon_PrimePage_Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à While the color displays, you will also see another shape placed around..
+        /// </summary>
+        public static string Simon_PrimePage_ColorAround {
+            get {
+                return ResourceManager.GetString("Simon_PrimePage_ColorAround", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Before the color displays, you will see a shape around the fixation cross..
+        /// </summary>
+        public static string Simon_PrimePage_ColorBefore {
+            get {
+                return ResourceManager.GetString("Simon_PrimePage_ColorBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à While the arrow displays, you will also have to pay attention to the shape..
+        /// </summary>
+        public static string Simon_PrimePage_ColorIntegrated {
+            get {
+                return ResourceManager.GetString("Simon_PrimePage_ColorIntegrated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à If this is the {0} =&gt; REVERSED mode.
+        /// </summary>
+        public static string Simon_PrimePage_ReversedCase {
+            get {
+                return ResourceManager.GetString("Simon_PrimePage_ReversedCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à You must indicate the OPPOSITE command as the one displayed..
+        /// </summary>
+        public static string Simon_PrimePage_ReversedCaseDescription {
+            get {
+                return ResourceManager.GetString("Simon_PrimePage_ReversedCaseDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à shape.
+        /// </summary>
+        public static string Simon_PrimePage_Shape {
+            get {
+                return ResourceManager.GetString("Simon_PrimePage_Shape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à While the shape displays, you will also see another shape placed around..
+        /// </summary>
+        public static string Simon_PrimePage_ShapeAround {
+            get {
+                return ResourceManager.GetString("Simon_PrimePage_ShapeAround", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Before the shape displays, you will see another shape placed around the fixation cross..
+        /// </summary>
+        public static string Simon_PrimePage_ShapeBefore {
+            get {
+                return ResourceManager.GetString("Simon_PrimePage_ShapeBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à While the shape displays, you will also have to pay attention to the color..
+        /// </summary>
+        public static string Simon_PrimePage_ShapeIntegrated {
+            get {
+                return ResourceManager.GetString("Simon_PrimePage_ShapeIntegrated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à If this is the {0} =&gt; NORMAL mode.
+        /// </summary>
+        public static string Simon_PrimePage_StandardCase {
+            get {
+                return ResourceManager.GetString("Simon_PrimePage_StandardCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à You must indicate the SAME command as the one displayed..
+        /// </summary>
+        public static string Simon_PrimePage_StandardCaseDescription {
+            get {
+                return ResourceManager.GetString("Simon_PrimePage_StandardCaseDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Click on the RIGHT key ({0} key).
         /// </summary>
         public static string Simon_RightKey_Instruction {
             get {
                 return ResourceManager.GetString("Simon_RightKey_Instruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à If you see a shape with this color : .
+        /// </summary>
+        public static string Simon_Shape_Instruction {
+            get {
+                return ResourceManager.GetString("Simon_Shape_Instruction", resourceCulture);
             }
         }
         
@@ -1880,6 +2249,69 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Around.
+        /// </summary>
+        public static string SimonReversalCuePresentation_Around {
+            get {
+                return ResourceManager.GetString("SimonReversalCuePresentation_Around", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Before (prime).
+        /// </summary>
+        public static string SimonReversalCuePresentation_Before {
+            get {
+                return ResourceManager.GetString("SimonReversalCuePresentation_Before", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Integrated.
+        /// </summary>
+        public static string SimonReversalCuePresentation_Integrated {
+            get {
+                return ResourceManager.GetString("SimonReversalCuePresentation_Integrated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à None.
+        /// </summary>
+        public static string SimonReversalCuePresentation_None {
+            get {
+                return ResourceManager.GetString("SimonReversalCuePresentation_None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Arrows.
+        /// </summary>
+        public static string SimonStimulusMode_Arrow {
+            get {
+                return ResourceManager.GetString("SimonStimulusMode_Arrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Colors.
+        /// </summary>
+        public static string SimonStimulusMode_Color {
+            get {
+                return ResourceManager.GetString("SimonStimulusMode_Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Shapes.
+        /// </summary>
+        public static string SimonStimulusMode_Shape {
+            get {
+                return ResourceManager.GetString("SimonStimulusMode_Shape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Center.
         /// </summary>
         public static string SimonStimulusPositionMode_Center {
@@ -1894,6 +2326,105 @@ namespace StroopApp.Resources {
         public static string SimonStimulusPositionMode_LeftRight {
             get {
                 return ResourceManager.GetString("SimonStimulusPositionMode_LeftRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Circle.
+        /// </summary>
+        public static string SimonStimulusShape_Circle {
+            get {
+                return ResourceManager.GetString("SimonStimulusShape_Circle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Square.
+        /// </summary>
+        public static string SimonStimulusShape_Square {
+            get {
+                return ResourceManager.GetString("SimonStimulusShape_Square", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Triangle.
+        /// </summary>
+        public static string SimonStimulusShape_Triangle {
+            get {
+                return ResourceManager.GetString("SimonStimulusShape_Triangle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Blue.
+        /// </summary>
+        public static string StimulusColor_Blue {
+            get {
+                return ResourceManager.GetString("StimulusColor_Blue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Blue (Wong)*.
+        /// </summary>
+        public static string StimulusColor_BlueWong {
+            get {
+                return ResourceManager.GetString("StimulusColor_BlueWong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Vert.
+        /// </summary>
+        public static string StimulusColor_Green {
+            get {
+                return ResourceManager.GetString("StimulusColor_Green", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Orange.
+        /// </summary>
+        public static string StimulusColor_Orange {
+            get {
+                return ResourceManager.GetString("StimulusColor_Orange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Orange (Wong)*.
+        /// </summary>
+        public static string StimulusColor_OrangeWong {
+            get {
+                return ResourceManager.GetString("StimulusColor_OrangeWong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pink.
+        /// </summary>
+        public static string StimulusColor_Pink {
+            get {
+                return ResourceManager.GetString("StimulusColor_Pink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Red.
+        /// </summary>
+        public static string StimulusColor_Red {
+            get {
+                return ResourceManager.GetString("StimulusColor_Red", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à White.
+        /// </summary>
+        public static string StimulusColor_White {
+            get {
+                return ResourceManager.GetString("StimulusColor_White", resourceCulture);
             }
         }
         
