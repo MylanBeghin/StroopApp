@@ -1,9 +1,9 @@
 ﻿using StroopApp.Core;
 using StroopApp.Models.Simon;
+using StroopApp.Resources;
 using StroopApp.Services.Navigation;
 using StroopApp.ViewModels.State;
 using System.Globalization;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -14,13 +14,217 @@ namespace StroopApp.ViewModels.Experiment.Participant.Instructions
 {
     public partial class SimonInstructionsViewModel : InstructionsViewModelBase
     {
-        protected override int TotalPages => 4;
-        private TextBlock _textBlock = new ();
+        protected List<Action> _pageBuilders;
+        protected LocalizedStrings _loc;
+        protected SimonProfile _profile;
+        protected SimonResponseMappings _simonMappings;
+        protected List<Action> PageBuilders => _pageBuilders ??= BuildPages();
+        protected override int TotalPages => PageBuilders.Count;
+
+        private TextBlock _textBlock = new();
         public SimonInstructionsViewModel(ExperimentSettingsViewModel settings,
                                           INavigationService participantWindowNavigationService,
                                           Func<Page> nextPageFactory)
             : base(settings, participantWindowNavigationService, nextPageFactory)
         { }
+
+        protected List<Action> BuildPages()
+        {
+            _simonMappings = _settings.KeyMappings.Simon;
+            _profile = (SimonProfile)_settings.CurrentProfile;
+            _loc = new LocalizedStrings();
+            List<Action> pages = [];
+            pages.Add(BuildIntroPage);
+            pages.Add(BuildFixationCrossPage);
+            pages.Add(BuildLeftRulePage);
+            pages.Add(BuildRightRulePage);
+            if (_profile.ReversalCuePresentation is not ReversalCuePresentation.None)
+            {
+                pages.Add(() => BuildPrimePage(step: 0));
+                pages.Add(() => BuildPrimePage(step: 1));
+                pages.Add(() => BuildPrimePage(step: 2));
+            }
+            pages.Add(BuildQuestionsPage);
+            return pages;
+        }
+
+        private bool IsReversalCueColorModality =>
+            _profile.StimulusMode is (SimonStimulusMode.Shape or SimonStimulusMode.Arrow)
+            && _profile.ReversalCuePresentation is ReversalCuePresentation.Integrated;
+
+        private void BuildIntroPage()
+        {
+            AddTextLine(_loc["Simon_Page1_Intro"], true);
+            AddTextLine(_loc["Simon_Page1_Display"]);
+            AddTextLine(_profile.AnswerMode == SimonAnswerMode.LeftRight ? _loc["Simon_Page1_Display2"] : _loc["Simon_Page1_Display3"]);
+        }
+
+        private void BuildFixationCrossPage()
+        {
+            AddTextLine(_loc["Simon_FixationCrossPage_1"]);
+            var panel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+            };
+            panel.Children.Add(new Rectangle { Width = 30 });
+            panel.Children.Add(CreateFixationCross());
+            _textBlock.Inlines.Add(panel);
+        }
+
+        private void BuildPrimePage(int step)
+        {
+            if (_profile.StimulusMode is SimonStimulusMode.Color)
+            {
+                if (_profile.ReversalCuePresentation is ReversalCuePresentation.Before)
+                    AddTextLine(_loc["Simon_PrimePage_ColorBefore"]);
+                else if (_profile.ReversalCuePresentation is ReversalCuePresentation.Around)
+                    AddTextLine(_loc["Simon_PrimePage_ColorAround"]);
+                else
+                    AddTextLine(_loc["Simon_PrimePage_ColorIntegrated"]);
+            }
+            else if (_profile.StimulusMode is SimonStimulusMode.Shape)
+            {
+                if (_profile.ReversalCuePresentation is ReversalCuePresentation.Before)
+                    AddTextLine(_loc["Simon_PrimePage_ShapeBefore"]);
+                else if (_profile.ReversalCuePresentation is ReversalCuePresentation.Around)
+                    AddTextLine(_loc["Simon_PrimePage_ShapeAround"]);
+                else
+                    AddTextLine(_loc["Simon_PrimePage_ShapeIntegrated"]);
+            }
+            else if (_profile.StimulusMode is SimonStimulusMode.Arrow)
+            {
+                if (_profile.ReversalCuePresentation is ReversalCuePresentation.Before)
+                    AddTextLine(_loc["Simon_PrimePage_ArrowBefore"]);
+                else if (_profile.ReversalCuePresentation is ReversalCuePresentation.Around)
+                    AddTextLine(_loc["Simon_PrimePage_ArrowAround"]);
+                else
+                    AddTextLine(_loc["Simon_PrimePage_ArrowIntegrated"]);
+            }
+
+            if (step < 1) return;
+
+            var rowPanel = new StackPanel() { Orientation = Orientation.Horizontal };
+
+            var firstColPanel = new WrapPanel() { Width = 700, Orientation = Orientation.Vertical };
+            if (IsReversalCueColorModality)
+            {
+                firstColPanel.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Text = String.Format(_loc["Simon_PrimePage_StandardCase"], _loc["Simon_PrimePage_Color"]) });
+                firstColPanel.Children.Add(new Rectangle() { Height = 30 });
+                firstColPanel.Children.Add(CreateShape(_profile.StandardShape, _profile.StandardColor));
+                firstColPanel.Children.Add(new Rectangle() { Height = 30 });
+                firstColPanel.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Text = _loc["Simon_PrimePage_StandardCaseDescription"] });
+            }
+            else
+            {
+                firstColPanel.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Text = String.Format(_loc["Simon_PrimePage_StandardCase"], _loc["Simon_PrimePage_Shape"]) });
+                firstColPanel.Children.Add(new Rectangle() { Height = 30 });
+                firstColPanel.Children.Add(CreateOutlineCue(_profile.StandardShape, "#FFFFFF"));
+                firstColPanel.Children.Add(new Rectangle() { Height = 30 });
+                firstColPanel.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Text = _loc["Simon_PrimePage_StandardCaseDescription"] });
+            }
+            rowPanel.Children.Add(firstColPanel);
+
+            if (step < 2)
+            {
+                _textBlock.Inlines.Add(rowPanel);
+                return;
+            }
+            var secondColPanel = new WrapPanel() { Width = 700, Orientation = Orientation.Vertical };
+            if (IsReversalCueColorModality)
+            {
+                secondColPanel.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Text = String.Format(_loc["Simon_PrimePage_ReversedCase"], _loc["Simon_PrimePage_Color"]) });
+                secondColPanel.Children.Add(new Rectangle() { Height = 30 });
+                secondColPanel.Children.Add(CreateShape(_profile.StandardShape, _profile.ReversedColor));
+                secondColPanel.Children.Add(new Rectangle() { Height = 30 });
+                secondColPanel.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Text = _loc["Simon_PrimePage_ReversedCaseDescription"] });
+
+            }
+            else
+            {
+                secondColPanel.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Text = String.Format(_loc["Simon_PrimePage_ReversedCase"], _loc["Simon_PrimePage_Shape"]) });
+                secondColPanel.Children.Add(new Rectangle() { Height = 30 });
+                secondColPanel.Children.Add(CreateOutlineCue(_profile.ReversedShape, "#FFFFFF"));
+                secondColPanel.Children.Add(new Rectangle() { Height = 30 });
+                secondColPanel.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Text = _loc["Simon_PrimePage_ReversedCaseDescription"] });
+            }
+            rowPanel.Children.Add(secondColPanel);
+
+            _textBlock.Inlines.Add(rowPanel);
+        }
+
+
+        private void BuildLeftRulePage()
+        {
+            AddTextLine(_loc["Simon_Shape_Instruction"]);
+            if (_profile.AnswerMode == SimonAnswerMode.GoNoGo)
+            {
+                var panel = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                };
+
+                var shape = GetRuleShape(isLeftRule: true);
+                var color = GetRuleColor(isLeftRule: true);
+                _textBlock.Inlines.Add(CreateShape(shape, color));
+                panel.Children.Add(new Rectangle { Width = 30 });
+                panel.Children.Add(CreateHandClickIcon());
+
+                _textBlock.Inlines.Add(panel);
+
+                AddBlankLine();
+
+                AddTextLine(string.Format(_loc["Simon_GoKey_Instruction"], _simonMappings.Left.Key));
+            }
+            else
+            {
+                var shape = GetRuleShape(isLeftRule: true);
+                var color = GetRuleColor(isLeftRule: true);
+                _textBlock.Inlines.Add(CreateShape(shape, color));
+                AddBlankLine();
+                AddTextLine(string.Format(_loc["Simon_LeftKey_Instruction"], _simonMappings.Left.Key));
+            }
+        }
+
+        private void BuildRightRulePage()
+        {
+            AddTextLine(_loc["Simon_Shape_Instruction"]);
+            if (_profile.AnswerMode == SimonAnswerMode.GoNoGo)
+            {
+                var panel = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                };
+                var shape = GetRuleShape(isLeftRule: false);
+                var color = GetRuleColor(isLeftRule: false);
+                _textBlock.Inlines.Add(CreateShape(shape, color));
+                panel.Children.Add(new Rectangle { Width = 30 });
+                panel.Children.Add(CreateNoSymbolIcon());
+                _textBlock.Inlines.Add(panel);
+
+                AddBlankLine();
+                AddTextLine(string.Format(_loc["Simon_NoGoKey_Instruction"]));
+            }
+            else
+            {
+                var shape = GetRuleShape(isLeftRule: false);
+                var color = GetRuleColor(isLeftRule: false);
+                _textBlock.Inlines.Add(CreateShape(shape, color));
+                AddBlankLine();
+                _textBlock.Inlines.Add(new Run(string.Format(_loc["Simon_RightKey_Instruction"], _simonMappings.Right.Key)));
+                AddBlankLine();
+            }
+        }
+        private void BuildQuestionsPage()
+        {
+            AddTextLine(_loc["Page3_Questions"]);
+        }
+
 
         /// <summary>
         /// Generates localized instruction content based on page index and experiment configuration.
@@ -41,75 +245,7 @@ namespace StroopApp.ViewModels.Experiment.Participant.Instructions
                 var answerMode = ((SimonProfile)_settings.CurrentProfile).AnswerMode;
 
                 _textBlock = CreateNewTextBlock();
-
-                switch (page)
-                {
-                    case 0:
-                        AddTextLine(loc["Simon_Page1_Intro"], true);
-                        AddTextLine(loc["Simon_Page1_Display"]);
-                        AddTextLine(answerMode == SimonAnswerMode.LeftRight ? loc["Simon_Page1_Display2"] : loc["Simon_Page1_Display3"]);
-                        break;
-
-                    case 1:
-                        AddTextLine(loc["Simon_Circle_Instruction"]);
-                        if (answerMode == SimonAnswerMode.GoNoGo)
-                        {
-                            var panel = new StackPanel
-                            {
-                                Orientation = Orientation.Horizontal,
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                VerticalAlignment = VerticalAlignment.Center,
-                            };
-
-                            panel.Children.Add(CreateEllipse(simon.Left.Color));
-                            panel.Children.Add(new Rectangle { Width = 30 });
-                            panel.Children.Add(CreateHandClickIcon());
-
-                            _textBlock.Inlines.Add(panel);
-
-                            AddBlankLine();
-
-                            AddTextLine(string.Format(loc["Simon_GoKey_Instruction"], simon.Left.Key));
-                        }
-                        else
-                        {
-                            _textBlock.Inlines.Add(CreateEllipse(simon.Left.Color));
-                            AddBlankLine();
-                            AddTextLine(string.Format(loc["Simon_LeftKey_Instruction"], simon.Left.Key));
-                        }
-                        break;
-
-                    case 2:
-                        AddTextLine(loc["Simon_Circle_Instruction"]);
-
-                        if (answerMode == SimonAnswerMode.GoNoGo)
-                        {
-                            var panel = new StackPanel
-                            {
-                                Orientation = Orientation.Horizontal,
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                VerticalAlignment = VerticalAlignment.Center,
-                            };
-                            panel.Children.Add(CreateEllipse(simon.Right.Color));
-                            panel.Children.Add(new Rectangle { Width = 30 });
-                            panel.Children.Add(CreateNoSymbolIcon());
-                            _textBlock.Inlines.Add(panel);
-
-                            AddBlankLine();
-                            _textBlock.Inlines.Add(new Run(loc["Simon_NoGoKey_Instruction"]));
-                        }
-                        else
-                        {
-                            _textBlock.Inlines.Add(CreateEllipse(simon.Right.Color));
-                            AddBlankLine();
-                            _textBlock.Inlines.Add(new Run(string.Format(loc["Simon_RightKey_Instruction"], simon.Right.Key)));
-                        }
-                        break;
-
-                    case 3:
-                        AddTextLine(loc["Page3_Questions"]);
-                        break;
-                }
+                PageBuilders[page]();
                 return _textBlock;
             }
             finally
@@ -150,6 +286,80 @@ namespace StroopApp.ViewModels.Experiment.Participant.Instructions
             _textBlock.Inlines.Add(new LineBreak());
             _textBlock.Inlines.Add(new LineBreak());
         }
+
+        private Path CreateShape(SimonStimulusShape shape, string color)
+        {
+            Brush fill;
+            try
+            {
+                fill = (Brush)new BrushConverter().ConvertFromString(color)!;
+            }
+            catch
+            {
+                fill = Brushes.White;
+            }
+            return new Path()
+            {
+                Data = ShapeToGeometry(shape),
+                Width = 120,
+                Height = 120,
+                Stretch = Stretch.Uniform,
+                Fill = fill,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+            };
+        }
+        private Path CreateOutlineCue(SimonStimulusShape shape, string color)
+        {
+            Brush fill;
+            try
+            {
+                fill = (Brush)new BrushConverter().ConvertFromString(color)!;
+            }
+            catch
+            {
+                fill = Brushes.White;
+            }
+            return new Path()
+            {
+                Data = ShapeToGeometry(shape),
+                Width = 120,
+                Height = 120,
+                Stretch = Stretch.Uniform,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Fill = Brushes.Transparent,
+                Stroke = Brushes.White,
+                StrokeThickness = 6,
+            };
+        }
+        private SimonStimulusShape GetRuleShape(bool isLeftRule)
+        {
+            if (_profile.StimulusMode is SimonStimulusMode.Arrow)
+                return isLeftRule ? SimonStimulusShape.LeftArrow : SimonStimulusShape.RightArrow;
+            if (_profile.StimulusMode is SimonStimulusMode.Shape)
+                return isLeftRule ? _profile.LeftShape : _profile.RightShape;
+            return _profile.ReversalCuePresentation is ReversalCuePresentation.Integrated
+                ? _profile.StandardShape : _profile.BaseShape;
+        }
+
+        private string GetRuleColor(bool isLeftRule)
+        {
+            if (_profile.StimulusMode is SimonStimulusMode.Color)
+                return isLeftRule ? _profile.LeftColor : _profile.RightColor;
+            return _profile.ReversalCuePresentation is ReversalCuePresentation.Integrated
+               ? _profile.StandardColor : _profile.BaseColor;
+        }
+
+        private static Geometry ShapeToGeometry(SimonStimulusShape shape) => shape switch
+        {
+            SimonStimulusShape.Square => ShapesGeometries.Square,
+            SimonStimulusShape.Triangle => ShapesGeometries.Triangle,
+            SimonStimulusShape.LeftArrow => ShapesGeometries.LeftArrow,
+            SimonStimulusShape.RightArrow => ShapesGeometries.RightArrow,
+            _ => ShapesGeometries.Circle,
+
+        };
 
         private Ellipse CreateEllipse(string color = "#FFFFFF")
         {
@@ -233,6 +443,26 @@ namespace StroopApp.ViewModels.Experiment.Participant.Instructions
                 StrokeStartLineCap = PenLineCap.Round,
                 StrokeEndLineCap = PenLineCap.Round,
                 StrokeLineJoin = PenLineJoin.Round,
+            };
+        }
+
+        private Path CreateFixationCross()
+        {
+            var geometryGroup = new GeometryGroup { FillRule = FillRule.Nonzero };
+            geometryGroup.Children.Add(Geometry.Parse(
+                "M 45,90 C 40.582,90 37,86.418 37,82 L 37,8 C 37,3.582 40.582,0 45,0 " +
+                "C 49.418,0 53,3.582 53,8 L 53,82 C 53,86.418 49.418,90 45,90 Z"));
+            geometryGroup.Children.Add(Geometry.Parse(
+                "M 82,53 L 8,53 C 3.582,53 0,49.418 0,45 C 0,40.582 3.582,37 8,37 " +
+                "L 82,37 C 86.418,37 90,40.582 90,45 C 90,49.418 86.418,53 82,53 Z"));
+
+            return new Path
+            {
+                Data = geometryGroup,
+                Fill = Brushes.White,
+                Stretch = Stretch.Uniform,
+                Width = 50,
+                Height = 50,
             };
         }
     }

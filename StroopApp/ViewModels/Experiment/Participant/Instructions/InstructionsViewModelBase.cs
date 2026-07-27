@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using StroopApp.Core;
 using StroopApp.Services.Navigation;
 using StroopApp.ViewModels.State;
-using StroopApp.Views.Experiment.Participant;
 using System.Windows;
 using System.Windows.Controls;
 
