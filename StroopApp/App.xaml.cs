@@ -8,6 +8,7 @@ using StroopApp.Services.Navigation.PageFactory;
 using StroopApp.Services.Participant;
 using StroopApp.Services.Profile;
 using StroopApp.Services.Session;
+using StroopApp.Services.Summary;
 using StroopApp.Services.Trial;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.State;
@@ -78,6 +79,8 @@ namespace StroopApp
             services.AddSingleton<TrialExportFormatter,StroopTrialExportFormatter>();
             services.AddSingleton<TrialExportFormatter,SimonTrialExportFormatter>();
             services.AddSingleton<IExportationService, ExportationService>();
+            services.AddSingleton<BlockSummaryFormatter, StroopBlockSummaryFormatter>();
+            services.AddSingleton<BlockSummaryFormatter, SimonBlockSummaryFormatter>();
             services.AddTransient<ITrialGenerationService, TrialGenerationService>();
             services.AddTransient<ISimonTrialGenerationService, SimonTrialGenerationService>();
             services.AddSingleton<IExperimentSessionService, ExperimentSessionService>();

@@ -7,6 +7,7 @@ using StroopApp.Services.Charts;
 using StroopApp.Services.Exportation;
 using StroopApp.Services.Navigation;
 using StroopApp.Services.Session;
+using StroopApp.Services.Summary;
 using StroopApp.Services.Window;
 using StroopApp.ViewModels.State;
 using StroopApp.Views;
@@ -34,8 +35,11 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
         private readonly IWindowManager _windowManager;
         private readonly ExperimentChartFactory _chartFactory;
         private readonly IExperimentSessionService _sessionService;
+        private readonly IEnumerable<BlockSummaryFormatter> _summaryFormatters;
+        public IReadOnlyList<BlockSummaryColumn> SummaryColumns { get; }
 
-        [ObservableProperty]
+
+            [ObservableProperty]
         private string _currentParticipant = string.Empty;
 
         [ObservableProperty]
@@ -45,7 +49,8 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
                                   IExportationService exportationService,
                                   INavigationService experimenterNavigationService,
                                   IWindowManager windowManager,
-                                  IExperimentSessionService sessionService)
+                                  IExperimentSessionService sessionService,
+                                  IEnumerable<BlockSummaryFormatter> summaryFormatters)
         {
             Settings = settings;
             _exportationService = exportationService;
@@ -53,6 +58,7 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             _windowManager = windowManager;
             _chartFactory = new ExperimentChartFactory();
             _sessionService = sessionService;
+            _summaryFormatters = summaryFormatters;
 
             Blocks = Settings.ExperimentContext.Blocks;
             GlobalGraphViewModel = new GlobalGraphViewModel(settings);
@@ -60,7 +66,15 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             CurrentParticipant = string.Format(Strings.Label_CurrentParticipant, Settings.Participant.Id);
             CurrentProfile = string.Format(Strings.Label_CurrentProfile, Settings.CurrentProfile.ProfileName);
 
+            var formatter = GetFormatter();
+            SummaryColumns = formatter.GetColumns();
+
             UpdateBlock();
+        }
+        private BlockSummaryFormatter GetFormatter()
+        {
+            return _summaryFormatters.FirstOrDefault(f => f.TaskType == Settings.CurrentProfile.TaskType)
+    ?? throw new InvalidOperationException($"Pas de formatter de résumé pour {Settings.CurrentProfile.TaskType}");
         }
 
         private void UpdateBlock()
@@ -169,5 +183,6 @@ namespace StroopApp.ViewModels.Experiment.Experimenter.End
             else if (Settings.CurrentProfile.TaskType == TaskType.Simon)
                 _experimenterNavigationService.NavigateTo<SimonConfigurationPage>();
         }
+
     }
 }

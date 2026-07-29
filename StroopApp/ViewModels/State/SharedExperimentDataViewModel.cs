@@ -73,12 +73,7 @@ namespace StroopApp.ViewModels.State
         {
             if (settings == null) throw new ArgumentNullException(nameof(settings));
 
-            CurrentBlock = new Block(
-                settings.CurrentProfile.ProfileName,
-                settings.Block,
-                settings.CurrentProfile.CongruencePercent,
-                settings.CurrentProfile.SwitchPercent,
-                settings.CurrentProfile.HasVisualCue);
+            CurrentBlock = new Block(settings.CurrentProfile.CloneProfile(), settings.Block);
 
             Blocks.Add(CurrentBlock);
 

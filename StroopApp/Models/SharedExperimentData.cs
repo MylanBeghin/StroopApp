@@ -35,12 +35,13 @@ namespace StroopApp.Models
 
         public SharedExperimentData()
         {
-            Blocks = new ObservableCollection<Block>();
-            BlockSeries = new ObservableCollection<ISeries>();
-            Sections = new ObservableCollection<RectangularSection>();
-            ReactionPoints = new ObservableCollection<ReactionTimePoint>();
-            ColumnSerie = new ObservableCollection<ISeries>();
+            Blocks = [];
+            BlockSeries = [];
+            Sections = [];
+            ReactionPoints = [];
+            ColumnSerie = [];
             CurrentBlockStart = 1;
+
         }
 
         public virtual void Reset()
