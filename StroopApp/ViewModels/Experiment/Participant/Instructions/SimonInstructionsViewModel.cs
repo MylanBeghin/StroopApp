@@ -56,7 +56,20 @@ namespace StroopApp.ViewModels.Experiment.Participant.Instructions
         {
             AddTextLine(_loc["Simon_Page1_Intro"], true);
             AddTextLine(_loc["Simon_Page1_Display"]);
-            AddTextLine(_profile.AnswerMode == SimonAnswerMode.LeftRight ? _loc["Simon_Page1_Display2"] : _loc["Simon_Page1_Display3"]);
+            string stimulusModality = _profile.StimulusMode switch
+            {
+                SimonStimulusMode.Arrow => _loc["Simon_Word_ArrowDirection"],
+                SimonStimulusMode.Shape => _loc["Simon_Word_Shape"],
+                _ => _loc["Simon_Word_Color"],
+            };
+            if(_profile.AnswerMode == SimonAnswerMode.LeftRight)
+            {
+                AddTextLine(string.Format(_loc["Simon_Page1_Display2"], _simonMappings.Left.Key, _simonMappings.Right.Key, stimulusModality));
+            }
+            else
+            {
+                AddTextLine(string.Format(_loc["Simon_Page1_Display3"], _simonMappings.Left.Key, stimulusModality));
+            }
         }
 
         private void BuildFixationCrossPage()
@@ -110,7 +123,7 @@ namespace StroopApp.ViewModels.Experiment.Participant.Instructions
             var firstColPanel = new WrapPanel() { Width = 700, Orientation = Orientation.Vertical };
             if (IsReversalCueColorModality)
             {
-                firstColPanel.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Text = String.Format(_loc["Simon_PrimePage_StandardCase"], _loc["Simon_PrimePage_Color"]) });
+                firstColPanel.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Text = string.Format(_loc["Simon_PrimePage_StandardCase"], _loc["Simon_Word_Color"]) });
                 firstColPanel.Children.Add(new Rectangle() { Height = 30 });
                 firstColPanel.Children.Add(CreateShape(_profile.StandardShape, _profile.StandardColor));
                 firstColPanel.Children.Add(new Rectangle() { Height = 30 });
@@ -118,7 +131,7 @@ namespace StroopApp.ViewModels.Experiment.Participant.Instructions
             }
             else
             {
-                firstColPanel.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Text = String.Format(_loc["Simon_PrimePage_StandardCase"], _loc["Simon_PrimePage_Shape"]) });
+                firstColPanel.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Text = string.Format(_loc["Simon_PrimePage_StandardCase"], _loc["Simon_Word_Shape"]) });
                 firstColPanel.Children.Add(new Rectangle() { Height = 30 });
                 firstColPanel.Children.Add(CreateOutlineCue(_profile.StandardShape, "#FFFFFF"));
                 firstColPanel.Children.Add(new Rectangle() { Height = 30 });
@@ -134,7 +147,7 @@ namespace StroopApp.ViewModels.Experiment.Participant.Instructions
             var secondColPanel = new WrapPanel() { Width = 700, Orientation = Orientation.Vertical };
             if (IsReversalCueColorModality)
             {
-                secondColPanel.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Text = String.Format(_loc["Simon_PrimePage_ReversedCase"], _loc["Simon_PrimePage_Color"]) });
+                secondColPanel.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Text = string.Format(_loc["Simon_PrimePage_ReversedCase"], _loc["Simon_Word_Color"]) });
                 secondColPanel.Children.Add(new Rectangle() { Height = 30 });
                 secondColPanel.Children.Add(CreateShape(_profile.StandardShape, _profile.ReversedColor));
                 secondColPanel.Children.Add(new Rectangle() { Height = 30 });
@@ -143,7 +156,7 @@ namespace StroopApp.ViewModels.Experiment.Participant.Instructions
             }
             else
             {
-                secondColPanel.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Text = String.Format(_loc["Simon_PrimePage_ReversedCase"], _loc["Simon_PrimePage_Shape"]) });
+                secondColPanel.Children.Add(new TextBlock() { TextWrapping = TextWrapping.Wrap, Text = string.Format(_loc["Simon_PrimePage_ReversedCase"], _loc["Simon_Word_Shape"]) });
                 secondColPanel.Children.Add(new Rectangle() { Height = 30 });
                 secondColPanel.Children.Add(CreateOutlineCue(_profile.ReversedShape, "#FFFFFF"));
                 secondColPanel.Children.Add(new Rectangle() { Height = 30 });
@@ -157,7 +170,13 @@ namespace StroopApp.ViewModels.Experiment.Participant.Instructions
 
         private void BuildLeftRulePage()
         {
-            AddTextLine(_loc["Simon_Shape_Instruction"]);
+            if (_profile.StimulusMode == SimonStimulusMode.Shape)
+                AddTextLine(string.Format(_loc["Simon_Stimulus_Instruction_Shape"],_profile.LeftShape));
+            else if(_profile.StimulusMode == SimonStimulusMode.Arrow)
+                AddTextLine(_loc["Simon_Stimulus_Instruction_Arrow"]);
+            else
+                AddTextLine(_loc["Simon_Stimulus_Instruction_Color"]);
+                
             if (_profile.AnswerMode == SimonAnswerMode.GoNoGo)
             {
                 var panel = new StackPanel
@@ -191,7 +210,12 @@ namespace StroopApp.ViewModels.Experiment.Participant.Instructions
 
         private void BuildRightRulePage()
         {
-            AddTextLine(_loc["Simon_Shape_Instruction"]);
+            if(_profile.StimulusMode == SimonStimulusMode.Shape)
+            AddTextLine(string.Format(_loc["Simon_Stimulus_Instruction_Shape"], _profile.LeftShape));
+            else if (_profile.StimulusMode == SimonStimulusMode.Arrow)
+                AddTextLine(_loc["Simon_Stimulus_Instruction_Arrow"]);
+            else
+                AddTextLine(_loc["Simon_Stimulus_Instruction_Color"]);
             if (_profile.AnswerMode == SimonAnswerMode.GoNoGo)
             {
                 var panel = new StackPanel

@@ -1177,7 +1177,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Left Color.
+        ///   Recherche une chaîne localisée semblable à Left command color (/go).
         /// </summary>
         public static string Header_SimonLeftColor {
             get {
@@ -1186,7 +1186,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Left Shape.
+        ///   Recherche une chaîne localisée semblable à Left command shape (/go).
         /// </summary>
         public static string Header_SimonLeftShape {
             get {
@@ -1222,7 +1222,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Right Color.
+        ///   Recherche une chaîne localisée semblable à Right command color (/no-go).
         /// </summary>
         public static string Header_SimonRightColor {
             get {
@@ -1231,7 +1231,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Right Shape.
+        ///   Recherche une chaîne localisée semblable à Right command shape (/no-go).
         /// </summary>
         public static string Header_SimonRightShape {
             get {
@@ -1988,7 +1988,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Click on the LEFT key ({0} key).
+        ///   Recherche une chaîne localisée semblable à Click on the {0} key (left).
         /// </summary>
         public static string Simon_LeftKey_Instruction {
             get {
@@ -2015,7 +2015,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à You will have to press the RIGHT or LEFT key, depending on the COLOR of the circle..
+        ///   Recherche une chaîne localisée semblable à You will have to press the &quot;{0}&quot; or &quot;{1}&quot; key, depending on the {2} indicated..
         /// </summary>
         public static string Simon_Page1_Display2 {
             get {
@@ -2024,7 +2024,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à You will have to press the key or not, depending on the COLOR of the circle..
+        ///   Recherche une chaîne localisée semblable à You will have to press the &quot;{0}&quot; key or not, depending on the {1} indicated..
         /// </summary>
         public static string Simon_Page1_Display3 {
             get {
@@ -2159,15 +2159,6 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à shape.
-        /// </summary>
-        public static string Simon_PrimePage_Shape {
-            get {
-                return ResourceManager.GetString("Simon_PrimePage_Shape", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à While the shape displays, you will also see another shape placed around..
         /// </summary>
         public static string Simon_PrimePage_ShapeAround {
@@ -2213,7 +2204,7 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Click on the RIGHT key ({0} key).
+        ///   Recherche une chaîne localisée semblable à Click on the {0} (right).
         /// </summary>
         public static string Simon_RightKey_Instruction {
             get {
@@ -2222,11 +2213,56 @@ namespace StroopApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à If you see a shape with this color : .
+        ///   Recherche une chaîne localisée semblable à If you see this arrow.
         /// </summary>
-        public static string Simon_Shape_Instruction {
+        public static string Simon_Stimulus_Instruction_Arrow {
             get {
-                return ResourceManager.GetString("Simon_Shape_Instruction", resourceCulture);
+                return ResourceManager.GetString("Simon_Stimulus_Instruction_Arrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à If you see a shape with this color .
+        /// </summary>
+        public static string Simon_Stimulus_Instruction_Color {
+            get {
+                return ResourceManager.GetString("Simon_Stimulus_Instruction_Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à If you see a {0} .
+        /// </summary>
+        public static string Simon_Stimulus_Instruction_Shape {
+            get {
+                return ResourceManager.GetString("Simon_Stimulus_Instruction_Shape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à arrow direction.
+        /// </summary>
+        public static string Simon_Word_ArrowDirection {
+            get {
+                return ResourceManager.GetString("Simon_Word_ArrowDirection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à color.
+        /// </summary>
+        public static string Simon_Word_Color {
+            get {
+                return ResourceManager.GetString("Simon_Word_Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à shape.
+        /// </summary>
+        public static string Simon_Word_Shape {
+            get {
+                return ResourceManager.GetString("Simon_Word_Shape", resourceCulture);
             }
         }
         

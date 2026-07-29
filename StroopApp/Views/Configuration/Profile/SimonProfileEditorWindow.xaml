@@ -8,7 +8,7 @@
         xmlns:profile="clr-namespace:StroopApp.ViewModels.Configuration.Profile" 
         xmlns:converters="clr-namespace:StroopApp.Converters" d:DataContext="{d:DesignInstance Type=profile:SimonProfileEditorViewModel}"
         mc:Ignorable="d"
-        Title="SimonProfileEditorWindow" Height="700" Width="800" d:Height="1000">
+        Title="SimonProfileEditorWindow" Height="700" Width="900" d:Height="1000">
     <Window.Resources>
         <SolidColorBrush x:Key="OpaqueDefaultButtonBackground"
                  Color="#c4c4c4"

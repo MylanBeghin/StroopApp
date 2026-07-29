@@ -793,11 +793,17 @@
   <data name="Simon_Page2_Instructions" xml:space="preserve">
     <value>Press the key corresponding to the COLOR of the circle, as fast as possible.</value>
   </data>
-  <data name="Simon_Shape_Instruction" xml:space="preserve">
-    <value>If you see a shape with this color : </value>
+  <data name="Simon_Stimulus_Instruction_Shape" xml:space="preserve">
+    <value>If you see a {0} </value>
+  </data>
+  <data name="Simon_Stimulus_Instruction_Arrow" xml:space="preserve">
+    <value>If you see this arrow</value>
+  </data>
+  <data name="Simon_Stimulus_Instruction_Color" xml:space="preserve">
+    <value>If you see a shape with this color </value>
   </data>
   <data name="Simon_LeftKey_Instruction" xml:space="preserve">
-    <value>Click on the LEFT key ({0} key)</value>
+    <value>Click on the {0} key (left)</value>
   </data>
   <data name="Simon_GoKey_Instruction" xml:space="preserve">
     <value>Click on the key ({0} key) </value>
@@ -806,13 +812,13 @@
     <value>Don't click on any key.</value>
   </data>
   <data name="Simon_RightKey_Instruction" xml:space="preserve">
-    <value>Click on the RIGHT key ({0} key)</value>
+    <value>Click on the {0} (right)</value>
   </data>
   <data name="Simon_Page1_Display2" xml:space="preserve">
-    <value>You will have to press the RIGHT or LEFT key, depending on the COLOR of the circle.</value>
+    <value>You will have to press the "{0}" or "{1}" key, depending on the {2} indicated.</value>
   </data>
   <data name="Simon_Page1_Display3" xml:space="preserve">
-    <value>You will have to press the key or not, depending on the COLOR of the circle.</value>
+    <value>You will have to press the "{0}" key or not, depending on the {1} indicated.</value>
   </data>
   <data name="Header_StimulusPosition" xml:space="preserve">
     <value>Position</value>
@@ -872,16 +878,16 @@
     <value>Add a reversed rule vith a shape (before/around) or an internal stimulus feature.</value>
   </data>
   <data name="Header_SimonLeftColor" xml:space="preserve">
-    <value>Left Color</value>
+    <value>Left command color (/go)</value>
   </data>
   <data name="Header_SimonLeftShape" xml:space="preserve">
-    <value>Left Shape</value>
+    <value>Left command shape (/go)</value>
   </data>
   <data name="Header_SimonRightColor" xml:space="preserve">
-    <value>Right Color</value>
+    <value>Right command color (/no-go)</value>
   </data>
   <data name="Header_SimonRightShape" xml:space="preserve">
-    <value>Right Shape</value>
+    <value>Right command shape (/no-go)</value>
   </data>
   <data name="Header_SimonReversedShape" xml:space="preserve">
     <value>Reversed Shape</value>
@@ -976,10 +982,10 @@
   <data name="Simon_FixationCrossPage_1" xml:space="preserve">
     <value>A fixation cross will appear at the center of the screen. You will have to fix it while it is visible.</value>
   </data>
-  <data name="Simon_PrimePage_Shape" xml:space="preserve">
+  <data name="Simon_Word_Shape" xml:space="preserve">
     <value>shape</value>
   </data>
-  <data name="Simon_PrimePage_Color" xml:space="preserve">
+  <data name="Simon_Word_Color" xml:space="preserve">
     <value>color</value>
   </data>
   <data name="Simon_PrimePage_Arrow" xml:space="preserve">
@@ -1023,5 +1029,11 @@
   </data>
   <data name="Simon_PrimePage_ReversedCaseDescription" xml:space="preserve">
     <value>You must indicate the OPPOSITE command as the one displayed.</value>
+  </data>
+  <data name="Simon_Word_ArrowDirection" xml:space="preserve">
+    <value>arrow direction</value>
+  </data>
+  <data name="Simon_PrimePage_Color" xml:space="preserve">
+    <value>color</value>
   </data>
 </root>
