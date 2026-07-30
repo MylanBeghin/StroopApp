@@ -26,6 +26,7 @@ namespace StroopApp.Services.Exportation
             WriteCommonPrefix(worksheet, row, trial, profileName, blockNumber);
             var stroopTrial = (StroopTrial)trial;
             int col = CommonPrefixCount + 1;
+            worksheet.Cell(row, col++).Value = stroopTrial.IsCongruent;
             worksheet.Cell(row, col++).Value = stroopTrial.VisualCue switch
             {
                 VisualCueType.Square => LanguageService.GetLocalizedString("Label_Square"),

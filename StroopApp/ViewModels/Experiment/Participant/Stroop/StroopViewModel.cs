@@ -140,8 +140,9 @@ namespace StroopApp.ViewModels.Experiment.Participant.Stroop
                     {
                         _responseTime.Stop();
                         _inputTcs.TrySetCanceled();
+                        trial.IsValidResponse = false;
                         Settings.ExperimentContext.CurrentBlock.TrialTimes.Add(null);
-                        Settings.ExperimentContext.ReactionPoints.Add(new ReactionTimePoint(trial.TrialNumber, double.NaN, null));
+                        Settings.ExperimentContext.ReactionPoints.Add(new ReactionTimePoint(trial.TrialNumber, double.NaN, trial.IsValidResponse));
                     }
 
                     if (Settings.ExperimentContext.IsTaskStopped || _cancellationTokenSource.Token.IsCancellationRequested)
