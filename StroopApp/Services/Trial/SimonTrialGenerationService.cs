@@ -25,11 +25,12 @@ namespace StroopApp.Services.Trial
             List<bool> reversedFlags = GenerateReversedMappingFlags(total, reversedMappingCount);
 
             var trials = new List<ITrial>();
-
+            bool isPositionModeLeftRight = profile.StimulusPositionMode is not SimonStimulusPositionMode.Center;
             for (int i = 0; i < total; i++)
             {
-                bool isAnswerCongruent = congruenceFlags[i];
+                bool isSpatialCongruent = congruenceFlags[i];
                 bool isReversed = reversedFlags[i];
+                bool isAnswerCongruent = isPositionModeLeftRight &&(isSpatialCongruent ^ isReversed);
 
                 SimonAnswer answer = ComputeAnswer(profile.AnswerMode, isReversed);
                 string color = ComputeColor(answer, isReversed, profile);
@@ -43,8 +44,8 @@ namespace StroopApp.Services.Trial
                     ParticipantId = settings.Participant.Id,
                     CongruencePercent = profile.CongruencePercent,
                     ReversedMappingPercent = profile.ReversalCuePresentation == ReversalCuePresentation.None ? (int?)null : profile.ReversedMappingPercent,
+                    IsSpatialCongruent = isSpatialCongruent,
                     IsAnswerCongruent = isAnswerCongruent,
-                    IsSpatialCongruent = profile.StimulusPositionMode is not SimonStimulusPositionMode.Center && (isAnswerCongruent ^ isReversed),
                     IsReversedMapping = isReversed,
                     ExpectedAnswer = answer,
                     Stimulus = new SimonStimulus(color, position, shape)
@@ -85,7 +86,7 @@ namespace StroopApp.Services.Trial
                 _ => throw new NotImplementedException(),
             };
         }
-        private StimulusPosition ComputePosition(SimonAnswer expectedAnswer,bool isCongruent, SimonAnswerMode answerMode, SimonStimulusPositionMode positionMode)
+        private StimulusPosition ComputePosition(SimonAnswer expectedAnswer,bool isAnswerCongruent, SimonAnswerMode answerMode, SimonStimulusPositionMode positionMode)
         {
             if (positionMode == SimonStimulusPositionMode.Center)
                 return StimulusPosition.Center;
@@ -94,8 +95,8 @@ namespace StroopApp.Services.Trial
                 return _random.Next(2) == 0 ? StimulusPosition.Left : StimulusPosition.Right;
 
             return expectedAnswer == SimonAnswer.Left ? 
-                (isCongruent  ? StimulusPosition.Left : StimulusPosition.Right) : 
-                (isCongruent  ? StimulusPosition.Right : StimulusPosition.Left);
+                (isAnswerCongruent  ? StimulusPosition.Left : StimulusPosition.Right) : 
+                (isAnswerCongruent  ? StimulusPosition.Right : StimulusPosition.Left);
         }
         private string ComputeColor(SimonAnswer expectedAnswer, bool isReversed, SimonProfile profile)
         {
